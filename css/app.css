@@ -1601,6 +1601,11 @@
 
         /* ── Mobile hero refinements ─────────────────── */
         @media (max-width: 767.98px) {
+            #hero {
+                padding-top: 80px !important;
+                padding-bottom: 60px !important;
+            }
+
             .hero-content h1 {
                 flex-direction: column;
                 gap: 0.5rem;
@@ -1612,9 +1617,18 @@
             }
 
             .hero-cta-buttons {
+                display: grid;
                 grid-template-columns: 1fr;
                 gap: 1rem;
                 width: 100%;
+            }
+
+            .hero-cta-buttons .vd-btn {
+                width: 100%;
+            }
+
+            .hero-cta-buttons .vd-btn + .vd-btn {
+                margin-left: 0;
             }
 
             .hero-search-wrapper {
