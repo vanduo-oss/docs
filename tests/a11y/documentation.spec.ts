@@ -4,7 +4,7 @@ import { test, expect } from '@playwright/test';
 async function waitForSPA(page: import('@playwright/test').Page) {
   // Wait for the SPA engine to boot (registry loaded, first view rendered)
   await page.waitForFunction(() => {
-    return document.querySelector('#page-view.is-active') !== null
+    return (document.querySelector('#page-view.is-active') !== null && document.querySelector('#page-view .vd-dynamic-loader') === null)
       || document.querySelector('#docs-view.is-active') !== null;
   }, { timeout: 10000 });
 }
@@ -38,19 +38,19 @@ test.describe('SPA Home @a11y', () => {
     // Click Documentation link (handles hamburger menu on mobile)
     await clickNavLink(page, 'docs');
     await page.waitForFunction(() =>
-      document.querySelector('#docs-view.is-active') !== null
-    , { timeout: 5000 });
+      document.querySelector('#docs-landing') !== null
+      , { timeout: 5000 });
 
-    // Docs view should be active, page view hidden
-    await expect(page.locator('#docs-view.is-active')).toHaveCount(1);
-    await expect(page.locator('#page-view.is-active')).toHaveCount(0);
+    // Page view should remain active, but now showing docs-landing
+    await expect(page.locator('#docs-landing')).toBeVisible();
+    await expect(page.locator('#docs-view.is-active')).toHaveCount(0);
   });
 });
 
 /* ── Documentation view ─────────────────────────────── */
 test.describe('SPA Documentation @a11y', () => {
   test('docs view loads with sidebar and first section', async ({ page }) => {
-    await page.goto('/#docs');
+    await page.goto('/#docs/components');
     await waitForSPA(page);
 
     // Docs view visible
@@ -64,7 +64,7 @@ test.describe('SPA Documentation @a11y', () => {
   });
 
   test('sidebar includes expected component sections', async ({ page }) => {
-    await page.goto('/#docs');
+    await page.goto('/#docs/components');
     await waitForSPA(page);
 
     const expectedSections = ['navbar', 'sidenav', 'footer', 'code-snippet'];
@@ -74,14 +74,14 @@ test.describe('SPA Documentation @a11y', () => {
   });
 
   test('tab switching loads concepts sidebar', async ({ page }) => {
-    await page.goto('/#docs');
+    await page.goto('/#docs/components');
     await waitForSPA(page);
 
     // Switch to Concepts tab
     await page.locator('.doc-tab[data-tab="concepts"]').click();
     await page.waitForFunction(() =>
       document.querySelector('.doc-tab[data-tab="concepts"].active') !== null
-    , { timeout: 5000 });
+      , { timeout: 5000 });
 
     // Sidebar should have concepts sections
     await expect(page.locator('.doc-nav-link[data-section="philosophy"]')).toHaveCount(1);
@@ -167,14 +167,14 @@ test.describe('SPA Page Views @a11y', () => {
     // Navigate to docs (handles hamburger menu on mobile)
     await clickNavLink(page, 'docs');
     await page.waitForFunction(() =>
-      document.querySelector('#docs-view.is-active') !== null
-    , { timeout: 5000 });
+      document.querySelector('#docs-landing') !== null
+      , { timeout: 5000 });
 
     // Go back
     await page.goBack();
     await page.waitForFunction(() =>
-      document.querySelector('#page-view.is-active') !== null
-    , { timeout: 5000 });
+      document.querySelector('#home') !== null
+      , { timeout: 5000 });
     await expect(page.locator('#home')).toBeVisible();
   });
 });

@@ -747,7 +747,7 @@ function initGlobalSearch() {
 
     // Cmd/Ctrl+K global shortcut
     document.addEventListener('keydown', function (e) {
-        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
             e.preventDefault();
             e.stopPropagation();
 
