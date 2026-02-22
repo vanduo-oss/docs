@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 140" width="120" height="140">
+  <style>
+    .bound-outline {
+      fill: none;
+      stroke: #F4C430;
+      stroke-width: 6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .liquid-wave {
+      fill: #F4C430;
+      animation: wave-rise 4s ease-in-out infinite alternate;
+    }
+    .wave-mask {
+      clip-path: url(#drop-mask);
+    }
+    @keyframes wave-rise {
+      0%, 15% { transform: translateY(40px); opacity: 0.8; }
+      85%, 100% { transform: translateY(-15px); opacity: 1; }
+    }
+  </style>
+  <defs>
+    <clipPath id="drop-mask">
+      <path d="M 50 35 C 50 35 20 70 20 90 A 30 30 0 0 0 80 90 C 80 70 50 35 50 35 Z" />
+    </clipPath>
+  </defs>
+  <path class="bound-outline" d="M 50 35 C 50 35 20 70 20 90 A 30 30 0 0 0 80 90 C 80 70 50 35 50 35 Z" />
+  <g class="wave-mask">
+    <path class="liquid-wave" d="M -10 80 Q 25 60 50 80 T 110 80 L 110 140 L -10 140 Z" />
+  </g>
+</svg>

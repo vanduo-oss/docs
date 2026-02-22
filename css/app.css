@@ -102,6 +102,38 @@
             margin-left: auto;
         }
 
+        /* Icon Weights card: grid so 6 weights use horizontal space */
+        .doc-icons-weights {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem 2rem;
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 768px) {
+            .doc-icons-weights {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .doc-icons-weights {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .doc-icons-weight-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            text-align: center;
+        }
+
+        .doc-icons-weight-item i {
+            font-size: 2.5rem;
+        }
+
         .code-example {
             background: var(--bg-secondary);
             padding: 1rem;
@@ -204,9 +236,9 @@
         @media (max-width: 991px) {
             .doc-sidebar {
                 position: sticky;
-                top: 70px;
+                top: calc(70px + var(--doc-tabs-height, 0px));
                 height: auto;
-                max-height: calc(100vh - 80px);
+                max-height: calc(100vh - 70px - var(--doc-tabs-height, 0px));
                 overflow: visible;
                 display: flex;
                 flex-direction: column;
@@ -227,7 +259,7 @@
                 display: none;
                 overflow-y: auto;
                 flex: 1;
-                max-height: calc(100vh - 200px);
+                max-height: calc(100vh - 70px - var(--doc-tabs-height, 0px) - 60px);
             }
 
             .doc-nav.is-open {
@@ -264,6 +296,24 @@
 
         .hero-content .vd-mt-6 {
             margin-top: 2.5rem;
+        }
+
+        /* Hero CTA: Get Started 1.618× wider than GitHub (golden ratio) */
+        .hero-cta-buttons {
+            display: inline-grid;
+            grid-template-columns: 1.618fr 1fr;
+            gap: var(--spacing-6, 1.5rem);
+            align-items: stretch;
+        }
+
+        .hero-cta-buttons .vd-btn {
+            min-width: 0;
+            text-align: center;
+        }
+
+        .hero-cta-buttons .vd-btn i {
+            margin-right: 0.375em;
+            vertical-align: middle;
         }
 
         .feature-icon {
@@ -384,7 +434,38 @@
             margin-bottom: 0.5rem;
         }
 
-        /* Home: Philosophy cards */
+        /* Home: Features cards (same horizontal and vertical spacing) */
+        #home-features .philosophy-cards {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--grid-gutter);
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        #home-features .philosophy-cards > * {
+            padding-left: 0;
+            padding-right: 0;
+            margin-bottom: 0;
+            min-width: 0;
+            width: auto;
+        }
+
+        /* Home: Feature cards — golden ratio (width : height = 1.618 : 1) */
+        #home-features .philosophy-cards {
+            align-items: start;
+        }
+
+        #home-features .philosophy-cards .vd-card {
+            aspect-ratio: 1.618;
+            min-height: 12rem;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Home: Philosophy cards (docs #philosophy page) */
         #philosophy .philosophy-cards,
         #home #philosophy .philosophy-cards {
             display: grid;
@@ -405,6 +486,10 @@
 
         @media (min-width: 768px) {
 
+            #home-features .philosophy-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
             #philosophy .philosophy-cards,
             #home #philosophy .philosophy-cards {
                 grid-template-columns: repeat(2, 1fr);
@@ -420,6 +505,10 @@
         }
 
         @media (min-width: 992px) {
+
+            #home-features .philosophy-cards {
+                grid-template-columns: repeat(3, 1fr);
+            }
 
             #philosophy .philosophy-cards,
             #home #philosophy .philosophy-cards {
@@ -474,33 +563,14 @@
             margin-top: auto;
         }
 
-        /* Big card: button at 50% width, centered */
-        #whats-new .whats-new-cards>.vd-col-12:nth-child(3) .vd-card-body>a.vd-btn {
-            width: 50%;
-            min-width: fit-content;
-            align-self: center;
-        }
-
         #whats-new .vd-card-header h3 {
             text-align: center;
-        }
-
-        /* Separator and space above "The Shape of the Water" card */
-        #whats-new .whats-new-cards>.vd-col-12:nth-child(3) {
-            margin-top: 3rem;
-            padding-top: 3rem;
-            border-top: 1px solid var(--color-primary);
         }
 
         @media (min-width: 768px) {
             #whats-new .whats-new-cards {
                 grid-template-columns: repeat(2, 1fr);
                 grid-auto-rows: 1fr;
-            }
-
-            /* "The Shape of the Water" card spans full width of the two above */
-            #whats-new .whats-new-cards>.vd-col-12:nth-child(3) {
-                grid-column: 1 / -1;
             }
         }
 
@@ -577,6 +647,124 @@
             display: flex;
             flex-direction: column;
             min-height: 200px;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .about-card.vd-card-actionable:hover {
+            transform: translateY(-5px);
+        }
+
+        .about-card .vd-card-body i {
+            transition: color 0.3s ease;
+        }
+
+        .about-card.vd-card-actionable:hover .vd-card-body i {
+            color: var(--color-primary) !important;
+        }
+
+        /* Restrict card glow to actionable cards only (clickable or with action controls) */
+        .vd-card-glow:hover {
+            box-shadow: var(--card-shadow-elevated);
+            border-color: var(--card-border-color);
+        }
+
+        .vd-card-actionable.vd-card-glow:hover {
+            box-shadow: 0 0 15px 0 var(--card-glow-color), var(--card-shadow);
+            border-color: var(--card-glow-border-color);
+        }
+
+        a:hover .vd-card-actionable.vd-card-glow {
+            box-shadow: 0 0 15px 0 var(--card-glow-color), var(--shadow-xl);
+            border-color: var(--card-glow-border-color);
+        }
+
+        /* Docs landing: fixed icon colors only (h3 follows primary); hover keeps icon color */
+        #docs-landing .docs-card-components .vd-card-body i { color: #eab308; }
+        #docs-landing .docs-card-components:hover .vd-card-body i { color: #eab308 !important; }
+        #docs-landing .docs-card-guides .vd-card-body i { color: #22c55e; }
+        #docs-landing .docs-card-guides:hover .vd-card-body i { color: #22c55e !important; }
+        #docs-landing .docs-card-concepts .vd-card-body i { color: #ef4444; }
+        #docs-landing .docs-card-concepts:hover .vd-card-body i { color: #ef4444 !important; }
+
+        /* Docs landing: divider */
+        .docs-landing-divider {
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-info));
+            border: none;
+            margin: 2.5rem auto;
+            border-radius: 2px;
+        }
+
+        /* Docs landing: spacing between stacked cards on mobile */
+        @media (max-width: 767.98px) {
+            #docs-landing .vd-container-responsive > .vd-row:first-of-type > .vd-col-12 {
+                margin-bottom: 1.5rem;
+            }
+            #docs-landing .vd-container-responsive > .vd-row:first-of-type > .vd-col-12:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        /* Docs landing: golden-split row */
+        .docs-golden-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--grid-gutter, 1.5rem);
+        }
+
+        @media (min-width: 768px) {
+            .docs-golden-row {
+                grid-template-columns: 1.618fr 1fr;
+                grid-template-rows: 1fr;
+            }
+        }
+
+        /* Status card: progress bars */
+        .docs-status-bars {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .docs-status-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .docs-status-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .docs-status-label i {
+            margin-right: 0.4rem;
+            font-size: 1.05em;
+        }
+
+        .docs-status-pct {
+            font-weight: 700;
+            font-size: 0.85rem;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .docs-status-track {
+            width: 100%;
+            height: 8px;
+            background: var(--bg-secondary);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .docs-status-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.6s ease;
         }
 
         .about-card .vd-card-body {
@@ -748,12 +936,85 @@
         }
 
         /* ── Sticky doc-tabs on desktop & tablet ──────── */
-        .doc-tab:hover, .doc-tab.active {
+        .doc-tabs-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .doc-tabs-versions {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85em;
+            white-space: nowrap;
+        }
+
+        .doc-tabs-versions code {
+            font-size: 0.9rem;
+            padding: 0.25rem 0.5rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            color: var(--text-secondary);
+        }
+
+        .doc-tabs-versions code i {
+            margin-right: 0.25rem;
+        }
+
+        .doc-tab:hover,
+        .doc-tab.active {
             text-decoration: none;
         }
 
-        @media (min-width: 768px) {
+        /* Mobile: sticky tab bar + tabs in one line */
+        @media (max-width: 767.98px) {
+            .doc-tabs-wrapper {
+                position: sticky;
+                top: 70px;
+                z-index: 11;
+                background: var(--bg-primary);
+                padding: 0.75rem 0;
+                margin: 0;
+                border-bottom: 1px solid var(--border-color);
+                flex-wrap: wrap;
+            }
+
             .doc-tabs {
+                flex: 1 1 100%;
+                flex-wrap: nowrap;
+                margin: 0;
+                gap: 0.4rem;
+                min-width: 0;
+            }
+
+            .doc-tab {
+                flex: 1 1 0;
+                min-width: 0;
+                padding: 0.5rem 0.5rem;
+                font-size: 0.875rem;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                justify-content: center;
+            }
+
+            .doc-tabs-versions {
+                flex: 1 1 100%;
+                margin-top: 0.25rem;
+            }
+
+            /* Hide version span when scrolled to slim the sticky bar */
+            .doc-tabs-wrapper.is-scrolled .doc-tabs-versions {
+                display: none;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .doc-tabs-wrapper {
                 position: sticky;
                 top: 70px;
                 z-index: 11;
@@ -1062,13 +1323,27 @@
             opacity: 0.7;
         }
 
-        /* Hero search wrapper */
+        /* Hero search wrapper — match width of .vd-container-responsive (e.g. #home-features) */
         .hero-search-wrapper {
             position: relative;
-            max-width: 600px;
-            width: 90%;
+            width: 100%;
+            max-width: var(--container-max-width);
+            padding-left: var(--container-padding);
+            padding-right: var(--container-padding);
             margin: -2rem auto 2rem;
             z-index: 50;
+        }
+
+        @media (width >= 1200px) {
+            .hero-search-wrapper {
+                max-width: var(--container-xl);
+            }
+        }
+
+        @media (width >= 1400px) {
+            .hero-search-wrapper {
+                max-width: var(--container-2xl);
+            }
         }
 
         /* Hero search bar */
@@ -1307,7 +1582,8 @@
 
             .navbar-actions-always {
                 margin-left: auto;
-                margin-right: 0.5rem;
+                margin-right: 0.75rem;
+                gap: 0.75rem;
                 order: 98;
             }
 
@@ -1317,8 +1593,35 @@
 
             .navbar-actions-always .global-search-trigger,
             .navbar-actions-always .vd-theme-customizer-trigger {
-                width: 34px;
-                height: 34px;
+                width: 40px;
+                height: 40px;
                 font-size: 1rem;
+            }
+        }
+
+        /* ── Mobile hero refinements ─────────────────── */
+        @media (max-width: 767.98px) {
+            .hero-content h1 {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .hero-content h1 svg {
+                margin-right: 0 !important;
+                transform: none !important;
+            }
+
+            .hero-cta-buttons {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                width: 100%;
+            }
+
+            .hero-search-wrapper {
+                display: none;
+            }
+
+            .hero-desc-extended {
+                display: none;
             }
         }
