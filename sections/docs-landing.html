@@ -1,21 +1,23 @@
 <section id="docs-landing" class="about-section" style="padding-bottom: 6rem;">
-    <div class="vd-container-responsive">
-        <div class="about-header" style="padding: 60px 0 40px; background: none;">
-            <h1 class="vd-text-primary">Documentation</h1>
-            <p class="vd-text-muted">Explore the Vanduo Framework documentation.</p>
+    <!-- Page Header -->
+    <div class="about-header">
+        <div class="vd-container-responsive">
+            <h1 style="color: var(--color-primary);"><i class="ph ph-book-open-text"></i> Documentation</h1>
+            <p class="vd-text-lg vd-text-muted">Explore the Vanduo Framework documentation.</p>
         </div>
+    </div>
 
+    <!-- Main Content -->
+    <div class="vd-container-responsive" style="padding-top: 3rem;">
         <div class="vd-row justify-content-center">
             <div class="vd-col-12 vd-col-md-4">
                 <a href="#docs/components" style="text-decoration: none;" data-route="docs/components">
-                    <div class="vd-card about-card"
-                        style="aspect-ratio: 1 / 1.618; display: flex; align-items: center; justify-content: center; transition: transform 0.2s, box-shadow 0.2s; cursor: pointer;"
-                        onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='var(--shadow-md)';"
-                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--shadow-sm)';">
+                    <div class="vd-card vd-card-glow vd-card-actionable about-card docs-card-components"
+                        style="aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center; cursor: pointer;">
                         <div class="vd-card-body vd-text-center"
                             style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
                             <i class="ph ph-cube"
-                                style="font-size: 3.5rem; color: var(--color-primary); margin-bottom: 1.5rem; display: block;"></i>
+                                style="font-size: 3.5rem; color: #eab308; margin-bottom: 1.5rem; display: block;"></i>
                             <h3>Components</h3>
                             <p>Explore the building blocks of Vanduo Framework.</p>
                         </div>
@@ -24,14 +26,12 @@
             </div>
             <div class="vd-col-12 vd-col-md-4">
                 <a href="#docs/guides" style="text-decoration: none;" data-route="docs/guides">
-                    <div class="vd-card about-card"
-                        style="aspect-ratio: 1 / 1.618; display: flex; align-items: center; justify-content: center; transition: transform 0.2s, box-shadow 0.2s; cursor: pointer;"
-                        onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='var(--shadow-md)';"
-                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--shadow-sm)';">
+                    <div class="vd-card vd-card-glow vd-card-actionable about-card docs-card-guides"
+                        style="aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center; cursor: pointer;">
                         <div class="vd-card-body vd-text-center"
                             style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
                             <i class="ph ph-compass"
-                                style="font-size: 3.5rem; color: var(--color-success); margin-bottom: 1.5rem; display: block;"></i>
+                                style="font-size: 3.5rem; color: #22c55e; margin-bottom: 1.5rem; display: block;"></i>
                             <h3>Guides</h3>
                             <p>Step-by-step tutorials to master Vanduo.</p>
                         </div>
@@ -40,19 +40,104 @@
             </div>
             <div class="vd-col-12 vd-col-md-4">
                 <a href="#docs/concepts" style="text-decoration: none;" data-route="docs/concepts">
-                    <div class="vd-card about-card"
-                        style="aspect-ratio: 1 / 1.618; display: flex; align-items: center; justify-content: center; transition: transform 0.2s, box-shadow 0.2s; cursor: pointer;"
-                        onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='var(--shadow-md)';"
-                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--shadow-sm)';">
+                    <div class="vd-card vd-card-glow vd-card-actionable about-card docs-card-concepts"
+                        style="aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center; cursor: pointer;">
                         <div class="vd-card-body vd-text-center"
                             style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
                             <i class="ph ph-lightbulb"
-                                style="font-size: 3.5rem; color: var(--color-warning); margin-bottom: 1.5rem; display: block;"></i>
+                                style="font-size: 3.5rem; color: #ef4444; margin-bottom: 1.5rem; display: block;"></i>
                             <h3>Concepts</h3>
                             <p>Deep dive into the architecture and core philosophy.</p>
                         </div>
                     </div>
                 </a>
+            </div>
+        </div>
+
+        <!-- Divider -->
+        <hr class="docs-landing-divider">
+
+        <!-- Golden-split row: status (bigger) + version (smaller) -->
+        <div class="docs-golden-row">
+            <!-- Left: Documentation Status -->
+            <div class="docs-golden-left">
+                <div class="vd-card about-card docs-card-status"
+                    style="height: 100%; display: flex; align-items: stretch; cursor: default;">
+                    <div class="vd-card-body"
+                        style="display: flex; flex-direction: column; justify-content: center; padding: 2.5rem; width: 100%;">
+                        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 2rem;">
+                            <i class="ph ph-chart-pie-slice"
+                                style="font-size: 2rem; color: var(--color-primary);"></i>
+                            <h3 style="margin: 0; color: var(--color-primary); font-size: 1.35rem;">Documentation
+                                Coverage</h3>
+                        </div>
+
+                        <div class="docs-status-bars">
+                            <!-- Components -->
+                            <div class="docs-status-item">
+                                <div class="docs-status-label">
+                                    <span><i class="ph ph-cube" style="color: #eab308;"></i> Components</span>
+                                    <span class="docs-status-pct" style="color: #eab308;">~90%</span>
+                                </div>
+                                <div class="docs-status-track">
+                                    <div class="docs-status-fill" style="width: 90%; background: linear-gradient(90deg, #eab308, #facc15);">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Concepts -->
+                            <div class="docs-status-item">
+                                <div class="docs-status-label">
+                                    <span><i class="ph ph-lightbulb" style="color: #ef4444;"></i> Concepts</span>
+                                    <span class="docs-status-pct" style="color: #ef4444;">~33%</span>
+                                </div>
+                                <div class="docs-status-track">
+                                    <div class="docs-status-fill" style="width: 33%; background: linear-gradient(90deg, #ef4444, #f87171);">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Guides -->
+                            <div class="docs-status-item">
+                                <div class="docs-status-label">
+                                    <span><i class="ph ph-compass" style="color: #22c55e;"></i> Guides</span>
+                                    <span class="docs-status-pct" style="color: #22c55e;">~20%</span>
+                                </div>
+                                <div class="docs-status-track">
+                                    <div class="docs-status-fill" style="width: 20%; background: linear-gradient(90deg, #22c55e, #4ade80);">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p style="margin-top: 1.75rem; color: var(--text-secondary); font-size: 0.85rem; opacity: 0.7;">
+                            <i class="ph ph-info" style="margin-right: 0.25rem;"></i>
+                            Coverage is approximate and updated manually.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Version Info -->
+            <div class="docs-golden-right">
+                <div class="vd-card about-card docs-card-version"
+                    style="height: 100%; display: flex; align-items: center; justify-content: center; cursor: default;">
+                    <div class="vd-card-body"
+                        style="display: flex; flex-direction: column; align-items: stretch; justify-content: center; gap: 1rem; height: 100%; padding: 2rem;">
+                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+                            <span style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-primary);">Framework</span>
+                            <code title="Framework version" data-tooltip="Framework version"
+                                style="display: inline-flex; align-items: center; gap: 0.45rem; margin: 0; padding: 0.45rem 0.8rem; border-radius: var(--radius-sm); background: rgba(var(--primary-rgb), 0.1); color: var(--color-primary); font-size: 1.05rem; font-weight: 600;">
+                                <i class="ph ph-cube"></i> v1.1.8
+                            </code>
+                        </div>
+                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+                            <span style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-primary);">Docs</span>
+                            <code title="Documentation version" data-tooltip="Documentation Version"
+                                style="display: inline-flex; align-items: center; gap: 0.45rem; margin: 0; padding: 0.45rem 0.8rem; border-radius: var(--radius-sm); background: rgba(var(--primary-rgb), 0.1); color: var(--color-primary); font-size: 1.05rem; font-weight: 600;">
+                                <i class="ph ph-book-open-text"></i> v1.1.8
+                            </code>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

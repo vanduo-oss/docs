@@ -1,11 +1,5 @@
 <section id="getting-started">
-    <h2 class="demo-title"><i class="ph ph-rocket-launch"></i>Getting Started
-        <span style="font-size: 0.85em; vertical-align: middle; margin-left: 0.75rem; white-space: nowrap;">
-            <code title="Framework version"><i class="ph ph-cube"></i> v1.1.8</code>
-            <code title="Documentation version"
-                style="margin-left: 0.5rem;"><i class="ph ph-book-open-text"></i> v1.1.8</code>
-        </span>
-    </h2>
+    <h2 class="demo-title"><i class="ph ph-rocket-launch"></i>Getting Started</h2>
 
     <div class="vd-row vd-mb-5">
         <div class="vd-col-12">
@@ -22,7 +16,72 @@
 
     <div class="vd-row">
         <div class="vd-col-12 vd-mb-4">
-            <div class="vd-card vd-card-glow demo-card">
+            <div class="vd-card demo-card">
+                <div class="vd-card-header">
+                    <h3><i class="ph ph-package mr-2" style="color: var(--color-success);"></i>Package Manager
+                        <span class="vd-badge vd-badge-success" style="margin-left: 8px; font-size: 0.7rem; vertical-align: middle;">Recommended</span></h3>
+                </div>
+                <div class="vd-card-body">
+                    <p>We strongly recommend <a href="https://pnpm.io/" target="_blank" rel="noopener"><strong>pnpm</strong></a> for installing Vanduo Framework. Vanduo ships with strict <code>.npmrc</code> security policies that work best within the pnpm ecosystem:</p>
+                    <div class="vd-code-snippet" data-collapsible data-expanded="true">
+                        <button class="vd-code-snippet-toggle" aria-expanded="true">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="shell">Shell</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="shell"><code>pnpm add vanduo-framework</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="vd-mt-4">Then import in your project:</p>
+                    <div class="vd-code-snippet" data-collapsible data-expanded="true">
+                        <button class="vd-code-snippet-toggle" aria-expanded="true">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="javascript">JavaScript</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="javascript"><code><span class="code-keyword">import</span> <span class="code-string">'vanduo-framework/dist/vanduo.min.css'</span>;
+<span class="code-keyword">import</span> { Vanduo } <span class="code-keyword">from</span> <span class="code-string">'vanduo-framework'</span>;
+Vanduo.<span class="code-function">init</span>();</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vd-alert vd-alert-primary vd-mt-4">
+                        <i class="ph ph-info"></i>
+                        <div>
+                            <strong>Why pnpm?</strong> pnpm enforces a strict lockfile and creates an isolated <code>node_modules</code> structure by default. Vanduo's <code>.npmrc</code> security policies — like blocking exotic sub-dependencies and strict peer enforcement — work best with pnpm out of the box.
+                        </div>
+                    </div>
+                    <p class="vd-text-sm vd-text-muted vd-mt-3"><strong>Alternatives:</strong>
+                        <code>npm install vanduo-framework</code> and <code>yarn add vanduo-framework</code>
+                        will also work, but they do not enforce the same strict lockfile and isolated
+                        <code>node_modules</code> security guarantees that pnpm provides.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-mb-4">
+            <div class="vd-card demo-card">
                 <div class="vd-card-header">
                     <h3><i class="ph ph-lightning mr-2" style="color: var(--color-warning);"></i>CDN
                         (Fastest)</h3>
@@ -63,7 +122,7 @@
         </div>
 
         <div class="vd-col-12 vd-mb-4">
-            <div class="vd-card vd-card-glow demo-card">
+            <div class="vd-card demo-card">
                 <div class="vd-card-header">
                     <h3><i class="ph ph-download-simple mr-2" style="color: var(--color-primary);"></i>Download</h3>
                 </div>
@@ -104,7 +163,7 @@
         </div>
 
         <div class="vd-col-12 vd-mb-4">
-            <div class="vd-card vd-card-glow demo-card">
+            <div class="vd-card demo-card">
                 <div class="vd-card-header">
                     <h3><i class="ph ph-code mr-2" style="color: var(--color-success);"></i>Source
                         Files</h3>
@@ -146,7 +205,7 @@
 
     <div class="vd-row">
         <div class="vd-col-12 vd-col-md-6">
-            <div class="vd-card vd-card-glow demo-card">
+            <div class="vd-card demo-card">
                 <div class="vd-card-header">
                     <h3>CSS Variable Customization</h3>
                 </div>
@@ -196,7 +255,7 @@
         </div>
 
         <div class="vd-col-12 vd-col-md-6">
-            <div class="vd-card vd-card-glow demo-card">
+            <div class="vd-card demo-card">
                 <div class="vd-card-header">
                     <h3>Theme Switching</h3>
                 </div>
@@ -249,7 +308,7 @@
 
     <div class="vd-row">
         <div class="vd-col-12 vd-col-md-6">
-            <div class="vd-card vd-card-glow demo-card">
+            <div class="vd-card demo-card">
                 <div class="vd-card-header">
                     <h3>Data Attributes Reference</h3>
                 </div>
@@ -305,7 +364,7 @@
         </div>
 
         <div class="vd-col-12 vd-col-md-6">
-            <div class="vd-card vd-card-glow demo-card">
+            <div class="vd-card demo-card">
                 <div class="vd-card-header">
                     <h3>JavaScript API</h3>
                 </div>

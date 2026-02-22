@@ -27,26 +27,6 @@
       "icon": "ph-cube",
       "categories": [
         {
-          "name": "Getting Started",
-          "sections": [
-            {
-              "id": "getting-started",
-              "title": "Quick Start",
-              "file": "quick-start.html",
-              "preload": true,
-              "icon": "ph-rocket-launch",
-              "keywords": [
-                "install",
-                "cdn",
-                "npm",
-                "setup",
-                "quick start",
-                "getting started"
-              ]
-            }
-          ]
-        },
-        {
           "name": "Core",
           "sections": [
             {
@@ -469,6 +449,23 @@
           "name": "Start Here",
           "sections": [
             {
+              "id": "getting-started",
+              "title": "Quick Start",
+              "file": "quick-start.html",
+              "preload": true,
+              "icon": "ph-rocket-launch",
+              "keywords": [
+                "install",
+                "cdn",
+                "npm",
+                "pnpm",
+                "package manager",
+                "setup",
+                "quick start",
+                "getting started"
+              ]
+            },
+            {
               "id": "getting-started-guide",
               "title": "Getting Started from Zero",
               "file": "guides/getting-started-guide.html",
@@ -680,7 +677,7 @@
               "id": "token-reference",
               "title": "CSS Token Reference",
               "file": "concepts/token-reference.html",
-              "icon": "ph-tokens",
+              "icon": "ph-list-bullets",
               "keywords": [
                 "token",
                 "reference",

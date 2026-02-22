@@ -400,10 +400,47 @@ document.querySelectorAll('.doc-tab[data-tab]').forEach(function (tab) {
     tab.addEventListener('click', function (e) {
         e.preventDefault();
         var tabKey = tab.getAttribute('data-tab');
-        var tabRoutes = { concepts: 'docs/concepts', guides: 'docs/guides' };
+        var tabRoutes = { components: 'docs/components', guides: 'docs/guides', concepts: 'docs/concepts' };
         navigate(tabRoutes[tabKey] || 'docs');
     });
 });
+
+/* ── Hide doc-tabs-versions when scrolled & track tab-bar height (mobile) ── */
+(function () {
+    var wrapper = document.querySelector('.doc-tabs-wrapper');
+    if (!wrapper) return;
+    var ticking = false;
+    var scrollThreshold = 60;
+
+    function updateScrolled() {
+        var docsActive = document.getElementById('docs-view').classList.contains('is-active');
+        var isMobile = window.matchMedia('(max-width: 767.98px)').matches;
+        var scrolled = window.scrollY > scrollThreshold;
+        if (docsActive && isMobile && scrolled) {
+            wrapper.classList.add('is-scrolled');
+        } else {
+            wrapper.classList.remove('is-scrolled');
+        }
+        ticking = false;
+    }
+
+    function onScroll() {
+        if (!ticking) {
+            requestAnimationFrame(updateScrolled);
+            ticking = true;
+        }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    updateScrolled();
+
+    var ro = new ResizeObserver(function () {
+        document.documentElement.style.setProperty(
+            '--doc-tabs-height', wrapper.offsetHeight + 'px'
+        );
+    });
+    ro.observe(wrapper);
+})();
 
 /* ── Mobile TOC toggle ─────────────────────── */
 var sidebarToggle = document.querySelector('.doc-sidebar-toggle');
@@ -747,7 +784,7 @@ function initGlobalSearch() {
 
     // Cmd/Ctrl+K global shortcut
     document.addEventListener('keydown', function (e) {
-        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
             e.preventDefault();
             e.stopPropagation();
 

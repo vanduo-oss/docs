@@ -29,34 +29,8 @@ export default defineConfig({
       },
     },
     {
-      name: 'Firefox Desktop',
-      use: {
-        ...devices['Desktop Firefox'],
-        viewport: { width: 1920, height: 1080 },
-      },
-    },
-    {
-      name: 'WebKit Desktop',
-      use: {
-        ...devices['Desktop Safari'],
-        viewport: { width: 1920, height: 1080 },
-      },
-    },
-    {
       name: 'Chromium Mobile',
       use: { ...devices['Pixel 7'] },
-    },
-    {
-      name: 'WebKit Mobile',
-      use: { ...devices['iPhone 14'] },
-    },
-    {
-      name: 'Chromium Tablet',
-      use: { ...devices['iPad Pro 11'] },
-    },
-    {
-      name: 'WebKit Tablet',
-      use: { ...devices['iPad Pro 11'] },
     },
   ],
   webServer: {
