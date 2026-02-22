@@ -124,15 +124,6 @@
             flex-direction: column;
         }
 
-        .doc-sidebar .vd-doc-search {
-            flex-shrink: 0;
-            position: sticky;
-            top: 70px;
-            z-index: 2;
-            background: var(--bg-primary);
-            padding-top: 0.5rem;
-            padding-bottom: 0.5rem;
-        }
 
         .doc-sidebar .doc-nav {
             overflow-y: auto;
@@ -226,15 +217,6 @@
                 z-index: 10;
             }
 
-            .doc-sidebar .vd-doc-search {
-                flex-shrink: 0;
-                position: sticky;
-                top: 70px;
-                z-index: 2;
-                background: var(--bg-primary);
-                padding-top: 0.5rem;
-                padding-bottom: 0.5rem;
-            }
 
             .doc-sidebar-toggle {
                 display: block;
@@ -766,6 +748,10 @@
         }
 
         /* ── Sticky doc-tabs on desktop & tablet ──────── */
+        .doc-tab:hover, .doc-tab.active {
+            text-decoration: none;
+        }
+
         @media (min-width: 768px) {
             .doc-tabs {
                 position: sticky;
@@ -781,9 +767,6 @@
                 top: 140px;
             }
 
-            .doc-sidebar .vd-doc-search {
-                top: 140px;
-            }
         }
 
         @media (min-width: 768px) and (max-width: 991px) {

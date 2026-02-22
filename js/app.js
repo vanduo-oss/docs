@@ -287,7 +287,6 @@ async function switchTab(tabKey) {
 
     buildSidebar(tabKey);
     closeMobileToc();
-    initSearch(tabKey);
 
     var orderedIds = getOrderedIds(tabKey);
     if (orderedIds.length > 0) {
@@ -316,36 +315,6 @@ function setupScrollSpy() {
     sections.forEach(function (sec) { scrollSpyObserver.observe(sec); });
 }
 
-/* ── Search ───────────────────────────────────── */
-function initSearch(tabKey) {
-    var data = [];
-    var tab = registry.tabs[tabKey];
-    if (tab) {
-        tab.categories.forEach(function (cat) {
-            cat.sections.forEach(function (sec) {
-                data.push({
-                    id: sec.id,
-                    title: sec.title,
-                    content: (sec.keywords || []).join(' '),
-                    category: cat.name,
-                    icon: sec.icon || ''
-                });
-            });
-        });
-    }
-    if (window.Search) {
-        window.Search.init({
-            containerSelector: '.vd-doc-search',
-            inputSelector: '.vd-doc-search-input',
-            resultsSelector: '.vd-doc-search-results',
-            contentSelector: '#dynamic-content section[id]',
-            data: data,
-            onSelect: function (result) {
-                if (result && result.id) loadSection(result.id);
-            }
-        });
-    }
-}
 
 /* ── Wire data-route links ────────────────────── */
 function wireRouteLinks(container) {
@@ -367,7 +336,8 @@ function parseHash(hash) {
     if (!h || h === 'home') return { view: 'home' };
     if (h === 'about') return { view: 'about' };
     if (h === 'changelog') return { view: 'changelog' };
-    if (h === 'docs' || h === 'docs/components') return { view: 'docs', tab: 'components', section: null };
+    if (h === 'docs') return { view: 'docs-landing' };
+    if (h === 'docs/components') return { view: 'docs', tab: 'components', section: null };
     if (h === 'docs/concepts') return { view: 'docs', tab: 'concepts', section: null };
     if (h === 'docs/guides') return { view: 'docs', tab: 'guides', section: null };
     if (h.startsWith('docs/')) {
@@ -389,8 +359,11 @@ async function navigate(route) {
 async function handleRoute() {
     var parsed = parseHash(location.hash);
 
-    if (parsed.view === 'home' || parsed.view === 'about' || parsed.view === 'changelog') {
+    if (parsed.view === 'home' || parsed.view === 'about' || parsed.view === 'changelog' || parsed.view === 'docs-landing') {
         await loadPage(parsed.view);
+        if (parsed.view === 'docs-landing') {
+            setActiveNavbarLink('docs');
+        }
         return;
     }
 
@@ -551,6 +524,15 @@ function buildGlobalSearchIndex() {
         keywords: 'changelog versions releases updates history changes new features',
         icon: 'ph-clock-counter-clockwise',
         route: 'changelog'
+    });
+    globalSearchIndex.push({
+        id: 'docs-landing',
+        title: 'Documentation',
+        category: 'Pages',
+        tab: 'Pages',
+        keywords: 'documentation doc docs components guides concepts',
+        icon: 'ph-book-open',
+        route: 'docs'
     });
 }
 

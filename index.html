@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Vanduo Framework v1.1.7. Pure HTML, CSS, JS framework for beautiful static websites. No dependencies, no build tools, just clean code.">
+        content="Vanduo Framework v1.1.7. Pure HTML, CSS, JS framework for beautiful websites. Zero runtime dependencies, no mandatory build tools, just clean code.">
     <meta name="author" content="Vanduo Framework">
     <meta name="keywords"
         content="CSS framework, HTML framework, JavaScript framework, static website, no dependencies, pure CSS, pure JavaScript, responsive design, UI components, Lithuania">
@@ -47,7 +47,7 @@
       "name": "Vanduo Framework",
       "applicationCategory": "DeveloperApplication",
       "operatingSystem": "Any",
-      "description": "Pure HTML, CSS, JS framework for designing beautiful static websites. No dependencies, no build tools, just clean and simple code.",
+      "description": "Pure HTML, CSS, JS framework for designing beautiful websites. Zero runtime dependencies, no mandatory build tools, just clean and simple code.",
       "url": "https://vanduo.dev/",
       "author": {
         "@type": "Organization",
@@ -104,7 +104,7 @@
     </nav>
 
     <!-- ── Main Content Area ──────────────────────────── -->
-    <main id="main-content" style="padding-top: 80px;">
+    <main id="main-content" style="padding-top: 80px; min-height: calc(100vh - 200px);">
 
         <!-- Page view (Home / About / Changelog) -->
         <div id="page-view"></div>
@@ -114,24 +114,14 @@
             <div class="vd-container-responsive">
                 <div class="doc-tabs">
                     <a href="#docs" class="doc-tab" data-tab="components"><i class="ph ph-cube"></i>Components</a>
-                    <a href="#docs/concepts" class="doc-tab" data-tab="concepts"><i class="ph ph-lightbulb"></i>Concepts
-                        &amp; Architecture</a>
                     <a href="#docs/guides" class="doc-tab" data-tab="guides"><i class="ph ph-compass"></i>Guides</a>
+                    <a href="#docs/concepts" class="doc-tab" data-tab="concepts"><i
+                            class="ph ph-lightbulb"></i>Concepts</a>
                 </div>
 
                 <div class="vd-row">
                     <aside class="vd-col-12 vd-col-lg-3 doc-sidebar">
-                        <div class="vd-doc-search">
-                            <div class="vd-doc-search-input-wrapper">
-                                <i class="ph ph-magnifying-glass vd-doc-search-icon"></i>
-                                <input type="search" class="vd-doc-search-input" placeholder="Search docs..."
-                                    aria-label="Search documentation" aria-controls="doc-search-results-list"
-                                    aria-expanded="false" autocomplete="off">
-                                <kbd class="vd-doc-search-shortcut">&#231;K</kbd>
-                            </div>
-                            <div class="vd-doc-search-results" id="doc-search-results-list" role="listbox"
-                                aria-label="Search results"></div>
-                        </div>
+
                         <button class="doc-sidebar-toggle" aria-label="Toggle navigation" aria-expanded="false">Table of
                             Contents</button>
                         <nav class="doc-nav" aria-label="Documentation sections">
