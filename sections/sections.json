@@ -539,36 +539,6 @@
           ]
         },
         {
-          "name": "Migration",
-          "sections": [
-            {
-              "id": "migration",
-              "title": "Migration Guide",
-              "file": "concepts/migration.html",
-              "icon": "ph-arrow-right",
-              "keywords": [
-                "migration",
-                "upgrade",
-                "update",
-                "version"
-              ]
-            },
-            {
-              "id": "breaking-changes",
-              "title": "Breaking Changes",
-              "file": "concepts/breaking-changes.html",
-              "icon": "ph-warning-circle",
-              "keywords": [
-                "breaking",
-                "changes",
-                "deprecated",
-                "removed",
-                "renamed"
-              ]
-            }
-          ]
-        },
-        {
           "name": "Reference",
           "sections": [
             {
