@@ -25,7 +25,9 @@ if (typeof window.Vanduo === 'undefined') {
 const SECTIONS_BASE = './sections/';
 let registry = { pages: [], tabs: {} };
 const loadedSections = new Set();
+const loadingSections = new Set();
 let scrollSpyObserver = null;
+let docLazyLoader = null;
 let currentView = null;
 let currentTab = null;
 
@@ -213,15 +215,23 @@ async function loadPage(pageId) {
 }
 
 /* ── Section loading (docs) ───────────────────── */
-async function loadSection(sectionId) {
+async function loadSection(sectionId, autoScroll = true) {
     if (loadedSections.has(sectionId)) {
         var el = document.getElementById(sectionId);
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (el && autoScroll) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
         setActiveNavLink(sectionId);
         return;
     }
+    if (loadingSections.has(sectionId)) {
+        return; // Deduplicate
+    }
+    loadingSections.add(sectionId);
+
     var meta = findSectionMeta(sectionId);
-    if (!meta) return;
+    if (!meta) {
+        loadingSections.delete(sectionId);
+        return;
+    }
 
     var container = document.getElementById('dynamic-content');
     var orderedIds = getOrderedIds(meta.tab);
@@ -243,7 +253,7 @@ async function loadSection(sectionId) {
         container.appendChild(placeholder);
     }
 
-    placeholder.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (autoScroll) placeholder.scrollIntoView({ behavior: 'smooth', block: 'start' });
     setActiveNavLink(sectionId);
 
     try {
@@ -263,18 +273,25 @@ async function loadSection(sectionId) {
             placeholder.remove();
         }
         setupScrollSpy();
+        setupInfiniteScroll();
+
         var target = document.getElementById(sectionId);
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        setActiveNavLink(sectionId);
-        setDocumentTitle(meta.section.title);
-        if (window.history && window.history.replaceState) {
-            window.history.replaceState(null, '', '#docs/' + sectionId);
+        if (target && autoScroll) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        if (autoScroll) {
+            setActiveNavLink(sectionId);
+            setDocumentTitle(meta.section.title);
+            if (window.history && window.history.replaceState) {
+                window.history.replaceState(null, '', '#docs/' + sectionId);
+            }
         }
     } catch (err) {
         placeholder.remove();
         console.error(err);
         container.insertAdjacentHTML('beforeend',
             '<div class="vd-alert vd-alert-error">Failed to load section. Check console.</div>');
+    } finally {
+        loadingSections.delete(sectionId);
     }
 }
 
@@ -287,6 +304,10 @@ async function switchTab(tabKey) {
     var container = document.getElementById('dynamic-content');
     container.innerHTML = '';
     loadedSections.clear();
+    loadingSections.clear();
+    if (docLazyLoader) {
+        docLazyLoader.disconnect();
+    }
 
     buildSidebar(tabKey);
     closeMobileToc();
@@ -305,12 +326,25 @@ function setupScrollSpy() {
     var sections = content.querySelectorAll('section[id]');
     if (!sections.length) return;
     scrollSpyObserver = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-                setActiveNavLink(entry.target.id);
-                var meta = findSectionMeta(entry.target.id);
-                if (meta && meta.section) {
-                    setDocumentTitle(meta.section.title);
+        // Find the most prominent intersecting entry (if multiple, take the first one or the one with biggest intersection ratio)
+        var intersecting = entries.filter(function (e) { return e.isIntersecting; });
+        if (!intersecting.length) return;
+
+        // Use the last intersecting one or max ratio? Just loop them.
+        intersecting.forEach(function (entry) {
+            setActiveNavLink(entry.target.id);
+            var meta = findSectionMeta(entry.target.id);
+            if (meta && meta.section) {
+                setDocumentTitle(meta.section.title);
+                if (window.history && window.history.replaceState) {
+                    var targetHashBase = '#docs/' + entry.target.id;
+                    // Only replace the hash if the current hash does NOT start with targetHashBase.
+                    // This preserves '#docs/buttons#sizes' when scrolling within the 'buttons' section.
+                    // To prevent a newly loaded lazy-section from stealing the hash while 'buttons' is still in view,
+                    // we can verify if the new entry actually takes up a significant portion, or just let it update.
+                    if (!window.location.hash.startsWith(targetHashBase)) {
+                        window.history.replaceState(null, '', targetHashBase);
+                    }
                 }
             }
         });
@@ -318,6 +352,44 @@ function setupScrollSpy() {
     sections.forEach(function (sec) { scrollSpyObserver.observe(sec); });
 }
 
+function setupInfiniteScroll() {
+    var container = document.getElementById('dynamic-content');
+    if (!container) return;
+
+    if (!window.VanduoLazyLoader) return; // Safety check if module not loaded
+
+    if (!docLazyLoader) {
+        docLazyLoader = new window.VanduoLazyLoader({
+            container: container,
+            onLoadNext: loadNextSection,
+            rootMargin: '400px'
+        });
+    }
+
+    // Always re-init when needed to append sentinel to the bottom again
+    docLazyLoader.init();
+}
+
+function loadNextSection() {
+    if (!currentTab) return;
+    var orderedIds = getOrderedIds(currentTab);
+
+    // Find the highest index among currently loaded or loading sections
+    var maxIndex = -1;
+    for (var id of orderedIds) {
+        if (loadedSections.has(id) || loadingSections.has(id)) {
+            var idx = orderedIds.indexOf(id);
+            if (idx > maxIndex) {
+                maxIndex = idx;
+            }
+        }
+    }
+
+    var nextIndex = maxIndex + 1;
+    if (nextIndex < orderedIds.length) {
+        loadSection(orderedIds[nextIndex], false); // autoScroll = false
+    }
+}
 
 /* ── Wire data-route links ────────────────────── */
 function wireRouteLinks(container) {
@@ -344,7 +416,8 @@ function parseHash(hash) {
     if (h === 'docs/concepts') return { view: 'docs', tab: 'concepts', section: null };
     if (h === 'docs/guides') return { view: 'docs', tab: 'guides', section: null };
     if (h.startsWith('docs/')) {
-        var sectionId = h.slice(5);
+        var fullPath = h.slice(5);
+        var sectionId = fullPath.split('#')[0];
         var tabKey = getTabForSection(sectionId);
         if (tabKey) return { view: 'docs', tab: tabKey, section: sectionId };
         return { view: 'docs', tab: 'components', section: null };
@@ -408,35 +481,10 @@ document.querySelectorAll('.doc-tab[data-tab]').forEach(function (tab) {
     });
 });
 
-/* ── Hide doc-tabs-versions when scrolled & track tab-bar height (mobile) ── */
+/* ── Track doc-tabs-wrapper height for sticky sidebar (--doc-tabs-height) ── */
 (function () {
     var wrapper = document.querySelector('.doc-tabs-wrapper');
     if (!wrapper) return;
-    var ticking = false;
-    var scrollThreshold = 60;
-
-    function updateScrolled() {
-        var docsActive = document.getElementById('docs-view').classList.contains('is-active');
-        var isMobile = window.matchMedia('(max-width: 767.98px)').matches;
-        var scrolled = window.scrollY > scrollThreshold;
-        if (docsActive && isMobile && scrolled) {
-            wrapper.classList.add('is-scrolled');
-        } else {
-            wrapper.classList.remove('is-scrolled');
-        }
-        ticking = false;
-    }
-
-    function onScroll() {
-        if (!ticking) {
-            requestAnimationFrame(updateScrolled);
-            ticking = true;
-        }
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    updateScrolled();
-
     var ro = new ResizeObserver(function () {
         document.documentElement.style.setProperty(
             '--doc-tabs-height', wrapper.offsetHeight + 'px'

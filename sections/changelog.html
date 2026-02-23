@@ -15,6 +15,61 @@
         <div class="vd-container-responsive" style="max-width: 1200px;">
 
             <!-- ═══════════════════════════════════════════════ -->
+            <!-- Version 1.2.1                                   -->
+            <!-- ═══════════════════════════════════════════════ -->
+            <article class="version-card">
+                <header class="version-header">
+                    <span class="vd-badge vd-badge-primary" style="font-size: 1rem; padding: 0.5rem 1rem;">v1.2.1</span>
+                    <span style="color: var(--text-secondary); font-size: 0.95rem;">
+                        <i class="ph ph-calendar mr-1"></i>February 23, 2026
+                    </span>
+                    <span class="vd-badge vd-badge-info" style="font-size: 0.75rem;">Latest</span>
+                </header>
+                <div class="version-body">
+                    <div class="vd-row">
+                        <div class="vd-col-12 vd-col-md-6">
+                            <div class="change-category">
+                                <h4 style="color: var(--color-primary);">
+                                    <i class="ph ph-cube"></i> Framework
+                                </h4>
+                                <p class="vd-text-sm vd-text-muted" style="padding-left: 1.5rem;"><em>No framework
+                                        changes in this release.</em></p>
+                            </div>
+                        </div>
+                        <div class="vd-col-12 vd-col-md-6">
+                            <div class="change-category">
+                                <h4 style="color: var(--color-info);">
+                                    <i class="ph ph-book-open-text"></i> Documentation
+                                </h4>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-sparkle" style="color: var(--color-primary);"></i>
+                                        <div>
+                                            <strong>New: Global Lazy Loading</strong>
+                                            <p>Entire documentation sections now load dynamically as you scroll or
+                                                navigate. This significantly reduces initial load time and improves
+                                                perceived performance across the site.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-info" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Note: experimental lazy-loader module</strong>
+                                            <p>The documentation's infinite scroll is powered by a custom
+                                                <code>lazy-loader</code> module. Currently, this is a
+                                                <strong>documentation-only feature</strong> and is not yet part of the
+                                                core Vanduo framework distribution.
+                                            </p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ═══════════════════════════════════════════════ -->
             <!-- Version 1.2.0                                   -->
             <!-- ═══════════════════════════════════════════════ -->
             <article class="version-card">
@@ -23,7 +78,6 @@
                     <span style="color: var(--text-secondary); font-size: 0.95rem;">
                         <i class="ph ph-calendar mr-1"></i>February 22, 2026
                     </span>
-                    <span class="vd-badge vd-badge-info" style="font-size: 0.75rem;">Latest</span>
                 </header>
                 <div class="version-body">
                     <div class="vd-row">
@@ -37,7 +91,8 @@
                                         <i class="ph ph-shield-check" style="color: var(--color-success);"></i>
                                         <div>
                                             <strong>Improvement: Code Safety Hardening</strong>
-                                            <p>Hardened framework runtime and release policies to improve safety defaults,
+                                            <p>Hardened framework runtime and release policies to improve safety
+                                                defaults,
                                                 reduce risky execution paths, and make upgrades safer across production
                                                 environments.</p>
                                         </div>
@@ -63,7 +118,8 @@
                                         <i class="ph ph-arrow-up" style="color: var(--color-primary);"></i>
                                         <div>
                                             <strong>Update: Docs Runtime Loads Framework from CDN</strong>
-                                            <p>The documentation app now consumes Vanduo directly from jsDelivr using the
+                                            <p>The documentation app now consumes Vanduo directly from jsDelivr using
+                                                the
                                                 official pinned <code>@v1.2.0</code> dist artifacts for CSS and JS.</p>
                                         </div>
                                     </li>
