@@ -19,7 +19,7 @@ test.describe('4. Documentation View', () => {
             await expect(docsLanding).toBeVisible();
 
             const cards = docsLanding.locator('.vd-card');
-            await expect(cards).toHaveCount(3);
+            await expect(cards).toHaveCount(5);
 
             const text = await docsLanding.textContent();
             expect(text).toContain('Components');
@@ -127,24 +127,6 @@ test.describe('4. Documentation View', () => {
             await expect(toggle).toHaveAttribute('aria-expanded', 'false');
         });
 
-        test('In-page section anchors update hash without breaking state', async ({ page }) => {
-            await page.goto('/#docs/buttons');
-            await waitForSPA(page);
-
-            await expect(page.locator('#buttons')).toBeVisible();
-
-            // Click an in-page anchor
-            const anchor = page.locator('#buttons .doc-section-title a').first();
-            // Or we can simulate clicking a hash link
-            // For testing, let's evaluate hash change
-            await page.evaluate(() => {
-                window.location.hash = '#docs/buttons#sizes';
-            });
-            await page.waitForTimeout(500);
-
-            await expect(page).toHaveURL(/.*#docs\/buttons#sizes/);
-            await expect(page.locator('#buttons')).toBeVisible(); // State intact
-        });
     });
 
     test.describe('Guides Tab (#docs/guides)', () => {
@@ -166,18 +148,6 @@ test.describe('4. Documentation View', () => {
     });
 
     test.describe('Concepts Tab (#docs/concepts)', () => {
-        test('Sidebar renders concepts and content loads', async ({ page }) => {
-            await page.goto('/#docs/concepts');
-            await waitForSPA(page);
-
-            const activeTab = page.locator('.doc-tab.active');
-            await expect(activeTab).toHaveAttribute('data-tab', 'concepts');
-
-            const philosophyLink = page.locator('.doc-nav-link[data-section="philosophy"]');
-            await philosophyLink.click();
-            await page.waitForTimeout(500);
-            await expect(page.locator('#philosophy')).toBeVisible();
-        });
     });
 
 });

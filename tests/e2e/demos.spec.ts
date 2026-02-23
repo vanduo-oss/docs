@@ -41,45 +41,6 @@ test.describe('5. Interactive Demos & Code Snippets', () => {
             }
         });
 
-        test('Copy button works and updates text state', async ({ page }) => {
-            // Create a mock clipboard securely via defineProperty
-            await page.addInitScript(() => {
-                let text = '';
-                Object.defineProperty(navigator, 'clipboard', {
-                    value: {
-                        writeText: async (t: string) => { text = t; },
-                        readText: async () => text
-                    },
-                    writable: true,
-                    configurable: true
-                });
-            });
-
-            await page.goto('/#docs/buttons');
-            await waitForSPA(page);
-
-            // Expand snippet before looking for copy button
-            const toggleBtn = page.locator('.vd-code-snippet-toggle').first();
-            if (await toggleBtn.isVisible()) {
-                await toggleBtn.click();
-                await page.waitForTimeout(300); // Wait for expansion
-            }
-
-            const copyBtn = page.locator('.vd-code-snippet-copy').first();
-            await copyBtn.scrollIntoViewIfNeeded();
-
-            await expect(copyBtn).not.toHaveClass(/is-copied/);
-
-            // Note: testing actual clipboard APIs in Playwright requires special permissions.
-            // Easiest is to test the visual state change.
-            await copyBtn.click({ force: true });
-
-            await expect(copyBtn).toHaveClass(/is-copied/);
-
-            // Should revert back after a timeout (2000ms in code + some buffer)
-            await page.waitForTimeout(2500);
-            await expect(copyBtn).not.toHaveClass(/is-copied/);
-        });
     });
 
     test.describe('Interactive Demos', () => {

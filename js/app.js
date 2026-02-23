@@ -326,14 +326,24 @@ function setupScrollSpy() {
     var sections = content.querySelectorAll('section[id]');
     if (!sections.length) return;
     scrollSpyObserver = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-                setActiveNavLink(entry.target.id);
-                var meta = findSectionMeta(entry.target.id);
-                if (meta && meta.section) {
-                    setDocumentTitle(meta.section.title);
-                    if (window.history && window.history.replaceState) {
-                        window.history.replaceState(null, '', '#docs/' + entry.target.id);
+        // Find the most prominent intersecting entry (if multiple, take the first one or the one with biggest intersection ratio)
+        var intersecting = entries.filter(function (e) { return e.isIntersecting; });
+        if (!intersecting.length) return;
+
+        // Use the last intersecting one or max ratio? Just loop them.
+        intersecting.forEach(function (entry) {
+            setActiveNavLink(entry.target.id);
+            var meta = findSectionMeta(entry.target.id);
+            if (meta && meta.section) {
+                setDocumentTitle(meta.section.title);
+                if (window.history && window.history.replaceState) {
+                    var targetHashBase = '#docs/' + entry.target.id;
+                    // Only replace the hash if the current hash does NOT start with targetHashBase.
+                    // This preserves '#docs/buttons#sizes' when scrolling within the 'buttons' section.
+                    // To prevent a newly loaded lazy-section from stealing the hash while 'buttons' is still in view,
+                    // we can verify if the new entry actually takes up a significant portion, or just let it update.
+                    if (!window.location.hash.startsWith(targetHashBase)) {
+                        window.history.replaceState(null, '', targetHashBase);
                     }
                 }
             }
@@ -406,7 +416,8 @@ function parseHash(hash) {
     if (h === 'docs/concepts') return { view: 'docs', tab: 'concepts', section: null };
     if (h === 'docs/guides') return { view: 'docs', tab: 'guides', section: null };
     if (h.startsWith('docs/')) {
-        var sectionId = h.slice(5);
+        var fullPath = h.slice(5);
+        var sectionId = fullPath.split('#')[0];
         var tabKey = getTabForSection(sectionId);
         if (tabKey) return { view: 'docs', tab: tabKey, section: sectionId };
         return { view: 'docs', tab: 'components', section: null };
@@ -470,35 +481,10 @@ document.querySelectorAll('.doc-tab[data-tab]').forEach(function (tab) {
     });
 });
 
-/* ── Hide doc-tabs-versions when scrolled & track tab-bar height (mobile) ── */
+/* ── Track doc-tabs-wrapper height for sticky sidebar (--doc-tabs-height) ── */
 (function () {
     var wrapper = document.querySelector('.doc-tabs-wrapper');
     if (!wrapper) return;
-    var ticking = false;
-    var scrollThreshold = 60;
-
-    function updateScrolled() {
-        var docsActive = document.getElementById('docs-view').classList.contains('is-active');
-        var isMobile = window.matchMedia('(max-width: 767.98px)').matches;
-        var scrolled = window.scrollY > scrollThreshold;
-        if (docsActive && isMobile && scrolled) {
-            wrapper.classList.add('is-scrolled');
-        } else {
-            wrapper.classList.remove('is-scrolled');
-        }
-        ticking = false;
-    }
-
-    function onScroll() {
-        if (!ticking) {
-            requestAnimationFrame(updateScrolled);
-            ticking = true;
-        }
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    updateScrolled();
-
     var ro = new ResizeObserver(function () {
         document.documentElement.style.setProperty(
             '--doc-tabs-height', wrapper.offsetHeight + 'px'
