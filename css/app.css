@@ -56,7 +56,7 @@
         /* ── Docs layout ────────────────────────────────── */
         section {
             padding: 4rem 0;
-            scroll-margin-top: 80px;
+            scroll-margin-top: calc(70px + var(--doc-tabs-height, 0px) + 2rem);
             border-bottom: 1px solid var(--border-color);
         }
 
@@ -443,7 +443,7 @@
             margin-right: 0;
         }
 
-        #home-features .philosophy-cards > * {
+        #home-features .philosophy-cards>* {
             padding-left: 0;
             padding-right: 0;
             margin-bottom: 0;
@@ -679,12 +679,29 @@
         }
 
         /* Docs landing: fixed icon colors only (h3 follows primary); hover keeps icon color */
-        #docs-landing .docs-card-components .vd-card-body i { color: #eab308; }
-        #docs-landing .docs-card-components:hover .vd-card-body i { color: #eab308 !important; }
-        #docs-landing .docs-card-guides .vd-card-body i { color: #22c55e; }
-        #docs-landing .docs-card-guides:hover .vd-card-body i { color: #22c55e !important; }
-        #docs-landing .docs-card-concepts .vd-card-body i { color: #ef4444; }
-        #docs-landing .docs-card-concepts:hover .vd-card-body i { color: #ef4444 !important; }
+        #docs-landing .docs-card-components .vd-card-body i {
+            color: #eab308;
+        }
+
+        #docs-landing .docs-card-components:hover .vd-card-body i {
+            color: #eab308 !important;
+        }
+
+        #docs-landing .docs-card-guides .vd-card-body i {
+            color: #22c55e;
+        }
+
+        #docs-landing .docs-card-guides:hover .vd-card-body i {
+            color: #22c55e !important;
+        }
+
+        #docs-landing .docs-card-concepts .vd-card-body i {
+            color: #ef4444;
+        }
+
+        #docs-landing .docs-card-concepts:hover .vd-card-body i {
+            color: #ef4444 !important;
+        }
 
         /* Docs landing: divider */
         .docs-landing-divider {
@@ -698,10 +715,11 @@
 
         /* Docs landing: spacing between stacked cards on mobile */
         @media (max-width: 767.98px) {
-            #docs-landing .vd-container-responsive > .vd-row:first-of-type > .vd-col-12 {
+            #docs-landing .vd-container-responsive>.vd-row:first-of-type>.vd-col-12 {
                 margin-bottom: 1.5rem;
             }
-            #docs-landing .vd-container-responsive > .vd-row:first-of-type > .vd-col-12:last-child {
+
+            #docs-landing .vd-container-responsive>.vd-row:first-of-type>.vd-col-12:last-child {
                 margin-bottom: 0;
             }
         }
@@ -1585,7 +1603,7 @@
                 width: 100%;
             }
 
-            .hero-cta-buttons .vd-btn + .vd-btn {
+            .hero-cta-buttons .vd-btn+.vd-btn {
                 margin-left: 0;
             }
 
