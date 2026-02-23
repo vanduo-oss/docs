@@ -25,7 +25,9 @@ if (typeof window.Vanduo === 'undefined') {
 const SECTIONS_BASE = './sections/';
 let registry = { pages: [], tabs: {} };
 const loadedSections = new Set();
+const loadingSections = new Set();
 let scrollSpyObserver = null;
+let docLazyLoader = null;
 let currentView = null;
 let currentTab = null;
 
@@ -213,15 +215,23 @@ async function loadPage(pageId) {
 }
 
 /* ── Section loading (docs) ───────────────────── */
-async function loadSection(sectionId) {
+async function loadSection(sectionId, autoScroll = true) {
     if (loadedSections.has(sectionId)) {
         var el = document.getElementById(sectionId);
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (el && autoScroll) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
         setActiveNavLink(sectionId);
         return;
     }
+    if (loadingSections.has(sectionId)) {
+        return; // Deduplicate
+    }
+    loadingSections.add(sectionId);
+
     var meta = findSectionMeta(sectionId);
-    if (!meta) return;
+    if (!meta) {
+        loadingSections.delete(sectionId);
+        return;
+    }
 
     var container = document.getElementById('dynamic-content');
     var orderedIds = getOrderedIds(meta.tab);
@@ -243,7 +253,7 @@ async function loadSection(sectionId) {
         container.appendChild(placeholder);
     }
 
-    placeholder.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (autoScroll) placeholder.scrollIntoView({ behavior: 'smooth', block: 'start' });
     setActiveNavLink(sectionId);
 
     try {
@@ -263,18 +273,25 @@ async function loadSection(sectionId) {
             placeholder.remove();
         }
         setupScrollSpy();
+        setupInfiniteScroll();
+
         var target = document.getElementById(sectionId);
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        setActiveNavLink(sectionId);
-        setDocumentTitle(meta.section.title);
-        if (window.history && window.history.replaceState) {
-            window.history.replaceState(null, '', '#docs/' + sectionId);
+        if (target && autoScroll) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        if (autoScroll) {
+            setActiveNavLink(sectionId);
+            setDocumentTitle(meta.section.title);
+            if (window.history && window.history.replaceState) {
+                window.history.replaceState(null, '', '#docs/' + sectionId);
+            }
         }
     } catch (err) {
         placeholder.remove();
         console.error(err);
         container.insertAdjacentHTML('beforeend',
             '<div class="vd-alert vd-alert-error">Failed to load section. Check console.</div>');
+    } finally {
+        loadingSections.delete(sectionId);
     }
 }
 
@@ -287,6 +304,10 @@ async function switchTab(tabKey) {
     var container = document.getElementById('dynamic-content');
     container.innerHTML = '';
     loadedSections.clear();
+    loadingSections.clear();
+    if (docLazyLoader) {
+        docLazyLoader.disconnect();
+    }
 
     buildSidebar(tabKey);
     closeMobileToc();
@@ -311,6 +332,9 @@ function setupScrollSpy() {
                 var meta = findSectionMeta(entry.target.id);
                 if (meta && meta.section) {
                     setDocumentTitle(meta.section.title);
+                    if (window.history && window.history.replaceState) {
+                        window.history.replaceState(null, '', '#docs/' + entry.target.id);
+                    }
                 }
             }
         });
@@ -318,6 +342,44 @@ function setupScrollSpy() {
     sections.forEach(function (sec) { scrollSpyObserver.observe(sec); });
 }
 
+function setupInfiniteScroll() {
+    var container = document.getElementById('dynamic-content');
+    if (!container) return;
+
+    if (!window.VanduoLazyLoader) return; // Safety check if module not loaded
+
+    if (!docLazyLoader) {
+        docLazyLoader = new window.VanduoLazyLoader({
+            container: container,
+            onLoadNext: loadNextSection,
+            rootMargin: '400px'
+        });
+    }
+
+    // Always re-init when needed to append sentinel to the bottom again
+    docLazyLoader.init();
+}
+
+function loadNextSection() {
+    if (!currentTab) return;
+    var orderedIds = getOrderedIds(currentTab);
+
+    // Find the highest index among currently loaded or loading sections
+    var maxIndex = -1;
+    for (var id of orderedIds) {
+        if (loadedSections.has(id) || loadingSections.has(id)) {
+            var idx = orderedIds.indexOf(id);
+            if (idx > maxIndex) {
+                maxIndex = idx;
+            }
+        }
+    }
+
+    var nextIndex = maxIndex + 1;
+    if (nextIndex < orderedIds.length) {
+        loadSection(orderedIds[nextIndex], false); // autoScroll = false
+    }
+}
 
 /* ── Wire data-route links ────────────────────── */
 function wireRouteLinks(container) {
