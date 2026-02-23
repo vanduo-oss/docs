@@ -1,5 +1,8 @@
-import { Vanduo } from '../dist/vanduo.esm.min.js';
-Vanduo.init();
+if (typeof window.Vanduo === 'undefined') {
+    console.error('Vanduo failed to load from CDN. Check network/CDN availability.');
+} else {
+    window.Vanduo.init();
+}
 
 /* ── Disabled code-snippet tab → info toast ────── */
 (function () {
