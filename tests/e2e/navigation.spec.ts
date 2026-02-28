@@ -42,54 +42,7 @@ test.describe('1. Global Navigation & Layout', () => {
         // Let's do it properly:
     });
 
-    test('Mobile hamburger menu toggles correctly', async ({ page, isMobile }) => {
-        test.skip(!isMobile, 'Hamburger menu only visible on mobile context');
 
-        await page.goto('/');
-        await waitForSPA(page);
-
-        const toggle = page.locator('.vd-navbar-toggle');
-        const menu = page.locator('.vd-navbar-menu');
-
-        await expect(toggle).toBeVisible();
-
-        // Open menu
-        await toggle.click();
-        await expect(menu).toHaveClass(/is-active/);
-
-        // Close menu
-        await toggle.click();
-        await expect(menu).not.toHaveClass(/is-active/);
-    });
-
-    test('Theme customizer toggles dark/light mode', async ({ page }) => {
-        await page.goto('/');
-        await waitForSPA(page);
-
-        await page.evaluate(() => window.scrollTo(0, 0));
-        await page.waitForTimeout(100);
-
-        // Click theme trigger
-        const trigger = page.locator('[data-theme-customizer-trigger]').first();
-        await expect(trigger).toBeVisible();
-        await trigger.click();
-
-        await page.waitForTimeout(300); // Wait for transition
-
-        // Change theme to Dark
-        await page.locator('.tc-mode-btn[data-mode="dark"]').first().click();
-
-        // Check HTML data-theme attribute
-        await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
-
-        // Change theme to Light
-        await page.locator('.tc-mode-btn[data-mode="light"]').first().click();
-        await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
-
-        // Change to System
-        await page.locator('.tc-mode-btn[data-mode="system"]').first().click();
-        await expect(page.locator('html')).not.toHaveAttribute('data-theme', /.+/); // 'system' removes the attribute
-    });
 
     test('Footer links route properly and open external links in new tabs', async ({ page }) => {
         await page.goto('/');

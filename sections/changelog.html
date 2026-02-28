@@ -15,11 +15,13 @@
         <div class="vd-container-responsive" style="max-width: 1200px;">
 
             <!-- ═══════════════════════════════════════════════ -->
+            <!-- Version 1.2.1                                   -->
+            <!-- ═══════════════════════════════════════════════ -->
             <article class="version-card">
                 <header class="version-header">
                     <span class="vd-badge vd-badge-primary" style="font-size: 1rem; padding: 0.5rem 1rem;">v1.2.1</span>
                     <span style="color: var(--text-secondary); font-size: 0.95rem;">
-                        <i class="ph ph-calendar mr-1"></i>February 28, 2026
+                        <i class="ph ph-calendar mr-1"></i>February 23, 2026
                     </span>
                     <span class="vd-badge vd-badge-info" style="font-size: 0.75rem;">Latest</span>
                 </header>
@@ -30,42 +32,8 @@
                                 <h4 style="color: var(--color-primary);">
                                     <i class="ph ph-cube"></i> Framework
                                 </h4>
-                                <ul class="change-list">
-                                    <li class="change-item">
-                                        <i class="ph ph-sparkle" style="color: var(--color-primary);"></i>
-                                        <div>
-                                            <strong>New: VanduoLazyLoad Component</strong>
-                                            <p>New <code>VanduoLazyLoad</code> utility component wraps the browser's
-                                                <code>IntersectionObserver</code> with a clean API. Low-level
-                                                <code>observe()</code>/<code>unobserve()</code> for any use-case, and
-                                                high-level <code>loadSection()</code> for fetching HTML partials on
-                                                demand with skeleton/spinner placeholders. Attribute-driven via
-                                                <code>data-vd-lazy</code>.
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <li class="change-item">
-                                        <i class="ph ph-shield-check" style="color: var(--color-success);"></i>
-                                        <div>
-                                            <strong>Security: SSRF &amp; XSS Guards</strong>
-                                            <p>Cross-origin URLs are blocked by <code>_isSafeUrl()</code> (same-origin
-                                                only). Fetched HTML is parsed safely via <code>DOMParser</code> +
-                                                <code>adoptNode</code>, never via raw <code>innerHTML</code>. Error
-                                                messages use <code>textContent</code> only.
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <li class="change-item">
-                                        <i class="ph ph-bell" style="color: var(--color-info);"></i>
-                                        <div>
-                                            <strong>New: Lifecycle Events</strong>
-                                            <p>Three custom events bubble from the container on each load lifecycle:
-                                                <code>lazysection:loading</code>, <code>lazysection:loaded</code>, and
-                                                <code>lazysection:error</code>.
-                                            </p>
-                                        </div>
-                                    </li>
-                                </ul>
+                                <p class="vd-text-sm vd-text-muted" style="padding-left: 1.5rem;"><em>No framework
+                                        changes in this release.</em></p>
                             </div>
                         </div>
                         <div class="vd-col-12 vd-col-md-6">
@@ -77,20 +45,21 @@
                                     <li class="change-item">
                                         <i class="ph ph-sparkle" style="color: var(--color-primary);"></i>
                                         <div>
-                                            <strong>New: Lazy Load Component Reference</strong>
-                                            <p>New page under <strong>Components → Utilities</strong> documenting all
-                                                <code>VanduoLazyLoad</code> methods, options, events, and security
-                                                notes.
-                                            </p>
+                                            <strong>New: Global Lazy Loading</strong>
+                                            <p>Entire documentation sections now load dynamically as you scroll or
+                                                navigate. This significantly reduces initial load time and improves
+                                                perceived performance across the site.</p>
                                         </div>
                                     </li>
                                     <li class="change-item">
-                                        <i class="ph ph-sparkle" style="color: var(--color-primary);"></i>
+                                        <i class="ph ph-info" style="color: var(--color-info);"></i>
                                         <div>
-                                            <strong>New: Global Lazy Loading Guide</strong>
-                                            <p>New guide under <strong>Guides → Performance</strong> walking through
-                                                motivation, partial authoring, attribute API, programmatic API, event
-                                                handling, and real-world patterns.</p>
+                                            <strong>Note: experimental lazy-loader module</strong>
+                                            <p>The documentation's infinite scroll is powered by a custom
+                                                <code>lazy-loader</code> module. Currently, this is a
+                                                <strong>documentation-only feature</strong> and is not yet part of the
+                                                core Vanduo framework distribution.
+                                            </p>
                                         </div>
                                     </li>
                                 </ul>

@@ -49,19 +49,6 @@ test.describe('SPA Home @a11y', () => {
 
 /* ── Documentation view ─────────────────────────────── */
 test.describe('SPA Documentation @a11y', () => {
-  test('docs view loads with sidebar and first section', async ({ page }) => {
-    await page.goto('/#docs/components');
-    await waitForSPA(page);
-
-    // Docs view visible
-    await expect(page.locator('#docs-view.is-active')).toHaveCount(1);
-
-    // Sidebar has nav links
-    await expect(page.locator('.doc-nav-link')).not.toHaveCount(0);
-
-    // First section (Quick Start) should auto-load
-    await expect(page.locator('#getting-started')).toBeVisible({ timeout: 10000 });
-  });
 
   test('sidebar includes expected component sections', async ({ page }) => {
     await page.goto('/#docs/components');

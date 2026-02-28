@@ -56,7 +56,7 @@
         /* ── Docs layout ────────────────────────────────── */
         section {
             padding: 4rem 0;
-            scroll-margin-top: 80px;
+            scroll-margin-top: calc(70px + var(--doc-tabs-height, 0px) + 2rem);
             border-bottom: 1px solid var(--border-color);
         }
 
@@ -948,27 +948,6 @@
             flex-wrap: wrap;
         }
 
-        .doc-tabs-versions {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.85em;
-            white-space: nowrap;
-        }
-
-        .doc-tabs-versions code {
-            font-size: 0.9rem;
-            padding: 0.25rem 0.5rem;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            color: var(--text-secondary);
-        }
-
-        .doc-tabs-versions code i {
-            margin-right: 0.25rem;
-        }
-
         .doc-tab:hover,
         .doc-tab.active {
             text-decoration: none;
@@ -1006,15 +985,6 @@
                 justify-content: center;
             }
 
-            .doc-tabs-versions {
-                flex: 1 1 100%;
-                margin-top: 0.25rem;
-            }
-
-            /* Hide version span when scrolled to slim the sticky bar */
-            .doc-tabs-wrapper.is-scrolled .doc-tabs-versions {
-                display: none;
-            }
         }
 
         @media (min-width: 768px) {
@@ -1327,7 +1297,7 @@
             opacity: 0.7;
         }
 
-        /* Hero search wrapper — match width of .hero-content text above */
+        /* Hero search wrapper — match width of .hero-content (paragraph p.vd-mb-6) */
         .hero-search-wrapper {
             position: relative;
             width: 100%;

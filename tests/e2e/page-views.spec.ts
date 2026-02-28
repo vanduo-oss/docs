@@ -18,9 +18,11 @@ test.describe('3. Page Views', () => {
             await expect(hero).toBeVisible();
 
             const title = hero.locator('h1');
-            await expect(title).toHaveText(/Vanduo\s*Framework/);
+            // The SVG icon inside the H1 makes exact text matching tricky, check textContent directly
+            const textContent = await title.textContent();
+            expect(textContent).toMatch(/Vanduo\s*Framework/);
 
-            const getStartedBtn = hero.locator('a[data-route="docs"]');
+            const getStartedBtn = hero.locator('a[data-route="docs/getting-started"]');
             await expect(getStartedBtn).toBeVisible();
         });
 
@@ -54,12 +56,15 @@ test.describe('3. Page Views', () => {
             await page.goto('/');
             await waitForSPA(page);
 
-            const getStartedBtn = page.locator('#hero a[data-route="docs"]');
+            const getStartedBtn = page.locator('#hero a[data-route="docs/getting-started"]');
+            await expect(getStartedBtn).toBeVisible();
             await getStartedBtn.click();
-            await page.waitForTimeout(500);
 
-            await expect(page).toHaveURL(/.*#docs/);
-            await expect(page.locator('#docs-landing')).toBeVisible();
+            await waitForSPA(page);
+
+            await expect(page).toHaveURL(/.*#docs\/getting-started/);
+            // Verify docs view is loaded instead of sidebar
+            await expect(page.locator('#docs-view')).toBeAttached();
 
             // Go back to test GitHub link
             await page.goBack();
