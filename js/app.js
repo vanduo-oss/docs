@@ -32,6 +32,21 @@ let currentView = null;
 let currentTab = null;
 
 /* ── Loading placeholders ─────────────────────── */
+/*
+ * NOTE: This SPA uses its OWN lazy loading, separate from the framework's
+ * VanduoLazyLoad component (js/components/lazy-load.js). Both share the same
+ * placeholder DNA (skeleton card + quad-spinner), but serve different purposes:
+ *
+ *   • Docs loadSection() / loadPage()  – application-level, tightly coupled
+ *     to the SPA router, ordered DOM insertion, scroll-spy, sidebar sync,
+ *     section caching, and history state. Route-triggered.
+ *
+ *   • Framework VanduoLazyLoad         – generic, reusable IntersectionObserver
+ *     wrapper for end-users. Viewport-triggered. No routing awareness.
+ *
+ * Merging them would require the framework component to know about SPA routing
+ * internals, which violates its generic design. The duplication is intentional.
+ */
 function getLoadingPlaceholderHtml() {
     return '<div style="padding: 4rem 0; scroll-margin-top: 80px; border-bottom: 1px solid var(--border-color);">'
         + '<div class="vd-skeleton-card" style="position: relative; min-height: 300px; padding: 2rem; overflow: hidden;">'

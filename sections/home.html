@@ -254,16 +254,24 @@
                         </div>
                         <div class="vd-card-body">
                             <ul class="vd-footer-links" style="list-style: none; padding-left: 0;">
-                                <li class="vd-mb-2"><strong>Code Safety Hardening</strong> &mdash; Strengthened runtime
-                                    and release guardrails to reduce risky execution paths and improve baseline safety.
+                                <li class="vd-mb-2"><strong>VanduoLazyLoad Component</strong> &mdash; New utility
+                                    wrapping <code>IntersectionObserver</code> with low-level
+                                    <code>observe()</code>/<code>unobserve()</code> APIs and a high-level
+                                    <code>loadSection()</code> for fetching HTML partials on demand with
+                                    skeleton/spinner placeholders.
                                 </li>
-                                <li class="vd-mb-2"><strong>Safer Update Story</strong> &mdash; Integration guidance now
-                                    favors predictable loading and versioning patterns for production stability.</li>
-                                <li class="vd-mb-2"><strong>CDN-First Delivery</strong> &mdash; Docs now load official
-                                    framework assets directly from jsDelivr for a cleaner, centralized distribution
-                                    path.</li>
-                                <li><strong>Docs Synced to 1.2.0</strong> &mdash; Version badges, quick-start pinning,
-                                    and release content now match the latest framework release.</li>
+                                <li class="vd-mb-2"><strong>Security: SSRF &amp; XSS Guards</strong> &mdash;
+                                    Cross-origin
+                                    URLs blocked by same-origin validation; fetched HTML parsed safely via
+                                    <code>DOMParser</code> + <code>adoptNode</code>, never raw
+                                    <code>innerHTML</code>.
+                                </li>
+                                <li class="vd-mb-2"><strong>Lifecycle Events</strong> &mdash; Three custom events
+                                    (<code>lazysection:loading</code>, <code>lazysection:loaded</code>,
+                                    <code>lazysection:error</code>) bubble from containers for easy integration.
+                                </li>
+                                <li><strong>Docs Synced to v1.2.1</strong> &mdash; CDN bumped to v1.2.1, new Lazy Load
+                                    component reference page and Global Lazy Loading guide added.</li>
                             </ul>
                             <a href="#changelog" class="vd-btn vd-btn-sm vd-btn-primary vd-mt-3"
                                 data-route="changelog"><i class="ph ph-scroll mr-2"></i>Read
