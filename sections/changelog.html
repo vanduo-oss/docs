@@ -15,6 +15,73 @@
         <div class="vd-container-responsive" style="max-width: 1200px;">
 
             <!-- ═══════════════════════════════════════════════ -->
+            <!-- Version 1.2.2                                   -->
+            <!-- ═══════════════════════════════════════════════ -->
+            <article class="version-card">
+                <header class="version-header">
+                    <span class="vd-badge vd-badge-primary" style="font-size: 1rem; padding: 0.5rem 1rem;">v1.2.2</span>
+                    <span style="color: var(--text-secondary); font-size: 0.95rem;">
+                        <i class="ph ph-calendar mr-1"></i>February 28, 2026
+                    </span>
+                    <span class="vd-badge vd-badge-info" style="font-size: 0.75rem;">Latest</span>
+                </header>
+                <div class="version-body">
+                    <div class="vd-row">
+                        <div class="vd-col-12 vd-col-md-6">
+                            <h4><i class="ph ph-cube mr-2" style="color: var(--color-primary);"></i>Framework</h4>
+                            <div class="change-group">
+                                <h5>Bug Fix</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-wrench" style="color: var(--color-warning);"></i>
+                                        <div>
+                                            <strong>Fix: Draggable Touch on Mobile</strong>
+                                            <p>Touch event listeners for <code>touchmove</code> and
+                                                <code>touchend</code> now use <code>{ passive: false }</code> so
+                                                <code>preventDefault()</code> works on modern browsers. Additionally,
+                                                all <code>preventDefault()</code> calls are guarded with
+                                                <code>e.cancelable</code> checks. Fixes the
+                                                <code>[Intervention]</code> console warnings and enables proper drag
+                                                operations on touch devices.
+                                            </p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="vd-col-12 vd-col-md-6">
+                            <h4><i class="ph ph-book-open-text mr-2"
+                                    style="color: var(--color-primary);"></i>Documentation</h4>
+                            <div class="change-group">
+                                <h5>Updates</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-arrow-up" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: CDN Bumped to v1.2.2</strong>
+                                            <p>Docs runtime now loads Vanduo Framework from
+                                                <code>@v1.2.2</code> CDN artifacts (CSS &amp; JS), picking up the
+                                                draggable touch fix.
+                                            </p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-arrows-clockwise" style="color: var(--color-success);"></i>
+                                        <div>
+                                            <strong>Update: Version References Aligned to v1.2.2</strong>
+                                            <p>All meta tags, SEO data, JSON-LD, docs-landing version badges,
+                                                and home page &ldquo;What&rsquo;s New&rdquo; card updated to
+                                                reference v1.2.2.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ═══════════════════════════════════════════════ -->
             <!-- Version 1.2.1                                   -->
             <!-- ═══════════════════════════════════════════════ -->
             <article class="version-card">
@@ -23,7 +90,6 @@
                     <span style="color: var(--text-secondary); font-size: 0.95rem;">
                         <i class="ph ph-calendar mr-1"></i>February 23, 2026
                     </span>
-                    <span class="vd-badge vd-badge-info" style="font-size: 0.75rem;">Latest</span>
                 </header>
                 <div class="version-body">
                     <div class="vd-row">
