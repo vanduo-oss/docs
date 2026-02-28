@@ -438,6 +438,27 @@
               ]
             }
           ]
+        },
+        {
+          "name": "Utilities",
+          "sections": [
+            {
+              "id": "lazy-load",
+              "title": "Lazy Load",
+              "file": "components/lazy-load.html",
+              "icon": "ph-cloud-arrow-down",
+              "keywords": [
+                "lazy",
+                "load",
+                "observer",
+                "intersection",
+                "dynamic",
+                "component",
+                "utility",
+                "performance"
+              ]
+            }
+          ]
         }
       ]
     },
@@ -569,6 +590,28 @@
                 "contrast",
                 "wcag",
                 "inclusive"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Performance",
+          "sections": [
+            {
+              "id": "lazy-loading-guide",
+              "title": "Global Lazy Loading",
+              "file": "guides/lazy-loading-guide.html",
+              "icon": "ph-cloud-arrow-down",
+              "keywords": [
+                "lazy",
+                "loading",
+                "performance",
+                "intersection observer",
+                "dynamic",
+                "fetch",
+                "on-demand",
+                "section",
+                "partial"
               ]
             }
           ]
