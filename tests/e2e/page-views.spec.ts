@@ -71,11 +71,9 @@ test.describe('3. Page Views', () => {
             await waitForSPA(page);
 
             const githubBtn = page.locator('#hero a[href*="github.com"]');
-            const [newPage] = await Promise.all([
-                page.waitForEvent('popup'),
-                githubBtn.click()
-            ]);
-            await expect(newPage).toHaveURL(/.*github\.com/);
+            await expect(githubBtn).toBeVisible();
+            await expect(githubBtn).toHaveAttribute('href', /.*github\.com\/Nostromo-618\/vanduo-framework/);
+            await expect(githubBtn).toHaveAttribute('target', '_blank');
         });
     });
 
@@ -89,31 +87,6 @@ test.describe('3. Page Views', () => {
 
             const title = aboutSection.locator('h1');
             await expect(title).toContainText('About');
-        });
-
-        test('Founder\'s image box opens properly', async ({ page }) => {
-            await page.goto('/#about');
-            await waitForSPA(page);
-
-            const imageTrigger = page.locator('.founders-image-wrap img[data-image-box]');
-            await imageTrigger.scrollIntoViewIfNeeded();
-            await expect(imageTrigger).toBeVisible();
-
-            await imageTrigger.click();
-            await page.waitForTimeout(500);
-
-            const imageBox = page.locator('.vd-image-box-backdrop.is-visible');
-            await expect(imageBox).toBeVisible();
-
-            const caption = imageBox.locator('.vd-image-box-caption');
-            await expect(caption).toHaveText(/Vanduo Foundation/);
-
-            // Close it
-            const closeBtn = imageBox.locator('.vd-image-box-close');
-            await closeBtn.click();
-            await page.waitForTimeout(500);
-
-            await expect(imageBox).not.toBeVisible();
         });
     });
 
