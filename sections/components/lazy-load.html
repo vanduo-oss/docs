@@ -1,0 +1,290 @@
+<section id="lazy-load">
+    <h2 class="demo-title"><i class="ph ph-cloud-arrow-down"></i>Lazy Load <code class="vd-text-sm">Utility</code></h2>
+    <p class="vd-mb-5">The <strong>VanduoLazyLoad</strong> utility uses the browser's <code>IntersectionObserver</code>
+        to defer loading content until it's needed — when the target element scrolls into view. It works at two levels:
+        a low-level observer API for any use-case, and a high-level section-fetcher that replaces an element with a
+        fetched HTML partial.</p>
+
+    <!-- Overview cards -->
+    <div class="vd-row vd-mb-8">
+        <div class="vd-col-12 vd-col-md-4 vd-mb-4">
+            <div class="vd-card" style="text-align:center;">
+                <div class="vd-card-body">
+                    <i class="ph ph-timer" style="font-size:2rem;color:var(--color-primary);"></i>
+                    <h4 class="vd-mt-3">Faster Initial Load</h4>
+                    <p class="vd-text-sm vd-text-muted">Only the visible viewport is fetched at startup. Off-screen
+                        content waits.</p>
+                </div>
+            </div>
+        </div>
+        <div class="vd-col-12 vd-col-md-4 vd-mb-4">
+            <div class="vd-card" style="text-align:center;">
+                <div class="vd-card-body">
+                    <i class="ph ph-code" style="font-size:2rem;color:var(--color-success);"></i>
+                    <h4 class="vd-mt-3">Zero Config</h4>
+                    <p class="vd-text-sm vd-text-muted">Add <code>data-vd-lazy</code> to any element and call
+                        <code>Vanduo.init()</code>. Done.</p>
+                </div>
+            </div>
+        </div>
+        <div class="vd-col-12 vd-col-md-4 vd-mb-4">
+            <div class="vd-card" style="text-align:center;">
+                <div class="vd-card-body">
+                    <i class="ph ph-plug" style="font-size:2rem;color:var(--color-info);"></i>
+                    <h4 class="vd-mt-3">Full JS API</h4>
+                    <p class="vd-text-sm vd-text-muted">Use <code>VanduoLazyLoad.observe()</code> and
+                        <code>loadSection()</code> for complete control.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Attribute-driven usage -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h3><i class="ph ph-tag"></i> Attribute-driven Usage</h3>
+                </div>
+                <div class="vd-card-body">
+                    <p>The simplest way — add <code>data-vd-lazy</code> with the URL to fetch, then call
+                        <code>Vanduo.init()</code>. When the element scrolls into view, a placeholder appears while the
+                        content fetches, then the element is replaced with the loaded HTML.</p>
+
+                    <div class="vd-code-snippet" data-collapsible data-expanded="true">
+                        <button class="vd-code-snippet-toggle" aria-expanded="true">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">div</span>
+  <span class="code-attr">data-vd-lazy</span>=<span class="code-string">"./sections/my-section.html"</span>
+  <span class="code-attr">data-vd-lazy-placeholder</span>=<span class="code-string">"skeleton"</span>&gt;
+&lt;/<span class="code-tag">div</span>&gt;
+
+<span class="code-comment">&lt;!-- Vanduo.init() wires all [data-vd-lazy] elements automatically --&gt;</span>
+&lt;<span class="code-tag">script</span>&gt;Vanduo.init();&lt;/<span class="code-tag">script</span>&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 class="vd-mt-6 vd-mb-3">Placeholder Options</h4>
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Value</th>
+                                    <th>Result</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>"skeleton"</code> (default)</td>
+                                    <td>Animated skeleton card with shimmer and four-color spinner overlay</td>
+                                </tr>
+                                <tr>
+                                    <td><code>"spinner"</code></td>
+                                    <td>Centered four-color spinner, minimal height</td>
+                                </tr>
+                                <tr>
+                                    <td>Any HTML string</td>
+                                    <td>Your custom HTML rendered while loading</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- loadSection() API -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h3><i class="ph ph-function"></i> <code>VanduoLazyLoad.loadSection(url, el, options?)</code></h3>
+                </div>
+                <div class="vd-card-body">
+                    <p>High-level API: fetches an HTML partial and injects it into <code>el</code> when the element
+                        enters the viewport. Shows a placeholder immediately.</p>
+
+                    <div class="vd-code-snippet" data-collapsible data-expanded="true">
+                        <button class="vd-code-snippet-toggle" aria-expanded="true">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="js">JS</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="js"><code><span class="code-keyword">const</span> container = document.getElementById(<span class="code-string">'my-section'</span>);
+
+VanduoLazyLoad.loadSection(<span class="code-string">'./sections/heavy-content.html'</span>, container, {
+  placeholder: <span class="code-string">'skeleton'</span>,    <span class="code-comment">// 'skeleton' | 'spinner' | HTMLString</span>
+  threshold:   <span class="code-number">0</span>,            <span class="code-comment">// IntersectionObserver threshold (0–1)</span>
+  rootMargin:  <span class="code-string">'0px'</span>,        <span class="code-comment">// IntersectionObserver rootMargin</span>
+  onLoaded:    (el) =&gt; { console.log(<span class="code-string">'loaded!'</span>, el); },
+  onError:     (err) =&gt; { console.error(err); }
+});</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 class="vd-mt-6 vd-mb-3">Events</h4>
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Event</th>
+                                    <th>Fired on</th>
+                                    <th>When</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>lazysection:loading</code></td>
+                                    <td><code>containerEl</code></td>
+                                    <td>Immediately after placeholder is shown</td>
+                                </tr>
+                                <tr>
+                                    <td><code>lazysection:loaded</code></td>
+                                    <td><code>containerEl</code></td>
+                                    <td>After content is injected successfully</td>
+                                </tr>
+                                <tr>
+                                    <td><code>lazysection:error</code></td>
+                                    <td><code>containerEl</code></td>
+                                    <td>After a fetch failure (404, network error, etc.)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="vd-alert vd-alert-info vd-mt-5">
+                        <i class="ph ph-lock"></i>
+                        <div><strong>Security note:</strong> <code>loadSection()</code> rejects any URL that resolves to
+                            a different origin. Only same-origin and relative URLs are allowed. Cross-origin requests
+                            are blocked silently with a console error.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Low-level observe() API -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h3><i class="ph ph-eye"></i> Low-level Observer API</h3>
+                </div>
+                <div class="vd-card-body">
+                    <p>For full control, use the low-level API. The callback fires <em>once</em> when the element enters
+                        the viewport, then the element is automatically unobserved.</p>
+
+                    <div class="vd-code-snippet" data-collapsible data-expanded="true">
+                        <button class="vd-code-snippet-toggle" aria-expanded="true">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="js">JS</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="js"><code><span class="code-keyword">const</span> el = document.querySelector(<span class="code-string">'#my-element'</span>);
+
+<span class="code-comment">// Observe — callback fires once on first intersection, then auto-unobserves</span>
+VanduoLazyLoad.observe(el, (target) =&gt; {
+  target.classList.add(<span class="code-string">'is-visible'</span>);
+  <span class="code-comment">// load an image, animate in, fetch data...</span>
+}, { threshold: <span class="code-number">0.2</span>, rootMargin: <span class="code-string">'-50px'</span> });
+
+<span class="code-comment">// Cancel a single element</span>
+VanduoLazyLoad.unobserve(el);
+
+<span class="code-comment">// Cancel all active observations</span>
+VanduoLazyLoad.unobserveAll();</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 class="vd-mt-6 vd-mb-3">API Reference</h4>
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Method</th>
+                                    <th>Parameters</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>observe(el, cb, opts?)</code></td>
+                                    <td><code>el</code>: Element<br><code>cb</code>: (el: Element) =>
+                                        void<br><code>opts.threshold</code>: 0–1<br><code>opts.rootMargin</code>: CSS
+                                        string</td>
+                                    <td>Fires <code>cb</code> once when <code>el</code> enters viewport, then unobserves
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><code>unobserve(el)</code></td>
+                                    <td><code>el</code>: Element</td>
+                                    <td>Stops observing a specific element</td>
+                                </tr>
+                                <tr>
+                                    <td><code>unobserveAll()</code></td>
+                                    <td>—</td>
+                                    <td>Stops all active observations</td>
+                                </tr>
+                                <tr>
+                                    <td><code>loadSection(url, el, opts?)</code></td>
+                                    <td>See above</td>
+                                    <td>Fetches HTML and injects when <code>el</code> enters viewport</td>
+                                </tr>
+                                <tr>
+                                    <td><code>init()</code></td>
+                                    <td>—</td>
+                                    <td>Wires all <code>[data-vd-lazy]</code> elements in the DOM</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vd-alert vd-alert-primary vd-mb-6">
+        <i class="ph ph-book-open"></i>
+        <div><strong>Want a step-by-step walkthrough?</strong> See the <a href="#docs/lazy-loading-guide"
+                data-route="docs/lazy-loading-guide"
+                style="color:var(--color-primary-text,inherit);text-decoration:underline;">Global Lazy Loading guide</a>
+            in the Guides section.</div>
+    </div>
+</section>

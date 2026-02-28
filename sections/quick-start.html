@@ -6,10 +6,14 @@
             <div class="vd-card demo-card">
                 <div class="vd-card-header">
                     <h3><i class="ph ph-package mr-2" style="color: var(--color-success);"></i>Package Manager
-                        <span class="vd-badge vd-badge-success" style="margin-left: 8px; font-size: 0.7rem; vertical-align: middle;">Recommended</span></h3>
+                        <span class="vd-badge vd-badge-success"
+                            style="margin-left: 8px; font-size: 0.7rem; vertical-align: middle;">Recommended</span>
+                    </h3>
                 </div>
                 <div class="vd-card-body">
-                    <p>We strongly recommend <a href="https://pnpm.io/" target="_blank" rel="noopener"><strong>pnpm</strong></a> for installing Vanduo Framework. Vanduo ships with strict <code>.npmrc</code> security policies that work best within the pnpm ecosystem:</p>
+                    <p>We strongly recommend <a href="https://pnpm.io/" target="_blank"
+                            rel="noopener"><strong>pnpm</strong></a> for installing Vanduo Framework. Vanduo ships with
+                        strict <code>.npmrc</code> security policies that work best within the pnpm ecosystem:</p>
                     <div class="vd-code-snippet" data-collapsible data-expanded="true">
                         <button class="vd-code-snippet-toggle" aria-expanded="true">
                             <span class="vd-code-snippet-toggle-icon"></span>
@@ -26,7 +30,8 @@
                                 </button>
                             </div>
                             <div class="vd-code-snippet-body">
-                                <pre class="vd-code-snippet-pane is-active" data-lang="shell"><code>pnpm add vanduo-framework</code></pre>
+                                <pre class="vd-code-snippet-pane is-active"
+                                    data-lang="shell"><code>pnpm add vanduo-framework</code></pre>
                             </div>
                         </div>
                     </div>
@@ -39,7 +44,8 @@
                         <div class="vd-code-snippet-content">
                             <div class="vd-code-snippet-header">
                                 <div class="vd-code-snippet-tabs" role="tablist">
-                                    <button class="vd-code-snippet-tab is-active" data-lang="javascript">JavaScript</button>
+                                    <button class="vd-code-snippet-tab is-active"
+                                        data-lang="javascript">JavaScript</button>
                                 </div>
                                 <button class="vd-code-snippet-copy" aria-label="Copy code">
                                     <span class="vd-code-snippet-copy-icon"></span>
@@ -56,13 +62,17 @@ Vanduo.<span class="code-function">init</span>();</code></pre>
                     <div class="vd-alert vd-alert-primary vd-mt-4">
                         <i class="ph ph-info"></i>
                         <div>
-                            <strong>Why pnpm?</strong> pnpm enforces a strict lockfile and creates an isolated <code>node_modules</code> structure by default. Vanduo's <code>.npmrc</code> security policies — like blocking exotic sub-dependencies and strict peer enforcement — work best with pnpm out of the box.
+                            <strong>Why pnpm?</strong> pnpm enforces a strict lockfile and creates an isolated
+                            <code>node_modules</code> structure by default. Vanduo's <code>.npmrc</code> security
+                            policies — like blocking exotic sub-dependencies and strict peer enforcement — work best
+                            with pnpm out of the box.
                         </div>
                     </div>
                     <p class="vd-text-sm vd-text-muted vd-mt-3"><strong>Alternatives:</strong>
                         <code>npm install vanduo-framework</code> and <code>yarn add vanduo-framework</code>
                         will also work, but they do not enforce the same strict lockfile and isolated
-                        <code>node_modules</code> security guarantees that pnpm provides.</p>
+                        <code>node_modules</code> security guarantees that pnpm provides.
+                    </p>
                 </div>
             </div>
         </div>

@@ -443,7 +443,7 @@
             margin-right: 0;
         }
 
-        #home-features .philosophy-cards > * {
+        #home-features .philosophy-cards>* {
             padding-left: 0;
             padding-right: 0;
             margin-bottom: 0;
@@ -679,12 +679,29 @@
         }
 
         /* Docs landing: fixed icon colors only (h3 follows primary); hover keeps icon color */
-        #docs-landing .docs-card-components .vd-card-body i { color: #eab308; }
-        #docs-landing .docs-card-components:hover .vd-card-body i { color: #eab308 !important; }
-        #docs-landing .docs-card-guides .vd-card-body i { color: #22c55e; }
-        #docs-landing .docs-card-guides:hover .vd-card-body i { color: #22c55e !important; }
-        #docs-landing .docs-card-concepts .vd-card-body i { color: #ef4444; }
-        #docs-landing .docs-card-concepts:hover .vd-card-body i { color: #ef4444 !important; }
+        #docs-landing .docs-card-components .vd-card-body i {
+            color: #eab308;
+        }
+
+        #docs-landing .docs-card-components:hover .vd-card-body i {
+            color: #eab308 !important;
+        }
+
+        #docs-landing .docs-card-guides .vd-card-body i {
+            color: #22c55e;
+        }
+
+        #docs-landing .docs-card-guides:hover .vd-card-body i {
+            color: #22c55e !important;
+        }
+
+        #docs-landing .docs-card-concepts .vd-card-body i {
+            color: #ef4444;
+        }
+
+        #docs-landing .docs-card-concepts:hover .vd-card-body i {
+            color: #ef4444 !important;
+        }
 
         /* Docs landing: divider */
         .docs-landing-divider {
@@ -698,10 +715,11 @@
 
         /* Docs landing: spacing between stacked cards on mobile */
         @media (max-width: 767.98px) {
-            #docs-landing .vd-container-responsive > .vd-row:first-of-type > .vd-col-12 {
+            #docs-landing .vd-container-responsive>.vd-row:first-of-type>.vd-col-12 {
                 margin-bottom: 1.5rem;
             }
-            #docs-landing .vd-container-responsive > .vd-row:first-of-type > .vd-col-12:last-child {
+
+            #docs-landing .vd-container-responsive>.vd-row:first-of-type>.vd-col-12:last-child {
                 margin-bottom: 0;
             }
         }
@@ -815,20 +833,6 @@
             min-width: 0;
         }
 
-        .about-support-card {
-            padding: 2.5rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            gap: 1rem;
-        }
-
-        .about-support-card p {
-            max-width: 720px;
-            margin: 0;
-            color: var(--text-secondary);
-        }
 
         /* ── Changelog page styles ──────────────────────── */
         .changelog-header {
@@ -1323,27 +1327,15 @@
             opacity: 0.7;
         }
 
-        /* Hero search wrapper — match width of .vd-container-responsive (e.g. #home-features) */
+        /* Hero search wrapper — match width of .hero-content text above */
         .hero-search-wrapper {
             position: relative;
             width: 100%;
-            max-width: var(--container-max-width);
-            padding-left: var(--container-padding);
-            padding-right: var(--container-padding);
+            max-width: 800px;
+            padding-left: 2rem;
+            padding-right: 2rem;
             margin: -2rem auto 2rem;
             z-index: 50;
-        }
-
-        @media (width >= 1200px) {
-            .hero-search-wrapper {
-                max-width: var(--container-xl);
-            }
-        }
-
-        @media (width >= 1400px) {
-            .hero-search-wrapper {
-                max-width: var(--container-2xl);
-            }
         }
 
         /* Hero search bar */
@@ -1627,7 +1619,7 @@
                 width: 100%;
             }
 
-            .hero-cta-buttons .vd-btn + .vd-btn {
+            .hero-cta-buttons .vd-btn+.vd-btn {
                 margin-left: 0;
             }
 
