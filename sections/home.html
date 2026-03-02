@@ -250,32 +250,29 @@
                     <div class="vd-card vd-card-glow vd-card-actionable demo-card">
                         <div class="vd-card-header">
                             <h3 style="color: var(--color-primary);"><i class="ph ph-shield-check mr-2"
-                                    style="color: var(--color-primary);"></i>What&apos;s New in v1.2.2</h3>
+                                    style="color: var(--color-primary);"></i>What&apos;s New in v1.2.3</h3>
                         </div>
                         <div class="vd-card-body">
                             <ul class="vd-footer-links" style="list-style: none; padding-left: 0;">
-                                <li class="vd-mb-2"><strong>VanduoLazyLoad Component</strong> &mdash; New utility
-                                    wrapping <code>IntersectionObserver</code> with low-level
-                                    <code>observe()</code>/<code>unobserve()</code> APIs and a high-level
-                                    <code>loadSection()</code> for fetching HTML partials on demand with
-                                    skeleton/spinner placeholders.
+                                <li class="vd-mb-2"><strong>Organization Transfer</strong> &mdash; Vanduo has officially
+                                    moved to its new home at the <code>vanduo-oss</code> GitHub organization, paving the
+                                    way for community scaling and better collaboration.
                                 </li>
-                                <li class="vd-mb-2"><strong>Security: SSRF &amp; XSS Guards</strong> &mdash;
-                                    Cross-origin
-                                    URLs blocked by same-origin validation; fetched HTML parsed safely via
-                                    <code>DOMParser</code> + <code>adoptNode</code>, never raw
-                                    <code>innerHTML</code>.
+                                <li class="vd-mb-2"><strong>Scoped NPM Package</strong> &mdash; The framework is now
+                                    published as a scoped package: <code>@vanduo-oss/framework</code>, preventing naming
+                                    collisions and clearly signaling official packages.
                                 </li>
-                                <li class="vd-mb-2"><strong>Lifecycle Events</strong> &mdash; Three custom events
-                                    (<code>lazysection:loading</code>, <code>lazysection:loaded</code>,
-                                    <code>lazysection:error</code>) bubble from containers for easy integration.
+                                <li class="vd-mb-2"><strong>Package Deprecation</strong> &mdash; The legacy
+                                    <code>vanduo-framework</code> package has been formally deprecated. All downstream
+                                    projects must update their <code>package.json</code> and import statements.
                                 </li>
-                                <li><strong>Docs Synced to v1.2.2</strong> &mdash; CDN bumped to v1.2.2, new Lazy Load
-                                    component reference page and Global Lazy Loading guide added.</li>
+                                <li><strong>Docs Synced to v1.2.3</strong> &mdash; All CDN tags, Quick Start commands,
+                                    and integration guides have been aggressively audited and migrated to the new scope.
+                                </li>
                             </ul>
                             <a href="#changelog" class="vd-btn vd-btn-sm vd-btn-primary vd-mt-3"
                                 data-route="changelog"><i class="ph ph-scroll mr-2"></i>Read
-                                v1.2.2 Changelog</a>
+                                v1.2.3 Changelog</a>
                         </div>
                     </div>
                 </div>
