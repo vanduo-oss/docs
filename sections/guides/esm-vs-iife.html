@@ -35,7 +35,8 @@
                                     <h4 class="vd-mt-3">ESM</h4>
                                     <p class="vd-text-sm vd-text-muted">ECMAScript Modules</p>
                                     <p class="vd-text-sm">The modern standard. Use <code>import</code> /
-                                        <code>export</code>. Works with bundlers like Vite, Webpack, Rollup.</p>
+                                        <code>export</code>. Works with bundlers like Vite, Webpack, Rollup.
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -156,7 +157,7 @@
                             </div>
                             <div class="vd-code-snippet-body">
                                 <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Add these before &lt;/body&gt; --&gt;</span>
-&lt;<span class="code-tag">script</span> <span class="code-attr">src</span>=<span class="code-string">"https://cdn.jsdelivr.net/gh/Nostromo-618/vanduo-framework@main/dist/vanduo.min.js"</span>&gt;&lt;/<span class="code-tag">script</span>&gt;
+&lt;<span class="code-tag">script</span> <span class="code-attr">src</span>=<span class="code-string">"https://cdn.jsdelivr.net/gh/vanduo-oss/framework@main/dist/vanduo.min.js"</span>&gt;&lt;/<span class="code-tag">script</span>&gt;
 &lt;<span class="code-tag">script</span>&gt;
     // Vanduo is now available as a global object
     Vanduo.init();
@@ -232,7 +233,7 @@
 <span class="code-keyword">import</span> { Vanduo } <span class="code-keyword">from</span> <span class="code-string">'./dist/vanduo.esm.js'</span>;
 
 <span class="code-comment">// Or if installed via npm:</span>
-<span class="code-comment">// import { Vanduo } from 'vanduo-framework';</span>
+<span class="code-comment">// import { Vanduo } from '@vanduo-oss/framework';</span>
 
 <span class="code-comment">// Initialize</span>
 Vanduo.<span class="code-function">init</span>();
@@ -248,7 +249,8 @@ Vanduo.components.toast.<span class="code-function">show</span>({
                     </div>
 
                     <p class="vd-mt-4">To use ESM directly in a browser (without a bundler), you need
-                        <code>type="module"</code>:</p>
+                        <code>type="module"</code>:
+                    </p>
                     <div class="vd-code-snippet" data-collapsible data-expanded="true">
                         <button class="vd-code-snippet-toggle" aria-expanded="true">
                             <span class="vd-code-snippet-toggle-icon"></span>
@@ -338,7 +340,7 @@ Vanduo.components.toast.<span class="code-function">show</span>({
                             </div>
                             <div class="vd-code-snippet-body">
                                 <pre class="vd-code-snippet-pane is-active" data-lang="js"><code><span class="code-comment">// CommonJS / require() syntax</span>
-<span class="code-keyword">const</span> { Vanduo } = <span class="code-function">require</span>(<span class="code-string">'vanduo-framework'</span>);
+<span class="code-keyword">const</span> { Vanduo } = <span class="code-function">require</span>(<span class="code-string">'@vanduo-oss/framework'</span>);
 
 <span class="code-comment">// Or point directly to the CJS file:</span>
 <span class="code-keyword">const</span> { Vanduo } = <span class="code-function">require</span>(<span class="code-string">'./dist/vanduo.cjs.js'</span>);
@@ -462,7 +464,7 @@ Vanduo.<span class="code-function">init</span>();</code></pre>
                                             </div>
                                             <div class="vd-code-snippet-body">
                                                 <pre class="vd-code-snippet-pane is-active" data-lang="js"><code><span class="code-comment">// Only imports what you use</span>
-<span class="code-keyword">import</span> { Vanduo } <span class="code-keyword">from</span> <span class="code-string">'vanduo-framework'</span>;
+<span class="code-keyword">import</span> { Vanduo } <span class="code-keyword">from</span> <span class="code-string">'@vanduo-oss/framework'</span>;
 
 Vanduo.<span class="code-function">init</span>();
 <span class="code-comment">// Your bundler strips out unused</span>
@@ -585,17 +587,18 @@ Vanduo.<span class="code-function">init</span>();
                             <div class="vd-code-snippet-body">
                                 <pre class="vd-code-snippet-pane is-active"
                                     data-lang="js"><code># Install
-npm install vanduo-framework
+npm install @vanduo-oss/framework
 
 # In your code:
-<span class="code-keyword">import</span> { Vanduo } <span class="code-keyword">from</span> <span class="code-string">'vanduo-framework'</span>;  <span class="code-comment">// → gets ESM</span>
-<span class="code-keyword">const</span> { Vanduo } = <span class="code-function">require</span>(<span class="code-string">'vanduo-framework'</span>); <span class="code-comment">// → gets CJS</span></code></pre>
+<span class="code-keyword">import</span> { Vanduo } <span class="code-keyword">from</span> <span class="code-string">'@vanduo-oss/framework'</span>;  <span class="code-comment">// → gets ESM</span>
+<span class="code-keyword">const</span> { Vanduo } = <span class="code-function">require</span>(<span class="code-string">'@vanduo-oss/framework'</span>); <span class="code-comment">// → gets CJS</span></code></pre>
                             </div>
                         </div>
                     </div>
                     <p class="vd-mt-3 vd-text-sm vd-text-muted">Your bundler reads the <code>"exports"</code> field in
                         <code>package.json</code> and selects the correct file automatically. You don't need to specify
-                        the file path.</p>
+                        the file path.
+                    </p>
                 </div>
             </div>
         </div>

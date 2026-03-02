@@ -15,6 +15,83 @@
         <div class="vd-container-responsive" style="max-width: 1200px;">
 
             <!-- ═══════════════════════════════════════════════ -->
+            <!-- Version 1.2.3                                   -->
+            <!-- ═══════════════════════════════════════════════ -->
+            <article class="version-card">
+                <header class="version-header">
+                    <span class="vd-badge vd-badge-primary" style="font-size: 1rem; padding: 0.5rem 1rem;">v1.2.3</span>
+                    <span style="color: var(--text-secondary); font-size: 0.95rem;">
+                        <i class="ph ph-calendar mr-1"></i>March 2, 2026
+                    </span>
+                    <span class="vd-badge vd-badge-info" style="font-size: 0.75rem;">Latest</span>
+                </header>
+                <div class="version-body">
+                    <div class="vd-row">
+                        <div class="vd-col-12 vd-col-md-6">
+                            <h4><i class="ph ph-cube mr-2" style="color: var(--color-primary);"></i>Framework</h4>
+                            <div class="change-group">
+                                <h5>Organization Transfer</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-buildings" style="color: var(--color-primary);"></i>
+                                        <div>
+                                            <strong>New: Migrated to vanduo-oss organization</strong>
+                                            <p>Repository moved from <code>Nostromo-618/vanduo-framework</code> to
+                                                <code>vanduo-oss/framework</code> on GitHub. All CDN links, badges,
+                                                and documentation references updated to the new path.
+                                            </p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-package" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>New: Scoped npm package</strong>
+                                            <p>npm package renamed from <code>vanduo-framework</code> to
+                                                <code>@vanduo-oss/framework</code>. Install with
+                                                <code>pnpm add @vanduo-oss/framework</code>. The old
+                                                <code>vanduo-framework</code> package has been deprecated with a
+                                                pointer to the new name.
+                                            </p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="vd-col-12 vd-col-md-6">
+                            <h4><i class="ph ph-book-open-text mr-2"
+                                    style="color: var(--color-primary);"></i>Documentation</h4>
+                            <div class="change-group">
+                                <h5>Updates</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-arrow-up" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: CDN Bumped to v1.2.3</strong>
+                                            <p>Docs runtime now loads Vanduo Framework from
+                                                <code>@v1.2.3</code> CDN artifacts via the new
+                                                <code>vanduo-oss/framework</code> path.
+                                            </p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-arrows-clockwise" style="color: var(--color-success);"></i>
+                                        <div>
+                                            <strong>Update: All links migrated to vanduo-oss</strong>
+                                            <p>GitHub links, install commands, code examples, and
+                                                import statements across Quick Start, Getting Started,
+                                                and ESM vs IIFE guides all updated to
+                                                <code>@vanduo-oss/framework</code>.
+                                            </p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ═══════════════════════════════════════════════ -->
             <!-- Version 1.2.2                                   -->
             <!-- ═══════════════════════════════════════════════ -->
             <article class="version-card">
@@ -23,7 +100,6 @@
                     <span style="color: var(--text-secondary); font-size: 0.95rem;">
                         <i class="ph ph-calendar mr-1"></i>February 28, 2026
                     </span>
-                    <span class="vd-badge vd-badge-info" style="font-size: 0.75rem;">Latest</span>
                 </header>
                 <div class="version-body">
                     <div class="vd-row">
@@ -1060,7 +1136,8 @@
                                         <div>
                                             <strong>New: Package.json Exports Map</strong>
                                             <p>Added proper <code>exports</code> field in package.json for clean
-                                                imports: <code>import { Vanduo } from 'vanduo-framework'</code>.</p>
+                                                imports: <code>import { Vanduo } from '@vanduo-oss/framework'</code>.
+                                            </p>
                                         </div>
                                     </li>
                                     <li class="change-item">

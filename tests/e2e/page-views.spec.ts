@@ -72,7 +72,7 @@ test.describe('3. Page Views', () => {
 
             const githubBtn = page.locator('#hero a[href*="github.com"]');
             await expect(githubBtn).toBeVisible();
-            await expect(githubBtn).toHaveAttribute('href', /.*github\.com\/Nostromo-618\/vanduo-framework/);
+            await expect(githubBtn).toHaveAttribute('href', /.*github\.com\/vanduo-oss\/framework/);
             await expect(githubBtn).toHaveAttribute('target', '_blank');
         });
     });
