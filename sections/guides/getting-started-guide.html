@@ -217,13 +217,13 @@ cd my-first-vanduo-site</code></pre>
                             </div>
                             <div class="vd-code-snippet-body">
                                 <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">nav</span> <span class="code-attr">class</span>=<span class="code-string">"vd-navbar"</span>&gt;
-    &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-container"</span>&gt;
+    &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-navbar-container"</span>&gt;
         &lt;<span class="code-tag">a</span> <span class="code-attr">href</span>=<span class="code-string">"#"</span> <span class="code-attr">class</span>=<span class="code-string">"vd-navbar-brand"</span>&gt;My Site&lt;/<span class="code-tag">a</span>&gt;
-        &lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-navbar-toggler"</span> <span class="code-attr">data-toggle</span>=<span class="code-string">"collapse"</span> <span class="code-attr">data-target</span>=<span class="code-string">"#mainNav"</span>
-                <span class="code-attr">aria-label</span>=<span class="code-string">"Toggle navigation"</span>&gt;
-            &lt;<span class="code-tag">i</span> <span class="code-attr">class</span>=<span class="code-string">"ph ph-list"</span>&gt;&lt;/<span class="code-tag">i</span>&gt;
+        &lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-navbar-toggle"</span>
+                <span class="code-attr">aria-expanded</span>=<span class="code-string">"false"</span> <span class="code-attr">aria-label</span>=<span class="code-string">"Toggle navigation"</span>&gt;
+            &lt;<span class="code-tag">span</span>&gt;&lt;/<span class="code-tag">span</span>&gt;&lt;<span class="code-tag">span</span>&gt;&lt;/<span class="code-tag">span</span>&gt;&lt;<span class="code-tag">span</span>&gt;&lt;/<span class="code-tag">span</span>&gt;
         &lt;/<span class="code-tag">button</span>&gt;
-        &lt;<span class="code-tag">div</span> <span class="code-attr">id</span>=<span class="code-string">"mainNav"</span> <span class="code-attr">class</span>=<span class="code-string">"vd-navbar-collapse"</span>&gt;
+        &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-navbar-menu"</span> <span class="code-attr">aria-hidden</span>=<span class="code-string">"true"</span>&gt;
             &lt;<span class="code-tag">ul</span> <span class="code-attr">class</span>=<span class="code-string">"vd-navbar-nav"</span>&gt;
                 &lt;<span class="code-tag">li</span>&gt;&lt;<span class="code-tag">a</span> <span class="code-attr">href</span>=<span class="code-string">"#"</span> <span class="code-attr">class</span>=<span class="code-string">"vd-nav-link"</span>&gt;Home&lt;/<span class="code-tag">a</span>&gt;&lt;/<span class="code-tag">li</span>&gt;
                 &lt;<span class="code-tag">li</span>&gt;&lt;<span class="code-tag">a</span> <span class="code-attr">href</span>=<span class="code-string">"#"</span> <span class="code-attr">class</span>=<span class="code-string">"vd-nav-link"</span>&gt;About&lt;/<span class="code-tag">a</span>&gt;&lt;/<span class="code-tag">li</span>&gt;
@@ -239,9 +239,7 @@ cd my-first-vanduo-site</code></pre>
                     <ul>
                         <li><code>vd-navbar</code> — The main navbar wrapper, handles styling and layout</li>
                         <li><code>vd-navbar-brand</code> — Your site name or logo</li>
-                        <li><code>vd-navbar-toggler</code> — The hamburger button that appears on mobile</li>
-                        <li><code>data-toggle="collapse"</code> — Tells Vanduo's JS to make this a collapsible element
-                        </li>
+                        <li><code>vd-navbar-toggle</code> — The hamburger button that appears on mobile; Vanduo's JS finds it automatically inside <code>vd-navbar</code></li>
                         <li><code>vd-navbar-nav</code> — The list of navigation links</li>
                     </ul>
                 </div>
@@ -563,13 +561,13 @@ npx http-server . -p 3000
 &lt;/<span class="code-tag">head</span>&gt;
 &lt;<span class="code-tag">body</span>&gt;
     &lt;<span class="code-tag">nav</span> <span class="code-attr">class</span>=<span class="code-string">"vd-navbar"</span>&gt;
-        &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-container"</span>&gt;
+        &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-navbar-container"</span>&gt;
             &lt;<span class="code-tag">a</span> <span class="code-attr">href</span>=<span class="code-string">"#"</span> <span class="code-attr">class</span>=<span class="code-string">"vd-navbar-brand"</span>&gt;My Site&lt;/<span class="code-tag">a</span>&gt;
-            &lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-navbar-toggler"</span> <span class="code-attr">data-toggle</span>=<span class="code-string">"collapse"</span> <span class="code-attr">data-target</span>=<span class="code-string">"#mainNav"</span>
-                    <span class="code-attr">aria-label</span>=<span class="code-string">"Toggle navigation"</span>&gt;
-                &lt;<span class="code-tag">i</span> <span class="code-attr">class</span>=<span class="code-string">"ph ph-list"</span>&gt;&lt;/<span class="code-tag">i</span>&gt;
+            &lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-navbar-toggle"</span>
+                    <span class="code-attr">aria-expanded</span>=<span class="code-string">"false"</span> <span class="code-attr">aria-label</span>=<span class="code-string">"Toggle navigation"</span>&gt;
+                &lt;<span class="code-tag">span</span>&gt;&lt;/<span class="code-tag">span</span>&gt;&lt;<span class="code-tag">span</span>&gt;&lt;/<span class="code-tag">span</span>&gt;&lt;<span class="code-tag">span</span>&gt;&lt;/<span class="code-tag">span</span>&gt;
             &lt;/<span class="code-tag">button</span>&gt;
-            &lt;<span class="code-tag">div</span> <span class="code-attr">id</span>=<span class="code-string">"mainNav"</span> <span class="code-attr">class</span>=<span class="code-string">"vd-navbar-collapse"</span>&gt;
+            &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-navbar-menu"</span> <span class="code-attr">aria-hidden</span>=<span class="code-string">"true"</span>&gt;
                 &lt;<span class="code-tag">ul</span> <span class="code-attr">class</span>=<span class="code-string">"vd-navbar-nav"</span>&gt;
                     &lt;<span class="code-tag">li</span>&gt;&lt;<span class="code-tag">a</span> <span class="code-attr">href</span>=<span class="code-string">"#"</span> <span class="code-attr">class</span>=<span class="code-string">"vd-nav-link"</span>&gt;Home&lt;/<span class="code-tag">a</span>&gt;&lt;/<span class="code-tag">li</span>&gt;
                     &lt;<span class="code-tag">li</span>&gt;&lt;<span class="code-tag">a</span> <span class="code-attr">href</span>=<span class="code-string">"#"</span> <span class="code-attr">class</span>=<span class="code-string">"vd-nav-link"</span>&gt;About&lt;/<span class="code-tag">a</span>&gt;&lt;/<span class="code-tag">li</span>&gt;
