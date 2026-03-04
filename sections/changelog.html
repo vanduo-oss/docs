@@ -45,7 +45,7 @@
                         <div class="vd-col-12 vd-col-md-6">
                             <h4><i class="ph ph-book-open-text mr-2" style="color: var(--color-primary);"></i>Documentation</h4>
                             <div class="change-group">
-                                <h5>Bug Fix</h5>
+                                <h5>Bug Fixes</h5>
                                 <ul class="change-list">
                                     <li class="change-item">
                                         <i class="ph ph-wrench" style="color: var(--color-warning);"></i>
@@ -58,6 +58,42 @@
                                                 subpath-not-defined error. Corrected to
                                                 <code>'@vanduo-oss/framework/css'</code> — the proper
                                                 exports-map entry.
+                                            </p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-wrench" style="color: var(--color-warning);"></i>
+                                        <div>
+                                            <strong>Fix: Incorrect navbar markup in Getting Started guide</strong>
+                                            <p>The 7-step Getting Started guide contained Bootstrap-style navbar
+                                                patterns that do not exist in Vanduo.
+                                                <code>vd-navbar-toggler</code> → <code>vd-navbar-toggle</code>,
+                                                <code>data-toggle="collapse"</code> and
+                                                <code>data-target="#mainNav"</code> attributes removed,
+                                                <code>vd-navbar-collapse</code> → <code>vd-navbar-menu
+                                                aria-hidden="true"</code>, and
+                                                <code>vd-container</code> inside <code>nav</code> →
+                                                <code>vd-navbar-container</code>. Fixed in both the Step 3 snippet
+                                                and the Complete File reference.
+                                            </p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="change-group">
+                                <h5>Improvements</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-arrow-up" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Improvement: Quick Start install options restructured</strong>
+                                            <p>The "Package Manager" card (formerly first with a Recommended badge)
+                                                has been renamed to "With a Bundler (Vite)" and moved to the last
+                                                position. CDN is now first and Recommended — the correct default for
+                                                users who just want to drop Vanduo into a page. The bundler card now
+                                                includes a warning that bare module specifiers require a build tool,
+                                                and a <code>pnpm create vite</code> scaffold step before the import
+                                                snippet.
                                             </p>
                                         </div>
                                     </li>

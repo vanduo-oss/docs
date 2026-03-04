@@ -2,18 +2,149 @@
     <h2 class="demo-title"><i class="ph ph-rocket-launch"></i>Getting Started</h2>
 
     <div class="vd-row">
+        <!-- Card 1: CDN (Recommended) -->
         <div class="vd-col-12 vd-mb-4">
             <div class="vd-card demo-card">
                 <div class="vd-card-header">
-                    <h3><i class="ph ph-package mr-2" style="color: var(--color-success);"></i>Package Manager
+                    <h3><i class="ph ph-lightning mr-2" style="color: var(--color-warning);"></i>CDN
                         <span class="vd-badge vd-badge-success"
                             style="margin-left: 8px; font-size: 0.7rem; vertical-align: middle;">Recommended</span>
                     </h3>
                 </div>
                 <div class="vd-card-body">
-                    <p>We strongly recommend <a href="https://pnpm.io/" target="_blank"
-                            rel="noopener"><strong>pnpm</strong></a> for installing Vanduo Framework. Vanduo ships with
-                        strict <code>.npmrc</code> security policies that work best within the pnpm ecosystem:</p>
+                    <p>The quickest way to get started — no install, no build step. Add two lines to any HTML file:</p>
+                    <div class="vd-code-snippet" data-collapsible data-expanded="true">
+                        <button class="vd-code-snippet-toggle" aria-expanded="true">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active"
+                                    data-lang="html"><code><span class="code-comment">&lt;!-- CSS --&gt;</span>
+&lt;<span class="code-tag">link</span> <span class="code-attr">rel</span>=<span class="code-string">"stylesheet"</span> <span class="code-attr">href</span>=<span class="code-string">"https://cdn.jsdelivr.net/gh/vanduo-oss/framework@main/dist/vanduo.min.css"</span>&gt;
+
+<span class="code-comment">&lt;!-- JS --&gt;</span>
+&lt;<span class="code-tag">script</span> <span class="code-attr">src</span>=<span class="code-string">"https://cdn.jsdelivr.net/gh/vanduo-oss/framework@main/dist/vanduo.min.js"</span>&gt;&lt;/<span class="code-tag">script</span>&gt;
+&lt;<span class="code-tag">script</span>&gt;Vanduo.<span class="code-function">init</span>();&lt;/<span class="code-tag">script</span>&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="vd-text-sm vd-text-muted vd-mt-3"><strong>Tip:</strong> Pin to a specific version for
+                        production: <code>@v1.2.3</code> instead of <code>@main</code></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 2: Download -->
+        <div class="vd-col-12 vd-mb-4">
+            <div class="vd-card demo-card">
+                <div class="vd-card-header">
+                    <h3><i class="ph ph-download-simple mr-2" style="color: var(--color-primary);"></i>Download</h3>
+                </div>
+                <div class="vd-card-body">
+                    <p><a href="https://github.com/vanduo-oss/framework/tree/main/dist" target="_blank"
+                            rel="noopener"><strong>Download the dist/ folder</strong></a> and include locally — no
+                        internet connection required at runtime:</p>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active"
+                                    data-lang="html"><code><span class="code-comment">&lt;!-- CSS --&gt;</span>
+&lt;<span class="code-tag">link</span> <span class="code-attr">rel</span>=<span class="code-string">"stylesheet"</span> <span class="code-attr">href</span>=<span class="code-string">"dist/vanduo.min.css"</span>&gt;
+
+<span class="code-comment">&lt;!-- JS --&gt;</span>
+&lt;<span class="code-tag">script</span> <span class="code-attr">src</span>=<span class="code-string">"dist/vanduo.min.js"</span>&gt;&lt;/<span class="code-tag">script</span>&gt;
+&lt;<span class="code-tag">script</span>&gt;Vanduo.<span class="code-function">init</span>();&lt;/<span class="code-tag">script</span>&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="vd-text-sm vd-text-muted vd-mt-3">The <code>dist/</code> folder is
+                        self-contained with CSS, JS, fonts, and icons.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 3: Source Files -->
+        <div class="vd-col-12 vd-mb-4">
+            <div class="vd-card demo-card">
+                <div class="vd-card-header">
+                    <h3><i class="ph ph-code mr-2" style="color: var(--color-success);"></i>Source
+                        Files</h3>
+                </div>
+                <div class="vd-card-body">
+                    <p>For development or modular imports:</p>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active"
+                                    data-lang="html"><code><span class="code-comment">&lt;!-- Full framework --&gt;</span>
+&lt;<span class="code-tag">link</span> <span class="code-attr">rel</span>=<span class="code-string">"stylesheet"</span> <span class="code-attr">href</span>=<span class="code-string">"css/vanduo.css"</span>&gt;
+&lt;<span class="code-tag">script</span> <span class="code-attr">src</span>=<span class="code-string">"js/vanduo.js"</span>&gt;&lt;/<span class="code-tag">script</span>&gt;
+&lt;<span class="code-tag">script</span>&gt;Vanduo.<span class="code-function">init</span>();&lt;/<span class="code-tag">script</span>&gt;
+
+<span class="code-comment">&lt;!-- Or pick individual modules --&gt;</span>
+&lt;<span class="code-tag">link</span> <span class="code-attr">rel</span>=<span class="code-string">"stylesheet"</span> <span class="code-attr">href</span>=<span class="code-string">"css/core/colors.css"</span>&gt;
+&lt;<span class="code-tag">link</span> <span class="code-attr">rel</span>=<span class="code-string">"stylesheet"</span> <span class="code-attr">href</span>=<span class="code-string">"css/components/buttons.css"</span>&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 4: With a Bundler (Vite) -->
+        <div class="vd-col-12 vd-mb-4">
+            <div class="vd-card demo-card">
+                <div class="vd-card-header">
+                    <h3><i class="ph ph-wrench mr-2" style="color: var(--color-primary);"></i>With a Bundler (Vite)</h3>
+                </div>
+                <div class="vd-card-body">
+                    <div class="vd-alert vd-alert-warning vd-mb-4">
+                        <i class="ph ph-warning"></i>
+                        <div>
+                            <strong>Requires a bundler.</strong> The imports below use bare module specifiers
+                            (<code>@vanduo-oss/framework</code>) which browsers cannot resolve on their own. You must
+                            use a build tool like <a href="https://vite.dev/" target="_blank"
+                                rel="noopener">Vite</a>. For static HTML files, use the CDN or Download options above.
+                        </div>
+                    </div>
+                    <p><strong>Step 1.</strong> Scaffold a Vite project and add Vanduo:</p>
                     <div class="vd-code-snippet" data-collapsible data-expanded="true">
                         <button class="vd-code-snippet-toggle" aria-expanded="true">
                             <span class="vd-code-snippet-toggle-icon"></span>
@@ -31,11 +162,13 @@
                             </div>
                             <div class="vd-code-snippet-body">
                                 <pre class="vd-code-snippet-pane is-active"
-                                    data-lang="shell"><code>pnpm add @vanduo-oss/framework</code></pre>
+                                    data-lang="shell"><code>pnpm create vite my-app --template vanilla
+cd my-app
+pnpm add @vanduo-oss/framework</code></pre>
                             </div>
                         </div>
                     </div>
-                    <p class="vd-mt-4">Then import in your project:</p>
+                    <p class="vd-mt-4"><strong>Step 2.</strong> Import in your entry file (e.g. <code>main.js</code>):</p>
                     <div class="vd-code-snippet" data-collapsible data-expanded="true">
                         <button class="vd-code-snippet-toggle" aria-expanded="true">
                             <span class="vd-code-snippet-toggle-icon"></span>
@@ -73,128 +206,6 @@ Vanduo.<span class="code-function">init</span>();</code></pre>
                         will also work, but they do not enforce the same strict lockfile and isolated
                         <code>node_modules</code> security guarantees that pnpm provides.
                     </p>
-                </div>
-            </div>
-        </div>
-
-        <div class="vd-col-12 vd-mb-4">
-            <div class="vd-card demo-card">
-                <div class="vd-card-header">
-                    <h3><i class="ph ph-lightning mr-2" style="color: var(--color-warning);"></i>CDN
-                        (Fastest)</h3>
-                </div>
-                <div class="vd-card-body">
-                    <p>Load directly from jsDelivr — no download required:</p>
-                    <div class="vd-code-snippet" data-collapsible>
-                        <button class="vd-code-snippet-toggle" aria-expanded="false">
-                            <span class="vd-code-snippet-toggle-icon"></span>
-                            <span>View Code</span>
-                        </button>
-                        <div class="vd-code-snippet-content">
-                            <div class="vd-code-snippet-header">
-                                <div class="vd-code-snippet-tabs" role="tablist">
-                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
-                                </div>
-                                <button class="vd-code-snippet-copy" aria-label="Copy code">
-                                    <span class="vd-code-snippet-copy-icon"></span>
-                                    <span class="vd-code-snippet-copy-text">Copy</span>
-                                </button>
-                            </div>
-                            <div class="vd-code-snippet-body">
-                                <pre class="vd-code-snippet-pane is-active"
-                                    data-lang="html"><code><span class="code-comment">&lt;!-- CSS --&gt;</span>
-&lt;<span class="code-tag">link</span> <span class="code-attr">rel</span>=<span class="code-string">"stylesheet"</span> <span class="code-attr">href</span>=<span class="code-string">"https://cdn.jsdelivr.net/gh/vanduo-oss/framework@main/dist/vanduo.min.css"</span>&gt;
-
-<span class="code-comment">&lt;!-- JS --&gt;</span>
-&lt;<span class="code-tag">script</span> <span class="code-attr">src</span>=<span class="code-string">"https://cdn.jsdelivr.net/gh/vanduo-oss/framework@main/dist/vanduo.min.js"</span>&gt;&lt;/<span class="code-tag">script</span>&gt;
-&lt;<span class="code-tag">script</span>&gt;Vanduo.<span class="code-function">init</span>();&lt;/<span class="code-tag">script</span>&gt;</code></pre>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="vd-text-sm vd-text-muted vd-mt-3"><strong>Tip:</strong> Pin to a
-                        version for
-                        production:<br><code>@v1.2.0</code> instead of <code>@main</code></p>
-                </div>
-            </div>
-        </div>
-
-        <div class="vd-col-12 vd-mb-4">
-            <div class="vd-card demo-card">
-                <div class="vd-card-header">
-                    <h3><i class="ph ph-download-simple mr-2" style="color: var(--color-primary);"></i>Download</h3>
-                </div>
-                <div class="vd-card-body">
-                    <p><a href="https://github.com/vanduo-oss/framework/tree/main/dist" target="_blank"><strong>Download
-                                the dist/ folder</strong></a> and
-                        include locally:</p>
-                    <div class="vd-code-snippet" data-collapsible>
-                        <button class="vd-code-snippet-toggle" aria-expanded="false">
-                            <span class="vd-code-snippet-toggle-icon"></span>
-                            <span>View Code</span>
-                        </button>
-                        <div class="vd-code-snippet-content">
-                            <div class="vd-code-snippet-header">
-                                <div class="vd-code-snippet-tabs" role="tablist">
-                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
-                                </div>
-                                <button class="vd-code-snippet-copy" aria-label="Copy code">
-                                    <span class="vd-code-snippet-copy-icon"></span>
-                                    <span class="vd-code-snippet-copy-text">Copy</span>
-                                </button>
-                            </div>
-                            <div class="vd-code-snippet-body">
-                                <pre class="vd-code-snippet-pane is-active"
-                                    data-lang="html"><code><span class="code-comment">&lt;!-- CSS --&gt;</span>
-&lt;<span class="code-tag">link</span> <span class="code-attr">rel</span>=<span class="code-string">"stylesheet"</span> <span class="code-attr">href</span>=<span class="code-string">"dist/vanduo.min.css"</span>&gt;
-
-<span class="code-comment">&lt;!-- JS --&gt;</span>
-&lt;<span class="code-tag">script</span> <span class="code-attr">src</span>=<span class="code-string">"dist/vanduo.min.js"</span>&gt;&lt;/<span class="code-tag">script</span>&gt;
-&lt;<span class="code-tag">script</span>&gt;Vanduo.<span class="code-function">init</span>();&lt;/<span class="code-tag">script</span>&gt;</code></pre>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="vd-text-sm vd-text-muted vd-mt-3">The <code>dist/</code> folder is
-                        self-contained with CSS, JS, fonts, and icons.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="vd-col-12 vd-mb-4">
-            <div class="vd-card demo-card">
-                <div class="vd-card-header">
-                    <h3><i class="ph ph-code mr-2" style="color: var(--color-success);"></i>Source
-                        Files</h3>
-                </div>
-                <div class="vd-card-body">
-                    <p>For development or modular imports:</p>
-                    <div class="vd-code-snippet" data-collapsible>
-                        <button class="vd-code-snippet-toggle" aria-expanded="false">
-                            <span class="vd-code-snippet-toggle-icon"></span>
-                            <span>View Code</span>
-                        </button>
-                        <div class="vd-code-snippet-content">
-                            <div class="vd-code-snippet-header">
-                                <div class="vd-code-snippet-tabs" role="tablist">
-                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
-                                </div>
-                                <button class="vd-code-snippet-copy" aria-label="Copy code">
-                                    <span class="vd-code-snippet-copy-icon"></span>
-                                    <span class="vd-code-snippet-copy-text">Copy</span>
-                                </button>
-                            </div>
-                            <div class="vd-code-snippet-body">
-                                <pre class="vd-code-snippet-pane is-active"
-                                    data-lang="html"><code><span class="code-comment">&lt;!-- Full framework --&gt;</span>
-&lt;<span class="code-tag">link</span> <span class="code-attr">rel</span>=<span class="code-string">"stylesheet"</span> <span class="code-attr">href</span>=<span class="code-string">"css/vanduo.css"</span>&gt;
-&lt;<span class="code-tag">script</span> <span class="code-attr">src</span>=<span class="code-string">"js/vanduo.js"</span>&gt;&lt;/<span class="code-tag">script</span>&gt;
-&lt;<span class="code-tag">script</span>&gt;Vanduo.<span class="code-function">init</span>();&lt;/<span class="code-tag">script</span>&gt;
-
-<span class="code-comment">&lt;!-- Or pick individual modules --&gt;</span>
-&lt;<span class="code-tag">link</span> <span class="code-attr">rel</span>=<span class="code-string">"stylesheet"</span> <span class="code-attr">href</span>=<span class="code-string">"css/core/colors.css"</span>&gt;
-&lt;<span class="code-tag">link</span> <span class="code-attr">rel</span>=<span class="code-string">"stylesheet"</span> <span class="code-attr">href</span>=<span class="code-string">"css/components/buttons.css"</span>&gt;</code></pre>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
