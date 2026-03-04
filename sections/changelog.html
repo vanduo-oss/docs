@@ -30,13 +30,29 @@
                         <div class="vd-col-12 vd-col-md-6">
                             <h4><i class="ph ph-cube mr-2" style="color: var(--color-primary);"></i>Framework</h4>
                             <div class="change-group">
-                                <h5>No Changes</h5>
+                                <h5>Bug Fixes</h5>
                                 <ul class="change-list">
                                     <li class="change-item">
-                                        <i class="ph ph-minus" style="color: var(--text-secondary);"></i>
+                                        <i class="ph ph-wrench" style="color: var(--color-warning);"></i>
                                         <div>
-                                            <strong>No framework changes in this release</strong>
-                                            <p>This release contains documentation fixes only. Framework remains at v1.2.3.</p>
+                                            <strong>Fix: Build/runtime version mismatch resolved</strong>
+                                            <p>Framework release updated to <code>v1.2.4</code>. Runtime initialization logs,
+                                                bundle banners, and <code>build-info.json</code> now resolve from the package
+                                                version and stay in sync across generated artifacts.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="change-group">
+                                <h5>Build &amp; Release</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-gear" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Improvement: Unified dist output and CI consistency guard</strong>
+                                            <p>The default build now recreates <code>dist/</code> and emits both minified and
+                                                unminified JS/CSS outputs in one run. CI now validates cross-artifact version
+                                                consistency and fails on drift before release asset upload.</p>
                                         </div>
                                     </li>
                                 </ul>
