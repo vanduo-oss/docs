@@ -1125,6 +1125,22 @@ table {
   --font-family-sans: "Titillium Web", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+[data-font="google-sans"] {
+  --font-family-sans: "Google Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+[data-font="roboto"] {
+  --font-family-sans: "Roboto", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+[data-font="lato"] {
+  --font-family-sans: "Lato", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+[data-font="noto-sans"] {
+  --font-family-sans: "Noto Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
 :root {
   --font-size-xs: .625rem;
   --font-size-sm: .8125rem;

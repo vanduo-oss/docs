@@ -1,3 +1,42 @@
+        /* ── Custom Font Faces ───────────────────────────── */
+        @font-face {
+            font-family: 'Google Sans';
+            src: url('../dist/fonts/google-sans/GoogleSans-Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            src: url('../dist/fonts/roboto/Roboto-Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Lato';
+            src: url('../dist/fonts/lato/Lato-Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Noto Sans';
+            src: url('../dist/fonts/noto-sans/NotoSans-Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        /* ── Custom Font Tokens ─────────────────────────── */
+        [data-font='google-sans'] { --font-family-sans: 'Google Sans', -apple-system, BlinkMacSystemFont, sans-serif; }
+        [data-font='roboto']      { --font-family-sans: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif; }
+        [data-font='lato']        { --font-family-sans: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif; }
+        [data-font='noto-sans']   { --font-family-sans: 'Noto Sans', -apple-system, BlinkMacSystemFont, sans-serif; }
+
         /* ── Global ─────────────────────────────────────── */
         html {
             scroll-behavior: smooth;
@@ -7,10 +46,6 @@
 
         body {
             overscroll-behavior-y: none;
-        }
-
-        .vd-navbar-brand {
-            margin-left: 1rem;
         }
 
         .vd-navbar-brand-wrap {
@@ -51,6 +86,19 @@
 
         .vd-tooltip:not(.is-visible) {
             display: none !important;
+        }
+
+        /* ── Hero title mobile alignment ───────────────────── */
+        @media (max-width: 600px) {
+            .hero-title {
+                flex-direction: column !important;
+                align-items: center !important;
+            }
+            .hero-title svg {
+                transform: none !important;
+                margin-right: 0 !important;
+                margin-bottom: 0.25em;
+            }
         }
 
         /* ── Docs layout ────────────────────────────────── */

@@ -17,8 +17,8 @@ test.describe('3. Page Views', () => {
             const hero = page.locator('#hero');
             await expect(hero).toBeVisible();
 
-            const title = hero.locator('h1');
-            // The SVG icon inside the H1 makes exact text matching tricky, check textContent directly
+            const title = hero.locator('h2');
+            // The SVG icon inside the H2 makes exact text matching tricky, check textContent directly
             const textContent = await title.textContent();
             expect(textContent).toMatch(/Vanduo\s*Framework/);
 

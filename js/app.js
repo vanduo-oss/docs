@@ -1,6 +1,22 @@
 if (typeof window.Vanduo === 'undefined') {
     console.error('Vanduo failed to load from CDN. Check network/CDN availability.');
 } else {
+    // Extend theme customizer with site-specific fonts and override defaults
+    if (window.ThemeCustomizer) {
+        Object.assign(window.ThemeCustomizer.FONT_OPTIONS, {
+            'google-sans': { name: 'Google Sans', family: "'Google Sans', sans-serif" },
+            'roboto':       { name: 'Roboto',      family: "'Roboto', sans-serif" },
+            'lato':         { name: 'Lato',         family: "'Lato', sans-serif" },
+            'noto-sans':    { name: 'Noto Sans',    family: "'Noto Sans', sans-serif" }
+        });
+        Object.assign(window.ThemeCustomizer.DEFAULTS, {
+            FONT:           'lato',
+            PRIMARY_LIGHT:  'cyan',
+            PRIMARY_DARK:   'cyan',
+            NEUTRAL:        'stone',
+            RADIUS:         '0.375'
+        });
+    }
     window.Vanduo.init();
 }
 

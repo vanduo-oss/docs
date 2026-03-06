@@ -3749,7 +3749,11 @@ module.exports = __toCommonJS(index_exports);
       "ubuntu": { name: "Ubuntu", family: "'Ubuntu', sans-serif" },
       "open-sans": { name: "Open Sans", family: "'Open Sans', sans-serif" },
       "rubik": { name: "Rubik", family: "'Rubik', sans-serif" },
-      "titillium-web": { name: "Titillium Web", family: "'Titillium Web', sans-serif" }
+      "titillium-web": { name: "Titillium Web", family: "'Titillium Web', sans-serif" },
+      "google-sans": { name: "Google Sans", family: "'Google Sans', sans-serif" },
+      "roboto": { name: "Roboto", family: "'Roboto', sans-serif" },
+      "lato": { name: "Lato", family: "'Lato', sans-serif" },
+      "noto-sans": { name: "Noto Sans", family: "'Noto Sans', sans-serif" }
     },
     // Theme mode options
     THEME_MODES: ["system", "dark", "light"],
