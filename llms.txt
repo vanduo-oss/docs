@@ -1,0 +1,47 @@
+# Vanduo Framework
+> Pure HTML, CSS, JS framework for designing beautiful websites.
+> Zero runtime dependencies, no mandatory build tools, just clean and simple code.
+> MIT Licensed. https://vanduo.dev
+
+## What is Vanduo?
+Vanduo is a lightweight front-end framework built on plain HTML, CSS, and JavaScript.
+It requires no build step and has zero runtime dependencies. It is designed for
+developers who want clean, composable UI primitives without the overhead of large
+frameworks.
+
+## Key Features
+- Fibonacci/Golden Ratio design system for spacing, typography, and grid
+- Modular CSS — use the full bundle or pick individual components
+- Built-in dark mode with light/dark/system preference (localStorage)
+- Theme customizer: primary color, neutral, radius, font family
+- 1,500+ Phosphor Icons in 6 weights, bundled locally (no CDN required)
+- Open Color palette (10-step accessible color scales)
+- Accessibility-first: ARIA, focus-visible, reduced-motion, semantic HTML
+- Lazy loading, parallax, tabs, toasts, draggable, search, and more
+
+## Documentation Structure
+The docs site is a single-page application (SPA) at https://vanduo.dev.
+All content is hash-routed. Main sections:
+
+- #home            — Overview, features, icon preview, color palette
+- #docs            — Full component and concept documentation
+- #docs/components — UI components (buttons, cards, forms, alerts, etc.)
+- #docs/guides     — Getting started, lazy loading, theme customizer, ESM vs IIFE
+- #docs/concepts   — Design philosophy, tokens, namespacing, lifecycle, modules
+- #changelog       — Version history
+- #about           — Project background
+
+## Technology
+- Language: HTML, CSS, JavaScript (ES Modules + IIFE builds)
+- CSS: Custom properties (tokens), no preprocessor required
+- JS: Vanilla, no framework dependencies
+- Fonts: Inter, Source Sans 3, Fira Sans, IBM Plex Sans, JetBrains Mono,
+         Ubuntu, Open Sans, Rubik, Titillium Web, Google Sans, Roboto, Lato, Noto Sans
+- Icons: Phosphor Icons (MIT)
+- Colors: Open Color system (MIT)
+
+## Links
+- Website:    https://vanduo.dev
+- GitHub:     https://github.com/vanduo-oss/framework
+- License:    MIT — https://opensource.org/licenses/MIT
+- Sitemap:    https://vanduo.dev/sitemap.xml

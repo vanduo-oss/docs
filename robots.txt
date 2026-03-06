@@ -1,11 +1,73 @@
 # Vanduo Framework - robots.txt
 # https://www.robotstxt.org/robotstxt.html
+# We welcome all crawlers, scrapers, and AI/LLM bots - read freely.
 
+# -- General ------------------------------------------
 User-agent: *
 Allow: /
 
-# Sitemap location
+# -- OpenAI -------------------------------------------
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+# -- Anthropic / Claude -------------------------------
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+# -- Google -------------------------------------------
+User-agent: Googlebot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# -- Microsoft / Bing ---------------------------------
+User-agent: Bingbot
+Allow: /
+
+User-agent: msnbot
+Allow: /
+
+# -- Perplexity ---------------------------------------
+User-agent: PerplexityBot
+Allow: /
+
+# -- Meta ---------------------------------------------
+User-agent: FacebookBot
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+# -- Common Crawl (LLM training data) -----------------
+User-agent: CCBot
+Allow: /
+
+# -- Internet Archive ---------------------------------
+User-agent: ia_archiver
+Allow: /
+
+# -- Apple --------------------------------------------
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# -- Sitemap ------------------------------------------
 Sitemap: https://vanduo.dev/sitemap.xml
 
-# Disallow crawling of development utilities and section fragments
-Disallow: /sections/
+# -- LLM-friendly plain-text index --------------------
+# https://vanduo.dev/llms.txt
