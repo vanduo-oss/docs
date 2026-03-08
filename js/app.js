@@ -5,16 +5,16 @@ if (typeof window.Vanduo === 'undefined') {
     if (window.ThemeCustomizer) {
         Object.assign(window.ThemeCustomizer.FONT_OPTIONS, {
             'google-sans': { name: 'Google Sans', family: "'Google Sans', sans-serif" },
-            'roboto':       { name: 'Roboto',      family: "'Roboto', sans-serif" },
-            'lato':         { name: 'Lato',         family: "'Lato', sans-serif" },
-            'noto-sans':    { name: 'Noto Sans',    family: "'Noto Sans', sans-serif" }
+            'roboto': { name: 'Roboto', family: "'Roboto', sans-serif" },
+            'lato': { name: 'Lato', family: "'Lato', sans-serif" },
+            'noto-sans': { name: 'Noto Sans', family: "'Noto Sans', sans-serif" }
         });
         Object.assign(window.ThemeCustomizer.DEFAULTS, {
-            FONT:           'lato',
-            PRIMARY_LIGHT:  'cyan',
-            PRIMARY_DARK:   'cyan',
-            NEUTRAL:        'stone',
-            RADIUS:         '0.375'
+            FONT: 'lato',
+            PRIMARY_LIGHT: 'cyan',
+            PRIMARY_DARK: 'cyan',
+            NEUTRAL: 'stone',
+            RADIUS: '0.375'
         });
     }
     window.Vanduo.init();
@@ -357,28 +357,29 @@ function setupScrollSpy() {
     var sections = content.querySelectorAll('section[id]');
     if (!sections.length) return;
     scrollSpyObserver = new IntersectionObserver(function (entries) {
-        // Find the most prominent intersecting entry (if multiple, take the first one or the one with biggest intersection ratio)
+        // Collect all currently-visible sections, then pick the one closest to
+        // the top of the viewport (smallest absolute top offset).  This prevents
+        // incorrect highlighting when multiple sections are in view.
         var intersecting = entries.filter(function (e) { return e.isIntersecting; });
         if (!intersecting.length) return;
 
-        // Use the last intersecting one or max ratio? Just loop them.
-        intersecting.forEach(function (entry) {
-            setActiveNavLink(entry.target.id);
-            var meta = findSectionMeta(entry.target.id);
-            if (meta && meta.section) {
-                setDocumentTitle(meta.section.title);
-                if (window.history && window.history.replaceState) {
-                    var targetHashBase = '#docs/' + entry.target.id;
-                    // Only replace the hash if the current hash does NOT start with targetHashBase.
-                    // This preserves '#docs/buttons#sizes' when scrolling within the 'buttons' section.
-                    // To prevent a newly loaded lazy-section from stealing the hash while 'buttons' is still in view,
-                    // we can verify if the new entry actually takes up a significant portion, or just let it update.
-                    if (!window.location.hash.startsWith(targetHashBase)) {
-                        window.history.replaceState(null, '', targetHashBase);
-                    }
+        var best = intersecting.reduce(function (a, b) {
+            var aTop = Math.abs(a.boundingClientRect.top);
+            var bTop = Math.abs(b.boundingClientRect.top);
+            return bTop < aTop ? b : a;
+        });
+
+        setActiveNavLink(best.target.id);
+        var meta = findSectionMeta(best.target.id);
+        if (meta && meta.section) {
+            setDocumentTitle(meta.section.title);
+            if (window.history && window.history.replaceState) {
+                var targetHashBase = '#docs/' + best.target.id;
+                if (!window.location.hash.startsWith(targetHashBase)) {
+                    window.history.replaceState(null, '', targetHashBase);
                 }
             }
-        });
+        }
     }, { rootMargin: '-80px 0px -60% 0px', threshold: 0 });
     sections.forEach(function (sec) { scrollSpyObserver.observe(sec); });
 }
@@ -1062,9 +1063,75 @@ function initGlobalSearch() {
     });
 }
 
+/* ── Dark Mode Toggle Icon Sync ───────────────── */
+(function () {
+    var toggle = document.getElementById('dark-mode-toggle');
+    if (!toggle) return;
+    var icon = toggle.querySelector('i');
+    if (!icon) return;
+
+    function updateIcon() {
+        var pref = 'system';
+        try {
+            pref = localStorage.getItem('vanduo-theme-preference') || 'system';
+        } catch (e) { }
+
+        if (pref === 'system') {
+            icon.className = 'ph ph-desktop';
+            toggle.setAttribute('aria-label', 'Theme: System (Click to switch to Light)');
+        } else if (pref === 'light') {
+            icon.className = 'ph ph-sun';
+            toggle.setAttribute('aria-label', 'Theme: Light (Click to switch to Dark)');
+        } else {
+            icon.className = 'ph ph-moon';
+            toggle.setAttribute('aria-label', 'Theme: Dark (Click to switch to System)');
+        }
+    }
+
+    updateIcon();
+
+    // Watch for data-theme attribute changes (set by framework ThemeSwitcher)
+    var observer = new MutationObserver(function (mutations) {
+        mutations.forEach(function (m) {
+            if (m.attributeName === 'data-theme') updateIcon();
+        });
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+    // Also listen for OS preference changes when in system mode
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateIcon);
+})();
+
 /* ── Init ───────────────────────────────────── */
 (async function () {
     await loadRegistry();
     initGlobalSearch();
+
+    // Dynamic component count badge (docs landing)
+    var totalSections = 0;
+    Object.keys(registry.tabs).forEach(function (tabKey) {
+        registry.tabs[tabKey].categories.forEach(function (cat) {
+            totalSections += cat.sections.length;
+        });
+    });
+    var countEl = document.getElementById('docs-component-count-num');
+    if (countEl) countEl.textContent = totalSections + '+';
+
+    // Copy Class Name micro-interaction
+    document.body.addEventListener('click', function (e) {
+        var target = e.target;
+        if (target.tagName === 'CODE' && target.closest('.vd-table') || target.classList.contains('code-selector') && target.closest('.vd-code-snippet')) {
+            var textToCopy = target.textContent || target.innerText;
+            navigator.clipboard.writeText(textToCopy.trim()).then(function () {
+                target.classList.add('copied-inline');
+                setTimeout(function () {
+                    target.classList.remove('copied-inline');
+                }, 2000);
+            }).catch(function (err) {
+                console.error('Failed to copy class name: ', err);
+            });
+        }
+    });
+
     await handleRoute();
 })();

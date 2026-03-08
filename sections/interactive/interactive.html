@@ -1,104 +1,104 @@
-                    <section id="interactive">
-                        <h2 class="demo-title"><i class="ph ph-hand-pointing"></i>Interactive Components</h2>
+<section id="interactive">
+    <h2 class="demo-title"><i class="ph ph-hand-pointing"></i>Interactive Components</h2>
 
-                        <div class="vd-row">
-                            <div class="vd-col-12 vd-col-md-6">
-                                <div class="vd-card vd-card-glow demo-card">
-                                    <div class="vd-card-header">
-                                        <h3>Tooltips</h3>
-                                    </div>
-                                    <div class="vd-card-body">
-                                        <p>Hover over the buttons to see tooltips:</p>
-                                        <button class="vd-btn vd-btn-primary" data-tooltip="This is a tooltip on top"
-                                            data-tooltip-placement="top">Tooltip Top</button>
-                                        <button class="vd-btn vd-btn-primary" data-tooltip="This is a tooltip on right"
-                                            data-tooltip-placement="right">Tooltip Right</button>
-                                        <button class="vd-btn vd-btn-primary" data-tooltip="This is a tooltip on bottom"
-                                            data-tooltip-placement="bottom">Tooltip Bottom</button>
-                                        <button class="vd-btn vd-btn-primary" data-tooltip="This is a tooltip on left"
-                                            data-tooltip-placement="left">Tooltip Left</button>
-                                    </div>
+    <div class="vd-row">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h3>Tooltips</h3>
+                </div>
+                <div class="vd-card-body">
+                    <p>Hover over the buttons to see tooltips:</p>
+                    <button class="vd-btn vd-btn-primary" data-tooltip="This is a tooltip on top"
+                        data-tooltip-placement="top">Tooltip Top</button>
+                    <button class="vd-btn vd-btn-primary" data-tooltip="This is a tooltip on right"
+                        data-tooltip-placement="right">Tooltip Right</button>
+                    <button class="vd-btn vd-btn-primary" data-tooltip="This is a tooltip on bottom"
+                        data-tooltip-placement="bottom">Tooltip Bottom</button>
+                    <button class="vd-btn vd-btn-primary" data-tooltip="This is a tooltip on left"
+                        data-tooltip-placement="left">Tooltip Left</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h3>Dropdown</h3>
+                </div>
+                <div class="vd-card-body">
+                    <div class="vd-dropdown">
+                        <button class="vd-btn vd-btn-primary vd-dropdown-toggle" aria-expanded="false">
+                            Dropdown Button
+                        </button>
+                        <ul class="vd-dropdown-menu">
+                            <li><a href="#" class="vd-dropdown-item">Action</a></li>
+                            <li><a href="#" class="vd-dropdown-item">Another action</a></li>
+                            <li><a href="#" class="vd-dropdown-item">Something else</a></li>
+                            <li>
+                                <hr class="vd-dropdown-divider">
+                            </li>
+                            <li><a href="#" class="vd-dropdown-item">Separated link</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vd-row">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h3>Modal</h3>
+                </div>
+                <div class="vd-card-body">
+                    <button class="vd-btn vd-btn-primary" data-modal="#demo-modal">Open
+                        Modal</button>
+
+                    <!-- Modal element -->
+                    <div class="vd-modal" id="demo-modal">
+                        <div class="vd-modal-backdrop"></div>
+                        <div class="vd-modal-dialog">
+                            <div class="vd-modal-content">
+                                <div class="vd-modal-header">
+                                    <h3 class="vd-modal-title">Demo Modal</h3>
+                                    <button class="vd-modal-close" data-dismiss="modal"
+                                        aria-label="Close">&times;</button>
                                 </div>
-                            </div>
-
-                            <div class="vd-col-12 vd-col-md-6">
-                                <div class="vd-card vd-card-glow demo-card">
-                                    <div class="vd-card-header">
-                                        <h3>Dropdown</h3>
-                                    </div>
-                                    <div class="vd-card-body">
-                                        <div class="vd-dropdown">
-                                            <button class="vd-btn vd-btn-primary vd-dropdown-toggle"
-                                                aria-expanded="false">
-                                                Dropdown Button
-                                            </button>
-                                            <ul class="vd-dropdown-menu">
-                                                <li><a href="#" class="vd-dropdown-item">Action</a></li>
-                                                <li><a href="#" class="vd-dropdown-item">Another action</a></li>
-                                                <li><a href="#" class="vd-dropdown-item">Something else</a></li>
-                                                <li>
-                                                    <hr class="vd-dropdown-divider">
-                                                </li>
-                                                <li><a href="#" class="vd-dropdown-item">Separated link</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
+                                <div class="vd-modal-body">
+                                    <p>This is the Vanduo modal component. It supports backdrop click to close, keyboard
+                                        escape, and the close button.</p>
+                                </div>
+                                <div class="vd-modal-footer">
+                                    <button class="vd-btn vd-btn-secondary" data-dismiss="modal">Close</button>
+                                    <button class="vd-btn vd-btn-primary">Save changes</button>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
 
-                        <div class="vd-row">
-                            <div class="vd-col-12 vd-col-md-6">
-                                <div class="vd-card vd-card-glow demo-card">
-                                    <div class="vd-card-header">
-                                        <h3>Modal</h3>
-                                    </div>
-                                    <div class="vd-card-body">
-                                        <button class="vd-btn vd-btn-primary" data-modal="#demo-modal">Open
-                                            Modal</button>
-
-                                        <!-- Modal element -->
-                                        <div class="vd-modal" id="demo-modal">
-                                            <div class="vd-modal-backdrop"></div>
-                                            <div class="vd-modal-dialog">
-                                                <div class="vd-modal-content">
-                                                    <div class="vd-modal-header">
-                                                        <h3 class="vd-modal-title">Demo Modal</h3>
-                                                        <button class="vd-modal-close" data-dismiss="modal" aria-label="Close">&times;</button>
-                                                    </div>
-                                                    <div class="vd-modal-body">
-                                                        <p>This is the Vanduo modal component. It supports backdrop click to close, keyboard escape, and the close button.</p>
-                                                    </div>
-                                                    <div class="vd-modal-footer">
-                                                        <button class="vd-btn vd-btn-secondary" data-dismiss="modal">Close</button>
-                                                        <button class="vd-btn vd-btn-primary">Save changes</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Code Snippet for Modal -->
-                                <div class="vd-code-snippet" data-collapsible>
-                                    <button class="vd-code-snippet-toggle" aria-expanded="false">
-                                        <span class="vd-code-snippet-toggle-icon"></span>
-                                        <span>View Code</span>
-                                    </button>
-                                    <div class="vd-code-snippet-content">
-                                        <div class="vd-code-snippet-header">
-                                            <div class="vd-code-snippet-tabs" role="tablist">
-                                                <button class="vd-code-snippet-tab is-active"
-                                                    data-lang="html">HTML</button>
-                                                <button class="vd-code-snippet-tab" data-lang="js">JS</button>
-                                            </div>
-                                            <button class="vd-code-snippet-copy" aria-label="Copy code">
-                                                <span class="vd-code-snippet-copy-icon"></span>
-                                                <span class="vd-code-snippet-copy-text">Copy</span>
-                                            </button>
-                                        </div>
-                                        <div class="vd-code-snippet-body">
-                                            <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Trigger button --&gt;</span>
+            <!-- Code Snippet for Modal -->
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                            <button class="vd-code-snippet-tab" data-lang="js">JS</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Trigger button --&gt;</span>
 &lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"btn btn-primary"</span> <span class="code-attr">data-modal</span>=<span class="code-string">"#my-modal"</span>&gt;Open Modal&lt;/<span class="code-tag">button</span>&gt;
 
 <span class="code-comment">&lt;!-- Modal structure --&gt;</span>
@@ -117,7 +117,7 @@
     &lt;/<span class="code-tag">div</span>&gt;
   &lt;/<span class="code-tag">div</span>&gt;
 &lt;/<span class="code-tag">div</span>&gt;</code></pre>
-                                            <pre class="vd-code-snippet-pane" data-lang="js"><code><span class="code-comment">// Open modal programmatically</span>
+                        <pre class="vd-code-snippet-pane" data-lang="js"><code><span class="code-comment">// Open modal programmatically</span>
 <span class="code-keyword">const</span> modal = <span class="code-function">Modal</span>.<span class="code-function">open</span>(<span class="code-string">'#my-modal'</span>);
 
 <span class="code-comment">// Close modal</span>
@@ -128,77 +128,76 @@ document.<span class="code-function">querySelector</span>(<span class="code-stri
   .<span class="code-function">addEventListener</span>(<span class="code-string">'modal:open'</span>, (e) => {
     <span class="code-function">console</span>.<span class="code-function">log</span>(<span class="code-string">'Modal opened'</span>);
   });</code></pre>
-                                        </div>
-                                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h3>Collapsible / Accordion</h3>
+                </div>
+                <div class="vd-card-body">
+                    <div class="accordion">
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span>Accordion Item 1</span>
+                                <span class="accordion-icon"></span>
+                            </button>
+                            <div class="accordion-body" id="collapse1">
+                                <div class="accordion-content">
+                                    This is the content of the first accordion item.
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="vd-col-12 vd-col-md-6">
-                                <div class="vd-card vd-card-glow demo-card">
-                                    <div class="vd-card-header">
-                                        <h3>Collapsible / Accordion</h3>
-                                    </div>
-                                    <div class="vd-card-body">
-                                        <div class="accordion">
-                                            <div class="accordion-item">
-                                                <button class="accordion-header">
-                                                    <span>Accordion Item 1</span>
-                                                    <span class="accordion-icon"></span>
-                                                </button>
-                                                <div class="accordion-body" id="collapse1">
-                                                    <div class="accordion-content">
-                                                        This is the content of the first accordion item.
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="accordion-item">
-                                                <button class="accordion-header">
-                                                    <span>Accordion Item 2</span>
-                                                    <span class="accordion-icon"></span>
-                                                </button>
-                                                <div class="accordion-body" id="collapse2">
-                                                    <div class="accordion-content">
-                                                        This is the content of the second accordion item.
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="accordion-item">
-                                                <button class="accordion-header">
-                                                    <span>Accordion Item 3</span>
-                                                    <span class="accordion-icon"></span>
-                                                </button>
-                                                <div class="accordion-body" id="collapse3">
-                                                    <div class="accordion-content">
-                                                        This is the content of the third accordion item.
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span>Accordion Item 2</span>
+                                <span class="accordion-icon"></span>
+                            </button>
+                            <div class="accordion-body" id="collapse2">
+                                <div class="accordion-content">
+                                    This is the content of the second accordion item.
                                 </div>
+                            </div>
+                        </div>
 
-                                <!-- Code Snippet for Accordion -->
-                                <div class="vd-code-snippet" data-collapsible>
-                                    <button class="vd-code-snippet-toggle" aria-expanded="false">
-                                        <span class="vd-code-snippet-toggle-icon"></span>
-                                        <span>View Code</span>
-                                    </button>
-                                    <div class="vd-code-snippet-content">
-                                        <div class="vd-code-snippet-header">
-                                            <div class="vd-code-snippet-tabs" role="tablist">
-                                                <button class="vd-code-snippet-tab is-active"
-                                                    data-lang="html">HTML</button>
-                                                <button class="vd-code-snippet-tab" data-lang="js">JS</button>
-                                            </div>
-                                            <button class="vd-code-snippet-copy" aria-label="Copy code">
-                                                <span class="vd-code-snippet-copy-icon"></span>
-                                                <span class="vd-code-snippet-copy-text">Copy</span>
-                                            </button>
-                                        </div>
-                                        <div class="vd-code-snippet-body">
-                                            <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"accordion"</span>&gt;
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span>Accordion Item 3</span>
+                                <span class="accordion-icon"></span>
+                            </button>
+                            <div class="accordion-body" id="collapse3">
+                                <div class="accordion-content">
+                                    This is the content of the third accordion item.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Code Snippet for Accordion -->
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                            <button class="vd-code-snippet-tab" data-lang="js">JS</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"accordion"</span>&gt;
   &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"accordion-item"</span>&gt;
     &lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"accordion-header"</span>&gt;
       &lt;<span class="code-tag">span</span>&gt;Item Title&lt;/<span class="code-tag">span</span>&gt;
@@ -211,8 +210,8 @@ document.<span class="code-function">querySelector</span>(<span class="code-stri
     &lt;/<span class="code-tag">div</span>&gt;
   &lt;/<span class="code-tag">div</span>&gt;
 &lt;/<span class="code-tag">div</span>&gt;</code></pre>
-                                            <pre class="vd-code-snippet-pane"
-                                                data-lang="js"><code><span class="code-comment">// Accordion auto-initializes on page load</span>
+                        <pre class="vd-code-snippet-pane"
+                            data-lang="js"><code><span class="code-comment">// Accordion auto-initializes on page load</span>
 <span class="code-comment">// Click accordion headers to toggle</span>
 
 <span class="code-comment">// Programmatic control:</span>
@@ -224,9 +223,181 @@ item.<span class="code-function">classList</span>.<span class="code-function">ad
 
 <span class="code-comment">// Close item</span>
 item.<span class="code-function">classList</span>.<span class="code-function">remove</span>(<span class="code-string">'is-open'</span>);</code></pre>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h3 id="api" class="docs-heading">API Reference</h3>
+
+    <h4 class="vd-mt-6 vd-mb-3">Tooltips</h4>
+    <div class="vd-table-responsive" style="margin-bottom: 2rem;">
+        <table class="vd-table vd-table-hover">
+            <thead>
+                <tr>
+                    <th style="width: 25%;">Attribute / Class</th>
+                    <th style="width: 55%;">Description</th>
+                    <th style="width: 20%;">Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>data-tooltip="[text]"</code></td>
+                    <td>Initializes a tooltip on the element with the specified text content.</td>
+                    <td>Attribute</td>
+                </tr>
+                <tr>
+                    <td><code>data-tooltip-placement="[pos]"</code></td>
+                    <td>Sets placement (<code>top</code>, <code>right</code>, <code>bottom</code>, <code>left</code>).
+                        Defaults to top.</td>
+                    <td>Attribute</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h4 class="vd-mb-3">Dropdowns</h4>
+    <div class="vd-table-responsive" style="margin-bottom: 2rem;">
+        <table class="vd-table vd-table-hover">
+            <thead>
+                <tr>
+                    <th style="width: 25%;">Class Name</th>
+                    <th style="width: 55%;">Description</th>
+                    <th style="width: 20%;">Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>.vd-dropdown</code></td>
+                    <td>Base container class that establishes positioning context.</td>
+                    <td>Component</td>
+                </tr>
+                <tr>
+                    <td><code>.vd-dropdown-toggle</code></td>
+                    <td>Button or link that toggles the dropdown menu visibility on click.</td>
+                    <td>Sub-component</td>
+                </tr>
+                <tr>
+                    <td><code>.vd-dropdown-menu</code></td>
+                    <td>The hidden menu container that appears when activated.</td>
+                    <td>Sub-component</td>
+                </tr>
+                <tr>
+                    <td><code>.vd-dropdown-item</code></td>
+                    <td>Individual interactive links or buttons within the popup menu.</td>
+                    <td>Sub-component</td>
+                </tr>
+                <tr>
+                    <td><code>.vd-dropdown-divider</code></td>
+                    <td>Horizontal line used to separate groups of items.</td>
+                    <td>Sub-component</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h4 class="vd-mb-3">Modals</h4>
+    <div class="vd-table-responsive" style="margin-bottom: 2rem;">
+        <table class="vd-table vd-table-hover">
+            <thead>
+                <tr>
+                    <th style="width: 25%;">Class / Attribute</th>
+                    <th style="width: 55%;">Description</th>
+                    <th style="width: 20%;">Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>.vd-modal</code></td>
+                    <td>Outer wrapper for the modal dialog. Usually hidden by default.</td>
+                    <td>Component</td>
+                </tr>
+                <tr>
+                    <td><code>.vd-modal-backdrop</code></td>
+                    <td>Semi-transparent overlay behind the modal dialog.</td>
+                    <td>Sub-component</td>
+                </tr>
+                <tr>
+                    <td><code>.vd-modal-dialog</code></td>
+                    <td>Positioning container that centers the modal content.</td>
+                    <td>Layout</td>
+                </tr>
+                <tr>
+                    <td><code>.vd-modal-content</code></td>
+                    <td>The actual visual card/box of the modal.</td>
+                    <td>Sub-component</td>
+                </tr>
+                <tr>
+                    <td><code>.vd-modal-header</code></td>
+                    <td>Container for the modal title and close button.</td>
+                    <td>Sub-component</td>
+                </tr>
+                <tr>
+                    <td><code>.vd-modal-body</code></td>
+                    <td>Main content area of the modal with default padding.</td>
+                    <td>Sub-component</td>
+                </tr>
+                <tr>
+                    <td><code>.vd-modal-footer</code></td>
+                    <td>Bottom area typically used for action buttons.</td>
+                    <td>Sub-component</td>
+                </tr>
+                <tr>
+                    <td><code>data-modal="#id"</code></td>
+                    <td>Attribute on a trigger button to open the target modal on click.</td>
+                    <td>Attribute</td>
+                </tr>
+                <tr>
+                    <td><code>data-dismiss="modal"</code></td>
+                    <td>Attribute on elements inside the modal that should close it.</td>
+                    <td>Attribute</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h4 class="vd-mb-3">Accordions</h4>
+    <div class="vd-table-responsive" style="margin-bottom: 3rem;">
+        <table class="vd-table vd-table-hover">
+            <thead>
+                <tr>
+                    <th style="width: 25%;">Class Name</th>
+                    <th style="width: 55%;">Description</th>
+                    <th style="width: 20%;">Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>.accordion</code></td>
+                    <td>Base container class for a group of collapsible items.</td>
+                    <td>Component</td>
+                </tr>
+                <tr>
+                    <td><code>.accordion-item</code></td>
+                    <td>Wrapper for a single header/body pair.</td>
+                    <td>Sub-component</td>
+                </tr>
+                <tr>
+                    <td><code>.accordion-header</code></td>
+                    <td>Clickable button that toggles the visibility of the body.</td>
+                    <td>Sub-component</td>
+                </tr>
+                <tr>
+                    <td><code>.accordion-icon</code></td>
+                    <td>Chevron or icon element that animates based on state.</td>
+                    <td>Sub-component</td>
+                </tr>
+                <tr>
+                    <td><code>.accordion-body</code></td>
+                    <td>The collapsible area that hides or reveals its content.</td>
+                    <td>Sub-component</td>
+                </tr>
+                <tr>
+                    <td><code>.accordion-content</code></td>
+                    <td>Inner wrapper providing padding to the body content.</td>
+                    <td>Sub-component</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
