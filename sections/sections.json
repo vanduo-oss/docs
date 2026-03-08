@@ -134,6 +134,18 @@
               ]
             },
             {
+              "id": "button-groups",
+              "title": "Button Groups",
+              "file": "components/button-groups.html",
+              "icon": "ph-squares-four",
+              "keywords": [
+                "button group",
+                "toolbar",
+                "segmented",
+                "toggle"
+              ]
+            },
+            {
               "id": "forms",
               "title": "Forms",
               "file": "components/forms.html",
@@ -202,11 +214,133 @@
                 "bottom",
                 "links"
               ]
+            },
+            {
+              "id": "image-box",
+              "title": "Image Box",
+              "file": "media/image-box.html",
+              "icon": "ph-image",
+              "keywords": [
+                "image",
+                "lightbox",
+                "gallery",
+                "photo",
+                "zoom"
+              ]
             }
           ]
         },
         {
-          "name": "Interactive",
+          "name": "Data Display",
+          "sections": [
+            {
+              "id": "avatars",
+              "title": "Avatars",
+              "file": "data-display/avatars.html",
+              "icon": "ph-user-circle",
+              "keywords": [
+                "avatar",
+                "image",
+                "profile"
+              ]
+            },
+            {
+              "id": "badges",
+              "title": "Badges",
+              "file": "data-display/badges.html",
+              "icon": "ph-tag",
+              "keywords": [
+                "badge",
+                "pill",
+                "tag",
+                "label"
+              ]
+            },
+            {
+              "id": "collections",
+              "title": "Collections",
+              "file": "data-display/collections.html",
+              "icon": "ph-list-dashes",
+              "keywords": [
+                "list",
+                "collection",
+                "group",
+                "items"
+              ]
+            },
+            {
+              "id": "tables",
+              "title": "Tables",
+              "file": "data-display/tables.html",
+              "icon": "ph-table",
+              "keywords": [
+                "table",
+                "grid",
+                "data",
+                "rows",
+                "columns"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Feedback",
+          "sections": [
+            {
+              "id": "alerts",
+              "title": "Alerts",
+              "file": "feedback/alerts.html",
+              "icon": "ph-warning-circle",
+              "keywords": [
+                "alert",
+                "notification",
+                "message",
+                "warning",
+                "error",
+                "success"
+              ]
+            },
+            {
+              "id": "chips",
+              "title": "Chips",
+              "file": "feedback/chips.html",
+              "icon": "ph-ticket",
+              "keywords": [
+                "chip",
+                "tag",
+                "pill",
+                "input"
+              ]
+            },
+            {
+              "id": "preloader",
+              "title": "Preloader",
+              "file": "feedback/preloader.html",
+              "icon": "ph-spinner-gap",
+              "keywords": [
+                "preloader",
+                "loading",
+                "spinner",
+                "circular",
+                "progress"
+              ]
+            },
+            {
+              "id": "skeleton",
+              "title": "Skeleton",
+              "file": "feedback/skeleton.html",
+              "icon": "ph-selection-background",
+              "keywords": [
+                "skeleton",
+                "ghost",
+                "loading",
+                "placeholder"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Overlay",
           "sections": [
             {
               "id": "interactive",
@@ -223,18 +357,6 @@
               ]
             },
             {
-              "id": "tabs",
-              "title": "Tabs",
-              "file": "interactive/tabs.html",
-              "icon": "ph-tabs",
-              "keywords": [
-                "tabs",
-                "tab",
-                "panel",
-                "switch"
-              ]
-            },
-            {
               "id": "toasts",
               "title": "Toast Notifications",
               "file": "interactive/toasts.html",
@@ -245,6 +367,23 @@
                 "alert",
                 "message",
                 "snackbar"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Input",
+          "sections": [
+            {
+              "id": "tabs",
+              "title": "Tabs",
+              "file": "interactive/tabs.html",
+              "icon": "ph-tabs",
+              "keywords": [
+                "tabs",
+                "tab",
+                "panel",
+                "switch"
               ]
             },
             {
@@ -273,7 +412,12 @@
                 "highlight",
                 "pre"
               ]
-            },
+            }
+          ]
+        },
+        {
+          "name": "Motion",
+          "sections": [
             {
               "id": "draggable",
               "title": "Draggable Components",
@@ -287,154 +431,6 @@
                 "move",
                 "drag",
                 "drop"
-              ]
-            }
-          ]
-        },
-        {
-          "name": "Data Display",
-          "sections": [
-            {
-              "id": "collections",
-              "title": "Collections",
-              "file": "data-display/collections.html",
-              "icon": "ph-list",
-              "keywords": [
-                "collection",
-                "list",
-                "ordered",
-                "unordered",
-                "definition"
-              ]
-            },
-            {
-              "id": "tables",
-              "title": "Tables",
-              "file": "data-display/tables.html",
-              "icon": "ph-table",
-              "keywords": [
-                "table",
-                "data",
-                "row",
-                "column",
-                "striped",
-                "responsive"
-              ]
-            },
-            {
-              "id": "badges",
-              "title": "Badges",
-              "file": "data-display/badges.html",
-              "icon": "ph-seal",
-              "keywords": [
-                "badge",
-                "label",
-                "count",
-                "status",
-                "indicator"
-              ]
-            },
-            {
-              "id": "avatars",
-              "title": "Avatars",
-              "file": "data-display/avatars.html",
-              "icon": "ph-user-circle",
-              "keywords": [
-                "avatar",
-                "user",
-                "profile",
-                "image",
-                "circle"
-              ]
-            }
-          ]
-        },
-        {
-          "name": "Feedback",
-          "sections": [
-            {
-              "id": "alerts",
-              "title": "Alerts",
-              "file": "feedback/alerts.html",
-              "icon": "ph-warning",
-              "keywords": [
-                "alert",
-                "warning",
-                "error",
-                "success",
-                "info",
-                "message"
-              ]
-            },
-            {
-              "id": "chips",
-              "title": "Chips & Tags",
-              "file": "feedback/chips.html",
-              "icon": "ph-tag",
-              "keywords": [
-                "chip",
-                "tag",
-                "label",
-                "removable",
-                "filter"
-              ]
-            },
-            {
-              "id": "skeleton",
-              "title": "Skeleton Loaders",
-              "file": "feedback/skeleton.html",
-              "icon": "ph-spinner",
-              "keywords": [
-                "skeleton",
-                "loader",
-                "placeholder",
-                "shimmer",
-                "loading"
-              ]
-            },
-            {
-              "id": "preloader",
-              "title": "Preloader & Progress Bars",
-              "file": "feedback/preloader.html",
-              "icon": "ph-circle-notch",
-              "keywords": [
-                "preloader",
-                "progress",
-                "spinner",
-                "loading",
-                "bar",
-                "indeterminate",
-                "quad-spinner"
-              ]
-            },
-            {
-              "id": "button-groups",
-              "title": "Button Groups",
-              "file": "feedback/button-groups.html",
-              "icon": "ph-squares-four",
-              "keywords": [
-                "button group",
-                "toolbar",
-                "segmented",
-                "toggle"
-              ]
-            }
-          ]
-        },
-        {
-          "name": "Media",
-          "sections": [
-            {
-              "id": "image-box",
-              "title": "Image Box",
-              "file": "media/image-box.html",
-              "icon": "ph-image",
-              "keywords": [
-                "image",
-                "lightbox",
-                "gallery",
-                "photo",
-                "zoom"
               ]
             }
           ]

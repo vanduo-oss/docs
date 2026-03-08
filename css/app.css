@@ -32,10 +32,21 @@
         }
 
         /* ── Custom Font Tokens ─────────────────────────── */
-        [data-font='google-sans'] { --font-family-sans: 'Google Sans', -apple-system, BlinkMacSystemFont, sans-serif; }
-        [data-font='roboto']      { --font-family-sans: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif; }
-        [data-font='lato']        { --font-family-sans: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif; }
-        [data-font='noto-sans']   { --font-family-sans: 'Noto Sans', -apple-system, BlinkMacSystemFont, sans-serif; }
+        [data-font='google-sans'] {
+            --font-family-sans: 'Google Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        [data-font='roboto'] {
+            --font-family-sans: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        [data-font='lato'] {
+            --font-family-sans: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        [data-font='noto-sans'] {
+            --font-family-sans: 'Noto Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
 
         /* ── Global ─────────────────────────────────────── */
         html {
@@ -94,6 +105,7 @@
                 flex-direction: column !important;
                 align-items: center !important;
             }
+
             .hero-title svg {
                 transform: none !important;
                 margin-right: 0 !important;
@@ -1097,6 +1109,28 @@
             background: var(--color-primary-alpha-10);
         }
 
+        /* Dark mode toggle button */
+        .dark-mode-toggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--card-border-radius);
+            background: transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 1.15rem;
+            transition: color 0.2s, border-color 0.2s, background 0.2s;
+        }
+
+        .dark-mode-toggle:hover {
+            color: var(--color-primary);
+            border-color: var(--color-primary);
+            background: var(--color-primary-alpha-10);
+        }
+
         /* Overlay */
         .global-search-overlay {
             position: fixed;
@@ -1602,6 +1636,7 @@
             }
 
             .navbar-actions-always .global-search-trigger,
+            .navbar-actions-always .dark-mode-toggle,
             .navbar-actions-always .vd-theme-customizer-trigger {
                 width: 40px;
                 height: 40px;
@@ -1648,4 +1683,52 @@
             .hero-desc-extended {
                 display: none;
             }
+        }
+
+        /* --- Copy Class Name Micro-interaction --- */
+        .vd-table code,
+        .vd-code-snippet .code-selector {
+            cursor: pointer;
+            position: relative;
+            transition: background-color 0.15s ease, color 0.15s ease;
+        }
+
+        .vd-table code:hover,
+        .vd-code-snippet .code-selector:hover {
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            border-radius: var(--radius-sm, 4px);
+        }
+
+        /* Tooltip for copy action */
+        .vd-table code::after,
+        .vd-code-snippet .code-selector::after {
+            content: "Copy";
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(4px);
+            background-color: var(--text-primary);
+            color: var(--bg-primary);
+            font-size: 0.7rem;
+            padding: 0.2rem 0.4rem;
+            border-radius: var(--radius-sm, 4px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.15s ease, transform 0.15s ease;
+            white-space: nowrap;
+            z-index: 10;
+        }
+
+        .vd-table code:hover::after,
+        .vd-code-snippet .code-selector:hover::after {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-4px);
+        }
+
+        .vd-table code.copied-inline::after,
+        .vd-code-snippet .code-selector.copied-inline::after {
+            content: "Copied!";
+            background-color: var(--color-success);
+            color: var(--color-white);
         }

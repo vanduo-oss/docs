@@ -1,33 +1,33 @@
-                    <section id="sidenav">
-                        <h2 class="demo-title"><i class="ph ph-sidebar"></i>Sidenav</h2>
-                        <p class="vd-mb-8">Create overlay, push, or fixed side drawers with canonical
-                            <code>vd-sidenav-*</code> variants.
-                        </p>
+<section id="sidenav">
+    <h2 class="demo-title"><i class="ph ph-sidebar"></i>Sidenav</h2>
+    <p class="vd-mb-8">Create overlay, push, or fixed side drawers with canonical
+        <code>vd-sidenav-*</code> variants.
+    </p>
 
-                        <div class="vd-row">
-                            <div class="vd-col-12 vd-col-md-6">
-                                <div class="vd-card vd-card-glow demo-card">
-                                    <div class="vd-card-header">
-                                        <h3>Basic Structure</h3>
-                                    </div>
-                                     <div class="vd-card-body">
-                                        <div class="vd-code-snippet" data-collapsible>
-                                            <button class="vd-code-snippet-toggle" aria-expanded="false">
-                                                <span class="vd-code-snippet-toggle-icon"></span>
-                                                <span>View Code</span>
-                                            </button>
-                                            <div class="vd-code-snippet-content">
-                                                <div class="vd-code-snippet-header">
-                                                    <div class="vd-code-snippet-tabs" role="tablist">
-                                                        <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
-                                                    </div>
-                                                    <button class="vd-code-snippet-copy" aria-label="Copy code">
-                                                        <span class="vd-code-snippet-copy-icon"></span>
-                                                        <span class="vd-code-snippet-copy-text">Copy</span>
-                                                    </button>
-                                                </div>
-                                                <div class="vd-code-snippet-body">
-                                                    <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Trigger button --&gt;</span>
+    <div class="vd-row">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h3>Basic Structure</h3>
+                </div>
+                <div class="vd-card-body">
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Trigger button --&gt;</span>
 &lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-btn vd-btn-primary"</span> <span class="code-attr">data-sidenav-toggle</span>=<span class="code-string">"#demo-sidenav"</span>&gt;
   Open Sidenav
 &lt;/<span class="code-tag">button</span>&gt;
@@ -44,74 +44,177 @@
     &lt;/<span class="code-tag">ul</span>&gt;
   &lt;/<span class="code-tag">div</span>&gt;
 &lt;/<span class="code-tag">aside</span>&gt;</code></pre>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="vd-col-12 vd-col-md-6">
-                                <div class="vd-card vd-card-glow demo-card">
-                                    <div class="vd-card-header">
-                                        <h3>Variants</h3>
-                                    </div>
-                                    <div class="vd-card-body">
-                                        <div class="vd-table-responsive">
-                                            <table class="vd-table vd-table-striped">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Class</th>
-                                                        <th>Purpose</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr><td><code>.vd-sidenav-right</code></td><td>Open from right side</td></tr>
-                                                    <tr><td><code>.vd-sidenav-push</code></td><td>Push content on desktop</td></tr>
-                                                    <tr><td><code>.vd-sidenav-fixed</code></td><td>Persistent desktop sidebar</td></tr>
-                                                    <tr><td><code>.vd-sidenav-sm</code></td><td>Small width (233px)</td></tr>
-                                                    <tr><td><code>.vd-sidenav-lg</code></td><td>Large width (377px)</td></tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <p class="vd-text-sm vd-text-muted vd-mt-4">Runtime state classes:
-                                            <code>.is-open</code> on sidenav and <code>.body-sidenav-open</code> on body.
-                                        </p>
-                                    </div>
-                                </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                        <div class="vd-row">
-                            <div class="vd-col-12">
-                                <div class="vd-card vd-card-glow demo-card">
-                                    <div class="vd-card-header">
-                                        <h3>CSS Variables</h3>
-                                    </div>
-                                    <div class="vd-card-body">
-                                        <div class="vd-table-responsive">
-                                            <table class="vd-table vd-table-striped">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Variable</th>
-                                                        <th>Default</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr><td><code>--sidenav-width</code></td><td><code>233px</code></td></tr>
-                                                    <tr><td><code>--sidenav-width-lg</code></td><td><code>377px</code></td></tr>
-                                                    <tr><td><code>--sidenav-bg</code></td><td><code>var(--color-white)</code></td></tr>
-                                                    <tr><td><code>--sidenav-overlay-bg</code></td><td><code>rgba(0, 0, 0, 0.5)</code></td></tr>
-                                                    <tr><td><code>--sidenav-z-index</code></td><td><code>1040</code></td></tr>
-                                                    <tr><td><code>--sidenav-overlay-z-index</code></td><td><code>1030</code></td></tr>
-                                                    <tr><td><code>--sidenav-transition</code></td><td><code>transform var(--transition-duration-slow) var(--transition-ease)</code></td></tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h3>Variants</h3>
+                </div>
+                <div class="vd-card-body">
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Class</th>
+                                    <th>Purpose</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>.vd-sidenav-right</code></td>
+                                    <td>Open from right side</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.vd-sidenav-push</code></td>
+                                    <td>Push content on desktop</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.vd-sidenav-fixed</code></td>
+                                    <td>Persistent desktop sidebar</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.vd-sidenav-sm</code></td>
+                                    <td>Small width (233px)</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.vd-sidenav-lg</code></td>
+                                    <td>Large width (377px)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="vd-text-sm vd-text-muted vd-mt-4">Runtime state classes:
+                        <code>.is-open</code> on sidenav and <code>.body-sidenav-open</code> on body.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                    <!-- Footer Section -->
+    <div class="vd-row">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h3>CSS Variables</h3>
+                </div>
+                <div class="vd-card-body">
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Variable</th>
+                                    <th>Default</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>--sidenav-width</code></td>
+                                    <td><code>233px</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>--sidenav-width-lg</code></td>
+                                    <td><code>377px</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>--sidenav-bg</code></td>
+                                    <td><code>var(--color-white)</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>--sidenav-overlay-bg</code></td>
+                                    <td><code>rgba(0, 0, 0, 0.5)</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>--sidenav-z-index</code></td>
+                                    <td><code>1040</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>--sidenav-overlay-z-index</code></td>
+                                    <td><code>1030</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>--sidenav-transition</code></td>
+                                    <td><code>transform var(--transition-duration-slow) var(--transition-ease)</code>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h3 id="api" class="docs-heading">API Reference</h3>
+    <div class="vd-table-responsive" style="margin-bottom: 3rem;">
+        <table class="vd-table vd-table-hover">
+            <thead>
+                <tr>
+                    <th style="width: 25%;">Class Name / Attribute</th>
+                    <th style="width: 55%;">Description</th>
+                    <th style="width: 20%;">Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>.vd-sidenav</code></td>
+                    <td>Base container for the off-canvas side drawer.</td>
+                    <td>Component</td>
+                </tr>
+                <tr>
+                    <td><code>.vd-sidenav-header</code></td>
+                    <td>Header area containing the title and close button.</td>
+                    <td>Layout</td>
+                </tr>
+                <tr>
+                    <td><code>.vd-sidenav-title</code></td>
+                    <td>Typography class for the sidenav header text.</td>
+                    <td>Element</td>
+                </tr>
+                <tr>
+                    <td><code>.vd-sidenav-close</code></td>
+                    <td>Button to explicitly close the sidenav.</td>
+                    <td>Action</td>
+                </tr>
+                <tr>
+                    <td><code>.vd-sidenav-body</code></td>
+                    <td>Scrollable content container for the main drawer area.</td>
+                    <td>Layout</td>
+                </tr>
+                <tr>
+                    <td><code>.vd-sidenav-nav</code></td>
+                    <td>Wrapper for an unordered list of navigation items.</td>
+                    <td>Layout</td>
+                </tr>
+                <tr>
+                    <td><code>.vd-sidenav-item</code></td>
+                    <td>Individual list item. Add <code>.active</code> for current state.</td>
+                    <td>Component</td>
+                </tr>
+                <tr>
+                    <td><code>.vd-sidenav-link</code></td>
+                    <td>Clickable anchor element within a sidenav item.</td>
+                    <td>Element</td>
+                </tr>
+                <tr>
+                    <td><code>.vd-sidenav-[variant]</code></td>
+                    <td>Modifiers defining behavior/positioning (<code>-right</code>, <code>-push</code>,
+                        <code>-fixed</code>, <code>-sm</code>, <code>-lg</code>).</td>
+                    <td>Modifier</td>
+                </tr>
+                <tr>
+                    <td><code>data-sidenav-toggle="#id"</code></td>
+                    <td>Attribute placed on any trigger element (like a button) to open/close the targeted sidenav.</td>
+                    <td>Attribute</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- Footer Section -->
