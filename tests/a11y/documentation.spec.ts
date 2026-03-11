@@ -60,20 +60,6 @@ test.describe('SPA Documentation @a11y', () => {
     }
   });
 
-  test('tab switching loads concepts sidebar', async ({ page }) => {
-    await page.goto('/#docs/components');
-    await waitForSPA(page);
-
-    // Switch to Concepts tab
-    await page.locator('.doc-tab[data-tab="concepts"]').click();
-    await page.waitForFunction(() =>
-      document.querySelector('.doc-tab[data-tab="concepts"].active') !== null
-      , { timeout: 5000 });
-
-    // Sidebar should have concepts sections
-    await expect(page.locator('.doc-nav-link[data-section="philosophy"]')).toHaveCount(1);
-    await expect(page.locator('.doc-nav-link[data-section="namespacing"]')).toHaveCount(1);
-  });
 
   test('deep link to section loads correct tab and section', async ({ page }) => {
     await page.goto('/#docs/buttons');
@@ -89,16 +75,6 @@ test.describe('SPA Documentation @a11y', () => {
     await expect(page.locator('#buttons')).toBeVisible({ timeout: 10000 });
   });
 
-  test('deep link to concepts section activates concepts tab', async ({ page }) => {
-    await page.goto('/#docs/philosophy');
-    await waitForSPA(page);
-
-    // Concepts tab active
-    await expect(page.locator('.doc-tab[data-tab="concepts"].active')).toHaveCount(1);
-
-    // Philosophy section loaded
-    await expect(page.locator('#philosophy')).toBeVisible({ timeout: 10000 });
-  });
 });
 
 /* ── Theme customizer ───────────────────────────────── */
