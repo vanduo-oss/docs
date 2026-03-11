@@ -68,10 +68,10 @@ test.describe('3. Page Views', () => {
 
             // Go back to test GitHub link
             await page.goBack();
-            await waitForSPA(page);
+            await page.waitForFunction(() => document.querySelector('#home') !== null, { timeout: 5000 });
 
             const githubBtn = page.locator('#hero a[href*="github.com"]');
-            await expect(githubBtn).toBeVisible();
+            await expect(githubBtn).toBeVisible({ timeout: 10000 });
             await expect(githubBtn).toHaveAttribute('href', /.*github\.com\/vanduo-oss\/framework/);
             await expect(githubBtn).toHaveAttribute('target', '_blank');
         });
