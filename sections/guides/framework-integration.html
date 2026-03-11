@@ -1,0 +1,171 @@
+<section id="framework-integration">
+    <h2 class="demo-title"><i class="ph ph-plugs-connected"></i>Framework Integration <code class="vd-text-sm">Guide</code></h2>
+    <p class="vd-mb-5">Vanduo is designed to be completely framework-agnostic. Because it is built with pure CSS and Vanilla JavaScript modules, it can be dropped into any modern frontend framework (React, Vue, Nuxt, Svelte, etc.) seamlessly.</p>
+
+    <!-- General Philosophy -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card demo-card">
+                <div class="vd-card-header">
+                    <h3><i class="ph ph-brain"></i> The Core Concept</h3>
+                </div>
+                <div class="vd-card-body">
+                    <p>When integrating Vanduo into a component-heavy framework, remember these two rules:</p>
+                    <ol>
+                        <li class="vd-mb-3"><strong>CSS is Global:</strong> Import <code>vanduo.css</code> once in your global entry file (e.g., <code>main.js</code>, <code>_app.js</code>, or <code>layout.vue</code>).</li>
+                        <li><strong>JS Needs the DOM:</strong> Vanduo's JavaScript components (like modals, dropdowns, and tabs) need elements to exist in the DOM before initialization. You must call <code>Vanduo.init()</code> <em>after</em> your framework has mounted the component to the screen.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Framework Examples -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card demo-card">
+                <div class="vd-card-header">
+                    <h3><i class="ph ph-code"></i> Integration Examples</h3>
+                </div>
+                <div class="vd-card-body">
+                    <p class="vd-text-muted vd-mb-4">Select your framework below to see how to initialize Vanduo components when the view mounts.</p>
+                    
+                    <div class="vd-tabs" data-active-tab="react">
+                        <div class="vd-tab-links">
+                            <button class="vd-tab-link vd-active" data-target="react">React / Next.js</button>
+                            <button class="vd-tab-link" data-target="vue">Vue 3 / Nuxt</button>
+                            <button class="vd-tab-link" data-target="svelte">Svelte</button>
+                        </div>
+                        <div class="vd-tab-content">
+                            <!-- React Tab -->
+                            <div class="vd-tab-pane vd-active" id="react">
+                                <p class="vd-text-sm vd-mb-2">In React or Next.js, use the <code>useEffect</code> hook to call <code>Vanduo.init()</code> after the component mounts.</p>
+                                <div class="vd-code-snippet" data-collapsible data-expanded="true">
+                                    <div class="vd-code-snippet-content">
+                                        <div class="vd-code-snippet-header">
+                                            <div class="vd-code-snippet-tabs" role="tablist">
+                                                <button class="vd-code-snippet-tab is-active" data-lang="js">JS</button>
+                                            </div>
+                                        </div>
+                                        <div class="vd-code-snippet-body">
+                                            <pre class="vd-code-snippet-pane is-active" data-lang="js"><code>import { useEffect } from 'react';
+import 'vanduo/dist/vanduo.css';
+import { Vanduo } from 'vanduo';
+
+export default function App() {
+  useEffect(() => {
+    // Initialize Vanduo components once the DOM is ready
+    Vanduo.init();
+  }, []);
+
+  return (
+    &lt;div className="vd-container"&gt;
+      &lt;button className="vd-btn vd-btn-primary" data-modal-target="my-modal"&gt;
+        Open Modal
+      &lt;/button&gt;
+      
+      &lt;div id="my-modal" className="vd-modal"&gt;
+        {/* Modal Content */}
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Vue Tab -->
+                            <div class="vd-tab-pane" id="vue">
+                                <p class="vd-text-sm vd-mb-2">In Vue 3 (Composition API) or Nuxt, use the <code>onMounted</code> hook.</p>
+                                <div class="vd-code-snippet" data-collapsible data-expanded="true">
+                                    <div class="vd-code-snippet-content">
+                                        <div class="vd-code-snippet-header">
+                                            <div class="vd-code-snippet-tabs" role="tablist">
+                                                <button class="vd-code-snippet-tab is-active" data-lang="js">Vue</button>
+                                            </div>
+                                        </div>
+                                        <div class="vd-code-snippet-body">
+                                            <pre class="vd-code-snippet-pane is-active" data-lang="js"><code>&lt;script setup&gt;
+import { onMounted } from 'vue';
+import 'vanduo/dist/vanduo.css';
+import { Vanduo } from 'vanduo';
+
+onMounted(() =&gt; {
+  // Initialize dynamic components inside this view
+  Vanduo.init();
+});
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;div class="vd-container"&gt;
+    &lt;!-- Your layout --&gt;
+    &lt;button class="vd-btn" data-dropdown-trigger="menu-1"&gt;Dropdown&lt;/button&gt;
+    &lt;div id="menu-1" class="vd-dropdown-menu"&gt;...&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/template&gt;</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Svelte Tab -->
+                            <div class="vd-tab-pane" id="svelte">
+                                <p class="vd-text-sm vd-mb-2">In Svelte, use the <code>onMount</code> lifecycle function.</p>
+                                <div class="vd-code-snippet" data-collapsible data-expanded="true">
+                                    <div class="vd-code-snippet-content">
+                                        <div class="vd-code-snippet-header">
+                                            <div class="vd-code-snippet-tabs" role="tablist">
+                                                <button class="vd-code-snippet-tab is-active" data-lang="js">Svelte</button>
+                                            </div>
+                                        </div>
+                                        <div class="vd-code-snippet-body">
+                                            <pre class="vd-code-snippet-pane is-active" data-lang="js"><code>&lt;script&gt;
+  import { onMount } from 'svelte';
+  import 'vanduo/dist/vanduo.css';
+  import { Vanduo } from 'vanduo';
+
+  onMount(() =&gt; {
+    Vanduo.init();
+  });
+&lt;/script&gt;
+
+&lt;div class="vd-container"&gt;
+  &lt;div class="vd-tabs"&gt;
+     &lt;!-- Tab markup --&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Troubleshooting -->
+    <div class="vd-alert vd-alert-warning vd-mt-6">
+        <i class="ph ph-warning"></i>
+        <div>
+            <strong>Re-initialization in SPAs:</strong> When dealing with Client-Side Routing (like <code>next/router</code> or <code>vue-router</code>), navigating to a new page component replaces DOM elements. Ensure you call <code>Vanduo.init()</code> in the mounting phase of the new page component so Vanduo attaches its event listeners to the newly rendered elements!
+        </div>
+    </div>
+
+    <!-- What's Next block -->
+    <div class="vd-mt-8 vd-py-5" style="border-top: 1px solid var(--border-color);">
+        <h3 class="vd-text-lg vd-mb-4"><i class="ph ph-arrow-circle-right"></i> What's Next?</h3>
+        <div class="vd-row">
+            <div class="vd-col-12 vd-col-md-6">
+                <a href="#docs/first-layout" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
+                    <div class="vd-card-body">
+                        <h4 class="vd-text-md vd-mb-2">Building Your First Layout</h4>
+                        <p class="vd-text-sm vd-text-muted vd-mb-0">Ready to build? Learn how the grid system works to structure your pages.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

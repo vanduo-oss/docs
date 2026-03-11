@@ -1,0 +1,209 @@
+<section id="utilities-cheat-sheet">
+    <h2 class="demo-title"><i class="ph ph-magic-wand"></i>Utilities Cheat Sheet <code class="vd-text-sm">Guide</code></h2>
+    <p class="vd-mb-5">Vanduo includes a comprehensive set of utility classes based on the Fibonacci scale (8, 13, 21, 34, 55...). This cheat sheet provides a quick reference for all available utilities.</p>
+
+    <div class="vd-row">
+        <!-- Spacing Utilities -->
+        <div class="vd-col-12 vd-col-lg-6 vd-mb-6">
+            <div class="vd-card demo-card" style="height: 100%;">
+                <div class="vd-card-header">
+                    <h3><i class="ph ph-arrows-out"></i> Spacing (Margin & Padding)</h3>
+                </div>
+                <div class="vd-card-body">
+                    <p class="vd-text-sm vd-text-muted">Format: <code>vd-{property}-{direction}-{size}</code></p>
+                    <table class="vd-table vd-table-striped vd-text-sm">
+                        <thead>
+                            <tr>
+                                <th>Property</th>
+                                <th>Direction(s)</th>
+                                <th>Sizes (px)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>m</code> (margin)<br><code>p</code> (padding)</td>
+                                <td>
+                                    <em>none</em> (all sides)<br>
+                                    <code>t</code> (top), <code>b</code> (bottom)<br>
+                                    <code>l</code> (left), <code>r</code> (right)<br>
+                                    <code>x</code> (left & right)<br>
+                                    <code>y</code> (top & bottom)
+                                </td>
+                                <td>
+                                    <code>0</code> (0px)<br>
+                                    <code>1</code> (8px)<br>
+                                    <code>2</code> (13px)<br>
+                                    <code>3</code> (21px)<br>
+                                    <code>4</code> (34px)<br>
+                                    <code>5</code> (55px)<br>
+                                    <code>6</code> (89px)<br>
+                                    <code>7</code> (144px)<br>
+                                    <code>8</code> (233px)
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="vd-p-3 vd-bg-secondary vd-rounded-md vd-mt-3">
+                        <strong class="vd-d-block vd-mb-2">Examples:</strong>
+                        <code>vd-mb-4</code> = Margin Bottom 34px<br>
+                        <code>vd-px-3</code> = Padding X (Left/Right) 21px<br>
+                        <code>vd-m-0</code>  = Margin 0px on all sides
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Typography Utilities -->
+        <div class="vd-col-12 vd-col-lg-6 vd-mb-6">
+            <div class="vd-card demo-card" style="height: 100%;">
+                <div class="vd-card-header">
+                    <h3><i class="ph ph-text-t"></i> Typography</h3>
+                </div>
+                <div class="vd-card-body">
+                    <table class="vd-table vd-table-striped vd-text-sm">
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>vd-text-left</code></td><td>Text align left</td></tr>
+                            <tr><td><code>vd-text-center</code></td><td>Text align center</td></tr>
+                            <tr><td><code>vd-text-right</code></td><td>Text align right</td></tr>
+                            <tr><td><code>vd-text-sm</code></td><td>Small text (0.875rem)</td></tr>
+                            <tr><td><code>vd-text-md</code></td><td>Base text (1rem)</td></tr>
+                            <tr><td><code>vd-text-lg</code></td><td>Large text (1.25rem)</td></tr>
+                            <tr><td><code>vd-fw-normal</code></td><td>Font weight 400</td></tr>
+                            <tr><td><code>vd-fw-medium</code></td><td>Font weight 500</td></tr>
+                            <tr><td><code>vd-fw-bold</code></td><td>Font weight 700</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Color Utilities -->
+        <div class="vd-col-12 vd-mb-6">
+            <div class="vd-card demo-card">
+                <div class="vd-card-header">
+                    <h3><i class="ph ph-palette"></i> Colors & Backgrounds</h3>
+                </div>
+                <div class="vd-card-body">
+                    <p class="vd-text-sm vd-text-muted">Use these classes to quickly apply themed colors to text or backgrounds.</p>
+                    <div class="vd-row">
+                        <div class="vd-col-12 vd-col-md-6">
+                            <table class="vd-table vd-table-striped vd-text-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Text Colors</th>
+                                        <th>Visual</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td><code>vd-text-primary</code></td><td class="vd-text-primary vd-fw-bold">Sample Text</td></tr>
+                                    <tr><td><code>vd-text-success</code></td><td class="vd-text-success vd-fw-bold">Sample Text</td></tr>
+                                    <tr><td><code>vd-text-warning</code></td><td class="vd-text-warning vd-fw-bold">Sample Text</td></tr>
+                                    <tr><td><code>vd-text-error</code></td><td class="vd-text-error vd-fw-bold">Sample Text</td></tr>
+                                    <tr><td><code>vd-text-muted</code></td><td class="vd-text-muted vd-fw-bold">Sample Text</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="vd-col-12 vd-col-md-6">
+                            <table class="vd-table vd-table-striped vd-text-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Background Colors</th>
+                                        <th>Visual</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td><code>vd-bg-primary</code></td><td><div class="vd-bg-primary vd-rounded-sm" style="height:24px;"></div></td></tr>
+                                    <tr><td><code>vd-bg-success</code></td><td><div class="vd-bg-success vd-rounded-sm" style="height:24px;"></div></td></tr>
+                                    <tr><td><code>vd-bg-warning</code></td><td><div class="vd-bg-warning vd-rounded-sm" style="height:24px;"></div></td></tr>
+                                    <tr><td><code>vd-bg-error</code></td><td><div class="vd-bg-error vd-rounded-sm" style="height:24px;"></div></td></tr>
+                                    <tr><td><code>vd-bg-secondary</code></td><td><div class="vd-bg-secondary vd-rounded-sm" style="height:24px;"></div></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Layout & Display Utilities -->
+        <div class="vd-col-12 vd-col-lg-6 vd-mb-6">
+            <div class="vd-card demo-card" style="height: 100%;">
+                <div class="vd-card-header">
+                    <h3><i class="ph ph-layout"></i> Display & Flexbox</h3>
+                </div>
+                <div class="vd-card-body">
+                    <table class="vd-table vd-table-striped vd-text-sm">
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>vd-d-none</code></td><td><code>display: none;</code></td></tr>
+                            <tr><td><code>vd-d-block</code></td><td><code>display: block;</code></td></tr>
+                            <tr><td><code>vd-d-inline-block</code></td><td><code>display: inline-block;</code></td></tr>
+                            <tr><td><code>vd-d-flex</code></td><td><code>display: flex;</code></td></tr>
+                            <tr><td><code>vd-d-inline-flex</code></td><td><code>display: inline-flex;</code></td></tr>
+                            <tr><td><code>vd-flex-column</code></td><td><code>flex-direction: column;</code></td></tr>
+                            <tr><td><code>vd-justify-start</code></td><td><code>justify-content: flex-start;</code></td></tr>
+                            <tr><td><code>vd-justify-center</code></td><td><code>justify-content: center;</code></td></tr>
+                            <tr><td><code>vd-justify-between</code></td><td><code>justify-content: space-between;</code></td></tr>
+                            <tr><td><code>vd-align-center</code></td><td><code>align-items: center;</code></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Miscellaneous Utilities -->
+        <div class="vd-col-12 vd-col-lg-6 vd-mb-6">
+            <div class="vd-card demo-card" style="height: 100%;">
+                <div class="vd-card-header">
+                    <h3><i class="ph ph-corners-out"></i> Radius & Visuals</h3>
+                </div>
+                <div class="vd-card-body">
+                    <table class="vd-table vd-table-striped vd-text-sm">
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>vd-rounded-0</code></td><td>Border radius 0</td></tr>
+                            <tr><td><code>vd-rounded-sm</code></td><td>Small border radius (4px)</td></tr>
+                            <tr><td><code>vd-rounded-md</code></td><td>Medium border radius (8px)</td></tr>
+                            <tr><td><code>vd-rounded-lg</code></td><td>Large border radius (12px)</td></tr>
+                            <tr><td><code>vd-rounded-full</code></td><td>Full border radius (9999px)</td></tr>
+                            <tr><td><code>vd-shadow-sm</code></td><td>Small drop shadow</td></tr>
+                            <tr><td><code>vd-shadow-md</code></td><td>Medium drop shadow</td></tr>
+                            <tr><td><code>vd-shadow-lg</code></td><td>Large drop shadow</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- What's Next block -->
+    <div class="vd-mt-8 vd-py-5" style="border-top: 1px solid var(--border-color);">
+        <h3 class="vd-text-lg vd-mb-4"><i class="ph ph-arrow-circle-right"></i> What's Next?</h3>
+        <div class="vd-row">
+            <div class="vd-col-12 vd-col-md-6">
+                <a href="#docs/css-variables-theming" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
+                    <div class="vd-card-body">
+                        <h4 class="vd-text-md vd-mb-2">CSS Variables & Theming</h4>
+                        <p class="vd-text-sm vd-text-muted vd-mb-0">Learn how Vanduo's styling system works under the hood and how to override it.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

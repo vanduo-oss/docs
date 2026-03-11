@@ -37,6 +37,8 @@ let scrollSpyObserver = null;
 let docLazyLoader = null;
 let currentView = null;
 let currentTab = null;
+let scrollSpyTicking = false;
+let activeDocSectionId = null;
 
 /* ── Loading placeholders ─────────────────────── */
 /*
@@ -334,6 +336,12 @@ async function switchTab(tabKey) {
     if (docLazyLoader) {
         docLazyLoader.disconnect();
     }
+    if (scrollSpyObserver) {
+        scrollSpyObserver.disconnect();
+        scrollSpyObserver = null;
+    }
+    scrollSpyTicking = false;
+    activeDocSectionId = null;
 
     buildSidebar(tabKey);
     closeMobileToc();
@@ -345,48 +353,67 @@ async function switchTab(tabKey) {
 }
 
 /* ── Scroll-spy ───────────────────────────────── */
-// Tracks which sections are currently intersecting so we can always pick
-// the best candidate even when IntersectionObserver fires partial batches.
-const visibleSections = new Set();
+const SCROLL_SPY_OFFSET = 96;
 
-function createScrollSpyObserver() {
-    return new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-                visibleSections.add(entry.target);
-            } else {
-                visibleSections.delete(entry.target);
-            }
-        });
-
-        if (!visibleSections.size) return;
-
-        // Pick the visible section whose top edge is nearest the sticky navbar.
-        var best = null;
-        visibleSections.forEach(function (sec) {
-            if (!best) { best = sec; return; }
-            if (Math.abs(sec.getBoundingClientRect().top) < Math.abs(best.getBoundingClientRect().top)) {
-                best = sec;
-            }
-        });
-
-        if (!best) return;
-        setActiveNavLink(best.id);
-        var meta = findSectionMeta(best.id);
-        if (meta && meta.section) {
-            setDocumentTitle(meta.section.title);
-            if (window.history && window.history.replaceState) {
-                var targetHashBase = '#docs/' + best.id;
-                if (!window.location.hash.startsWith(targetHashBase)) {
-                    window.history.replaceState(null, '', targetHashBase);
-                }
+function syncActiveDocSection(sectionId) {
+    if (!sectionId) return;
+    activeDocSectionId = sectionId;
+    setActiveNavLink(sectionId);
+    var meta = findSectionMeta(sectionId);
+    if (meta && meta.section) {
+        setDocumentTitle(meta.section.title);
+        if (window.history && window.history.replaceState) {
+            var targetHashBase = '#docs/' + sectionId;
+            if (!window.location.hash.startsWith(targetHashBase)) {
+                window.history.replaceState(null, '', targetHashBase);
             }
         }
+    }
+}
+
+function getActiveDocSectionId() {
+    if (!currentTab) return null;
+    var orderedIds = getOrderedIds(currentTab);
+    var firstLoadedId = null;
+    var activeId = null;
+
+    for (var i = 0; i < orderedIds.length; i++) {
+        var id = orderedIds[i];
+        var sectionEl = document.getElementById(id);
+        if (!sectionEl) continue;
+
+        if (!firstLoadedId) firstLoadedId = id;
+
+        if (sectionEl.getBoundingClientRect().top <= SCROLL_SPY_OFFSET) {
+            activeId = id;
+            continue;
+        }
+
+        break;
+    }
+
+    return activeId || firstLoadedId;
+}
+
+function updateActiveDocSection() {
+    scrollSpyTicking = false;
+    var nextSectionId = getActiveDocSectionId();
+    if (!nextSectionId || nextSectionId === activeDocSectionId) return;
+    syncActiveDocSection(nextSectionId);
+}
+
+function requestActiveDocSectionUpdate() {
+    if (scrollSpyTicking) return;
+    scrollSpyTicking = true;
+    window.requestAnimationFrame(updateActiveDocSection);
+}
+
+function createScrollSpyObserver() {
+    return new IntersectionObserver(function () {
+        requestActiveDocSectionUpdate();
     }, {
-        // -80px clears the sticky navbar; -50% means top half of viewport
-        // determines the active section — better for tall guide pages.
-        rootMargin: '-80px 0px -50% 0px',
-        threshold: [0, 0.1]
+        rootMargin: '-' + SCROLL_SPY_OFFSET + 'px 0px -55% 0px',
+        threshold: [0, 1]
     });
 }
 
@@ -397,11 +424,12 @@ function observeSection(sectionEl) {
         scrollSpyObserver = createScrollSpyObserver();
     }
     scrollSpyObserver.observe(sectionEl);
+    requestActiveDocSectionUpdate();
 }
 
 // Full reset — only called on tab switches, not per-section load.
 function setupScrollSpy() {
-    visibleSections.clear();
+    activeDocSectionId = null;
     if (scrollSpyObserver) {
         scrollSpyObserver.disconnect();
     }
@@ -411,6 +439,7 @@ function setupScrollSpy() {
     content.querySelectorAll('section[id]').forEach(function (sec) {
         scrollSpyObserver.observe(sec);
     });
+    requestActiveDocSectionUpdate();
 }
 
 function setupInfiniteScroll() {
@@ -613,6 +642,8 @@ document.addEventListener('draggable:drop', function (e) {
 wireRouteLinks(document.querySelector('.vd-footer'));
 
 window.addEventListener('hashchange', function () { handleRoute(); });
+window.addEventListener('scroll', requestActiveDocSectionUpdate, { passive: true });
+window.addEventListener('resize', requestActiveDocSectionUpdate);
 
 /* ── Global Search ────────────────────────────── */
 var globalSearchIndex = [];

@@ -1,0 +1,118 @@
+<section id="css-variables-theming">
+    <h2 class="demo-title"><i class="ph ph-swatches"></i>CSS Variables & Theming <code class="vd-text-sm">Guide</code></h2>
+    <p class="vd-mb-5">Vanduo is built on top of a powerful CSS variables (Custom Properties) foundation. This means you can fundamentally alter the look and feel of the entire framework just by changing a few variables in your root CSS file, without ever needing a preprocessor like Sass.</p>
+
+    <!-- Global Tiers -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card demo-card">
+                <div class="vd-card-header">
+                    <h3><i class="ph ph-tree-structure"></i> The Three Variable Tiers</h3>
+                </div>
+                <div class="vd-card-body">
+                    <p>Vanduo's variables are layered to give you massive control with minimal effort:</p>
+                    <ol class="vd-mb-4">
+                        <li><strong>1. Theme Colors:</strong> The highest level. Defines what "Primary" or "Success" actually means.</li>
+                        <li><strong>2. Component Tokens:</strong> Variables scoped to specific components (e.g., <code>--btn-height</code> or <code>--card-bg</code>).</li>
+                        <li><strong>3. Utility Variables:</strong> Core infrastructure like spacing steps and border radii.</li>
+                    </ol>
+
+                    <h4 class="vd-mt-5 vd-mb-3">Overriding the Global Theme</h4>
+                    <p>To change Vanduo's default blue to your brand's purple, simply redefine <code>--color-primary</code> on the <code>:root</code> element in your own CSS file. Ensure your CSS is loaded <em>after</em> Vanduo's CSS.</p>
+
+                    <div class="vd-code-snippet" data-collapsible data-expanded="true">
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="css">styles.css</button>
+                                </div>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="css"><code>:root {
+  /* Change the primary brand color to Brand Purple */
+  --color-primary: #8a2be2;
+  
+  /* Buttons and links automatically inherit this change! */
+  
+  /* You can also adjust foundational spacing */
+  --grid-gutter: 2rem;
+  --btn-border-radius: 9999px; /* Pill-shaped buttons globally */
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- How Dark Mode Works -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card demo-card">
+                <div class="vd-card-header">
+                    <h3><i class="ph ph-moon"></i> How Dark Mode Works Under the Hood</h3>
+                </div>
+                <div class="vd-card-body">
+                    <p>Unlike frameworks that require a separate CSS file or write heavy contextual selectors like <code>.dark .btn { ... }</code>, Vanduo handles dark mode purely by re-assigning semantic color variables at the root level.</p>
+                    
+                    <p>When the <code>data-theme="dark"</code> attribute is added to the <code>&lt;html&gt;</code> tag, Vanduo swaps the literal hex values assigned to structural variables like <code>--bg-primary</code> and <code>--text-primary</code>.</p>
+
+                    <div class="vd-code-snippet" data-collapsible data-expanded="true">
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="css">Vanduo Source</button>
+                                </div>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="css"><code>/* By default (Light Mode) */
+:root {
+  --bg-primary: #ffffff;
+  --text-primary: #1e293b;
+  --border-color: #e2e8f0;
+}
+
+/* When Dark Mode is toggled on */
+html[data-theme="dark"] {
+  --bg-primary: #0f172a;       /* Background becomes very dark blue */
+  --text-primary: #f8fafc;     /* Text becomes near white */
+  --border-color: #334155;     /* Borders become dark */
+}
+
+/* Components just use the semantic variables. They don't care if it's light or dark! */
+.vd-card {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="vd-alert vd-alert-info vd-mt-4">
+                        <i class="ph ph-info"></i>
+                        <div>
+                            Because of this architecture, you can easily create custom themes (like "High Contrast" or "Sepia") by applying a new data attribute like <code>data-theme="sepia"</code> and overriding those same 5-6 semantic variables!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- What's Next block -->
+    <div class="vd-mt-8 vd-py-5" style="border-top: 1px solid var(--border-color);">
+        <h3 class="vd-text-lg vd-mb-4"><i class="ph ph-arrow-circle-right"></i> What's Next?</h3>
+        <div class="vd-row">
+            <div class="vd-col-12 vd-col-md-6">
+                <a href="#docs/accessibility-essentials" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
+                    <div class="vd-card-body">
+                        <h4 class="vd-text-md vd-mb-2">Accessibility Essentials</h4>
+                        <p class="vd-text-sm vd-text-muted vd-mb-0">Learn how Vanduo handles accessibility out of the box, and best practices for inclusion.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
