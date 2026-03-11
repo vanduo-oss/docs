@@ -101,15 +101,315 @@ html[data-theme="dark"] {
         </div>
     </div>
 
+    <!-- Component-Level Tokens -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card demo-card">
+                <div class="vd-card-header">
+                    <h3><i class="ph ph-puzzle-piece"></i> Component-Level Tokens</h3>
+                </div>
+                <div class="vd-card-body">
+                    <p>Beyond the global theme colors, Vanduo exposes scoped variables for individual components. These let you fine-tune a single component without affecting the rest of the system.</p>
+                    <table class="vd-table vd-table-bordered vd-mt-4">
+                        <thead>
+                            <tr>
+                                <th>Component</th>
+                                <th>Token Examples</th>
+                                <th>What It Controls</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Buttons</strong></td>
+                                <td><code>--btn-height</code>, <code>--btn-border-radius</code>, <code>--btn-font-weight</code></td>
+                                <td>Size, shape, and text weight of all buttons</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Cards</strong></td>
+                                <td><code>--card-bg</code>, <code>--card-border-radius</code>, <code>--card-padding</code></td>
+                                <td>Background, corners, and internal spacing</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Navbar</strong></td>
+                                <td><code>--navbar-height</code>, <code>--navbar-bg</code></td>
+                                <td>Bar height and background color</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Forms</strong></td>
+                                <td><code>--input-border-radius</code>, <code>--input-border-color</code>, <code>--input-bg</code></td>
+                                <td>Input field appearance</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Modal</strong></td>
+                                <td><code>--modal-bg</code>, <code>--modal-backdrop</code>, <code>--modal-border-radius</code></td>
+                                <td>Dialog appearance and overlay</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="vd-code-snippet vd-mt-4" data-collapsible data-expanded="true">
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="css">component-overrides.css</button>
+                                </div>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="css"><code>:root {
+  /* Make all cards more rounded with extra padding */
+  --card-border-radius: 1rem;
+  --card-padding: 2rem;
+
+  /* Pill-shaped inputs */
+  --input-border-radius: 9999px;
+
+  /* Taller navbar */
+  --navbar-height: 4.5rem;
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vd-alert vd-alert-primary vd-mt-4">
+                        <i class="ph ph-question"></i>
+                        <div>
+                            <strong>How do I find all available tokens?</strong> Open your browser DevTools, select any Vanduo element, and look at the <em>Computed</em> tab — all CSS custom properties used by that element are listed there with their current values.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Creating a Custom Theme File -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card demo-card">
+                <div class="vd-card-header">
+                    <h3><i class="ph ph-file-css"></i> Creating a Custom Theme File</h3>
+                </div>
+                <div class="vd-card-body">
+                    <p>The recommended approach is to keep your overrides in a dedicated CSS file loaded <strong>after</strong> Vanduo's stylesheet. This keeps your customizations organized and easy to swap.</p>
+                    <div class="vd-code-snippet vd-mt-4" data-collapsible data-expanded="true">
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">index.html</button>
+                                </div>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;!-- Vanduo first --&gt;
+&lt;link rel="stylesheet" href="vanduo/dist/vanduo.min.css"&gt;
+
+&lt;!-- Your overrides second (wins due to cascade order) --&gt;
+&lt;link rel="stylesheet" href="css/my-theme.css"&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vd-code-snippet vd-mt-4" data-collapsible data-expanded="true">
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="css">css/my-theme.css</button>
+                                </div>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="css"><code>/* ── Brand Colors ──────────────────────────── */
+:root {
+  --color-primary: #6d28d9;
+  --color-primary-hover: #5b21b6;
+  --color-success: #059669;
+  --color-danger: #dc2626;
+}
+
+/* ── Typography ───────────────────────────── */
+:root {
+  --font-family-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-family-mono: 'JetBrains Mono', monospace;
+}
+
+/* ── Component Tuning ─────────────────────── */
+:root {
+  --btn-border-radius: 0.5rem;
+  --card-border-radius: 0.75rem;
+  --input-border-radius: 0.5rem;
+}
+
+/* ── Dark Mode Adjustments ────────────────── */
+html[data-theme="dark"] {
+  --bg-primary: #18181b;
+  --bg-secondary: #27272a;
+  --border-color: #3f3f46;
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Creating a Fully Custom Theme -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card demo-card">
+                <div class="vd-card-header">
+                    <h3><i class="ph ph-paint-brush"></i> Creating a Fully Custom Theme</h3>
+                </div>
+                <div class="vd-card-body">
+                    <p>You can go beyond light and dark by creating entirely new themes. Add a <code>data-theme</code> attribute to <code>&lt;html&gt;</code> and define the corresponding variables:</p>
+                    <div class="vd-code-snippet vd-mt-4" data-collapsible data-expanded="true">
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="css">css/my-theme.css</button>
+                                </div>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="css"><code>/* Sepia Theme */
+html[data-theme="sepia"] {
+  --bg-primary: #fdf6e3;
+  --bg-secondary: #eee8d5;
+  --text-primary: #657b83;
+  --text-secondary: #586e75;
+  --border-color: #d6cdb5;
+  --color-primary: #b58900;
+  --color-primary-hover: #a67c00;
+}
+
+/* High Contrast Theme */
+html[data-theme="high-contrast"] {
+  --bg-primary: #000000;
+  --bg-secondary: #1a1a1a;
+  --text-primary: #ffffff;
+  --text-secondary: #e0e0e0;
+  --border-color: #ffffff;
+  --color-primary: #ffff00;
+  --color-primary-hover: #cccc00;
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="vd-mt-4">Then toggle between themes with JavaScript:</p>
+                    <div class="vd-code-snippet vd-mt-3" data-collapsible data-expanded="true">
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="js">JS</button>
+                                </div>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="js"><code>function setTheme(name) {
+  document.documentElement.setAttribute('data-theme', name);
+  localStorage.setItem('vanduo-theme-preference', name);
+}
+
+// Usage
+setTheme('sepia');
+setTheme('high-contrast');
+setTheme('dark');
+setTheme('light');</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Practical Examples -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card demo-card">
+                <div class="vd-card-header">
+                    <h3><i class="ph ph-wrench"></i> Practical Override Recipes</h3>
+                </div>
+                <div class="vd-card-body">
+                    <p>Common real-world customizations you can copy and adapt:</p>
+
+                    <h4 class="vd-mt-5 vd-mb-3">Soft, Rounded UI</h4>
+                    <div class="vd-code-snippet" data-collapsible data-expanded="true">
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="css">CSS</button>
+                                </div>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="css"><code>:root {
+  --btn-border-radius: 9999px;
+  --card-border-radius: 1.5rem;
+  --input-border-radius: 9999px;
+  --modal-border-radius: 1.5rem;
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 class="vd-mt-5 vd-mb-3">Corporate / Enterprise Feel</h4>
+                    <div class="vd-code-snippet" data-collapsible data-expanded="true">
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="css">CSS</button>
+                                </div>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="css"><code>:root {
+  --color-primary: #1e40af;
+  --font-family-sans: 'Noto Sans', -apple-system, sans-serif;
+  --btn-border-radius: 0.25rem;
+  --card-border-radius: 0.375rem;
+  --card-padding: 1.5rem;
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 class="vd-mt-5 vd-mb-3">Scoped Override (Single Page)</h4>
+                    <p class="vd-mb-3">You can scope overrides to a specific page or section by targeting a parent class or ID instead of <code>:root</code>:</p>
+                    <div class="vd-code-snippet" data-collapsible data-expanded="true">
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="css">CSS</button>
+                                </div>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="css"><code>.landing-page {
+  --color-primary: #059669;
+  --card-border-radius: 2rem;
+  --btn-border-radius: 9999px;
+}
+
+.dashboard {
+  --color-primary: #6366f1;
+  --card-padding: 1rem;
+  --card-border-radius: 0.375rem;
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- What's Next block -->
-    <div class="vd-mt-8 vd-py-5" style="border-top: 1px solid var(--border-color);">
-        <h3 class="vd-text-lg vd-mb-4"><i class="ph ph-arrow-circle-right"></i> What's Next?</h3>
-        <div class="vd-row">
-            <div class="vd-col-12 vd-col-md-6">
-                <a href="#docs/accessibility-essentials" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
+    <div class="vd-mt-8" style="border-top: 1px solid var(--border-color); padding-top: 2.5rem; padding-bottom: 3rem;">
+        <h3 class="vd-text-lg vd-mb-5"><i class="ph ph-arrow-circle-right"></i> What's Next?</h3>
+        <div class="vd-row" style="gap: 1.25rem;">
+            <div class="vd-col-12 vd-col-md-6 vd-mb-4">
+                <a href="#docs/accessibility-essentials" data-route="docs/accessibility-essentials" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
                     <div class="vd-card-body">
                         <h4 class="vd-text-md vd-mb-2">Accessibility Essentials</h4>
                         <p class="vd-text-sm vd-text-muted vd-mb-0">Learn how Vanduo handles accessibility out of the box, and best practices for inclusion.</p>
+                    </div>
+                </a>
+            </div>
+            <div class="vd-col-12 vd-col-md-6 vd-mb-4">
+                <a href="#docs/theme-customizer-guide" data-route="docs/theme-customizer-guide" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
+                    <div class="vd-card-body">
+                        <h4 class="vd-text-md vd-mb-2">Theme Customizer Walkthrough</h4>
+                        <p class="vd-text-sm vd-text-muted vd-mb-0">Apply your custom variables at runtime with the visual theme customizer panel.</p>
                     </div>
                 </a>
             </div>
