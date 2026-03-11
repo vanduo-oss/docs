@@ -20,22 +20,13 @@ if (typeof window.Vanduo === 'undefined') {
     window.Vanduo.init();
 }
 
-/* ── Disabled code-snippet tab → info toast ────── */
-(function () {
-    var lastToast = 0;
-    function handleDisabledTab(e) {
-        var now = Date.now();
-        if (now - lastToast < 1500) return;
-        var el = document.elementFromPoint(e.clientX, e.clientY);
-        if (!el || !el.matches || !el.matches('.vd-code-snippet-tab[disabled]')) return;
-        lastToast = now;
-        var lang = (el.getAttribute('data-lang') || '').toUpperCase();
-        if (typeof Toast !== 'undefined') {
-            Toast.info(lang + ' is not used in this example.');
-        }
-    }
-    document.addEventListener('mousedown', handleDisabledTab, true);
-})();
+/* ── Hide disabled code-snippet tabs ─────────────── */
+function hideDisabledCodeTabs(container) {
+    if (!container) return;
+    container.querySelectorAll('.vd-code-snippet-tab[disabled]').forEach(function (tab) {
+        tab.style.display = 'none';
+    });
+}
 
 /* ── Constants ────────────────────────────────── */
 const SECTIONS_BASE = './sections/';
@@ -238,6 +229,7 @@ async function loadPage(pageId) {
         var html = await res.text();
         container.innerHTML = html.trim();
         if (typeof Vanduo !== 'undefined') Vanduo.init();
+        hideDisabledCodeTabs(container);
         wireRouteLinks(container);
     } catch (err) {
         console.error(err);
@@ -284,7 +276,7 @@ async function loadSection(sectionId, autoScroll = true) {
         container.appendChild(placeholder);
     }
 
-    if (autoScroll) placeholder.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // No scroll to placeholder — we only scroll once, to the real content below.
     setActiveNavLink(sectionId);
 
     try {
@@ -299,11 +291,14 @@ async function loadSection(sectionId, autoScroll = true) {
             container.replaceChild(sectionEl, placeholder);
             loadedSections.add(sectionId);
             if (typeof Vanduo !== 'undefined') Vanduo.init();
+            hideDisabledCodeTabs(sectionEl);
             wireRouteLinks(sectionEl);
+            // Incrementally observe the new section element rather than
+            // rebuilding the entire observer on every load.
+            observeSection(sectionEl);
         } else {
             placeholder.remove();
         }
-        setupScrollSpy();
         setupInfiniteScroll();
 
         var target = document.getElementById(sectionId);
@@ -350,38 +345,72 @@ async function switchTab(tabKey) {
 }
 
 /* ── Scroll-spy ───────────────────────────────── */
-function setupScrollSpy() {
-    var content = document.getElementById('dynamic-content');
-    if (!content) return;
-    if (scrollSpyObserver) scrollSpyObserver.disconnect();
-    var sections = content.querySelectorAll('section[id]');
-    if (!sections.length) return;
-    scrollSpyObserver = new IntersectionObserver(function (entries) {
-        // Collect all currently-visible sections, then pick the one closest to
-        // the top of the viewport (smallest absolute top offset).  This prevents
-        // incorrect highlighting when multiple sections are in view.
-        var intersecting = entries.filter(function (e) { return e.isIntersecting; });
-        if (!intersecting.length) return;
+// Tracks which sections are currently intersecting so we can always pick
+// the best candidate even when IntersectionObserver fires partial batches.
+const visibleSections = new Set();
 
-        var best = intersecting.reduce(function (a, b) {
-            var aTop = Math.abs(a.boundingClientRect.top);
-            var bTop = Math.abs(b.boundingClientRect.top);
-            return bTop < aTop ? b : a;
+function createScrollSpyObserver() {
+    return new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                visibleSections.add(entry.target);
+            } else {
+                visibleSections.delete(entry.target);
+            }
         });
 
-        setActiveNavLink(best.target.id);
-        var meta = findSectionMeta(best.target.id);
+        if (!visibleSections.size) return;
+
+        // Pick the visible section whose top edge is nearest the sticky navbar.
+        var best = null;
+        visibleSections.forEach(function (sec) {
+            if (!best) { best = sec; return; }
+            if (Math.abs(sec.getBoundingClientRect().top) < Math.abs(best.getBoundingClientRect().top)) {
+                best = sec;
+            }
+        });
+
+        if (!best) return;
+        setActiveNavLink(best.id);
+        var meta = findSectionMeta(best.id);
         if (meta && meta.section) {
             setDocumentTitle(meta.section.title);
             if (window.history && window.history.replaceState) {
-                var targetHashBase = '#docs/' + best.target.id;
+                var targetHashBase = '#docs/' + best.id;
                 if (!window.location.hash.startsWith(targetHashBase)) {
                     window.history.replaceState(null, '', targetHashBase);
                 }
             }
         }
-    }, { rootMargin: '-80px 0px -60% 0px', threshold: 0 });
-    sections.forEach(function (sec) { scrollSpyObserver.observe(sec); });
+    }, {
+        // -80px clears the sticky navbar; -50% means top half of viewport
+        // determines the active section — better for tall guide pages.
+        rootMargin: '-80px 0px -50% 0px',
+        threshold: [0, 0.1]
+    });
+}
+
+// Observe a single newly-inserted section (incremental — no observer teardown).
+function observeSection(sectionEl) {
+    if (!sectionEl || !sectionEl.id) return;
+    if (!scrollSpyObserver) {
+        scrollSpyObserver = createScrollSpyObserver();
+    }
+    scrollSpyObserver.observe(sectionEl);
+}
+
+// Full reset — only called on tab switches, not per-section load.
+function setupScrollSpy() {
+    visibleSections.clear();
+    if (scrollSpyObserver) {
+        scrollSpyObserver.disconnect();
+    }
+    scrollSpyObserver = createScrollSpyObserver();
+    var content = document.getElementById('dynamic-content');
+    if (!content) return;
+    content.querySelectorAll('section[id]').forEach(function (sec) {
+        scrollSpyObserver.observe(sec);
+    });
 }
 
 function setupInfiniteScroll() {
