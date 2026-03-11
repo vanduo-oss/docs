@@ -1,0 +1,207 @@
+<section id="transfer">
+    <h2 class="demo-title"><i class="ph ph-arrows-left-right"></i>Transfer / Dual List</h2>
+    <p class="vd-mb-5">The <strong>VanduoTransfer</strong> component renders a dual-panel picker — users move items from an
+        "Available" list to a "Selected" list using arrow buttons. Supports search filtering and programmatic access to
+        the selected items.</p>
+
+    <div class="vd-row">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card" id="demo-transfer-basic">
+                <div class="vd-card-header"><h3>Basic Transfer</h3></div>
+                <div class="vd-card-body">
+                    <div data-vd-transfer='[
+                        {"id":"apple","label":"Apple"},
+                        {"id":"banana","label":"Banana"},
+                        {"id":"cherry","label":"Cherry"},
+                        {"id":"dragonfruit","label":"Dragonfruit"},
+                        {"id":"elderberry","label":"Elderberry"},
+                        {"id":"fig","label":"Fig"},
+                        {"id":"grape","label":"Grape"},
+                        {"id":"honeydew","label":"Honeydew"},
+                        {"id":"kiwi","label":"Kiwi"},
+                        {"id":"lemon","label":"Lemon"},
+                        {"id":"mango","label":"Mango"},
+                        {"id":"nectarine","label":"Nectarine"}
+                    ]'></div>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">div</span> <span class="code-attr">data-vd-transfer</span>=<span class="code-string">'[
+  { "id": "apple",  "label": "Apple" },
+  { "id": "banana", "label": "Banana" },
+  { "id": "cherry", "label": "Cherry" },
+  { "id": "grape",  "label": "Grape" },
+  { "id": "kiwi",   "label": "Kiwi" },
+  { "id": "mango",  "label": "Mango" }
+]'</span>&gt;&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vd-row">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card" id="demo-transfer-search">
+                <div class="vd-card-header"><h3>With Search Filtering</h3></div>
+                <div class="vd-card-body">
+                    <p class="vd-text-sm vd-text-muted vd-mb-4">Search inputs are built into each panel automatically.
+                        Filtering is case-insensitive and matches anywhere in the label text.</p>
+                    <div data-vd-transfer='[
+                        {"id":"html","label":"HTML"},
+                        {"id":"css","label":"CSS"},
+                        {"id":"javascript","label":"JavaScript"},
+                        {"id":"typescript","label":"TypeScript"},
+                        {"id":"python","label":"Python"},
+                        {"id":"ruby","label":"Ruby"},
+                        {"id":"go","label":"Go"},
+                        {"id":"rust","label":"Rust"},
+                        {"id":"java","label":"Java"},
+                        {"id":"csharp","label":"C#"},
+                        {"id":"php","label":"PHP"},
+                        {"id":"swift","label":"Swift"},
+                        {"id":"kotlin","label":"Kotlin"},
+                        {"id":"dart","label":"Dart"},
+                        {"id":"scala","label":"Scala"}
+                    ]'></div>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                    <button class="vd-code-snippet-tab" data-lang="js">JS</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">div</span> <span class="code-attr">data-vd-transfer</span>=<span class="code-string">'[
+  { "id": "html",       "label": "HTML" },
+  { "id": "css",        "label": "CSS" },
+  { "id": "javascript", "label": "JavaScript" },
+  { "id": "typescript", "label": "TypeScript" },
+  { "id": "python",     "label": "Python" }
+]'</span>&gt;&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                                <pre class="vd-code-snippet-pane" data-lang="js"><code><span class="code-keyword">const</span> el = document.querySelector(<span class="code-string">'[data-vd-transfer]'</span>);
+
+<span class="code-comment">// Get selected item IDs</span>
+<span class="code-keyword">const</span> selected = VanduoTransfer.getSelected(el);
+console.log(selected); <span class="code-comment">// ["javascript", "python"]</span>
+
+<span class="code-comment">// Listen for changes</span>
+el.addEventListener(<span class="code-string">'transfer:change'</span>, (e) =&gt; {
+  console.log(<span class="code-string">'Selected:'</span>, e.detail.selected);
+});</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- API Reference -->
+    <div class="vd-card vd-card-glow demo-card">
+        <div class="vd-card-header">
+            <h3><i class="ph ph-list-dashes mr-2" style="color: var(--color-primary);"></i>API Reference</h3>
+        </div>
+        <div class="vd-card-body">
+            <h4>CSS Classes</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr><th>Class</th><th>Description</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>.vd-transfer</code></td><td>Auto-generated root container (flex layout with two panels)</td></tr>
+                        <tr><td><code>.vd-transfer-panel</code></td><td>Each side panel (Available / Selected)</td></tr>
+                        <tr><td><code>.vd-transfer-header</code></td><td>Panel header showing title and item count</td></tr>
+                        <tr><td><code>.vd-transfer-search</code></td><td>Search input inside each panel for filtering items</td></tr>
+                        <tr><td><code>.vd-transfer-list</code></td><td>Scrollable list container holding items</td></tr>
+                        <tr><td><code>.vd-transfer-item</code></td><td>Individual item row with a checkbox</td></tr>
+                        <tr><td><code>.vd-transfer-item.is-checked</code></td><td>Checked state on an item (ready to move)</td></tr>
+                        <tr><td><code>.vd-transfer-actions</code></td><td>Center column holding the move buttons</td></tr>
+                        <tr><td><code>.vd-transfer-btn</code></td><td>Arrow button to move checked items between panels</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4 class="vd-mt-6">Data Attributes</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr><th>Attribute</th><th>Description</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>data-vd-transfer</code></td><td>JSON array of <code>{id, label}</code> objects. All items start in the "Available" panel</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4 class="vd-mt-6">JavaScript Methods</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr><th>Method</th><th>Description</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>VanduoTransfer.init()</code></td><td>Scans for all <code>[data-vd-transfer]</code> elements and renders dual-list widgets</td></tr>
+                        <tr><td><code>VanduoTransfer.getSelected(el)</code></td><td>Returns an array of <code>id</code> strings currently in the "Selected" panel</td></tr>
+                        <tr><td><code>VanduoTransfer.destroy(el)</code></td><td>Removes the rendered widget and event listeners from the element</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4 class="vd-mt-6">Events</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr><th>Event</th><th>Description</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>transfer:change</code></td><td>Fired on the element when items are moved. <code>event.detail</code> contains <code>{ selected: string[], available: string[] }</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accessibility -->
+    <div class="vd-card vd-card-glow demo-card">
+        <div class="vd-card-header">
+            <h3><i class="ph ph-wheelchair mr-2" style="color: var(--color-primary);"></i>Accessibility</h3>
+        </div>
+        <div class="vd-card-body">
+            <ul>
+                <li>Each panel list has <code>role="listbox"</code> with <code>aria-multiselectable="true"</code></li>
+                <li>Items use <code>role="option"</code> with <code>aria-selected</code> reflecting checked state</li>
+                <li>Move buttons have descriptive <code>aria-label</code>s (e.g. "Move selected to right")</li>
+                <li><kbd>Space</kbd> toggles item selection; <kbd>↑</kbd>/<kbd>↓</kbd> navigate the list</li>
+                <li><kbd>Ctrl+A</kbd> selects all visible items in the focused panel</li>
+                <li>Search inputs are labelled with <code>aria-label="Filter available items"</code> / <code>"Filter selected items"</code></li>
+                <li>Panel headers use <code>aria-live="polite"</code> to announce count changes</li>
+            </ul>
+        </div>
+    </div>
+</section>

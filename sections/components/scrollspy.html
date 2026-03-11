@@ -1,0 +1,305 @@
+<section id="scrollspy">
+    <h2 class="demo-title"><i class="ph ph-map-trifold"></i>Waypoint / Scrollspy</h2>
+
+    <div class="vd-row">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card" id="demo-waypoint-sidebar">
+                <div class="vd-card-header">
+                    <h3>Sidebar Navigation Scrollspy</h3>
+                </div>
+                <div class="vd-card-body">
+                    <div style="display:flex; gap:1.5rem; min-height:280px;">
+                        <nav class="vd-waypoint-nav" data-vd-waypoint-nav="#waypoint-demo-scroll" style="flex:0 0 160px;">
+                            <a href="#wp-section-intro" class="is-active">Introduction</a>
+                            <a href="#wp-section-setup">Setup</a>
+                            <a href="#wp-section-usage">Usage</a>
+                            <a href="#wp-section-api">API</a>
+                        </nav>
+                        <div id="waypoint-demo-scroll" style="flex:1; overflow-y:auto; max-height:280px; padding-right:1rem; scroll-behavior:smooth;">
+                            <div id="wp-section-intro" style="padding-bottom:2rem;">
+                                <h4 style="margin-top:0;">Introduction</h4>
+                                <p>Waypoint automatically highlights navigation links as the user scrolls through corresponding content sections. It observes section visibility and updates the <code>.is-active</code> class on the matching nav link.</p>
+                            </div>
+                            <div id="wp-section-setup" style="padding-bottom:2rem;">
+                                <h4>Setup</h4>
+                                <p>Add <code>data-vd-waypoint-nav</code> to the nav container and point it to the scrollable parent. Each link <code>href</code> should reference a section ID within the scroll container.</p>
+                            </div>
+                            <div id="wp-section-usage" style="padding-bottom:2rem;">
+                                <h4>Usage</h4>
+                                <p>Waypoint supports vertical scroll containers of any height. Links are highlighted top-down — the topmost visible section wins. Works with both window scroll and overflow containers.</p>
+                            </div>
+                            <div id="wp-section-api" style="padding-bottom:2rem;">
+                                <h4>API</h4>
+                                <p>Call <code>VanduoWaypoint.refresh(nav)</code> after dynamic content changes. Destroy with <code>VanduoWaypoint.destroy(nav)</code> to clean up observers.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Sidebar scrollspy navigation --&gt;</span>
+&lt;<span class="code-tag">nav</span> <span class="code-attr">class</span>=<span class="code-string">"vd-waypoint-nav"</span>
+     <span class="code-attr">data-vd-waypoint-nav</span>=<span class="code-string">"#scroll-container"</span>&gt;
+  &lt;<span class="code-tag">a</span> <span class="code-attr">href</span>=<span class="code-string">"#section-1"</span> <span class="code-attr">class</span>=<span class="code-string">"is-active"</span>&gt;Section 1&lt;/<span class="code-tag">a</span>&gt;
+  &lt;<span class="code-tag">a</span> <span class="code-attr">href</span>=<span class="code-string">"#section-2"</span>&gt;Section 2&lt;/<span class="code-tag">a</span>&gt;
+  &lt;<span class="code-tag">a</span> <span class="code-attr">href</span>=<span class="code-string">"#section-3"</span>&gt;Section 3&lt;/<span class="code-tag">a</span>&gt;
+&lt;/<span class="code-tag">nav</span>&gt;
+
+&lt;<span class="code-tag">div</span> <span class="code-attr">id</span>=<span class="code-string">"scroll-container"</span> <span class="code-attr">style</span>=<span class="code-string">"overflow-y:auto;"</span>&gt;
+  &lt;<span class="code-tag">div</span> <span class="code-attr">id</span>=<span class="code-string">"section-1"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;
+  &lt;<span class="code-tag">div</span> <span class="code-attr">id</span>=<span class="code-string">"section-2"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;
+  &lt;<span class="code-tag">div</span> <span class="code-attr">id</span>=<span class="code-string">"section-3"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;
+&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vd-row">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-waypoint-underline">
+                <div class="vd-card-header">
+                    <h3>Underline Variant</h3>
+                </div>
+                <div class="vd-card-body">
+                    <nav class="vd-waypoint-nav vd-waypoint-underline" style="display:flex; gap:.5rem; border-bottom: 2px solid var(--border-color); padding-bottom:0;">
+                        <a href="#" class="is-active" style="padding:.5rem 1rem;">Overview</a>
+                        <a href="#" style="padding:.5rem 1rem;">Features</a>
+                        <a href="#" style="padding:.5rem 1rem;">Pricing</a>
+                        <a href="#" style="padding:.5rem 1rem;">FAQ</a>
+                    </nav>
+                    <p class="vd-text-sm vd-text-muted vd-mt-4">Horizontal tabs with an animated underline indicator on the active link.</p>
+                </div>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">nav</span> <span class="code-attr">class</span>=<span class="code-string">"vd-waypoint-nav vd-waypoint-underline"</span>
+     <span class="code-attr">data-vd-waypoint-nav</span>=<span class="code-string">"window"</span>&gt;
+  &lt;<span class="code-tag">a</span> <span class="code-attr">href</span>=<span class="code-string">"#overview"</span> <span class="code-attr">class</span>=<span class="code-string">"is-active"</span>&gt;Overview&lt;/<span class="code-tag">a</span>&gt;
+  &lt;<span class="code-tag">a</span> <span class="code-attr">href</span>=<span class="code-string">"#features"</span>&gt;Features&lt;/<span class="code-tag">a</span>&gt;
+  &lt;<span class="code-tag">a</span> <span class="code-attr">href</span>=<span class="code-string">"#pricing"</span>&gt;Pricing&lt;/<span class="code-tag">a</span>&gt;
+&lt;/<span class="code-tag">nav</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-waypoint-pill">
+                <div class="vd-card-header">
+                    <h3>Pill Variant</h3>
+                </div>
+                <div class="vd-card-body">
+                    <nav class="vd-waypoint-nav vd-waypoint-pill" style="display:flex; gap:.5rem; flex-wrap:wrap;">
+                        <a href="#" class="is-active" style="padding:.4rem 1rem; border-radius:999px;">Getting Started</a>
+                        <a href="#" style="padding:.4rem 1rem; border-radius:999px;">Components</a>
+                        <a href="#" style="padding:.4rem 1rem; border-radius:999px;">Utilities</a>
+                        <a href="#" style="padding:.4rem 1rem; border-radius:999px;">Theming</a>
+                    </nav>
+                    <p class="vd-text-sm vd-text-muted vd-mt-4">Rounded pill-style links with a filled background on the active item.</p>
+                </div>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">nav</span> <span class="code-attr">class</span>=<span class="code-string">"vd-waypoint-nav vd-waypoint-pill"</span>
+     <span class="code-attr">data-vd-waypoint-nav</span>=<span class="code-string">"#content"</span>&gt;
+  &lt;<span class="code-tag">a</span> <span class="code-attr">href</span>=<span class="code-string">"#start"</span> <span class="code-attr">class</span>=<span class="code-string">"is-active"</span>&gt;Getting Started&lt;/<span class="code-tag">a</span>&gt;
+  &lt;<span class="code-tag">a</span> <span class="code-attr">href</span>=<span class="code-string">"#components"</span>&gt;Components&lt;/<span class="code-tag">a</span>&gt;
+  &lt;<span class="code-tag">a</span> <span class="code-attr">href</span>=<span class="code-string">"#utilities"</span>&gt;Utilities&lt;/<span class="code-tag">a</span>&gt;
+&lt;/<span class="code-tag">nav</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- API Reference -->
+    <div class="vd-card vd-card-glow demo-card" id="demo-waypoint-api">
+        <div class="vd-card-header">
+            <h3><i class="ph ph-list-dashes mr-2" style="color: var(--color-primary);"></i>API Reference</h3>
+        </div>
+        <div class="vd-card-body">
+            <h4>CSS Classes</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr>
+                            <th>Class</th>
+                            <th>Description</th>
+                            <th>Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>.vd-waypoint-nav</code></td>
+                            <td>Base scrollspy navigation container — required</td>
+                            <td>Base</td>
+                        </tr>
+                        <tr>
+                            <td><code>.vd-waypoint-border</code></td>
+                            <td>Adds a left border highlight on the active link (sidebar style)</td>
+                            <td>Modifier</td>
+                        </tr>
+                        <tr>
+                            <td><code>.vd-waypoint-pill</code></td>
+                            <td>Rounded pill-shaped background on the active link</td>
+                            <td>Modifier</td>
+                        </tr>
+                        <tr>
+                            <td><code>.vd-waypoint-underline</code></td>
+                            <td>Bottom underline indicator on the active link (tab style)</td>
+                            <td>Modifier</td>
+                        </tr>
+                        <tr>
+                            <td><code>.is-active</code></td>
+                            <td>Applied automatically to the currently visible section's link</td>
+                            <td>State</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4>Data Attributes</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr>
+                            <th>Attribute</th>
+                            <th>Description</th>
+                            <th>Default</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>data-vd-waypoint-nav</code></td>
+                            <td>Selector for the scrollable container to observe (e.g. <code>"#content"</code> or <code>"window"</code>)</td>
+                            <td><code>window</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>data-vd-waypoint-offset</code></td>
+                            <td>Pixel offset from the top to trigger activation earlier or later</td>
+                            <td><code>0</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>data-vd-scrollspy-nav</code></td>
+                            <td>Alias for <code>data-vd-waypoint-nav</code></td>
+                            <td>&mdash;</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4>JavaScript Methods</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>VanduoWaypoint.init()</code></td>
+                            <td>Initialize all <code>[data-vd-waypoint-nav]</code> elements on the page</td>
+                        </tr>
+                        <tr>
+                            <td><code>VanduoWaypoint.refresh(nav)</code></td>
+                            <td>Recalculate section positions after dynamic content changes</td>
+                        </tr>
+                        <tr>
+                            <td><code>VanduoWaypoint.destroy(nav)</code></td>
+                            <td>Remove scroll listeners and IntersectionObservers for the given nav</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4>Events</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr>
+                            <th>Event</th>
+                            <th>Description</th>
+                            <th>Detail</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>waypoint:change</code></td>
+                            <td>Fired on the nav element when the active section changes</td>
+                            <td><code>{ activeLink, sectionId }</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accessibility -->
+    <div class="vd-card vd-card-glow demo-card">
+        <div class="vd-card-header">
+            <h3><i class="ph ph-wheelchair mr-2" style="color: var(--color-primary);"></i>Accessibility</h3>
+        </div>
+        <div class="vd-card-body">
+            <ul>
+                <li>Navigation container uses <code>role="navigation"</code> with <code>aria-label="Table of contents"</code></li>
+                <li>Active link receives <code>aria-current="true"</code> in addition to the <code>.is-active</code> class</li>
+                <li>Links use standard anchor elements for native keyboard navigation and focus management</li>
+                <li>Smooth scrolling respects <code>prefers-reduced-motion</code> media query</li>
+                <li>Section targets use semantic heading hierarchy for screen reader landmark navigation</li>
+            </ul>
+        </div>
+    </div>
+</section>

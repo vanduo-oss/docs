@@ -1,0 +1,289 @@
+<section id="ripple">
+    <h2 class="demo-title"><i class="ph ph-drop"></i>Ripple / Waves</h2>
+
+    <div class="vd-row">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-ripple-basic">
+                <div class="vd-card-header">
+                    <h3>Basic Ripple on Buttons</h3>
+                </div>
+                <div class="vd-card-body" style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center;">
+                    <button class="vd-btn vd-btn-primary vd-ripple">Primary Ripple</button>
+                    <button class="vd-btn vd-btn-secondary vd-ripple">Secondary Ripple</button>
+                    <button class="vd-btn vd-btn-outline vd-ripple">Outline Ripple</button>
+                </div>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Add .vd-ripple to any clickable element --&gt;</span>
+&lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-btn vd-btn-primary vd-ripple"</span>&gt;
+  Primary Ripple
+&lt;/<span class="code-tag">button</span>&gt;
+
+<span class="code-comment">&lt;!-- Or use the data attribute --&gt;</span>
+&lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-btn vd-btn-primary"</span> <span class="code-attr">data-vd-ripple</span>&gt;
+  Primary Ripple
+&lt;/<span class="code-tag">button</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-ripple-variants">
+                <div class="vd-card-header">
+                    <h3>Color Variants</h3>
+                </div>
+                <div class="vd-card-body" style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center;">
+                    <button class="vd-btn vd-btn-outline vd-ripple">Default (light)</button>
+                    <button class="vd-btn vd-btn-outline vd-ripple vd-ripple-dark">Dark Ripple</button>
+                    <button class="vd-btn vd-btn-outline vd-ripple vd-ripple-primary">Primary Ripple</button>
+                </div>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Default light ripple --&gt;</span>
+&lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-btn vd-ripple"</span>&gt;Default&lt;/<span class="code-tag">button</span>&gt;
+
+<span class="code-comment">&lt;!-- Dark ripple (for light backgrounds) --&gt;</span>
+&lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-btn vd-ripple vd-ripple-dark"</span>&gt;Dark&lt;/<span class="code-tag">button</span>&gt;
+
+<span class="code-comment">&lt;!-- Primary-coloured ripple --&gt;</span>
+&lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-btn vd-ripple vd-ripple-primary"</span>&gt;Primary&lt;/<span class="code-tag">button</span>&gt;
+
+<span class="code-comment">&lt;!-- Light ripple (for dark backgrounds) --&gt;</span>
+&lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-btn vd-ripple vd-ripple-light"</span>&gt;Light&lt;/<span class="code-tag">button</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vd-row">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-ripple-div">
+                <div class="vd-card-header">
+                    <h3>Ripple on Non-button Elements</h3>
+                </div>
+                <div class="vd-card-body">
+                    <div class="vd-ripple" data-vd-ripple style="padding:2rem; background:var(--bg-secondary); border-radius:var(--radius-md); cursor:pointer; text-align:center; position:relative; overflow:hidden;">
+                        <p style="margin:0;"><i class="ph ph-hand-tap mr-2"></i>Click anywhere on this div</p>
+                        <p class="vd-text-sm vd-text-muted" style="margin:.5rem 0 0;">Ripple works on any element — not just buttons</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Ripple on a generic div --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-ripple"</span> <span class="code-attr">data-vd-ripple</span>
+     <span class="code-attr">style</span>=<span class="code-string">"position:relative; overflow:hidden;"</span>&gt;
+  Click anywhere on this div
+&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-ripple-data">
+                <div class="vd-card-header">
+                    <h3>Data Attribute Variants</h3>
+                </div>
+                <div class="vd-card-body" style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center;">
+                    <button class="vd-btn vd-btn-primary" data-vd-ripple>Default via data</button>
+                    <button class="vd-btn vd-btn-outline" data-vd-ripple="dark">Dark via data</button>
+                    <button class="vd-btn vd-btn-success" data-vd-ripple="primary">Primary via data</button>
+                </div>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Variant via data-vd-ripple value --&gt;</span>
+&lt;<span class="code-tag">button</span> <span class="code-attr">data-vd-ripple</span>&gt;Default&lt;/<span class="code-tag">button</span>&gt;
+&lt;<span class="code-tag">button</span> <span class="code-attr">data-vd-ripple</span>=<span class="code-string">"dark"</span>&gt;Dark&lt;/<span class="code-tag">button</span>&gt;
+&lt;<span class="code-tag">button</span> <span class="code-attr">data-vd-ripple</span>=<span class="code-string">"primary"</span>&gt;Primary&lt;/<span class="code-tag">button</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- API Reference -->
+    <div class="vd-card vd-card-glow demo-card" id="demo-ripple-api">
+        <div class="vd-card-header">
+            <h3><i class="ph ph-list-dashes mr-2" style="color: var(--color-primary);"></i>API Reference</h3>
+        </div>
+        <div class="vd-card-body">
+            <h4>CSS Classes</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr>
+                            <th>Class</th>
+                            <th>Description</th>
+                            <th>Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>.vd-ripple</code></td>
+                            <td>Enable ripple effect on an element (requires <code>position:relative; overflow:hidden</code> on non-button elements)</td>
+                            <td>Base</td>
+                        </tr>
+                        <tr>
+                            <td><code>.vd-ripple-dark</code></td>
+                            <td>Dark ripple wave — best on light/white backgrounds</td>
+                            <td>Modifier</td>
+                        </tr>
+                        <tr>
+                            <td><code>.vd-ripple-primary</code></td>
+                            <td>Ripple wave in the theme's primary colour</td>
+                            <td>Modifier</td>
+                        </tr>
+                        <tr>
+                            <td><code>.vd-ripple-light</code></td>
+                            <td>Light/white ripple wave — best on dark backgrounds</td>
+                            <td>Modifier</td>
+                        </tr>
+                        <tr>
+                            <td><code>.vd-ripple-wave</code></td>
+                            <td>Internal class applied to the expanding circle element (auto-generated by JS)</td>
+                            <td>Internal</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4>Data Attributes</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr>
+                            <th>Attribute</th>
+                            <th>Description</th>
+                            <th>Default</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>data-vd-ripple</code></td>
+                            <td>Enable ripple via data attribute. Empty value uses default light wave.</td>
+                            <td><em>light</em></td>
+                        </tr>
+                        <tr>
+                            <td><code>data-vd-ripple="dark"</code></td>
+                            <td>Dark ripple variant via data attribute</td>
+                            <td>&mdash;</td>
+                        </tr>
+                        <tr>
+                            <td><code>data-vd-ripple="primary"</code></td>
+                            <td>Primary-colour ripple variant via data attribute</td>
+                            <td>&mdash;</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4>JavaScript Methods</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>VanduoRipple.init()</code></td>
+                            <td>Initialize ripple listeners on all <code>.vd-ripple</code> and <code>[data-vd-ripple]</code> elements</td>
+                        </tr>
+                        <tr>
+                            <td><code>VanduoRipple.destroy(el)</code></td>
+                            <td>Remove ripple event listeners from the given element</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accessibility -->
+    <div class="vd-card vd-card-glow demo-card">
+        <div class="vd-card-header">
+            <h3><i class="ph ph-wheelchair mr-2" style="color: var(--color-primary);"></i>Accessibility</h3>
+        </div>
+        <div class="vd-card-body">
+            <ul>
+                <li>The ripple is a purely visual effect and does not affect DOM focus or screen reader output</li>
+                <li>The generated <code>.vd-ripple-wave</code> element uses <code>aria-hidden="true"</code></li>
+                <li>Ripple animation respects <code>prefers-reduced-motion: reduce</code> — the wave is instant rather than animated</li>
+                <li>Non-button elements with ripple should include appropriate <code>role</code> and <code>tabindex</code> for keyboard access</li>
+                <li>Colour contrast of the ripple wave meets WCAG guidelines against all standard button backgrounds</li>
+            </ul>
+        </div>
+    </div>
+</section>

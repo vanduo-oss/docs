@@ -1,0 +1,239 @@
+<section id="autocomplete">
+    <h2 class="demo-title"><i class="ph ph-magnifying-glass"></i>Autocomplete / Suggest</h2>
+    <p class="vd-mb-5">The <strong>VanduoSuggest</strong> component adds type-ahead suggestions to any text input. Feed it
+        a static JSON array or point it at a remote URL — results filter as the user types. Alias:
+        <code>data-vd-autocomplete</code>.</p>
+
+    <div class="vd-row">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-suggest-basic">
+                <div class="vd-card-header"><h3>Basic — Static JSON Array</h3></div>
+                <div class="vd-card-body">
+                    <div class="vd-form-group">
+                        <label for="suggest-fruits">Search Fruits</label>
+                        <input type="text" id="suggest-fruits" class="vd-input" placeholder="Type a fruit name…"
+                            data-vd-suggest='["Apple","Apricot","Avocado","Banana","Blackberry","Blueberry","Cherry","Coconut","Cranberry","Date","Dragonfruit","Fig","Grape","Guava","Kiwi","Lemon","Lime","Lychee","Mango","Melon","Nectarine","Orange","Papaya","Peach","Pear","Pineapple","Plum","Pomegranate","Raspberry","Strawberry","Watermelon"]'>
+                    </div>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">input</span> <span class="code-attr">type</span>=<span class="code-string">"text"</span>
+  <span class="code-attr">class</span>=<span class="code-string">"vd-input"</span>
+  <span class="code-attr">placeholder</span>=<span class="code-string">"Type a fruit name…"</span>
+  <span class="code-attr">data-vd-suggest</span>=<span class="code-string">'["Apple","Banana","Cherry","Grape","Mango","Orange","Peach","Strawberry"]'</span>&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-suggest-url">
+                <div class="vd-card-header"><h3>Remote CSV Data Source</h3></div>
+                <div class="vd-card-body">
+                    <div class="vd-form-group">
+                        <label for="suggest-cities">Search Cities</label>
+                        <input type="text" id="suggest-cities" class="vd-input" placeholder="Type a city…"
+                            data-vd-suggest
+                            data-vd-suggest-url="/api/cities.csv">
+                    </div>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">input</span> <span class="code-attr">type</span>=<span class="code-string">"text"</span>
+  <span class="code-attr">class</span>=<span class="code-string">"vd-input"</span>
+  <span class="code-attr">placeholder</span>=<span class="code-string">"Type a city…"</span>
+  <span class="code-attr">data-vd-suggest</span>
+  <span class="code-attr">data-vd-suggest-url</span>=<span class="code-string">"/api/cities.csv"</span>&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vd-row">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-suggest-min-chars">
+                <div class="vd-card-header"><h3>Minimum Characters (2)</h3></div>
+                <div class="vd-card-body">
+                    <div class="vd-form-group">
+                        <label for="suggest-countries">Search Countries</label>
+                        <input type="text" id="suggest-countries" class="vd-input" placeholder="Type at least 2 characters…"
+                            data-vd-suggest='["Argentina","Australia","Austria","Belgium","Brazil","Canada","Chile","China","Colombia","Denmark","Egypt","Finland","France","Germany","Greece","India","Ireland","Italy","Japan","Mexico","Netherlands","Norway","Poland","Portugal","Russia","Spain","Sweden","Switzerland","Turkey","United Kingdom","United States"]'
+                            data-vd-suggest-min-chars="2">
+                    </div>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">input</span> <span class="code-attr">type</span>=<span class="code-string">"text"</span>
+  <span class="code-attr">class</span>=<span class="code-string">"vd-input"</span>
+  <span class="code-attr">placeholder</span>=<span class="code-string">"Type at least 2 characters…"</span>
+  <span class="code-attr">data-vd-suggest</span>=<span class="code-string">'["Argentina","Brazil","Canada",…]'</span>
+  <span class="code-attr">data-vd-suggest-min-chars</span>=<span class="code-string">"2"</span>&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-suggest-alias">
+                <div class="vd-card-header"><h3>Alias: <code>data-vd-autocomplete</code></h3></div>
+                <div class="vd-card-body">
+                    <div class="vd-form-group">
+                        <label for="suggest-colors">Search Colors</label>
+                        <input type="text" id="suggest-colors" class="vd-input" placeholder="Type a color…"
+                            data-vd-autocomplete='["Red","Orange","Yellow","Green","Blue","Indigo","Violet","Cyan","Magenta","Teal","Coral","Crimson","Gold","Lime","Navy","Olive","Pink","Salmon","Silver","Turquoise"]'>
+                    </div>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- data-vd-autocomplete is an alias for data-vd-suggest --&gt;</span>
+&lt;<span class="code-tag">input</span> <span class="code-attr">type</span>=<span class="code-string">"text"</span>
+  <span class="code-attr">class</span>=<span class="code-string">"vd-input"</span>
+  <span class="code-attr">data-vd-autocomplete</span>=<span class="code-string">'["Red","Orange","Yellow","Green","Blue"]'</span>&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- API Reference -->
+    <div class="vd-card vd-card-glow demo-card">
+        <div class="vd-card-header">
+            <h3><i class="ph ph-list-dashes mr-2" style="color: var(--color-primary);"></i>API Reference</h3>
+        </div>
+        <div class="vd-card-body">
+            <h4>CSS Classes</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr><th>Class</th><th>Description</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>.vd-suggest-wrapper</code></td><td>Auto-generated wrapper around the input; positions the dropdown list</td></tr>
+                        <tr><td><code>.vd-suggest-list</code></td><td>The dropdown <code>&lt;ul&gt;</code> containing suggestion items</td></tr>
+                        <tr><td><code>.vd-suggest-item</code></td><td>Individual suggestion <code>&lt;li&gt;</code> inside the list</td></tr>
+                        <tr><td><code>.vd-suggest-match</code></td><td>Wraps the matched substring within each suggestion item (bold highlight)</td></tr>
+                        <tr><td><code>.vd-suggest-empty</code></td><td>Shown when no results match the current query</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4 class="vd-mt-6">Data Attributes</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr><th>Attribute</th><th>Description</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>data-vd-suggest</code></td><td>Activates the component. Optionally holds an inline JSON array of strings</td></tr>
+                        <tr><td><code>data-vd-suggest-url</code></td><td>URL to fetch suggestions from (JSON array or CSV). Overrides inline data</td></tr>
+                        <tr><td><code>data-vd-suggest-min-chars</code></td><td>Minimum characters before the dropdown appears (default: <code>1</code>)</td></tr>
+                        <tr><td><code>data-vd-autocomplete</code></td><td>Alias for <code>data-vd-suggest</code> — works identically</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4 class="vd-mt-6">JavaScript Methods</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr><th>Method</th><th>Description</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>VanduoSuggest.init()</code></td><td>Scans the DOM for <code>[data-vd-suggest]</code> and <code>[data-vd-autocomplete]</code> inputs and wires them up</td></tr>
+                        <tr><td><code>VanduoSuggest.destroy(el)</code></td><td>Removes event listeners, dropdown, and wrapper from the given input element</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4 class="vd-mt-6">Events</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr><th>Event</th><th>Description</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>suggest:select</code></td><td>Fired on the input when the user picks a suggestion. <code>event.detail</code> contains the selected value string</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accessibility -->
+    <div class="vd-card vd-card-glow demo-card">
+        <div class="vd-card-header">
+            <h3><i class="ph ph-wheelchair mr-2" style="color: var(--color-primary);"></i>Accessibility</h3>
+        </div>
+        <div class="vd-card-body">
+            <ul>
+                <li>The input receives <code>role="combobox"</code> and <code>aria-autocomplete="list"</code></li>
+                <li>The suggestion list has <code>role="listbox"</code>; each item has <code>role="option"</code></li>
+                <li><code>aria-expanded</code> toggles <code>true</code>/<code>false</code> as the dropdown opens and closes</li>
+                <li><code>aria-activedescendant</code> tracks the currently highlighted option for screen readers</li>
+                <li><kbd>↑</kbd> / <kbd>↓</kbd> arrow keys navigate the list; <kbd>Enter</kbd> selects; <kbd>Escape</kbd> closes</li>
+                <li>Focus returns to the input after selection, preserving natural tab order</li>
+            </ul>
+        </div>
+    </div>
+</section>

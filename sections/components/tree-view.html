@@ -1,0 +1,360 @@
+<section id="tree-view">
+    <h2 class="demo-title"><i class="ph ph-tree-structure"></i>Tree View</h2>
+    <p class="vd-mb-5">The <strong>VanduoTree</strong> component renders hierarchical data as an expandable/collapsible
+        tree. Supports checkbox selection with parent-child cascade, connection lines, and initial open state — all
+        configured via a single JSON data attribute.</p>
+
+    <div class="vd-row">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-tree-basic">
+                <div class="vd-card-header"><h3>Basic File Tree</h3></div>
+                <div class="vd-card-body">
+                    <div data-vd-tree='[
+                        {"id":"src","label":"src","icon":"ph ph-folder","children":[
+                            {"id":"components","label":"components","icon":"ph ph-folder","children":[
+                                {"id":"btn","label":"Button.vue","icon":"ph ph-file-vue"},
+                                {"id":"card","label":"Card.vue","icon":"ph ph-file-vue"},
+                                {"id":"modal","label":"Modal.vue","icon":"ph ph-file-vue"}
+                            ]},
+                            {"id":"utils","label":"utils","icon":"ph ph-folder","children":[
+                                {"id":"helpers","label":"helpers.js","icon":"ph ph-file-js"},
+                                {"id":"api","label":"api.js","icon":"ph ph-file-js"}
+                            ]},
+                            {"id":"app","label":"App.vue","icon":"ph ph-file-vue"},
+                            {"id":"main","label":"main.js","icon":"ph ph-file-js"}
+                        ]},
+                        {"id":"public","label":"public","icon":"ph ph-folder","children":[
+                            {"id":"index","label":"index.html","icon":"ph ph-file-html"},
+                            {"id":"favicon","label":"favicon.ico","icon":"ph ph-image"}
+                        ]},
+                        {"id":"pkg","label":"package.json","icon":"ph ph-file"},
+                        {"id":"readme","label":"README.md","icon":"ph ph-file-text"}
+                    ]'></div>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">div</span> <span class="code-attr">data-vd-tree</span>=<span class="code-string">'[
+  {
+    "id": "src",
+    "label": "src",
+    "icon": "ph ph-folder",
+    "children": [
+      { "id": "btn",  "label": "Button.vue", "icon": "ph ph-file-vue" },
+      { "id": "card", "label": "Card.vue",   "icon": "ph ph-file-vue" }
+    ]
+  },
+  { "id": "pkg", "label": "package.json", "icon": "ph ph-file" }
+]'</span>&gt;&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-tree-checkbox">
+                <div class="vd-card-header"><h3>Checkbox Tree with Cascade</h3></div>
+                <div class="vd-card-body">
+                    <div data-vd-tree='[
+                        {"id":"permissions","label":"Permissions","children":[
+                            {"id":"users","label":"User Management","children":[
+                                {"id":"users-read","label":"View Users"},
+                                {"id":"users-create","label":"Create Users"},
+                                {"id":"users-edit","label":"Edit Users"},
+                                {"id":"users-delete","label":"Delete Users"}
+                            ]},
+                            {"id":"content","label":"Content Management","children":[
+                                {"id":"content-read","label":"View Content"},
+                                {"id":"content-create","label":"Create Content"},
+                                {"id":"content-edit","label":"Edit Content"},
+                                {"id":"content-publish","label":"Publish Content"}
+                            ]},
+                            {"id":"settings","label":"System Settings","children":[
+                                {"id":"settings-general","label":"General Settings"},
+                                {"id":"settings-security","label":"Security Settings"},
+                                {"id":"settings-billing","label":"Billing Settings"}
+                            ]}
+                        ]}
+                    ]'
+                    data-vd-tree-checkbox
+                    data-vd-tree-cascade></div>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                    <button class="vd-code-snippet-tab" data-lang="js">JS</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">div</span>
+  <span class="code-attr">data-vd-tree</span>=<span class="code-string">'[
+    {
+      "id": "permissions",
+      "label": "Permissions",
+      "children": [
+        {
+          "id": "users",
+          "label": "User Management",
+          "children": [
+            { "id": "users-read",   "label": "View Users" },
+            { "id": "users-create", "label": "Create Users" }
+          ]
+        }
+      ]
+    }
+  ]'</span>
+  <span class="code-attr">data-vd-tree-checkbox</span>
+  <span class="code-attr">data-vd-tree-cascade</span>&gt;
+&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                                <pre class="vd-code-snippet-pane" data-lang="js"><code><span class="code-keyword">const</span> tree = document.querySelector(<span class="code-string">'[data-vd-tree-checkbox]'</span>);
+
+<span class="code-comment">// Get all checked node IDs</span>
+<span class="code-keyword">const</span> checked = VanduoTree.getChecked(tree);
+console.log(checked); <span class="code-comment">// ["users-read", "users-create"]</span>
+
+<span class="code-comment">// Listen for check changes</span>
+tree.addEventListener(<span class="code-string">'tree:check'</span>, (e) =&gt; {
+  console.log(<span class="code-string">'Checked nodes:'</span>, e.detail.checked);
+});</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vd-row">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-tree-open">
+                <div class="vd-card-header"><h3>Initially Open Nodes</h3></div>
+                <div class="vd-card-body">
+                    <p class="vd-text-sm vd-text-muted vd-mb-4">Set <code>"open": true</code> on any node in the JSON
+                        data to expand it on render.</p>
+                    <div data-vd-tree='[
+                        {"id":"docs","label":"Documentation","open":true,"children":[
+                            {"id":"getting-started","label":"Getting Started","open":true,"children":[
+                                {"id":"install","label":"Installation"},
+                                {"id":"quick-start","label":"Quick Start Guide"},
+                                {"id":"config","label":"Configuration"}
+                            ]},
+                            {"id":"api-ref","label":"API Reference","children":[
+                                {"id":"components-api","label":"Components"},
+                                {"id":"utilities-api","label":"Utilities"},
+                                {"id":"plugins-api","label":"Plugins"}
+                            ]},
+                            {"id":"examples","label":"Examples","children":[
+                                {"id":"basic-examples","label":"Basic"},
+                                {"id":"advanced-examples","label":"Advanced"}
+                            ]}
+                        ]}
+                    ]'></div>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">div</span> <span class="code-attr">data-vd-tree</span>=<span class="code-string">'[
+  {
+    "id": "docs",
+    "label": "Documentation",
+    "open": true,
+    "children": [
+      {
+        "id": "getting-started",
+        "label": "Getting Started",
+        "open": true,
+        "children": [
+          { "id": "install", "label": "Installation" },
+          { "id": "quick-start", "label": "Quick Start" }
+        ]
+      }
+    ]
+  }
+]'</span>&gt;&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-tree-structure">
+                <div class="vd-card-header"><h3>Generated HTML Structure</h3></div>
+                <div class="vd-card-body">
+                    <p class="vd-text-sm vd-text-muted vd-mb-4">The component generates the following DOM structure
+                        from the JSON data. You can style each part using the CSS classes listed in the API reference.</p>
+                    <div class="vd-code-snippet" data-collapsible data-expanded="true">
+                        <button class="vd-code-snippet-toggle" aria-expanded="true">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Auto-generated structure --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-tree vd-tree-lines"</span> <span class="code-attr">role</span>=<span class="code-string">"tree"</span>&gt;
+  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-tree-node"</span> <span class="code-attr">role</span>=<span class="code-string">"treeitem"</span> <span class="code-attr">aria-expanded</span>=<span class="code-string">"true"</span>&gt;
+    &lt;<span class="code-tag">span</span> <span class="code-attr">class</span>=<span class="code-string">"vd-tree-toggle"</span>&gt;▶&lt;/<span class="code-tag">span</span>&gt;
+    &lt;<span class="code-tag">input</span> <span class="code-attr">type</span>=<span class="code-string">"checkbox"</span> <span class="code-attr">class</span>=<span class="code-string">"vd-tree-checkbox"</span>&gt;
+    &lt;<span class="code-tag">span</span> <span class="code-attr">class</span>=<span class="code-string">"vd-tree-label"</span>&gt;Parent Node&lt;/<span class="code-tag">span</span>&gt;
+    &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-tree-children"</span> <span class="code-attr">role</span>=<span class="code-string">"group"</span>&gt;
+      &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-tree-node"</span> <span class="code-attr">role</span>=<span class="code-string">"treeitem"</span>&gt;
+        &lt;<span class="code-tag">span</span> <span class="code-attr">class</span>=<span class="code-string">"vd-tree-label"</span>&gt;Leaf Node&lt;/<span class="code-tag">span</span>&gt;
+      &lt;/<span class="code-tag">div</span>&gt;
+    &lt;/<span class="code-tag">div</span>&gt;
+  &lt;/<span class="code-tag">div</span>&gt;
+&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- API Reference -->
+    <div class="vd-card vd-card-glow demo-card">
+        <div class="vd-card-header">
+            <h3><i class="ph ph-list-dashes mr-2" style="color: var(--color-primary);"></i>API Reference</h3>
+        </div>
+        <div class="vd-card-body">
+            <h4>CSS Classes</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr><th>Class</th><th>Description</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>.vd-tree</code></td><td>Auto-generated root container for the tree</td></tr>
+                        <tr><td><code>.vd-tree-node</code></td><td>Individual tree node (may contain children)</td></tr>
+                        <tr><td><code>.vd-tree-toggle</code></td><td>Expand/collapse arrow for branch nodes</td></tr>
+                        <tr><td><code>.vd-tree-label</code></td><td>Text label of the node (may include an icon)</td></tr>
+                        <tr><td><code>.vd-tree-checkbox</code></td><td>Checkbox input rendered when <code>data-vd-tree-checkbox</code> is set</td></tr>
+                        <tr><td><code>.vd-tree-children</code></td><td>Wrapper around child nodes (collapsed/expanded via CSS)</td></tr>
+                        <tr><td><code>.vd-tree-lines</code></td><td>Adds vertical/horizontal connection lines between nodes</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4 class="vd-mt-6">Data Attributes</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr><th>Attribute</th><th>Description</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>data-vd-tree</code></td><td>JSON array of tree nodes. Each node: <code>{ id, label, icon?, open?, children? }</code></td></tr>
+                        <tr><td><code>data-vd-tree-checkbox</code></td><td>Renders checkboxes next to each node label</td></tr>
+                        <tr><td><code>data-vd-tree-cascade</code></td><td>When combined with <code>data-vd-tree-checkbox</code>, checking a parent auto-checks all descendants, and vice-versa</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4 class="vd-mt-6">Node Object Shape</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr><th>Property</th><th>Type</th><th>Description</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>id</code></td><td><code>string</code></td><td>Unique identifier for the node</td></tr>
+                        <tr><td><code>label</code></td><td><code>string</code></td><td>Display text</td></tr>
+                        <tr><td><code>icon</code></td><td><code>string?</code></td><td>CSS class(es) for an icon (e.g. <code>"ph ph-folder"</code>)</td></tr>
+                        <tr><td><code>open</code></td><td><code>boolean?</code></td><td>If <code>true</code>, node renders expanded on init</td></tr>
+                        <tr><td><code>children</code></td><td><code>Node[]?</code></td><td>Nested child nodes (makes this a branch node)</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4 class="vd-mt-6">JavaScript Methods</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr><th>Method</th><th>Description</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>VanduoTree.init()</code></td><td>Scans for all <code>[data-vd-tree]</code> elements and renders tree widgets</td></tr>
+                        <tr><td><code>VanduoTree.getChecked(el)</code></td><td>Returns an array of <code>id</code> strings for all checked nodes (checkbox trees only)</td></tr>
+                        <tr><td><code>VanduoTree.destroy(el)</code></td><td>Removes the rendered tree and event listeners from the element</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4 class="vd-mt-6">Events</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr><th>Event</th><th>Description</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>tree:check</code></td><td>Fired on the element when a checkbox changes. <code>event.detail</code> contains <code>{ checked: string[], node: string }</code></td></tr>
+                        <tr><td><code>tree:toggle</code></td><td>Fired when a node is expanded or collapsed. <code>event.detail</code> contains <code>{ id: string, open: boolean }</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accessibility -->
+    <div class="vd-card vd-card-glow demo-card">
+        <div class="vd-card-header">
+            <h3><i class="ph ph-wheelchair mr-2" style="color: var(--color-primary);"></i>Accessibility</h3>
+        </div>
+        <div class="vd-card-body">
+            <ul>
+                <li>The root container has <code>role="tree"</code>; each node has <code>role="treeitem"</code></li>
+                <li>Child groups are wrapped in <code>role="group"</code></li>
+                <li>Branch nodes set <code>aria-expanded="true"</code> or <code>"false"</code> to reflect open state</li>
+                <li><kbd>↑</kbd> / <kbd>↓</kbd> navigate between visible nodes; <kbd>→</kbd> expands a branch; <kbd>←</kbd> collapses it</li>
+                <li><kbd>Home</kbd> jumps to the first node; <kbd>End</kbd> jumps to the last visible node</li>
+                <li><kbd>Space</kbd> toggles the checkbox on checkbox trees</li>
+                <li><kbd>Enter</kbd> activates (selects/expands) the focused node</li>
+                <li>Type-ahead: pressing a letter key jumps to the next node whose label starts with that character</li>
+            </ul>
+        </div>
+    </div>
+</section>

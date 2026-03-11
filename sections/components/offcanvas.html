@@ -1,0 +1,345 @@
+<section id="offcanvas">
+    <h2 class="demo-title"><i class="ph ph-arrows-out"></i>Offcanvas</h2>
+    <p class="vd-mb-8">Extend the Sidenav into a full offcanvas panel that slides in from any edge. Uses the existing <code>VanduoSidenav</code> API with positional modifiers.</p>
+
+    <div class="vd-row">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-offcanvas-left">
+                <div class="vd-card-header">
+                    <h3>Left (Default)</h3>
+                </div>
+                <div class="vd-card-body" style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center;">
+                    <button class="vd-btn vd-btn-primary" data-sidenav-toggle="#offcanvas-left-demo">
+                        <i class="ph ph-arrow-line-left mr-2"></i>Open Left
+                    </button>
+                    <aside class="vd-offcanvas" id="offcanvas-left-demo">
+                        <div class="vd-sidenav-header">
+                            <h3 class="vd-sidenav-title">Left Panel</h3>
+                            <button class="vd-sidenav-close" aria-label="Close">&times;</button>
+                        </div>
+                        <div class="vd-sidenav-body">
+                            <p>Default offcanvas slides in from the left edge.</p>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-offcanvas-right">
+                <div class="vd-card-header">
+                    <h3>Right</h3>
+                </div>
+                <div class="vd-card-body" style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center;">
+                    <button class="vd-btn vd-btn-primary" data-sidenav-toggle="#offcanvas-right-demo">
+                        Open Right<i class="ph ph-arrow-line-right ml-2"></i>
+                    </button>
+                    <aside class="vd-offcanvas vd-offcanvas-right" id="offcanvas-right-demo" data-vd-position="right">
+                        <div class="vd-sidenav-header">
+                            <h3 class="vd-sidenav-title">Right Panel</h3>
+                            <button class="vd-sidenav-close" aria-label="Close">&times;</button>
+                        </div>
+                        <div class="vd-sidenav-body">
+                            <p>Add <code>.vd-offcanvas-right</code> or <code>data-vd-position="right"</code>.</p>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vd-row">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-offcanvas-top">
+                <div class="vd-card-header">
+                    <h3>Top</h3>
+                </div>
+                <div class="vd-card-body" style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center;">
+                    <button class="vd-btn vd-btn-outline-primary" data-sidenav-toggle="#offcanvas-top-demo">
+                        <i class="ph ph-arrow-line-up mr-2"></i>Open Top
+                    </button>
+                    <aside class="vd-offcanvas vd-offcanvas-top vd-sidenav-top" id="offcanvas-top-demo" data-vd-position="top">
+                        <div class="vd-sidenav-header">
+                            <h3 class="vd-sidenav-title">Top Panel</h3>
+                            <button class="vd-sidenav-close" aria-label="Close">&times;</button>
+                        </div>
+                        <div class="vd-sidenav-body">
+                            <p>Full-width panel sliding down from the top edge — great for search overlays or notification trays.</p>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Top offcanvas panel --&gt;</span>
+&lt;<span class="code-tag">button</span> <span class="code-attr">data-sidenav-toggle</span>=<span class="code-string">"#offcanvas-top"</span>&gt;
+  Open Top
+&lt;/<span class="code-tag">button</span>&gt;
+
+&lt;<span class="code-tag">aside</span> <span class="code-attr">class</span>=<span class="code-string">"vd-offcanvas vd-offcanvas-top"</span>
+       <span class="code-attr">id</span>=<span class="code-string">"offcanvas-top"</span>
+       <span class="code-attr">data-vd-position</span>=<span class="code-string">"top"</span>&gt;
+  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-sidenav-header"</span>&gt;
+    &lt;<span class="code-tag">h3</span> <span class="code-attr">class</span>=<span class="code-string">"vd-sidenav-title"</span>&gt;Top Panel&lt;/<span class="code-tag">h3</span>&gt;
+    &lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-sidenav-close"</span>&gt;&amp;times;&lt;/<span class="code-tag">button</span>&gt;
+  &lt;/<span class="code-tag">div</span>&gt;
+  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-sidenav-body"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;
+&lt;/<span class="code-tag">aside</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-offcanvas-bottom">
+                <div class="vd-card-header">
+                    <h3>Bottom</h3>
+                </div>
+                <div class="vd-card-body" style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center;">
+                    <button class="vd-btn vd-btn-outline-primary" data-sidenav-toggle="#offcanvas-bottom-demo">
+                        <i class="ph ph-arrow-line-down mr-2"></i>Open Bottom
+                    </button>
+                    <aside class="vd-offcanvas vd-offcanvas-bottom vd-sidenav-bottom" id="offcanvas-bottom-demo" data-vd-position="bottom">
+                        <div class="vd-sidenav-header">
+                            <h3 class="vd-sidenav-title">Bottom Panel</h3>
+                            <button class="vd-sidenav-close" aria-label="Close">&times;</button>
+                        </div>
+                        <div class="vd-sidenav-body">
+                            <p>Full-width panel sliding up from the bottom — ideal for mobile action sheets.</p>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Bottom offcanvas panel --&gt;</span>
+&lt;<span class="code-tag">aside</span> <span class="code-attr">class</span>=<span class="code-string">"vd-offcanvas vd-offcanvas-bottom"</span>
+       <span class="code-attr">data-vd-position</span>=<span class="code-string">"bottom"</span>&gt;
+  ...
+&lt;/<span class="code-tag">aside</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vd-row">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card" id="demo-offcanvas-data">
+                <div class="vd-card-header">
+                    <h3>Using <code>data-vd-position</code></h3>
+                </div>
+                <div class="vd-card-body">
+                    <p class="vd-mb-4">You can set the slide direction entirely through the <code>data-vd-position</code> attribute instead of adding directional CSS classes. The JS reads this attribute at init time and applies the correct transform.</p>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Direction via data attribute only --&gt;</span>
+&lt;<span class="code-tag">aside</span> <span class="code-attr">class</span>=<span class="code-string">"vd-offcanvas"</span> <span class="code-attr">data-vd-position</span>=<span class="code-string">"top"</span>&gt;...&lt;/<span class="code-tag">aside</span>&gt;
+&lt;<span class="code-tag">aside</span> <span class="code-attr">class</span>=<span class="code-string">"vd-offcanvas"</span> <span class="code-attr">data-vd-position</span>=<span class="code-string">"right"</span>&gt;...&lt;/<span class="code-tag">aside</span>&gt;
+&lt;<span class="code-tag">aside</span> <span class="code-attr">class</span>=<span class="code-string">"vd-offcanvas"</span> <span class="code-attr">data-vd-position</span>=<span class="code-string">"bottom"</span>&gt;...&lt;/<span class="code-tag">aside</span>&gt;
+&lt;<span class="code-tag">aside</span> <span class="code-attr">class</span>=<span class="code-string">"vd-offcanvas"</span> <span class="code-attr">data-vd-position</span>=<span class="code-string">"left"</span>&gt;...&lt;/<span class="code-tag">aside</span>&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- API Reference -->
+    <div class="vd-card vd-card-glow demo-card" id="demo-offcanvas-api">
+        <div class="vd-card-header">
+            <h3><i class="ph ph-list-dashes mr-2" style="color: var(--color-primary);"></i>API Reference</h3>
+        </div>
+        <div class="vd-card-body">
+            <h4>CSS Classes</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr>
+                            <th>Class</th>
+                            <th>Description</th>
+                            <th>Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>.vd-offcanvas</code></td>
+                            <td>Base offcanvas panel — extends <code>.vd-sidenav</code> behaviour</td>
+                            <td>Base</td>
+                        </tr>
+                        <tr>
+                            <td><code>.vd-offcanvas-top</code></td>
+                            <td>Slide from the top edge (full-width)</td>
+                            <td>Modifier</td>
+                        </tr>
+                        <tr>
+                            <td><code>.vd-offcanvas-bottom</code></td>
+                            <td>Slide from the bottom edge (full-width)</td>
+                            <td>Modifier</td>
+                        </tr>
+                        <tr>
+                            <td><code>.vd-offcanvas-right</code></td>
+                            <td>Slide from the right edge</td>
+                            <td>Modifier</td>
+                        </tr>
+                        <tr>
+                            <td><code>.vd-sidenav-top</code></td>
+                            <td>Legacy alias for <code>.vd-offcanvas-top</code></td>
+                            <td>Modifier</td>
+                        </tr>
+                        <tr>
+                            <td><code>.vd-sidenav-bottom</code></td>
+                            <td>Legacy alias for <code>.vd-offcanvas-bottom</code></td>
+                            <td>Modifier</td>
+                        </tr>
+                        <tr>
+                            <td><code>.is-open</code></td>
+                            <td>Applied when the panel is visible</td>
+                            <td>State</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4>Data Attributes</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr>
+                            <th>Attribute</th>
+                            <th>Description</th>
+                            <th>Default</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>data-vd-position</code></td>
+                            <td>Set slide direction: <code>top</code>, <code>right</code>, <code>bottom</code>, or <code>left</code></td>
+                            <td><code>left</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>data-sidenav-toggle</code></td>
+                            <td>Place on trigger element — value is the selector for the offcanvas (e.g. <code>"#my-panel"</code>)</td>
+                            <td>&mdash;</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4>JavaScript Methods</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>VanduoSidenav.open(el)</code></td>
+                            <td>Open the offcanvas panel programmatically</td>
+                        </tr>
+                        <tr>
+                            <td><code>VanduoSidenav.close(el)</code></td>
+                            <td>Close the offcanvas panel programmatically</td>
+                        </tr>
+                        <tr>
+                            <td><code>VanduoSidenav.toggle(el)</code></td>
+                            <td>Toggle the offcanvas panel open or closed</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4>Events</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr>
+                            <th>Event</th>
+                            <th>Description</th>
+                            <th>Detail</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>sidenav:open</code></td>
+                            <td>Fired on the offcanvas element after it becomes visible</td>
+                            <td><code>{ position }</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>sidenav:close</code></td>
+                            <td>Fired on the offcanvas element after it is hidden</td>
+                            <td><code>{ position }</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accessibility -->
+    <div class="vd-card vd-card-glow demo-card">
+        <div class="vd-card-header">
+            <h3><i class="ph ph-wheelchair mr-2" style="color: var(--color-primary);"></i>Accessibility</h3>
+        </div>
+        <div class="vd-card-body">
+            <ul>
+                <li>Offcanvas uses <code>role="dialog"</code> and <code>aria-modal="true"</code> when open</li>
+                <li>Close button includes <code>aria-label="Close"</code> for assistive technology</li>
+                <li>Focus is trapped within the panel while open and returned to the trigger on close</li>
+                <li>Pressing <kbd>Escape</kbd> closes the offcanvas panel</li>
+                <li>Overlay backdrop blocks interaction with the page beneath</li>
+                <li>The trigger button uses <code>aria-expanded</code> reflecting open/closed state</li>
+            </ul>
+        </div>
+    </div>
+</section>

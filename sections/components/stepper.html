@@ -1,0 +1,264 @@
+<section id="stepper">
+    <h2 class="demo-title"><i class="ph ph-steps"></i>Stepper</h2>
+    <p class="vd-mb-8">Multi-step progress indicators for wizards, checkout flows, and onboarding sequences.
+        Supports horizontal, vertical, and clickable variants with built-in state management.</p>
+
+    <!-- Horizontal Stepper -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card" id="demo-stepper-horizontal">
+                <div class="vd-card-header">
+                    <h3><i class="ph ph-arrow-right"></i> Horizontal Stepper</h3>
+                </div>
+                <div class="vd-card-body">
+                    <div class="vd-stepper" id="stepper-h-demo" role="list">
+                        <div class="vd-stepper-item is-completed" role="listitem">
+                            <div class="vd-stepper-circle"><i class="ph ph-check"></i></div>
+                            <div class="vd-stepper-label">Account
+                                <span class="vd-stepper-description">Create your credentials</span>
+                            </div>
+                        </div>
+                        <div class="vd-stepper-item is-completed" role="listitem">
+                            <div class="vd-stepper-circle"><i class="ph ph-check"></i></div>
+                            <div class="vd-stepper-label">Profile
+                                <span class="vd-stepper-description">Personal information</span>
+                            </div>
+                        </div>
+                        <div class="vd-stepper-item is-active" role="listitem">
+                            <div class="vd-stepper-circle">3</div>
+                            <div class="vd-stepper-label">Preferences
+                                <span class="vd-stepper-description">Customize your experience</span>
+                            </div>
+                        </div>
+                        <div class="vd-stepper-item" role="listitem">
+                            <div class="vd-stepper-circle">4</div>
+                            <div class="vd-stepper-label">Confirmation
+                                <span class="vd-stepper-description">Review &amp; submit</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display:flex;gap:.5rem;justify-content:center;margin-top:1.5rem;">
+                        <button class="vd-btn vd-btn-outline vd-btn-sm" onclick="VanduoStepper.prev(document.getElementById('stepper-h-demo'))">
+                            <i class="ph ph-caret-left"></i> Previous
+                        </button>
+                        <button class="vd-btn vd-btn-primary vd-btn-sm" onclick="VanduoStepper.next(document.getElementById('stepper-h-demo'))">
+                            Next <i class="ph ph-caret-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vertical Stepper -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-stepper-vertical">
+                <div class="vd-card-header">
+                    <h3><i class="ph ph-arrow-down"></i> Vertical Stepper</h3>
+                </div>
+                <div class="vd-card-body">
+                    <div class="vd-stepper vd-stepper-vertical" role="list">
+                        <div class="vd-stepper-item is-completed" role="listitem">
+                            <div class="vd-stepper-circle"><i class="ph ph-check"></i></div>
+                            <div class="vd-stepper-label">Order Placed
+                                <span class="vd-stepper-description">Your order has been confirmed</span>
+                            </div>
+                        </div>
+                        <div class="vd-stepper-item is-active" role="listitem">
+                            <div class="vd-stepper-circle">2</div>
+                            <div class="vd-stepper-label">Processing
+                                <span class="vd-stepper-description">We're preparing your items</span>
+                            </div>
+                        </div>
+                        <div class="vd-stepper-item" role="listitem">
+                            <div class="vd-stepper-circle">3</div>
+                            <div class="vd-stepper-label">Shipped
+                                <span class="vd-stepper-description">On the way to your address</span>
+                            </div>
+                        </div>
+                        <div class="vd-stepper-item" role="listitem">
+                            <div class="vd-stepper-circle">4</div>
+                            <div class="vd-stepper-label">Delivered
+                                <span class="vd-stepper-description">Package received</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Clickable Stepper -->
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-stepper-clickable">
+                <div class="vd-card-header">
+                    <h3><i class="ph ph-cursor-click"></i> Clickable Stepper</h3>
+                </div>
+                <div class="vd-card-body">
+                    <div class="vd-stepper vd-stepper-clickable" id="stepper-click-demo" role="list">
+                        <div class="vd-stepper-item is-completed" role="listitem" tabindex="0">
+                            <div class="vd-stepper-circle"><i class="ph ph-check"></i></div>
+                            <div class="vd-stepper-label">Plan
+                                <span class="vd-stepper-description">Choose a subscription</span>
+                            </div>
+                        </div>
+                        <div class="vd-stepper-item is-active" role="listitem" tabindex="0">
+                            <div class="vd-stepper-circle">2</div>
+                            <div class="vd-stepper-label">Billing
+                                <span class="vd-stepper-description">Payment details</span>
+                            </div>
+                        </div>
+                        <div class="vd-stepper-item is-error" role="listitem" tabindex="0">
+                            <div class="vd-stepper-circle"><i class="ph ph-warning"></i></div>
+                            <div class="vd-stepper-label">Verification
+                                <span class="vd-stepper-description">Identity check failed</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="vd-text-sm vd-text-muted vd-mt-4">
+                        <i class="ph ph-info"></i> Click any step to navigate directly. The error state on step 3 shows validation feedback.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- API Reference -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h3>API Reference</h3>
+                </div>
+                <div class="vd-card-body">
+                    <h4>CSS Classes</h4>
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Class</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>.vd-stepper</code></td>
+                                    <td>Base container for the stepper component. Renders a horizontal step track by default.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.vd-stepper-vertical</code></td>
+                                    <td>Modifier that stacks steps vertically with a connecting line on the left.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.vd-stepper-clickable</code></td>
+                                    <td>Enables pointer cursor and click-to-navigate behavior on each step.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.vd-stepper-item</code></td>
+                                    <td>Individual step wrapper. Holds the circle, label, and description.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.vd-stepper-circle</code></td>
+                                    <td>Circular indicator showing the step number, check icon, or error icon.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.vd-stepper-label</code></td>
+                                    <td>Primary text label for the step.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.vd-stepper-description</code></td>
+                                    <td>Secondary text below the label providing additional context.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.is-active</code></td>
+                                    <td>Marks the currently active step with primary-colored circle and bold label.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.is-completed</code></td>
+                                    <td>Marks a step as finished. Displays a check icon and success styling.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.is-error</code></td>
+                                    <td>Marks a step as having an error. Displays danger color and warning icon.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="vd-mt-6">JavaScript Methods</h4>
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Method</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>VanduoStepper.init()</code></td>
+                                    <td>Initializes all stepper instances in the DOM. Call after dynamic content loads.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>VanduoStepper.setStep(el, index)</code></td>
+                                    <td>Sets the active step to the given zero-based index. Previous steps are marked completed.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>VanduoStepper.next(el)</code></td>
+                                    <td>Advances to the next step. Marks the current step as completed.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>VanduoStepper.prev(el)</code></td>
+                                    <td>Returns to the previous step. Reverts the current step to pending.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>VanduoStepper.destroy(el)</code></td>
+                                    <td>Removes event listeners and internal state for the given stepper element.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="vd-mt-6">Events</h4>
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Event</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>stepper:change</code></td>
+                                    <td>Fired on the stepper element when the active step changes. <code>event.detail</code> contains <code>{ index, previousIndex, step }</code>.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accessibility -->
+    <div class="vd-row">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h3><i class="ph ph-wheelchair"></i> Accessibility</h3>
+                </div>
+                <div class="vd-card-body">
+                    <ul>
+                        <li>The stepper container uses <code>role="list"</code> and each step uses <code>role="listitem"</code> for assistive technology.</li>
+                        <li>Active step is announced via <code>aria-current="step"</code>.</li>
+                        <li>Completed steps convey state through <code>aria-label="Completed"</code> on the circle.</li>
+                        <li>Error steps include <code>aria-label="Error"</code> for screen reader feedback.</li>
+                        <li>Clickable steppers add <code>tabindex="0"</code> and respond to <kbd>Enter</kbd> and <kbd>Space</kbd> key presses.</li>
+                        <li>Focus order follows the visual step sequence from first to last.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

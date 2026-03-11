@@ -1,0 +1,403 @@
+<section id="carousel">
+    <h2 class="demo-title"><i class="ph ph-slideshow"></i>Flow / Carousel</h2>
+
+    <div class="vd-row">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card" id="demo-flow-basic">
+                <div class="vd-card-header">
+                    <h3>Basic Carousel</h3>
+                </div>
+                <div class="vd-card-body">
+                    <div class="vd-flow" data-vd-loop="true">
+                        <div class="vd-flow-track">
+                            <div class="vd-flow-slide" style="background: linear-gradient(135deg, var(--color-primary), var(--color-info)); color: #fff; padding: 3rem; text-align: center; border-radius: var(--radius-md);">
+                                <h3 style="margin:0 0 .5rem;">Slide One</h3>
+                                <p style="margin:0; opacity:.85;">Horizontal slide transition</p>
+                            </div>
+                            <div class="vd-flow-slide" style="background: linear-gradient(135deg, var(--color-success), var(--color-primary)); color: #fff; padding: 3rem; text-align: center; border-radius: var(--radius-md);">
+                                <h3 style="margin:0 0 .5rem;">Slide Two</h3>
+                                <p style="margin:0; opacity:.85;">Swipe or use controls to navigate</p>
+                            </div>
+                            <div class="vd-flow-slide" style="background: linear-gradient(135deg, var(--color-warning), var(--color-error)); color: #fff; padding: 3rem; text-align: center; border-radius: var(--radius-md);">
+                                <h3 style="margin:0 0 .5rem;">Slide Three</h3>
+                                <p style="margin:0; opacity:.85;">Fully responsive and accessible</p>
+                            </div>
+                        </div>
+                        <button class="vd-flow-prev" aria-label="Previous slide"><i class="ph ph-caret-left"></i></button>
+                        <button class="vd-flow-next" aria-label="Next slide"><i class="ph ph-caret-right"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"
+                            data-extract="#demo-flow-basic .vd-card-body"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vd-row">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-flow-fade">
+                <div class="vd-card-header">
+                    <h3>Fade Variant</h3>
+                </div>
+                <div class="vd-card-body">
+                    <div class="vd-flow vd-flow-fade" data-vd-loop="true">
+                        <div class="vd-flow-track">
+                            <div class="vd-flow-slide" style="background: linear-gradient(135deg, #667eea, #764ba2); color: #fff; padding: 3rem; text-align: center; border-radius: var(--radius-md);">
+                                <h4 style="margin:0;">Cross-fade transition</h4>
+                            </div>
+                            <div class="vd-flow-slide" style="background: linear-gradient(135deg, #f093fb, #f5576c); color: #fff; padding: 3rem; text-align: center; border-radius: var(--radius-md);">
+                                <h4 style="margin:0;">Smooth opacity blend</h4>
+                            </div>
+                            <div class="vd-flow-slide" style="background: linear-gradient(135deg, #4facfe, #00f2fe); color: #fff; padding: 3rem; text-align: center; border-radius: var(--radius-md);">
+                                <h4 style="margin:0;">Elegant transitions</h4>
+                            </div>
+                        </div>
+                        <button class="vd-flow-prev" aria-label="Previous slide"><i class="ph ph-caret-left"></i></button>
+                        <button class="vd-flow-next" aria-label="Next slide"><i class="ph ph-caret-right"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Add .vd-flow-fade for crossfade --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-flow vd-flow-fade"</span>&gt;
+  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-flow-track"</span>&gt;
+    &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-flow-slide"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;
+    &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-flow-slide"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;
+  &lt;/<span class="code-tag">div</span>&gt;
+  &lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-flow-prev"</span>&gt;&amp;lsaquo;&lt;/<span class="code-tag">button</span>&gt;
+  &lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-flow-next"</span>&gt;&amp;rsaquo;&lt;/<span class="code-tag">button</span>&gt;
+&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-flow-autoplay">
+                <div class="vd-card-header">
+                    <h3>Autoplay with Indicators</h3>
+                </div>
+                <div class="vd-card-body">
+                    <div class="vd-flow" data-vd-autoplay="true" data-vd-interval="4000" data-vd-loop="true">
+                        <div class="vd-flow-track">
+                            <div class="vd-flow-slide" style="background: linear-gradient(135deg, #0c3483, #a2b6df); color: #fff; padding: 3rem; text-align: center; border-radius: var(--radius-md);">
+                                <h4 style="margin:0;">Auto-advances every 4s</h4>
+                            </div>
+                            <div class="vd-flow-slide" style="background: linear-gradient(135deg, #fc5c7d, #6a82fb); color: #fff; padding: 3rem; text-align: center; border-radius: var(--radius-md);">
+                                <h4 style="margin:0;">Pauses on hover</h4>
+                            </div>
+                            <div class="vd-flow-slide" style="background: linear-gradient(135deg, #11998e, #38ef7d); color: #fff; padding: 3rem; text-align: center; border-radius: var(--radius-md);">
+                                <h4 style="margin:0;">Click indicator to jump</h4>
+                            </div>
+                        </div>
+                        <button class="vd-flow-prev" aria-label="Previous slide"><i class="ph ph-caret-left"></i></button>
+                        <button class="vd-flow-next" aria-label="Next slide"><i class="ph ph-caret-right"></i></button>
+                        <div class="vd-flow-indicators">
+                            <button aria-label="Go to slide 1"></button>
+                            <button aria-label="Go to slide 2"></button>
+                            <button aria-label="Go to slide 3"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Autoplay with indicators --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-flow"</span>
+     <span class="code-attr">data-vd-autoplay</span>=<span class="code-string">"true"</span>
+     <span class="code-attr">data-vd-interval</span>=<span class="code-string">"4000"</span>
+     <span class="code-attr">data-vd-loop</span>=<span class="code-string">"true"</span>&gt;
+  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-flow-track"</span>&gt;
+    &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-flow-slide"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;
+    &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-flow-slide"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;
+  &lt;/<span class="code-tag">div</span>&gt;
+  &lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-flow-prev"</span>&gt;...&lt;/<span class="code-tag">button</span>&gt;
+  &lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-flow-next"</span>&gt;...&lt;/<span class="code-tag">button</span>&gt;
+  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-flow-indicators"</span>&gt;
+    &lt;<span class="code-tag">button</span> <span class="code-attr">aria-label</span>=<span class="code-string">"Go to slide 1"</span>&gt;&lt;/<span class="code-tag">button</span>&gt;
+    &lt;<span class="code-tag">button</span> <span class="code-attr">aria-label</span>=<span class="code-string">"Go to slide 2"</span>&gt;&lt;/<span class="code-tag">button</span>&gt;
+  &lt;/<span class="code-tag">div</span>&gt;
+&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vd-row">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-flow-compact">
+                <div class="vd-card-header">
+                    <h3>Compact Size</h3>
+                </div>
+                <div class="vd-card-body">
+                    <div class="vd-flow vd-flow-compact" data-vd-loop="true">
+                        <div class="vd-flow-track">
+                            <div class="vd-flow-slide" style="background: var(--bg-secondary); padding: 1.5rem; text-align: center; border-radius: var(--radius-md);">
+                                <p style="margin:0;">Compact slide A</p>
+                            </div>
+                            <div class="vd-flow-slide" style="background: var(--bg-secondary); padding: 1.5rem; text-align: center; border-radius: var(--radius-md);">
+                                <p style="margin:0;">Compact slide B</p>
+                            </div>
+                        </div>
+                        <button class="vd-flow-prev" aria-label="Previous slide"><i class="ph ph-caret-left"></i></button>
+                        <button class="vd-flow-next" aria-label="Next slide"><i class="ph ph-caret-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-flow-lg">
+                <div class="vd-card-header">
+                    <h3>Large Size</h3>
+                </div>
+                <div class="vd-card-body">
+                    <div class="vd-flow vd-flow-lg" data-vd-loop="true">
+                        <div class="vd-flow-track">
+                            <div class="vd-flow-slide" style="background: linear-gradient(135deg, #232526, #414345); color: #fff; padding: 4rem; text-align: center; border-radius: var(--radius-md);">
+                                <h3 style="margin:0 0 .5rem;">Hero-size Carousel</h3>
+                                <p style="margin:0; opacity:.8;">Great for feature showcases and landing pages</p>
+                            </div>
+                            <div class="vd-flow-slide" style="background: linear-gradient(135deg, #1a2a6c, #b21f1f); color: #fff; padding: 4rem; text-align: center; border-radius: var(--radius-md);">
+                                <h3 style="margin:0 0 .5rem;">Full-width Content</h3>
+                                <p style="margin:0; opacity:.8;">Increased padding and height for impact</p>
+                            </div>
+                        </div>
+                        <button class="vd-flow-prev" aria-label="Previous slide"><i class="ph ph-caret-left"></i></button>
+                        <button class="vd-flow-next" aria-label="Next slide"><i class="ph ph-caret-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- API Reference -->
+    <div class="vd-card vd-card-glow demo-card" id="demo-flow-api">
+        <div class="vd-card-header">
+            <h3><i class="ph ph-list-dashes mr-2" style="color: var(--color-primary);"></i>API Reference</h3>
+        </div>
+        <div class="vd-card-body">
+            <h4>CSS Classes</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr>
+                            <th>Class</th>
+                            <th>Description</th>
+                            <th>Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>.vd-flow</code></td>
+                            <td>Base carousel container — required</td>
+                            <td>Base</td>
+                        </tr>
+                        <tr>
+                            <td><code>.vd-carousel</code></td>
+                            <td>Alias for <code>.vd-flow</code></td>
+                            <td>Base</td>
+                        </tr>
+                        <tr>
+                            <td><code>.vd-flow-track</code></td>
+                            <td>Inner wrapper holding all slides; handles translation</td>
+                            <td>Structure</td>
+                        </tr>
+                        <tr>
+                            <td><code>.vd-flow-slide</code></td>
+                            <td>Individual slide element within the track</td>
+                            <td>Structure</td>
+                        </tr>
+                        <tr>
+                            <td><code>.vd-flow-prev</code></td>
+                            <td>Previous-slide navigation button</td>
+                            <td>Control</td>
+                        </tr>
+                        <tr>
+                            <td><code>.vd-flow-next</code></td>
+                            <td>Next-slide navigation button</td>
+                            <td>Control</td>
+                        </tr>
+                        <tr>
+                            <td><code>.vd-flow-indicators</code></td>
+                            <td>Container for dot indicators; one button per slide</td>
+                            <td>Control</td>
+                        </tr>
+                        <tr>
+                            <td><code>.vd-flow-fade</code></td>
+                            <td>Crossfade transition instead of horizontal slide</td>
+                            <td>Modifier</td>
+                        </tr>
+                        <tr>
+                            <td><code>.vd-flow-compact</code></td>
+                            <td>Reduced padding and height for compact layouts</td>
+                            <td>Size</td>
+                        </tr>
+                        <tr>
+                            <td><code>.vd-flow-lg</code></td>
+                            <td>Increased padding and height for hero-style carousels</td>
+                            <td>Size</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4>Data Attributes</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr>
+                            <th>Attribute</th>
+                            <th>Description</th>
+                            <th>Default</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>data-vd-autoplay</code></td>
+                            <td>Enable automatic slide advancement when set to <code>"true"</code></td>
+                            <td><code>false</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>data-vd-interval</code></td>
+                            <td>Time in milliseconds between auto-advances</td>
+                            <td><code>5000</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>data-vd-loop</code></td>
+                            <td>Loop back to start after last slide when set to <code>"true"</code></td>
+                            <td><code>false</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4>JavaScript Methods</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>VanduoFlow.init()</code></td>
+                            <td>Initialize all <code>.vd-flow</code> components on the page</td>
+                        </tr>
+                        <tr>
+                            <td><code>VanduoFlow.next(el)</code></td>
+                            <td>Advance the given carousel element to the next slide</td>
+                        </tr>
+                        <tr>
+                            <td><code>VanduoFlow.prev(el)</code></td>
+                            <td>Move the given carousel element to the previous slide</td>
+                        </tr>
+                        <tr>
+                            <td><code>VanduoFlow.goTo(el, index)</code></td>
+                            <td>Jump the given carousel to the slide at <code>index</code> (0-based)</td>
+                        </tr>
+                        <tr>
+                            <td><code>VanduoFlow.destroy(el)</code></td>
+                            <td>Tear down event listeners and timers for the given carousel</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4>Events</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr>
+                            <th>Event</th>
+                            <th>Description</th>
+                            <th>Detail</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>flow:change</code></td>
+                            <td>Fired on the <code>.vd-flow</code> element after a slide transition completes</td>
+                            <td><code>{ index, slide, direction }</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accessibility -->
+    <div class="vd-card vd-card-glow demo-card">
+        <div class="vd-card-header">
+            <h3><i class="ph ph-wheelchair mr-2" style="color: var(--color-primary);"></i>Accessibility</h3>
+        </div>
+        <div class="vd-card-body">
+            <ul>
+                <li>Navigation buttons include <code>aria-label</code> attributes for screen readers</li>
+                <li>Indicator buttons use <code>aria-label="Go to slide N"</code> for identification</li>
+                <li>Active indicator receives <code>aria-current="true"</code> and <code>.is-active</code> class</li>
+                <li>Autoplay pauses on <code>:hover</code> and <code>:focus-within</code> to respect user interaction</li>
+                <li>Keyboard navigation: <kbd>ArrowLeft</kbd> / <kbd>ArrowRight</kbd> move between slides when focused</li>
+                <li>The carousel container uses <code>role="region"</code> and <code>aria-roledescription="carousel"</code></li>
+                <li>Each slide uses <code>role="group"</code> and <code>aria-roledescription="slide"</code></li>
+            </ul>
+        </div>
+    </div>
+</section>

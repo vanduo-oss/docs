@@ -1,0 +1,332 @@
+<section id="popover">
+    <h2 class="demo-title"><i class="ph ph-chat-circle"></i>Bubble / Popover</h2>
+
+    <div class="vd-row">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-bubble-basic">
+                <div class="vd-card-header">
+                    <h3>Basic Popover</h3>
+                </div>
+                <div class="vd-card-body" style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center;">
+                    <button class="vd-btn vd-btn-primary" data-vd-bubble="This is a simple popover message.">
+                        Hover me
+                    </button>
+                    <button class="vd-btn vd-btn-outline" data-vd-bubble="Another bubble with default placement.">
+                        Basic Bubble
+                    </button>
+                </div>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Basic popover via data attribute --&gt;</span>
+&lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-btn vd-btn-primary"</span>
+        <span class="code-attr">data-vd-bubble</span>=<span class="code-string">"This is a simple popover message."</span>&gt;
+  Hover me
+&lt;/<span class="code-tag">button</span>&gt;
+
+<span class="code-comment">&lt;!-- Alias: data-vd-popover also works --&gt;</span>
+&lt;<span class="code-tag">button</span> <span class="code-attr">data-vd-popover</span>=<span class="code-string">"Same behaviour."</span>&gt;Alias&lt;/<span class="code-tag">button</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-bubble-placement">
+                <div class="vd-card-header">
+                    <h3>Placement Variants</h3>
+                </div>
+                <div class="vd-card-body" style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center; justify-content:center; padding: 2rem;">
+                    <button class="vd-btn vd-btn-outline-primary" data-vd-bubble="Appears on top" data-vd-bubble-placement="top">
+                        Top
+                    </button>
+                    <button class="vd-btn vd-btn-outline-primary" data-vd-bubble="Appears on the right" data-vd-bubble-placement="right">
+                        Right
+                    </button>
+                    <button class="vd-btn vd-btn-outline-primary" data-vd-bubble="Appears on the bottom" data-vd-bubble-placement="bottom">
+                        Bottom
+                    </button>
+                    <button class="vd-btn vd-btn-outline-primary" data-vd-bubble="Appears on the left" data-vd-bubble-placement="left">
+                        Left
+                    </button>
+                </div>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">button</span> <span class="code-attr">data-vd-bubble</span>=<span class="code-string">"Top"</span>
+        <span class="code-attr">data-vd-bubble-placement</span>=<span class="code-string">"top"</span>&gt;Top&lt;/<span class="code-tag">button</span>&gt;
+
+&lt;<span class="code-tag">button</span> <span class="code-attr">data-vd-bubble</span>=<span class="code-string">"Right"</span>
+        <span class="code-attr">data-vd-bubble-placement</span>=<span class="code-string">"right"</span>&gt;Right&lt;/<span class="code-tag">button</span>&gt;
+
+&lt;<span class="code-tag">button</span> <span class="code-attr">data-vd-bubble</span>=<span class="code-string">"Bottom"</span>
+        <span class="code-attr">data-vd-bubble-placement</span>=<span class="code-string">"bottom"</span>&gt;Bottom&lt;/<span class="code-tag">button</span>&gt;
+
+&lt;<span class="code-tag">button</span> <span class="code-attr">data-vd-bubble</span>=<span class="code-string">"Left"</span>
+        <span class="code-attr">data-vd-bubble-placement</span>=<span class="code-string">"left"</span>&gt;Left&lt;/<span class="code-tag">button</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vd-row">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-bubble-titled">
+                <div class="vd-card-header">
+                    <h3>With Title &amp; Close Button</h3>
+                </div>
+                <div class="vd-card-body" style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center;">
+                    <button class="vd-btn vd-btn-primary"
+                            data-vd-bubble="This popover has a title header and a close button for click-triggered popovers."
+                            data-vd-bubble-title="Popover Title"
+                            data-vd-bubble-placement="bottom">
+                        Titled Popover
+                    </button>
+                </div>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">button</span> <span class="code-attr">data-vd-bubble</span>=<span class="code-string">"Body text for the popover."</span>
+        <span class="code-attr">data-vd-bubble-title</span>=<span class="code-string">"Popover Title"</span>
+        <span class="code-attr">data-vd-bubble-placement</span>=<span class="code-string">"bottom"</span>&gt;
+  Titled Popover
+&lt;/<span class="code-tag">button</span>&gt;
+
+<span class="code-comment">&lt;!-- Generated markup --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-bubble-content"</span>&gt;
+  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-bubble-header"</span>&gt;
+    &lt;<span class="code-tag">strong</span>&gt;Popover Title&lt;/<span class="code-tag">strong</span>&gt;
+    &lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-bubble-close"</span> <span class="code-attr">aria-label</span>=<span class="code-string">"Close"</span>&gt;&amp;times;&lt;/<span class="code-tag">button</span>&gt;
+  &lt;/<span class="code-tag">div</span>&gt;
+  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-bubble-body"</span>&gt;Body text&lt;/<span class="code-tag">div</span>&gt;
+&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-bubble-notitle">
+                <div class="vd-card-header">
+                    <h3>Body-only (No Title)</h3>
+                </div>
+                <div class="vd-card-body" style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center;">
+                    <span class="vd-btn vd-btn-outline-secondary" data-vd-bubble="A compact bubble with no header — just content." data-vd-bubble-placement="top">
+                        Hover for info
+                    </span>
+                    <span class="vd-btn vd-btn-outline-secondary" data-vd-bubble="Works on any element, not just buttons." data-vd-bubble-placement="right">
+                        Any element
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- API Reference -->
+    <div class="vd-card vd-card-glow demo-card" id="demo-bubble-api">
+        <div class="vd-card-header">
+            <h3><i class="ph ph-list-dashes mr-2" style="color: var(--color-primary);"></i>API Reference</h3>
+        </div>
+        <div class="vd-card-body">
+            <h4>CSS Classes</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr>
+                            <th>Class</th>
+                            <th>Description</th>
+                            <th>Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>.vd-bubble-content</code></td>
+                            <td>Outer popover container (auto-generated by JS)</td>
+                            <td>Base</td>
+                        </tr>
+                        <tr>
+                            <td><code>.vd-popover-content</code></td>
+                            <td>Alias for <code>.vd-bubble-content</code></td>
+                            <td>Base</td>
+                        </tr>
+                        <tr>
+                            <td><code>.vd-bubble-header</code></td>
+                            <td>Header section containing title and close button</td>
+                            <td>Structure</td>
+                        </tr>
+                        <tr>
+                            <td><code>.vd-bubble-body</code></td>
+                            <td>Body section holding the popover text content</td>
+                            <td>Structure</td>
+                        </tr>
+                        <tr>
+                            <td><code>.vd-bubble-close</code></td>
+                            <td>Close button within the header</td>
+                            <td>Action</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4>Data Attributes</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr>
+                            <th>Attribute</th>
+                            <th>Description</th>
+                            <th>Default</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>data-vd-bubble</code></td>
+                            <td>Popover body text — placing this on any element makes it a trigger</td>
+                            <td>&mdash;</td>
+                        </tr>
+                        <tr>
+                            <td><code>data-vd-popover</code></td>
+                            <td>Alias for <code>data-vd-bubble</code></td>
+                            <td>&mdash;</td>
+                        </tr>
+                        <tr>
+                            <td><code>data-vd-bubble-title</code></td>
+                            <td>Optional title shown in the popover header</td>
+                            <td><em>none</em></td>
+                        </tr>
+                        <tr>
+                            <td><code>data-vd-bubble-placement</code></td>
+                            <td>Position relative to trigger: <code>top</code>, <code>right</code>, <code>bottom</code>, <code>left</code></td>
+                            <td><code>top</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4>JavaScript Methods</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>VanduoBubble.init()</code></td>
+                            <td>Initialize all <code>[data-vd-bubble]</code> triggers on the page</td>
+                        </tr>
+                        <tr>
+                            <td><code>VanduoBubble.show(trigger)</code></td>
+                            <td>Programmatically show the popover for the given trigger element</td>
+                        </tr>
+                        <tr>
+                            <td><code>VanduoBubble.hide(trigger)</code></td>
+                            <td>Programmatically hide the popover for the given trigger element</td>
+                        </tr>
+                        <tr>
+                            <td><code>VanduoBubble.hideAll()</code></td>
+                            <td>Dismiss every open popover on the page</td>
+                        </tr>
+                        <tr>
+                            <td><code>VanduoBubble.destroy(trigger)</code></td>
+                            <td>Remove event listeners and generated DOM for the given trigger</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4>Events</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr>
+                            <th>Event</th>
+                            <th>Description</th>
+                            <th>Detail</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>bubble:show</code></td>
+                            <td>Fired on the trigger element when its popover becomes visible</td>
+                            <td><code>{ trigger, placement }</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>bubble:hide</code></td>
+                            <td>Fired on the trigger element when its popover is dismissed</td>
+                            <td><code>{ trigger }</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accessibility -->
+    <div class="vd-card vd-card-glow demo-card">
+        <div class="vd-card-header">
+            <h3><i class="ph ph-wheelchair mr-2" style="color: var(--color-primary);"></i>Accessibility</h3>
+        </div>
+        <div class="vd-card-body">
+            <ul>
+                <li>Trigger elements receive <code>aria-describedby</code> pointing to the popover ID</li>
+                <li>The popover uses <code>role="tooltip"</code> for untitled and <code>role="dialog"</code> for titled variants</li>
+                <li>Close buttons include <code>aria-label="Close"</code> for screen readers</li>
+                <li>Popover is dismissed on <kbd>Escape</kbd> keypress</li>
+                <li>Focus is trapped inside titled popovers and returned to the trigger on close</li>
+                <li>Popover auto-repositions to stay within the viewport (collision detection)</li>
+            </ul>
+        </div>
+    </div>
+</section>

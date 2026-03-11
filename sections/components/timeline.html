@@ -1,0 +1,238 @@
+<section id="timeline">
+    <h2 class="demo-title"><i class="ph ph-clock-countdown"></i>Timeline</h2>
+    <p class="vd-mb-8">Display chronological events in a vertical track. A pure CSS component — no JavaScript required.
+        Supports alternating layout and color-coded markers for different event states.</p>
+
+    <!-- Basic Vertical Timeline -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-timeline-basic">
+                <div class="vd-card-header">
+                    <h3><i class="ph ph-list-numbers"></i> Basic Timeline</h3>
+                </div>
+                <div class="vd-card-body">
+                    <div class="vd-timeline">
+                        <div class="vd-timeline-item">
+                            <div class="vd-timeline-marker vd-timeline-success"></div>
+                            <div class="vd-timeline-content">
+                                <span class="vd-timeline-date">March 2026</span>
+                                <h4 class="vd-timeline-title">Project Launched</h4>
+                                <p class="vd-timeline-text">Initial release of the framework with core components, grid system, and theme engine.</p>
+                            </div>
+                        </div>
+                        <div class="vd-timeline-item">
+                            <div class="vd-timeline-marker"></div>
+                            <div class="vd-timeline-content">
+                                <span class="vd-timeline-date">February 2026</span>
+                                <h4 class="vd-timeline-title">Beta Testing</h4>
+                                <p class="vd-timeline-text">Community feedback collected, accessibility audit completed, and performance benchmarks run.</p>
+                            </div>
+                        </div>
+                        <div class="vd-timeline-item">
+                            <div class="vd-timeline-marker"></div>
+                            <div class="vd-timeline-content">
+                                <span class="vd-timeline-date">January 2026</span>
+                                <h4 class="vd-timeline-title">Design Phase</h4>
+                                <p class="vd-timeline-text">Design tokens defined, Figma components created, and documentation site scaffolded.</p>
+                            </div>
+                        </div>
+                        <div class="vd-timeline-item">
+                            <div class="vd-timeline-marker"></div>
+                            <div class="vd-timeline-content">
+                                <span class="vd-timeline-date">December 2025</span>
+                                <h4 class="vd-timeline-title">Concept &amp; Planning</h4>
+                                <p class="vd-timeline-text">Requirements gathered, architecture decided, and technology stack finalized.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Color Variants -->
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-timeline-colors">
+                <div class="vd-card-header">
+                    <h3><i class="ph ph-palette"></i> Color Variants</h3>
+                </div>
+                <div class="vd-card-body">
+                    <div class="vd-timeline">
+                        <div class="vd-timeline-item">
+                            <div class="vd-timeline-marker vd-timeline-marker-lg vd-timeline-success">
+                                <i class="ph ph-check"></i>
+                            </div>
+                            <div class="vd-timeline-content">
+                                <h4 class="vd-timeline-title">Build Passed</h4>
+                                <p class="vd-timeline-text">All 142 tests passed. Bundle size within budget.</p>
+                            </div>
+                        </div>
+                        <div class="vd-timeline-item">
+                            <div class="vd-timeline-marker vd-timeline-marker-lg vd-timeline-warning">
+                                <i class="ph ph-warning"></i>
+                            </div>
+                            <div class="vd-timeline-content">
+                                <h4 class="vd-timeline-title">Deprecation Notice</h4>
+                                <p class="vd-timeline-text">The <code>.vd-card-flat</code> class will be removed in v3.0. Migrate to <code>.vd-card-outlined</code>.</p>
+                            </div>
+                        </div>
+                        <div class="vd-timeline-item">
+                            <div class="vd-timeline-marker vd-timeline-marker-lg vd-timeline-danger">
+                                <i class="ph ph-x"></i>
+                            </div>
+                            <div class="vd-timeline-content">
+                                <h4 class="vd-timeline-title">Deploy Failed</h4>
+                                <p class="vd-timeline-text">CDN purge timed out. Rollback initiated automatically.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alternating Timeline -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card" id="demo-timeline-alternating">
+                <div class="vd-card-header">
+                    <h3><i class="ph ph-arrows-left-right"></i> Alternating Timeline</h3>
+                </div>
+                <div class="vd-card-body">
+                    <div class="vd-timeline vd-timeline-alternating">
+                        <div class="vd-timeline-item">
+                            <div class="vd-timeline-marker vd-timeline-success"></div>
+                            <div class="vd-timeline-content">
+                                <span class="vd-timeline-date">09:00</span>
+                                <h4 class="vd-timeline-title">Morning Standup</h4>
+                                <p class="vd-timeline-text">Team synced on sprint goals and blockers for the day.</p>
+                            </div>
+                        </div>
+                        <div class="vd-timeline-item">
+                            <div class="vd-timeline-marker"></div>
+                            <div class="vd-timeline-content">
+                                <span class="vd-timeline-date">11:30</span>
+                                <h4 class="vd-timeline-title">Code Review</h4>
+                                <p class="vd-timeline-text">Reviewed pull requests for the new grid system and responsive utilities.</p>
+                            </div>
+                        </div>
+                        <div class="vd-timeline-item">
+                            <div class="vd-timeline-marker vd-timeline-warning"></div>
+                            <div class="vd-timeline-content">
+                                <span class="vd-timeline-date">14:00</span>
+                                <h4 class="vd-timeline-title">Design Sync</h4>
+                                <p class="vd-timeline-text">Discussed token naming conventions and dark-mode color adjustments.</p>
+                            </div>
+                        </div>
+                        <div class="vd-timeline-item">
+                            <div class="vd-timeline-marker vd-timeline-success"></div>
+                            <div class="vd-timeline-content">
+                                <span class="vd-timeline-date">17:00</span>
+                                <h4 class="vd-timeline-title">Release Shipped</h4>
+                                <p class="vd-timeline-text">Version 2.4.0 published to npm and CDN. Changelog updated.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- API Reference -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h3>API Reference</h3>
+                </div>
+                <div class="vd-card-body">
+                    <h4>CSS Classes</h4>
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Class</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>.vd-timeline</code></td>
+                                    <td>Base container. Draws a vertical line and positions items along it.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.vd-timeline-item</code></td>
+                                    <td>Individual event wrapper containing a marker and content block.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.vd-timeline-marker</code></td>
+                                    <td>Circular dot positioned on the timeline track. Default size is 12px.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.vd-timeline-marker-lg</code></td>
+                                    <td>Larger marker (24px) that can contain an icon.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.vd-timeline-content</code></td>
+                                    <td>Text block beside the marker holding title, date, and description.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.vd-timeline-title</code></td>
+                                    <td>Heading text for the event.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.vd-timeline-date</code></td>
+                                    <td>Small muted text for the event date or timestamp.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.vd-timeline-text</code></td>
+                                    <td>Body text describing the event in detail.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.vd-timeline-alternating</code></td>
+                                    <td>Modifier that alternates items left and right of the center line (desktop only).</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.vd-timeline-success</code></td>
+                                    <td>Colors the marker with the success (green) palette.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.vd-timeline-warning</code></td>
+                                    <td>Colors the marker with the warning (amber) palette.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.vd-timeline-danger</code></td>
+                                    <td>Colors the marker with the danger (red) palette.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="vd-alert vd-alert-info vd-mt-5">
+                        <i class="ph ph-code"></i>
+                        <div><strong>No JavaScript needed.</strong> The timeline is a pure CSS component. No initialization or event handling is required.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accessibility -->
+    <div class="vd-row">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h3><i class="ph ph-wheelchair"></i> Accessibility</h3>
+                </div>
+                <div class="vd-card-body">
+                    <ul>
+                        <li>Use an <code>&lt;ol&gt;</code> or add <code>role="list"</code> on the container and <code>role="listitem"</code> on each <code>.vd-timeline-item</code> so events are announced as an ordered sequence.</li>
+                        <li>Markers are decorative — apply <code>aria-hidden="true"</code> on <code>.vd-timeline-marker</code> icons.</li>
+                        <li>Ensure <code>.vd-timeline-date</code> text uses a <code>&lt;time&gt;</code> element with a <code>datetime</code> attribute for machine-readable dates.</li>
+                        <li>Color variants must not be the sole indicator of state — pair them with text labels or icons.</li>
+                        <li>The alternating layout collapses to a single column on narrow viewports, maintaining natural reading order.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
