@@ -455,6 +455,150 @@
               ]
             }
           ]
+        },
+        {
+          "name": "Carousel & Media",
+          "sections": [
+            {
+              "id": "carousel",
+              "title": "Carousel / Flow",
+              "file": "components/carousel.html",
+              "icon": "ph-slideshow",
+              "keywords": ["carousel", "slider", "flow", "slideshow", "swipe", "autoplay"]
+            },
+            {
+              "id": "spotlight",
+              "title": "Spotlight / Feature Discovery",
+              "file": "components/spotlight.html",
+              "icon": "ph-target",
+              "keywords": ["spotlight", "feature discovery", "tour", "onboarding", "highlight"]
+            },
+            {
+              "id": "timeline",
+              "title": "Timeline",
+              "file": "components/timeline.html",
+              "icon": "ph-clock-countdown",
+              "keywords": ["timeline", "history", "events", "chronology", "vertical"]
+            }
+          ]
+        },
+        {
+          "name": "Popover & Overlay",
+          "sections": [
+            {
+              "id": "popover",
+              "title": "Popover / Bubble",
+              "file": "components/popover.html",
+              "icon": "ph-chat-teardrop",
+              "keywords": ["popover", "bubble", "popup", "tooltip", "click"]
+            },
+            {
+              "id": "offcanvas",
+              "title": "Offcanvas",
+              "file": "components/offcanvas.html",
+              "icon": "ph-sidebar-simple",
+              "keywords": ["offcanvas", "drawer", "panel", "slide", "direction"]
+            },
+            {
+              "id": "fab",
+              "title": "FAB (Floating Action Button)",
+              "file": "components/fab.html",
+              "icon": "ph-plus-circle",
+              "keywords": ["fab", "floating", "action", "button", "speed dial"]
+            }
+          ]
+        },
+        {
+          "name": "Navigation & Scroll",
+          "sections": [
+            {
+              "id": "scrollspy",
+              "title": "Scrollspy / Waypoint",
+              "file": "components/scrollspy.html",
+              "icon": "ph-crosshair",
+              "keywords": ["scrollspy", "waypoint", "scroll", "navigation", "active"]
+            },
+            {
+              "id": "sticky",
+              "title": "Sticky / Affix",
+              "file": "components/sticky.html",
+              "icon": "ph-push-pin",
+              "keywords": ["sticky", "affix", "fixed", "scroll", "position"]
+            },
+            {
+              "id": "stepper",
+              "title": "Stepper",
+              "file": "components/stepper.html",
+              "icon": "ph-list-numbers",
+              "keywords": ["stepper", "wizard", "steps", "progress", "multi-step"]
+            }
+          ]
+        },
+        {
+          "name": "Data Entry",
+          "sections": [
+            {
+              "id": "autocomplete",
+              "title": "Autocomplete / Suggest",
+              "file": "components/autocomplete.html",
+              "icon": "ph-magnifying-glass-plus",
+              "keywords": ["autocomplete", "suggest", "typeahead", "search", "combobox"]
+            },
+            {
+              "id": "form-validation",
+              "title": "Form Validation",
+              "file": "components/form-validation.html",
+              "icon": "ph-check-circle",
+              "keywords": ["validate", "validation", "form", "rules", "required", "email"]
+            },
+            {
+              "id": "datepicker",
+              "title": "Date Picker",
+              "file": "components/datepicker.html",
+              "icon": "ph-calendar",
+              "keywords": ["datepicker", "date", "calendar", "picker", "select"]
+            },
+            {
+              "id": "timepicker",
+              "title": "Time Picker",
+              "file": "components/timepicker.html",
+              "icon": "ph-clock",
+              "keywords": ["timepicker", "time", "picker", "clock", "schedule"]
+            },
+            {
+              "id": "rating",
+              "title": "Rating",
+              "file": "components/rating.html",
+              "icon": "ph-star",
+              "keywords": ["rating", "stars", "score", "review", "feedback"]
+            },
+            {
+              "id": "transfer",
+              "title": "Transfer / Multi-select",
+              "file": "components/transfer.html",
+              "icon": "ph-arrows-left-right",
+              "keywords": ["transfer", "dual list", "multi-select", "shuttle", "pick"]
+            },
+            {
+              "id": "tree-view",
+              "title": "Tree View",
+              "file": "components/tree-view.html",
+              "icon": "ph-tree-structure",
+              "keywords": ["tree", "hierarchy", "nodes", "expand", "collapse", "checkbox"]
+            }
+          ]
+        },
+        {
+          "name": "Effects",
+          "sections": [
+            {
+              "id": "ripple",
+              "title": "Ripple / Waves",
+              "file": "components/ripple.html",
+              "icon": "ph-wave-sine",
+              "keywords": ["ripple", "waves", "click", "effect", "animation"]
+            }
+          ]
         }
       ]
     },

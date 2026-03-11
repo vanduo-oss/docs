@@ -1,0 +1,255 @@
+<section id="datepicker">
+    <h2 class="demo-title"><i class="ph ph-calendar-dots"></i>Datepicker</h2>
+    <p class="vd-mb-5">The <strong>VanduoDatepicker</strong> component attaches a calendar popup to any text input. Supports
+        custom date formats, min/max date constraints, and month/year navigation — all driven by data attributes.</p>
+
+    <div class="vd-row">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-datepicker-basic">
+                <div class="vd-card-header"><h3>Basic Datepicker</h3></div>
+                <div class="vd-card-body">
+                    <div class="vd-form-group">
+                        <label for="dp-basic">Select a Date</label>
+                        <input type="text" id="dp-basic" class="vd-input" placeholder="YYYY-MM-DD"
+                            data-vd-datepicker readonly>
+                    </div>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">input</span> <span class="code-attr">type</span>=<span class="code-string">"text"</span>
+  <span class="code-attr">class</span>=<span class="code-string">"vd-input"</span>
+  <span class="code-attr">placeholder</span>=<span class="code-string">"YYYY-MM-DD"</span>
+  <span class="code-attr">data-vd-datepicker</span>
+  <span class="code-attr">readonly</span>&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-datepicker-preselect">
+                <div class="vd-card-header"><h3>Pre-selected Value & Custom Format</h3></div>
+                <div class="vd-card-body">
+                    <div class="vd-form-group">
+                        <label for="dp-preselect">Birthday</label>
+                        <input type="text" id="dp-preselect" class="vd-input" value="03/15/1995"
+                            data-vd-datepicker
+                            data-vd-datepicker-format="MM/DD/YYYY"
+                            readonly>
+                    </div>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">input</span> <span class="code-attr">type</span>=<span class="code-string">"text"</span>
+  <span class="code-attr">class</span>=<span class="code-string">"vd-input"</span>
+  <span class="code-attr">value</span>=<span class="code-string">"03/15/1995"</span>
+  <span class="code-attr">data-vd-datepicker</span>
+  <span class="code-attr">data-vd-datepicker-format</span>=<span class="code-string">"MM/DD/YYYY"</span>
+  <span class="code-attr">readonly</span>&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vd-row">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-datepicker-minmax">
+                <div class="vd-card-header"><h3>Min / Max Date Constraints</h3></div>
+                <div class="vd-card-body">
+                    <div class="vd-form-group">
+                        <label for="dp-minmax">Appointment (next 30 days only)</label>
+                        <input type="text" id="dp-minmax" class="vd-input" placeholder="Pick a date…"
+                            data-vd-datepicker
+                            data-vd-datepicker-min="2026-03-11"
+                            data-vd-datepicker-max="2026-04-10"
+                            readonly>
+                    </div>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">input</span> <span class="code-attr">type</span>=<span class="code-string">"text"</span>
+  <span class="code-attr">class</span>=<span class="code-string">"vd-input"</span>
+  <span class="code-attr">data-vd-datepicker</span>
+  <span class="code-attr">data-vd-datepicker-min</span>=<span class="code-string">"2026-03-11"</span>
+  <span class="code-attr">data-vd-datepicker-max</span>=<span class="code-string">"2026-04-10"</span>
+  <span class="code-attr">readonly</span>&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-datepicker-navigation">
+                <div class="vd-card-header"><h3>Month / Year Navigation</h3></div>
+                <div class="vd-card-body">
+                    <p class="vd-text-sm vd-text-muted vd-mb-4">All datepickers include built-in month/year navigation.
+                        Click the month/year header to switch between month and year views. Arrow buttons step through
+                        months.</p>
+                    <div class="vd-form-group">
+                        <label for="dp-nav">Event Date</label>
+                        <input type="text" id="dp-nav" class="vd-input" placeholder="DD.MM.YYYY"
+                            data-vd-datepicker
+                            data-vd-datepicker-format="DD.MM.YYYY"
+                            readonly>
+                    </div>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">input</span> <span class="code-attr">type</span>=<span class="code-string">"text"</span>
+  <span class="code-attr">class</span>=<span class="code-string">"vd-input"</span>
+  <span class="code-attr">placeholder</span>=<span class="code-string">"DD.MM.YYYY"</span>
+  <span class="code-attr">data-vd-datepicker</span>
+  <span class="code-attr">data-vd-datepicker-format</span>=<span class="code-string">"DD.MM.YYYY"</span>
+  <span class="code-attr">readonly</span>&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- API Reference -->
+    <div class="vd-card vd-card-glow demo-card">
+        <div class="vd-card-header">
+            <h3><i class="ph ph-list-dashes mr-2" style="color: var(--color-primary);"></i>API Reference</h3>
+        </div>
+        <div class="vd-card-body">
+            <h4>CSS Classes</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr><th>Class</th><th>Description</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>.vd-datepicker-popup</code></td><td>The floating calendar container positioned below the input</td></tr>
+                        <tr><td><code>.vd-datepicker-header</code></td><td>Header row with month/year label and navigation arrows</td></tr>
+                        <tr><td><code>.vd-datepicker-grid</code></td><td>7-column CSS grid holding day cells</td></tr>
+                        <tr><td><code>.vd-datepicker-day</code></td><td>Individual day cell button</td></tr>
+                        <tr><td><code>.vd-datepicker-day.is-today</code></td><td>Highlights today's date with a ring indicator</td></tr>
+                        <tr><td><code>.vd-datepicker-day.is-selected</code></td><td>The currently selected date (filled primary color)</td></tr>
+                        <tr><td><code>.vd-datepicker-day.is-disabled</code></td><td>Dates outside the min/max range (greyed out, not clickable)</td></tr>
+                        <tr><td><code>.vd-datepicker-day.is-outside</code></td><td>Days from the previous/next month shown for grid continuity</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4 class="vd-mt-6">Data Attributes</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr><th>Attribute</th><th>Description</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>data-vd-datepicker</code></td><td>Activates the datepicker on the input</td></tr>
+                        <tr><td><code>data-vd-datepicker-format</code></td><td>Date format string. Tokens: <code>YYYY</code>, <code>MM</code>, <code>DD</code>. Default: <code>"YYYY-MM-DD"</code></td></tr>
+                        <tr><td><code>data-vd-datepicker-min</code></td><td>Earliest selectable date in <code>YYYY-MM-DD</code> format</td></tr>
+                        <tr><td><code>data-vd-datepicker-max</code></td><td>Latest selectable date in <code>YYYY-MM-DD</code> format</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4 class="vd-mt-6">JavaScript Methods</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr><th>Method</th><th>Description</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>VanduoDatepicker.init()</code></td><td>Scans for all <code>[data-vd-datepicker]</code> inputs and attaches calendar popups</td></tr>
+                        <tr><td><code>VanduoDatepicker.destroy(el)</code></td><td>Removes the calendar popup and event listeners from the given input</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4 class="vd-mt-6">Events</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr><th>Event</th><th>Description</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>datepicker:select</code></td><td>Fired on the input when a date is picked. <code>event.detail</code> contains <code>{ date: Date, formatted: string }</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accessibility -->
+    <div class="vd-card vd-card-glow demo-card">
+        <div class="vd-card-header">
+            <h3><i class="ph ph-wheelchair mr-2" style="color: var(--color-primary);"></i>Accessibility</h3>
+        </div>
+        <div class="vd-card-body">
+            <ul>
+                <li>The popup has <code>role="dialog"</code> and <code>aria-label="Choose date"</code></li>
+                <li>Day grid uses <code>role="grid"</code> with <code>role="gridcell"</code> for each day</li>
+                <li><kbd>←</kbd> / <kbd>→</kbd> move by day; <kbd>↑</kbd> / <kbd>↓</kbd> move by week</li>
+                <li><kbd>Home</kbd> / <kbd>End</kbd> jump to start/end of the current week</li>
+                <li><kbd>Page Up</kbd> / <kbd>Page Down</kbd> navigate by month</li>
+                <li><kbd>Enter</kbd> selects the focused date; <kbd>Escape</kbd> closes the popup and returns focus to the input</li>
+                <li>Disabled dates have <code>aria-disabled="true"</code> and are skipped during keyboard navigation</li>
+            </ul>
+        </div>
+    </div>
+</section>

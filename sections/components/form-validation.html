@@ -1,0 +1,353 @@
+<section id="form-validation">
+    <h2 class="demo-title"><i class="ph ph-shield-check"></i>Form Validation</h2>
+    <p class="vd-mb-5">The <strong>VanduoValidate</strong> component provides declarative, attribute-driven form validation.
+        Chain rules with pipe syntax (<code>required|email|min:3</code>), choose when validation triggers, and customise
+        every error message — all without writing JavaScript.</p>
+
+    <div class="vd-row">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-validate-required">
+                <div class="vd-card-header"><h3>Required & Email</h3></div>
+                <div class="vd-card-body">
+                    <form data-vd-validate novalidate>
+                        <div class="vd-form-group">
+                            <label for="val-name">Full Name</label>
+                            <input type="text" id="val-name" class="vd-input" placeholder="Jane Doe"
+                                data-vd-rules="required"
+                                data-vd-msg-required="Please enter your name">
+                        </div>
+                        <div class="vd-form-group">
+                            <label for="val-email">Email Address</label>
+                            <input type="email" id="val-email" class="vd-input" placeholder="jane@example.com"
+                                data-vd-rules="required|email">
+                        </div>
+                        <button type="submit" class="vd-btn vd-btn-primary">Submit</button>
+                    </form>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">form</span> <span class="code-attr">data-vd-validate</span> <span class="code-attr">novalidate</span>&gt;
+  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-form-group"</span>&gt;
+    &lt;<span class="code-tag">label</span> <span class="code-attr">for</span>=<span class="code-string">"name"</span>&gt;Full Name&lt;/<span class="code-tag">label</span>&gt;
+    &lt;<span class="code-tag">input</span> <span class="code-attr">type</span>=<span class="code-string">"text"</span> <span class="code-attr">id</span>=<span class="code-string">"name"</span> <span class="code-attr">class</span>=<span class="code-string">"vd-input"</span>
+      <span class="code-attr">data-vd-rules</span>=<span class="code-string">"required"</span>
+      <span class="code-attr">data-vd-msg-required</span>=<span class="code-string">"Please enter your name"</span>&gt;
+  &lt;/<span class="code-tag">div</span>&gt;
+
+  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-form-group"</span>&gt;
+    &lt;<span class="code-tag">label</span> <span class="code-attr">for</span>=<span class="code-string">"email"</span>&gt;Email&lt;/<span class="code-tag">label</span>&gt;
+    &lt;<span class="code-tag">input</span> <span class="code-attr">type</span>=<span class="code-string">"email"</span> <span class="code-attr">id</span>=<span class="code-string">"email"</span> <span class="code-attr">class</span>=<span class="code-string">"vd-input"</span>
+      <span class="code-attr">data-vd-rules</span>=<span class="code-string">"required|email"</span>&gt;
+  &lt;/<span class="code-tag">div</span>&gt;
+
+  &lt;<span class="code-tag">button</span> <span class="code-attr">type</span>=<span class="code-string">"submit"</span> <span class="code-attr">class</span>=<span class="code-string">"vd-btn vd-btn-primary"</span>&gt;Submit&lt;/<span class="code-tag">button</span>&gt;
+&lt;/<span class="code-tag">form</span>&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-validate-length">
+                <div class="vd-card-header"><h3>Min / Max Length & Number Range</h3></div>
+                <div class="vd-card-body">
+                    <form data-vd-validate novalidate>
+                        <div class="vd-form-group">
+                            <label for="val-username">Username (3–20 chars)</label>
+                            <input type="text" id="val-username" class="vd-input" placeholder="vanduo_user"
+                                data-vd-rules="required|min:3|max:20">
+                        </div>
+                        <div class="vd-form-group">
+                            <label for="val-age">Age (18–120)</label>
+                            <input type="number" id="val-age" class="vd-input" placeholder="25"
+                                data-vd-rules="required|number|minVal:18|maxVal:120">
+                        </div>
+                        <button type="submit" class="vd-btn vd-btn-primary">Submit</button>
+                    </form>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">input</span> <span class="code-attr">class</span>=<span class="code-string">"vd-input"</span>
+  <span class="code-attr">data-vd-rules</span>=<span class="code-string">"required|min:3|max:20"</span>&gt;
+
+&lt;<span class="code-tag">input</span> <span class="code-attr">type</span>=<span class="code-string">"number"</span> <span class="code-attr">class</span>=<span class="code-string">"vd-input"</span>
+  <span class="code-attr">data-vd-rules</span>=<span class="code-string">"required|number|minVal:18|maxVal:120"</span>&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vd-row">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-validate-password">
+                <div class="vd-card-header"><h3>Password Match</h3></div>
+                <div class="vd-card-body">
+                    <form data-vd-validate novalidate>
+                        <div class="vd-form-group">
+                            <label for="val-pass">Password</label>
+                            <input type="password" id="val-pass" class="vd-input" placeholder="••••••••"
+                                data-vd-rules="required|min:8">
+                        </div>
+                        <div class="vd-form-group">
+                            <label for="val-pass-confirm">Confirm Password</label>
+                            <input type="password" id="val-pass-confirm" class="vd-input" placeholder="••••••••"
+                                data-vd-rules="required|match:val-pass"
+                                data-vd-msg-match="Passwords do not match">
+                        </div>
+                        <button type="submit" class="vd-btn vd-btn-primary">Create Account</button>
+                    </form>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">input</span> <span class="code-attr">type</span>=<span class="code-string">"password"</span> <span class="code-attr">id</span>=<span class="code-string">"pass"</span> <span class="code-attr">class</span>=<span class="code-string">"vd-input"</span>
+  <span class="code-attr">data-vd-rules</span>=<span class="code-string">"required|min:8"</span>&gt;
+
+&lt;<span class="code-tag">input</span> <span class="code-attr">type</span>=<span class="code-string">"password"</span> <span class="code-attr">class</span>=<span class="code-string">"vd-input"</span>
+  <span class="code-attr">data-vd-rules</span>=<span class="code-string">"required|match:pass"</span>
+  <span class="code-attr">data-vd-msg-match</span>=<span class="code-string">"Passwords do not match"</span>&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-validate-modes">
+                <div class="vd-card-header"><h3>Validation Modes & Custom Messages</h3></div>
+                <div class="vd-card-body">
+                    <form data-vd-validate data-vd-validate-mode="blur" novalidate>
+                        <div class="vd-form-group">
+                            <label for="val-website">Website (validate on blur)</label>
+                            <input type="text" id="val-website" class="vd-input" placeholder="https://example.com"
+                                data-vd-rules="required|url"
+                                data-vd-msg-url="Please enter a valid URL starting with http:// or https://">
+                        </div>
+                        <div class="vd-form-group">
+                            <label for="val-pattern">Hex Color (validate on input)</label>
+                            <input type="text" id="val-pattern" class="vd-input" placeholder="#ff6600"
+                                data-vd-rules="required|pattern:^#[0-9a-fA-F]{6}$"
+                                data-vd-validate-mode="input"
+                                data-vd-msg-pattern="Must be a valid 6-digit hex color (e.g. #ff6600)">
+                        </div>
+                        <button type="submit" class="vd-btn vd-btn-primary">Submit</button>
+                    </form>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Form-level mode: blur --&gt;</span>
+&lt;<span class="code-tag">form</span> <span class="code-attr">data-vd-validate</span> <span class="code-attr">data-vd-validate-mode</span>=<span class="code-string">"blur"</span>&gt;
+
+  <span class="code-comment">&lt;!-- URL with custom message --&gt;</span>
+  &lt;<span class="code-tag">input</span> <span class="code-attr">class</span>=<span class="code-string">"vd-input"</span>
+    <span class="code-attr">data-vd-rules</span>=<span class="code-string">"required|url"</span>
+    <span class="code-attr">data-vd-msg-url</span>=<span class="code-string">"Enter a valid URL"</span>&gt;
+
+  <span class="code-comment">&lt;!-- Per-field mode override: input --&gt;</span>
+  &lt;<span class="code-tag">input</span> <span class="code-attr">class</span>=<span class="code-string">"vd-input"</span>
+    <span class="code-attr">data-vd-rules</span>=<span class="code-string">"required|pattern:^#[0-9a-fA-F]{6}$"</span>
+    <span class="code-attr">data-vd-validate-mode</span>=<span class="code-string">"input"</span>
+    <span class="code-attr">data-vd-msg-pattern</span>=<span class="code-string">"Must be a hex color"</span>&gt;
+
+&lt;/<span class="code-tag">form</span>&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Built-in Rules -->
+    <div class="vd-card vd-card-glow demo-card">
+        <div class="vd-card-header">
+            <h3><i class="ph ph-list-checks mr-2" style="color: var(--color-primary);"></i>Built-in Validation Rules</h3>
+        </div>
+        <div class="vd-card-body">
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr><th>Rule</th><th>Syntax</th><th>Description</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>required</code></td><td><code>required</code></td><td>Field must not be empty</td></tr>
+                        <tr><td><code>email</code></td><td><code>email</code></td><td>Must be a valid email address</td></tr>
+                        <tr><td><code>url</code></td><td><code>url</code></td><td>Must be a valid URL</td></tr>
+                        <tr><td><code>number</code></td><td><code>number</code></td><td>Must be a numeric value</td></tr>
+                        <tr><td><code>min</code></td><td><code>min:N</code></td><td>Minimum string length of <em>N</em> characters</td></tr>
+                        <tr><td><code>max</code></td><td><code>max:N</code></td><td>Maximum string length of <em>N</em> characters</td></tr>
+                        <tr><td><code>minVal</code></td><td><code>minVal:N</code></td><td>Numeric value must be ≥ <em>N</em></td></tr>
+                        <tr><td><code>maxVal</code></td><td><code>maxVal:N</code></td><td>Numeric value must be ≤ <em>N</em></td></tr>
+                        <tr><td><code>pattern</code></td><td><code>pattern:REGEX</code></td><td>Value must match the given regular expression</td></tr>
+                        <tr><td><code>match</code></td><td><code>match:ID</code></td><td>Value must equal the value of the element with the given <code>id</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- API Reference -->
+    <div class="vd-card vd-card-glow demo-card">
+        <div class="vd-card-header">
+            <h3><i class="ph ph-list-dashes mr-2" style="color: var(--color-primary);"></i>API Reference</h3>
+        </div>
+        <div class="vd-card-body">
+            <h4>CSS Classes</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr><th>Class</th><th>Description</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>.vd-validate</code></td><td>Optional base class applied to forms for scoped styling</td></tr>
+                        <tr><td><code>.is-valid</code></td><td>Added to an input that passes all rules (green border)</td></tr>
+                        <tr><td><code>.is-invalid</code></td><td>Added to an input that fails a rule (red border)</td></tr>
+                        <tr><td><code>.vd-validate-error</code></td><td>Auto-generated error message element shown below the invalid input</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4 class="vd-mt-6">Data Attributes</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr><th>Attribute</th><th>Description</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>data-vd-validate</code></td><td>Place on a <code>&lt;form&gt;</code> to opt-in to validation</td></tr>
+                        <tr><td><code>data-vd-rules</code></td><td>Pipe-separated rule string on each input (e.g. <code>"required|email|min:3"</code>)</td></tr>
+                        <tr><td><code>data-vd-validate-mode</code></td><td>When to validate: <code>"blur"</code> (default), <code>"input"</code>, or <code>"submit"</code>. Can be set per-form or per-field</td></tr>
+                        <tr><td><code>data-vd-msg-*</code></td><td>Custom error message per rule, e.g. <code>data-vd-msg-required="Name is required"</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4 class="vd-mt-6">JavaScript Methods</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr><th>Method</th><th>Description</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>VanduoValidate.init()</code></td><td>Scans the DOM for <code>[data-vd-validate]</code> forms and attaches validation</td></tr>
+                        <tr><td><code>VanduoValidate.validateForm(form)</code></td><td>Programmatically validates all fields in the given <code>&lt;form&gt;</code> element. Returns <code>true</code> if valid</td></tr>
+                        <tr><td><code>VanduoValidate.addRule(name, validator, message)</code></td><td>Register a custom rule. <code>validator(value, param)</code> must return <code>true</code> or <code>false</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4 class="vd-mt-6">Events</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr><th>Event</th><th>Description</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>validate:submit</code></td><td>Fired on the form when all fields pass validation on submit. <code>event.detail</code> contains form data as a plain object</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4 class="vd-mt-6">Custom Rule Example</h4>
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="js">JS</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="js"><code>VanduoValidate.addRule(
+  <span class="code-string">'noSpaces'</span>,
+  (value) =&gt; !/\s/.test(value),
+  <span class="code-string">'Value must not contain spaces'</span>
+);
+
+<span class="code-comment">// Usage: data-vd-rules="required|noSpaces"</span></code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accessibility -->
+    <div class="vd-card vd-card-glow demo-card">
+        <div class="vd-card-header">
+            <h3><i class="ph ph-wheelchair mr-2" style="color: var(--color-primary);"></i>Accessibility</h3>
+        </div>
+        <div class="vd-card-body">
+            <ul>
+                <li>Invalid fields receive <code>aria-invalid="true"</code>; valid fields get <code>aria-invalid="false"</code></li>
+                <li>Error messages are linked via <code>aria-describedby</code> so screen readers announce them</li>
+                <li>Error elements use <code>role="alert"</code> for immediate announcement on live changes</li>
+                <li>Native <code>&lt;form&gt;</code> semantics preserved — <code>novalidate</code> disables browser UI, not semantics</li>
+                <li>Focus moves to the first invalid field on submit for keyboard users</li>
+            </ul>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,230 @@
+<section id="sticky">
+    <h2 class="demo-title"><i class="ph ph-push-pin"></i>Sticky / Affix</h2>
+    <p class="vd-mb-8">Pin elements to the viewport as the user scrolls. Ideal for navigation bars,
+        table-of-contents panels, and floating toolbars that need to stay visible.</p>
+
+    <!-- Sticky Navigation Bar Demo -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card" id="demo-sticky-nav">
+                <div class="vd-card-header">
+                    <h3><i class="ph ph-navigation-arrow"></i> Sticky Navigation Bar</h3>
+                </div>
+                <div class="vd-card-body">
+                    <div style="position:relative;height:280px;overflow-y:auto;border:1px solid var(--border-color);border-radius:var(--radius-md);padding:0;">
+                        <div style="padding:1rem 1.25rem;background:var(--bg-secondary);">
+                            <p class="vd-text-sm vd-text-muted">Scroll down inside this container to see the sticky bar pin itself.</p>
+                        </div>
+                        <nav class="vd-affix" data-vd-affix style="background:var(--card-bg);padding:.75rem 1.25rem;border-bottom:1px solid var(--border-color);display:flex;align-items:center;gap:1rem;z-index:10;">
+                            <strong style="color:var(--color-primary);"><i class="ph ph-compass"></i> Nav</strong>
+                            <a href="#" class="vd-text-sm" onclick="return false">Home</a>
+                            <a href="#" class="vd-text-sm" onclick="return false">Features</a>
+                            <a href="#" class="vd-text-sm" onclick="return false">Pricing</a>
+                            <a href="#" class="vd-text-sm" onclick="return false">Contact</a>
+                        </nav>
+                        <div style="padding:1.25rem;">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <p class="vd-mt-4">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                            <p class="vd-mt-4">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                            <p class="vd-mt-4">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            <p class="vd-mt-4">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sticky with Custom Offset -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-sticky-offset">
+                <div class="vd-card-header">
+                    <h3><i class="ph ph-arrows-vertical"></i> Custom Offset</h3>
+                </div>
+                <div class="vd-card-body">
+                    <p class="vd-mb-4">Use <code>data-vd-affix-offset</code> to control when the element becomes stuck. The value is the distance in pixels from the top of the scroll container.</p>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">div</span>
+  <span class="code-attr">class</span>=<span class="code-string">"vd-affix vd-affix-bordered"</span>
+  <span class="code-attr">data-vd-affix</span>
+  <span class="code-attr">data-vd-affix-offset</span>=<span class="code-string">"60"</span>&gt;
+  &lt;<span class="code-tag">p</span>&gt;I stick after scrolling 60px&lt;/<span class="code-tag">p</span>&gt;
+&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-sticky-variants">
+                <div class="vd-card-header">
+                    <h3><i class="ph ph-paint-brush"></i> Style Variants</h3>
+                </div>
+                <div class="vd-card-body">
+                    <p class="vd-mb-4">Combine modifier classes to fine-tune the look when the element becomes stuck.</p>
+                    <div style="display:flex;flex-direction:column;gap:.75rem;">
+                        <div class="vd-affix-bordered" style="padding:.5rem 1rem;border-radius:var(--radius-md);border:1px solid var(--border-color);">
+                            <code>.vd-affix-bordered</code> — adds a bottom border when stuck
+                        </div>
+                        <div class="vd-affix-no-shadow" style="padding:.5rem 1rem;border-radius:var(--radius-md);background:var(--bg-secondary);">
+                            <code>.vd-affix-no-shadow</code> — suppresses the default drop shadow
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- API Reference -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h3>API Reference</h3>
+                </div>
+                <div class="vd-card-body">
+                    <h4>CSS Classes</h4>
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Class</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>.vd-affix</code></td>
+                                    <td>Base class for affix-enabled elements. Pairs with <code>data-vd-affix</code>.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.vd-sticky</code></td>
+                                    <td>CSS-only sticky positioning via <code>position: sticky</code>. No JS required.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.is-stuck</code></td>
+                                    <td>Applied automatically when the element is pinned to the viewport.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.vd-affix-placeholder</code></td>
+                                    <td>Auto-generated spacer element that prevents layout shift when the element becomes fixed.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.vd-affix-no-shadow</code></td>
+                                    <td>Modifier that removes the default box-shadow applied in the stuck state.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.vd-affix-bordered</code></td>
+                                    <td>Modifier that adds a subtle bottom border instead of a shadow when stuck.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="vd-mt-6">Data Attributes</h4>
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Attribute</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>data-vd-affix</code></td>
+                                    <td>Enables the affix behavior on the element. Detected by <code>VanduoAffix.init()</code>.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>data-vd-affix-offset</code></td>
+                                    <td>Scroll distance in pixels before the element sticks. Defaults to <code>0</code>.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="vd-mt-6">JavaScript Methods</h4>
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Method</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>VanduoAffix.init()</code></td>
+                                    <td>Scans the DOM for <code>[data-vd-affix]</code> elements and attaches scroll listeners.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>VanduoAffix.destroy(el)</code></td>
+                                    <td>Removes scroll listeners, the <code>.is-stuck</code> class, and the placeholder element.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="vd-mt-6">Events</h4>
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Event</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>affix:stuck</code></td>
+                                    <td>Fired on the element when it becomes pinned. <code>event.detail</code> contains <code>{ offset }</code>.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>affix:unstuck</code></td>
+                                    <td>Fired on the element when it returns to its natural position.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accessibility -->
+    <div class="vd-row">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h3><i class="ph ph-wheelchair"></i> Accessibility</h3>
+                </div>
+                <div class="vd-card-body">
+                    <ul>
+                        <li>Sticky elements do not trap focus — keyboard navigation continues naturally past them.</li>
+                        <li>The auto-generated placeholder prevents content from jumping, avoiding disorientation for screen magnifier users.</li>
+                        <li>Use <code>aria-label</code> on sticky navigation to distinguish it from the main page nav (e.g. <code>aria-label="Sticky toolbar"</code>).</li>
+                        <li>Stuck state changes are visual-only; ensure the element's purpose is clear without relying on position.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

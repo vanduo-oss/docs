@@ -1,0 +1,302 @@
+<section id="spotlight">
+    <h2 class="demo-title"><i class="ph ph-flashlight"></i>Spotlight / Feature Discovery</h2>
+    <p class="vd-mb-8">Guide users through your interface with step-by-step tours. An overlay highlights
+        target elements while a tooltip provides context and navigation controls.</p>
+
+    <!-- Interactive Tour Demo -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card" id="demo-spotlight-tour">
+                <div class="vd-card-header">
+                    <h3><i class="ph ph-map-trifold"></i> Interactive Tour</h3>
+                </div>
+                <div class="vd-card-body">
+                    <p class="vd-mb-5">Click the button below to start a 3-step feature discovery tour that highlights elements inside this demo area.</p>
+
+                    <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:flex-start;margin-bottom:1.5rem;">
+                        <button class="vd-btn vd-btn-primary" id="spotlight-start-btn" onclick="startDemoTour()">
+                            <i class="ph ph-play"></i> Start Tour
+                        </button>
+                    </div>
+
+                    <div style="display:flex;gap:1.5rem;flex-wrap:wrap;">
+                        <div id="spot-target-search" style="padding:1rem 1.5rem;background:var(--bg-secondary);border-radius:var(--radius-md);display:flex;align-items:center;gap:.5rem;">
+                            <i class="ph ph-magnifying-glass" style="font-size:1.25rem;color:var(--color-primary);"></i>
+                            <span>Search Bar</span>
+                        </div>
+                        <div id="spot-target-notifications" style="padding:1rem 1.5rem;background:var(--bg-secondary);border-radius:var(--radius-md);display:flex;align-items:center;gap:.5rem;">
+                            <i class="ph ph-bell" style="font-size:1.25rem;color:var(--color-warning);"></i>
+                            <span>Notifications</span>
+                        </div>
+                        <div id="spot-target-profile" style="padding:1rem 1.5rem;background:var(--bg-secondary);border-radius:var(--radius-md);display:flex;align-items:center;gap:.5rem;">
+                            <i class="ph ph-user-circle" style="font-size:1.25rem;color:var(--color-success);"></i>
+                            <span>Profile Menu</span>
+                        </div>
+                    </div>
+
+                    <script>
+                        function startDemoTour() {
+                            VanduoSpotlight.start([
+                                {
+                                    target: '#spot-target-search',
+                                    title: 'Quick Search',
+                                    description: 'Find anything in your workspace instantly. Supports fuzzy matching and keyboard shortcuts.'
+                                },
+                                {
+                                    target: '#spot-target-notifications',
+                                    title: 'Notifications',
+                                    description: 'Stay informed about mentions, updates, and system alerts. Click to see your notification center.'
+                                },
+                                {
+                                    target: '#spot-target-profile',
+                                    title: 'Your Profile',
+                                    description: 'Manage account settings, theme preferences, and sign-out from here.'
+                                }
+                            ]);
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Usage Code -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-spotlight-js">
+                <div class="vd-card-header">
+                    <h3><i class="ph ph-code"></i> JavaScript API</h3>
+                </div>
+                <div class="vd-card-body">
+                    <div class="vd-code-snippet" data-collapsible data-expanded="true">
+                        <button class="vd-code-snippet-toggle" aria-expanded="true">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="js">JS</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="js"><code><span class="code-keyword">const</span> steps = [
+  {
+    target: <span class="code-string">'#search-input'</span>,
+    title:  <span class="code-string">'Search'</span>,
+    description: <span class="code-string">'Find anything fast.'</span>
+  },
+  {
+    target: <span class="code-string">'.notifications-bell'</span>,
+    title:  <span class="code-string">'Notifications'</span>,
+    description: <span class="code-string">'Your latest alerts.'</span>
+  }
+];
+
+<span class="code-comment">// Start the tour</span>
+VanduoSpotlight.start(steps);
+
+<span class="code-comment">// Programmatic navigation</span>
+VanduoSpotlight.next();
+VanduoSpotlight.prev();
+
+<span class="code-comment">// End the tour early</span>
+VanduoSpotlight.stop();</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-spotlight-declarative">
+                <div class="vd-card-header">
+                    <h3><i class="ph ph-tag"></i> Declarative Usage</h3>
+                </div>
+                <div class="vd-card-body">
+                    <p class="vd-mb-4">Optionally define tours in HTML with <code>data-vd-spotlight</code> attributes. The JS API takes priority when both are present.</p>
+                    <div class="vd-code-snippet" data-collapsible data-expanded="true">
+                        <button class="vd-code-snippet-toggle" aria-expanded="true">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">button</span>
+  <span class="code-attr">data-vd-spotlight</span>=<span class="code-string">'[
+    {"target":"#el-1","title":"First","description":"..."},
+    {"target":"#el-2","title":"Second","description":"..."}
+  ]'</span>&gt;
+  Start Tour
+&lt;/<span class="code-tag">button</span>&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- API Reference -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h3>API Reference</h3>
+                </div>
+                <div class="vd-card-body">
+                    <h4>CSS Classes</h4>
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Class</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>.vd-spotlight-overlay</code></td>
+                                    <td>Full-screen semi-transparent backdrop with a cut-out around the target element.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.vd-spotlight-tooltip</code></td>
+                                    <td>Floating card positioned near the highlighted target containing tour content.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.vd-spotlight-title</code></td>
+                                    <td>Heading inside the tooltip.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.vd-spotlight-description</code></td>
+                                    <td>Body text inside the tooltip explaining the highlighted feature.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.vd-spotlight-footer</code></td>
+                                    <td>Bottom section of the tooltip holding navigation buttons and step counter.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.vd-spotlight-btn</code></td>
+                                    <td>Base class for navigation buttons within the tooltip footer.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.vd-spotlight-btn-primary</code></td>
+                                    <td>Primary-colored variant for the "Next" / "Finish" button.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.vd-spotlight-target</code></td>
+                                    <td>Applied automatically to the currently highlighted DOM element. Raises it above the overlay.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="vd-mt-6">Data Attributes</h4>
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Attribute</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>data-vd-spotlight</code></td>
+                                    <td>JSON array of step objects on a trigger button for declarative tour initialization. Each object requires <code>target</code>, <code>title</code>, and <code>description</code>.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="vd-mt-6">JavaScript Methods</h4>
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Method</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>VanduoSpotlight.start(steps)</code></td>
+                                    <td>Begins the tour. <code>steps</code> is an array of <code>{ target, title, description }</code> objects. <code>target</code> is a CSS selector.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>VanduoSpotlight.next()</code></td>
+                                    <td>Advances to the next step. If on the last step, finishes the tour.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>VanduoSpotlight.prev()</code></td>
+                                    <td>Returns to the previous step. No-op if already on the first step.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>VanduoSpotlight.stop()</code></td>
+                                    <td>Ends the tour immediately, removes the overlay and tooltip, and restores target elements.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="vd-mt-6">Events</h4>
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Event</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>spotlight:step</code></td>
+                                    <td>Fired on <code>document</code> when the tour moves to a new step. <code>event.detail</code> contains <code>{ index, step, total }</code>.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>spotlight:end</code></td>
+                                    <td>Fired on <code>document</code> when the tour finishes or is stopped. <code>event.detail</code> contains <code>{ completedSteps, total }</code>.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accessibility -->
+    <div class="vd-row">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h3><i class="ph ph-wheelchair"></i> Accessibility</h3>
+                </div>
+                <div class="vd-card-body">
+                    <ul>
+                        <li>The tooltip uses <code>role="dialog"</code> and <code>aria-modal="true"</code> to indicate a modal context to assistive technologies.</li>
+                        <li>Focus is trapped inside the tooltip during the tour — <kbd>Tab</kbd> cycles through the navigation buttons.</li>
+                        <li>Pressing <kbd>Escape</kbd> ends the tour and returns focus to the element that triggered it.</li>
+                        <li>The overlay is announced as <code>aria-hidden="true"</code> so screen readers skip the backdrop.</li>
+                        <li>Each step's title and description are linked via <code>aria-labelledby</code> and <code>aria-describedby</code> on the dialog.</li>
+                        <li>Step counter (e.g. "2 of 3") is included as <code>aria-label</code> on the footer for progress context.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

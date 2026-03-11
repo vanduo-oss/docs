@@ -1,0 +1,256 @@
+<section id="rating">
+    <h2 class="demo-title"><i class="ph ph-star"></i>Rating</h2>
+    <p class="vd-mb-5">The <strong>VanduoRating</strong> component renders an interactive star-rating widget. Configure the
+        maximum number of stars, pre-set a value, make it read-only, or pick a size variant — all via data attributes.</p>
+
+    <div class="vd-row">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-rating-basic">
+                <div class="vd-card-header"><h3>Basic 5-Star Rating</h3></div>
+                <div class="vd-card-body">
+                    <div data-vd-rating></div>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">div</span> <span class="code-attr">data-vd-rating</span>&gt;&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-rating-preset">
+                <div class="vd-card-header"><h3>Pre-set Value (3 of 5)</h3></div>
+                <div class="vd-card-body">
+                    <div data-vd-rating data-vd-rating-value="3"></div>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">div</span> <span class="code-attr">data-vd-rating</span> <span class="code-attr">data-vd-rating-value</span>=<span class="code-string">"3"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vd-row">
+        <div class="vd-col-12 vd-col-md-4">
+            <div class="vd-card vd-card-glow demo-card" id="demo-rating-readonly">
+                <div class="vd-card-header"><h3>Read-Only</h3></div>
+                <div class="vd-card-body">
+                    <div data-vd-rating data-vd-rating-value="4" data-vd-rating-readonly></div>
+                    <p class="vd-text-sm vd-text-muted vd-mt-3">User cannot change the value. Useful for displaying average scores.</p>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">div</span> <span class="code-attr">data-vd-rating</span>
+  <span class="code-attr">data-vd-rating-value</span>=<span class="code-string">"4"</span>
+  <span class="code-attr">data-vd-rating-readonly</span>&gt;
+&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-4">
+            <div class="vd-card vd-card-glow demo-card" id="demo-rating-max">
+                <div class="vd-card-header"><h3>Custom Max (10 Stars)</h3></div>
+                <div class="vd-card-body">
+                    <div data-vd-rating data-vd-rating-max="10" data-vd-rating-value="7"></div>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">div</span> <span class="code-attr">data-vd-rating</span>
+  <span class="code-attr">data-vd-rating-max</span>=<span class="code-string">"10"</span>
+  <span class="code-attr">data-vd-rating-value</span>=<span class="code-string">"7"</span>&gt;
+&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-4">
+            <div class="vd-card vd-card-glow demo-card" id="demo-rating-sizes">
+                <div class="vd-card-header"><h3>Size Variants</h3></div>
+                <div class="vd-card-body">
+                    <p class="vd-text-sm vd-text-muted vd-mb-3">Small</p>
+                    <div class="vd-rating-sm" data-vd-rating data-vd-rating-value="4"></div>
+                    <p class="vd-text-sm vd-text-muted vd-mb-3 vd-mt-4">Default</p>
+                    <div data-vd-rating data-vd-rating-value="4"></div>
+                    <p class="vd-text-sm vd-text-muted vd-mb-3 vd-mt-4">Large</p>
+                    <div class="vd-rating-lg" data-vd-rating data-vd-rating-value="4"></div>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Small --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-rating-sm"</span> <span class="code-attr">data-vd-rating</span> <span class="code-attr">data-vd-rating-value</span>=<span class="code-string">"4"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+
+<span class="code-comment">&lt;!-- Default --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">data-vd-rating</span> <span class="code-attr">data-vd-rating-value</span>=<span class="code-string">"4"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+
+<span class="code-comment">&lt;!-- Large --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-rating-lg"</span> <span class="code-attr">data-vd-rating</span> <span class="code-attr">data-vd-rating-value</span>=<span class="code-string">"4"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- API Reference -->
+    <div class="vd-card vd-card-glow demo-card">
+        <div class="vd-card-header">
+            <h3><i class="ph ph-list-dashes mr-2" style="color: var(--color-primary);"></i>API Reference</h3>
+        </div>
+        <div class="vd-card-body">
+            <h4>CSS Classes</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr><th>Class</th><th>Description</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>.vd-rating</code></td><td>Auto-generated container wrapping the star elements</td></tr>
+                        <tr><td><code>.vd-rating-star</code></td><td>Individual star element (filled or empty depending on value)</td></tr>
+                        <tr><td><code>.vd-rating-readonly</code></td><td>Added to the container when read-only; disables hover/click interactions</td></tr>
+                        <tr><td><code>.vd-rating-sm</code></td><td>Small size variant — place on the trigger element alongside <code>data-vd-rating</code></td></tr>
+                        <tr><td><code>.vd-rating-lg</code></td><td>Large size variant</td></tr>
+                        <tr><td><code>.vd-rating-value</code></td><td>Optional text element displaying the numeric value (e.g. "4 / 5")</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4 class="vd-mt-6">Data Attributes</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr><th>Attribute</th><th>Description</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>data-vd-rating</code></td><td>Activates the rating component on the element</td></tr>
+                        <tr><td><code>data-vd-rating-max</code></td><td>Maximum number of stars (default: <code>5</code>)</td></tr>
+                        <tr><td><code>data-vd-rating-value</code></td><td>Initial selected value (default: <code>0</code>)</td></tr>
+                        <tr><td><code>data-vd-rating-readonly</code></td><td>Makes the rating non-interactive (display only)</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4 class="vd-mt-6">JavaScript Methods</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr><th>Method</th><th>Description</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>VanduoRating.init()</code></td><td>Scans for all <code>[data-vd-rating]</code> elements and renders star widgets</td></tr>
+                        <tr><td><code>VanduoRating.getValue(el)</code></td><td>Returns the current numeric value for the given rating element</td></tr>
+                        <tr><td><code>VanduoRating.setValue(el, value)</code></td><td>Programmatically sets the rating value and updates the visual state</td></tr>
+                        <tr><td><code>VanduoRating.destroy(el)</code></td><td>Removes the rendered stars and event listeners from the element</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4 class="vd-mt-6">Events</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr><th>Event</th><th>Description</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>rating:change</code></td><td>Fired on the element when the user selects a new value. <code>event.detail</code> contains <code>{ value: number, max: number }</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accessibility -->
+    <div class="vd-card vd-card-glow demo-card">
+        <div class="vd-card-header">
+            <h3><i class="ph ph-wheelchair mr-2" style="color: var(--color-primary);"></i>Accessibility</h3>
+        </div>
+        <div class="vd-card-body">
+            <ul>
+                <li>The container has <code>role="radiogroup"</code> with an <code>aria-label</code> like "Rating: 3 out of 5"</li>
+                <li>Each star has <code>role="radio"</code> with <code>aria-checked</code> and <code>aria-label</code> (e.g. "3 stars")</li>
+                <li><kbd>←</kbd> / <kbd>→</kbd> arrow keys change the value; <kbd>Home</kbd> sets to 1; <kbd>End</kbd> sets to max</li>
+                <li>Read-only ratings use <code>aria-readonly="true"</code> and are not focusable</li>
+                <li>The widget is fully operable without a mouse via <kbd>Tab</kbd> + arrow keys</li>
+            </ul>
+        </div>
+    </div>
+</section>

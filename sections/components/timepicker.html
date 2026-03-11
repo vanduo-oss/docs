@@ -1,0 +1,203 @@
+<section id="timepicker">
+    <h2 class="demo-title"><i class="ph ph-clock"></i>Timepicker</h2>
+    <p class="vd-mb-5">The <strong>VanduoTimepicker</strong> component adds a scrollable time-selection dropdown to any text
+        input. Choose between 12-hour and 24-hour formats, and configure the minute step interval.</p>
+
+    <div class="vd-row">
+        <div class="vd-col-12 vd-col-md-4">
+            <div class="vd-card vd-card-glow demo-card" id="demo-timepicker-12h">
+                <div class="vd-card-header"><h3>12-Hour Format (Default)</h3></div>
+                <div class="vd-card-body">
+                    <div class="vd-form-group">
+                        <label for="tp-12h">Meeting Time</label>
+                        <input type="text" id="tp-12h" class="vd-input" placeholder="hh:mm AM/PM"
+                            data-vd-timepicker readonly>
+                    </div>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">input</span> <span class="code-attr">type</span>=<span class="code-string">"text"</span>
+  <span class="code-attr">class</span>=<span class="code-string">"vd-input"</span>
+  <span class="code-attr">placeholder</span>=<span class="code-string">"hh:mm AM/PM"</span>
+  <span class="code-attr">data-vd-timepicker</span>
+  <span class="code-attr">readonly</span>&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-4">
+            <div class="vd-card vd-card-glow demo-card" id="demo-timepicker-24h">
+                <div class="vd-card-header"><h3>24-Hour Format</h3></div>
+                <div class="vd-card-body">
+                    <div class="vd-form-group">
+                        <label for="tp-24h">Departure Time</label>
+                        <input type="text" id="tp-24h" class="vd-input" placeholder="HH:mm"
+                            data-vd-timepicker
+                            data-vd-timepicker-format="24h"
+                            readonly>
+                    </div>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">input</span> <span class="code-attr">type</span>=<span class="code-string">"text"</span>
+  <span class="code-attr">class</span>=<span class="code-string">"vd-input"</span>
+  <span class="code-attr">placeholder</span>=<span class="code-string">"HH:mm"</span>
+  <span class="code-attr">data-vd-timepicker</span>
+  <span class="code-attr">data-vd-timepicker-format</span>=<span class="code-string">"24h"</span>
+  <span class="code-attr">readonly</span>&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-4">
+            <div class="vd-card vd-card-glow demo-card" id="demo-timepicker-step">
+                <div class="vd-card-header"><h3>15-Minute Step</h3></div>
+                <div class="vd-card-body">
+                    <div class="vd-form-group">
+                        <label for="tp-step">Appointment Slot</label>
+                        <input type="text" id="tp-step" class="vd-input" placeholder="Select time…"
+                            data-vd-timepicker
+                            data-vd-timepicker-step="15"
+                            readonly>
+                    </div>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">input</span> <span class="code-attr">type</span>=<span class="code-string">"text"</span>
+  <span class="code-attr">class</span>=<span class="code-string">"vd-input"</span>
+  <span class="code-attr">placeholder</span>=<span class="code-string">"Select time…"</span>
+  <span class="code-attr">data-vd-timepicker</span>
+  <span class="code-attr">data-vd-timepicker-step</span>=<span class="code-string">"15"</span>
+  <span class="code-attr">readonly</span>&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- API Reference -->
+    <div class="vd-card vd-card-glow demo-card">
+        <div class="vd-card-header">
+            <h3><i class="ph ph-list-dashes mr-2" style="color: var(--color-primary);"></i>API Reference</h3>
+        </div>
+        <div class="vd-card-body">
+            <h4>CSS Classes</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr><th>Class</th><th>Description</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>.vd-timepicker-popup</code></td><td>The scrollable dropdown container positioned below the input</td></tr>
+                        <tr><td><code>.vd-timepicker-list</code></td><td>Inner list wrapper holding time slots</td></tr>
+                        <tr><td><code>.vd-timepicker-item</code></td><td>Individual time slot option</td></tr>
+                        <tr><td><code>.vd-timepicker-item.is-selected</code></td><td>The currently selected time slot (highlighted)</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4 class="vd-mt-6">Data Attributes</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr><th>Attribute</th><th>Description</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>data-vd-timepicker</code></td><td>Activates the timepicker on the input</td></tr>
+                        <tr><td><code>data-vd-timepicker-format</code></td><td>Set to <code>"24h"</code> for 24-hour format. Default is 12-hour with AM/PM</td></tr>
+                        <tr><td><code>data-vd-timepicker-step</code></td><td>Minute interval between time slots (default: <code>30</code>). Common values: <code>15</code>, <code>30</code>, <code>60</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4 class="vd-mt-6">JavaScript Methods</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr><th>Method</th><th>Description</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>VanduoTimepicker.init()</code></td><td>Scans for all <code>[data-vd-timepicker]</code> inputs and attaches time dropdowns</td></tr>
+                        <tr><td><code>VanduoTimepicker.destroy(el)</code></td><td>Removes the time dropdown and event listeners from the given input</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4 class="vd-mt-6">Events</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr><th>Event</th><th>Description</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>timepicker:select</code></td><td>Fired on the input when a time is chosen. <code>event.detail</code> contains <code>{ time: string, hours: number, minutes: number }</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accessibility -->
+    <div class="vd-card vd-card-glow demo-card">
+        <div class="vd-card-header">
+            <h3><i class="ph ph-wheelchair mr-2" style="color: var(--color-primary);"></i>Accessibility</h3>
+        </div>
+        <div class="vd-card-body">
+            <ul>
+                <li>The dropdown has <code>role="listbox"</code>; each time slot has <code>role="option"</code></li>
+                <li>The input receives <code>aria-haspopup="listbox"</code> and <code>aria-expanded</code> state</li>
+                <li><kbd>↑</kbd> / <kbd>↓</kbd> arrow keys navigate time slots; <kbd>Enter</kbd> selects; <kbd>Escape</kbd> closes</li>
+                <li><code>aria-activedescendant</code> tracks the focused time slot for screen readers</li>
+                <li>Selected slot receives <code>aria-selected="true"</code></li>
+                <li>Focus returns to the input after selection or dismissal</li>
+            </ul>
+        </div>
+    </div>
+</section>
