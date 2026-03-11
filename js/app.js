@@ -445,7 +445,6 @@ function parseHash(hash) {
     if (h === 'changelog') return { view: 'changelog' };
     if (h === 'docs') return { view: 'docs-landing' };
     if (h === 'docs/components') return { view: 'docs', tab: 'components', section: null };
-    if (h === 'docs/concepts') return { view: 'docs', tab: 'concepts', section: null };
     if (h === 'docs/guides') return { view: 'docs', tab: 'guides', section: null };
     if (h.startsWith('docs/')) {
         var fullPath = h.slice(5);
@@ -508,7 +507,7 @@ document.querySelectorAll('.doc-tab[data-tab]').forEach(function (tab) {
     tab.addEventListener('click', function (e) {
         e.preventDefault();
         var tabKey = tab.getAttribute('data-tab');
-        var tabRoutes = { components: 'docs/components', guides: 'docs/guides', concepts: 'docs/concepts' };
+        var tabRoutes = { components: 'docs/components', guides: 'docs/guides' };
         navigate(tabRoutes[tabKey] || 'docs');
     });
 });
@@ -650,7 +649,7 @@ function buildGlobalSearchIndex() {
         title: 'Documentation',
         category: 'Pages',
         tab: 'Pages',
-        keywords: 'documentation doc docs components guides concepts',
+        keywords: 'documentation doc docs components guides',
         icon: 'ph-book-open',
         route: 'docs'
     });

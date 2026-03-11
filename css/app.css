@@ -755,13 +755,6 @@
             color: #22c55e !important;
         }
 
-        #docs-landing .docs-card-concepts .vd-card-body i {
-            color: #ef4444;
-        }
-
-        #docs-landing .docs-card-concepts:hover .vd-card-body i {
-            color: #ef4444 !important;
-        }
 
         /* Docs landing: divider */
         .docs-landing-divider {
@@ -1028,6 +1021,7 @@
 
             .doc-tabs {
                 flex: 1 1 100%;
+                display: flex;
                 flex-wrap: nowrap;
                 margin: 0;
                 gap: 0.4rem;
@@ -1056,6 +1050,19 @@
                 padding: 1rem 0 0.75rem;
                 margin: 0;
                 border-bottom: 1px solid var(--border-color);
+            }
+
+            .doc-tabs {
+                display: flex;
+                gap: 0.5rem;
+            }
+
+            .doc-tab[data-tab="components"] {
+                flex: 1.618;
+            }
+
+            .doc-tab[data-tab="guides"] {
+                flex: 1;
             }
 
             .doc-sidebar {

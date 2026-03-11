@@ -460,6 +460,145 @@
                             </div>
                         </div>
 
+                        <!-- Color Utility Classes Usage Guide -->
+                        <div class="vd-row">
+                            <div class="vd-col-12">
+                                <div class="vd-card vd-card-glow demo-card">
+                                    <div class="vd-card-header">
+                                        <h3><i class="ph ph-paint-brush-broad"></i> Color Utility Classes</h3>
+                                        <p class="vd-text-sm vd-text-muted vd-mb-0">Apply background and text colors
+                                            directly via CSS classes — no custom styles needed.
+                                            <span class="vd-badge vd-badge-info" style="font-size: 0.7rem;">v1.2.6</span>
+                                        </p>
+                                    </div>
+                                    <div class="vd-card-body">
+                                        <p class="vd-mb-4">Every Open Color hue (0–9 shades) is available as a
+                                            utility class. The pattern maps directly to the CSS custom property
+                                            names.</p>
+
+                                        <!-- Background Color -->
+                                        <h4 class="vd-mb-3">Background Color</h4>
+                                        <p class="vd-mb-3">Use <code>vd-bg-{color}-{shade}</code> to set an element's
+                                            background color.</p>
+
+                                        <div class="vd-bg-teal-3 vd-mb-3"
+                                            style="padding: 1.25rem; border-radius: var(--btn-border-radius); color: #087f5b;">
+                                            This element has a <strong>vd-bg-teal-3</strong> class
+                                        </div>
+
+                                        <div class="vd-code-snippet vd-mb-6" data-collapsible>
+                                            <button class="vd-code-snippet-toggle" aria-expanded="false">
+                                                <span class="vd-code-snippet-toggle-icon"></span>
+                                                <span>View Code</span>
+                                            </button>
+                                            <div class="vd-code-snippet-content">
+                                                <div class="vd-code-snippet-header">
+                                                    <div class="vd-code-snippet-tabs" role="tablist">
+                                                        <button class="vd-code-snippet-tab is-active"
+                                                            data-lang="markup">HTML</button>
+                                                    </div>
+                                                    <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                                        <span class="vd-code-snippet-copy-icon"></span>
+                                                        <span class="vd-code-snippet-copy-text">Copy</span>
+                                                    </button>
+                                                </div>
+                                                <div class="vd-code-snippet-body">
+                                                    <pre class="vd-code-snippet-pane is-active" data-lang="markup"><code>&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-bg-teal-3"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Text Color -->
+                                        <h4 class="vd-mb-3">Text Color</h4>
+                                        <p class="vd-mb-3">Use <code>vd-text-{color}-{shade}</code> to set an element's
+                                            text color.</p>
+
+                                        <div class="vd-card vd-mb-3" style="border: 1px solid var(--border-color);">
+                                            <div class="vd-card-body">
+                                                <span class="vd-text-blue-7" style="font-size: 1.1rem; font-weight: 500;">
+                                                    This text has a <strong>vd-text-blue-7</strong> class
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="vd-code-snippet vd-mb-6" data-collapsible>
+                                            <button class="vd-code-snippet-toggle" aria-expanded="false">
+                                                <span class="vd-code-snippet-toggle-icon"></span>
+                                                <span>View Code</span>
+                                            </button>
+                                            <div class="vd-code-snippet-content">
+                                                <div class="vd-code-snippet-header">
+                                                    <div class="vd-code-snippet-tabs" role="tablist">
+                                                        <button class="vd-code-snippet-tab is-active"
+                                                            data-lang="markup">HTML</button>
+                                                    </div>
+                                                    <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                                        <span class="vd-code-snippet-copy-icon"></span>
+                                                        <span class="vd-code-snippet-copy-text">Copy</span>
+                                                    </button>
+                                                </div>
+                                                <div class="vd-code-snippet-body">
+                                                    <pre class="vd-code-snippet-pane is-active" data-lang="markup"><code>&lt;<span class="code-tag">span</span> <span class="code-attr">class</span>=<span class="code-string">"vd-text-blue-7"</span>&gt;...&lt;/<span class="code-tag">span</span>&gt;</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Combined -->
+                                        <h4 class="vd-mb-3">Combining Background &amp; Text</h4>
+                                        <p class="vd-mb-3">Stack both classes on a single element for full control.</p>
+
+                                        <div class="vd-bg-indigo-8 vd-text-yellow-2 vd-mb-3"
+                                            style="padding: 1.25rem; border-radius: var(--btn-border-radius); font-weight: 500;">
+                                            <strong>vd-bg-indigo-8</strong> background with
+                                            <strong>vd-text-yellow-2</strong> text
+                                        </div>
+
+                                        <div class="vd-code-snippet vd-mb-4" data-collapsible>
+                                            <button class="vd-code-snippet-toggle" aria-expanded="false">
+                                                <span class="vd-code-snippet-toggle-icon"></span>
+                                                <span>View Code</span>
+                                            </button>
+                                            <div class="vd-code-snippet-content">
+                                                <div class="vd-code-snippet-header">
+                                                    <div class="vd-code-snippet-tabs" role="tablist">
+                                                        <button class="vd-code-snippet-tab is-active"
+                                                            data-lang="markup">HTML</button>
+                                                    </div>
+                                                    <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                                        <span class="vd-code-snippet-copy-icon"></span>
+                                                        <span class="vd-code-snippet-copy-text">Copy</span>
+                                                    </button>
+                                                </div>
+                                                <div class="vd-code-snippet-body">
+                                                    <pre class="vd-code-snippet-pane is-active" data-lang="markup"><code>&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-bg-indigo-8 vd-text-yellow-2"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Available hues reference -->
+                                        <h4 class="vd-mb-3">Available Hues</h4>
+                                        <p class="vd-text-sm vd-text-muted">All 13 Open Color hues are supported, each
+                                            with shades <code>0</code> (lightest) through <code>9</code> (darkest):</p>
+                                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem;">
+                                            <code class="vd-bg-red-5" style="padding: 0.25rem 0.6rem; border-radius: 4px; color: #fff;">red</code>
+                                            <code class="vd-bg-orange-5" style="padding: 0.25rem 0.6rem; border-radius: 4px; color: #fff;">orange</code>
+                                            <code class="vd-bg-yellow-5" style="padding: 0.25rem 0.6rem; border-radius: 4px; color: #212529;">yellow</code>
+                                            <code class="vd-bg-lime-5" style="padding: 0.25rem 0.6rem; border-radius: 4px; color: #212529;">lime</code>
+                                            <code class="vd-bg-green-6" style="padding: 0.25rem 0.6rem; border-radius: 4px; color: #fff;">green</code>
+                                            <code class="vd-bg-teal-5" style="padding: 0.25rem 0.6rem; border-radius: 4px; color: #fff;">teal</code>
+                                            <code class="vd-bg-cyan-5" style="padding: 0.25rem 0.6rem; border-radius: 4px; color: #fff;">cyan</code>
+                                            <code class="vd-bg-blue-5" style="padding: 0.25rem 0.6rem; border-radius: 4px; color: #fff;">blue</code>
+                                            <code class="vd-bg-indigo-5" style="padding: 0.25rem 0.6rem; border-radius: 4px; color: #fff;">indigo</code>
+                                            <code class="vd-bg-violet-5" style="padding: 0.25rem 0.6rem; border-radius: 4px; color: #fff;">violet</code>
+                                            <code class="vd-bg-grape-5" style="padding: 0.25rem 0.6rem; border-radius: 4px; color: #fff;">grape</code>
+                                            <code class="vd-bg-pink-5" style="padding: 0.25rem 0.6rem; border-radius: 4px; color: #fff;">pink</code>
+                                            <code class="vd-bg-gray-6" style="padding: 0.25rem 0.6rem; border-radius: 4px; color: #fff;">gray</code>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- Usage Guide -->
                         <div class="vd-row">
                             <div class="vd-col-12 vd-col-md-6">
