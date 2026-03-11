@@ -1,0 +1,161 @@
+<section id="framework-integration">
+    <h2 class="demo-title"><i class="ph ph-plugs-connected"></i>Framework Integration <code class="vd-text-sm">Guide</code></h2>
+    <p class="vd-mb-5">Vanduo is designed to be completely framework-agnostic. Because it is built with pure CSS and Vanilla JavaScript modules, it can be dropped into any modern frontend framework (React, Vue, Nuxt, Svelte, etc.) seamlessly.</p>
+
+    <!-- General Philosophy -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card demo-card">
+                <div class="vd-card-header">
+                    <h3><i class="ph ph-brain"></i> The Core Concept</h3>
+                </div>
+                <div class="vd-card-body">
+                    <p>When integrating Vanduo into a component-heavy framework, remember these two rules:</p>
+                    <ol>
+                        <li class="vd-mb-3"><strong>CSS is Global:</strong> Import <code>vanduo.css</code> once in your global entry file (e.g., <code>main.js</code>, <code>_app.js</code>, or <code>layout.vue</code>).</li>
+                        <li><strong>JS Needs the DOM:</strong> Vanduo's JavaScript components (like modals, dropdowns, and tabs) need elements to exist in the DOM before initialization. You must call <code>Vanduo.init()</code> <em>after</em> your framework has mounted the component to the screen.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Where to Import CSS -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card demo-card">
+                <div class="vd-card-header">
+                    <h3><i class="ph ph-paint-bucket"></i> Where to Import CSS</h3>
+                </div>
+                <div class="vd-card-body">
+                    <p class="vd-mb-4">Vanduo's stylesheet should be imported <strong>once</strong> at the top level of your application. The exact file depends on your framework:</p>
+                    <table class="vd-table vd-table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Framework</th>
+                                <th>Global Entry File</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>React (CRA)</strong></td>
+                                <td><code>src/index.js</code> or <code>src/App.js</code></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Next.js</strong></td>
+                                <td><code>pages/_app.js</code> or <code>app/layout.tsx</code></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Vue 3</strong></td>
+                                <td><code>src/main.js</code></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Nuxt 3</strong></td>
+                                <td><code>nuxt.config.ts</code> → <code>css: ['vanduo/dist/vanduo.css']</code></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Svelte / SvelteKit</strong></td>
+                                <td><code>src/routes/+layout.svelte</code> or <code>src/app.html</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="vd-alert vd-alert-info vd-mt-4">
+                        <i class="ph ph-lightbulb"></i>
+                        <div>
+                            Never import <code>vanduo.css</code> in individual components — it will duplicate styles and increase bundle size. One global import covers everything.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SPA Route Changes -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card demo-card">
+                <div class="vd-card-header">
+                    <h3><i class="ph ph-arrows-left-right"></i> Handling SPA Route Changes</h3>
+                </div>
+                <div class="vd-card-body">
+                    <p>In a single-page application, navigating between routes replaces DOM elements without a full page reload. Vanduo's event listeners are attached to specific elements, so you need to re-initialize after each route change.</p>
+                    <p class="vd-mt-3"><strong>The pattern is the same in every framework:</strong> call <code>Vanduo.init()</code> in the mounting lifecycle of each page component that uses Vanduo interactive features (modals, dropdowns, tabs, tooltips, etc.).</p>
+                    <div class="vd-alert vd-alert-warning vd-mt-4">
+                        <i class="ph ph-warning"></i>
+                        <div>
+                            <strong>Re-initialization in SPAs:</strong> When dealing with Client-Side Routing (like <code>next/router</code> or <code>vue-router</code>), navigating to a new page component replaces DOM elements. Ensure you call <code>Vanduo.init()</code> in the mounting phase of the new page component so Vanduo attaches its event listeners to the newly rendered elements!
+                        </div>
+                    </div>
+                    <p class="vd-mt-4">Static content (grids, cards, typography, utilities) works without <code>init()</code> — only interactive JavaScript components need it.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SSR / SSG Considerations -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card demo-card">
+                <div class="vd-card-header">
+                    <h3><i class="ph ph-cloud"></i> SSR &amp; SSG Considerations</h3>
+                </div>
+                <div class="vd-card-body">
+                    <p>When using Server-Side Rendering (Next.js, Nuxt, SvelteKit), Vanduo's <strong>CSS works perfectly</strong> — it's just a stylesheet and renders on the server without issues.</p>
+                    <p class="vd-mt-3">However, Vanduo's <strong>JavaScript</strong> requires the <code>window</code> and <code>document</code> APIs, which don't exist on the server. Follow these rules:</p>
+                    <ul class="vd-mt-3">
+                        <li class="vd-mb-2"><strong>Never import Vanduo JS at the module top level</strong> in a server-rendered file. Use dynamic imports or guard with a browser check.</li>
+                        <li class="vd-mb-2"><strong>Always call <code>Vanduo.init()</code> inside a client-side lifecycle hook</strong> (<code>useEffect</code>, <code>onMounted</code>, <code>onMount</code>). These only run in the browser.</li>
+                        <li><strong>For Next.js App Router:</strong> mark the component that calls <code>Vanduo.init()</code> with <code>'use client';</code> at the top of the file.</li>
+                    </ul>
+                    <div class="vd-code-snippet vd-mt-4" data-collapsible data-expanded="true">
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="js">Next.js (App Router)</button>
+                                </div>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="js"><code>'use client';
+
+import { useEffect } from 'react';
+import { Vanduo } from 'vanduo';
+
+export default function VanduoProvider({ children }) {
+  useEffect(() =&gt; {
+    Vanduo.init();
+    return () =&gt; Vanduo.destroy();
+  }, []);
+
+  return &lt;&gt;{children}&lt;/&gt;;
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- What's Next block -->
+    <div class="vd-mt-8" style="border-top: 1px solid var(--border-color); padding-top: 2.5rem; padding-bottom: 3rem;">
+        <h3 class="vd-text-lg vd-mb-5"><i class="ph ph-arrow-circle-right"></i> What's Next?</h3>
+        <div class="vd-row" style="gap: 1.25rem;">
+            <div class="vd-col-12 vd-col-md-6 vd-mb-4">
+                <a href="#docs/first-layout" data-route="docs/first-layout" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
+                    <div class="vd-card-body">
+                        <h4 class="vd-text-md vd-mb-2">Building Your First Layout</h4>
+                        <p class="vd-text-sm vd-text-muted vd-mb-0">Ready to build? Learn how the grid system works to structure your pages.</p>
+                    </div>
+                </a>
+            </div>
+            <div class="vd-col-12 vd-col-md-6 vd-mb-4">
+                <a href="#docs/esm-vs-iife" data-route="docs/esm-vs-iife" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
+                    <div class="vd-card-body">
+                        <h4 class="vd-text-md vd-mb-2">ESM vs IIFE vs Legacy</h4>
+                        <p class="vd-text-sm vd-text-muted vd-mb-0">Understand which JavaScript module format is right for your project.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

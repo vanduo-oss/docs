@@ -179,7 +179,7 @@
                                 <tr>
                                     <td><strong>Color Mode</strong></td>
                                     <td>Light or dark theme</td>
-                                    <td><code>vanduo-theme</code></td>
+                                    <td><code>vanduo-theme-preference</code></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -252,7 +252,7 @@ console.<span class="code-function">log</span>(state);
                             </div>
                             <div class="vd-code-snippet-body">
                                         <pre class="vd-code-snippet-pane is-active" data-lang="js"><code><span class="code-keyword">const</span> primaryColor = localStorage.<span class="code-function">getItem</span>(<span class="code-string">'vanduo-primary'</span>);  <span class="code-comment">// 'blue'</span>
-<span class="code-keyword">const</span> currentTheme = localStorage.<span class="code-function">getItem</span>(<span class="code-string">'vanduo-theme'</span>);    <span class="code-comment">// 'dark'</span></code></pre>
+<span class="code-keyword">const</span> currentTheme = localStorage.<span class="code-function">getItem</span>(<span class="code-string">'vanduo-theme-preference'</span>);  <span class="code-comment">// 'dark'</span></code></pre>
                             </div>
                         </div>
                     </div>
@@ -379,7 +379,7 @@ function applyPreset(name) {
                             </div>
                             <div class="vd-code-snippet-body">
                                         <pre class="vd-code-snippet-pane is-active" data-lang="js"><code><span class="code-comment">// Fired whenever any setting changes</span>
-document.<span class="code-function">addEventListener</span>(<span class="code-string">'themeCustomizer: change'</span>, (e) => {
+document.<span class="code-function">addEventListener</span>(<span class="code-string">'themeCustomizer:change'</span>, (e) => {
     console.<span class="code-function">log</span>(<span class="code-string">'Setting changed: '</span>, e.detail);
     <span class="code-comment">// e.detail = { property: 'primary', value: 'rose' }</span>
 });
@@ -548,8 +548,8 @@ Vanduo.components.themeCustomizer.<span class="code-function">reset</span>();
                             </div>
                             <div class="vd-code-snippet-body">
                                         <pre class="vd-code-snippet-pane is-active" data-lang="css"><code><span class="code-selector">:root </span>{
-    <span class="code-property">--tc-panel-bg</span>: <span class="code-value">var</span>(<span class="code-value">--color-bg</span>);
-    <span class="code-property">--tc-panel-border</span>: <span class="code-value">var</span>(<span class="code-value">--color-border</span>);
+    <span class="code-property">--tc-panel-bg</span>: <span class="code-value">var</span>(<span class="code-value">--bg-primary</span>);
+    <span class="code-property">--tc-panel-border</span>: <span class="code-value">var</span>(<span class="code-value">--border-color</span>);
     <span class="code-property">--tc-panel-shadow</span>: <span class="code-value">var</span>(<span class="code-value">--shadow-lg</span>);
     <span class="code-property">--tc-panel-width</span>: <span class="code-number">320</span><span class="code-unit">px</span>;
     <span class="code-property">--tc-panel-z-index</span>: <span class="code-number">9999</span>;
@@ -562,4 +562,26 @@ Vanduo.components.themeCustomizer.<span class="code-function">reset</span>();
         </div>
     </div>
 
+    <!-- What's Next block -->
+    <div class="vd-mt-8" style="border-top: 1px solid var(--border-color); padding-top: 2.5rem; padding-bottom: 3rem;">
+        <h3 class="vd-text-lg vd-mb-5"><i class="ph ph-arrow-circle-right"></i> What's Next?</h3>
+        <div class="vd-row" style="gap: 1.25rem;">
+            <div class="vd-col-12 vd-col-md-6 vd-mb-4">
+                <a href="#docs/css-variables-theming" data-route="docs/css-variables-theming" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
+                    <div class="vd-card-body">
+                        <h4 class="vd-text-md vd-mb-2">CSS Variables &amp; Theming</h4>
+                        <p class="vd-text-sm vd-text-muted vd-mb-0">Learn how Vanduo's styling system works under the hood and how to override it via CSS.</p>
+                    </div>
+                </a>
+            </div>
+            <div class="vd-col-12 vd-col-md-6 vd-mb-4">
+                <a href="#docs/utilities-cheat-sheet" data-route="docs/utilities-cheat-sheet" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
+                    <div class="vd-card-body">
+                        <h4 class="vd-text-md vd-mb-2">Utilities Cheat Sheet</h4>
+                        <p class="vd-text-sm vd-text-muted vd-mb-0">Quick reference for all spacing, typography, color, and layout utility classes.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
 </section>

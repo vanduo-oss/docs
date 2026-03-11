@@ -11,7 +11,7 @@ async function waitForSPA(page: import('@playwright/test').Page) {
 test.describe('4. Documentation View', () => {
 
     test.describe('Docs Landing (#docs)', () => {
-        test('Displays the three main cards', async ({ page }) => {
+        test('Displays the two main cards', async ({ page }) => {
             await page.goto('/#docs');
             await waitForSPA(page);
 
@@ -19,12 +19,12 @@ test.describe('4. Documentation View', () => {
             await expect(docsLanding).toBeVisible();
 
             const cards = docsLanding.locator('.vd-card');
-            await expect(cards).toHaveCount(5);
+            await expect(cards).toHaveCount(4);
 
-            const text = await docsLanding.textContent();
-            expect(text).toContain('Components');
-            expect(text).toContain('Guides');
-            expect(text).toContain('Concepts');
+            await expect(docsLanding).toContainText('Components');
+            await expect(docsLanding).toContainText('Guides');
+            await expect(docsLanding).toContainText(/Documentation\s+Coverage/);
+            await expect(docsLanding).not.toContainText('Concepts');
         });
 
         test('Cards route to respective tab views', async ({ page }) => {
@@ -49,14 +49,6 @@ test.describe('4. Documentation View', () => {
             await page.waitForTimeout(500);
             await expect(page).toHaveURL(/.*#docs\//);
 
-            // Go back and click Concepts
-            await page.goBack();
-            await waitForSPA(page);
-
-            const conceptsCard = page.locator('#docs-landing a[data-route="docs/concepts"]');
-            await conceptsCard.click();
-            await page.waitForTimeout(500);
-            await expect(page).toHaveURL(/.*#docs\//);
         });
     });
 

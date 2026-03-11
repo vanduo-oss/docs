@@ -499,6 +499,22 @@
               ]
             },
             {
+              "id": "framework-integration",
+              "title": "Framework Integration",
+              "file": "guides/framework-integration.html",
+              "icon": "ph-plugs-connected",
+              "keywords": [
+                "react",
+                "vue",
+                "nuxt",
+                "next",
+                "svelte",
+                "framework",
+                "integration",
+                "spa"
+              ]
+            },
+            {
               "id": "esm-vs-iife",
               "title": "ESM vs IIFE vs Legacy",
               "file": "guides/esm-vs-iife.html",
@@ -552,6 +568,22 @@
               ]
             },
             {
+              "id": "css-variables-theming",
+              "title": "CSS Variables & Theming",
+              "file": "guides/css-variables-theming.html",
+              "icon": "ph-swatches",
+              "keywords": [
+                "css",
+                "variable",
+                "theme",
+                "dark mode",
+                "light mode",
+                "override",
+                "custom",
+                "properties"
+              ]
+            },
+            {
               "id": "theme-customizer-guide",
               "title": "Theme Customizer Walkthrough",
               "file": "guides/theme-customizer-guide.html",
@@ -572,6 +604,22 @@
         {
           "name": "Best Practices",
           "sections": [
+            {
+              "id": "utilities-cheat-sheet",
+              "title": "Utilities Cheat Sheet",
+              "file": "guides/utilities-cheat-sheet.html",
+              "icon": "ph-magic-wand",
+              "keywords": [
+                "utility",
+                "utilities",
+                "cheat sheet",
+                "margin",
+                "padding",
+                "color",
+                "flex",
+                "radius"
+              ]
+            },
             {
               "id": "accessibility-essentials",
               "title": "Accessibility Essentials",
@@ -608,121 +656,6 @@
                 "on-demand",
                 "section",
                 "partial"
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    "concepts": {
-      "label": "Concepts",
-      "icon": "ph-lightbulb",
-      "categories": [
-        {
-          "name": "Philosophy",
-          "sections": [
-            {
-              "id": "philosophy",
-              "title": "Philosophy",
-              "file": "concepts/philosophy.html",
-              "icon": "ph-heart",
-              "keywords": [
-                "philosophy",
-                "principles",
-                "design",
-                "water",
-                "vanduo"
-              ]
-            }
-          ]
-        },
-        {
-          "name": "Architecture",
-          "sections": [
-            {
-              "id": "namespacing",
-              "title": "CSS Namespacing",
-              "file": "concepts/namespacing.html",
-              "icon": "ph-shield",
-              "keywords": [
-                "namespace",
-                "prefix",
-                "vd-",
-                "css",
-                "convention",
-                "conflict"
-              ]
-            },
-            {
-              "id": "tokens",
-              "title": "Design Tokens",
-              "file": "concepts/tokens.html",
-              "icon": "ph-palette",
-              "keywords": [
-                "tokens",
-                "variables",
-                "css custom properties",
-                "design system"
-              ]
-            },
-            {
-              "id": "lifecycle",
-              "title": "Lifecycle Management",
-              "file": "concepts/lifecycle.html",
-              "icon": "ph-arrows-clockwise",
-              "keywords": [
-                "lifecycle",
-                "init",
-                "destroy",
-                "cleanup",
-                "memory",
-                "SPA"
-              ]
-            },
-            {
-              "id": "modules",
-              "title": "Module Formats",
-              "file": "concepts/modules.html",
-              "icon": "ph-package",
-              "keywords": [
-                "module",
-                "esm",
-                "cjs",
-                "iife",
-                "import",
-                "require",
-                "bundle"
-              ]
-            }
-          ]
-        },
-        {
-          "name": "Reference",
-          "sections": [
-            {
-              "id": "class-prefixes",
-              "title": "Class Prefix Reference",
-              "file": "concepts/class-prefixes.html",
-              "icon": "ph-list-dashes",
-              "keywords": [
-                "class",
-                "prefix",
-                "reference",
-                "naming",
-                "convention"
-              ]
-            },
-            {
-              "id": "token-reference",
-              "title": "CSS Token Reference",
-              "file": "concepts/token-reference.html",
-              "icon": "ph-list-bullets",
-              "keywords": [
-                "token",
-                "reference",
-                "css variable",
-                "custom property",
-                "list"
               ]
             }
           ]

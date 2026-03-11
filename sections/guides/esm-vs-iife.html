@@ -4,6 +4,13 @@
         mean? This guide breaks it all down in plain language, helps you pick the right one for your project, and shows
         you exactly how to set each up with Vanduo.</p>
 
+    <div class="vd-alert vd-alert-success vd-mb-6">
+        <i class="ph ph-lightning"></i>
+        <div>
+            <strong>TL;DR for Beginners:</strong> If you are building a modern app with React, Vue, Next.js, or Vite, use <strong>ESM</strong>. If you are just building a simple HTML page and want to drop in a script tag to make components work immediately, use <strong>IIFE</strong>. You can safely ignore the rest!
+        </div>
+    </div>
+
     <!-- The Big Picture -->
     <div class="vd-row vd-mb-8">
         <div class="vd-col-12">
@@ -586,7 +593,7 @@ Vanduo.<span class="code-function">init</span>();
                             </div>
                             <div class="vd-code-snippet-body">
                                 <pre class="vd-code-snippet-pane is-active"
-                                    data-lang="js"><code># Install
+                                    data-lang="shell"><code># Install
 npm install @vanduo-oss/framework
 
 # In your code:
@@ -604,4 +611,26 @@ npm install @vanduo-oss/framework
         </div>
     </div>
 
+    <!-- What's Next block -->
+    <div class="vd-mt-8" style="border-top: 1px solid var(--border-color); padding-top: 2.5rem; padding-bottom: 3rem;">
+        <h3 class="vd-text-lg vd-mb-5"><i class="ph ph-arrow-circle-right"></i> What's Next?</h3>
+        <div class="vd-row" style="gap: 1.25rem;">
+            <div class="vd-col-12 vd-col-md-6 vd-mb-4">
+                <a href="#docs/first-layout" data-route="docs/first-layout" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
+                    <div class="vd-card-body">
+                        <h4 class="vd-text-md vd-mb-2">Building Your First Layout</h4>
+                        <p class="vd-text-sm vd-text-muted vd-mb-0">Now that you know which module format to use, learn how the grid system works to structure your pages.</p>
+                    </div>
+                </a>
+            </div>
+            <div class="vd-col-12 vd-col-md-6 vd-mb-4">
+                <a href="#docs/framework-integration" data-route="docs/framework-integration" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
+                    <div class="vd-card-body">
+                        <h4 class="vd-text-md vd-mb-2">Framework Integration</h4>
+                        <p class="vd-text-sm vd-text-muted vd-mb-0">Using React, Vue, or Svelte? See how to wire Vanduo into your framework's lifecycle.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
 </section>
