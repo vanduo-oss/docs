@@ -1,7 +1,7 @@
 <section id="autocomplete">
     <h2 class="demo-title"><i class="ph ph-magnifying-glass"></i>Autocomplete / Suggest</h2>
     <p class="vd-mb-5">The <strong>VanduoSuggest</strong> component adds type-ahead suggestions to any text input. Feed it
-        a static JSON array or point it at a remote URL — results filter as the user types. Alias:
+        a static JSON array or point it at a remote JSON endpoint — results filter as the user types. Alias:
         <code>data-vd-autocomplete</code>.</p>
 
     <div class="vd-row">
@@ -42,14 +42,13 @@
         </div>
 
         <div class="vd-col-12 vd-col-md-6">
-            <div class="vd-card vd-card-glow demo-card" id="demo-suggest-url">
-                <div class="vd-card-header"><h3>Remote CSV Data Source</h3></div>
+            <div class="vd-card vd-card-glow demo-card" id="demo-suggest-capitals">
+                <div class="vd-card-header"><h3>EU Capitals</h3></div>
                 <div class="vd-card-body">
                     <div class="vd-form-group">
-                        <label for="suggest-cities">Search Cities</label>
-                        <input type="text" id="suggest-cities" class="vd-input" placeholder="Type a city…"
-                            data-vd-suggest
-                            data-vd-suggest-url="/api/cities.csv">
+                        <label for="suggest-cities">Search EU Capitals</label>
+                        <input type="text" id="suggest-cities" class="vd-input" placeholder="Type an EU capital…"
+                            data-vd-suggest='["Amsterdam","Athens","Berlin","Bratislava","Brussels","Bucharest","Budapest","Copenhagen","Dublin","Helsinki","Lisbon","Ljubljana","Luxembourg","Madrid","Nicosia","Paris","Prague","Riga","Rome","Sofia","Stockholm","Tallinn","Valletta","Vienna","Vilnius","Warsaw","Zagreb"]'>
                     </div>
                     <div class="vd-code-snippet" data-collapsible>
                         <button class="vd-code-snippet-toggle" aria-expanded="false">
@@ -69,9 +68,8 @@
                             <div class="vd-code-snippet-body">
                                 <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">input</span> <span class="code-attr">type</span>=<span class="code-string">"text"</span>
   <span class="code-attr">class</span>=<span class="code-string">"vd-input"</span>
-  <span class="code-attr">placeholder</span>=<span class="code-string">"Type a city…"</span>
-  <span class="code-attr">data-vd-suggest</span>
-  <span class="code-attr">data-vd-suggest-url</span>=<span class="code-string">"/api/cities.csv"</span>&gt;</code></pre>
+  <span class="code-attr">placeholder</span>=<span class="code-string">"Type an EU capital…"</span>
+  <span class="code-attr">data-vd-suggest</span>=<span class="code-string">'["Amsterdam","Athens","Berlin","Brussels","Dublin","Paris","Rome","Vienna"]'</span>&gt;</code></pre>
                             </div>
                         </div>
                     </div>
@@ -86,9 +84,9 @@
                 <div class="vd-card-header"><h3>Minimum Characters (2)</h3></div>
                 <div class="vd-card-body">
                     <div class="vd-form-group">
-                        <label for="suggest-countries">Search Countries</label>
-                        <input type="text" id="suggest-countries" class="vd-input" placeholder="Type at least 2 characters…"
-                            data-vd-suggest='["Argentina","Australia","Austria","Belgium","Brazil","Canada","Chile","China","Colombia","Denmark","Egypt","Finland","France","Germany","Greece","India","Ireland","Italy","Japan","Mexico","Netherlands","Norway","Poland","Portugal","Russia","Spain","Sweden","Switzerland","Turkey","United Kingdom","United States"]'
+                        <label for="suggest-countries">Search EU Countries</label>
+                        <input type="text" id="suggest-countries" class="vd-input" placeholder="Type at least 2 letters…"
+                            data-vd-suggest='["Austria","Belgium","Bulgaria","Croatia","Cyprus","Czech Republic","Denmark","Estonia","Finland","France","Germany","Greece","Hungary","Ireland","Italy","Latvia","Lithuania","Luxembourg","Malta","Netherlands","Poland","Portugal","Romania","Slovakia","Slovenia","Spain","Sweden"]'
                             data-vd-suggest-min-chars="2">
                     </div>
                     <div class="vd-code-snippet" data-collapsible>
@@ -109,8 +107,8 @@
                             <div class="vd-code-snippet-body">
                                 <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">input</span> <span class="code-attr">type</span>=<span class="code-string">"text"</span>
   <span class="code-attr">class</span>=<span class="code-string">"vd-input"</span>
-  <span class="code-attr">placeholder</span>=<span class="code-string">"Type at least 2 characters…"</span>
-  <span class="code-attr">data-vd-suggest</span>=<span class="code-string">'["Argentina","Brazil","Canada",…]'</span>
+  <span class="code-attr">placeholder</span>=<span class="code-string">"Type at least 2 letters…"</span>
+  <span class="code-attr">data-vd-suggest</span>=<span class="code-string">'["Austria","Belgium","France",…]'</span>
   <span class="code-attr">data-vd-suggest-min-chars</span>=<span class="code-string">"2"</span>&gt;</code></pre>
                             </div>
                         </div>
@@ -186,7 +184,7 @@
                     </thead>
                     <tbody>
                         <tr><td><code>data-vd-suggest</code></td><td>Activates the component. Optionally holds an inline JSON array of strings</td></tr>
-                        <tr><td><code>data-vd-suggest-url</code></td><td>URL to fetch suggestions from (JSON array or CSV). Overrides inline data</td></tr>
+                        <tr><td><code>data-vd-suggest-url</code></td><td>URL to fetch suggestions from a JSON endpoint. Overrides inline data</td></tr>
                         <tr><td><code>data-vd-suggest-min-chars</code></td><td>Minimum characters before the dropdown appears (default: <code>1</code>)</td></tr>
                         <tr><td><code>data-vd-autocomplete</code></td><td>Alias for <code>data-vd-suggest</code> — works identically</td></tr>
                     </tbody>

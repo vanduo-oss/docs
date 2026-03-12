@@ -8,27 +8,27 @@
                     <h3>Sidebar Navigation Scrollspy</h3>
                 </div>
                 <div class="vd-card-body">
-                    <div style="display:flex; gap:1.5rem; min-height:280px;">
-                        <nav class="vd-waypoint-nav" data-vd-waypoint-nav="#waypoint-demo-scroll" style="flex:0 0 160px;">
+                    <div class="waypoint-demo-layout">
+                        <nav class="vd-waypoint-nav vd-waypoint-border waypoint-demo-sidebar-nav" data-vd-waypoint-nav="#waypoint-demo-scroll" aria-label="Scrollspy sections">
                             <a href="#wp-section-intro" class="is-active">Introduction</a>
                             <a href="#wp-section-setup">Setup</a>
                             <a href="#wp-section-usage">Usage</a>
                             <a href="#wp-section-api">API</a>
                         </nav>
-                        <div id="waypoint-demo-scroll" style="flex:1; overflow-y:auto; max-height:280px; padding-right:1rem; scroll-behavior:smooth;">
-                            <div id="wp-section-intro" style="padding-bottom:2rem;">
-                                <h4 style="margin-top:0;">Introduction</h4>
+                        <div id="waypoint-demo-scroll" class="waypoint-demo-scroll">
+                            <div id="wp-section-intro" class="waypoint-demo-section">
+                                <h4 class="waypoint-demo-section-title">Introduction</h4>
                                 <p>Waypoint automatically highlights navigation links as the user scrolls through corresponding content sections. It observes section visibility and updates the <code>.is-active</code> class on the matching nav link.</p>
                             </div>
-                            <div id="wp-section-setup" style="padding-bottom:2rem;">
+                            <div id="wp-section-setup" class="waypoint-demo-section">
                                 <h4>Setup</h4>
                                 <p>Add <code>data-vd-waypoint-nav</code> to the nav container and point it to the scrollable parent. Each link <code>href</code> should reference a section ID within the scroll container.</p>
                             </div>
-                            <div id="wp-section-usage" style="padding-bottom:2rem;">
+                            <div id="wp-section-usage" class="waypoint-demo-section">
                                 <h4>Usage</h4>
-                                <p>Waypoint supports vertical scroll containers of any height. Links are highlighted top-down — the topmost visible section wins. Works with both window scroll and overflow containers.</p>
+                                <p>Waypoint supports vertical scroll containers of any height. Links are highlighted top-down - the topmost visible section wins. Works with both window scroll and overflow containers.</p>
                             </div>
-                            <div id="wp-section-api" style="padding-bottom:2rem;">
+                            <div id="wp-section-api" class="waypoint-demo-section">
                                 <h4>API</h4>
                                 <p>Call <code>VanduoWaypoint.refresh(nav)</code> after dynamic content changes. Destroy with <code>VanduoWaypoint.destroy(nav)</code> to clean up observers.</p>
                             </div>
@@ -80,13 +80,13 @@
                     <h3>Underline Variant</h3>
                 </div>
                 <div class="vd-card-body">
-                    <nav class="vd-waypoint-nav vd-waypoint-underline" style="display:flex; gap:.5rem; border-bottom: 2px solid var(--border-color); padding-bottom:0;">
-                        <a href="#" class="is-active" style="padding:.5rem 1rem;">Overview</a>
-                        <a href="#" style="padding:.5rem 1rem;">Features</a>
-                        <a href="#" style="padding:.5rem 1rem;">Pricing</a>
-                        <a href="#" style="padding:.5rem 1rem;">FAQ</a>
+                    <nav class="vd-waypoint-nav vd-waypoint-underline waypoint-demo-tab-nav waypoint-demo-tab-nav-underline" data-waypoint-demo-nav aria-label="Underline variant preview" role="tablist">
+                        <button type="button" class="is-active" role="tab" aria-selected="true" data-waypoint-demo-copy="Overview of the current section with a compact underline indicator.">Overview</button>
+                        <button type="button" role="tab" aria-selected="false" data-waypoint-demo-copy="Feature-focused tab labels can switch active state without moving the page.">Features</button>
+                        <button type="button" role="tab" aria-selected="false" data-waypoint-demo-copy="Pricing can stay in-place while the active item updates visually.">Pricing</button>
+                        <button type="button" role="tab" aria-selected="false" data-waypoint-demo-copy="FAQ remains clickable without sending the reader somewhere else on the docs page.">FAQ</button>
                     </nav>
-                    <p class="vd-text-sm vd-text-muted vd-mt-4">Horizontal tabs with an animated underline indicator on the active link.</p>
+                    <p class="vd-text-sm vd-text-muted vd-mt-4" data-waypoint-demo-panel>Overview of the current section with a compact underline indicator.</p>
                 </div>
             </div>
 
@@ -124,13 +124,13 @@
                     <h3>Pill Variant</h3>
                 </div>
                 <div class="vd-card-body">
-                    <nav class="vd-waypoint-nav vd-waypoint-pill" style="display:flex; gap:.5rem; flex-wrap:wrap;">
-                        <a href="#" class="is-active" style="padding:.4rem 1rem; border-radius:999px;">Getting Started</a>
-                        <a href="#" style="padding:.4rem 1rem; border-radius:999px;">Components</a>
-                        <a href="#" style="padding:.4rem 1rem; border-radius:999px;">Utilities</a>
-                        <a href="#" style="padding:.4rem 1rem; border-radius:999px;">Theming</a>
+                    <nav class="vd-waypoint-nav vd-waypoint-pill waypoint-demo-tab-nav waypoint-demo-tab-nav-pill" data-waypoint-demo-nav aria-label="Pill variant preview" role="tablist">
+                        <button type="button" class="is-active" role="tab" aria-selected="true" data-waypoint-demo-copy="Getting started stays selected while the card remains anchored in place.">Getting Started</button>
+                        <button type="button" role="tab" aria-selected="false" data-waypoint-demo-copy="Components can be previewed as pills without triggering a page jump.">Components</button>
+                        <button type="button" role="tab" aria-selected="false" data-waypoint-demo-copy="Utilities now behave like local controls instead of placeholder links.">Utilities</button>
+                        <button type="button" role="tab" aria-selected="false" data-waypoint-demo-copy="Theming is shown as another selectable state in the same card.">Theming</button>
                     </nav>
-                    <p class="vd-text-sm vd-text-muted vd-mt-4">Rounded pill-style links with a filled background on the active item.</p>
+                    <p class="vd-text-sm vd-text-muted vd-mt-4" data-waypoint-demo-panel>Getting started stays selected while the card remains anchored in place.</p>
                 </div>
             </div>
 

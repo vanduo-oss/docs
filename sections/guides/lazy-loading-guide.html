@@ -198,6 +198,32 @@
                             elements, shows the placeholder immediately, then uses <code>IntersectionObserver</code> to
                             trigger the fetch when the element enters the viewport.</div>
                     </div>
+
+                    <h4 class="vd-mt-6 vd-mb-3">Placeholder Options</h4>
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-hover">
+                            <thead>
+                                <tr>
+                                    <th style="width: 25%;">Value</th>
+                                    <th style="width: 75%;">Result</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>"skeleton"</code> (default)</td>
+                                    <td>Animated skeleton card with shimmer and four-color spinner overlay</td>
+                                </tr>
+                                <tr>
+                                    <td><code>"spinner"</code></td>
+                                    <td>Centered four-color spinner, minimal height</td>
+                                </tr>
+                                <tr>
+                                    <td>Any HTML string</td>
+                                    <td>Your custom HTML rendered while loading</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -251,6 +277,97 @@ VanduoLazyLoad.observe(img, (target) =&gt; {
 }, { threshold: <span class="code-number">0.1</span> });</code></pre>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- API Reference -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h3><i class="ph ph-book-open"></i> API Reference</h3>
+                </div>
+                <div class="vd-card-body">
+                    <h4 class="vd-mb-3">Methods</h4>
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-hover">
+                            <thead>
+                                <tr>
+                                    <th style="width: 25%;">Method</th>
+                                    <th style="width: 30%;">Parameters</th>
+                                    <th style="width: 45%;">Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>observe(el, cb, opts?)</code></td>
+                                    <td><code>el</code>: Element<br><code>cb</code>: (el: Element) =>
+                                        void<br><code>opts.threshold</code>: 0–1<br><code>opts.rootMargin</code>: CSS
+                                        string</td>
+                                    <td>Fires <code>cb</code> once when <code>el</code> enters viewport, then unobserves</td>
+                                </tr>
+                                <tr>
+                                    <td><code>unobserve(el)</code></td>
+                                    <td><code>el</code>: Element</td>
+                                    <td>Stops observing a specific element</td>
+                                </tr>
+                                <tr>
+                                    <td><code>unobserveAll()</code></td>
+                                    <td>—</td>
+                                    <td>Stops all active observations</td>
+                                </tr>
+                                <tr>
+                                    <td><code>loadSection(url, el, opts?)</code></td>
+                                    <td><code>url</code>: string<br><code>el</code>: Element<br><code>opts.placeholder</code>: string<br><code>opts.threshold</code>: 0–1<br><code>opts.rootMargin</code>: CSS string<br><code>opts.onLoaded</code>: (el) => void<br><code>opts.onError</code>: (err) => void</td>
+                                    <td>Fetches an HTML partial and injects it into <code>el</code> when the element enters the viewport</td>
+                                </tr>
+                                <tr>
+                                    <td><code>init()</code></td>
+                                    <td>—</td>
+                                    <td>Wires all <code>[data-vd-lazy]</code> elements in the DOM</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="vd-mt-6 vd-mb-3">Events</h4>
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-hover">
+                            <thead>
+                                <tr>
+                                    <th style="width: 25%;">Event</th>
+                                    <th style="width: 25%;">Fired on</th>
+                                    <th style="width: 50%;">When</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>lazysection:loading</code></td>
+                                    <td><code>containerEl</code></td>
+                                    <td>Immediately after placeholder is shown</td>
+                                </tr>
+                                <tr>
+                                    <td><code>lazysection:loaded</code></td>
+                                    <td><code>containerEl</code></td>
+                                    <td>After content is injected successfully</td>
+                                </tr>
+                                <tr>
+                                    <td><code>lazysection:error</code></td>
+                                    <td><code>containerEl</code></td>
+                                    <td>After a fetch failure (404, network error, etc.)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="vd-alert vd-alert-info vd-mt-5">
+                        <i class="ph ph-lock"></i>
+                        <div><strong>Security note:</strong> <code>loadSection()</code> rejects any URL that resolves to
+                            a different origin. Only same-origin and relative URLs are allowed. Cross-origin requests
+                            are blocked silently with a console error.</div>
                     </div>
                 </div>
             </div>
@@ -359,17 +476,6 @@ document.addEventListener(<span class="code-string">'lazysection:error'</span>, 
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="vd-row vd-mb-6">
-        <div class="vd-col-12">
-            <div class="vd-alert vd-alert-primary">
-                <i class="ph ph-cube"></i>
-                <div><strong>API Reference:</strong> See the <a href="#docs/lazy-load" data-route="docs/lazy-load"
-                        style="color:var(--color-primary-text,inherit);text-decoration:underline;">Lazy Load component page</a>
-                    for the full method signatures, options, and event details.</div>
             </div>
         </div>
     </div>

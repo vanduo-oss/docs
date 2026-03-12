@@ -3,17 +3,18 @@
     <p class="vd-mb-5">The <strong>VanduoTimepicker</strong> component adds a scrollable time-selection dropdown to any text
         input. Choose between 12-hour and 24-hour formats, and configure the minute step interval.</p>
 
-    <div class="vd-row">
-        <div class="vd-col-12 vd-col-md-4">
-            <div class="vd-card vd-card-glow demo-card" id="demo-timepicker-12h">
+    <div class="vd-row" style="margin-bottom: var(--grid-gutter);">
+        <div class="vd-col-12 vd-col-md-4" style="display: flex;">
+            <div class="vd-card vd-card-glow demo-card" id="demo-timepicker-12h"
+                style="display: flex; flex-direction: column; height: 100%;">
                 <div class="vd-card-header"><h3>12-Hour Format (Default)</h3></div>
-                <div class="vd-card-body">
-                    <div class="vd-form-group">
+                <div class="vd-card-body" style="display: flex; flex: 1; flex-direction: column;">
+                    <div class="vd-form-group" style="display: flex; align-items: center; gap: 1.25rem;">
                         <label for="tp-12h">Meeting Time</label>
                         <input type="text" id="tp-12h" class="vd-input" placeholder="hh:mm AM/PM"
-                            data-vd-timepicker readonly>
+                            data-vd-timepicker readonly style="flex: 1;">
                     </div>
-                    <div class="vd-code-snippet" data-collapsible>
+                    <div class="vd-code-snippet" data-collapsible style="margin-top: auto;">
                         <button class="vd-code-snippet-toggle" aria-expanded="false">
                             <span class="vd-code-snippet-toggle-icon"></span>
                             <span>View Code</span>
@@ -41,18 +42,19 @@
             </div>
         </div>
 
-        <div class="vd-col-12 vd-col-md-4">
-            <div class="vd-card vd-card-glow demo-card" id="demo-timepicker-24h">
+        <div class="vd-col-12 vd-col-md-4" style="display: flex;">
+            <div class="vd-card vd-card-glow demo-card" id="demo-timepicker-24h"
+                style="display: flex; flex-direction: column; height: 100%;">
                 <div class="vd-card-header"><h3>24-Hour Format</h3></div>
-                <div class="vd-card-body">
-                    <div class="vd-form-group">
+                <div class="vd-card-body" style="display: flex; flex: 1; flex-direction: column;">
+                    <div class="vd-form-group" style="display: flex; align-items: center; gap: 1.25rem;">
                         <label for="tp-24h">Departure Time</label>
                         <input type="text" id="tp-24h" class="vd-input" placeholder="HH:mm"
                             data-vd-timepicker
                             data-vd-timepicker-format="24h"
-                            readonly>
+                            readonly style="flex: 1;">
                     </div>
-                    <div class="vd-code-snippet" data-collapsible>
+                    <div class="vd-code-snippet" data-collapsible style="margin-top: auto;">
                         <button class="vd-code-snippet-toggle" aria-expanded="false">
                             <span class="vd-code-snippet-toggle-icon"></span>
                             <span>View Code</span>
@@ -81,18 +83,19 @@
             </div>
         </div>
 
-        <div class="vd-col-12 vd-col-md-4">
-            <div class="vd-card vd-card-glow demo-card" id="demo-timepicker-step">
+        <div class="vd-col-12 vd-col-md-4" style="display: flex;">
+            <div class="vd-card vd-card-glow demo-card" id="demo-timepicker-step"
+                style="display: flex; flex-direction: column; height: 100%;">
                 <div class="vd-card-header"><h3>15-Minute Step</h3></div>
-                <div class="vd-card-body">
-                    <div class="vd-form-group">
+                <div class="vd-card-body" style="display: flex; flex: 1; flex-direction: column;">
+                    <div class="vd-form-group" style="display: flex; align-items: center; gap: 1.25rem;">
                         <label for="tp-step">Appointment Slot</label>
                         <input type="text" id="tp-step" class="vd-input" placeholder="Select time…"
                             data-vd-timepicker
                             data-vd-timepicker-step="15"
-                            readonly>
+                            readonly style="flex: 1;">
                     </div>
-                    <div class="vd-code-snippet" data-collapsible>
+                    <div class="vd-code-snippet" data-collapsible style="margin-top: auto;">
                         <button class="vd-code-snippet-toggle" aria-expanded="false">
                             <span class="vd-code-snippet-toggle-icon"></span>
                             <span>View Code</span>

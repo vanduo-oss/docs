@@ -11,50 +11,34 @@
                     <h3><i class="ph ph-map-trifold"></i> Interactive Tour</h3>
                 </div>
                 <div class="vd-card-body">
-                    <p class="vd-mb-5">Click the button below to start a 3-step feature discovery tour that highlights elements inside this demo area.</p>
+                    <div class="spotlight-demo-stack">
+                        <p class="vd-mb-0">Click the button below to start a 3-step feature discovery tour that highlights elements inside this demo area.</p>
 
-                    <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:flex-start;margin-bottom:1.5rem;">
-                        <button class="vd-btn vd-btn-primary" id="spotlight-start-btn" onclick="startDemoTour()">
+                        <div class="spotlight-demo-actions">
+                            <button class="vd-btn vd-btn-primary" id="spotlight-start-btn" data-vd-spotlight='[
+                                {"target":"#spot-target-search","title":"Quick Search","description":"Find anything in your workspace instantly. Supports fuzzy matching and keyboard shortcuts."},
+                                {"target":"#spot-target-notifications","title":"Notifications","description":"Stay informed about mentions, updates, and system alerts. Click to see your notification center."},
+                                {"target":"#spot-target-profile","title":"Your Profile","description":"Manage account settings, theme preferences, and sign-out from here."}
+                            ]'>
                             <i class="ph ph-play"></i> Start Tour
-                        </button>
-                    </div>
+                            </button>
+                        </div>
 
-                    <div style="display:flex;gap:1.5rem;flex-wrap:wrap;">
-                        <div id="spot-target-search" style="padding:1rem 1.5rem;background:var(--bg-secondary);border-radius:var(--radius-md);display:flex;align-items:center;gap:.5rem;">
-                            <i class="ph ph-magnifying-glass" style="font-size:1.25rem;color:var(--color-primary);"></i>
-                            <span>Search Bar</span>
-                        </div>
-                        <div id="spot-target-notifications" style="padding:1rem 1.5rem;background:var(--bg-secondary);border-radius:var(--radius-md);display:flex;align-items:center;gap:.5rem;">
-                            <i class="ph ph-bell" style="font-size:1.25rem;color:var(--color-warning);"></i>
-                            <span>Notifications</span>
-                        </div>
-                        <div id="spot-target-profile" style="padding:1rem 1.5rem;background:var(--bg-secondary);border-radius:var(--radius-md);display:flex;align-items:center;gap:.5rem;">
-                            <i class="ph ph-user-circle" style="font-size:1.25rem;color:var(--color-success);"></i>
-                            <span>Profile Menu</span>
+                        <div class="spotlight-demo-targets">
+                            <div id="spot-target-search" class="spotlight-demo-target">
+                                <i class="ph ph-magnifying-glass spotlight-demo-target-icon spotlight-demo-target-icon-primary"></i>
+                                <span>Search Bar</span>
+                            </div>
+                            <div id="spot-target-notifications" class="spotlight-demo-target">
+                                <i class="ph ph-bell spotlight-demo-target-icon spotlight-demo-target-icon-warning"></i>
+                                <span>Notifications</span>
+                            </div>
+                            <div id="spot-target-profile" class="spotlight-demo-target">
+                                <i class="ph ph-user-circle spotlight-demo-target-icon spotlight-demo-target-icon-success"></i>
+                                <span>Profile Menu</span>
+                            </div>
                         </div>
                     </div>
-
-                    <script>
-                        function startDemoTour() {
-                            VanduoSpotlight.start([
-                                {
-                                    target: '#spot-target-search',
-                                    title: 'Quick Search',
-                                    description: 'Find anything in your workspace instantly. Supports fuzzy matching and keyboard shortcuts.'
-                                },
-                                {
-                                    target: '#spot-target-notifications',
-                                    title: 'Notifications',
-                                    description: 'Stay informed about mentions, updates, and system alerts. Click to see your notification center.'
-                                },
-                                {
-                                    target: '#spot-target-profile',
-                                    title: 'Your Profile',
-                                    description: 'Manage account settings, theme preferences, and sign-out from here.'
-                                }
-                            ]);
-                        }
-                    </script>
                 </div>
             </div>
         </div>
@@ -119,7 +103,7 @@ VanduoSpotlight.stop();</code></pre>
                     <h3><i class="ph ph-tag"></i> Declarative Usage</h3>
                 </div>
                 <div class="vd-card-body">
-                    <p class="vd-mb-4">Optionally define tours in HTML with <code>data-vd-spotlight</code> attributes. The JS API takes priority when both are present.</p>
+                    <p class="vd-mb-4">Attach a JSON array of steps directly to a trigger element with <code>data-vd-spotlight</code>. After <code>Vanduo.init()</code>, clicking that trigger starts the tour automatically.</p>
                     <div class="vd-code-snippet" data-collapsible data-expanded="true">
                         <button class="vd-code-snippet-toggle" aria-expanded="true">
                             <span class="vd-code-snippet-toggle-icon"></span>
@@ -217,7 +201,7 @@ VanduoSpotlight.stop();</code></pre>
                             <tbody>
                                 <tr>
                                     <td><code>data-vd-spotlight</code></td>
-                                    <td>JSON array of step objects on a trigger button for declarative tour initialization. Each object requires <code>target</code>, <code>title</code>, and <code>description</code>.</td>
+                                    <td>JSON array of step objects on a trigger element for declarative tour startup. Each step must include <code>target</code>; <code>title</code> and <code>description</code> are optional.</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -239,7 +223,7 @@ VanduoSpotlight.stop();</code></pre>
                                 </tr>
                                 <tr>
                                     <td><code>VanduoSpotlight.next()</code></td>
-                                    <td>Advances to the next step. If on the last step, finishes the tour.</td>
+                                    <td>Advances to the next step. On the final step, the UI swaps the primary action to <code>Done</code>.</td>
                                 </tr>
                                 <tr>
                                     <td><code>VanduoSpotlight.prev()</code></td>
@@ -265,11 +249,11 @@ VanduoSpotlight.stop();</code></pre>
                             <tbody>
                                 <tr>
                                     <td><code>spotlight:step</code></td>
-                                    <td>Fired on <code>document</code> when the tour moves to a new step. <code>event.detail</code> contains <code>{ index, step, total }</code>.</td>
+                                    <td>Fired on <code>document</code> when the tour moves to a new step. <code>event.detail</code> contains <code>{ index, step, total, data }</code>.</td>
                                 </tr>
                                 <tr>
                                     <td><code>spotlight:end</code></td>
-                                    <td>Fired on <code>document</code> when the tour finishes or is stopped. <code>event.detail</code> contains <code>{ completedSteps, total }</code>.</td>
+                                    <td>Fired on <code>document</code> when the tour finishes or is stopped. <code>event.detail</code> contains <code>{ completedSteps, total, completed }</code>.</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -289,11 +273,11 @@ VanduoSpotlight.stop();</code></pre>
                 <div class="vd-card-body">
                     <ul>
                         <li>The tooltip uses <code>role="dialog"</code> and <code>aria-modal="true"</code> to indicate a modal context to assistive technologies.</li>
-                        <li>Focus is trapped inside the tooltip during the tour — <kbd>Tab</kbd> cycles through the navigation buttons.</li>
-                        <li>Pressing <kbd>Escape</kbd> ends the tour and returns focus to the element that triggered it.</li>
-                        <li>The overlay is announced as <code>aria-hidden="true"</code> so screen readers skip the backdrop.</li>
-                        <li>Each step's title and description are linked via <code>aria-labelledby</code> and <code>aria-describedby</code> on the dialog.</li>
-                        <li>Step counter (e.g. "2 of 3") is included as <code>aria-label</code> on the footer for progress context.</li>
+                        <li>Pressing <kbd>Escape</kbd> or clicking the overlay ends the tour, and focus returns to the trigger when possible.</li>
+                        <li>The overlay is marked <code>aria-hidden="true"</code> so screen readers skip the backdrop.</li>
+                        <li>Each step's title and description are connected to the tooltip with <code>aria-labelledby</code> and <code>aria-describedby</code>.</li>
+                        <li>The footer includes an <code>aria-label</code> announcing the current step count.</li>
+                        <li>Keep step copy concise and make sure every highlighted target remains understandable even if a user dismisses the tour early.</li>
                     </ul>
                 </div>
             </div>

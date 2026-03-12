@@ -630,6 +630,23 @@ document.addEventListener('click', function (e) {
             el.textContent = "I'm not draggable yet...";
         }
     }
+
+    var waypointDemoButton = e.target.closest('[data-waypoint-demo-nav] button');
+    if (waypointDemoButton) {
+        var demoNav = waypointDemoButton.closest('[data-waypoint-demo-nav]');
+        if (!demoNav) return;
+
+        demoNav.querySelectorAll('button').forEach(function (button) {
+            button.classList.toggle('is-active', button === waypointDemoButton);
+            button.setAttribute('aria-selected', String(button === waypointDemoButton));
+        });
+
+        var demoPanel = demoNav.parentElement && demoNav.parentElement.querySelector('[data-waypoint-demo-panel]');
+        var nextCopy = waypointDemoButton.getAttribute('data-waypoint-demo-copy');
+        if (demoPanel && nextCopy) {
+            demoPanel.textContent = nextCopy;
+        }
+    }
 });
 
 document.addEventListener('draggable:drop', function (e) {

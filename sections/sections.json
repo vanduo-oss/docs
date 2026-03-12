@@ -436,27 +436,6 @@
           ]
         },
         {
-          "name": "Utilities",
-          "sections": [
-            {
-              "id": "lazy-load",
-              "title": "Lazy Load",
-              "file": "components/lazy-load.html",
-              "icon": "ph-cloud-arrow-down",
-              "keywords": [
-                "lazy",
-                "load",
-                "observer",
-                "intersection",
-                "dynamic",
-                "component",
-                "utility",
-                "performance"
-              ]
-            }
-          ]
-        },
-        {
           "name": "Carousel & Media",
           "sections": [
             {
@@ -792,14 +771,19 @@
               "icon": "ph-cloud-arrow-down",
               "keywords": [
                 "lazy",
+                "load",
                 "loading",
                 "performance",
                 "intersection observer",
+                "observer",
+                "intersection",
                 "dynamic",
                 "fetch",
                 "on-demand",
                 "section",
-                "partial"
+                "partial",
+                "component",
+                "utility"
               ]
             }
           ]
