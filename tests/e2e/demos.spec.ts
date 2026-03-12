@@ -78,5 +78,20 @@ test.describe('5. Interactive Demos & Code Snippets', () => {
                 await expect(modal).not.toHaveClass(/is-active/);
             }
         });
+
+        test('Spotlight demo starts without missing-handler errors', async ({ page }) => {
+            const errors: string[] = [];
+            page.on('pageerror', (error) => errors.push(error.message));
+
+            await page.goto('/#docs/spotlight');
+            await waitForSPA(page);
+
+            const spotlightBtn = page.getByRole('button', { name: 'Start Tour' }).first();
+            await spotlightBtn.click();
+
+            await expect(page.locator('.vd-spotlight-overlay')).toBeVisible();
+            await expect(page.locator('.vd-spotlight-tooltip')).toBeVisible();
+            expect(errors.join('\n')).not.toContain('startDemoTour is not defined');
+        });
     });
 });

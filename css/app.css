@@ -204,6 +204,171 @@
             overflow-x: auto;
         }
 
+        .spotlight-demo-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .spotlight-demo-actions {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 1rem;
+            padding-top: 0.25rem;
+        }
+
+        .spotlight-demo-targets {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+        }
+
+        .spotlight-demo-target {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 1.25rem;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-md);
+            min-height: 4.25rem;
+        }
+
+        .spotlight-demo-target-icon {
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .spotlight-demo-target-icon-primary {
+            color: var(--color-primary);
+        }
+
+        .spotlight-demo-target-icon-warning {
+            color: var(--color-warning);
+        }
+
+        .spotlight-demo-target-icon-success {
+            color: var(--color-success);
+        }
+
+        .waypoint-demo-layout {
+            display: grid;
+            grid-template-columns: minmax(10rem, 12rem) minmax(0, 1fr);
+            gap: 1.5rem;
+            min-height: 280px;
+            align-items: start;
+        }
+
+        .waypoint-demo-sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            align-self: start;
+        }
+
+        .waypoint-demo-sidebar-nav a {
+            display: block;
+            padding: 0.35rem 0.875rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-left: 2px solid transparent;
+            transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .waypoint-demo-sidebar-nav a:hover {
+            color: var(--color-primary);
+            background: var(--bg-secondary);
+        }
+
+        .waypoint-demo-scroll {
+            overflow-y: auto;
+            max-height: 280px;
+            padding-right: 1rem;
+            scroll-behavior: smooth;
+        }
+
+        .waypoint-demo-section {
+            padding-bottom: 2rem;
+        }
+
+        .waypoint-demo-section:last-child {
+            padding-bottom: 0;
+        }
+
+        .waypoint-demo-section-title {
+            margin-top: 0;
+        }
+
+        .waypoint-demo-tab-nav {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .waypoint-demo-tab-nav button {
+            appearance: none;
+            border: 0;
+            background: transparent;
+            color: var(--text-primary);
+            white-space: nowrap;
+            transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .waypoint-demo-tab-nav button:hover {
+            color: var(--color-primary);
+        }
+
+        .waypoint-demo-tab-nav button:focus-visible {
+            outline: 2px solid var(--color-primary);
+            outline-offset: 2px;
+        }
+
+        .waypoint-demo-tab-nav-underline {
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0;
+        }
+
+        .waypoint-demo-tab-nav-underline button {
+            padding: 0.5rem 1rem;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+        }
+
+        .waypoint-demo-tab-nav-underline button.is-active {
+            color: var(--waypoint-active-color);
+            font-weight: 600;
+            border-bottom-color: var(--waypoint-active-color);
+        }
+
+        .waypoint-demo-tab-nav-pill {
+            flex-wrap: wrap;
+        }
+
+        .waypoint-demo-tab-nav-pill button {
+            padding: 0.4rem 1rem;
+            border-radius: 999px;
+        }
+
+        .waypoint-demo-tab-nav-pill button.is-active {
+            background-color: var(--waypoint-active-color);
+            color: #fff;
+            font-weight: 600;
+        }
+
+        @media (max-width: 767.98px) {
+            .waypoint-demo-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .waypoint-demo-sidebar-nav {
+                width: 100%;
+            }
+
+            .waypoint-demo-tab-nav {
+                overflow-x: auto;
+                padding-bottom: 0.25rem;
+            }
+        }
+
         /* ── Sidebar ────────────────────────────────────── */
         .doc-sidebar {
             position: sticky;

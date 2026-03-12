@@ -1,22 +1,27 @@
 <section id="fab">
     <h2 class="demo-title"><i class="ph ph-plus-circle"></i>Floating Action Button (FAB)</h2>
 
+    <!-- ==================== Basic FAB / Sizes ==================== -->
     <div class="vd-row">
         <div class="vd-col-12 vd-col-md-6">
             <div class="vd-card vd-card-glow demo-card" id="demo-fab-basic">
                 <div class="vd-card-header">
                     <h3>Basic FAB</h3>
                 </div>
-                <div class="vd-card-body" style="display:flex; gap:1.5rem; align-items:center; flex-wrap:wrap; padding:2rem;">
-                    <button class="vd-fab" aria-label="Add">
-                        <i class="ph ph-plus"></i>
-                    </button>
-                    <button class="vd-fab" aria-label="Edit">
-                        <i class="ph ph-pencil-simple"></i>
-                    </button>
-                    <button class="vd-fab" aria-label="Share">
-                        <i class="ph ph-share-network"></i>
-                    </button>
+                <div class="vd-card-body">
+                    <p class="vd-text-sm vd-text-muted vd-mb-4">The circular FAB is designed for the single most important action on a screen. Use an icon that clearly represents the action.</p>
+                    <div style="display:flex; gap:1.5rem; align-items:center; flex-wrap:wrap; padding:1rem 0;">
+                        <button class="vd-fab" aria-label="Add">
+                            <i class="ph ph-plus"></i>
+                        </button>
+                        <button class="vd-fab" aria-label="Edit">
+                            <i class="ph ph-pencil-simple"></i>
+                        </button>
+                        <button class="vd-fab" aria-label="Share">
+                            <i class="ph ph-share-network"></i>
+                        </button>
+                    </div>
+                    <p class="vd-text-sm vd-text-muted vd-mt-3"><strong>Tip:</strong> Add <code>.vd-fab-fixed</code> to pin the FAB to the viewport corner. Without it, the FAB flows inline like a regular button.</p>
                 </div>
             </div>
 
@@ -37,7 +42,13 @@
                         </button>
                     </div>
                     <div class="vd-code-snippet-body">
-                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-fab"</span> <span class="code-attr">aria-label</span>=<span class="code-string">"Add"</span>&gt;
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Inline FAB (no fixed positioning) --&gt;</span>
+&lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-fab"</span> <span class="code-attr">aria-label</span>=<span class="code-string">"Add"</span>&gt;
+  &lt;<span class="code-tag">i</span> <span class="code-attr">class</span>=<span class="code-string">"ph ph-plus"</span>&gt;&lt;/<span class="code-tag">i</span>&gt;
+&lt;/<span class="code-tag">button</span>&gt;
+
+<span class="code-comment">&lt;!-- Fixed to bottom-right of viewport --&gt;</span>
+&lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-fab vd-fab-fixed"</span> <span class="code-attr">aria-label</span>=<span class="code-string">"Add"</span>&gt;
   &lt;<span class="code-tag">i</span> <span class="code-attr">class</span>=<span class="code-string">"ph ph-plus"</span>&gt;&lt;/<span class="code-tag">i</span>&gt;
 &lt;/<span class="code-tag">button</span>&gt;</code></pre>
                     </div>
@@ -50,16 +61,28 @@
                 <div class="vd-card-header">
                     <h3>Sizes</h3>
                 </div>
-                <div class="vd-card-body" style="display:flex; gap:1.5rem; align-items:center; flex-wrap:wrap; padding:2rem;">
-                    <button class="vd-fab vd-fab-sm" aria-label="Small add">
-                        <i class="ph ph-plus"></i>
-                    </button>
-                    <button class="vd-fab" aria-label="Default add">
-                        <i class="ph ph-plus"></i>
-                    </button>
-                    <button class="vd-fab vd-fab-lg" aria-label="Large add">
-                        <i class="ph ph-plus"></i>
-                    </button>
+                <div class="vd-card-body">
+                    <p class="vd-text-sm vd-text-muted vd-mb-4">Three sizes based on Fibonacci spacing. Use small for secondary actions, default for primary, and large for hero-level prominence.</p>
+                    <div style="display:flex; gap:2rem; align-items:end; flex-wrap:wrap; padding:1rem 0;">
+                        <div style="text-align:center;">
+                            <button class="vd-fab vd-fab-sm" aria-label="Small add">
+                                <i class="ph ph-plus"></i>
+                            </button>
+                            <div class="vd-text-sm vd-text-muted" style="margin-top:.5rem;">Small<br>40&times;40</div>
+                        </div>
+                        <div style="text-align:center;">
+                            <button class="vd-fab" aria-label="Default add">
+                                <i class="ph ph-plus"></i>
+                            </button>
+                            <div class="vd-text-sm vd-text-muted" style="margin-top:.5rem;">Default<br>56&times;56</div>
+                        </div>
+                        <div style="text-align:center;">
+                            <button class="vd-fab vd-fab-lg" aria-label="Large add">
+                                <i class="ph ph-plus"></i>
+                            </button>
+                            <div class="vd-text-sm vd-text-muted" style="margin-top:.5rem;">Large<br>72&times;72</div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -80,31 +103,35 @@
                         </button>
                     </div>
                     <div class="vd-code-snippet-body">
-                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-fab vd-fab-sm"</span>&gt;...&lt;/<span class="code-tag">button</span>&gt;
-&lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-fab"</span>&gt;...&lt;/<span class="code-tag">button</span>&gt;
-&lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-fab vd-fab-lg"</span>&gt;...&lt;/<span class="code-tag">button</span>&gt;</code></pre>
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-fab vd-fab-sm"</span>&gt;...&lt;/<span class="code-tag">button</span>&gt;  <span class="code-comment">&lt;!-- 40px --&gt;</span>
+&lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-fab"</span>&gt;...&lt;/<span class="code-tag">button</span>&gt;         <span class="code-comment">&lt;!-- 56px (default) --&gt;</span>
+&lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-fab vd-fab-lg"</span>&gt;...&lt;/<span class="code-tag">button</span>&gt;  <span class="code-comment">&lt;!-- 72px --&gt;</span></code></pre>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- ==================== Extended / Colors ==================== -->
     <div class="vd-row">
         <div class="vd-col-12 vd-col-md-6">
             <div class="vd-card vd-card-glow demo-card" id="demo-fab-extended">
                 <div class="vd-card-header">
                     <h3>Extended FAB (with Label)</h3>
                 </div>
-                <div class="vd-card-body" style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center; padding:2rem;">
-                    <button class="vd-fab vd-fab-extended">
-                        <i class="ph ph-plus mr-2"></i>Create
-                    </button>
-                    <button class="vd-fab vd-fab-extended vd-fab-success">
-                        <i class="ph ph-check mr-2"></i>Approve
-                    </button>
-                    <button class="vd-fab vd-fab-extended vd-fab-danger">
-                        <i class="ph ph-trash mr-2"></i>Delete
-                    </button>
+                <div class="vd-card-body">
+                    <p class="vd-text-sm vd-text-muted vd-mb-4">When the icon alone isn't enough, use the extended variant to pair an icon with a text label. The pill shape keeps the elevated FAB feel while improving clarity.</p>
+                    <div style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center; padding:1rem 0;">
+                        <button class="vd-fab vd-fab-extended">
+                            <i class="ph ph-plus"></i>Create
+                        </button>
+                        <button class="vd-fab vd-fab-extended vd-fab-success">
+                            <i class="ph ph-check"></i>Approve
+                        </button>
+                        <button class="vd-fab vd-fab-extended vd-fab-danger">
+                            <i class="ph ph-trash"></i>Delete
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -126,11 +153,11 @@
                     </div>
                     <div class="vd-code-snippet-body">
                         <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-fab vd-fab-extended"</span>&gt;
-  &lt;<span class="code-tag">i</span> <span class="code-attr">class</span>=<span class="code-string">"ph ph-plus mr-2"</span>&gt;&lt;/<span class="code-tag">i</span>&gt;Create
+  &lt;<span class="code-tag">i</span> <span class="code-attr">class</span>=<span class="code-string">"ph ph-plus"</span>&gt;&lt;/<span class="code-tag">i</span>&gt;Create
 &lt;/<span class="code-tag">button</span>&gt;
 
 &lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-fab vd-fab-extended vd-fab-success"</span>&gt;
-  &lt;<span class="code-tag">i</span> <span class="code-attr">class</span>=<span class="code-string">"ph ph-check mr-2"</span>&gt;&lt;/<span class="code-tag">i</span>&gt;Approve
+  &lt;<span class="code-tag">i</span> <span class="code-attr">class</span>=<span class="code-string">"ph ph-check"</span>&gt;&lt;/<span class="code-tag">i</span>&gt;Approve
 &lt;/<span class="code-tag">button</span>&gt;</code></pre>
                     </div>
                 </div>
@@ -142,39 +169,33 @@
                 <div class="vd-card-header">
                     <h3>Color Variants</h3>
                 </div>
-                <div class="vd-card-body" style="display:flex; gap:1.5rem; align-items:center; flex-wrap:wrap; padding:2rem;">
-                    <button class="vd-fab" aria-label="Default">
-                        <i class="ph ph-star"></i>
-                    </button>
-                    <button class="vd-fab vd-fab-success" aria-label="Success">
-                        <i class="ph ph-check"></i>
-                    </button>
-                    <button class="vd-fab vd-fab-danger" aria-label="Danger">
-                        <i class="ph ph-trash"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="vd-row">
-        <div class="vd-col-12 vd-col-md-6">
-            <div class="vd-card vd-card-glow demo-card" id="demo-fab-position">
-                <div class="vd-card-header">
-                    <h3>Position Variants</h3>
-                </div>
                 <div class="vd-card-body">
-                    <div style="position:relative; height:200px; background:var(--bg-secondary); border-radius:var(--radius-md); overflow:hidden;">
-                        <button class="vd-fab vd-fab-sm" style="position:absolute; bottom:1rem; right:1rem;" aria-label="Bottom-right (default)">
-                            <i class="ph ph-arrow-down-right"></i>
-                        </button>
-                        <button class="vd-fab vd-fab-sm vd-fab-bottom-left" style="position:absolute; bottom:1rem; left:1rem;" aria-label="Bottom-left">
-                            <i class="ph ph-arrow-down-left"></i>
-                        </button>
-                        <button class="vd-fab vd-fab-sm vd-fab-top-right" style="position:absolute; top:1rem; right:1rem;" aria-label="Top-right">
-                            <i class="ph ph-arrow-up-right"></i>
-                        </button>
-                        <span style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); opacity:.5; font-size:.85rem;">Position preview area</span>
+                    <p class="vd-text-sm vd-text-muted vd-mb-4">Semantic colors communicate intent at a glance. Use the default primary for standard actions, success for confirmations, and danger for destructive operations.</p>
+                    <div style="display:flex; gap:2rem; align-items:end; flex-wrap:wrap; padding:1rem 0;">
+                        <div style="text-align:center;">
+                            <button class="vd-fab" aria-label="Default">
+                                <i class="ph ph-star"></i>
+                            </button>
+                            <div class="vd-text-sm vd-text-muted" style="margin-top:.5rem;">Primary</div>
+                        </div>
+                        <div style="text-align:center;">
+                            <button class="vd-fab vd-fab-secondary" aria-label="Secondary">
+                                <i class="ph ph-gear"></i>
+                            </button>
+                            <div class="vd-text-sm vd-text-muted" style="margin-top:.5rem;">Secondary</div>
+                        </div>
+                        <div style="text-align:center;">
+                            <button class="vd-fab vd-fab-success" aria-label="Success">
+                                <i class="ph ph-check"></i>
+                            </button>
+                            <div class="vd-text-sm vd-text-muted" style="margin-top:.5rem;">Success</div>
+                        </div>
+                        <div style="text-align:center;">
+                            <button class="vd-fab vd-fab-danger" aria-label="Danger">
+                                <i class="ph ph-trash"></i>
+                            </button>
+                            <div class="vd-text-sm vd-text-muted" style="margin-top:.5rem;">Danger</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -196,10 +217,76 @@
                         </button>
                     </div>
                     <div class="vd-code-snippet-body">
-                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Fixed position on the page --&gt;</span>
-&lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-fab"</span>&gt;...&lt;/<span class="code-tag">button</span>&gt;
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-fab"</span>&gt;...&lt;/<span class="code-tag">button</span>&gt;                     <span class="code-comment">&lt;!-- primary (default) --&gt;</span>
+&lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-fab vd-fab-secondary"</span>&gt;...&lt;/<span class="code-tag">button</span>&gt;   <span class="code-comment">&lt;!-- secondary / gray --&gt;</span>
+&lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-fab vd-fab-success"</span>&gt;...&lt;/<span class="code-tag">button</span>&gt;     <span class="code-comment">&lt;!-- success / green --&gt;</span>
+&lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-fab vd-fab-danger"</span>&gt;...&lt;/<span class="code-tag">button</span>&gt;      <span class="code-comment">&lt;!-- danger / red --&gt;</span></code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== Position Variants / Speed Dial ==================== -->
+    <div class="vd-row">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-fab-position">
+                <div class="vd-card-header">
+                    <h3>Position Variants</h3>
+                </div>
+                <div class="vd-card-body">
+                    <p class="vd-text-sm vd-text-muted vd-mb-4">Position classes pin the FAB to a viewport corner with <code>position:&nbsp;fixed</code>. Each class is self-contained &mdash; no need to add <code>.vd-fab-fixed</code> separately.</p>
+                    <div style="position:relative; height:220px; background:var(--bg-secondary); border-radius:var(--radius-md); overflow:hidden;">
+                        <button class="vd-fab vd-fab-sm" style="position:absolute; top:1rem; right:1rem;" aria-label="Top-right">
+                            <i class="ph ph-arrow-up-right"></i>
+                        </button>
+                        <span class="vd-text-sm vd-text-muted" style="position:absolute; top:1.2rem; right:4rem;">top-right</span>
+
+                        <button class="vd-fab vd-fab-sm" style="position:absolute; top:1rem; left:1rem;" aria-label="Top-left">
+                            <i class="ph ph-arrow-up-left"></i>
+                        </button>
+                        <span class="vd-text-sm vd-text-muted" style="position:absolute; top:1.2rem; left:4rem;">top-left</span>
+
+                        <span style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); opacity:.4; font-size:.8rem; text-align:center; line-height:1.5;">Simulated viewport<br>(uses absolute positioning for preview)</span>
+
+                        <button class="vd-fab vd-fab-sm" style="position:absolute; bottom:1rem; right:1rem;" aria-label="Bottom-right (default)">
+                            <i class="ph ph-arrow-down-right"></i>
+                        </button>
+                        <span class="vd-text-sm vd-text-muted" style="position:absolute; bottom:1.2rem; right:4rem;">fixed (default)</span>
+
+                        <button class="vd-fab vd-fab-sm" style="position:absolute; bottom:1rem; left:1rem;" aria-label="Bottom-left">
+                            <i class="ph ph-arrow-down-left"></i>
+                        </button>
+                        <span class="vd-text-sm vd-text-muted" style="position:absolute; bottom:1.2rem; left:4rem;">bottom-left</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Fixed to bottom-right (default) --&gt;</span>
+&lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-fab vd-fab-fixed"</span>&gt;...&lt;/<span class="code-tag">button</span>&gt;
+
+<span class="code-comment">&lt;!-- Other corners --&gt;</span>
 &lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-fab vd-fab-bottom-left"</span>&gt;...&lt;/<span class="code-tag">button</span>&gt;
-&lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-fab vd-fab-top-right"</span>&gt;...&lt;/<span class="code-tag">button</span>&gt;</code></pre>
+&lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-fab vd-fab-top-right"</span>&gt;...&lt;/<span class="code-tag">button</span>&gt;
+&lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-fab vd-fab-top-left"</span>&gt;...&lt;/<span class="code-tag">button</span>&gt;
+&lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-fab vd-fab-center"</span>&gt;...&lt;/<span class="code-tag">button</span>&gt;</code></pre>
                     </div>
                 </div>
             </div>
@@ -211,11 +298,13 @@
                     <h3>Speed Dial Menu</h3>
                 </div>
                 <div class="vd-card-body" style="padding:2rem;">
-                    <div class="vd-fab-menu" style="position:relative; display:inline-flex; flex-direction:column-reverse; align-items:center; gap:.75rem;">
-                        <button class="vd-fab" aria-label="Toggle speed dial" onclick="this.parentElement.classList.toggle('is-open')">
+                    <p class="vd-text-sm vd-text-muted vd-mb-4">Group related actions behind a single FAB trigger. Clicking the main button reveals a stack of smaller action buttons with a staggered entrance animation.</p>
+                    <div class="vd-fab-menu" id="demo-speed-dial">
+                        <button class="vd-fab" aria-label="Toggle speed dial" aria-expanded="false"
+                                onclick="var m=this.parentElement; m.classList.toggle('is-open'); this.setAttribute('aria-expanded', m.classList.contains('is-open'));">
                             <i class="ph ph-plus"></i>
                         </button>
-                        <div class="vd-fab-action" style="display:flex; flex-direction:column; gap:.5rem; align-items:center;">
+                        <div class="vd-fab-actions">
                             <button class="vd-fab vd-fab-sm vd-fab-success" aria-label="Upload">
                                 <i class="ph ph-upload-simple"></i>
                             </button>
@@ -227,7 +316,7 @@
                             </button>
                         </div>
                     </div>
-                    <p class="vd-text-sm vd-text-muted vd-mt-4">Click the FAB to toggle the speed dial actions. Uses a simple <code>.is-open</code> class toggle — no JS framework required.</p>
+                    <p class="vd-text-sm vd-text-muted vd-mt-4">Click the FAB above to toggle the speed dial. Uses a simple <code>.is-open</code> class toggle and <code>aria-expanded</code> &mdash; no JS framework required.</p>
                 </div>
             </div>
 
@@ -251,21 +340,55 @@
                         <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Speed dial FAB menu --&gt;</span>
 &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-fab-menu"</span>&gt;
   &lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-fab"</span> <span class="code-attr">aria-label</span>=<span class="code-string">"Toggle menu"</span>
+          <span class="code-attr">aria-expanded</span>=<span class="code-string">"false"</span>
           <span class="code-attr">onclick</span>=<span class="code-string">"this.parentElement.classList.toggle('is-open')"</span>&gt;
     &lt;<span class="code-tag">i</span> <span class="code-attr">class</span>=<span class="code-string">"ph ph-plus"</span>&gt;&lt;/<span class="code-tag">i</span>&gt;
   &lt;/<span class="code-tag">button</span>&gt;
-  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-fab-action"</span>&gt;
-    &lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-fab vd-fab-sm"</span>&gt;...&lt;/<span class="code-tag">button</span>&gt;
-    &lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-fab vd-fab-sm"</span>&gt;...&lt;/<span class="code-tag">button</span>&gt;
+  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-fab-actions"</span>&gt;
+    &lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-fab vd-fab-sm"</span> <span class="code-attr">aria-label</span>=<span class="code-string">"Upload"</span>&gt;...&lt;/<span class="code-tag">button</span>&gt;
+    &lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-fab vd-fab-sm"</span> <span class="code-attr">aria-label</span>=<span class="code-string">"Photo"</span>&gt;...&lt;/<span class="code-tag">button</span>&gt;
   &lt;/<span class="code-tag">div</span>&gt;
-&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+&lt;/<span class="code-tag">div</span>&gt;
+
+<span class="code-comment">&lt;!-- Fixed speed dial in bottom-right corner --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-fab-menu vd-fab-fixed"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;</code></pre>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- API Reference -->
+    <!-- ==================== Usage Guidance ==================== -->
+    <div class="vd-card vd-card-glow demo-card" id="demo-fab-guidance">
+        <div class="vd-card-header">
+            <h3><i class="ph ph-lightbulb mr-2" style="color: var(--color-primary);"></i>When to Use a FAB</h3>
+        </div>
+        <div class="vd-card-body">
+            <div class="vd-row">
+                <div class="vd-col-12 vd-col-md-6">
+                    <h4 style="color: var(--color-success);">Do</h4>
+                    <ul>
+                        <li>Use for the <strong>single most important action</strong> on a screen (e.g. "New message", "Add item")</li>
+                        <li>Use <code>.vd-fab-fixed</code> or a position class to anchor it to the viewport</li>
+                        <li>Keep icon-only FABs to universally understood icons (plus, edit, share)</li>
+                        <li>Use the extended variant when the icon alone may be ambiguous</li>
+                        <li>Use the speed dial pattern to group 3&ndash;6 related actions</li>
+                    </ul>
+                </div>
+                <div class="vd-col-12 vd-col-md-6">
+                    <h4 style="color: var(--color-danger);">Don't</h4>
+                    <ul>
+                        <li>Don't place more than one fixed FAB on a page &mdash; it dilutes focus</li>
+                        <li>Don't use a FAB for minor or infrequent actions &mdash; use a regular <code>.vd-btn</code></li>
+                        <li>Don't skip <code>aria-label</code> on icon-only FABs</li>
+                        <li>Don't use more than 6 actions in a speed dial &mdash; it becomes overwhelming</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== API Reference ==================== -->
     <div class="vd-card vd-card-glow demo-card" id="demo-fab-api">
         <div class="vd-card-header">
             <h3><i class="ph ph-list-dashes mr-2" style="color: var(--color-primary);"></i>API Reference</h3>
@@ -284,8 +407,13 @@
                     <tbody>
                         <tr>
                             <td><code>.vd-fab</code></td>
-                            <td>Base floating action button — circular with elevation</td>
+                            <td>Base floating action button &mdash; circular with elevation. Flows inline by default.</td>
                             <td>Base</td>
+                        </tr>
+                        <tr>
+                            <td><code>.vd-fab-fixed</code></td>
+                            <td>Pins the FAB to the bottom-right corner of the viewport with <code>position:&nbsp;fixed</code></td>
+                            <td>Position</td>
                         </tr>
                         <tr>
                             <td><code>.vd-fab-sm</code></td>
@@ -313,6 +441,21 @@
                             <td>Position</td>
                         </tr>
                         <tr>
+                            <td><code>.vd-fab-top-left</code></td>
+                            <td>Fixed position: top-left corner of the viewport</td>
+                            <td>Position</td>
+                        </tr>
+                        <tr>
+                            <td><code>.vd-fab-center</code></td>
+                            <td>Fixed position: bottom-center of the viewport</td>
+                            <td>Position</td>
+                        </tr>
+                        <tr>
+                            <td><code>.vd-fab-secondary</code></td>
+                            <td>Secondary/gray colour variant</td>
+                            <td>Color</td>
+                        </tr>
+                        <tr>
                             <td><code>.vd-fab-success</code></td>
                             <td>Success/green colour variant</td>
                             <td>Color</td>
@@ -324,12 +467,12 @@
                         </tr>
                         <tr>
                             <td><code>.vd-fab-menu</code></td>
-                            <td>Container for a speed-dial group of FABs</td>
+                            <td>Container for a speed-dial group. Flows inline by default; add <code>.vd-fab-fixed</code> to anchor it.</td>
                             <td>Structure</td>
                         </tr>
                         <tr>
-                            <td><code>.vd-fab-action</code></td>
-                            <td>Wrapper for the child action buttons inside a speed dial</td>
+                            <td><code>.vd-fab-actions</code></td>
+                            <td>Wrapper for child action buttons inside a speed dial (animated on toggle)</td>
                             <td>Structure</td>
                         </tr>
                         <tr>
@@ -342,11 +485,11 @@
             </div>
 
             <h4>JavaScript</h4>
-            <p class="vd-text-muted">The FAB is a CSS-only component. Speed dial toggling uses a simple <code>.is-open</code> class toggle — no dedicated JS module is required. You can add your own click handler or use the inline <code>onclick</code> example above.</p>
+            <p class="vd-text-muted">The FAB is a CSS-only component. Speed dial toggling uses a simple <code>.is-open</code> class toggle &mdash; no dedicated JS module is required. You can add your own click handler or use the inline <code>onclick</code> example above.</p>
         </div>
     </div>
 
-    <!-- Accessibility -->
+    <!-- ==================== Accessibility ==================== -->
     <div class="vd-card vd-card-glow demo-card">
         <div class="vd-card-header">
             <h3><i class="ph ph-wheelchair mr-2" style="color: var(--color-primary);"></i>Accessibility</h3>

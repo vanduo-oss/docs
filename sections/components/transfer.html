@@ -1,67 +1,14 @@
 <section id="transfer">
     <h2 class="demo-title"><i class="ph ph-arrows-left-right"></i>Transfer / Dual List</h2>
-    <p class="vd-mb-5">The <strong>VanduoTransfer</strong> component renders a dual-panel picker — users move items from an
-        "Available" list to a "Selected" list using arrow buttons. Supports search filtering and programmatic access to
-        the selected items.</p>
+    <p class="vd-mb-5">The <strong>VanduoTransfer</strong> component renders a dual-panel picker — users move items from a
+        "Source" list to a "Target" list using arrow buttons. Search filtering is built into both panels automatically,
+        and selected items are accessible programmatically at any time.</p>
 
     <div class="vd-row">
         <div class="vd-col-12">
-            <div class="vd-card vd-card-glow demo-card" id="demo-transfer-basic">
-                <div class="vd-card-header"><h3>Basic Transfer</h3></div>
+            <div class="vd-card vd-card-glow demo-card" id="demo-transfer">
+                <div class="vd-card-header"><h3>Transfer</h3></div>
                 <div class="vd-card-body">
-                    <div data-vd-transfer='[
-                        {"id":"apple","label":"Apple"},
-                        {"id":"banana","label":"Banana"},
-                        {"id":"cherry","label":"Cherry"},
-                        {"id":"dragonfruit","label":"Dragonfruit"},
-                        {"id":"elderberry","label":"Elderberry"},
-                        {"id":"fig","label":"Fig"},
-                        {"id":"grape","label":"Grape"},
-                        {"id":"honeydew","label":"Honeydew"},
-                        {"id":"kiwi","label":"Kiwi"},
-                        {"id":"lemon","label":"Lemon"},
-                        {"id":"mango","label":"Mango"},
-                        {"id":"nectarine","label":"Nectarine"}
-                    ]'></div>
-                    <div class="vd-code-snippet" data-collapsible>
-                        <button class="vd-code-snippet-toggle" aria-expanded="false">
-                            <span class="vd-code-snippet-toggle-icon"></span>
-                            <span>View Code</span>
-                        </button>
-                        <div class="vd-code-snippet-content">
-                            <div class="vd-code-snippet-header">
-                                <div class="vd-code-snippet-tabs" role="tablist">
-                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
-                                </div>
-                                <button class="vd-code-snippet-copy" aria-label="Copy code">
-                                    <span class="vd-code-snippet-copy-icon"></span>
-                                    <span class="vd-code-snippet-copy-text">Copy</span>
-                                </button>
-                            </div>
-                            <div class="vd-code-snippet-body">
-                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">div</span> <span class="code-attr">data-vd-transfer</span>=<span class="code-string">'[
-  { "id": "apple",  "label": "Apple" },
-  { "id": "banana", "label": "Banana" },
-  { "id": "cherry", "label": "Cherry" },
-  { "id": "grape",  "label": "Grape" },
-  { "id": "kiwi",   "label": "Kiwi" },
-  { "id": "mango",  "label": "Mango" }
-]'</span>&gt;&lt;/<span class="code-tag">div</span>&gt;</code></pre>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="vd-row">
-        <div class="vd-col-12">
-            <div class="vd-card vd-card-glow demo-card" id="demo-transfer-search">
-                <div class="vd-card-header"><h3>With Search Filtering</h3></div>
-                <div class="vd-card-body">
-                    <p class="vd-text-sm vd-text-muted vd-mb-4">Search inputs are built into each panel automatically.
-                        Filtering is case-insensitive and matches anywhere in the label text.</p>
                     <div data-vd-transfer='[
                         {"id":"html","label":"HTML"},
                         {"id":"css","label":"CSS"},
