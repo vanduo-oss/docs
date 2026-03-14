@@ -7,10 +7,10 @@ NPM Package: https://www.npmjs.com/package/@vanduo-oss/framework
 
 ## Current Snapshot
 
-- Docs are aligned with the v1.2.8 release surface.
-- Production docs load the pinned framework CDN bundle from `@v1.2.8`, while local preview resolves framework assets from `./dist` and refreshes them from the sibling framework repo when available.
+- Docs are aligned with the v1.2.9 release surface.
+- Production docs load the pinned framework CDN bundle from `@v1.2.9`, while local preview resolves framework assets from `./dist` and refreshes them from the sibling framework repo when available.
 - Theme tooling is documented as two separate components: Theme Switcher for lightweight system/light/dark toggles and Theme Customizer for full palette, neutral, radius, and font control.
-- The docs UI and release-facing copy were refreshed during the v1.2.8 pre-release pass.
+- The docs UI and release-facing copy were refreshed during the v1.2.9 release pass.
 
 ## Installation
 

@@ -1,5 +1,5 @@
 <section id="theme-customizer-guide">
-    <h2 class="demo-title"><i class="ph ph-paint-brush"></i>Theme Customizer Walkthrough <code class="vd-text-sm">Guide</code></h2>
+    <h4 class="demo-title"><i class="ph ph-paint-brush"></i>Theme Customizer Walkthrough <code class="vd-text-sm">Guide</code></h4>
     <p class="vd-mb-5">Vanduo's Theme Customizer is a floating panel that lets you — and your users — change the entire look and feel of a site at runtime: primary color, neutral palette, border radius, font family, and dark/light mode. This guide walks you through setting it up, reading values, reacting to changes, and building a fully branded experience.</p>
 
     <!-- What is the Theme Customizer? -->
@@ -7,7 +7,7 @@
         <div class="vd-col-12">
             <div class="vd-card vd-card-glow demo-card">
                 <div class="vd-card-header">
-                    <h3><i class="ph ph-eye"></i> What You Get</h3>
+                    <h4><i class="ph ph-eye"></i> What You Get</h4>
                 </div>
                 <div class="vd-card-body">
                     <p>The Theme Customizer gives your site a floating settings panel with these controls:</p>
@@ -51,7 +51,7 @@
         <div class="vd-col-12">
             <div class="vd-card vd-card-glow demo-card">
                 <div class="vd-card-header">
-                    <h3><span class="vd-badge vd-badge-primary" style="margin-right: 8px;">Step 1 of 6</span> <i class="ph ph-cursor-click"></i> Add the Trigger Button</h3>
+                    <h4><span class="vd-badge vd-badge-primary" style="margin-right: 8px;">Step 1 of 6</span> <i class="ph ph-cursor-click"></i> Add the Trigger Button</h4>
                 </div>
                 <div class="vd-card-body">
                     <p>The customizer needs a button for users to open it. Place this anywhere — in your navbar, a floating corner, or a settings page:</p>
@@ -98,7 +98,7 @@
         <div class="vd-col-12">
             <div class="vd-card vd-card-glow demo-card">
                 <div class="vd-card-header">
-                    <h3><span class="vd-badge vd-badge-primary" style="margin-right: 8px;">Step 2 of 6</span> <i class="ph ph-code"></i> Include and Initialize</h3>
+                    <h4><span class="vd-badge vd-badge-primary" style="margin-right: 8px;">Step 2 of 6</span> <i class="ph ph-code"></i> Include and Initialize</h4>
                 </div>
                 <div class="vd-card-body">
                     <p>The Theme Customizer is part of Vanduo's JS bundle — no extra files needed. Just make sure you have:</p>
@@ -142,7 +142,7 @@
         <div class="vd-col-12">
             <div class="vd-card vd-card-glow demo-card">
                 <div class="vd-card-header">
-                    <h3><span class="vd-badge vd-badge-primary" style="margin-right: 8px;">Step 3 of 6</span> <i class="ph ph-hand-pointing"></i> Try Each Control</h3>
+                    <h4><span class="vd-badge vd-badge-primary" style="margin-right: 8px;">Step 3 of 6</span> <i class="ph ph-hand-pointing"></i> Try Each Control</h4>
                 </div>
                 <div class="vd-card-body">
                     <p>Open the customizer and explore what each control does:</p>
@@ -200,7 +200,7 @@
         <div class="vd-col-12">
             <div class="vd-card vd-card-glow demo-card">
                 <div class="vd-card-header">
-                    <h3><span class="vd-badge vd-badge-primary" style="margin-right: 8px;">Step 4 of 6</span> <i class="ph ph-eye"></i> Read the User's Choices</h3>
+                    <h4><span class="vd-badge vd-badge-primary" style="margin-right: 8px;">Step 4 of 6</span> <i class="ph ph-eye"></i> Read the User's Choices</h4>
                 </div>
                 <div class="vd-card-body">
                     <p>Need to know what the user selected? Use the <code>getState()</code> API:</p>
@@ -266,7 +266,7 @@ console.<span class="code-function">log</span>(state);
         <div class="vd-col-12">
             <div class="vd-card vd-card-glow demo-card">
                 <div class="vd-card-header">
-                    <h3><span class="vd-badge vd-badge-primary" style="margin-right: 8px;">Step 5 of 6</span> <i class="ph ph-code"></i> Set Values Programmatically</h3>
+                    <h4><span class="vd-badge vd-badge-primary" style="margin-right: 8px;">Step 5 of 6</span> <i class="ph ph-code"></i> Set Values Programmatically</h4>
                 </div>
                 <div class="vd-card-body">
                     <p>You can control the customizer from your own code — perfect for "preset themes" or onboarding flows:</p>
@@ -358,7 +358,7 @@ function applyPreset(name) {
         <div class="vd-col-12">
             <div class="vd-card vd-card-glow demo-card">
                 <div class="vd-card-header">
-                    <h3><span class="vd-badge vd-badge-primary" style="margin-right: 8px;">Step 6 of 6</span> <i class="ph ph-broadcast"></i> Listen to Changes</h3>
+                    <h4><span class="vd-badge vd-badge-primary" style="margin-right: 8px;">Step 6 of 6</span> <i class="ph ph-broadcast"></i> Listen to Changes</h4>
                 </div>
                 <div class="vd-card-body">
                     <p>React to user customizations in real time with custom events:</p>
@@ -418,7 +418,7 @@ document.<span class="code-function">addEventListener</span>(<span class="code-s
         <div class="vd-col-12">
             <div class="vd-card vd-card-glow demo-card">
                 <div class="vd-card-header">
-                    <h3><i class="ph ph-swap"></i> Before / After: Building a Brand</h3>
+                    <h4><i class="ph ph-swap"></i> Before / After: Building a Brand</h4>
                 </div>
                 <div class="vd-card-body">
                     <p>See the difference a few customizer calls make:</p>
@@ -496,7 +496,7 @@ tc.<span class="code-function">setFont</span>(<span class="code-string">'Rubik'<
         <div class="vd-col-12">
             <div class="vd-card vd-card-glow demo-card">
                 <div class="vd-card-header">
-                    <h3><i class="ph ph-arrow-counter-clockwise"></i> Resetting and Defaults</h3>
+                    <h4><i class="ph ph-arrow-counter-clockwise"></i> Resetting and Defaults</h4>
                 </div>
                 <div class="vd-card-body">
                     <p>Need to go back to square one?</p>
@@ -564,7 +564,7 @@ Vanduo.components.themeCustomizer.<span class="code-function">reset</span>();
 
     <!-- What's Next block -->
     <div class="vd-mt-8" style="border-top: 1px solid var(--border-color); padding-top: 2.5rem; padding-bottom: 3rem;">
-        <h3 class="vd-text-lg vd-mb-5"><i class="ph ph-arrow-circle-right"></i> What's Next?</h3>
+        <h4 class="vd-text-lg vd-mb-5"><i class="ph ph-arrow-circle-right"></i> What's Next?</h4>
         <div class="vd-row" style="gap: 1.25rem;">
             <div class="vd-col-12 vd-col-md-6 vd-mb-4">
                 <a href="#docs/css-variables-theming" data-route="docs/css-variables-theming" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">

@@ -1,6 +1,6 @@
 <section id="lazy-loading-guide">
-    <h2 class="demo-title"><i class="ph ph-cloud-arrow-down"></i>Global Lazy Loading <code
-            class="vd-text-sm">Guide</code></h2>
+    <h4 class="demo-title"><i class="ph ph-cloud-arrow-down"></i>Global Lazy Loading <code
+            class="vd-text-sm">Guide</code></h4>
     <p class="vd-mb-5">This guide walks you through using <strong>VanduoLazyLoad</strong> to build pages that load
         content on demand. Instead of shipping all HTML upfront, sections are fetched and injected only when they scroll
         into view — giving users a fast first paint and a smooth reading experience.</p>
@@ -10,7 +10,7 @@
         <div class="vd-col-12">
             <div class="vd-card vd-card-glow demo-card">
                 <div class="vd-card-header">
-                    <h3><i class="ph ph-question"></i> Why Lazy Loading?</h3>
+                    <h4><i class="ph ph-question"></i> Why Lazy Loading?</h4>
                 </div>
                 <div class="vd-card-body">
                     <p>A documentation site can have hundreds of kilobytes of HTML across dozens of sections. Sending it
@@ -59,8 +59,8 @@
         <div class="vd-col-12">
             <div class="vd-card vd-card-glow demo-card">
                 <div class="vd-card-header">
-                    <h3><span class="vd-badge vd-badge-primary" style="margin-right:8px;">Step 1</span><i
-                            class="ph ph-package"></i> Include VanduoLazyLoad</h3>
+                    <h4><span class="vd-badge vd-badge-primary" style="margin-right:8px;">Step 1</span><i
+                            class="ph ph-package"></i> Include VanduoLazyLoad</h4>
                 </div>
                 <div class="vd-card-body">
                     <p><code>VanduoLazyLoad</code> is part of the Vanduo Framework and is included automatically in the
@@ -104,8 +104,8 @@
         <div class="vd-col-12">
             <div class="vd-card vd-card-glow demo-card">
                 <div class="vd-card-header">
-                    <h3><span class="vd-badge vd-badge-primary" style="margin-right:8px;">Step 2</span><i
-                            class="ph ph-file-html"></i> Create HTML Partials</h3>
+                    <h4><span class="vd-badge vd-badge-primary" style="margin-right:8px;">Step 2</span><i
+                            class="ph ph-file-html"></i> Create HTML Partials</h4>
                 </div>
                 <div class="vd-card-body">
                     <p>Each lazy-loaded section is a standalone HTML fragment — just the content, no
@@ -146,8 +146,8 @@
         <div class="vd-col-12">
             <div class="vd-card vd-card-glow demo-card">
                 <div class="vd-card-header">
-                    <h3><span class="vd-badge vd-badge-primary" style="margin-right:8px;">Step 3</span><i
-                            class="ph ph-tag"></i> The Simplest Usage: HTML Attributes</h3>
+                    <h4><span class="vd-badge vd-badge-primary" style="margin-right:8px;">Step 3</span><i
+                            class="ph ph-tag"></i> The Simplest Usage: HTML Attributes</h4>
                 </div>
                 <div class="vd-card-body">
                     <p>Add <code>data-vd-lazy</code> pointing to your partial, and optionally
@@ -234,8 +234,8 @@
         <div class="vd-col-12">
             <div class="vd-card vd-card-glow demo-card">
                 <div class="vd-card-header">
-                    <h3><span class="vd-badge vd-badge-primary" style="margin-right:8px;">Step 4</span><i
-                            class="ph ph-code"></i> Programmatic Usage</h3>
+                    <h4><span class="vd-badge vd-badge-primary" style="margin-right:8px;">Step 4</span><i
+                            class="ph ph-code"></i> Programmatic Usage</h4>
                 </div>
                 <div class="vd-card-body">
                     <p>For dynamic UIs where elements are created at runtime, use the JS API directly:</p>
@@ -288,7 +288,7 @@ VanduoLazyLoad.observe(img, (target) =&gt; {
         <div class="vd-col-12">
             <div class="vd-card vd-card-glow demo-card">
                 <div class="vd-card-header">
-                    <h3><i class="ph ph-book-open"></i> API Reference</h3>
+                    <h4><i class="ph ph-book-open"></i> API Reference</h4>
                 </div>
                 <div class="vd-card-body">
                     <h4 class="vd-mb-3">Methods</h4>
@@ -379,7 +379,7 @@ VanduoLazyLoad.observe(img, (target) =&gt; {
         <div class="vd-col-12">
             <div class="vd-card vd-card-glow demo-card">
                 <div class="vd-card-header">
-                    <h3><i class="ph ph-bell"></i> Listening to Events</h3>
+                    <h4><i class="ph ph-bell"></i> Listening to Events</h4>
                 </div>
                 <div class="vd-card-body">
                     <p>All events bubble from the container element, so you can listen globally or on the target:</p>
@@ -427,7 +427,7 @@ document.addEventListener(<span class="code-string">'lazysection:error'</span>, 
         <div class="vd-col-12">
             <div class="vd-card vd-card-glow demo-card">
                 <div class="vd-card-header">
-                    <h3><i class="ph ph-sparkle"></i> Real-world Patterns</h3>
+                    <h4><i class="ph ph-sparkle"></i> Real-world Patterns</h4>
                 </div>
                 <div class="vd-card-body">
                     <div class="vd-row">
@@ -482,7 +482,7 @@ document.addEventListener(<span class="code-string">'lazysection:error'</span>, 
 
     <!-- What's Next block -->
     <div class="vd-mt-8" style="border-top: 1px solid var(--border-color); padding-top: 2.5rem; padding-bottom: 3rem;">
-        <h3 class="vd-text-lg vd-mb-5"><i class="ph ph-arrow-circle-right"></i> What's Next?</h3>
+        <h4 class="vd-text-lg vd-mb-5"><i class="ph ph-arrow-circle-right"></i> What's Next?</h4>
         <div class="vd-row" style="gap: 1.25rem;">
             <div class="vd-col-12 vd-col-md-6 vd-mb-4">
                 <a href="#docs/accessibility-essentials" data-route="docs/accessibility-essentials" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">

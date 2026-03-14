@@ -2,8 +2,8 @@
     <!-- Page Header -->
     <div class="changelog-header">
         <div class="vd-container-responsive">
-            <h1 style="color: var(--color-primary);"><i class="ph ph-scroll" style="color: var(--color-primary);"></i>
-                Changelog</h1>
+            <h2 style="color: var(--color-primary);"><i class="ph ph-scroll" style="color: var(--color-primary);"></i>
+                Changelog</h2>
             <p class="vd-text-lg vd-text-muted">All notable changes to <strong>Vanduo Framework</strong> and
                 <strong>Vanduo Docs</strong> are documented here — side by side.
             </p>
@@ -15,6 +15,94 @@
         <div class="vd-container-responsive" style="max-width: 1200px;">
 
             <!-- ═══════════════════════════════════════════════ -->
+            <!-- Version 1.2.9                                   -->
+            <!-- ═══════════════════════════════════════════════ -->
+            <article class="version-card">
+                <header class="version-header">
+                    <span class="vd-badge vd-badge-primary" style="font-size: 1rem; padding: 0.5rem 1rem;">v1.2.9</span>
+                    <span style="color: var(--text-secondary); font-size: 0.95rem;">
+                        <i class="ph ph-calendar mr-1"></i>March 14, 2026
+                    </span>
+                    <span class="vd-badge vd-badge-info" style="font-size: 0.75rem;">Latest</span>
+                </header>
+                <div class="version-body">
+                    <div class="vd-row">
+                        <div class="vd-col-12 vd-col-md-6">
+                            <h4><i class="ph ph-cube mr-2" style="color: var(--color-primary);"></i>Framework</h4>
+                            <div class="change-group">
+                                <h5>Fixes</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-bug" style="color: var(--color-error);"></i>
+                                        <div>
+                                            <strong>Fix: Theme Customizer now persists theme changes through the supported Theme Switcher path</strong>
+                                            <p>The regression caused by calling a missing <code>savePreference()</code>
+                                                path during shared theme updates was removed, so Theme Customizer and
+                                                Theme Switcher now stay synchronized without runtime errors.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="change-group">
+                                <h5>Updates</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-package" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: Release artifacts and package metadata aligned for v1.2.9</strong>
+                                            <p>Framework bundles, package metadata, <code>llms.txt</code>, and release-facing
+                                                README/CDN examples now consistently point at the <code>1.2.9</code>
+                                                release surface.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="vd-col-12 vd-col-md-6">
+                            <h4><i class="ph ph-book-open-text mr-2"
+                                    style="color: var(--color-primary);"></i>Documentation</h4>
+                            <div class="change-group">
+                                <h5>Fixes</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-device-mobile" style="color: var(--color-success);"></i>
+                                        <div>
+                                            <strong>Fix: Home hero CTAs and feature cards behave correctly across tablet widths</strong>
+                                            <p>The docs home page now stacks hero actions at the right breakpoint and keeps
+                                                feature cards equal height, resolving the intermediate-width overflow and
+                                                clipping seen during the v1.2.9 docs pass.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="change-group">
+                                <h5>Updates</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-arrows-clockwise" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: Production docs pin and release-facing copy advanced to v1.2.9</strong>
+                                            <p>The pinned jsDelivr framework version, docs metadata, package version,
+                                                changelog, README, and LLM context were updated so public docs match the
+                                                new framework release.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-text-h" style="color: var(--color-primary);"></i>
+                                        <div>
+                                            <strong>Update: Documentation heading hierarchy was normalized across many pages</strong>
+                                            <p>Docs content headings were rebalanced to improve structure, scanning, and
+                                                semantic consistency across component, guide, and landing pages.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ═══════════════════════════════════════════════ -->
             <!-- Version 1.2.8                                   -->
             <!-- ═══════════════════════════════════════════════ -->
             <article class="version-card">
@@ -23,7 +111,6 @@
                     <span style="color: var(--text-secondary); font-size: 0.95rem;">
                         <i class="ph ph-calendar mr-1"></i>March 14, 2026
                     </span>
-                    <span class="vd-badge vd-badge-info" style="font-size: 0.75rem;">Latest</span>
                 </header>
                 <div class="version-body">
                     <div class="vd-row">
