@@ -142,4 +142,110 @@ test.describe('4. Documentation View', () => {
     test.describe('Concepts Tab (#docs/concepts)', () => {
     });
 
+    test.describe('Theme Switching', () => {
+        test('Dark mode toggle changes primary color from black to amber', async ({ page }) => {
+            await page.goto('/#home');
+            await waitForSPA(page);
+
+            // Wait for Vanduo to initialize and apply preferences
+            await page.waitForFunction(() => {
+                return document.documentElement.hasAttribute('data-primary');
+            }, { timeout: 5000 });
+
+            // Get initial primary color (should be black in light mode per docs defaults)
+            const initialPrimary = await page.evaluate(() => {
+                return document.documentElement.getAttribute('data-primary');
+            });
+            expect(initialPrimary).toBe('black');
+
+            // Click the dark mode toggle button
+            const darkModeToggle = page.locator('#dark-mode-toggle');
+            await expect(darkModeToggle).toBeVisible();
+            
+            // Cycle through until we get to dark mode
+            // Initial: system -> click -> light -> click -> dark
+            let attempts = 0;
+            let currentTheme = await page.evaluate(() => {
+                return document.documentElement.getAttribute('data-theme');
+            });
+            
+            while (currentTheme !== 'dark' && attempts < 3) {
+                await darkModeToggle.click();
+                await page.waitForTimeout(400);
+                currentTheme = await page.evaluate(() => {
+                    return document.documentElement.getAttribute('data-theme');
+                });
+                attempts++;
+            }
+            
+            expect(currentTheme).toBe('dark');
+
+            // Wait for primary color to update ( coordination happens async )
+            await page.waitForTimeout(200);
+
+            // Verify primary color changed to amber (dark mode default per docs)
+            const darkPrimary = await page.evaluate(() => {
+                return document.documentElement.getAttribute('data-primary');
+            });
+            expect(darkPrimary).toBe('amber');
+
+            // Toggle back to light mode
+            attempts = 0;
+            while (currentTheme !== 'light' && attempts < 3) {
+                await darkModeToggle.click();
+                await page.waitForTimeout(400);
+                currentTheme = await page.evaluate(() => {
+                    return document.documentElement.getAttribute('data-theme');
+                });
+                attempts++;
+            }
+            
+            expect(currentTheme).toBe('light');
+
+            // Wait for primary color to update
+            await page.waitForTimeout(200);
+
+            // Verify back to black primary
+            const lightPrimary = await page.evaluate(() => {
+                return document.documentElement.getAttribute('data-primary');
+            });
+            expect(lightPrimary).toBe('black');
+        });
+
+        test('ThemeSwitcher and ThemeCustomizer stay in sync', async ({ page }) => {
+            await page.goto('/#home');
+            await waitForSPA(page);
+            await page.waitForTimeout(500);
+
+            // Open theme customizer panel
+            const customizerTrigger = page.locator('.vd-theme-customizer-trigger');
+            if (await customizerTrigger.count() > 0) {
+                await customizerTrigger.click();
+                await page.waitForTimeout(300);
+
+                // Click dark mode in customizer
+                const darkModeBtn = page.locator('.tc-mode-btn[data-mode="dark"]');
+                if (await darkModeBtn.count() > 0) {
+                    await darkModeBtn.click();
+                    await page.waitForTimeout(300);
+
+                    // Verify dark mode is active
+                    const theme = await page.evaluate(() => {
+                        return document.documentElement.getAttribute('data-theme');
+                    });
+                    expect(theme).toBe('dark');
+
+                    // Verify primary color swapped
+                    const primary = await page.evaluate(() => {
+                        return document.documentElement.getAttribute('data-primary');
+                    });
+                    expect(primary).toBe('amber');
+                }
+
+                // Close panel
+                await page.keyboard.press('Escape');
+            }
+        });
+    });
+
 });

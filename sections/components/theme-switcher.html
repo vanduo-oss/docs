@@ -1,0 +1,367 @@
+<section id="theme-switcher">
+    <h2 class="demo-title"><i class="ph ph-moon"></i>Theme Switcher</h2>
+    <p class="vd-mb-8">The Theme Switcher is a lightweight component for toggling between light, dark, and system color
+        modes. Unlike the full Theme Customizer, it focuses solely on the color mode toggle without additional
+        customization options. Perfect for when you need a simple dark mode button.</p>
+
+    <div class="vd-alert vd-alert-info vd-mb-8">
+        <i class="ph ph-info"></i>
+        <div>
+            <strong>Coordination with ThemeCustomizer:</strong> When both components are present, they automatically
+            stay in sync. Changing the theme via ThemeSwitcher will also swap the primary color if you're using the
+            default per-theme colors (PRIMARY_LIGHT / PRIMARY_DARK).
+        </div>
+    </div>
+
+    <div class="vd-row">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h3>Button Toggle</h3>
+                </div>
+                <div class="vd-card-body">
+                    <p>Add <code>data-toggle="theme"</code> to any button to enable theme cycling:</p>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active"
+                                    data-lang="html"><code><span class="code-comment"><!-- Simple icon button --></span>
+<<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-btn vd-btn-icon"</span> 
+        <span class="code-attr">data-toggle</span>=<span class="code-string">"theme"</span>
+        <span class="code-attr">aria-label</span>=<span class="code-string">"Toggle theme"</span>>
+    <<span class="code-tag">i</span> <span class="code-attr">class</span>=<span class="code-string">"ph ph-moon"</span>></<span class="code-tag">i</span>>
+</<span class="code-tag">button</span>>
+
+<span class="code-comment"><!-- Button with label --></span>
+<<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-btn vd-btn-secondary"</span> 
+        <span class="code-attr">data-toggle</span>=<span class="code-string">"theme"</span>>
+    Theme: <<span class="code-tag">span</span> <span class="code-attr">class</span>=<span class="code-string">"theme-current-label"</span>>System</<span class="code-tag">span</span>>
+</<span class="code-tag">button</span>>
+
+<span class="code-comment"><!-- Include the JS component --></span>
+<<span class="code-tag">script</span> <span class="code-attr">src</span>=<span class="code-string">"js/components/theme-switcher.js"</span>></<span class="code-tag">script</span>></code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="vd-mt-5"><strong>Try it:</strong> Click the theme button in the navbar to cycle through
+                        System → Light → Dark → System.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h3>Select Dropdown</h3>
+                </div>
+                <div class="vd-card-body">
+                    <p>Use a select element for explicit theme selection:</p>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active"
+                                    data-lang="html"><code><span class="code-comment"><!-- Select dropdown --></span>
+<<span class="code-tag">select</span> <span class="code-attr">class</span>=<span class="code-string">"vd-form-select"</span> <span class="code-attr">data-toggle</span>=<span class="code-string">"theme"</span>>
+    <<span class="code-tag">option</span> <span class="code-attr">value</span>=<span class="code-string">"system"</span>>System</<span class="code-tag">option</span>>
+    <<span class="code-tag">option</span> <span class="code-attr">value</span>=<span class="code-string">"light"</span>>Light</<span class="code-tag">option</span>>
+    <<span class="code-tag">option</span> <span class="code-attr">value</span>=<span class="code-string">"dark"</span>>Dark</<span class="code-tag">option</span>>
+</<span class="code-tag">select</span>></code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vd-row">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h3>ThemeSwitcher vs ThemeCustomizer</h3>
+                </div>
+                <div class="vd-card-body">
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Feature</th>
+                                    <th>ThemeSwitcher</th>
+                                    <th>ThemeCustomizer</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Light/Dark/System mode</td>
+                                    <td><i class="ph ph-check vd-text-success"></i></td>
+                                    <td><i class="ph ph-check vd-text-success"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Per-theme primary colors</td>
+                                    <td><i class="ph ph-x vd-text-muted"></i> (follows system)</td>
+                                    <td><i class="ph ph-check vd-text-success"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Color palette selection</td>
+                                    <td><i class="ph ph-x vd-text-muted"></i></td>
+                                    <td><i class="ph ph-check vd-text-success"></i> (18 colors)</td>
+                                </tr>
+                                <tr>
+                                    <td>Neutral scale</td>
+                                    <td><i class="ph ph-x vd-text-muted"></i></td>
+                                    <td><i class="ph ph-check vd-text-success"></i> (5 options)</td>
+                                </tr>
+                                <tr>
+                                    <td>Border radius</td>
+                                    <td><i class="ph ph-x vd-text-muted"></i></td>
+                                    <td><i class="ph ph-check vd-text-success"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Font family</td>
+                                    <td><i class="ph ph-x vd-text-muted"></i></td>
+                                    <td><i class="ph ph-check vd-text-success"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>File size</td>
+                                    <td>~3KB</td>
+                                    <td>~15KB</td>
+                                </tr>
+                                <tr>
+                                    <td>Use case</td>
+                                    <td>Simple toggle</td>
+                                    <td>Full customization</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h3>Per-Theme Primary Colors</h3>
+                </div>
+                <div class="vd-card-body">
+                    <p>When using ThemeCustomizer with ThemeSwitcher, you can define different primary colors for light
+                        and dark modes:</p>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="js">JS</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active"
+                                    data-lang="js"><code><span class="code-comment">// Override defaults before init</span>
+Object.<span class="code-function">assign</span>(window.ThemeCustomizer.DEFAULTS, {
+    <span class="code-comment">// Primary color in light mode</span>
+    PRIMARY_LIGHT: <span class="code-string">'black'</span>,
+    <span class="code-comment">// Primary color in dark mode</span>
+    PRIMARY_DARK: <span class="code-string">'amber'</span>
+});
+
+<span class="code-comment">// Initialize Vanduo</span>
+Vanduo.<span class="code-function">init</span>();</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="vd-mt-5 vd-text-sm vd-text-muted">When the user switches themes, the primary color
+                        automatically changes if they're using the default. If they've manually selected a color, it
+                        stays unchanged.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h3 id="api" class="docs-heading">JavaScript API</h3>
+    <div class="vd-row">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h3>Programmatic Control</h3>
+                </div>
+                <div class="vd-card-body">
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="js">JS</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active"
+                                    data-lang="js"><code><span class="code-comment">// Access the component</span>
+<span class="code-keyword">const</span> switcher = Vanduo.components.themeSwitcher;
+
+<span class="code-comment">// Get current preference</span>
+<span class="code-keyword">const</span> pref = switcher.<span class="code-function">getPreference</span>();
+<span class="code-comment">// Returns: 'system', 'light', or 'dark'</span>
+
+<span class="code-comment">// Set preference programmatically</span>
+switcher.<span class="code-function">setPreference</span>(<span class="code-string">'dark'</span>);
+
+<span class="code-comment">// Apply without changing preference</span>
+switcher.<span class="code-function">applyTheme</span>();</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h3>localStorage Key</h3>
+                </div>
+                <div class="vd-card-body">
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Default</th>
+                                    <th>Values</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>vanduo-theme-preference</code></td>
+                                    <td><code>system</code></td>
+                                    <td>system, light, dark</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="vd-mt-5 vd-text-sm vd-text-muted">The preference is automatically saved and restored on
+                        page load.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h3 class="docs-heading">CSS API</h3>
+    <div class="vd-table-responsive" style="margin-bottom: 3rem;">
+        <table class="vd-table vd-table-hover">
+            <thead>
+                <tr>
+                    <th style="width: 25%;">Attribute</th>
+                    <th style="width: 55%;">Description</th>
+                    <th style="width: 20%;">Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>data-toggle="theme"</code></td>
+                    <td>Required attribute on button or select element to bind theme switching behavior.</td>
+                    <td>Attribute</td>
+                </tr>
+                <tr>
+                    <td><code>data-theme="light|dark"</code></td>
+                    <td>Applied to <code><html></code> element. Controls CSS variable overrides for dark/light
+                        mode. Removed when using system preference.</td>
+                    <td>State Attribute</td>
+                </tr>
+                <tr>
+                    <td><code>.theme-current-label</code></td>
+                    <td>Class for span inside button to auto-update with current theme label (System, Light, Dark).
+                    </td>
+                    <td>Utility Class</td>
+                </tr>
+                <tr>
+                    <td><code>data-theme-initialized</code></td>
+                    <td>Added to elements after ThemeSwitcher binds events. Used for testing and debugging.</td>
+                    <td>State Attribute</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3 class="docs-heading">Best Practices</h3>
+    <div class="vd-row">
+        <div class="vd-col-12 vd-col-md-4">
+            <div class="vd-card demo-card">
+                <div class="vd-card-body">
+                    <h4><i class="ph ph-check-circle vd-text-success"></i> Use ThemeSwitcher when...</h4>
+                    <ul class="vd-mt-4">
+                        <li>You only need light/dark toggle</li>
+                        <li>File size is critical</li>
+                        <li>Quick integration needed</li>
+                        <li>Navbar space is limited</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="vd-col-12 vd-col-md-4">
+            <div class="vd-card demo-card">
+                <div class="vd-card-body">
+                    <h4><i class="ph ph-check-circle vd-text-success"></i> Use ThemeCustomizer when...</h4>
+                    <ul class="vd-mt-4">
+                        <li>Users need color customization</li>
+                        <li>You want per-theme primary colors</li>
+                        <li>Font/radius customization needed</li>
+                        <li>Building a theme-aware app</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="vd-col-12 vd-col-md-4">
+            <div class="vd-card demo-card">
+                <div class="vd-card-body">
+                    <h4><i class="ph ph-check-circle vd-text-success"></i> Use Both when...</h4>
+                    <ul class="vd-mt-4">
+                        <li>Quick toggle in navbar</li>
+                        <li>Full panel in settings</li>
+                        <li>Auto-coordination provided</li>
+                        <li>Best of both worlds</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

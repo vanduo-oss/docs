@@ -281,6 +281,58 @@ customizer.<span class="code-function">reset</span>();</code></pre>
         </table>
     </div>
 
+    <h3 class="docs-heading">Coordination with ThemeSwitcher</h3>
+    <div class="vd-row vd-mb-8">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h3>Auto-Coordination</h3>
+                </div>
+                <div class="vd-card-body">
+                    <p>When both ThemeCustomizer and ThemeSwitcher are present on the same page, they automatically stay
+                        in sync:</p>
+                    <ul class="vd-mt-4">
+                        <li>Changing theme via <strong>ThemeSwitcher</strong> button triggers primary color swap if using
+                            defaults</li>
+                        <li>Changing theme via <strong>ThemeCustomizer</strong> panel updates ThemeSwitcher state</li>
+                        <li>Preferences are shared via <code>localStorage</code></li>
+                    </ul>
+                    <div class="vd-code-snippet vd-mt-5" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active"
+                                    data-lang="html"><code><span class="code-comment"><!-- Navbar: Quick toggle via ThemeSwitcher --></span>
+<<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-btn vd-btn-icon"</span> <span class="code-attr">data-toggle</span>=<span class="code-string">"theme"</span>>
+    <<span class="code-tag">i</span> <span class="code-attr">class</span>=<span class="code-string">"ph ph-moon"</span>></<span class="code-tag">i</span>>
+</<span class="code-tag">button</span>>
+
+<span class="code-comment"><!-- Settings: Full panel via ThemeCustomizer --></span>
+<<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-theme-customizer-trigger"</span> <span class="code-attr">data-theme-customizer-trigger</span>>
+    <<span class="code-tag">i</span> <span class="code-attr">class</span>=<span class="code-string">"ph ph-paint-roller"</span>></<span class="code-tag">i</span>>
+</<span class="code-tag">button</span>>
+
+<span class="code-comment"><!-- Both components coordinate automatically --></span></code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="vd-row">
         <div class="vd-col-12 vd-col-md-6">
             <div class="vd-card vd-card-glow demo-card">
