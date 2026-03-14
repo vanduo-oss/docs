@@ -115,13 +115,13 @@
 
         /* ── Docs layout ────────────────────────────────── */
         section {
-            padding: 4rem 0;
-            scroll-margin-top: calc(70px + var(--doc-tabs-height, 0px) + 2rem);
-            border-bottom: 1px solid var(--border-color);
+            padding: 2rem 0;
+            scroll-margin-top: calc(70px + var(--doc-tabs-height, 0px) + 0.5rem);
+            border-bottom: none;
         }
 
         section:first-of-type {
-            padding-top: 2rem;
+            padding-top: 1rem;
         }
 
         section:last-of-type {
@@ -138,8 +138,8 @@
             align-items: center;
             gap: 0.5rem;
             margin-bottom: 1.5rem;
-            padding-bottom: 0.75rem;
-            border-bottom: 2px solid var(--color-primary);
+            padding-bottom: 0;
+            border-bottom: none;
             font-size: 1.75rem;
             color: var(--color-primary);
         }
@@ -375,7 +375,7 @@
             top: 70px;
             height: calc(100vh - 80px);
             overflow: visible;
-            padding-right: 1rem;
+            padding-right: 0.5rem;
             border-right: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
@@ -1157,6 +1157,11 @@
             display: block;
         }
 
+        /* Full-width docs container — remove max-width constraint */
+        #docs-view .vd-container-responsive {
+            max-width: none;
+        }
+
         /* ── Sticky doc-tabs on desktop & tablet ──────── */
         .doc-tabs-wrapper {
             display: flex;
@@ -1180,7 +1185,6 @@
                 background: var(--bg-primary);
                 padding: 0.75rem 0;
                 margin: 0;
-                border-bottom: 1px solid var(--border-color);
                 flex-wrap: wrap;
             }
 
@@ -1214,7 +1218,6 @@
                 background: var(--bg-primary);
                 padding: 1rem 0 0.75rem;
                 margin: 0;
-                border-bottom: 1px solid var(--border-color);
             }
 
             .doc-tabs {

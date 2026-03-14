@@ -121,6 +121,19 @@
               ]
             },
             {
+              "id": "theme-switcher",
+              "title": "Theme Switcher",
+              "file": "components/theme-switcher.html",
+              "icon": "ph-moon",
+              "keywords": [
+                "theme",
+                "switcher",
+                "dark mode",
+                "light mode",
+                "toggle"
+              ]
+            },
+            {
               "id": "buttons",
               "title": "Buttons",
               "file": "components/buttons.html",

@@ -11,10 +11,10 @@ if (typeof window.Vanduo === 'undefined') {
         });
         Object.assign(window.ThemeCustomizer.DEFAULTS, {
             FONT: 'lato',
-            PRIMARY_LIGHT: 'cyan',
-            PRIMARY_DARK: 'cyan',
-            NEUTRAL: 'stone',
-            RADIUS: '0.375'
+            PRIMARY_LIGHT: 'black',
+            PRIMARY_DARK: 'amber',
+            NEUTRAL: 'slate',
+            RADIUS: '0.25'
         });
     }
     window.Vanduo.init();
