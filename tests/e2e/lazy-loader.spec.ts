@@ -1,11 +1,14 @@
+import path from 'node:path';
 import { test, expect } from '@playwright/test';
+
+const lazyLoaderScriptPath = path.resolve(__dirname, '../../js/lazy-loader.js');
 
 test.describe('Lazy Loader Component', () => {
 
     test('Unit Test - Component isolation via page.evaluate', async ({ page }) => {
         // Load a blank page and inject our module
         await page.goto('about:blank');
-        await page.addScriptTag({ path: 'js/lazy-loader.js' });
+        await page.addScriptTag({ path: lazyLoaderScriptPath });
 
         // Wait for VanduoLazyLoader to be available
         await page.waitForFunction(() => typeof window.VanduoLazyLoader !== 'undefined', { timeout: 10000 });

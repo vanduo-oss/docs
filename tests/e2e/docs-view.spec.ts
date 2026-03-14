@@ -124,7 +124,7 @@ test.describe('4. Documentation View', () => {
             const content = page.locator('#dynamic-content');
             await expect(content).toBeVisible();
             // Wait for at least one piece of actual content inside dynamic-content
-            await expect(content.locator('h1, h2').first()).toBeVisible();
+            await expect(content.locator('h1, h2, h3, h4').first()).toBeVisible();
         });
 
         test('Scrollspy highlights the active section in the sidebar as user scrolls', async ({ page, isMobile }) => {
