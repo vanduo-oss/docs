@@ -460,6 +460,51 @@
             margin-right: 0.375rem;
         }
 
+        /* ── Sidebar inline filter ──────────────────────── */
+        .doc-sidebar-search {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.375rem 0.75rem;
+            margin-bottom: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--btn-border-radius);
+            background: var(--bg-secondary);
+            flex-shrink: 0;
+            transition: border-color 0.2s;
+        }
+
+        .doc-sidebar-search:focus-within {
+            border-color: var(--color-primary);
+        }
+
+        .doc-sidebar-search i {
+            color: var(--text-muted);
+            font-size: 0.9375rem;
+            flex-shrink: 0;
+        }
+
+        .doc-sidebar-search-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-size: var(--font-size-sm);
+            color: var(--text-primary);
+            min-width: 0;
+        }
+
+        .doc-sidebar-search-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .doc-sidebar-search-no-results {
+            padding: 0.375rem 0.8125rem;
+            font-size: var(--font-size-sm);
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
         /* ── Mobile TOC toggle ───────────────────────────── */
         .doc-sidebar-toggle {
             display: none;
@@ -500,7 +545,6 @@
                 background: var(--bg-primary);
                 z-index: 10;
             }
-
 
             .doc-sidebar-toggle {
                 display: block;
@@ -1232,6 +1276,10 @@
                 flex-wrap: wrap;
             }
 
+            .doc-sidebar-search {
+                display: none;
+            }
+
             .doc-tabs {
                 flex: 1 1 100%;
                 display: flex;
@@ -1260,17 +1308,23 @@
                 top: 70px;
                 z-index: 11;
                 background: var(--bg-primary);
-                padding: 1rem 0 0.75rem;
+                padding: 0.5rem 0;
                 margin: 0;
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .doc-sidebar-search {
+                flex: 3;
             }
 
             .doc-tabs {
+                flex: 3;
                 display: flex;
                 gap: 0.5rem;
             }
 
             .doc-tab[data-tab="components"] {
-                flex: 1.618;
+                flex: 2;
             }
 
             .doc-tab[data-tab="guides"] {
