@@ -34,9 +34,9 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: 'npx serve -l 8787',
+    command: 'pnpm run preview:local',
     url: 'http://localhost:8787',
     reuseExistingServer: !process.env.CI,
-    timeout: 10 * 1000,
+    timeout: 20 * 1000,
   },
 });

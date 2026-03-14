@@ -9,7 +9,7 @@ This document tracks the test coverage planning for the `vanduo-docs` site. Sinc
 ### 1. Global Navigation & Layout
 - [x] Navbar links load corresponding page views without a full reload.
 - [ ] Mobile hamburger menu toggles correctly and displays links. (Skipped on Desktop)
-- [ ] Theme customizer toggles dark/light mode and updates `data-theme`. (**FAILING**)
+- [x] Theme switcher and ThemeCustomizer reset stay synchronized and update `data-theme` plus shared localStorage state.
 - [x] Footer links route properly and open external links in new tabs.
 - [x] Back/Forward browser history works seamlessly with the SPA router.
 

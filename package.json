@@ -4,6 +4,8 @@
   "private": true,
   "description": "Vanduo documentation and website",
   "scripts": {
+    "sync:framework": "node scripts/sync-framework-assets.js",
+    "preview:local": "pnpm run sync:framework && npx serve -l 8787",
     "test": "playwright test",
     "test:ui": "playwright test --ui",
     "test:headed": "playwright test --headed",

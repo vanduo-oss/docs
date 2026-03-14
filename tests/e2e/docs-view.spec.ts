@@ -1,11 +1,67 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, type Page } from '@playwright/test';
 
-async function waitForSPA(page: import('@playwright/test').Page) {
+async function waitForSPA(page: Page) {
     await page.waitForFunction(() => {
         return document.querySelector('#page-view.is-active') !== null && document.querySelector('#page-view .vd-dynamic-loader') === null
             || document.querySelector('#docs-view.is-active') !== null
             || document.querySelector('#docs-landing') !== null;
     }, { timeout: 10000 });
+}
+
+async function getCurrentTheme(page: Page) {
+    return await page.evaluate(() => document.documentElement.getAttribute('data-theme'));
+}
+
+async function cycleTheme(page: Page, targetTheme: string | null) {
+    const darkModeToggle = page.locator('#dark-mode-toggle');
+    let currentTheme = await getCurrentTheme(page);
+    let attempts = 0;
+
+    while (currentTheme !== targetTheme && attempts < 3) {
+        await darkModeToggle.click();
+        await page.waitForTimeout(400);
+        currentTheme = await getCurrentTheme(page);
+        attempts++;
+    }
+
+    return currentTheme;
+}
+
+async function getFrameworkAssetInfo(page: Page) {
+    return await page.evaluate(() => {
+        const runtimeWindow = window as Window & {
+            __VANDUO_FRAMEWORK_ASSET_MODE?: string;
+            __VANDUO_FRAMEWORK_ASSETS?: {
+                cssHref?: string;
+                jsSrc?: string;
+            };
+        };
+        const frameworkCss = document.querySelector('link[data-framework-css]') as HTMLLinkElement | null;
+
+        return {
+            mode: runtimeWindow.__VANDUO_FRAMEWORK_ASSET_MODE || null,
+            marker: document.documentElement.getAttribute('data-framework-assets'),
+            cssHref: frameworkCss ? frameworkCss.getAttribute('href') : null,
+            jsSrc: runtimeWindow.__VANDUO_FRAMEWORK_ASSETS ? runtimeWindow.__VANDUO_FRAMEWORK_ASSETS.jsSrc || null : null
+        };
+    });
+}
+
+async function expectLocalFrameworkAssets(page: Page) {
+    await page.waitForFunction(() => {
+        const runtimeWindow = window as Window & {
+            __VANDUO_FRAMEWORK_ASSET_MODE?: string;
+        };
+
+        return runtimeWindow.__VANDUO_FRAMEWORK_ASSET_MODE === 'local'
+            && document.documentElement.getAttribute('data-framework-assets') === 'local';
+    }, { timeout: 10000 });
+
+    const assetInfo = await getFrameworkAssetInfo(page);
+    expect(assetInfo.mode).toBe('local');
+    expect(assetInfo.marker).toBe('local');
+    expect(assetInfo.cssHref).toBe('./dist/vanduo.min.css');
+    expect(assetInfo.jsSrc).toBe('./dist/vanduo.min.js');
 }
 
 test.describe('4. Documentation View', () => {
@@ -143,9 +199,17 @@ test.describe('4. Documentation View', () => {
     });
 
     test.describe('Theme Switching', () => {
-        test('Dark mode toggle changes primary color from black to amber', async ({ page }) => {
+        test('Local preview resolves framework assets from docs dist', async ({ page }) => {
             await page.goto('/#home');
             await waitForSPA(page);
+            await expectLocalFrameworkAssets(page);
+        });
+
+        test('Dark mode toggle changes primary color from black to amber', async ({ page }) => {
+            await page.emulateMedia({ colorScheme: 'light' });
+            await page.goto('/#home');
+            await waitForSPA(page);
+            await expectLocalFrameworkAssets(page);
 
             // Wait for Vanduo to initialize and apply preferences
             await page.waitForFunction(() => {
@@ -161,22 +225,8 @@ test.describe('4. Documentation View', () => {
             // Click the dark mode toggle button
             const darkModeToggle = page.locator('#dark-mode-toggle');
             await expect(darkModeToggle).toBeVisible();
-            
-            // Cycle through until we get to dark mode
-            // Initial: system -> click -> light -> click -> dark
-            let attempts = 0;
-            let currentTheme = await page.evaluate(() => {
-                return document.documentElement.getAttribute('data-theme');
-            });
-            
-            while (currentTheme !== 'dark' && attempts < 3) {
-                await darkModeToggle.click();
-                await page.waitForTimeout(400);
-                currentTheme = await page.evaluate(() => {
-                    return document.documentElement.getAttribute('data-theme');
-                });
-                attempts++;
-            }
+
+            let currentTheme = await cycleTheme(page, 'dark');
             
             expect(currentTheme).toBe('dark');
 
@@ -190,15 +240,7 @@ test.describe('4. Documentation View', () => {
             expect(darkPrimary).toBe('amber');
 
             // Toggle back to light mode
-            attempts = 0;
-            while (currentTheme !== 'light' && attempts < 3) {
-                await darkModeToggle.click();
-                await page.waitForTimeout(400);
-                currentTheme = await page.evaluate(() => {
-                    return document.documentElement.getAttribute('data-theme');
-                });
-                attempts++;
-            }
+            currentTheme = await cycleTheme(page, 'light');
             
             expect(currentTheme).toBe('light');
 
@@ -212,39 +254,49 @@ test.describe('4. Documentation View', () => {
             expect(lightPrimary).toBe('black');
         });
 
-        test('ThemeSwitcher and ThemeCustomizer stay in sync', async ({ page }) => {
+        test('ThemeCustomizer reset stays in sync with ThemeSwitcher', async ({ page }) => {
+            await page.emulateMedia({ colorScheme: 'light' });
+            const pageErrors: string[] = [];
+            page.on('pageerror', (error) => {
+                pageErrors.push(error.message);
+            });
+
             await page.goto('/#home');
             await waitForSPA(page);
+            await expectLocalFrameworkAssets(page);
             await page.waitForTimeout(500);
+
+            await page.waitForFunction(() => {
+                return document.documentElement.hasAttribute('data-primary');
+            }, { timeout: 5000 });
+
+            const theme = await cycleTheme(page, 'dark');
+            expect(theme).toBe('dark');
+            await page.waitForTimeout(200);
 
             // Open theme customizer panel
             const customizerTrigger = page.locator('.vd-theme-customizer-trigger');
-            if (await customizerTrigger.count() > 0) {
-                await customizerTrigger.click();
-                await page.waitForTimeout(300);
+            await expect(customizerTrigger).toBeVisible();
+            await customizerTrigger.click();
+            await page.waitForTimeout(300);
 
-                // Click dark mode in customizer
-                const darkModeBtn = page.locator('.tc-mode-btn[data-mode="dark"]');
-                if (await darkModeBtn.count() > 0) {
-                    await darkModeBtn.click();
-                    await page.waitForTimeout(300);
+            const resetButton = page.locator('.vd-theme-customizer-panel.is-open .customizer-reset').first();
+            await expect(resetButton).toBeVisible();
+            await resetButton.click();
+            await page.waitForTimeout(300);
 
-                    // Verify dark mode is active
-                    const theme = await page.evaluate(() => {
-                        return document.documentElement.getAttribute('data-theme');
-                    });
-                    expect(theme).toBe('dark');
+            const resetState = await page.evaluate(() => {
+                return {
+                    theme: document.documentElement.getAttribute('data-theme'),
+                    primary: document.documentElement.getAttribute('data-primary'),
+                    storagePref: localStorage.getItem('vanduo-theme-preference')
+                };
+            });
 
-                    // Verify primary color swapped
-                    const primary = await page.evaluate(() => {
-                        return document.documentElement.getAttribute('data-primary');
-                    });
-                    expect(primary).toBe('amber');
-                }
-
-                // Close panel
-                await page.keyboard.press('Escape');
-            }
+            expect(resetState.theme).toBeNull();
+            expect(resetState.primary).toBe('black');
+            expect(resetState.storagePref).toBe('system');
+            expect(pageErrors.join('\n')).not.toContain('savePreference is not a function');
         });
     });
 

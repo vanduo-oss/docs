@@ -31,6 +31,14 @@
             font-display: swap;
         }
 
+        @font-face {
+            font-family: 'Zen Dots';
+            src: url('../dist/fonts/zen-dots/ZenDots-Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
         /* ── Custom Font Tokens ─────────────────────────── */
         [data-font='google-sans'] {
             --font-family-sans: 'Google Sans', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -63,6 +71,21 @@
             display: inline-flex;
             align-items: center;
             gap: 0.4rem;
+        }
+
+        /* Zen Dots — navbar brand and hero title (home page only) */
+        .vd-navbar-brand-wrap > a {
+            font-family: 'Zen Dots', sans-serif;
+            text-transform: lowercase;
+        }
+
+        #home .hero-title {
+            font-family: 'Zen Dots', sans-serif;
+            text-transform: lowercase;
+        }
+
+        .hero-title-brand {
+            font-weight: bold;
         }
 
         .vd-lt-flag-link {
@@ -507,33 +530,49 @@
         }
 
         /* ── Home: Hero ─────────────────────────────────── */
+        .hero-zone {
+            max-width: 1100px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
         .hero-content {
             position: relative;
             z-index: 2;
-            max-width: 800px;
+            max-width: 100%;
+            width: 100%;
             padding: 2rem;
             margin: 0 auto;
+            align-self: stretch;
+            box-sizing: border-box;
         }
 
         .hero-content .vd-text-lg.vd-text-muted {
-            margin-bottom: 3rem !important;
+            margin-bottom: 6rem !important;
         }
 
         .hero-content .vd-mt-6 {
-            margin-top: 2.5rem;
+            margin-top: 5rem;
         }
 
-        /* Hero CTA: Get Started 1.618× wider than GitHub (golden ratio) */
+        /* Hero bottom padding: sized so gap to search bar matches CTA button spacing (--spacing-6) */
+        .hero-zone #hero {
+            padding-bottom: calc(2rem + var(--spacing-6, 1.5rem)) !important;
+        }
+
+        /* Hero CTA: Fibonacci 5:4:2 (largest first, middle gets more room for "Browse Components") */
         .hero-cta-buttons {
-            display: inline-grid;
-            grid-template-columns: 1.618fr 1fr;
+            display: grid;
+            grid-template-columns: 5fr 4fr 2fr;
             gap: var(--spacing-6, 1.5rem);
             align-items: stretch;
+            width: 100%;
         }
 
         .hero-cta-buttons .vd-btn {
             min-width: 0;
             text-align: center;
+            white-space: nowrap;
         }
 
         .hero-cta-buttons .vd-btn i {
@@ -1554,14 +1593,15 @@
             opacity: 0.7;
         }
 
-        /* Hero search wrapper — match width of .hero-content (paragraph p.vd-mb-6) */
+        /* Hero search wrapper — matches .hero-content width (same as CTA button row) */
         .hero-search-wrapper {
             position: relative;
             width: 100%;
-            max-width: 800px;
+            max-width: 1100px;
+            margin: -2rem auto 2rem;
             padding-left: 2rem;
             padding-right: 2rem;
-            margin: -2rem auto 2rem;
+            box-sizing: border-box;
             z-index: 50;
         }
 

@@ -210,11 +210,20 @@ customizer.<span class="code-function">toggle</span>();
 <span class="code-comment">// Returns: { primary, neutral, radius, font, theme }</span>
 
 <span class="code-comment">// Set values programmatically</span>
-customizer.<span class="code-function">setPrimary</span>(<span class="code-string">'violet'</span>);
-customizer.<span class="code-function">setNeutral</span>(<span class="code-string">'slate'</span>);
-customizer.<span class="code-function">setRadius</span>(<span class="code-string">'0.375'</span>);
-customizer.<span class="code-function">setFont</span>(<span class="code-string">'inter'</span>);
-customizer.<span class="code-function">setTheme</span>(<span class="code-string">'dark'</span>);
+customizer.<span class="code-function">applyPrimary</span>(<span class="code-string">'violet'</span>);
+customizer.<span class="code-function">applyNeutral</span>(<span class="code-string">'slate'</span>);
+customizer.<span class="code-function">applyRadius</span>(<span class="code-string">'0.375'</span>);
+customizer.<span class="code-function">applyFont</span>(<span class="code-string">'inter'</span>);
+customizer.<span class="code-function">applyTheme</span>(<span class="code-string">'dark'</span>);
+
+<span class="code-comment">// Or update multiple preferences at once</span>
+customizer.<span class="code-function">setPreferences</span>({
+    <span class="code-property">primary</span>: <span class="code-string">'violet'</span>,
+    <span class="code-property">neutral</span>: <span class="code-string">'slate'</span>,
+    <span class="code-property">radius</span>: <span class="code-string">'0.375'</span>,
+    <span class="code-property">font</span>: <span class="code-string">'inter'</span>,
+    <span class="code-property">theme</span>: <span class="code-string">'dark'</span>
+});
 
 <span class="code-comment">// Reset to defaults</span>
 customizer.<span class="code-function">reset</span>();</code></pre>
@@ -404,23 +413,23 @@ customizer.<span class="code-function">reset</span>();</code></pre>
                             </div>
                             <div class="vd-code-snippet-body">
                                 <pre class="vd-code-snippet-pane is-active" data-lang="js"><code><span class="code-comment">// Panel opened</span>
-<span class="code-keyword">document</span>.<span class="code-function">addEventListener</span>(<span class="code-string">'themeCustomizer:open'</span>, () => {
+<span class="code-keyword">document</span>.<span class="code-function">addEventListener</span>(<span class="code-string">'theme:panel-open'</span>, () => {
     <span class="code-keyword">console</span>.<span class="code-function">log</span>(<span class="code-string">'Customizer opened'</span>);
 });
 
 <span class="code-comment">// Panel closed</span>
-<span class="code-keyword">document</span>.<span class="code-function">addEventListener</span>(<span class="code-string">'themeCustomizer:close'</span>, () => {
+<span class="code-keyword">document</span>.<span class="code-function">addEventListener</span>(<span class="code-string">'theme:panel-close'</span>, () => {
     <span class="code-keyword">console</span>.<span class="code-function">log</span>(<span class="code-string">'Customizer closed'</span>);
 });
 
 <span class="code-comment">// Any setting changed</span>
-<span class="code-keyword">document</span>.<span class="code-function">addEventListener</span>(<span class="code-string">'themeCustomizer:change'</span>, (e) => {
+<span class="code-keyword">document</span>.<span class="code-function">addEventListener</span>(<span class="code-string">'theme:change'</span>, (e) => {
     <span class="code-keyword">console</span>.<span class="code-function">log</span>(<span class="code-string">'Changed:'</span>, e.detail);
-    <span class="code-comment">// { type: 'primary', value: 'violet' }</span>
+    <span class="code-comment">// { type: 'primary-change', value: 'violet', state: { ... } }</span>
 });
 
 <span class="code-comment">// Settings reset</span>
-<span class="code-keyword">document</span>.<span class="code-function">addEventListener</span>(<span class="code-string">'themeCustomizer:reset'</span>, () => {
+<span class="code-keyword">document</span>.<span class="code-function">addEventListener</span>(<span class="code-string">'theme:reset'</span>, () => {
     <span class="code-keyword">console</span>.<span class="code-function">log</span>(<span class="code-string">'Settings reset to defaults'</span>);
 });</code></pre>
                             </div>

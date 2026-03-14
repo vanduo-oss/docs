@@ -36,8 +36,42 @@
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="./favicon.svg">
 
-    <!-- Vanduo Framework CSS (pinned CDN release) -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.2.8/dist/vanduo.min.css">
+    <!-- Vanduo Framework CSS (local for development, pinned CDN for production) -->
+    <script>
+        (function () {
+            var params = new URLSearchParams(window.location.search);
+            var forcedMode = params.get('vanduo-assets');
+            var isLocalPreview = window.location.protocol === 'file:'
+                || window.location.hostname === 'localhost'
+                || window.location.hostname === '127.0.0.1';
+            var mode = forcedMode === 'cdn' || forcedMode === 'local'
+                ? forcedMode
+                : (isLocalPreview ? 'local' : 'cdn');
+            var basePath = mode === 'local'
+                ? './dist'
+                : 'https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.2.8/dist';
+
+            window.__VANDUO_FRAMEWORK_ASSET_MODE = mode;
+            window.__VANDUO_FRAMEWORK_ASSETS = {
+                mode: mode,
+                cssHref: basePath + '/vanduo.min.css',
+                jsSrc: basePath + '/vanduo.min.js'
+            };
+            document.documentElement.setAttribute('data-framework-assets', mode);
+        })();
+    </script>
+    <link id="vanduo-framework-css" rel="stylesheet">
+    <script>
+        (function () {
+            var frameworkCss = document.getElementById('vanduo-framework-css');
+            if (!frameworkCss || !window.__VANDUO_FRAMEWORK_ASSETS) {
+                return;
+            }
+
+            frameworkCss.href = window.__VANDUO_FRAMEWORK_ASSETS.cssHref;
+            frameworkCss.setAttribute('data-framework-css', window.__VANDUO_FRAMEWORK_ASSET_MODE);
+        })();
+    </script>
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -76,8 +110,7 @@
         <div class="vd-navbar-container">
             <div class="vd-navbar-brand">
                 <div class="vd-navbar-brand-wrap">
-                    <a href="#home" data-route="home"><i class="ph-fill ph-drop"
-                            style="color: var(--vd-color-primary); margin-right: 0.25em;"></i>Vanduo</a>
+                    <a href="#home" data-route="home">Vanduo</a>
 
                 </div>
             </div>
@@ -147,8 +180,6 @@
                 <div class="vd-col-12 vd-col-md-4">
                     <div class="vd-footer-section">
                         <h4>Vanduo Framework</h4>
-                        <p>Essential just like water is.</p>
-                        <p>Pure HTML, CSS, JS framework for beautiful static websites.</p>
                     </div>
                 </div>
                 <div class="vd-col-12 vd-col-md-4">
@@ -207,12 +238,45 @@
         </div>
     </div>
 
-    <!-- ── Vanduo Framework JS (pinned CDN release) ─────────────────── -->
-    <script src="https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.2.8/dist/vanduo.min.js"></script>
+    <!-- ── Vanduo Framework JS (local for development, pinned CDN for production) ───────── -->
+    <script>
+        (function () {
+            var assetState = window.__VANDUO_FRAMEWORK_ASSETS;
 
-    <!-- ── SPA Engine ─────────────────────────────────── -->
-    <script src="js/lazy-loader.js"></script>
-    <script src="js/app.js"></script>
+            if (!assetState) {
+                console.error('Vanduo asset configuration is missing.');
+                return;
+            }
+
+            function loadScript(src, attributeName, attributeValue) {
+                return new Promise(function (resolve, reject) {
+                    var script = document.createElement('script');
+                    script.src = src;
+                    if (attributeName) {
+                        script.setAttribute(attributeName, attributeValue || '');
+                    }
+                    script.onload = function () {
+                        resolve();
+                    };
+                    script.onerror = function () {
+                        reject(new Error('Failed to load script: ' + src));
+                    };
+                    document.body.appendChild(script);
+                });
+            }
+
+            loadScript(assetState.jsSrc, 'data-framework-js', assetState.mode)
+                .then(function () {
+                    return loadScript('js/lazy-loader.js');
+                })
+                .then(function () {
+                    return loadScript('js/app.js');
+                })
+                .catch(function (error) {
+                    console.error(error.message);
+                });
+        })();
+    </script>
 </body>
 
 </html>
