@@ -134,6 +134,10 @@
                 margin-right: 0 !important;
                 margin-bottom: 0.25em;
             }
+
+            .hero-cta-buttons {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* ── Docs layout ────────────────────────────────── */
@@ -563,7 +567,7 @@
         /* Hero CTA: Fibonacci 5:4:2 (largest first, middle gets more room for "Browse Components") */
         .hero-cta-buttons {
             display: grid;
-            grid-template-columns: 5fr 4fr 2fr;
+            grid-template-columns: repeat(3, 1fr);
             gap: var(--spacing-6, 1.5rem);
             align-items: stretch;
             width: 100%;
@@ -715,13 +719,11 @@
             width: auto;
         }
 
-        /* Home: Feature cards — golden ratio (width : height = 1.618 : 1) */
         #home-features .philosophy-cards {
-            align-items: start;
+            align-items: stretch;
         }
 
         #home-features .philosophy-cards .vd-card {
-            aspect-ratio: 1.618;
             min-height: 12rem;
             width: 100%;
             display: flex;
