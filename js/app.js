@@ -143,7 +143,7 @@ function buildSidebar(tabKey) {
     navList.innerHTML = '';
 
     // Reset inline filter on every tab switch
-    var searchInput = document.getElementById('doc-sidebar-search-input');
+    var searchInput = document.getElementById('doc-sidebar-filter-input');
     if (searchInput) { searchInput.value = ''; }
 
     var tab = registry.tabs[tabKey];
@@ -178,7 +178,7 @@ function filterSidebarNav(query) {
     var q = query.trim().toLowerCase();
 
     // Remove any existing no-results message
-    var existing = navList.querySelector('.doc-sidebar-search-no-results');
+    var existing = navList.querySelector('.doc-sidebar-filter-no-results');
     if (existing) existing.remove();
 
     if (!q) {
@@ -227,7 +227,7 @@ function filterSidebarNav(query) {
 
     if (!anyVisible) {
         var hint = document.createElement('li');
-        hint.className = 'doc-sidebar-search-no-results';
+        hint.className = 'doc-sidebar-filter-no-results';
         hint.textContent = 'No matches';
         navList.appendChild(hint);
     }
@@ -676,27 +676,27 @@ if (dynamicNavList) {
         e.preventDefault();
         var id = link.getAttribute('data-section');
         closeMobileToc();
-        var sidebarFilterInput = document.getElementById('doc-sidebar-search-input');
+        var sidebarFilterInput = document.getElementById('doc-sidebar-filter-input');
         if (sidebarFilterInput) { sidebarFilterInput.value = ''; filterSidebarNav(''); }
         navigate('docs/' + id);
     });
 }
 
 /* ── Sidebar filter events ────────────────────── */
-var docSidebarSearchInput = document.getElementById('doc-sidebar-search-input');
-if (docSidebarSearchInput) {
+var docSidebarFilterInput = document.getElementById('doc-sidebar-filter-input');
+if (docSidebarFilterInput) {
     var sidebarFilterTimer = null;
-    docSidebarSearchInput.addEventListener('input', function () {
+    docSidebarFilterInput.addEventListener('input', function () {
         if (sidebarFilterTimer) clearTimeout(sidebarFilterTimer);
         sidebarFilterTimer = setTimeout(function () {
-            filterSidebarNav(docSidebarSearchInput.value);
+            filterSidebarNav(docSidebarFilterInput.value);
         }, 80);
     });
-    docSidebarSearchInput.addEventListener('keydown', function (e) {
+    docSidebarFilterInput.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') {
-            docSidebarSearchInput.value = '';
+            docSidebarFilterInput.value = '';
             filterSidebarNav('');
-            docSidebarSearchInput.blur();
+            docSidebarFilterInput.blur();
         }
     });
 }
