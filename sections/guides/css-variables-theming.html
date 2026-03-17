@@ -1,9 +1,9 @@
 <section id="css-variables-theming">
     <h4 class="demo-title"><i class="ph ph-swatches"></i>CSS Variables & Theming <code class="vd-text-sm">Guide</code></h4>
-    <p class="vd-mb-5">Vanduo is built on top of a powerful CSS variables (Custom Properties) foundation. This means you can fundamentally alter the look and feel of the entire framework just by changing a few variables in your root CSS file, without ever needing a preprocessor like Sass.</p>
+    <p class="vd-mb-8">Vanduo is built on top of a powerful CSS variables (Custom Properties) foundation. This means you can fundamentally alter the look and feel of the entire framework just by changing a few variables in your root CSS file, without ever needing a preprocessor like Sass.</p>
 
     <!-- Global Tiers -->
-    <div class="vd-row vd-mb-6">
+    <div class="vd-row vd-mb-8">
         <div class="vd-col-12">
             <div class="vd-card demo-card">
                 <div class="vd-card-header">
@@ -12,20 +12,22 @@
                 <div class="vd-card-body">
                     <p>Vanduo's variables are layered to give you massive control with minimal effort:</p>
                     <ol class="vd-mb-4">
-                        <li><strong>1. Theme Colors:</strong> The highest level. Defines what "Primary" or "Success" actually means.</li>
-                        <li><strong>2. Component Tokens:</strong> Variables scoped to specific components (e.g., <code>--btn-height</code> or <code>--card-bg</code>).</li>
-                        <li><strong>3. Utility Variables:</strong> Core infrastructure like spacing steps and border radii.</li>
+                        <li class="vd-mb-2"><strong>1. Theme Colors:</strong> The highest level. Defines what "Primary" or "Success" actually means.</li>
+                        <li class="vd-mb-2"><strong>2. Component Tokens:</strong> Variables scoped to specific components (e.g., <code>--btn-height</code> or <code>--card-bg</code>).</li>
+                        <li class="vd-mb-2"><strong>3. Utility Variables:</strong> Core infrastructure like spacing steps and border radii.</li>
                     </ol>
 
                     <h4 class="vd-mt-5 vd-mb-3">Overriding the Global Theme</h4>
                     <p>To change Vanduo's default blue to your brand's purple, simply redefine <code>--color-primary</code> on the <code>:root</code> element in your own CSS file. Ensure your CSS is loaded <em>after</em> Vanduo's CSS.</p>
 
-                    <div class="vd-code-snippet" data-collapsible data-expanded="true">
+                    <div class="vd-code-snippet vd-mt-4" data-collapsible data-expanded="true">
+                        <button class="vd-code-snippet-toggle" aria-expanded="true"><span class="vd-code-snippet-toggle-icon"></span><span>View Code</span></button>
                         <div class="vd-code-snippet-content">
                             <div class="vd-code-snippet-header">
                                 <div class="vd-code-snippet-tabs" role="tablist">
                                     <button class="vd-code-snippet-tab is-active" data-lang="css">styles.css</button>
                                 </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code"><span class="vd-code-snippet-copy-icon"></span><span class="vd-code-snippet-copy-text">Copy</span></button>
                             </div>
                             <div class="vd-code-snippet-body">
                                 <pre class="vd-code-snippet-pane is-active" data-lang="css"><code>:root {
@@ -47,7 +49,7 @@
     </div>
 
     <!-- How Dark Mode Works -->
-    <div class="vd-row vd-mb-6">
+    <div class="vd-row vd-mb-8">
         <div class="vd-col-12">
             <div class="vd-card demo-card">
                 <div class="vd-card-header">
@@ -59,11 +61,13 @@
                     <p>When the <code>data-theme="dark"</code> attribute is added to the <code>&lt;html&gt;</code> tag, Vanduo swaps the literal hex values assigned to structural variables like <code>--bg-primary</code> and <code>--text-primary</code>.</p>
 
                     <div class="vd-code-snippet" data-collapsible data-expanded="true">
+                        <button class="vd-code-snippet-toggle" aria-expanded="true"><span class="vd-code-snippet-toggle-icon"></span><span>View Code</span></button>
                         <div class="vd-code-snippet-content">
                             <div class="vd-code-snippet-header">
                                 <div class="vd-code-snippet-tabs" role="tablist">
                                     <button class="vd-code-snippet-tab is-active" data-lang="css">Vanduo Source</button>
                                 </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code"><span class="vd-code-snippet-copy-icon"></span><span class="vd-code-snippet-copy-text">Copy</span></button>
                             </div>
                             <div class="vd-code-snippet-body">
                                 <pre class="vd-code-snippet-pane is-active" data-lang="css"><code>/* By default (Light Mode) */
@@ -102,7 +106,7 @@ html[data-theme="dark"] {
     </div>
 
     <!-- Component-Level Tokens -->
-    <div class="vd-row vd-mb-6">
+    <div class="vd-row vd-mb-8">
         <div class="vd-col-12">
             <div class="vd-card demo-card">
                 <div class="vd-card-header">
@@ -110,7 +114,7 @@ html[data-theme="dark"] {
                 </div>
                 <div class="vd-card-body">
                     <p>Beyond the global theme colors, Vanduo exposes scoped variables for individual components. These let you fine-tune a single component without affecting the rest of the system.</p>
-                    <table class="vd-table vd-table-bordered vd-mt-4">
+                    <table class="vd-table vd-table-bordered vd-mt-3">
                         <thead>
                             <tr>
                                 <th>Component</th>
@@ -146,12 +150,14 @@ html[data-theme="dark"] {
                             </tr>
                         </tbody>
                     </table>
-                    <div class="vd-code-snippet vd-mt-4" data-collapsible data-expanded="true">
+                    <div class="vd-code-snippet vd-mt-3" data-collapsible data-expanded="true">
+                        <button class="vd-code-snippet-toggle" aria-expanded="true"><span class="vd-code-snippet-toggle-icon"></span><span>View Code</span></button>
                         <div class="vd-code-snippet-content">
                             <div class="vd-code-snippet-header">
                                 <div class="vd-code-snippet-tabs" role="tablist">
                                     <button class="vd-code-snippet-tab is-active" data-lang="css">component-overrides.css</button>
                                 </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code"><span class="vd-code-snippet-copy-icon"></span><span class="vd-code-snippet-copy-text">Copy</span></button>
                             </div>
                             <div class="vd-code-snippet-body">
                                 <pre class="vd-code-snippet-pane is-active" data-lang="css"><code>:root {
@@ -180,7 +186,7 @@ html[data-theme="dark"] {
     </div>
 
     <!-- Creating a Custom Theme File -->
-    <div class="vd-row vd-mb-6">
+    <div class="vd-row vd-mb-8">
         <div class="vd-col-12">
             <div class="vd-card demo-card">
                 <div class="vd-card-header">
@@ -188,12 +194,14 @@ html[data-theme="dark"] {
                 </div>
                 <div class="vd-card-body">
                     <p>The recommended approach is to keep your overrides in a dedicated CSS file loaded <strong>after</strong> Vanduo's stylesheet. This keeps your customizations organized and easy to swap.</p>
-                    <div class="vd-code-snippet vd-mt-4" data-collapsible data-expanded="true">
+                    <div class="vd-code-snippet vd-mt-3" data-collapsible data-expanded="true">
+                        <button class="vd-code-snippet-toggle" aria-expanded="true"><span class="vd-code-snippet-toggle-icon"></span><span>View Code</span></button>
                         <div class="vd-code-snippet-content">
                             <div class="vd-code-snippet-header">
                                 <div class="vd-code-snippet-tabs" role="tablist">
                                     <button class="vd-code-snippet-tab is-active" data-lang="html">index.html</button>
                                 </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code"><span class="vd-code-snippet-copy-icon"></span><span class="vd-code-snippet-copy-text">Copy</span></button>
                             </div>
                             <div class="vd-code-snippet-body">
                                 <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;!-- Vanduo first --&gt;
@@ -204,12 +212,14 @@ html[data-theme="dark"] {
                             </div>
                         </div>
                     </div>
-                    <div class="vd-code-snippet vd-mt-4" data-collapsible data-expanded="true">
+                    <div class="vd-code-snippet vd-mt-3" data-collapsible data-expanded="true">
+                        <button class="vd-code-snippet-toggle" aria-expanded="true"><span class="vd-code-snippet-toggle-icon"></span><span>View Code</span></button>
                         <div class="vd-code-snippet-content">
                             <div class="vd-code-snippet-header">
                                 <div class="vd-code-snippet-tabs" role="tablist">
                                     <button class="vd-code-snippet-tab is-active" data-lang="css">css/my-theme.css</button>
                                 </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code"><span class="vd-code-snippet-copy-icon"></span><span class="vd-code-snippet-copy-text">Copy</span></button>
                             </div>
                             <div class="vd-code-snippet-body">
                                 <pre class="vd-code-snippet-pane is-active" data-lang="css"><code>/* ── Brand Colors ──────────────────────────── */
@@ -248,7 +258,7 @@ html[data-theme="dark"] {
     </div>
 
     <!-- Creating a Fully Custom Theme -->
-    <div class="vd-row vd-mb-6">
+    <div class="vd-row vd-mb-8">
         <div class="vd-col-12">
             <div class="vd-card demo-card">
                 <div class="vd-card-header">
@@ -256,15 +266,19 @@ html[data-theme="dark"] {
                 </div>
                 <div class="vd-card-body">
                     <p>You can go beyond light and dark by creating entirely new themes. Add a <code>data-theme</code> attribute to <code>&lt;html&gt;</code> and define the corresponding variables:</p>
-                    <div class="vd-code-snippet vd-mt-4" data-collapsible data-expanded="true">
-                        <div class="vd-code-snippet-content">
-                            <div class="vd-code-snippet-header">
-                                <div class="vd-code-snippet-tabs" role="tablist">
-                                    <button class="vd-code-snippet-tab is-active" data-lang="css">css/my-theme.css</button>
-                                </div>
-                            </div>
-                            <div class="vd-code-snippet-body">
-                                <pre class="vd-code-snippet-pane is-active" data-lang="css"><code>/* Sepia Theme */
+                    <div class="vd-row vd-mt-3">
+                        <div class="vd-col-12 vd-col-lg-7 vd-mb-4">
+                            <div class="vd-code-snippet m-0" data-collapsible data-expanded="true" style="height: 100%;">
+                                <button class="vd-code-snippet-toggle" aria-expanded="true"><span class="vd-code-snippet-toggle-icon"></span><span>View Code</span></button>
+                                <div class="vd-code-snippet-content" style="height: 100%;">
+                                    <div class="vd-code-snippet-header">
+                                        <div class="vd-code-snippet-tabs" role="tablist">
+                                            <button class="vd-code-snippet-tab is-active" data-lang="css">css/my-theme.css</button>
+                                        </div>
+                                        <button class="vd-code-snippet-copy" aria-label="Copy code"><span class="vd-code-snippet-copy-icon"></span><span class="vd-code-snippet-copy-text">Copy</span></button>
+                                    </div>
+                                    <div class="vd-code-snippet-body" style="height: 100%;">
+                                        <pre class="vd-code-snippet-pane is-active" data-lang="css" style="height: 100%;"><code>/* Sepia Theme */
 html[data-theme="sepia"] {
   --bg-primary: #fdf6e3;
   --bg-secondary: #eee8d5;
@@ -285,16 +299,35 @@ html[data-theme="high-contrast"] {
   --color-primary: #ffff00;
   --color-primary-hover: #cccc00;
 }</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="vd-col-12 vd-col-lg-5 vd-mb-4">
+                            <!-- Sepia Preview -->
+                            <div style="--bg-primary: #fdf6e3; --bg-secondary: #eee8d5; --text-primary: #657b83; --text-secondary: #586e75; --border-color: #d6cdb5; --color-primary: #b58900; background: var(--bg-primary); padding: 1.25rem; border-radius: 0.5rem; border: 1px solid var(--border-color); margin-bottom: 1rem; color: var(--text-primary);">
+                                <h5 style="color: var(--text-primary); margin-bottom: 0.25rem; font-weight: 600;">Sepia Theme</h5>
+                                <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 1rem;">Warm and easy on the eyes.</p>
+                                <button class="vd-btn" style="background: var(--color-primary); color: #fff; border: none;">Apply Sepia</button>
+                            </div>
+                            
+                            <!-- High Contrast Preview -->
+                            <div style="--bg-primary: #000000; --bg-secondary: #1a1a1a; --text-primary: #ffffff; --text-secondary: #e0e0e0; --border-color: #ffffff; --color-primary: #ffff00; background: var(--bg-primary); padding: 1.25rem; border-radius: 0.5rem; border: 1px solid var(--border-color); color: var(--text-primary);">
+                                <h5 style="color: var(--text-primary); margin-bottom: 0.25rem; font-weight: 600;">High Contrast</h5>
+                                <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 1rem;">Maximum legibility for visual impairments.</p>
+                                <button class="vd-btn" style="background: var(--color-primary); color: #000; border: none; font-weight: 700;">Apply Contrast</button>
                             </div>
                         </div>
                     </div>
                     <p class="vd-mt-4">Then toggle between themes with JavaScript:</p>
                     <div class="vd-code-snippet vd-mt-3" data-collapsible data-expanded="true">
+                        <button class="vd-code-snippet-toggle" aria-expanded="true"><span class="vd-code-snippet-toggle-icon"></span><span>View Code</span></button>
                         <div class="vd-code-snippet-content">
                             <div class="vd-code-snippet-header">
                                 <div class="vd-code-snippet-tabs" role="tablist">
                                     <button class="vd-code-snippet-tab is-active" data-lang="js">JS</button>
                                 </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code"><span class="vd-code-snippet-copy-icon"></span><span class="vd-code-snippet-copy-text">Copy</span></button>
                             </div>
                             <div class="vd-code-snippet-body">
                                 <pre class="vd-code-snippet-pane is-active" data-lang="js"><code>function setTheme(name) {
@@ -316,7 +349,7 @@ setTheme('light');</code></pre>
     </div>
 
     <!-- Practical Examples -->
-    <div class="vd-row vd-mb-6">
+    <div class="vd-row vd-mb-8">
         <div class="vd-col-12">
             <div class="vd-card demo-card">
                 <div class="vd-card-header">
@@ -326,55 +359,96 @@ setTheme('light');</code></pre>
                     <p>Common real-world customizations you can copy and adapt:</p>
 
                     <h4 class="vd-mt-5 vd-mb-3">Soft, Rounded UI</h4>
-                    <div class="vd-code-snippet" data-collapsible data-expanded="true">
-                        <div class="vd-code-snippet-content">
-                            <div class="vd-code-snippet-header">
-                                <div class="vd-code-snippet-tabs" role="tablist">
-                                    <button class="vd-code-snippet-tab is-active" data-lang="css">CSS</button>
+                    <p class="vd-mb-3">Use these variables for a softer, friendlier look:</p>
+                    <div class="vd-row">
+                        <div class="vd-col-12 vd-col-md-6 vd-mb-4">
+                            <!-- Visual Demo -->
+                            <div style="--btn-border-radius: 9999px; --card-border-radius: 1.5rem; --input-border-radius: 9999px; --modal-border-radius: 1.5rem; height: 100%;">
+                                <div class="vd-card" style="height: 100%;">
+                                    <div class="vd-card-body">
+                                        <h5 class="vd-mb-3">Welcome Back</h5>
+                                        <input type="text" class="vd-form-control vd-mb-3" placeholder="Enter your email..." style="width: 100%;">
+                                        <button class="vd-btn vd-btn-primary vd-btn-block" style="width: 100%;">Sign In</button>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="vd-code-snippet-body">
-                                <pre class="vd-code-snippet-pane is-active" data-lang="css"><code>:root {
+                        </div>
+                        <div class="vd-col-12 vd-col-md-6 vd-mb-4">
+                            <div class="vd-code-snippet" data-collapsible data-expanded="true" style="height: 100%; margin: 0;">
+                                <button class="vd-code-snippet-toggle" aria-expanded="true"><span class="vd-code-snippet-toggle-icon"></span><span>View Code</span></button>
+                                <div class="vd-code-snippet-content" style="height: 100%;">
+                                    <div class="vd-code-snippet-header">
+                                        <div class="vd-code-snippet-tabs" role="tablist">
+                                            <button class="vd-code-snippet-tab is-active" data-lang="css">CSS</button>
+                                        </div>
+                                        <button class="vd-code-snippet-copy" aria-label="Copy code"><span class="vd-code-snippet-copy-icon"></span><span class="vd-code-snippet-copy-text">Copy</span></button>
+                                    </div>
+                                    <div class="vd-code-snippet-body" style="height: 100%;">
+                                        <pre class="vd-code-snippet-pane is-active" data-lang="css" style="height: 100%;"><code>:root {
   --btn-border-radius: 9999px;
   --card-border-radius: 1.5rem;
   --input-border-radius: 9999px;
   --modal-border-radius: 1.5rem;
 }</code></pre>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     <h4 class="vd-mt-5 vd-mb-3">Corporate / Enterprise Feel</h4>
-                    <div class="vd-code-snippet" data-collapsible data-expanded="true">
-                        <div class="vd-code-snippet-content">
-                            <div class="vd-code-snippet-header">
-                                <div class="vd-code-snippet-tabs" role="tablist">
-                                    <button class="vd-code-snippet-tab is-active" data-lang="css">CSS</button>
+                    <p class="vd-mb-3">A more formal, professional aesthetic:</p>
+                    <div class="vd-row">
+                        <div class="vd-col-12 vd-col-md-6 vd-mb-4">
+                            <div style="--color-primary: #1e40af; --font-family-sans: 'Noto Sans', -apple-system, sans-serif; --btn-border-radius: 0.25rem; --card-border-radius: 0.375rem; --card-padding: 1.5rem; height: 100%;">
+                                <div class="vd-card" style="height: 100%;">
+                                    <div class="vd-card-body">
+                                        <h5 style="font-weight: 600; margin-bottom: 0.25rem;">System Dashboard</h5>
+                                        <p class="vd-text-muted vd-text-sm vd-mb-3">Generate new API key for the production environment.</p>
+                                        <button class="vd-btn vd-btn-primary">Generate Key</button>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="vd-code-snippet-body">
-                                <pre class="vd-code-snippet-pane is-active" data-lang="css"><code>:root {
+                        </div>
+                        <div class="vd-col-12 vd-col-md-6 vd-mb-4">
+                            <div class="vd-code-snippet" data-collapsible data-expanded="true" style="height: 100%; margin: 0;">
+                                <button class="vd-code-snippet-toggle" aria-expanded="true"><span class="vd-code-snippet-toggle-icon"></span><span>View Code</span></button>
+                                <div class="vd-code-snippet-content" style="height: 100%;">
+                                    <div class="vd-code-snippet-header">
+                                        <div class="vd-code-snippet-tabs" role="tablist">
+                                            <button class="vd-code-snippet-tab is-active" data-lang="css">CSS</button>
+                                        </div>
+                                        <button class="vd-code-snippet-copy" aria-label="Copy code"><span class="vd-code-snippet-copy-icon"></span><span class="vd-code-snippet-copy-text">Copy</span></button>
+                                    </div>
+                                    <div class="vd-code-snippet-body" style="height: 100%;">
+                                        <pre class="vd-code-snippet-pane is-active" data-lang="css" style="height: 100%;"><code>:root {
   --color-primary: #1e40af;
   --font-family-sans: 'Noto Sans', -apple-system, sans-serif;
   --btn-border-radius: 0.25rem;
   --card-border-radius: 0.375rem;
   --card-padding: 1.5rem;
 }</code></pre>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     <h4 class="vd-mt-5 vd-mb-3">Scoped Override (Single Page)</h4>
                     <p class="vd-mb-3">You can scope overrides to a specific page or section by targeting a parent class or ID instead of <code>:root</code>:</p>
-                    <div class="vd-code-snippet" data-collapsible data-expanded="true">
-                        <div class="vd-code-snippet-content">
-                            <div class="vd-code-snippet-header">
-                                <div class="vd-code-snippet-tabs" role="tablist">
-                                    <button class="vd-code-snippet-tab is-active" data-lang="css">CSS</button>
-                                </div>
-                            </div>
-                            <div class="vd-code-snippet-body">
-                                <pre class="vd-code-snippet-pane is-active" data-lang="css"><code>.landing-page {
+                    <div class="vd-row vd-mt-2">
+                        <div class="vd-col-12 vd-col-md-6 vd-mb-4">
+                            <div class="vd-code-snippet" data-collapsible data-expanded="true" style="height: 100%; margin: 0;">
+                                <button class="vd-code-snippet-toggle" aria-expanded="true"><span class="vd-code-snippet-toggle-icon"></span><span>View Code</span></button>
+                                <div class="vd-code-snippet-content" style="height: 100%;">
+                                    <div class="vd-code-snippet-header">
+                                        <div class="vd-code-snippet-tabs" role="tablist">
+                                            <button class="vd-code-snippet-tab is-active" data-lang="css">CSS</button>
+                                        </div>
+                                        <button class="vd-code-snippet-copy" aria-label="Copy code"><span class="vd-code-snippet-copy-icon"></span><span class="vd-code-snippet-copy-text">Copy</span></button>
+                                    </div>
+                                    <div class="vd-code-snippet-body" style="height: 100%;">
+                                        <pre class="vd-code-snippet-pane is-active" data-lang="css" style="height: 100%;"><code>.landing-page {
   --color-primary: #059669;
   --card-border-radius: 2rem;
   --btn-border-radius: 9999px;
@@ -385,6 +459,26 @@ setTheme('light');</code></pre>
   --card-padding: 1rem;
   --card-border-radius: 0.375rem;
 }</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="vd-col-12 vd-col-md-6 vd-mb-4">
+                            <div style="--color-primary: #059669; --card-border-radius: 2rem; --btn-border-radius: 9999px; margin-bottom: 1rem;">
+                                <div class="vd-card">
+                                    <div class="vd-card-body">
+                                        <h5 class="vd-text-sm vd-text-muted vd-mb-2" style="text-transform: uppercase; letter-spacing: 0.05em;">.landing-page</h5>
+                                        <button class="vd-btn vd-btn-primary">Call to Action</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="--color-primary: #6366f1; --card-padding: 1rem; --card-border-radius: 0.375rem;">
+                                <div class="vd-card">
+                                    <div class="vd-card-body">
+                                        <h5 class="vd-text-sm vd-text-muted vd-mb-2" style="text-transform: uppercase; letter-spacing: 0.05em;">.dashboard</h5>
+                                        <button class="vd-btn vd-btn-primary">View Report</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
