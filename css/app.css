@@ -208,20 +208,24 @@
             border-radius: var(--radius-md);
         }
 
-        .color-swatch {
+        .theme-customizer-inline .color-swatch {
             width: 2rem;
             height: 2rem;
             border-radius: var(--radius-sm);
             border: 2px solid transparent;
             cursor: pointer;
             transition: transform 0.15s ease, border-color 0.15s ease;
+            padding: 0;
+            font-size: inherit;
+            font-family: inherit;
+            display: inline-block;
         }
 
-        .color-swatch:hover {
+        .theme-customizer-inline .color-swatch:hover {
             transform: scale(1.1);
         }
 
-        .color-swatch.active {
+        .theme-customizer-inline .color-swatch.active {
             border-color: var(--color-primary);
             box-shadow: 0 0 0 2px var(--bg-primary), 0 0 0 4px var(--color-primary);
         }
