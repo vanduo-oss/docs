@@ -93,11 +93,11 @@
                             <tr><td><code>vd-text-center</code></td><td>Text align center</td></tr>
                             <tr><td><code>vd-text-right</code></td><td>Text align right</td></tr>
                             <tr><td><code>vd-text-sm</code></td><td>Small text (0.875rem)</td></tr>
-                            <tr><td><code>vd-text-md</code></td><td>Base text (1rem)</td></tr>
-                            <tr><td><code>vd-text-lg</code></td><td>Large text (1.25rem)</td></tr>
-                            <tr><td><code>vd-fw-normal</code></td><td>Font weight 400</td></tr>
-                            <tr><td><code>vd-fw-medium</code></td><td>Font weight 500</td></tr>
-                            <tr><td><code>vd-fw-bold</code></td><td>Font weight 700</td></tr>
+<tr><td><code>vd-text-base</code></td><td>Base text (1rem)</td></tr>
+<tr><td><code>vd-text-lg</code></td><td>Large text (1.25rem)</td></tr>
+<tr><td><code>vd-font-normal</code></td><td>Font weight 400</td></tr>
+<tr><td><code>vd-font-medium</code></td><td>Font weight 500</td></tr>
+<tr><td><code>vd-font-bold</code></td><td>Font weight 700</td></tr>
                         </tbody>
                     </table>
                     <div class="vd-code-snippet vd-mt-4" data-collapsible data-expanded="true">
@@ -108,13 +108,13 @@
                                 </div>
                             </div>
                             <div class="vd-code-snippet-body">
-                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;h2 class="vd-text-center vd-fw-bold"&gt;
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;h2 class="vd-text-center vd-font-bold"&gt;
   Centered Bold Heading
 &lt;/h2&gt;
 &lt;p class="vd-text-lg vd-text-muted vd-text-center"&gt;
   Large muted subtitle text
 &lt;/p&gt;
-&lt;small class="vd-text-sm vd-fw-medium"&gt;
+&lt;small class="vd-text-sm vd-font-medium"&gt;
   Small medium-weight caption
 &lt;/small&gt;</code></pre>
                             </div>
@@ -188,15 +188,15 @@
                         </thead>
                         <tbody>
                             <tr><td><code>vd-d-none</code></td><td><code>display: none;</code></td></tr>
-                            <tr><td><code>vd-d-block</code></td><td><code>display: block;</code></td></tr>
-                            <tr><td><code>vd-d-inline-block</code></td><td><code>display: inline-block;</code></td></tr>
-                            <tr><td><code>vd-d-flex</code></td><td><code>display: flex;</code></td></tr>
-                            <tr><td><code>vd-d-inline-flex</code></td><td><code>display: inline-flex;</code></td></tr>
-                            <tr><td><code>vd-flex-column</code></td><td><code>flex-direction: column;</code></td></tr>
-                            <tr><td><code>vd-justify-start</code></td><td><code>justify-content: flex-start;</code></td></tr>
-                            <tr><td><code>vd-justify-center</code></td><td><code>justify-content: center;</code></td></tr>
-                            <tr><td><code>vd-justify-between</code></td><td><code>justify-content: space-between;</code></td></tr>
-                            <tr><td><code>vd-align-center</code></td><td><code>align-items: center;</code></td></tr>
+<tr><td><code>vd-d-block</code></td><td><code>display: block;</code></td></tr>
+<tr><td><code>vd-d-inline-block</code></td><td><code>display: inline-block;</code></td></tr>
+<tr><td><code>vd-d-flex</code></td><td><code>display: flex;</code></td></tr>
+<tr><td><code>vd-d-inline-flex</code></td><td><code>display: inline-flex;</code></td></tr>
+<tr><td><code>vd-flex-col</code></td><td><code>flex-direction: column;</code></td></tr>
+<tr><td><code>justify-start</code></td><td><code>justify-content: flex-start;</code></td></tr>
+<tr><td><code>justify-center</code></td><td><code>justify-content: center;</code></td></tr>
+<tr><td><code>justify-between</code></td><td><code>justify-content: space-between;</code></td></tr>
+<tr><td><code>items-center</code></td><td><code>align-items: center;</code></td></tr>
                         </tbody>
                     </table>
                     <div class="vd-code-snippet vd-mt-4" data-collapsible data-expanded="true">
@@ -208,13 +208,13 @@
                             </div>
                             <div class="vd-code-snippet-body">
                                 <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;!-- Centered flex row with space between --&gt;
-&lt;div class="vd-d-flex vd-justify-between vd-align-center"&gt;
+&lt;div class="vd-d-flex justify-between items-center"&gt;
   &lt;span&gt;Left content&lt;/span&gt;
   &lt;span&gt;Right content&lt;/span&gt;
 &lt;/div&gt;
 
 &lt;!-- Vertical stack --&gt;
-&lt;div class="vd-d-flex vd-flex-column vd-align-center"&gt;
+&lt;div class="vd-d-flex vd-flex-col items-center"&gt;
   &lt;h3&gt;Title&lt;/h3&gt;
   &lt;p&gt;Subtitle&lt;/p&gt;
   &lt;button class="vd-btn vd-btn-primary"&gt;Action&lt;/button&gt;
@@ -246,11 +246,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td><code>vd-rounded-0</code></td><td>Border radius 0</td></tr>
-                            <tr><td><code>vd-rounded-sm</code></td><td>Small border radius (4px)</td></tr>
-                            <tr><td><code>vd-rounded-md</code></td><td>Medium border radius (8px)</td></tr>
-                            <tr><td><code>vd-rounded-lg</code></td><td>Large border radius (12px)</td></tr>
-                            <tr><td><code>vd-rounded-full</code></td><td>Full border radius (9999px)</td></tr>
+                            <tr><td><code>vd-rounded-none</code></td><td>Border radius 0</td></tr>
+<tr><td><code>vd-rounded-sm</code></td><td>Small border radius (4px)</td></tr>
+<tr><td><code>vd-rounded-md</code></td><td>Medium border radius (8px)</td></tr>
+<tr><td><code>vd-rounded-lg</code></td><td>Large border radius (12px)</td></tr>
+<tr><td><code>vd-rounded-full</code></td><td>Full border radius (9999px)</td></tr>
                             <tr><td><code>vd-shadow-sm</code></td><td>Small drop shadow</td></tr>
                             <tr><td><code>vd-shadow-md</code></td><td>Medium drop shadow</td></tr>
                             <tr><td><code>vd-shadow-lg</code></td><td>Large drop shadow</td></tr>
@@ -276,7 +276,7 @@
 &lt;/div&gt;
 
 &lt;!-- Sharp-cornered badge --&gt;
-&lt;span class="vd-badge vd-badge-primary vd-rounded-0"&gt;
+&lt;span class="vd-badge vd-badge-primary vd-rounded-none"&gt;
   NEW
 &lt;/span&gt;</code></pre>
                             </div>
