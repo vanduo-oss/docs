@@ -7,8 +7,23 @@ const docsRoot = path.resolve(__dirname, '..');
 const docsDistDir = path.join(docsRoot, 'dist');
 const configuredFrameworkRoot = process.env.VANDUO_FRAMEWORK_DIR
   ? path.resolve(process.env.VANDUO_FRAMEWORK_DIR)
-  : path.resolve(docsRoot, '../vanduo-framework');
-const frameworkDistDir = path.join(configuredFrameworkRoot, 'dist');
+  : null;
+
+function resolveFrameworkRoot() {
+  if (configuredFrameworkRoot) {
+    return configuredFrameworkRoot;
+  }
+
+  const candidateRoots = [
+    path.resolve(docsRoot, '../framework'),
+    path.resolve(docsRoot, '../vanduo-framework')
+  ];
+
+  return candidateRoots.find((candidateRoot) => existsSync(path.join(candidateRoot, 'dist'))) || candidateRoots[0];
+}
+
+const frameworkRoot = resolveFrameworkRoot();
+const frameworkDistDir = path.join(frameworkRoot, 'dist');
 
 function readBuildInfo(distDir) {
   const buildInfoPath = path.join(distDir, 'build-info.json');
