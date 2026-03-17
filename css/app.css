@@ -189,6 +189,51 @@
             margin-left: auto;
         }
 
+        /* ── Theme Switcher & Customizer Demos ──────────── */
+        .theme-switcher-demo-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .theme-switcher-demo-btn.active {
+            background: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+        }
+
+        .theme-customizer-inline {
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-md);
+        }
+
+        .color-swatch {
+            width: 2rem;
+            height: 2rem;
+            border-radius: var(--radius-sm);
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: transform 0.15s ease, border-color 0.15s ease;
+        }
+
+        .color-swatch:hover {
+            transform: scale(1.1);
+        }
+
+        .color-swatch.active {
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 2px var(--bg-primary), 0 0 0 4px var(--color-primary);
+        }
+
+        .theme-mode-btn.active,
+        .neutral-btn.active,
+        .radius-btn.active {
+            background: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+        }
+
         /* Icon Weights card: grid so 6 weights use horizontal space */
         .doc-icons-weights {
             display: grid;

@@ -719,7 +719,7 @@ document.addEventListener('click', function (e) {
         }
     }
 
-    var waypointDemoButton = e.target.closest('[data-waypoint-demo-nav] button');
+        var waypointDemoButton = e.target.closest('[data-waypoint-demo-nav] button');
     if (waypointDemoButton) {
         var demoNav = waypointDemoButton.closest('[data-waypoint-demo-nav]');
         if (!demoNav) return;
@@ -735,6 +735,135 @@ document.addEventListener('click', function (e) {
             demoPanel.textContent = nextCopy;
         }
     }
+
+    // Theme Switcher Demo
+    var themeSwitcherBtn = e.target.closest('.theme-switcher-demo-btn');
+    if (themeSwitcherBtn) {
+        var theme = themeSwitcherBtn.getAttribute('data-theme-value');
+        if (theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('vanduo-theme-preference', theme);
+            
+            // Update active state on buttons
+            var demoCard = themeSwitcherBtn.closest('.demo-card');
+            if (demoCard) {
+                demoCard.querySelectorAll('.theme-switcher-demo-btn').forEach(function(btn) {
+                    btn.classList.toggle('active', btn === themeSwitcherBtn);
+                });
+            }
+            
+            // Update current theme label
+            var currentThemeLabel = document.getElementById('demo-current-theme');
+            if (currentThemeLabel) {
+                currentThemeLabel.textContent = theme;
+            }
+            
+            // Dispatch event for other components
+            window.dispatchEvent(new CustomEvent('themechange', { detail: { theme: theme } }));
+        }
+    }
+
+    // Theme Customizer Demo - Color Mode
+    var themeModeBtn = e.target.closest('.theme-mode-btn');
+    if (themeModeBtn) {
+        var mode = themeModeBtn.getAttribute('data-mode');
+        if (mode) {
+            document.documentElement.setAttribute('data-theme', mode);
+            localStorage.setItem('vanduo-theme-preference', mode);
+            window.dispatchEvent(new CustomEvent('themechange', { detail: { theme: mode } }));
+            updateCustomizerDemoState();
+        }
+    }
+
+    // Theme Customizer Demo - Primary Color
+    var colorSwatch = e.target.closest('.color-swatch');
+    if (colorSwatch) {
+        var color = colorSwatch.getAttribute('data-color');
+        if (color) {
+            document.documentElement.setAttribute('data-primary', color);
+            localStorage.setItem('vanduo-primary-color', color);
+            updateCustomizerDemoState();
+        }
+    }
+
+    // Theme Customizer Demo - Neutral Color
+    var neutralBtn = e.target.closest('.neutral-btn');
+    if (neutralBtn) {
+        var neutral = neutralBtn.getAttribute('data-neutral');
+        if (neutral) {
+            document.documentElement.setAttribute('data-neutral', neutral);
+            localStorage.setItem('vanduo-neutral-color', neutral);
+            updateCustomizerDemoState();
+        }
+    }
+
+    // Theme Customizer Demo - Border Radius
+    var radiusBtn = e.target.closest('.radius-btn');
+    if (radiusBtn) {
+        var radius = radiusBtn.getAttribute('data-radius');
+        if (radius) {
+            document.documentElement.setAttribute('data-radius', radius);
+            localStorage.setItem('vanduo-border-radius', radius);
+            updateCustomizerDemoState();
+        }
+    }
+});
+
+// Theme Customizer Demo - Font Family
+function initFontSelectListener() {
+    var fontSelect = document.querySelector('.font-select');
+    if (fontSelect) {
+        fontSelect.addEventListener('change', function() {
+            var font = this.value;
+            if (font) {
+                document.documentElement.setAttribute('data-font', font);
+                localStorage.setItem('vanduo-font-family', font);
+                updateCustomizerDemoState();
+            }
+        });
+    }
+}
+
+// Update visual state of customizer demo buttons
+function updateCustomizerDemoState() {
+    var html = document.documentElement;
+    var theme = html.getAttribute('data-theme') || 'system';
+    var primary = html.getAttribute('data-primary') || 'cyan';
+    var neutral = html.getAttribute('data-neutral') || 'gray';
+    var radius = html.getAttribute('data-radius') || '0.25';
+
+    // Update mode buttons
+    document.querySelectorAll('.theme-mode-btn').forEach(function(btn) {
+        btn.classList.toggle('active', btn.getAttribute('data-mode') === theme);
+    });
+
+    // Update color swatches
+    document.querySelectorAll('.color-swatch').forEach(function(swatch) {
+        swatch.classList.toggle('active', swatch.getAttribute('data-color') === primary);
+    });
+
+    // Update neutral buttons
+    document.querySelectorAll('.neutral-btn').forEach(function(btn) {
+        btn.classList.toggle('active', btn.getAttribute('data-neutral') === neutral);
+    });
+
+    // Update radius buttons
+    document.querySelectorAll('.radius-btn').forEach(function(btn) {
+        btn.classList.toggle('active', btn.getAttribute('data-radius') === radius);
+    });
+
+    // Update font select
+    var fontSelect = document.querySelector('.font-select');
+    if (fontSelect) {
+        var font = html.getAttribute('data-font') || 'jetbrains-mono';
+        fontSelect.value = font;
+    }
+}
+
+// Initialize customizer demo on page load
+document.addEventListener('DOMContentLoaded', function() {
+    initFontSelectListener();
+    updateCustomizerDemoState();
 });
 
 document.addEventListener('draggable:drop', function (e) {
