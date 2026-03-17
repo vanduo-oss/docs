@@ -741,8 +741,7 @@ document.addEventListener('click', function (e) {
     if (themeSwitcherBtn) {
         var theme = themeSwitcherBtn.getAttribute('data-theme-value');
         if (theme) {
-            document.documentElement.setAttribute('data-theme', theme);
-            localStorage.setItem('vanduo-theme-preference', theme);
+            applyTheme(theme);
             
             // Update active state on buttons
             var demoCard = themeSwitcherBtn.closest('.demo-card');
@@ -757,9 +756,6 @@ document.addEventListener('click', function (e) {
             if (currentThemeLabel) {
                 currentThemeLabel.textContent = theme;
             }
-            
-            // Dispatch event for other components
-            window.dispatchEvent(new CustomEvent('themechange', { detail: { theme: theme } }));
         }
     }
 
@@ -768,9 +764,7 @@ document.addEventListener('click', function (e) {
     if (themeModeBtn) {
         var mode = themeModeBtn.getAttribute('data-mode');
         if (mode) {
-            document.documentElement.setAttribute('data-theme', mode);
-            localStorage.setItem('vanduo-theme-preference', mode);
-            window.dispatchEvent(new CustomEvent('themechange', { detail: { theme: mode } }));
+            applyTheme(mode);
             updateCustomizerDemoState();
         }
     }
@@ -808,6 +802,39 @@ document.addEventListener('click', function (e) {
         }
     }
 });
+
+// Apply theme with proper system preference detection
+function applyTheme(theme) {
+    var html = document.documentElement;
+    
+    if (theme === 'system') {
+        // Detect system preference
+        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var actualTheme = prefersDark ? 'dark' : 'light';
+        
+        // Set data-theme to system for the framework to handle
+        html.setAttribute('data-theme', 'system');
+        
+        // Also set a data attribute for the actual theme being displayed
+        html.setAttribute('data-system-theme', actualTheme);
+        
+        // Force the color scheme via CSS class for immediate effect
+        if (prefersDark) {
+            html.style.colorScheme = 'dark';
+        } else {
+            html.style.colorScheme = 'light';
+        }
+    } else {
+        html.setAttribute('data-theme', theme);
+        html.removeAttribute('data-system-theme');
+        html.style.colorScheme = theme;
+    }
+    
+    localStorage.setItem('vanduo-theme-preference', theme);
+    
+    // Dispatch event for other components
+    window.dispatchEvent(new CustomEvent('themechange', { detail: { theme: theme } }));
+}
 
 // Theme Customizer Demo - Font Family
 function initFontSelectListener() {
