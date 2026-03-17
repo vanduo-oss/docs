@@ -15,6 +15,129 @@
         <div class="vd-container-responsive" style="max-width: 1200px;">
 
             <!-- ═══════════════════════════════════════════════ -->
+            <!-- Version 1.3.0                                   -->
+            <!-- ═══════════════════════════════════════════════ -->
+            <article class="version-card">
+                <header class="version-header">
+                    <span class="vd-badge vd-badge-primary" style="font-size: 1rem; padding: 0.5rem 1rem;">v1.3.0</span>
+                    <span style="color: var(--text-secondary); font-size: 0.95rem;">
+                        <i class="ph ph-calendar mr-1"></i>March 17, 2026
+                    </span>
+                    <span class="vd-badge vd-badge-info" style="font-size: 0.75rem;">Latest</span>
+                </header>
+                <div class="version-body">
+                    <div class="vd-row">
+                        <div class="vd-col-12 vd-col-md-6">
+                            <h4><i class="ph ph-cube mr-2" style="color: var(--color-primary);"></i>Framework</h4>
+                            <div class="change-group">
+                                <h5>Fixes</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-bug" style="color: var(--color-error);"></i>
+                                        <div>
+                                            <strong>Fix: Add missing spacing utilities and text-italic class</strong>
+                                            <p>Added <code>.vd-mt-6</code> and <code>.vd-mt-8</code> spacing utilities to <code>helpers.css</code>, and <code>.vd-text-italic</code> utility class to <code>typography.css</code>. These classes were referenced in docs but missing from the framework.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="change-group">
+                                <h5>Updates</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-package" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: doc-tabs.css visual adjustments</strong>
+                                            <p>Minor styling updates to the doc-tabs component for improved consistency.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="vd-col-12 vd-col-md-6">
+                            <h4><i class="ph ph-book-open-text mr-2" style="color: var(--color-primary);"></i>Documentation</h4>
+                            <div class="change-group">
+                                <h5>New Features</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-magnifying-glass" style="color: var(--color-primary);"></i>
+                                        <div>
+                                            <strong>New: Inline sidebar filter for Components &amp; Guides docs pages</strong>
+                                            <p>A compact &ldquo;Filter&hellip;&rdquo; input now sits above the sidebar nav list on the docs view. Typing hides non-matching items in-place and collapses empty section headers — Escape or switching tabs resets it. Hidden on mobile where screen real-estate is limited.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="change-group">
+                                <h5>Fixes</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-bug" style="color: var(--color-error);"></i>
+                                        <div>
+                                            <strong>Fix: Sidebar filter input hidden behind sticky tabs bar on scroll</strong>
+                                            <p>Fixed missing closing brace in CSS that caused the sidebar to use incorrect top position, resulting in the filter input being covered by the sticky tabs bar.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-device-mobile" style="color: var(--color-success);"></i>
+                                        <div>
+                                            <strong>Fix: Phantom class references updated to match framework</strong>
+                                            <p>Updated documentation to use correct class names: <code>vd-chip-outline</code> + <code>vd-chip-primary</code>, <code>vd-collection-text</code>, <code>vd-datepicker-days</code>, <code>vd-font-bold</code>, and <code>vd-input</code> instead of deprecated names.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="change-group">
+                                <h5>Improvements</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-arrow-up" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Improvement: Unify component documentation structure</strong>
+                                            <p>Standardized component docs with consistent ordering (rendered demos before code snippets), added rendered demos to navbar/sidenav/footer pages, prevented navigation in demo components, and created <code>template.html</code> for consistent structure.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-paint-roller" style="color: var(--color-primary);"></i>
+                                        <div>
+                                            <strong>Improvement: doc-tabs-wrapper visual refresh</strong>
+                                            <p>Removed border-bottom separator, updated active tab styling with primary color fill, and reduced vertical padding (~25%) for a cleaner appearance.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-arrows-down-up" style="color: var(--color-success);"></i>
+                                        <div>
+                                            <strong>Improvement: Sidebar filter relocated</strong>
+                                            <p>Moved filter input from doc-tabs-wrapper into doc-sidebar for better layout and positioning.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="change-group">
+                                <h5>Updates</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-arrows-clockwise" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: Guides content refreshed</strong>
+                                            <p>Updated guide content to reflect current framework features and best practices.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-test-tube" style="color: var(--color-success);"></i>
+                                        <div>
+                                            <strong>Update: Test specs aligned with current markup</strong>
+                                            <p>Updated Playwright test assertions to match the latest HTML structure changes.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ═══════════════════════════════════════════════ -->
             <!-- Version 1.2.9                                   -->
             <!-- ═══════════════════════════════════════════════ -->
             <article class="version-card">
@@ -23,7 +146,6 @@
                     <span style="color: var(--text-secondary); font-size: 0.95rem;">
                         <i class="ph ph-calendar mr-1"></i>March 14, 2026
                     </span>
-                    <span class="vd-badge vd-badge-info" style="font-size: 0.75rem;">Latest</span>
                 </header>
                 <div class="version-body">
                     <div class="vd-row">
