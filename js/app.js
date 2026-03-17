@@ -803,37 +803,27 @@ document.addEventListener('click', function (e) {
     }
 });
 
-// Apply theme with proper system preference detection
+// Apply theme using the real framework component behavior so system mode
+// matches the navbar implementation exactly.
 function applyTheme(theme) {
-    var html = document.documentElement;
-    
-    if (theme === 'system') {
-        // Detect system preference
-        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        var actualTheme = prefersDark ? 'dark' : 'light';
-        
-        // Set data-theme to system for the framework to handle
-        html.setAttribute('data-theme', 'system');
-        
-        // Also set a data attribute for the actual theme being displayed
-        html.setAttribute('data-system-theme', actualTheme);
-        
-        // Force the color scheme via CSS class for immediate effect
-        if (prefersDark) {
-            html.style.colorScheme = 'dark';
-        } else {
-            html.style.colorScheme = 'light';
-        }
-    } else {
-        html.setAttribute('data-theme', theme);
-        html.removeAttribute('data-system-theme');
-        html.style.colorScheme = theme;
+    var themeSwitcher = window.Vanduo
+        && window.Vanduo.components
+        && window.Vanduo.components.themeSwitcher;
+
+    if (themeSwitcher && typeof themeSwitcher.setPreference === 'function') {
+        themeSwitcher.setPreference(theme);
+        return;
     }
-    
+
+    // Fallback: mirror the framework's system handling by removing the
+    // attribute instead of setting data-theme="system".
+    if (theme === 'system') {
+        document.documentElement.removeAttribute('data-theme');
+    } else {
+        document.documentElement.setAttribute('data-theme', theme);
+    }
+
     localStorage.setItem('vanduo-theme-preference', theme);
-    
-    // Dispatch event for other components
-    window.dispatchEvent(new CustomEvent('themechange', { detail: { theme: theme } }));
 }
 
 // Theme Customizer Demo - Font Family
