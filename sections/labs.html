@@ -1,58 +1,231 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Labs - Vanduo Docs</title>
-    <link rel="stylesheet" href="../css/app.css">
-</head>
-<body>
-    <nav class="vd-navbar vd-navbar-fixed">
-        <div class="vd-navbar-container">
-            <div class="vd-navbar-brand">
-                <div class="vd-navbar-brand-wrap">
-                    <a href="#home" data-route="home">Vanduo</a>
+<section id="labs">
+    <div class="vd-container">
+        <h1 class="vd-mt-8 vd-mb-4" style="color: var(--color-primary);">
+            <i class="ph ph-flask"></i> Labs
+        </h1>
+        <p class="vd-text-lg vd-text-muted vd-mb-8">
+            Experimental features and demos. These are upcoming features that are not yet part of the framework and are subject to change.
+        </p>
+
+        <!-- Labs Navigation -->
+        <div class="vd-row vd-mb-8">
+            <div class="vd-col-12 vd-col-md-4">
+                <div class="vd-card vd-card-actionable vd-card-glow" data-lab="vd-hex">
+                    <div class="vd-card-body vd-text-center" style="padding: 2rem;">
+                        <i class="ph ph-hexagon" style="font-size: 3rem; color: var(--color-primary);"></i>
+                        <h3 class="vd-mt-4 vd-mb-2">vd-hex</h3>
+                        <p class="vd-text-muted">Dynamic controllable Hex Grid API for game development</p>
+                        <span class="vd-badge vd-badge-primary vd-mt-4">Experimental</span>
+                    </div>
                 </div>
             </div>
-            <div class="navbar-actions-always">
-                <button class="global-search-trigger" id="global-search-trigger" aria-label="Open global search">
-                    <i class="ph ph-magnifying-glass"></i>
-                </button>
-                <button class="dark-mode-toggle" id="dark-mode-toggle" data-toggle="theme" aria-label="Toggle dark mode">
-                    <i class="ph ph-moon"></i>
-                </button>
-                <button class="vd-theme-customizer-trigger" data-theme-customizer-trigger aria-label="Open theme customizer">
-                    <i class="ph ph-paint-roller"></i>
-                </button>
+        </div>
+
+        <!-- vd-hex Component Demo -->
+        <div id="vd-hex-demo" class="vd-mt-8">
+            <h2 class="vd-mb-4">
+                <i class="ph ph-hexagon"></i> vd-hex Component
+            </h2>
+            <p class="vd-text-muted vd-mb-6">
+                A dynamic controllable hex grid API. Click on a hex to select it. Use the controls below to customize the grid.
+            </p>
+
+            <!-- Canvas Container -->
+            <div class="vd-card vd-mb-6" style="padding: 1rem;">
+                <div id="hex-demo-container" style="position: relative; min-height: 400px;">
+                    <canvas id="hex-demo" style="width: 100%; height: 400px; display: block;"></canvas>
+                </div>
             </div>
-            <button class="vd-navbar-toggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
-            <div class="vd-navbar-menu">
-                <ul class="vd-navbar-nav">
-                    <li><a href="#home" class="vd-nav-link" data-route="home">Home</a></li>
-                    <li><a href="#docs" class="vd-nav-link" data-route="docs">Documentation</a></li>
-                    <li><a href="#changelog" class="vd-nav-link" data-route="changelog">Changelog</a></li>
-                    <li><a href="#about" class="vd-nav-link" data-route="about">About</a></li>
-                    <li><a href="#labs" class="vd-nav-link" data-route="labs">Labs</a></li>
-                </ul>
+
+            <!-- Controls -->
+            <div class="vd-card vd-mb-6">
+                <div class="vd-card-body">
+                    <h4 class="vd-mb-4">Grid Controls</h4>
+                    <div class="vd-row">
+                        <div class="vd-col-12 vd-col-md-4 vd-mb-4">
+                            <label class="vd-form-label" for="hex-size-slider">Hex Size</label>
+                            <input type="range" id="hex-size-slider" class="vd-range" min="10" max="50" value="30" style="width: 100%;">
+                            <span id="hex-size-value" class="vd-text-sm vd-text-muted">30px</span>
+                        </div>
+                        <div class="vd-col-12 vd-col-md-4 vd-mb-4">
+                            <label class="vd-form-label" for="hex-width-slider">Grid Width</label>
+                            <input type="range" id="hex-width-slider" class="vd-range" min="5" max="30" value="15" style="width: 100%;">
+                            <span id="hex-width-value" class="vd-text-sm vd-text-muted">15</span>
+                        </div>
+                        <div class="vd-col-12 vd-col-md-4 vd-mb-4">
+                            <label class="vd-form-label" for="hex-height-slider">Grid Height</label>
+                            <input type="range" id="hex-height-slider" class="vd-range" min="5" max="20" value="10" style="width: 100%;">
+                            <span id="hex-height-value" class="vd-text-sm vd-text-muted">10</span>
+                        </div>
+                    </div>
+                    <div class="vd-mt-4">
+                        <button id="hex-reset-btn" class="vd-btn vd-btn-outline">
+                            <i class="ph ph-arrows-counter-clockwise"></i> Reset Grid
+                        </button>
+                        <button id="hex-fill-btn" class="vd-btn vd-btn-outline vd-ml-2">
+                            <i class="ph ph-paint-bucket"></i> Fill Random
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Selected Hex Info -->
+            <div class="vd-card vd-mb-6" id="hex-info-card" style="display: none;">
+                <div class="vd-card-body">
+                    <h4 class="vd-mb-4">
+                        <i class="ph ph-cursor-click"></i> Selected Hex
+                    </h4>
+                    <div class="vd-row">
+                        <div class="vd-col-6 vd-col-md-3 vd-mb-2">
+                            <span class="vd-text-sm vd-text-muted">Coordinates:</span>
+                            <span id="hex-coords" class="vd-text-bold vd-ml-2">-</span>
+                        </div>
+                        <div class="vd-col-6 vd-col-md-3 vd-mb-2">
+                            <span class="vd-text-sm vd-text-muted">Pixel X:</span>
+                            <span id="hex-pixel-x" class="vd-text-bold vd-ml-2">-</span>
+                        </div>
+                        <div class="vd-col-6 vd-col-md-3 vd-mb-2">
+                            <span class="vd-text-sm vd-text-muted">Pixel Y:</span>
+                            <span id="hex-pixel-y" class="vd-text-bold vd-ml-2">-</span>
+                        </div>
+                        <div class="vd-col-6 vd-col-md-3 vd-mb-2">
+                            <span class="vd-text-sm vd-text-muted">Adjacent:</span>
+                            <span id="hex-adjacent" class="vd-text-bold vd-ml-2">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Usage Example -->
+            <div class="vd-card">
+                <div class="vd-card-body">
+                    <h4 class="vd-mb-4">
+                        <i class="ph ph-code"></i> Usage Example
+                    </h4>
+                    <div class="vd-code-snippet" data-snippet="vd-hex-example">
+                        <div class="vd-code-snippet-tabs">
+                            <button class="vd-code-snippet-tab active" data-lang="html">HTML</button>
+                            <button class="vd-code-snippet-tab" data-lang="js">JavaScript</button>
+                        </div>
+                        <pre class="vd-code-snippet-content"><code class="language-html"><!-- Container for the hex grid -->
+<div id="hex-demo-container">
+    <canvas id="hex-demo"></canvas>
+</div></code></pre>
+                        <pre class="vd-code-snippet-content" style="display: none;"><code class="language-javascript">// Import the VdHexGrid component
+import { VdHexGrid } from './js/hex-grid.js';
+
+// Initialize the hex grid
+const grid = new VdHexGrid({
+    element: document.getElementById('hex-demo-container'),
+    canvas: document.getElementById('hex-demo'),
+    size: 30,        // Hex size in pixels
+    width: 15,       // Number of columns
+    height: 10       // Number of rows
+});
+
+// Listen for hex selection
+grid.on('select', (hex) => {
+    console.log('Selected hex:', hex.q, hex.r);
+    // hex.q = axial q coordinate
+    // hex.r = axial r coordinate
+});
+
+// Update grid dynamically
+grid.setSize(40);
+grid.setDimensions(20, 15);</code></pre>
+                    </div>
+                </div>
             </div>
         </div>
-    </nav>
-    <main id="main-content" style="padding-top: 80px; min-height: calc(100vh - 200px);">
-        <section id="labs-content" class="vd-container-responsive">
-            <h1>Labs</h1>
-            <p>Experimental features and demos.</p>
-            <h2>vd-hex Component</h2>
-            <p>Dynamic controllable hex grid API.</p>
-            <canvas id="hex-demo" style="width: 100%; height: 400px; border: 1px solid #ccc;"></canvas>
-            <script type="module">
-                // Import vd-hex component (to be implemented)
-                // Example usage:
-                // import { HexGrid } from '../js/hex-grid.js';
-                // const grid = new HexGrid({element: document.getElementById('hex-demo'), size: 30});
-                // grid.render();
-            </script>
-        </section>
-    </main>
-    <script type="module" src="../js/app.js"></script>
-</body>
-</html>
+    </div>
+</section>
+
+<script type="module">
+    // Initialize vd-hex demo when Labs page is loaded
+    (function() {
+        // Check if we're on the Labs page and the demo container exists
+        const demoContainer = document.getElementById('hex-demo-container');
+        const demoCanvas = document.getElementById('hex-demo');
+        
+        if (!demoContainer || !demoCanvas) return;
+        
+        // Import and initialize the hex grid
+        import('./js/hex-grid.js').then(({ VdHexGrid }) => {
+            // Initialize the hex grid
+            const grid = new VdHexGrid({
+                element: demoContainer,
+                canvas: demoCanvas,
+                size: parseInt(document.getElementById('hex-size-slider')?.value || '30'),
+                width: parseInt(document.getElementById('hex-width-slider')?.value || '15'),
+                height: parseInt(document.getElementById('hex-height-slider')?.value || '10')
+            });
+            
+            // Wire up controls
+            const sizeSlider = document.getElementById('hex-size-slider');
+            const widthSlider = document.getElementById('hex-width-slider');
+            const heightSlider = document.getElementById('hex-height-slider');
+            const sizeValue = document.getElementById('hex-size-value');
+            const widthValue = document.getElementById('hex-width-value');
+            const heightValue = document.getElementById('hex-height-value');
+            const resetBtn = document.getElementById('hex-reset-btn');
+            const fillBtn = document.getElementById('hex-fill-btn');
+            const infoCard = document.getElementById('hex-info-card');
+            
+            // Update display values
+            if (sizeSlider && sizeValue) {
+                sizeSlider.addEventListener('input', (e) => {
+                    sizeValue.textContent = e.target.value + 'px';
+                    grid.setSize(parseInt(e.target.value));
+                });
+            }
+            
+            if (widthSlider && widthValue) {
+                widthSlider.addEventListener('input', (e) => {
+                    widthValue.textContent = e.target.value;
+                    grid.setDimensions(parseInt(e.target.value), grid.height);
+                });
+            }
+            
+            if (heightSlider && heightValue) {
+                heightSlider.addEventListener('input', (e) => {
+                    heightValue.textContent = e.target.value;
+                    grid.setDimensions(grid.width, parseInt(e.target.value));
+                });
+            }
+            
+            if (resetBtn) {
+                resetBtn.addEventListener('click', () => {
+                    if (sizeSlider) sizeSlider.value = 30;
+                    if (widthSlider) widthSlider.value = 15;
+                    if (heightSlider) heightSlider.value = 10;
+                    if (sizeValue) sizeValue.textContent = '30px';
+                    if (widthValue) widthValue.textContent = '15';
+                    if (heightValue) heightValue.textContent = '10';
+                    grid.reset();
+                });
+            }
+            
+            if (fillBtn) {
+                fillBtn.addEventListener('click', () => {
+                    grid.fillRandom();
+                });
+            }
+            
+            // Listen for selection events
+            grid.on('select', (hex) => {
+                if (infoCard) infoCard.style.display = 'block';
+                const coords = document.getElementById('hex-coords');
+                const pixelX = document.getElementById('hex-pixel-x');
+                const pixelY = document.getElementById('hex-pixel-y');
+                const adjacent = document.getElementById('hex-adjacent');
+                
+                if (coords) coords.textContent = `(${hex.q}, ${hex.r})`;
+                if (pixelX) pixelX.textContent = Math.round(hex.x);
+                if (pixelY) pixelY.textContent = Math.round(hex.y);
+                if (adjacent) adjacent.textContent = hex.adjacent?.length || 0;
+            });
+        }).catch(err => {
+            console.error('Failed to load VdHexGrid:', err);
+        });
+    })();
+</script>

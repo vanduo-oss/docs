@@ -7,6 +7,10 @@ NPM Package: https://www.npmjs.com/package/@vanduo-oss/framework
 
 ## Current Snapshot
 
+## Labs
+
+The Labs section showcases experimental components such as the `vd-hex` hex grid demo. See the Labs page for details.
+
 - Docs are aligned with the v1.2.9 release surface.
 - Production docs load the pinned framework CDN bundle from `@v1.2.9`, while local preview resolves framework assets from `./dist` and refreshes them from the sibling framework repo when available.
 - Theme tooling is documented as two separate components: Theme Switcher for lightweight system/light/dark toggles and Theme Customizer for full palette, neutral, radius, and font control.
