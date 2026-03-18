@@ -593,6 +593,12 @@ function initHexGridDemo() {
         var fillBtn = document.getElementById('hex-fill-btn');
         var infoCard = document.getElementById('hex-info-card');
         
+        // Toolbar buttons
+        var zoomInBtn = document.getElementById('hex-zoom-in');
+        var zoomOutBtn = document.getElementById('hex-zoom-out');
+        var resetViewBtn = document.getElementById('hex-reset-view');
+        var zoomLevelSpan = document.getElementById('hex-zoom-level');
+        
         if (sizeSlider && sizeValue) {
             sizeSlider.addEventListener('input', function(e) {
                 sizeValue.textContent = e.target.value + 'px';
@@ -631,6 +637,33 @@ function initHexGridDemo() {
                 grid.fillRandom();
             });
         }
+        
+        // Toolbar button handlers
+        if (zoomInBtn) {
+            zoomInBtn.addEventListener('click', function() {
+                grid.zoomIn();
+            });
+        }
+        
+        if (zoomOutBtn) {
+            zoomOutBtn.addEventListener('click', function() {
+                grid.zoomOut();
+            });
+        }
+        
+        if (resetViewBtn) {
+            resetViewBtn.addEventListener('click', function() {
+                grid.resetView();
+            });
+        }
+        
+        // Listen for zoom events to update zoom level indicator
+        grid.on('zoom', function(data) {
+            if (zoomLevelSpan) {
+                var percent = Math.round(data.scale * 100);
+                zoomLevelSpan.textContent = percent + '%';
+            }
+        });
         
         // Listen for selection events
         grid.on('select', function(hex) {

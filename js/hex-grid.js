@@ -4,6 +4,12 @@
 
 import { hexToPixel, pixelToHex, getHexCorners, getAdjacentHexes } from './utils/hex-math.js';
 
+// Constants
+const ZOOM_MIN = 0.3;
+const ZOOM_MAX = 3.0;
+const ZOOM_FACTOR = 0.1;
+const DRAG_THRESHOLD = 2;
+
 /**
  * VdHexGrid - A dynamic controllable hex grid component
  * 
@@ -31,6 +37,17 @@ export class VdHexGrid {
         this.selectedHex = null;
         this.listeners = {};
         
+        // Transform state for pan/zoom
+        this.transform = { x: 0, y: 0, scale: 1 };
+        
+        // Drag state
+        this.dragging = false;
+        this.lastPos = null;
+        this.hasMoved = false;
+        
+        // Theme colors
+        this.themeColors = this._getThemeColors();
+        
         // Set up canvas if not already done
         if (!this.canvas) {
             this.canvas = element.querySelector('canvas') || document.createElement('canvas');
@@ -45,6 +62,51 @@ export class VdHexGrid {
         this._generateGrid();
         this._render();
         this._setupEvents();
+        
+        // Observe theme changes
+        this._observeThemeChanges();
+    }
+    
+    /**
+     * Get theme colors from CSS custom properties
+     */
+    _getThemeColors() {
+        const root = document.documentElement;
+        const style = getComputedStyle(root);
+        
+        return {
+            bgPrimary: style.getPropertyValue('--bg-primary').trim() || '#ffffff',
+            bgSecondary: style.getPropertyValue('--bg-secondary').trim() || '#f5f5f5',
+            borderColor: style.getPropertyValue('--border-color').trim() || '#e0e0e0',
+            colorPrimary: style.getPropertyValue('--color-primary').trim() || '#3b82f6',
+            textColor: style.getPropertyValue('--text-primary').trim() || '#1f2937',
+            textMuted: style.getPropertyValue('--text-muted').trim() || '#6b7280'
+        };
+    }
+    
+    /**
+     * Observe theme changes and re-render when theme changes
+     */
+    _observeThemeChanges() {
+        const observer = new MutationObserver(() => {
+            this.themeColors = this._getThemeColors();
+            this._render();
+        });
+        
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['data-theme']
+        });
+    }
+    
+    /**
+     * Convert screen coordinates to world coordinates
+     */
+    _screenToWorld(screenX, screenY) {
+        return {
+            x: (screenX - this.transform.x) / this.transform.scale,
+            y: (screenY - this.transform.y) / this.transform.scale
+        };
     }
     
     /**
@@ -66,8 +128,8 @@ export class VdHexGrid {
                     r,
                     x: pixel.x,
                     y: pixel.y,
-                    fill: '#e8e8e8',
-                    stroke: '#999',
+                    fill: this.themeColors.bgSecondary,
+                    stroke: this.themeColors.borderColor,
                     adjacent: getAdjacentHexes(q, r)
                 };
                 this.hexes.set(`${q},${r}`, hex);
@@ -88,30 +150,33 @@ export class VdHexGrid {
         this.canvas.width = displayWidth;
         this.canvas.height = displayHeight;
         
-        // Clear canvas
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        // Clear canvas with theme background
+        this.ctx.fillStyle = this.themeColors.bgPrimary;
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
         
-        // Calculate offset to center the grid
-        const padding = this.size * 2;
-        const offsetX = padding;
-        const offsetY = padding;
+        // Apply transform
+        this.ctx.save();
+        this.ctx.translate(this.transform.x, this.transform.y);
+        this.ctx.scale(this.transform.scale, this.transform.scale);
         
         // Draw all hexes
         this.hexes.forEach(hex => {
-            this._drawHex(hex, offsetX, offsetY);
+            this._drawHex(hex);
         });
         
         // Redraw selected hex if any
         if (this.selectedHex) {
-            this._drawHex(this.selectedHex, offsetX, offsetY, true);
+            this._drawHex(this.selectedHex, true);
         }
+        
+        this.ctx.restore();
     }
     
     /**
      * Draw a single hex
      */
-    _drawHex(hex, offsetX = 0, offsetY = 0, isSelected = false) {
-        const corners = getHexCorners(hex.x + offsetX, hex.y + offsetY, this.size);
+    _drawHex(hex, isSelected = false) {
+        const corners = getHexCorners(hex.x, hex.y, this.size);
         
         this.ctx.beginPath();
         this.ctx.moveTo(corners[0].x, corners[0].y);
@@ -120,42 +185,73 @@ export class VdHexGrid {
         }
         this.ctx.closePath();
         
-        // Fill
-        this.ctx.fillStyle = isSelected ? '#4a90d9' : (hex.fill || '#e8e8e8');
+        // Fill with theme color or custom fill
+        const fill = isSelected ? this.themeColors.colorPrimary : (hex.fill || this.themeColors.bgSecondary);
+        this.ctx.fillStyle = fill;
         this.ctx.fill();
         
-        // Stroke
-        this.ctx.strokeStyle = isSelected ? '#2c5aa0' : (hex.stroke || '#999');
+        // Stroke with theme color
+        const stroke = isSelected ? this.themeColors.colorPrimary : (hex.stroke || this.themeColors.borderColor);
+        this.ctx.strokeStyle = stroke;
         this.ctx.lineWidth = isSelected ? 3 : 1;
         this.ctx.stroke();
         
         // Draw coordinates for selected hex
         if (isSelected) {
-            this.ctx.fillStyle = '#fff';
+            this.ctx.fillStyle = '#ffffff';
             this.ctx.font = '10px monospace';
             this.ctx.textAlign = 'center';
             this.ctx.textBaseline = 'middle';
-            this.ctx.fillText(`${hex.q},${hex.r}`, hex.x + offsetX, hex.y + offsetY);
+            this.ctx.fillText(`${hex.q},${hex.r}`, hex.x, hex.y);
         }
     }
     
     /**
-     * Set up mouse/touch events for hex selection
+     * Set up mouse/touch events for hex selection, pan, and zoom
      */
     _setupEvents() {
+        // Pan - pointer down
+        this.canvas.addEventListener('pointerdown', (e) => {
+            this.dragging = true;
+            this.hasMoved = false;
+            this.lastPos = { x: e.clientX, y: e.clientY };
+            this.canvas.style.cursor = 'grabbing';
+        });
+        
+        // Pan - pointer move
+        this.canvas.addEventListener('pointermove', (e) => {
+            if (!this.dragging) return;
+            
+            const cur = { x: e.clientX, y: e.clientY };
+            const dx = cur.x - this.lastPos.x;
+            const dy = cur.y - this.lastPos.y;
+            
+            if (Math.abs(dx) > DRAG_THRESHOLD || Math.abs(dy) > DRAG_THRESHOLD) {
+                this.hasMoved = true;
+            }
+            
+            this.transform.x += dx;
+            this.transform.y += dy;
+            this.lastPos = cur;
+            this._render();
+        });
+        
+        // Pan - pointer up
+        const stopDrag = () => {
+            this.dragging = false;
+            if (!this.hasMoved) {
+                this.canvas.style.cursor = 'pointer';
+            }
+        };
+        this.canvas.addEventListener('pointerup', stopDrag);
+        this.canvas.addEventListener('pointerleave', stopDrag);
+        
+        // Click (tap without drag)
         this.canvas.addEventListener('click', (e) => {
-            const rect = this.canvas.getBoundingClientRect();
-            const scaleX = this.canvas.width / rect.width;
-            const scaleY = this.canvas.height / rect.height;
-            const x = (e.clientX - rect.left) * scaleX;
-            const y = (e.clientY - rect.top) * scaleY;
+            if (this.hasMoved) return;
             
-            // Calculate offset to center the grid
-            const padding = this.size * 2;
-            const offsetX = padding;
-            const offsetY = padding;
-            
-            const hexCoords = pixelToHex(x - offsetX, y - offsetY, this.size);
+            const worldPos = this._screenToWorld(e.clientX, e.clientY);
+            const hexCoords = pixelToHex(worldPos.x, worldPos.y, this.size);
             const hex = this.hexes.get(`${hexCoords.q},${hexCoords.r}`);
             
             if (hex) {
@@ -165,8 +261,33 @@ export class VdHexGrid {
             }
         });
         
+        // Zoom
+        this.canvas.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            
+            const zoomFactor = e.deltaY > 0 ? 1 - ZOOM_FACTOR : 1 + ZOOM_FACTOR;
+            const newScale = Math.max(ZOOM_MIN, Math.min(this.transform.scale * zoomFactor, ZOOM_MAX));
+            
+            // Zoom toward cursor
+            const mouseX = e.clientX;
+            const mouseY = e.clientY;
+            
+            const scaleDiff = newScale / this.transform.scale;
+            this.transform.x = mouseX - (mouseX - this.transform.x) * scaleDiff;
+            this.transform.y = mouseY - (mouseY - this.transform.y) * scaleDiff;
+            this.transform.scale = newScale;
+            
+            this._render();
+            this._emit('zoom', { scale: this.transform.scale });
+        }, { passive: false });
+        
         // Cursor style
-        this.canvas.style.cursor = 'pointer';
+        this.canvas.addEventListener('mouseenter', () => {
+            this.canvas.style.cursor = 'grab';
+        });
+        this.canvas.addEventListener('mouseleave', () => {
+            this.canvas.style.cursor = 'default';
+        });
     }
     
     /**
@@ -196,6 +317,7 @@ export class VdHexGrid {
         this.width = 15;
         this.height = 10;
         this.selectedHex = null;
+        this.transform = { x: 0, y: 0, scale: 1 };
         this._generateGrid();
         this._render();
     }
@@ -234,6 +356,43 @@ export class VdHexGrid {
             hex.fill = color;
             this._render();
         }
+    }
+    
+    /**
+     * Reset view to default position
+     */
+    resetView() {
+        this.transform = { x: 0, y: 0, scale: 1 };
+        this._render();
+        this._emit('pan', { x: 0, y: 0 });
+        this._emit('zoom', { scale: 1 });
+    }
+    
+    /**
+     * Zoom in
+     */
+    zoomIn() {
+        const newScale = Math.min(this.transform.scale * (1 + ZOOM_FACTOR), ZOOM_MAX);
+        this.transform.scale = newScale;
+        this._render();
+        this._emit('zoom', { scale: this.transform.scale });
+    }
+    
+    /**
+     * Zoom out
+     */
+    zoomOut() {
+        const newScale = Math.max(this.transform.scale * (1 - ZOOM_FACTOR), ZOOM_MIN);
+        this.transform.scale = newScale;
+        this._render();
+        this._emit('zoom', { scale: this.transform.scale });
+    }
+    
+    /**
+     * Get current transform state
+     */
+    getTransform() {
+        return { ...this.transform };
     }
     
     /**
