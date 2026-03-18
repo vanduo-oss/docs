@@ -300,6 +300,7 @@ async function loadPage(pageId) {
         if (typeof Vanduo !== 'undefined') Vanduo.init();
         hideDisabledCodeTabs(container);
         wireRouteLinks(container);
+        initHexGridDemo();
     } catch (err) {
         console.error(err);
         container.innerHTML = '<div class="vd-alert vd-alert-error" style="margin: 2rem;">Failed to load page. Check console.</div>';
@@ -559,6 +560,93 @@ function wireRouteLinks(container) {
             var route = el.getAttribute('data-route');
             navigate(route);
         });
+    });
+}
+
+/* ── Initialize vd-hex demo on Labs page ───────── */
+function initHexGridDemo() {
+    var demoContainer = document.getElementById('hex-demo-container');
+    var demoCanvas = document.getElementById('hex-demo');
+    
+    if (!demoContainer || !demoCanvas) return;
+    
+    // Dynamic import to avoid loading on other pages
+    import('./hex-grid.js').then(function(module) {
+        var VdHexGrid = module.VdHexGrid;
+        var sizeSlider = document.getElementById('hex-size-slider');
+        var widthSlider = document.getElementById('hex-width-slider');
+        var heightSlider = document.getElementById('hex-height-slider');
+        
+        var grid = new VdHexGrid({
+            element: demoContainer,
+            canvas: demoCanvas,
+            size: parseInt(sizeSlider?.value || '30'),
+            width: parseInt(widthSlider?.value || '15'),
+            height: parseInt(heightSlider?.value || '10')
+        });
+        
+        // Wire up controls
+        var sizeValue = document.getElementById('hex-size-value');
+        var widthValue = document.getElementById('hex-width-value');
+        var heightValue = document.getElementById('hex-height-value');
+        var resetBtn = document.getElementById('hex-reset-btn');
+        var fillBtn = document.getElementById('hex-fill-btn');
+        var infoCard = document.getElementById('hex-info-card');
+        
+        if (sizeSlider && sizeValue) {
+            sizeSlider.addEventListener('input', function(e) {
+                sizeValue.textContent = e.target.value + 'px';
+                grid.setSize(parseInt(e.target.value));
+            });
+        }
+        
+        if (widthSlider && widthValue) {
+            widthSlider.addEventListener('input', function(e) {
+                widthValue.textContent = e.target.value;
+                grid.setDimensions(parseInt(e.target.value), grid.height);
+            });
+        }
+        
+        if (heightSlider && heightValue) {
+            heightSlider.addEventListener('input', function(e) {
+                heightValue.textContent = e.target.value;
+                grid.setDimensions(grid.width, parseInt(e.target.value));
+            });
+        }
+        
+        if (resetBtn) {
+            resetBtn.addEventListener('click', function() {
+                if (sizeSlider) sizeSlider.value = 30;
+                if (widthSlider) widthSlider.value = 15;
+                if (heightSlider) heightSlider.value = 10;
+                if (sizeValue) sizeValue.textContent = '30px';
+                if (widthValue) widthValue.textContent = '15';
+                if (heightValue) heightValue.textContent = '10';
+                grid.reset();
+            });
+        }
+        
+        if (fillBtn) {
+            fillBtn.addEventListener('click', function() {
+                grid.fillRandom();
+            });
+        }
+        
+        // Listen for selection events
+        grid.on('select', function(hex) {
+            if (infoCard) infoCard.style.display = 'block';
+            var coords = document.getElementById('hex-coords');
+            var pixelX = document.getElementById('hex-pixel-x');
+            var pixelY = document.getElementById('hex-pixel-y');
+            var adjacent = document.getElementById('hex-adjacent');
+            
+            if (coords) coords.textContent = '(' + hex.q + ', ' + hex.r + ')';
+            if (pixelX) pixelX.textContent = Math.round(hex.x);
+            if (pixelY) pixelY.textContent = Math.round(hex.y);
+            if (adjacent) adjacent.textContent = hex.adjacent?.length || 0;
+        });
+    }).catch(function(err) {
+        console.error('Failed to load VdHexGrid:', err);
     });
 }
 

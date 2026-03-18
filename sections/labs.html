@@ -32,8 +32,8 @@
 
             <!-- Canvas Container -->
             <div class="vd-card vd-mb-6" style="padding: 1rem;">
-                <div id="hex-demo-container" style="position: relative; min-height: 400px;">
-                    <canvas id="hex-demo" style="width: 100%; height: 400px; display: block;"></canvas>
+                <div id="hex-demo-container" style="position: relative; width: 100%; height: 400px; background: #fafafa;">
+                    <canvas id="hex-demo" style="width: 100%; height: 100%; display: block;"></canvas>
                 </div>
             </div>
 
@@ -139,93 +139,3 @@ grid.setDimensions(20, 15);</code></pre>
         </div>
     </div>
 </section>
-
-<script type="module">
-    // Initialize vd-hex demo when Labs page is loaded
-    (function() {
-        // Check if we're on the Labs page and the demo container exists
-        const demoContainer = document.getElementById('hex-demo-container');
-        const demoCanvas = document.getElementById('hex-demo');
-        
-        if (!demoContainer || !demoCanvas) return;
-        
-        // Import and initialize the hex grid
-        import('./js/hex-grid.js').then(({ VdHexGrid }) => {
-            // Initialize the hex grid
-            const grid = new VdHexGrid({
-                element: demoContainer,
-                canvas: demoCanvas,
-                size: parseInt(document.getElementById('hex-size-slider')?.value || '30'),
-                width: parseInt(document.getElementById('hex-width-slider')?.value || '15'),
-                height: parseInt(document.getElementById('hex-height-slider')?.value || '10')
-            });
-            
-            // Wire up controls
-            const sizeSlider = document.getElementById('hex-size-slider');
-            const widthSlider = document.getElementById('hex-width-slider');
-            const heightSlider = document.getElementById('hex-height-slider');
-            const sizeValue = document.getElementById('hex-size-value');
-            const widthValue = document.getElementById('hex-width-value');
-            const heightValue = document.getElementById('hex-height-value');
-            const resetBtn = document.getElementById('hex-reset-btn');
-            const fillBtn = document.getElementById('hex-fill-btn');
-            const infoCard = document.getElementById('hex-info-card');
-            
-            // Update display values
-            if (sizeSlider && sizeValue) {
-                sizeSlider.addEventListener('input', (e) => {
-                    sizeValue.textContent = e.target.value + 'px';
-                    grid.setSize(parseInt(e.target.value));
-                });
-            }
-            
-            if (widthSlider && widthValue) {
-                widthSlider.addEventListener('input', (e) => {
-                    widthValue.textContent = e.target.value;
-                    grid.setDimensions(parseInt(e.target.value), grid.height);
-                });
-            }
-            
-            if (heightSlider && heightValue) {
-                heightSlider.addEventListener('input', (e) => {
-                    heightValue.textContent = e.target.value;
-                    grid.setDimensions(grid.width, parseInt(e.target.value));
-                });
-            }
-            
-            if (resetBtn) {
-                resetBtn.addEventListener('click', () => {
-                    if (sizeSlider) sizeSlider.value = 30;
-                    if (widthSlider) widthSlider.value = 15;
-                    if (heightSlider) heightSlider.value = 10;
-                    if (sizeValue) sizeValue.textContent = '30px';
-                    if (widthValue) widthValue.textContent = '15';
-                    if (heightValue) heightValue.textContent = '10';
-                    grid.reset();
-                });
-            }
-            
-            if (fillBtn) {
-                fillBtn.addEventListener('click', () => {
-                    grid.fillRandom();
-                });
-            }
-            
-            // Listen for selection events
-            grid.on('select', (hex) => {
-                if (infoCard) infoCard.style.display = 'block';
-                const coords = document.getElementById('hex-coords');
-                const pixelX = document.getElementById('hex-pixel-x');
-                const pixelY = document.getElementById('hex-pixel-y');
-                const adjacent = document.getElementById('hex-adjacent');
-                
-                if (coords) coords.textContent = `(${hex.q}, ${hex.r})`;
-                if (pixelX) pixelX.textContent = Math.round(hex.x);
-                if (pixelY) pixelY.textContent = Math.round(hex.y);
-                if (adjacent) adjacent.textContent = hex.adjacent?.length || 0;
-            });
-        }).catch(err => {
-            console.error('Failed to load VdHexGrid:', err);
-        });
-    })();
-</script>

@@ -52,6 +52,11 @@ export class VdHexGrid {
      */
     _generateGrid() {
         this.hexes.clear();
+        
+        // Calculate offset to center the grid
+        const gridWidth = this.width * this.size * 1.5;
+        const gridHeight = this.height * this.size * Math.sqrt(3);
+        
         for (let r = 0; r < this.height; r++) {
             const qOffset = Math.floor(r / 2);
             for (let q = -qOffset; q < this.width - qOffset; q++) {
@@ -61,8 +66,8 @@ export class VdHexGrid {
                     r,
                     x: pixel.x,
                     y: pixel.y,
-                    fill: '#f0f0f0',
-                    stroke: '#ccc',
+                    fill: '#e8e8e8',
+                    stroke: '#999',
                     adjacent: getAdjacentHexes(q, r)
                 };
                 this.hexes.set(`${q},${r}`, hex);
@@ -74,27 +79,39 @@ export class VdHexGrid {
      * Render the hex grid on canvas
      */
     _render() {
-        // Set canvas size
-        const canvasWidth = (this.width + 1) * this.size * 1.5 + this.size * 2;
-        const canvasHeight = (this.height + 1) * this.size * Math.sqrt(3) + this.size * 2;
+        // Get canvas displayed size
+        const rect = this.canvas.getBoundingClientRect();
+        const displayWidth = rect.width || 800;
+        const displayHeight = rect.height || 400;
         
-        this.canvas.width = Math.max(canvasWidth, 800);
-        this.canvas.height = Math.max(canvasHeight, 400);
+        // Set canvas internal resolution to match display
+        this.canvas.width = displayWidth;
+        this.canvas.height = displayHeight;
         
         // Clear canvas
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         
+        // Calculate offset to center the grid
+        const padding = this.size * 2;
+        const offsetX = padding;
+        const offsetY = padding;
+        
         // Draw all hexes
         this.hexes.forEach(hex => {
-            this._drawHex(hex);
+            this._drawHex(hex, offsetX, offsetY);
         });
+        
+        // Redraw selected hex if any
+        if (this.selectedHex) {
+            this._drawHex(this.selectedHex, offsetX, offsetY, true);
+        }
     }
     
     /**
      * Draw a single hex
      */
-    _drawHex(hex, isSelected = false) {
-        const corners = getHexCorners(hex.x + this.canvas.width / 4, hex.y + this.canvas.height / 4, this.size);
+    _drawHex(hex, offsetX = 0, offsetY = 0, isSelected = false) {
+        const corners = getHexCorners(hex.x + offsetX, hex.y + offsetY, this.size);
         
         this.ctx.beginPath();
         this.ctx.moveTo(corners[0].x, corners[0].y);
@@ -104,11 +121,11 @@ export class VdHexGrid {
         this.ctx.closePath();
         
         // Fill
-        this.ctx.fillStyle = isSelected ? '#4a90d9' : (hex.fill || '#f0f0f0');
+        this.ctx.fillStyle = isSelected ? '#4a90d9' : (hex.fill || '#e8e8e8');
         this.ctx.fill();
         
         // Stroke
-        this.ctx.strokeStyle = isSelected ? '#2c5aa0' : (hex.stroke || '#ccc');
+        this.ctx.strokeStyle = isSelected ? '#2c5aa0' : (hex.stroke || '#999');
         this.ctx.lineWidth = isSelected ? 3 : 1;
         this.ctx.stroke();
         
@@ -118,7 +135,7 @@ export class VdHexGrid {
             this.ctx.font = '10px monospace';
             this.ctx.textAlign = 'center';
             this.ctx.textBaseline = 'middle';
-            this.ctx.fillText(`${hex.q},${hex.r}`, hex.x + this.canvas.width / 4, hex.y + this.canvas.height / 4);
+            this.ctx.fillText(`${hex.q},${hex.r}`, hex.x + offsetX, hex.y + offsetY);
         }
     }
     
@@ -133,14 +150,17 @@ export class VdHexGrid {
             const x = (e.clientX - rect.left) * scaleX;
             const y = (e.clientY - rect.top) * scaleY;
             
-            const hexCoords = pixelToHex(x - this.canvas.width / 4, y - this.canvas.height / 4, this.size);
+            // Calculate offset to center the grid
+            const padding = this.size * 2;
+            const offsetX = padding;
+            const offsetY = padding;
+            
+            const hexCoords = pixelToHex(x - offsetX, y - offsetY, this.size);
             const hex = this.hexes.get(`${hexCoords.q},${hexCoords.r}`);
             
             if (hex) {
                 this.selectedHex = hex;
                 this._render();
-                // Redraw selected hex with highlight
-                this._drawHex(hex, true);
                 this._emit('select', hex);
             }
         });
@@ -156,13 +176,6 @@ export class VdHexGrid {
         this.size = size;
         this._generateGrid();
         this._render();
-        if (this.selectedHex) {
-            const hex = this.hexes.get(`${this.selectedHex.q},${this.selectedHex.r}`);
-            if (hex) {
-                this.selectedHex = hex;
-                this._drawHex(hex, true);
-            }
-        }
     }
     
     /**
@@ -191,14 +204,11 @@ export class VdHexGrid {
      * Fill hexes with random colors
      */
     fillRandom() {
-        const colors = ['#f0f0f0', '#d4e5d4', '#e5d4d4', '#d4d4e5', '#e5e5d4', '#d4e5e5'];
+        const colors = ['#f0f0f0', '#d4e5d4', '#e5d4d4', '#d4d4e5', '#e5e5d4', '#d4e5e5', '#e8e8e8', '#d0d0d0'];
         this.hexes.forEach(hex => {
             hex.fill = colors[Math.floor(Math.random() * colors.length)];
         });
         this._render();
-        if (this.selectedHex) {
-            this._drawHex(this.selectedHex, true);
-        }
     }
     
     /**
@@ -223,9 +233,6 @@ export class VdHexGrid {
         if (hex) {
             hex.fill = color;
             this._render();
-            if (this.selectedHex && this.selectedHex.q === q && this.selectedHex.r === r) {
-                this._drawHex(hex, true);
-            }
         }
     }
     
