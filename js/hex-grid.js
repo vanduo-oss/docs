@@ -2,7 +2,22 @@
 // Based on web-civ HexGrid implementation
 // Enables developers to use hex grids as components and game devs creating web civ-like games
 
-import { hexToPixel, pixelToHex, getHexCorners, getAdjacentHexes } from './utils/hex-math.js';
+import {
+    hexToPixel,
+    pixelToHex,
+    getHexCorners,
+    getAdjacentHexes,
+    hexDistance,
+    TerrainType,
+    TERRAIN_COLORS,
+    DEFAULT_TERRAIN_COLOR,
+    TERRAIN_YIELDS,
+    TERRAIN_MOVEMENT_COSTS,
+    isPassable,
+    getMovementCost,
+    getTerrainYields,
+    getTerrainColor
+} from './utils/hex-math.js';
 
 // Constants
 const ZOOM_MIN = 0.3;
@@ -19,7 +34,8 @@ const DRAG_THRESHOLD = 2;
  *     canvas: document.getElementById('canvas'),
  *     size: 30,
  *     width: 15,
- *     height: 10
+ *     height: 10,
+ *     rotation: 0 // Optional rotation in radians
  * });
  * 
  * grid.on('select', (hex) => {
@@ -27,12 +43,13 @@ const DRAG_THRESHOLD = 2;
  * });
  */
 export class VdHexGrid {
-    constructor({ element, canvas, size = 30, width = 10, height = 10 }) {
+    constructor({ element, canvas, size = 30, width = 10, height = 10, rotation = 0 }) {
         this.element = element;
         this.canvas = canvas;
         this.size = size;
         this.width = width;
         this.height = height;
+        this.rotation = rotation;
         this.hexes = new Map();
         this.selectedHex = null;
         this.listeners = {};
@@ -47,6 +64,9 @@ export class VdHexGrid {
         
         // Theme colors
         this.themeColors = this._getThemeColors();
+        
+        // Custom render callback
+        this.customRenderCallback = null;
         
         // Set up canvas if not already done
         if (!this.canvas) {
@@ -103,9 +123,24 @@ export class VdHexGrid {
      * Convert screen coordinates to world coordinates
      */
     _screenToWorld(screenX, screenY) {
+        const rect = this.canvas.getBoundingClientRect();
+        const canvasX = screenX - rect.left;
+        const canvasY = screenY - rect.top;
+
         return {
-            x: (screenX - this.transform.x) / this.transform.scale,
-            y: (screenY - this.transform.y) / this.transform.scale
+            x: (canvasX - this.transform.x) / this.transform.scale,
+            y: (canvasY - this.transform.y) / this.transform.scale
+        };
+    }
+
+    /**
+     * Convert client coordinates to canvas-local coordinates
+     */
+    _clientToCanvas(clientX, clientY) {
+        const rect = this.canvas.getBoundingClientRect();
+        return {
+            x: clientX - rect.left,
+            y: clientY - rect.top
         };
     }
     
@@ -115,14 +150,11 @@ export class VdHexGrid {
     _generateGrid() {
         this.hexes.clear();
         
-        // Calculate offset to center the grid
-        const gridWidth = this.width * this.size * 1.5;
-        const gridHeight = this.height * this.size * Math.sqrt(3);
-        
         for (let r = 0; r < this.height; r++) {
             const qOffset = Math.floor(r / 2);
             for (let q = -qOffset; q < this.width - qOffset; q++) {
-                const pixel = hexToPixel(q, r, this.size);
+                const pixel = hexToPixel(q, r, this.size, this.rotation);
+                
                 const hex = {
                     q,
                     r,
@@ -130,7 +162,9 @@ export class VdHexGrid {
                     y: pixel.y,
                     fill: this.themeColors.bgSecondary,
                     stroke: this.themeColors.borderColor,
-                    adjacent: getAdjacentHexes(q, r)
+                    adjacent: getAdjacentHexes(q, r),
+                    terrain: null,
+                    data: {}
                 };
                 this.hexes.set(`${q},${r}`, hex);
             }
@@ -162,6 +196,11 @@ export class VdHexGrid {
         // Draw all hexes
         this.hexes.forEach(hex => {
             this._drawHex(hex);
+            
+            // Call custom render callback if set
+            if (this.customRenderCallback) {
+                this.customRenderCallback(this.ctx, hex, this.size);
+            }
         });
         
         // Redraw selected hex if any
@@ -176,7 +215,7 @@ export class VdHexGrid {
      * Draw a single hex
      */
     _drawHex(hex, isSelected = false) {
-        const corners = getHexCorners(hex.x, hex.y, this.size);
+        const corners = getHexCorners(hex.x, hex.y, this.size, this.rotation);
         
         this.ctx.beginPath();
         this.ctx.moveTo(corners[0].x, corners[0].y);
@@ -185,8 +224,17 @@ export class VdHexGrid {
         }
         this.ctx.closePath();
         
-        // Fill with theme color or custom fill
-        const fill = isSelected ? this.themeColors.colorPrimary : (hex.fill || this.themeColors.bgSecondary);
+        // Determine fill color: terrain > custom fill > theme
+        let fill;
+        if (isSelected) {
+            fill = this.themeColors.colorPrimary;
+        } else if (hex.terrain) {
+            fill = getTerrainColor(hex.terrain);
+        } else if (hex.fill) {
+            fill = hex.fill;
+        } else {
+            fill = this.themeColors.bgSecondary;
+        }
         this.ctx.fillStyle = fill;
         this.ctx.fill();
         
@@ -210,6 +258,13 @@ export class VdHexGrid {
      * Set up mouse/touch events for hex selection, pan, and zoom
      */
     _setupEvents() {
+        // Touch state for pinch-to-zoom
+        this.touchState = {
+            initialDistance: 0,
+            initialScale: 1,
+            touches: []
+        };
+        
         // Pan - pointer down
         this.canvas.addEventListener('pointerdown', (e) => {
             this.dragging = true;
@@ -251,7 +306,7 @@ export class VdHexGrid {
             if (this.hasMoved) return;
             
             const worldPos = this._screenToWorld(e.clientX, e.clientY);
-            const hexCoords = pixelToHex(worldPos.x, worldPos.y, this.size);
+            const hexCoords = pixelToHex(worldPos.x, worldPos.y, this.size, this.rotation);
             const hex = this.hexes.get(`${hexCoords.q},${hexCoords.r}`);
             
             if (hex) {
@@ -261,7 +316,7 @@ export class VdHexGrid {
             }
         });
         
-        // Zoom
+        // Zoom - mouse wheel
         this.canvas.addEventListener('wheel', (e) => {
             e.preventDefault();
             
@@ -269,17 +324,52 @@ export class VdHexGrid {
             const newScale = Math.max(ZOOM_MIN, Math.min(this.transform.scale * zoomFactor, ZOOM_MAX));
             
             // Zoom toward cursor
-            const mouseX = e.clientX;
-            const mouseY = e.clientY;
+            const mouse = this._clientToCanvas(e.clientX, e.clientY);
             
             const scaleDiff = newScale / this.transform.scale;
-            this.transform.x = mouseX - (mouseX - this.transform.x) * scaleDiff;
-            this.transform.y = mouseY - (mouseY - this.transform.y) * scaleDiff;
+            this.transform.x = mouse.x - (mouse.x - this.transform.x) * scaleDiff;
+            this.transform.y = mouse.y - (mouse.y - this.transform.y) * scaleDiff;
             this.transform.scale = newScale;
             
             this._render();
             this._emit('zoom', { scale: this.transform.scale });
         }, { passive: false });
+        
+        // Touch events for pinch-to-zoom
+        this.canvas.addEventListener('touchstart', (e) => {
+            if (e.touches.length === 2) {
+                e.preventDefault();
+                this.touchState.touches = Array.from(e.touches);
+                this.touchState.initialDistance = this._getTouchDistance(e.touches);
+                this.touchState.initialScale = this.transform.scale;
+            }
+        }, { passive: false });
+        
+        this.canvas.addEventListener('touchmove', (e) => {
+            if (e.touches.length === 2) {
+                e.preventDefault();
+                const currentDistance = this._getTouchDistance(e.touches);
+                const scale = (currentDistance / this.touchState.initialDistance) * this.touchState.initialScale;
+                const newScale = Math.max(ZOOM_MIN, Math.min(scale, ZOOM_MAX));
+                
+                // Zoom toward center of pinch
+                const centerClientX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+                const centerClientY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+                const center = this._clientToCanvas(centerClientX, centerClientY);
+                
+                const scaleDiff = newScale / this.transform.scale;
+                this.transform.x = center.x - (center.x - this.transform.x) * scaleDiff;
+                this.transform.y = center.y - (center.y - this.transform.y) * scaleDiff;
+                this.transform.scale = newScale;
+                
+                this._render();
+                this._emit('zoom', { scale: this.transform.scale });
+            }
+        }, { passive: false });
+        
+        this.canvas.addEventListener('touchend', () => {
+            this.touchState.touches = [];
+        });
         
         // Cursor style
         this.canvas.addEventListener('mouseenter', () => {
@@ -288,6 +378,18 @@ export class VdHexGrid {
         this.canvas.addEventListener('mouseleave', () => {
             this.canvas.style.cursor = 'default';
         });
+    }
+    
+    /**
+     * Calculate distance between two touch points
+     * @param {TouchList} touches - Touch list
+     * @returns {number} Distance in pixels
+     */
+    _getTouchDistance(touches) {
+        if (touches.length < 2) return 0;
+        const dx = touches[0].clientX - touches[1].clientX;
+        const dy = touches[0].clientY - touches[1].clientY;
+        return Math.sqrt(dx * dx + dy * dy);
     }
     
     /**
@@ -412,5 +514,299 @@ export class VdHexGrid {
         if (this.listeners[event]) {
             this.listeners[event].forEach(callback => callback(data));
         }
+    }
+    
+    // ═══════════════════════════════════════════════════════
+    // Terrain System
+    // ═══════════════════════════════════════════════════════
+    
+    /**
+     * Set terrain type for a hex
+     * @param {number} q - Hex column
+     * @param {number} r - Hex row
+     * @param {string} terrainType - Terrain type (e.g., 'GRASSLAND', 'OCEAN')
+     */
+    setHexTerrain(q, r, terrainType) {
+        const hex = this.hexes.get(`${q},${r}`);
+        if (hex) {
+            hex.terrain = terrainType;
+            this._render();
+        }
+    }
+    
+    /**
+     * Get terrain type for a hex
+     * @param {number} q - Hex column
+     * @param {number} r - Hex row
+     * @returns {string|null} Terrain type or null
+     */
+    getHexTerrain(q, r) {
+        const hex = this.hexes.get(`${q},${r}`);
+        return hex ? hex.terrain : null;
+    }
+    
+    /**
+     * Generate random terrain for all hexes
+     */
+    generateRandomTerrain() {
+        const terrainTypes = Object.values(TerrainType);
+        this.hexes.forEach(hex => {
+            hex.terrain = terrainTypes[Math.floor(Math.random() * terrainTypes.length)];
+        });
+        this._render();
+    }
+    
+    /**
+     * Get terrain yields for a hex
+     * @param {number} q - Hex column
+     * @param {number} r - Hex row
+     * @returns {Object} Yields object {food, production, gold}
+     */
+    getHexYields(q, r) {
+        const terrain = this.getHexTerrain(q, r);
+        return terrain ? getTerrainYields(terrain) : { food: 0, production: 0, gold: 0 };
+    }
+    
+    /**
+     * Get movement cost for a hex
+     * @param {number} q - Hex column
+     * @param {number} r - Hex row
+     * @returns {number} Movement cost
+     */
+    getHexMovementCost(q, r) {
+        const terrain = this.getHexTerrain(q, r);
+        return terrain ? getMovementCost(terrain) : 999;
+    }
+    
+    /**
+     * Check if hex is passable
+     * @param {number} q - Hex column
+     * @param {number} r - Hex row
+     * @returns {boolean} True if passable
+     */
+    isHexPassable(q, r) {
+        const terrain = this.getHexTerrain(q, r);
+        return terrain ? isPassable(terrain) : false;
+    }
+    
+    // ═══════════════════════════════════════════════════════
+    // Hex Data Attachment
+    // ═══════════════════════════════════════════════════════
+    
+    /**
+     * Set custom data for a hex
+     * @param {number} q - Hex column
+     * @param {number} r - Hex row
+     * @param {Object} data - Custom data object
+     */
+    setHexData(q, r, data) {
+        const hex = this.hexes.get(`${q},${r}`);
+        if (hex) {
+            hex.data = { ...hex.data, ...data };
+        }
+    }
+    
+    /**
+     * Get custom data for a hex
+     * @param {number} q - Hex column
+     * @param {number} r - Hex row
+     * @returns {Object} Custom data object
+     */
+    getHexData(q, r) {
+        const hex = this.hexes.get(`${q},${r}`);
+        return hex ? hex.data : {};
+    }
+    
+    /**
+     * Clear custom data for a hex
+     * @param {number} q - Hex column
+     * @param {number} r - Hex row
+     */
+    clearHexData(q, r) {
+        const hex = this.hexes.get(`${q},${r}`);
+        if (hex) {
+            hex.data = {};
+        }
+    }
+    
+    // ═══════════════════════════════════════════════════════
+    // Distance & Pathfinding
+    // ═══════════════════════════════════════════════════════
+    
+    /**
+     * Calculate distance between two hexes
+     * @param {number} q1 - First hex q coordinate
+     * @param {number} r1 - First hex r coordinate
+     * @param {number} q2 - Second hex q coordinate
+     * @param {number} r2 - Second hex r coordinate
+     * @returns {number} Distance in hex steps
+     */
+    hexDistance(q1, r1, q2, r2) {
+        return hexDistance(q1, r1, q2, r2);
+    }
+    
+    /**
+     * Get valid moves from a hex within movement points
+     * @param {number} q - Starting hex column
+     * @param {number} r - Starting hex row
+     * @param {number} movementPoints - Available movement points
+     * @returns {Array<{q: number, r: number}>} Array of valid hex coordinates
+     */
+    getValidMoves(q, r, movementPoints) {
+        const validHexes = [];
+        const adjacent = getAdjacentHexes(q, r);
+        
+        for (const hex of adjacent) {
+            if (!this.hexes.has(`${hex.q},${hex.r}`)) continue;
+            
+            const cost = this.getHexMovementCost(hex.q, hex.r);
+            if (cost < 999 && movementPoints >= cost) {
+                validHexes.push(hex);
+            }
+        }
+        
+        return validHexes;
+    }
+    
+    /**
+     * Get path between two hexes (simple BFS)
+     * @param {number} startQ - Starting hex column
+     * @param {number} startR - Starting hex row
+     * @param {number} endQ - Ending hex column
+     * @param {number} endR - Ending hex row
+     * @returns {Array<{q: number, r: number}>} Array of hex coordinates forming path
+     */
+    getPath(startQ, startR, endQ, endR) {
+        const startKey = `${startQ},${startR}`;
+        const endKey = `${endQ},${endR}`;
+        
+        if (!this.hexes.has(startKey) || !this.hexes.has(endKey)) {
+            return [];
+        }
+        
+        const queue = [[startQ, startR]];
+        const visited = new Set([startKey]);
+        const parent = new Map();
+        
+        while (queue.length > 0) {
+            const [currentQ, currentR] = queue.shift();
+            const currentKey = `${currentQ},${currentR}`;
+            
+            if (currentKey === endKey) {
+                // Reconstruct path
+                const path = [];
+                let key = endKey;
+                while (key) {
+                    const [q, r] = key.split(',').map(Number);
+                    path.unshift({ q, r });
+                    key = parent.get(key);
+                }
+                return path;
+            }
+            
+            const adjacent = getAdjacentHexes(currentQ, currentR);
+            for (const neighbor of adjacent) {
+                const neighborKey = `${neighbor.q},${neighbor.r}`;
+                if (this.hexes.has(neighborKey) && !visited.has(neighborKey)) {
+                    if (this.isHexPassable(neighbor.q, neighbor.r)) {
+                        visited.add(neighborKey);
+                        parent.set(neighborKey, currentKey);
+                        queue.push([neighbor.q, neighbor.r]);
+                    }
+                }
+            }
+        }
+        
+        return []; // No path found
+    }
+    
+    // ═══════════════════════════════════════════════════════
+    // Grid Rotation
+    // ═══════════════════════════════════════════════════════
+    
+    /**
+     * Set grid rotation
+     * @param {number} rotation - Rotation in radians
+     */
+    setRotation(rotation) {
+        this.rotation = rotation;
+        this._generateGrid();
+        this._render();
+    }
+    
+    /**
+     * Get current grid rotation
+     * @returns {number} Rotation in radians
+     */
+    getRotation() {
+        return this.rotation;
+    }
+    
+    // ═══════════════════════════════════════════════════════
+    // Custom Rendering
+    // ═══════════════════════════════════════════════════════
+    
+    /**
+     * Set custom render callback for each hex
+     * @param {function} callback - Called with (ctx, hex, size) for each hex
+     */
+    setCustomRender(callback) {
+        this.customRenderCallback = callback;
+        this._render();
+    }
+    
+    /**
+     * Clear custom render callback
+     */
+    clearCustomRender() {
+        this.customRenderCallback = null;
+        this._render();
+    }
+    
+    // ═══════════════════════════════════════════════════════
+    // Utility Methods
+    // ═══════════════════════════════════════════════════════
+    
+    /**
+     * Check if hex exists at coordinates
+     * @param {number} q - Hex column
+     * @param {number} r - Hex row
+     * @returns {boolean}
+     */
+    hasHex(q, r) {
+        return this.hexes.has(`${q},${r}`);
+    }
+    
+    /**
+     * Get hex count
+     * @returns {number} Number of hexes in grid
+     */
+    getHexCount() {
+        return this.hexes.size;
+    }
+    
+    /**
+     * Export terrain data as JSON
+     * @returns {Object} Terrain data object
+     */
+    exportTerrainData() {
+        const data = {};
+        this.hexes.forEach((hex, key) => {
+            if (hex.terrain) {
+                data[key] = hex.terrain;
+            }
+        });
+        return data;
+    }
+    
+    /**
+     * Import terrain data from JSON
+     * @param {Object} data - Terrain data object
+     */
+    importTerrainData(data) {
+        Object.entries(data).forEach(([key, terrain]) => {
+            const [q, r] = key.split(',').map(Number);
+            this.setHexTerrain(q, r, terrain);
+        });
     }
 }
