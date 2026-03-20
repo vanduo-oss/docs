@@ -29,8 +29,105 @@
                     <div class="vd-row">
                         <div class="vd-col-12 vd-col-md-6">
                             <h4><i class="ph ph-cube mr-2" style="color: var(--color-primary);"></i>Framework</h4>
-                            <p class="vd-text-sm vd-text-muted" style="padding-left: 0.25rem;"><em>No framework
-                                    changes in this release.</em></p>
+                            <div class="change-group">
+                                <h5><span class="vd-badge vd-badge-danger" style="font-size:0.7rem;vertical-align:middle;margin-right:0.35rem;">Critical</span> Security Fixes</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-shield-warning" style="color: var(--color-danger);"></i>
+                                        <div>
+                                            <strong>Suggest — XSS in <code>renderItems()</code></strong>
+                                            <p><code>renderItems()</code> now escapes text through <code>_escapeHtml()</code> before applying the highlight regex via <code>innerHTML</code>. Previously, raw server/user data was inserted directly — a malicious suggestion could execute arbitrary scripts.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-shield-warning" style="color: var(--color-danger);"></i>
+                                        <div>
+                                            <strong>Select — 3 broken <code>querySelector</code> selectors fixed</strong>
+                                            <p>Selector <code>.vd-custom-select-option</code> corrected to <code>.custom-select-option</code> in <code>updateSelectedOptions()</code>, <code>openDropdown()</code>, and <code>handleKeydown()</code>. Keyboard navigation and programmatic updates were silently failing.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-shield-warning" style="color: var(--color-danger);"></i>
+                                        <div>
+                                            <strong>Select — <code>generateId()</code> now assigns <code>element.id</code></strong>
+                                            <p><code>generateId()</code> assigns the generated ID to <code>element.id</code> before returning. Previously ARIA <code>aria-labelledby</code> pointed to a nonexistent ID, breaking screen-reader label association.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="change-group">
+                                <h5><span class="vd-badge vd-badge-warning" style="font-size:0.7rem;vertical-align:middle;margin-right:0.35rem;">Medium</span> Severity Fixes</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-warning" style="color: var(--color-warning);"></i>
+                                        <div>
+                                            <strong>Code Snippet — <code>codesnippet:copy</code> event reports actual success</strong>
+                                            <p>The <code>codesnippet:copy</code> custom event now passes the real <code>copySuccess</code> result instead of a hardcoded <code>true</code>.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-warning" style="color: var(--color-warning);"></i>
+                                        <div>
+                                            <strong>Modals — single shared ESC listener replaces O(n) per-modal handlers</strong>
+                                            <p>A single shared <code>keydown</code> handler on <code>document</code> replaces per-modal listeners. Handler is installed on first modal init and removed by <code>destroyAll()</code>.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-warning" style="color: var(--color-warning);"></i>
+                                        <div>
+                                            <strong>Dropdown + Select — typeahead buffer moved to per-instance state</strong>
+                                            <p><code>_typeaheadBuffer</code> and <code>_typeaheadTimer</code> are now stored per-instance in the <code>instances</code> Map. Previously, typing in one dropdown corrupted the typeahead state of another.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-warning" style="color: var(--color-warning);"></i>
+                                        <div>
+                                            <strong>Navbar — CSS class <code>body-navbar-open</code> replaces inline <code>overflow:hidden</code></strong>
+                                            <p>Replaced <code>document.body.style.overflow = 'hidden'</code> with the CSS class <code>.body-navbar-open</code>. Prevents the navbar and modal scroll locks from clobbering each other.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-warning" style="color: var(--color-warning);"></i>
+                                        <div>
+                                            <strong>Helpers — <code>on()</code> delegation returns the wrapper for <code>off()</code></strong>
+                                            <p><code>on()</code> now returns the bound wrapper function so callers can pass it to <code>off()</code> to remove delegation listeners.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-warning" style="color: var(--color-warning);"></i>
+                                        <div>
+                                            <strong>Validate — 100-char limit on user regex patterns (ReDoS prevention)</strong>
+                                            <p>User-supplied regex patterns in the <code>pattern</code> rule are now capped at 100 characters to prevent catastrophic backtracking.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-warning" style="color: var(--color-warning);"></i>
+                                        <div>
+                                            <strong>Validate — <code>match</code> rule uses <code>CSS.escape()</code> on param</strong>
+                                            <p>The <code>match</code> rule now applies <code>CSS.escape()</code> to the param before building the querySelector, preventing selector injection. Wrapped in try/catch for invalid selectors.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="change-group">
+                                <h5>Low Severity Fixes</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-info" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Image Box — <code>addEventListener('load', {once:true})</code> replaces DOM0 <code>onload</code></strong>
+                                            <p>Replaced <code>this.img.onload = ...</code> with <code>addEventListener('load', ..., { once: true })</code>. Handler is cleaned up in <code>close()</code> if the image hasn't loaded yet.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-info" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Theme Customizer — removed redundant second <code>applyTheme()</code> in <code>reset()</code></strong>
+                                            <p>The duplicate <code>this.applyTheme(this.DEFAULTS.THEME)</code> call in <code>reset()</code> has been removed.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                         <div class="vd-col-12 vd-col-md-6">
                             <h4><i class="ph ph-book-open-text mr-2" style="color: var(--color-primary);"></i>Documentation</h4>
@@ -60,8 +157,9 @@
                                         <div>
                                             <strong>Update: Documentation site version to v1.3.1</strong>
                                             <p><code>vanduo-docs</code> package and docs-landing <strong>Docs</strong>
-                                                badge updated to <strong>v1.3.1</strong>. Framework CDN and site meta
-                                                remain on <strong>v1.3.0</strong> for this docs-only release.</p>
+                                                badge updated to <strong>v1.3.1</strong>. Framework is now
+                                                <strong>v1.3.1</strong> (security &amp; correctness release). CDN pin
+                                                and production deployment follow on branch publish.</p>
                                         </div>
                                     </li>
                                 </ul>
