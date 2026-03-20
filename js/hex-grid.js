@@ -108,15 +108,26 @@ export class VdHexGrid {
      * Observe theme changes and re-render when theme changes
      */
     _observeThemeChanges() {
-        const observer = new MutationObserver(() => {
+        this._themeObserver = new MutationObserver(() => {
             this.themeColors = this._getThemeColors();
             this._render();
         });
         
-        observer.observe(document.documentElement, {
+        this._themeObserver.observe(document.documentElement, {
             attributes: true,
             attributeFilter: ['data-theme']
         });
+    }
+
+    /**
+     * Disconnect the theme observer and remove all canvas event listeners.
+     * Call this before discarding the instance (e.g. on SPA page unload).
+     */
+    destroy() {
+        if (this._themeObserver) {
+            this._themeObserver.disconnect();
+            this._themeObserver = null;
+        }
     }
     
     /**
@@ -418,6 +429,7 @@ export class VdHexGrid {
         this.size = 30;
         this.width = 15;
         this.height = 10;
+        this.rotation = 0;
         this.selectedHex = null;
         this.transform = { x: 0, y: 0, scale: 1 };
         this._generateGrid();
@@ -804,9 +816,12 @@ export class VdHexGrid {
      * @param {Object} data - Terrain data object
      */
     importTerrainData(data) {
+        // Mutate hex data directly to avoid triggering _render() on every hex.
+        // A single render is issued after all terrain values have been applied.
         Object.entries(data).forEach(([key, terrain]) => {
-            const [q, r] = key.split(',').map(Number);
-            this.setHexTerrain(q, r, terrain);
+            const hex = this.hexes.get(key);
+            if (hex) hex.terrain = terrain;
         });
+        this._render();
     }
 }

@@ -564,11 +564,21 @@ function wireRouteLinks(container) {
 }
 
 /* ── Initialize vd-hex demo on Labs page ───────── */
+// Module-level ref so we can destroy the previous instance before re-initialising
+// (prevents MutationObserver leak when the SPA navigates away and back to Labs).
+var _hexGridInstance = null;
+
 function initHexGridDemo() {
     var demoContainer = document.getElementById('hex-demo-container');
     var demoCanvas = document.getElementById('hex-demo');
     
     if (!demoContainer || !demoCanvas) return;
+
+    // Destroy any previous instance to disconnect its MutationObserver
+    if (_hexGridInstance) {
+        _hexGridInstance.destroy();
+        _hexGridInstance = null;
+    }
     
     // Dynamic import to avoid loading on other pages
     import('./hex-grid.js').then(function(module) {
@@ -576,6 +586,7 @@ function initHexGridDemo() {
         var sizeSlider = document.getElementById('hex-size-slider');
         var widthSlider = document.getElementById('hex-width-slider');
         var heightSlider = document.getElementById('hex-height-slider');
+        var rotationSlider = document.getElementById('hex-rotation-slider');
         
         var grid = new VdHexGrid({
             element: demoContainer,
@@ -584,11 +595,13 @@ function initHexGridDemo() {
             width: parseInt(widthSlider?.value || '15'),
             height: parseInt(heightSlider?.value || '10')
         });
+        _hexGridInstance = grid;
         
         // Wire up controls
         var sizeValue = document.getElementById('hex-size-value');
         var widthValue = document.getElementById('hex-width-value');
         var heightValue = document.getElementById('hex-height-value');
+        var rotationValue = document.getElementById('hex-rotation-value');
         var resetBtn = document.getElementById('hex-reset-btn');
         var fillBtn = document.getElementById('hex-fill-btn');
         var infoCard = document.getElementById('hex-info-card');
@@ -620,14 +633,24 @@ function initHexGridDemo() {
             });
         }
         
+        if (rotationSlider && rotationValue) {
+            rotationSlider.addEventListener('input', function(e) {
+                var deg = parseInt(e.target.value, 10);
+                rotationValue.textContent = deg + '\u00b0';
+                grid.setRotation(deg * Math.PI / 180);
+            });
+        }
+        
         if (resetBtn) {
             resetBtn.addEventListener('click', function() {
                 if (sizeSlider) sizeSlider.value = 30;
                 if (widthSlider) widthSlider.value = 15;
                 if (heightSlider) heightSlider.value = 10;
+                if (rotationSlider) rotationSlider.value = '0';
                 if (sizeValue) sizeValue.textContent = '30px';
                 if (widthValue) widthValue.textContent = '15';
                 if (heightValue) heightValue.textContent = '10';
+                if (rotationValue) rotationValue.textContent = '0\u00b0';
                 grid.reset();
             });
         }
