@@ -300,6 +300,7 @@ async function loadPage(pageId) {
         if (typeof Vanduo !== 'undefined') Vanduo.init();
         hideDisabledCodeTabs(container);
         wireRouteLinks(container);
+        initHexGridDemo();
     } catch (err) {
         console.error(err);
         container.innerHTML = '<div class="vd-alert vd-alert-error" style="margin: 2rem;">Failed to load page. Check console.</div>';
@@ -562,6 +563,149 @@ function wireRouteLinks(container) {
     });
 }
 
+/* ── Initialize vd-hex demo on Labs page ───────── */
+// Module-level ref so we can destroy the previous instance before re-initialising
+// (prevents MutationObserver leak when the SPA navigates away and back to Labs).
+var _hexGridInstance = null;
+
+function initHexGridDemo() {
+    var demoContainer = document.getElementById('hex-demo-container');
+    var demoCanvas = document.getElementById('hex-demo');
+    
+    if (!demoContainer || !demoCanvas) return;
+
+    // Destroy any previous instance to disconnect its MutationObserver
+    if (_hexGridInstance) {
+        _hexGridInstance.destroy();
+        _hexGridInstance = null;
+    }
+    
+    // Dynamic import to avoid loading on other pages
+    import('./hex-grid.js').then(function(module) {
+        var VdHexGrid = module.VdHexGrid;
+        var sizeSlider = document.getElementById('hex-size-slider');
+        var widthSlider = document.getElementById('hex-width-slider');
+        var heightSlider = document.getElementById('hex-height-slider');
+        var rotationSlider = document.getElementById('hex-rotation-slider');
+        
+        var grid = new VdHexGrid({
+            element: demoContainer,
+            canvas: demoCanvas,
+            size: parseInt(sizeSlider?.value || '30'),
+            width: parseInt(widthSlider?.value || '15'),
+            height: parseInt(heightSlider?.value || '10')
+        });
+        _hexGridInstance = grid;
+        
+        // Wire up controls
+        var sizeValue = document.getElementById('hex-size-value');
+        var widthValue = document.getElementById('hex-width-value');
+        var heightValue = document.getElementById('hex-height-value');
+        var rotationValue = document.getElementById('hex-rotation-value');
+        var resetBtn = document.getElementById('hex-reset-btn');
+        var fillBtn = document.getElementById('hex-fill-btn');
+        var infoCard = document.getElementById('hex-info-card');
+        
+        // Toolbar buttons
+        var zoomInBtn = document.getElementById('hex-zoom-in');
+        var zoomOutBtn = document.getElementById('hex-zoom-out');
+        var resetViewBtn = document.getElementById('hex-reset-view');
+        var zoomLevelSpan = document.getElementById('hex-zoom-level');
+        
+        if (sizeSlider && sizeValue) {
+            sizeSlider.addEventListener('input', function(e) {
+                sizeValue.textContent = e.target.value + 'px';
+                grid.setSize(parseInt(e.target.value));
+            });
+        }
+        
+        if (widthSlider && widthValue) {
+            widthSlider.addEventListener('input', function(e) {
+                widthValue.textContent = e.target.value;
+                grid.setDimensions(parseInt(e.target.value), grid.height);
+            });
+        }
+        
+        if (heightSlider && heightValue) {
+            heightSlider.addEventListener('input', function(e) {
+                heightValue.textContent = e.target.value;
+                grid.setDimensions(grid.width, parseInt(e.target.value));
+            });
+        }
+        
+        if (rotationSlider && rotationValue) {
+            rotationSlider.addEventListener('input', function(e) {
+                var deg = parseInt(e.target.value, 10);
+                rotationValue.textContent = deg + '\u00b0';
+                grid.setRotation(deg * Math.PI / 180);
+            });
+        }
+        
+        if (resetBtn) {
+            resetBtn.addEventListener('click', function() {
+                if (sizeSlider) sizeSlider.value = 30;
+                if (widthSlider) widthSlider.value = 15;
+                if (heightSlider) heightSlider.value = 10;
+                if (rotationSlider) rotationSlider.value = '0';
+                if (sizeValue) sizeValue.textContent = '30px';
+                if (widthValue) widthValue.textContent = '15';
+                if (heightValue) heightValue.textContent = '10';
+                if (rotationValue) rotationValue.textContent = '0\u00b0';
+                grid.reset();
+            });
+        }
+        
+        if (fillBtn) {
+            fillBtn.addEventListener('click', function() {
+                grid.fillRandom();
+            });
+        }
+        
+        // Toolbar button handlers
+        if (zoomInBtn) {
+            zoomInBtn.addEventListener('click', function() {
+                grid.zoomIn();
+            });
+        }
+        
+        if (zoomOutBtn) {
+            zoomOutBtn.addEventListener('click', function() {
+                grid.zoomOut();
+            });
+        }
+        
+        if (resetViewBtn) {
+            resetViewBtn.addEventListener('click', function() {
+                grid.resetView();
+            });
+        }
+        
+        // Listen for zoom events to update zoom level indicator
+        grid.on('zoom', function(data) {
+            if (zoomLevelSpan) {
+                var percent = Math.round(data.scale * 100);
+                zoomLevelSpan.textContent = percent + '%';
+            }
+        });
+        
+        // Listen for selection events
+        grid.on('select', function(hex) {
+            if (infoCard) infoCard.style.display = 'block';
+            var coords = document.getElementById('hex-coords');
+            var pixelX = document.getElementById('hex-pixel-x');
+            var pixelY = document.getElementById('hex-pixel-y');
+            var adjacent = document.getElementById('hex-adjacent');
+            
+            if (coords) coords.textContent = '(' + hex.q + ', ' + hex.r + ')';
+            if (pixelX) pixelX.textContent = Math.round(hex.x);
+            if (pixelY) pixelY.textContent = Math.round(hex.y);
+            if (adjacent) adjacent.textContent = hex.adjacent?.length || 0;
+        });
+    }).catch(function(err) {
+        console.error('Failed to load VdHexGrid:', err);
+    });
+}
+
 /* ── Router ───────────────────────────────────── */
 function parseHash(hash) {
     var h = (hash || '').replace(/^#\/?/, '');
@@ -569,6 +713,7 @@ function parseHash(hash) {
     if (h === 'about') return { view: 'about' };
     if (h === 'changelog') return { view: 'changelog' };
     if (h === 'docs') return { view: 'docs-landing' };
+    if (h === 'labs') return { view: 'labs' };
     if (h === 'docs/components') return { view: 'docs', tab: 'components', section: null };
     if (h === 'docs/guides') return { view: 'docs', tab: 'guides', section: null };
     if (h.startsWith('docs/')) {
@@ -591,10 +736,13 @@ async function navigate(route) {
 async function handleRoute() {
     var parsed = parseHash(location.hash);
 
-    if (parsed.view === 'home' || parsed.view === 'about' || parsed.view === 'changelog' || parsed.view === 'docs-landing') {
+    if (parsed.view === 'home' || parsed.view === 'about' || parsed.view === 'changelog' || parsed.view === 'docs-landing' || parsed.view === 'labs') {
         await loadPage(parsed.view);
         if (parsed.view === 'docs-landing') {
             setActiveNavbarLink('docs');
+        }
+        if (parsed.view === 'labs') {
+            setActiveNavbarLink('labs');
         }
         return;
     }
