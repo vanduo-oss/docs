@@ -1,12 +1,18 @@
 <section id="labs">
-    <div class="vd-container">
-        <h1 class="vd-mt-8 vd-mb-4" style="color: var(--color-primary);">
-            <i class="ph ph-flask"></i> Labs
-        </h1>
-        <p class="vd-text-lg vd-text-muted vd-mb-8">
-            Experimental features and demos. These are upcoming features that are not yet part of the framework and are subject to change.
-        </p>
+    <div class="labs-header">
+        <div class="vd-container-responsive">
+            <h2 style="color: var(--color-primary);"><i class="ph ph-flask" style="color: var(--color-primary);"></i>
+                Labs</h2>
+            <p class="vd-text-lg vd-text-muted">Experimental features and demos. These are upcoming features that are not
+                yet part of the framework and are subject to change.</p>
+            <p class="vd-text-muted vd-mt-3">Full source download and ES modules for <strong>vd-hex</strong> live at
+                <a href="https://github.com/vanduo-oss/labs" target="_blank" rel="noopener noreferrer">github.com/vanduo-oss/labs</a>
+                (README, <code>hex-grid.js</code>, <code>utils/hex-math.js</code>).</p>
+        </div>
+    </div>
 
+    <div class="labs-main">
+        <div class="vd-container-responsive" style="max-width: 1200px;">
         <!-- Labs Navigation -->
         <div class="vd-row vd-mb-8">
             <div class="vd-col-12 vd-col-md-4">
@@ -15,6 +21,7 @@
                         <i class="ph ph-hexagon" style="font-size: 3rem; color: var(--color-primary);"></i>
                         <h3 class="vd-mt-4 vd-mb-2">vd-hex</h3>
                         <p class="vd-text-muted">Experimental interactive hex-grid toolkit for visualization and game prototypes</p>
+                        <p class="vd-text-sm vd-text-muted vd-mt-2">Source: <a href="https://github.com/vanduo-oss/labs" target="_blank" rel="noopener noreferrer">vanduo-oss/labs</a></p>
                         <span class="vd-badge vd-badge-primary vd-mt-4">Experimental</span>
                     </div>
                 </div>
@@ -23,12 +30,13 @@
 
         <!-- vd-hex Component Demo -->
         <div id="vd-hex-demo" class="vd-mt-8">
-            <h2 class="vd-mb-4">
+            <h2 class="vd-mb-4" style="color: var(--color-primary);">
                 <i class="ph ph-hexagon"></i> vd-hex Component
             </h2>
-            <p class="vd-text-muted vd-mb-6">
+            <p class="vd-text-muted vd-mb-2">
                 An experimental interactive hex-grid toolkit with selection, pan/zoom, terrain helpers, and optional rotation. Click a hex to inspect it and use the controls below to explore the API.
             </p>
+            <p class="vd-text-sm vd-text-muted vd-mb-6">Standalone modules: <a href="https://github.com/vanduo-oss/labs" target="_blank" rel="noopener noreferrer">github.com/vanduo-oss/labs</a>.</p>
 
             <!-- Canvas Container with Toolbar -->
             <div class="vd-card vd-mb-6" style="padding: 1rem;">
@@ -72,6 +80,13 @@
                             <span id="hex-height-value" class="vd-text-sm vd-text-muted">10</span>
                         </div>
                     </div>
+                    <div class="vd-row">
+                        <div class="vd-col-12 vd-col-md-6 vd-mb-4">
+                            <label class="vd-form-label" for="hex-rotation-slider">Grid rotation</label>
+                            <input type="range" id="hex-rotation-slider" class="vd-range" min="-180" max="180" value="0" step="1" style="width: 100%;">
+                            <span id="hex-rotation-value" class="vd-text-sm vd-text-muted">0°</span>
+                        </div>
+                    </div>
                     <div class="vd-mt-4">
                         <button id="hex-reset-btn" class="vd-btn vd-btn-outline">
                             <i class="ph ph-arrows-counter-clockwise"></i> Reset Grid
@@ -110,31 +125,41 @@
                 </div>
             </div>
 
+            <template id="hex-usage-html-source">
+<!-- Container for the hex grid -->
+<div id="hex-demo-container">
+    <canvas id="hex-demo"></canvas>
+</div>
+            </template>
+
             <!-- Usage Example -->
             <div class="vd-card vd-mb-6">
                 <div class="vd-card-body">
                     <h4 class="vd-mb-4">
                         <i class="ph ph-code"></i> Usage Example
                     </h4>
-                    <div class="vd-code-snippet" data-snippet="vd-hex-example">
+                    <p class="vd-text-muted vd-mb-4">
+                        Minimal markup for the canvas container plus JavaScript to create the same interactive grid as above—expand to copy or compare with your own project.
+                    </p>
+                    <div class="vd-code-snippet" data-collapsible data-snippet="vd-hex-example">
+                        <button class="vd-code-snippet-toggle" type="button" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
                         <div class="vd-code-snippet-header">
-                            <div class="vd-code-snippet-tabs">
-                                <button class="vd-code-snippet-tab active" data-lang="html">HTML</button>
+                            <div class="vd-code-snippet-tabs" role="tablist">
+                                <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
                                 <button class="vd-code-snippet-tab" data-lang="js">JavaScript</button>
                             </div>
-                            <button class="vd-code-snippet-copy" title="Copy to clipboard">
-                                <i class="ph ph-copy"></i>
+                            <button class="vd-code-snippet-copy" type="button" aria-label="Copy code">
+                                <span class="vd-code-snippet-copy-icon"></span>
+                                <span class="vd-code-snippet-copy-text">Copy</span>
                             </button>
                         </div>
                         <div class="vd-code-snippet-body">
-                            <div class="vd-code-snippet-pane active" data-lang="html">
-<pre><code class="language-html"><!-- Container for the hex grid -->
-<div id="hex-demo-container">
-    <canvas id="hex-demo"></canvas>
-</div></code></pre>
-                            </div>
-                            <div class="vd-code-snippet-pane" data-lang="js">
-<pre><code class="language-javascript">// Import the VdHexGrid component
+                            <pre class="vd-code-snippet-pane is-active" data-lang="html" data-extract="#hex-usage-html-source"></pre>
+                            <pre class="vd-code-snippet-pane" data-lang="js"><code class="language-javascript">// Import the VdHexGrid component
 import { VdHexGrid } from './hex-grid.js';
 
 // Initialize the hex grid
@@ -169,7 +194,7 @@ grid.setRotation(-Math.PI / 6);
 // - Drag to pan
 // - Scroll to zoom
 // - Click to select a hex</code></pre>
-                            </div>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -182,24 +207,28 @@ grid.setRotation(-Math.PI / 6);
                         <i class="ph ph-file-code"></i> Full Source Code
                     </h4>
                     
+                    <h5 class="vd-mb-2"><code>hex-grid.js</code></h5>
+                    <p class="vd-text-muted vd-mb-3">
+                        Main <code>VdHexGrid</code> module: canvas rendering, pan/zoom, hex selection, terrain hooks, and events.
+                    </p>
                     <!-- VdHexGrid Source -->
-                    <div class="vd-code-snippet" data-snippet="vd-hex-source" data-collapsible="true">
+                    <div class="vd-code-snippet" data-collapsible data-snippet="vd-hex-source">
+                        <button class="vd-code-snippet-toggle" type="button" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
                         <div class="vd-code-snippet-header">
-                            <div class="vd-code-snippet-tabs">
-                                <button class="vd-code-snippet-tab active" data-lang="js">hex-grid.js</button>
+                            <div class="vd-code-snippet-tabs" role="tablist">
+                                <button class="vd-code-snippet-tab is-active" data-lang="js">hex-grid.js</button>
                             </div>
-                            <div class="vd-code-snippet-actions">
-                                <button class="vd-code-snippet-copy" title="Copy to clipboard">
-                                    <i class="ph ph-copy"></i>
-                                </button>
-                                <button class="vd-code-snippet-toggle" title="Toggle source">
-                                    <i class="ph ph-eye"></i>
-                                </button>
-                            </div>
+                            <button class="vd-code-snippet-copy" type="button" aria-label="Copy code">
+                                <span class="vd-code-snippet-copy-icon"></span>
+                                <span class="vd-code-snippet-copy-text">Copy</span>
+                            </button>
                         </div>
                         <div class="vd-code-snippet-body">
-                            <div class="vd-code-snippet-pane active" data-lang="js">
-<pre><code class="language-javascript">// VdHexGrid - Experimental interactive hex-grid toolkit for Vanduo framework
+                            <pre class="vd-code-snippet-pane is-active" data-lang="js"><code class="language-javascript">// VdHexGrid - Experimental interactive hex-grid toolkit for Vanduo framework
 // Based on web-civ HexGrid implementation
 // Intended for visualization, prototypes, and experimental game mechanics
 
@@ -530,6 +559,7 @@ export class VdHexGrid {
         this.size = 30;
         this.width = 15;
         this.height = 10;
+        this.rotation = 0;
         this.selectedHex = null;
         this.transform = { x: 0, y: 0, scale: 1 };
         this._generateGrid();
@@ -628,28 +658,32 @@ export class VdHexGrid {
         }
     }
 }</code></pre>
-                            </div>
+                        </div>
                         </div>
                     </div>
                     
+                    <h5 class="vd-mb-2 vd-mt-6"><code>hex-math.js</code></h5>
+                    <p class="vd-text-muted vd-mb-3">
+                        Axial coordinate helpers: <code>hexToPixel</code>, <code>pixelToHex</code>, corner geometry, and neighbor lists.
+                    </p>
                     <!-- Hex Math Utilities Source -->
-                    <div class="vd-code-snippet vd-mt-4" data-snippet="vd-hex-math-source" data-collapsible="true">
+                    <div class="vd-code-snippet vd-mt-4" data-collapsible data-snippet="vd-hex-math-source">
+                        <button class="vd-code-snippet-toggle" type="button" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
                         <div class="vd-code-snippet-header">
-                            <div class="vd-code-snippet-tabs">
-                                <button class="vd-code-snippet-tab active" data-lang="js">hex-math.js</button>
+                            <div class="vd-code-snippet-tabs" role="tablist">
+                                <button class="vd-code-snippet-tab is-active" data-lang="js">hex-math.js</button>
                             </div>
-                            <div class="vd-code-snippet-actions">
-                                <button class="vd-code-snippet-copy" title="Copy to clipboard">
-                                    <i class="ph ph-copy"></i>
-                                </button>
-                                <button class="vd-code-snippet-toggle" title="Toggle source">
-                                    <i class="ph ph-eye"></i>
-                                </button>
-                            </div>
+                            <button class="vd-code-snippet-copy" type="button" aria-label="Copy code">
+                                <span class="vd-code-snippet-copy-icon"></span>
+                                <span class="vd-code-snippet-copy-text">Copy</span>
+                            </button>
                         </div>
                         <div class="vd-code-snippet-body">
-                            <div class="vd-code-snippet-pane active" data-lang="js">
-<pre><code class="language-javascript">// Hex math utilities adapted for Vanduo framework
+                            <pre class="vd-code-snippet-pane is-active" data-lang="js"><code class="language-javascript">// Hex math utilities adapted for Vanduo framework
 // Based on web-civ utils/hex-math.js
 
 export function hexToPixel(q, r, size) {
@@ -704,21 +738,21 @@ export function getAdjacentHexes(q, r) {
         { q: q, r: r + 1 }
     ];
 }</code></pre>
-                            </div>
+                        </div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- API Reference -->
-            <div class="vd-card">
+            <div class="vd-card vd-mt-6">
                 <div class="vd-card-body">
                     <h4 class="vd-mb-4">
                         <i class="ph ph-book-open-text"></i> API Reference
                     </h4>
                     
                     <h5 class="vd-mb-3">Constructor Options</h5>
-                    <table class="vd-table vd-mb-4">
+                    <table class="vd-table vd-table-hover vd-mb-4">
                         <thead>
                             <tr>
                                 <th>Option</th>
@@ -768,7 +802,7 @@ export function getAdjacentHexes(q, r) {
                     </table>
                     
                     <h5 class="vd-mb-3">Methods</h5>
-                    <table class="vd-table vd-mb-4">
+                    <table class="vd-table vd-table-hover vd-mb-4">
                         <thead>
                             <tr>
                                 <th>Method</th>
@@ -968,7 +1002,7 @@ export function getAdjacentHexes(q, r) {
                     </table>
                     
                     <h5 class="vd-mb-3">Events</h5>
-                    <table class="vd-table">
+                    <table class="vd-table vd-table-hover">
                         <thead>
                             <tr>
                                 <th>Event</th>
@@ -1061,7 +1095,7 @@ export function getAdjacentHexes(q, r) {
                     </p>
                     
                     <h5 class="vd-mb-3">Terrain Types</h5>
-                    <table class="vd-table vd-mb-4">
+                    <table class="vd-table vd-table-hover vd-mb-4">
                         <thead>
                             <tr>
                                 <th>Terrain</th>
@@ -1150,18 +1184,23 @@ export function getAdjacentHexes(q, r) {
                     </table>
                     
                     <h5 class="vd-mb-3">Terrain Example</h5>
-                    <div class="vd-code-snippet" data-snippet="terrain-example">
+                    <div class="vd-code-snippet" data-collapsible data-snippet="terrain-example">
+                        <button class="vd-code-snippet-toggle" type="button" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
                         <div class="vd-code-snippet-header">
-                            <div class="vd-code-snippet-tabs">
-                                <button class="vd-code-snippet-tab active" data-lang="js">JavaScript</button>
+                            <div class="vd-code-snippet-tabs" role="tablist">
+                                <button class="vd-code-snippet-tab is-active" data-lang="js">JavaScript</button>
                             </div>
-                            <button class="vd-code-snippet-copy" title="Copy to clipboard">
-                                <i class="ph ph-copy"></i>
+                            <button class="vd-code-snippet-copy" type="button" aria-label="Copy code">
+                                <span class="vd-code-snippet-copy-icon"></span>
+                                <span class="vd-code-snippet-copy-text">Copy</span>
                             </button>
                         </div>
                         <div class="vd-code-snippet-body">
-                            <div class="vd-code-snippet-pane active" data-lang="js">
-<pre><code class="language-javascript">// Set terrain for specific hexes
+                            <pre class="vd-code-snippet-pane is-active" data-lang="js"><code class="language-javascript">// Set terrain for specific hexes
 grid.setHexTerrain(0, 0, 'GRASSLAND');
 grid.setHexTerrain(1, 0, 'OCEAN');
 grid.setHexTerrain(0, 1, 'MOUNTAIN');
@@ -1178,7 +1217,7 @@ grid.generateRandomTerrain();
 // Export/import terrain data
 const terrainData = grid.exportTerrainData();
 grid.importTerrainData(terrainData);</code></pre>
-                            </div>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -1195,18 +1234,23 @@ grid.importTerrainData(terrainData);</code></pre>
                     <p class="vd-text-muted vd-mb-4">
                         Create a Civilization-style strategy game with terrain, cities, and units.
                     </p>
-                    <div class="vd-code-snippet" data-snippet="use-case-game">
+                    <div class="vd-code-snippet" data-collapsible data-snippet="use-case-game">
+                        <button class="vd-code-snippet-toggle" type="button" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
                         <div class="vd-code-snippet-header">
-                            <div class="vd-code-snippet-tabs">
-                                <button class="vd-code-snippet-tab active" data-lang="js">JavaScript</button>
+                            <div class="vd-code-snippet-tabs" role="tablist">
+                                <button class="vd-code-snippet-tab is-active" data-lang="js">JavaScript</button>
                             </div>
-                            <button class="vd-code-snippet-copy" title="Copy to clipboard">
-                                <i class="ph ph-copy"></i>
+                            <button class="vd-code-snippet-copy" type="button" aria-label="Copy code">
+                                <span class="vd-code-snippet-copy-icon"></span>
+                                <span class="vd-code-snippet-copy-text">Copy</span>
                             </button>
                         </div>
                         <div class="vd-code-snippet-body">
-                            <div class="vd-code-snippet-pane active" data-lang="js">
-<pre><code class="language-javascript">// Create game map
+                            <pre class="vd-code-snippet-pane is-active" data-lang="js"><code class="language-javascript">// Create game map
 const grid = new VdHexGrid({
     element: document.getElementById('game-container'),
     canvas: document.getElementById('game-canvas'),
@@ -1230,7 +1274,7 @@ grid.on('select', (hex) => {
         showUnitPanel(hex.data.unit);
     }
 });</code></pre>
-                            </div>
+                        </div>
                         </div>
                     </div>
                     
@@ -1238,18 +1282,23 @@ grid.on('select', (hex) => {
                     <p class="vd-text-muted vd-mb-4">
                         Visualize hex-based board games like Settlers of Catan or Terra Mystica.
                     </p>
-                    <div class="vd-code-snippet" data-snippet="use-case-board">
+                    <div class="vd-code-snippet" data-collapsible data-snippet="use-case-board">
+                        <button class="vd-code-snippet-toggle" type="button" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
                         <div class="vd-code-snippet-header">
-                            <div class="vd-code-snippet-tabs">
-                                <button class="vd-code-snippet-tab active" data-lang="js">JavaScript</button>
+                            <div class="vd-code-snippet-tabs" role="tablist">
+                                <button class="vd-code-snippet-tab is-active" data-lang="js">JavaScript</button>
                             </div>
-                            <button class="vd-code-snippet-copy" title="Copy to clipboard">
-                                <i class="ph ph-copy"></i>
+                            <button class="vd-code-snippet-copy" type="button" aria-label="Copy code">
+                                <span class="vd-code-snippet-copy-icon"></span>
+                                <span class="vd-code-snippet-copy-text">Copy</span>
                             </button>
                         </div>
                         <div class="vd-code-snippet-body">
-                            <div class="vd-code-snippet-pane active" data-lang="js">
-<pre><code class="language-javascript">// Create board game grid
+                            <pre class="vd-code-snippet-pane is-active" data-lang="js"><code class="language-javascript">// Create board game grid
 const grid = new VdHexGrid({
     element: document.getElementById('board'),
     canvas: document.getElementById('board-canvas'),
@@ -1267,7 +1316,7 @@ grid.setHexTerrain(2, 0, 'PLAINS');
 // Add resource tokens
 grid.setHexData(1, 0, { resource: 'wood', token: 8 });
 grid.setHexData(2, 0, { resource: 'brick', token: 5 });</code></pre>
-                            </div>
+                        </div>
                         </div>
                     </div>
                     
@@ -1275,18 +1324,23 @@ grid.setHexData(2, 0, { resource: 'brick', token: 5 });</code></pre>
                     <p class="vd-text-muted vd-mb-4">
                         Create hex-based heatmaps or geographic data visualizations.
                     </p>
-                    <div class="vd-code-snippet" data-snippet="use-case-data">
+                    <div class="vd-code-snippet" data-collapsible data-snippet="use-case-data">
+                        <button class="vd-code-snippet-toggle" type="button" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
                         <div class="vd-code-snippet-header">
-                            <div class="vd-code-snippet-tabs">
-                                <button class="vd-code-snippet-tab active" data-lang="js">JavaScript</button>
+                            <div class="vd-code-snippet-tabs" role="tablist">
+                                <button class="vd-code-snippet-tab is-active" data-lang="js">JavaScript</button>
                             </div>
-                            <button class="vd-code-snippet-copy" title="Copy to clipboard">
-                                <i class="ph ph-copy"></i>
+                            <button class="vd-code-snippet-copy" type="button" aria-label="Copy code">
+                                <span class="vd-code-snippet-copy-icon"></span>
+                                <span class="vd-code-snippet-copy-text">Copy</span>
                             </button>
                         </div>
                         <div class="vd-code-snippet-body">
-                            <div class="vd-code-snippet-pane active" data-lang="js">
-<pre><code class="language-javascript">// Create heatmap grid
+                            <pre class="vd-code-snippet-pane is-active" data-lang="js"><code class="language-javascript">// Create heatmap grid
 const grid = new VdHexGrid({
     element: document.getElementById('heatmap'),
     canvas: document.getElementById('heatmap-canvas'),
@@ -1303,7 +1357,7 @@ data.forEach((value, index) => {
     const intensity = Math.floor(value * 255);
     grid.setHexFill(q, r, `rgb(${intensity}, 0, 0)`);
 });</code></pre>
-                            </div>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -1320,7 +1374,7 @@ data.forEach((value, index) => {
                     </p>
                     
                     <h5 class="vd-mb-3">Benchmarks</h5>
-                    <table class="vd-table vd-mb-4">
+                    <table class="vd-table vd-table-hover vd-mb-4">
                         <thead>
                             <tr>
                                 <th>Grid Size</th>
@@ -1388,7 +1442,7 @@ data.forEach((value, index) => {
                     </ul>
                     
                     <h5 class="vd-mb-3">Supported Browsers</h5>
-                    <table class="vd-table">
+                    <table class="vd-table vd-table-hover">
                         <thead>
                             <tr>
                                 <th>Browser</th>
@@ -1432,91 +1486,93 @@ data.forEach((value, index) => {
                 </div>
             </div>
 
-            <!-- Comparison -->
+            <!-- Feature Summary -->
             <div class="vd-card vd-mt-6">
                 <div class="vd-card-body">
                     <h4 class="vd-mb-4">
-                        <i class="ph ph-scales"></i> Comparison with Alternatives
+                        <i class="ph ph-star"></i> What VdHexGrid Offers
                     </h4>
-                    <p class="vd-text-muted vd-mb-4">
-                        How does VdHexGrid compare to other hex grid solutions?
+                    <p class="vd-text-muted vd-mb-6">
+                        A self-contained hex grid toolkit built for the Vanduo framework — no external dependencies, ready for games and data visualisation alike.
                     </p>
-                    
-                    <table class="vd-table">
-                        <thead>
-                            <tr>
-                                <th>Feature</th>
-                                <th>VdHexGrid</th>
-                                <th>Honeycomb</th>
-                                <th>Hexgrid.js</th>
-                                <th>CSS Hex Grid</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Zero dependencies</td>
-                                <td>✅</td>
-                                <td>❌</td>
-                                <td>❌</td>
-                                <td>✅</td>
-                            </tr>
-                            <tr>
-                                <td>Canvas rendering</td>
-                                <td>✅</td>
-                                <td>✅</td>
-                                <td>✅</td>
-                                <td>❌</td>
-                            </tr>
-                            <tr>
-                                <td>Built-in pan/zoom</td>
-                                <td>✅</td>
-                                <td>❌</td>
-                                <td>✅</td>
-                                <td>❌</td>
-                            </tr>
-                            <tr>
-                                <td>Terrain system</td>
-                                <td>✅</td>
-                                <td>❌</td>
-                                <td>❌</td>
-                                <td>❌</td>
-                            </tr>
-                            <tr>
-                                <td>Theme integration</td>
-                                <td>✅</td>
-                                <td>❌</td>
-                                <td>❌</td>
-                                <td>✅</td>
-                            </tr>
-                            <tr>
-                                <td>Pathfinding</td>
-                                <td>✅</td>
-                                <td>✅</td>
-                                <td>❌</td>
-                                <td>❌</td>
-                            </tr>
-                            <tr>
-                                <td>Mobile support</td>
-                                <td>✅</td>
-                                <td>✅</td>
-                                <td>✅</td>
-                                <td>✅</td>
-                            </tr>
-                            <tr>
-                                <td>Bundle size</td>
-                                <td>~15KB</td>
-                                <td>~30KB</td>
-                                <td>~20KB</td>
-                                <td>~5KB</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    
-                    <p class="vd-text-muted vd-mt-4">
-                        <strong>When to choose VdHexGrid:</strong> You need a lightweight, zero-dependency hex grid with built-in terrain, pan/zoom, and theme integration. Perfect for game development and data visualization.
-                    </p>
+
+                    <div class="vd-row vd-g-4">
+                        <div class="vd-col-12 vd-col-sm-6 vd-col-md-4">
+                            <div style="display:flex;gap:0.75rem;align-items:flex-start;">
+                                <i class="ph ph-package" style="font-size:1.5rem;color:var(--color-primary);flex-shrink:0;margin-top:0.1rem;"></i>
+                                <div>
+                                    <strong>Zero dependencies</strong>
+                                    <p class="vd-text-sm vd-text-muted vd-mt-1">Pure vanilla JS — no npm runtime packages required.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="vd-col-12 vd-col-sm-6 vd-col-md-4">
+                            <div style="display:flex;gap:0.75rem;align-items:flex-start;">
+                                <i class="ph ph-paint-bucket" style="font-size:1.5rem;color:var(--color-primary);flex-shrink:0;margin-top:0.1rem;"></i>
+                                <div>
+                                    <strong>Canvas rendering</strong>
+                                    <p class="vd-text-sm vd-text-muted vd-mt-1">Every hex is drawn on a <code>&lt;canvas&gt;</code> for smooth, pixel-perfect output.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="vd-col-12 vd-col-sm-6 vd-col-md-4">
+                            <div style="display:flex;gap:0.75rem;align-items:flex-start;">
+                                <i class="ph ph-arrows-out" style="font-size:1.5rem;color:var(--color-primary);flex-shrink:0;margin-top:0.1rem;"></i>
+                                <div>
+                                    <strong>Built-in pan &amp; zoom</strong>
+                                    <p class="vd-text-sm vd-text-muted vd-mt-1">Mouse wheel zoom, pointer drag pan, and pinch-to-zoom on touch devices.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="vd-col-12 vd-col-sm-6 vd-col-md-4">
+                            <div style="display:flex;gap:0.75rem;align-items:flex-start;">
+                                <i class="ph ph-mountains" style="font-size:1.5rem;color:var(--color-primary);flex-shrink:0;margin-top:0.1rem;"></i>
+                                <div>
+                                    <strong>Terrain system</strong>
+                                    <p class="vd-text-sm vd-text-muted vd-mt-1">Eight terrain types with colours, movement costs, and resource yields built in.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="vd-col-12 vd-col-sm-6 vd-col-md-4">
+                            <div style="display:flex;gap:0.75rem;align-items:flex-start;">
+                                <i class="ph ph-sun" style="font-size:1.5rem;color:var(--color-primary);flex-shrink:0;margin-top:0.1rem;"></i>
+                                <div>
+                                    <strong>Theme integration</strong>
+                                    <p class="vd-text-sm vd-text-muted vd-mt-1">Reads Vanduo CSS custom properties and re-renders automatically when the theme changes.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="vd-col-12 vd-col-sm-6 vd-col-md-4">
+                            <div style="display:flex;gap:0.75rem;align-items:flex-start;">
+                                <i class="ph ph-path" style="font-size:1.5rem;color:var(--color-primary);flex-shrink:0;margin-top:0.1rem;"></i>
+                                <div>
+                                    <strong>Pathfinding</strong>
+                                    <p class="vd-text-sm vd-text-muted vd-mt-1">BFS path search and movement-range helpers respect terrain passability costs.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="vd-col-12 vd-col-sm-6 vd-col-md-4">
+                            <div style="display:flex;gap:0.75rem;align-items:flex-start;">
+                                <i class="ph ph-device-mobile" style="font-size:1.5rem;color:var(--color-primary);flex-shrink:0;margin-top:0.1rem;"></i>
+                                <div>
+                                    <strong>Mobile support</strong>
+                                    <p class="vd-text-sm vd-text-muted vd-mt-1">Touch events and Pointer API provide a consistent experience across all devices.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="vd-col-12 vd-col-sm-6 vd-col-md-4">
+                            <div style="display:flex;gap:0.75rem;align-items:flex-start;">
+                                <i class="ph ph-feather" style="font-size:1.5rem;color:var(--color-primary);flex-shrink:0;margin-top:0.1rem;"></i>
+                                <div>
+                                    <strong>Lightweight</strong>
+                                    <p class="vd-text-sm vd-text-muted vd-mt-1">~15 KB minified &amp; gzipped — easy to drop into any project without bloat.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
         </div>
     </div>
 </section>
