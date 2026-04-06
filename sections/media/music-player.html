@@ -1,8 +1,10 @@
 <section id="music-player">
     <h4 class="demo-title"><i class="ph ph-music-note"></i>Music Player</h4>
-    <p class="vd-mb-8">A fully accessible HTML5 audio player component with transport controls,
+    <p class="vd-mb-4">A fully accessible HTML5 audio player component with transport controls,
         volume, and optional shuffle, seek bar, and playlist features. Zero external dependencies,
         powered by the native Audio API, and it automatically adapts to the active Vanduo theme.</p>
+    <p class="vd-text-sm vd-text-muted vd-mb-8">To keep the docs lightweight, all live demos below use one bundled sample track:
+        <em>Pale Blue Dot</em>. In real usage, pass as many tracks as you need.</p>
 
     <!-- ──────────────────────────────────────────────────────
          MINIMAL PLAYER (default)
@@ -16,7 +18,7 @@
                 </div>
                 <div class="vd-card-body">
                     <div id="demo-minimal" class="vd-music-player" data-music-player
-                        data-music-player-options='{"tracks":[{"name":"01 - The Belt of Orion","url":"./music/Stellardrone/Invent the Universe/01 - The Belt of Orion.mp3"},{"name":"02 - Crystal Spheres","url":"./music/Stellardrone/Invent the Universe/02 - Crystal Spheres.mp3"},{"name":"03 - Maia Nebula","url":"./music/Stellardrone/Invent the Universe/03 - Maia Nebula.mp3"}]}'></div>
+                        data-music-player-options='{"tracks":[{"name":"Pale Blue Dot","url":"./music/Stellardrone/Invent the Universe/06 - Pale Blue Dot.mp3"}]}'></div>
                     <div class="vd-code-snippet" data-collapsible>
                         <button class="vd-code-snippet-toggle" aria-expanded="false">
                             <span class="vd-code-snippet-toggle-icon"></span>
@@ -35,9 +37,11 @@
                             </div>
                             <div class="vd-code-snippet-body">
                                 <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">div</span> <span class="code-attr">id</span>=<span class="code-string">"my-player"</span> <span class="code-attr">class</span>=<span class="code-string">"vd-music-player"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;</code></pre>
-                                <pre class="vd-code-snippet-pane" data-lang="js"><code><span class="code-keyword">const</span> tracks = [
-  { name: <span class="code-string">'Track 01'</span>, url: <span class="code-string">'./music/track-01.mp3'</span> },
-  { name: <span class="code-string">'Track 02'</span>, url: <span class="code-string">'./music/track-02.mp3'</span> },
+                                                                <pre class="vd-code-snippet-pane" data-lang="js"><code><span class="code-keyword">const</span> tracks = [
+    {
+        name: <span class="code-string">'Pale Blue Dot'</span>,
+        url: <span class="code-string">'./music/Stellardrone/Invent the Universe/06 - Pale Blue Dot.mp3'</span>,
+    },
 ];
 
 VanduoMusicPlayer.initPlayer(
@@ -59,7 +63,7 @@ VanduoMusicPlayer.initPlayer(
                 </div>
                 <div class="vd-card-body">
                     <div id="demo-progress" class="vd-music-player" data-music-player
-                        data-music-player-options='{"tracks":[{"name":"04 - Approaching the Heliopause","url":"./music/Stellardrone/Invent the Universe/04 - Approaching the Heliopause.mp3"},{"name":"05 - Millions of Stars","url":"./music/Stellardrone/Invent the Universe/05 - Millions of Stars.mp3"}],"showProgress":true}'></div>
+                        data-music-player-options='{"tracks":[{"name":"Pale Blue Dot","url":"./music/Stellardrone/Invent the Universe/06 - Pale Blue Dot.mp3"}],"showProgress":true}'></div>
                     <div class="vd-code-snippet" data-collapsible>
                         <button class="vd-code-snippet-toggle" aria-expanded="false">
                             <span class="vd-code-snippet-toggle-icon"></span>
@@ -96,11 +100,11 @@ VanduoMusicPlayer.initPlayer(
             <div class="vd-card vd-card-glow demo-card">
                 <div class="vd-card-header">
                     <h4>With Shuffle</h4>
-                    <p class="vd-text-sm vd-text-muted vd-mb-0">Start shuffled with <code>shuffle: true</code>, or tap the shuffle button to toggle</p>
+                    <p class="vd-text-sm vd-text-muted vd-mb-0">Start shuffled with <code>shuffle: true</code>, or tap the shuffle button to toggle. The docs demo uses one bundled track, but the option works the same for longer lists.</p>
                 </div>
                 <div class="vd-card-body">
                     <div id="demo-shuffle" class="vd-music-player" data-music-player
-                        data-music-player-options='{"tracks":[{"name":"01 - The Belt of Orion","url":"./music/Stellardrone/Invent the Universe/01 - The Belt of Orion.mp3"},{"name":"02 - Crystal Spheres","url":"./music/Stellardrone/Invent the Universe/02 - Crystal Spheres.mp3"},{"name":"03 - Maia Nebula","url":"./music/Stellardrone/Invent the Universe/03 - Maia Nebula.mp3"},{"name":"04 - Approaching the Heliopause","url":"./music/Stellardrone/Invent the Universe/04 - Approaching the Heliopause.mp3"},{"name":"05 - Millions of Stars","url":"./music/Stellardrone/Invent the Universe/05 - Millions of Stars.mp3"}],"shuffle":true}'></div>
+                        data-music-player-options='{"tracks":[{"name":"Pale Blue Dot","url":"./music/Stellardrone/Invent the Universe/06 - Pale Blue Dot.mp3"}],"shuffle":true}'></div>
                     <div class="vd-code-snippet" data-collapsible>
                         <button class="vd-code-snippet-toggle" aria-expanded="false">
                             <span class="vd-code-snippet-toggle-icon"></span>
@@ -132,11 +136,11 @@ VanduoMusicPlayer.initPlayer(
             <div class="vd-card vd-card-glow demo-card">
                 <div class="vd-card-header">
                     <h4>With Playlist</h4>
-                    <p class="vd-text-sm vd-text-muted vd-mb-0">Enable <code>showPlaylist: true</code> to reveal a collapsible track list</p>
+                    <p class="vd-text-sm vd-text-muted vd-mb-0">Enable <code>showPlaylist: true</code> to reveal a collapsible track list. The bundled docs sample shows the UI using one tracked song.</p>
                 </div>
                 <div class="vd-card-body">
                     <div id="demo-playlist" class="vd-music-player" data-music-player
-                        data-music-player-options='{"tracks":[{"name":"06 - Pale Blue Dot","url":"./music/Stellardrone/Invent the Universe/06 - Pale Blue Dot.mp3"},{"name":"07 - An Ocean of Galaxies","url":"./music/Stellardrone/Invent the Universe/07 - An Ocean of Galaxies.mp3"},{"name":"08 - Infinite Void","url":"./music/Stellardrone/Invent the Universe/08 - Infinite Void.mp3"},{"name":"09 - The Edge of Forever","url":"./music/Stellardrone/Invent the Universe/09 - The Edge of Forever.mp3"}],"showPlaylist":true}'></div>
+                        data-music-player-options='{"tracks":[{"name":"Pale Blue Dot","url":"./music/Stellardrone/Invent the Universe/06 - Pale Blue Dot.mp3"}],"showPlaylist":true}'></div>
                     <div class="vd-code-snippet" data-collapsible>
                         <button class="vd-code-snippet-toggle" aria-expanded="false">
                             <span class="vd-code-snippet-toggle-icon"></span>
@@ -177,7 +181,7 @@ VanduoMusicPlayer.initPlayer(
                 </div>
                 <div class="vd-card-body">
                     <div id="demo-compact" class="vd-music-player vd-music-player-compact" data-music-player
-                        data-music-player-options='{"tracks":[{"name":"01 - The Belt of Orion","url":"./music/Stellardrone/Invent the Universe/01 - The Belt of Orion.mp3"},{"name":"02 - Crystal Spheres","url":"./music/Stellardrone/Invent the Universe/02 - Crystal Spheres.mp3"}]}'></div>
+                        data-music-player-options='{"tracks":[{"name":"Pale Blue Dot","url":"./music/Stellardrone/Invent the Universe/06 - Pale Blue Dot.mp3"}]}'></div>
                     <div class="vd-code-snippet" data-collapsible>
                         <button class="vd-code-snippet-toggle" aria-expanded="false">
                             <span class="vd-code-snippet-toggle-icon"></span>
@@ -210,7 +214,7 @@ VanduoMusicPlayer.initPlayer(
                 </div>
                 <div class="vd-card-body">
                     <div id="demo-sm" class="vd-music-player vd-music-player-sm" data-music-player
-                        data-music-player-options='{"tracks":[{"name":"01 - The Belt of Orion","url":"./music/Stellardrone/Invent the Universe/01 - The Belt of Orion.mp3"},{"name":"02 - Crystal Spheres","url":"./music/Stellardrone/Invent the Universe/02 - Crystal Spheres.mp3"}]}'></div>
+                        data-music-player-options='{"tracks":[{"name":"Pale Blue Dot","url":"./music/Stellardrone/Invent the Universe/06 - Pale Blue Dot.mp3"}]}'></div>
                     <div class="vd-code-snippet" data-collapsible>
                         <button class="vd-code-snippet-toggle" aria-expanded="false">
                             <span class="vd-code-snippet-toggle-icon"></span>
@@ -243,7 +247,7 @@ VanduoMusicPlayer.initPlayer(
                 </div>
                 <div class="vd-card-body">
                     <div id="demo-lg" class="vd-music-player vd-music-player-lg" data-music-player
-                        data-music-player-options='{"tracks":[{"name":"01 - The Belt of Orion","url":"./music/Stellardrone/Invent the Universe/01 - The Belt of Orion.mp3"},{"name":"02 - Crystal Spheres","url":"./music/Stellardrone/Invent the Universe/02 - Crystal Spheres.mp3"}]}'></div>
+                        data-music-player-options='{"tracks":[{"name":"Pale Blue Dot","url":"./music/Stellardrone/Invent the Universe/06 - Pale Blue Dot.mp3"}]}'></div>
                     <div class="vd-code-snippet" data-collapsible>
                         <button class="vd-code-snippet-toggle" aria-expanded="false">
                             <span class="vd-code-snippet-toggle-icon"></span>
@@ -282,7 +286,7 @@ VanduoMusicPlayer.initPlayer(
                 </div>
                 <div class="vd-card-body">
                     <div id="demo-inline" class="vd-music-player vd-music-player-inline" data-music-player
-                        data-music-player-options='{"tracks":[{"name":"01 - The Belt of Orion","url":"./music/Stellardrone/Invent the Universe/01 - The Belt of Orion.mp3"},{"name":"02 - Crystal Spheres","url":"./music/Stellardrone/Invent the Universe/02 - Crystal Spheres.mp3"},{"name":"03 - Maia Nebula","url":"./music/Stellardrone/Invent the Universe/03 - Maia Nebula.mp3"},{"name":"04 - Approaching the Heliopause","url":"./music/Stellardrone/Invent the Universe/04 - Approaching the Heliopause.mp3"},{"name":"05 - Millions of Stars","url":"./music/Stellardrone/Invent the Universe/05 - Millions of Stars.mp3"},{"name":"06 - Pale Blue Dot","url":"./music/Stellardrone/Invent the Universe/06 - Pale Blue Dot.mp3"},{"name":"07 - An Ocean of Galaxies","url":"./music/Stellardrone/Invent the Universe/07 - An Ocean of Galaxies.mp3"},{"name":"08 - Infinite Void","url":"./music/Stellardrone/Invent the Universe/08 - Infinite Void.mp3"},{"name":"09 - The Edge of Forever","url":"./music/Stellardrone/Invent the Universe/09 - The Edge of Forever.mp3"}],"showProgress":true,"showPlaylist":true,"shuffle":false}'></div>
+                        data-music-player-options='{"tracks":[{"name":"Pale Blue Dot","url":"./music/Stellardrone/Invent the Universe/06 - Pale Blue Dot.mp3"}],"showProgress":true,"showPlaylist":true,"shuffle":false}'></div>
                     <div class="vd-code-snippet" data-collapsible>
                         <button class="vd-code-snippet-toggle" aria-expanded="false">
                             <span class="vd-code-snippet-toggle-icon"></span>
@@ -354,7 +358,7 @@ VanduoMusicPlayer.next(el);
 VanduoMusicPlayer.previous(el);
 
 <span class="code-comment">// Go to a specific track (0-based index)</span>
-VanduoMusicPlayer.setTrack(el, <span class="code-number">2</span>);
+VanduoMusicPlayer.setTrack(el, <span class="code-number">0</span>);
 
 <span class="code-comment">// Volume (0 to 1)</span>
 VanduoMusicPlayer.setVolume(el, <span class="code-number">0.75</span>);
@@ -558,10 +562,13 @@ el.addEventListener(<span class="code-string">'musicplayer:ended'</span>, () =&g
                 <div class="vd-card-body">
                     <p class="vd-text-sm vd-text-muted vd-mb-2">
                         <i class="ph ph-music-notes" style="color:var(--color-primary);margin-right:0.375rem;"></i>
-                        <strong>Demo tracks:</strong> Music by
+                        <strong>Bundled demo audio:</strong> <em>Pale Blue Dot</em> by
                         <a href="https://stellardrone.bandcamp.com/" target="_blank" rel="noopener noreferrer">Stellardrone</a>
-                        from the album <em>Invent the Universe</em>, used with attribution.
-                        Available on <a href="https://stellardrone.bandcamp.com/" target="_blank" rel="noopener noreferrer">Bandcamp</a>.
+                        from the album <em>Invent the Universe</em>. Source:
+                        <a href="https://stellardrone.bandcamp.com/album/invent-the-universe" target="_blank" rel="noopener noreferrer">Bandcamp</a>.
+                        Licensed under
+                        <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>.
+                        No changes were made to the bundled audio file.
                     </p>
                 </div>
             </div>

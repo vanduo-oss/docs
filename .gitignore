@@ -19,8 +19,14 @@ node_modules/
 # Downloaded icon assets (use icons/ folder instead)
 /phosphor-icons
 
-# Demo audio tracks (large binary files — source in tinyrobots repo)
-/music/
+# Demo audio tracks (track only the bundled sample and attribution note)
+/music/*
+!/music/README.md
+!/music/Stellardrone/
+/music/Stellardrone/*
+!/music/Stellardrone/Invent the Universe/
+/music/Stellardrone/Invent the Universe/*
+!/music/Stellardrone/Invent the Universe/06 - Pale Blue Dot.mp3
 
 # SEO placeholder images (replace with actual brand assets)
 # /images/og-image.png

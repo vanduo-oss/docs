@@ -143,10 +143,9 @@ test.describe('Music Player Docs Page @e2e', () => {
 
     test('Stellardrone attribution card is present', async ({ page }) => {
         await gotoMusicPlayer(page);
-        const attribution = page.locator('#music-player').getByText(/Stellardrone/i);
-        await expect(attribution).toBeVisible();
         const link = page.locator('#music-player a[href*="stellardrone"]').first();
         await expect(link).toBeVisible();
+        await expect(link).toContainText('Stellardrone');
     });
 
     test('Options Reference table is present', async ({ page }) => {
