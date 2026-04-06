@@ -19,6 +19,9 @@ node_modules/
 # Downloaded icon assets (use icons/ folder instead)
 /phosphor-icons
 
+# Demo audio tracks (large binary files — source in tinyrobots repo)
+/music/
+
 # SEO placeholder images (replace with actual brand assets)
 # /images/og-image.png
 # /images/twitter-card.png

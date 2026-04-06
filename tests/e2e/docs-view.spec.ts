@@ -289,12 +289,16 @@ test.describe('4. Documentation View', () => {
                 return {
                     theme: document.documentElement.getAttribute('data-theme'),
                     primary: document.documentElement.getAttribute('data-primary'),
+                    neutral: document.documentElement.getAttribute('data-neutral'),
+                    radius: document.documentElement.getAttribute('data-radius'),
                     storagePref: localStorage.getItem('vanduo-theme-preference')
                 };
             });
 
             expect(resetState.theme).toBeNull();
             expect(resetState.primary).toBe('black');
+            expect(resetState.neutral).toBe('neutral');
+            expect(resetState.radius).toBe('0.375');
             expect(resetState.storagePref).toBe('system');
             expect(pageErrors.join('\n')).not.toContain('savePreference is not a function');
         });

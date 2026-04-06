@@ -245,6 +245,21 @@
                 "photo",
                 "zoom"
               ]
+            },
+            {
+              "id": "music-player",
+              "title": "Music Player",
+              "file": "media/music-player.html",
+              "icon": "ph-music-note",
+              "keywords": [
+                "music",
+                "player",
+                "audio",
+                "mp3",
+                "playlist",
+                "volume",
+                "media"
+              ]
             }
           ]
         },

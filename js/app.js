@@ -13,8 +13,8 @@ if (typeof window.Vanduo === 'undefined') {
             FONT: 'lato',
             PRIMARY_LIGHT: 'black',
             PRIMARY_DARK: 'amber',
-            NEUTRAL: 'slate',
-            RADIUS: '0.25'
+            NEUTRAL: 'neutral',
+            RADIUS: '0.375'
         });
     }
     window.Vanduo.init();
@@ -994,8 +994,8 @@ function updateCustomizerDemoState() {
     var html = document.documentElement;
     var theme = html.getAttribute('data-theme') || 'system';
     var primary = html.getAttribute('data-primary') || 'cyan';
-    var neutral = html.getAttribute('data-neutral') || 'gray';
-    var radius = html.getAttribute('data-radius') || '0.25';
+    var neutral = html.getAttribute('data-neutral') || 'neutral';
+    var radius = html.getAttribute('data-radius') || '0.375';
 
     // Update mode buttons
     document.querySelectorAll('.theme-mode-btn').forEach(function(btn) {

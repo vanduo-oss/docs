@@ -15,6 +15,91 @@
         <div class="vd-container-responsive" style="max-width: 1200px;">
 
             <!-- ═══════════════════════════════════════════════ -->
+            <!-- Version 1.3.2                                   -->
+            <!-- ═══════════════════════════════════════════════ -->
+            <article class="version-card">
+                <header class="version-header">
+                    <span class="vd-badge vd-badge-primary" style="font-size: 1rem; padding: 0.5rem 1rem;">v1.3.2</span>
+                    <span style="color: var(--text-secondary); font-size: 0.95rem;">
+                        <i class="ph ph-calendar mr-1"></i>April 6, 2026
+                    </span>
+                    <span class="vd-badge vd-badge-info" style="font-size: 0.75rem;">Latest</span>
+                </header>
+                <div class="version-body">
+                    <div class="vd-row">
+                        <div class="vd-col-12 vd-col-md-6">
+                            <h4><i class="ph ph-cube mr-2" style="color: var(--color-primary);"></i>Framework</h4>
+                            <div class="change-group">
+                                <h5>New Features</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-music-note" style="color: var(--color-primary);"></i>
+                                        <div>
+                                            <strong>New: Music Player component</strong>
+                                            <p>Added <code>.vd-music-player</code> with a minimal default layout plus optional <code>showProgress</code>, <code>showPlaylist</code>, and <code>shuffle</code> support. The component ships with transport controls, volume, HTML5 Audio integration, a full programmatic API, and custom events such as <code>musicplayer:trackchange</code> and <code>musicplayer:volumechange</code>.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="change-group">
+                                <h5>Improvements</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-layout" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Improvement: Music Player controls now scale more cleanly in constrained layouts</strong>
+                                            <p>The control row now wraps when needed and the volume slider uses tighter responsive sizing, preventing overflow in cards, inline layouts, and smaller breakpoints without changing the public API.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-check-circle" style="color: var(--color-success);"></i>
+                                        <div>
+                                            <strong>Improvement: Component coverage added for the new player</strong>
+                                            <p>Added Playwright fixture and component coverage for initialization, navigation, playlist, shuffle, progress, volume, no-track edge cases, and destroy behaviour.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="vd-col-12 vd-col-md-6">
+                            <h4><i class="ph ph-book-open-text mr-2" style="color: var(--color-primary);"></i>Documentation</h4>
+                            <div class="change-group">
+                                <h5>New Features</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-music-notes" style="color: var(--color-primary);"></i>
+                                        <div>
+                                            <strong>New: Music Player documentation page in Carousel &amp; Media</strong>
+                                            <p>The docs now include a dedicated Music Player page with live demos for the minimal player, progress bar, shuffle, playlist, size variants, and inline all-features layout, plus attribution for the Stellardrone demo tracks.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="change-group">
+                                <h5>Updates</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-code" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: Music Player API reference now uses Vanduo code snippets</strong>
+                                            <p>Programmatic API, custom events, and CSS variable references were converted to the standard Vanduo code-snippet UI with syntax highlighting and copy support for consistency with the rest of the docs.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-bookmark-simple" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: Documentation site version to v1.3.2</strong>
+                                            <p><code>vanduo-docs</code> package metadata, changelog, and docs landing version badges now reflect <strong>v1.3.2</strong> so the published docs match the framework release.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ═══════════════════════════════════════════════ -->
             <!-- Version 1.3.1                                   -->
             <!-- ═══════════════════════════════════════════════ -->
             <article class="version-card">
@@ -23,7 +108,6 @@
                     <span style="color: var(--text-secondary); font-size: 0.95rem;">
                         <i class="ph ph-calendar mr-1"></i>March 20, 2026
                     </span>
-                    <span class="vd-badge vd-badge-info" style="font-size: 0.75rem;">Latest</span>
                 </header>
                 <div class="version-body">
                     <div class="vd-row">
