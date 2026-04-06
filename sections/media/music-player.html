@@ -1,0 +1,570 @@
+<section id="music-player">
+    <h4 class="demo-title"><i class="ph ph-music-note"></i>Music Player</h4>
+    <p class="vd-mb-8">A fully accessible HTML5 audio player component with transport controls,
+        volume, and optional shuffle, seek bar, and playlist features. Zero external dependencies,
+        powered by the native Audio API, and it automatically adapts to the active Vanduo theme.</p>
+
+    <!-- ──────────────────────────────────────────────────────
+         MINIMAL PLAYER (default)
+    ───────────────────────────────────────────────────────── -->
+    <div class="vd-row">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h4>Minimal Player</h4>
+                    <p class="vd-text-sm vd-text-muted vd-mb-0">Default config — play/pause, prev/next, volume, track name</p>
+                </div>
+                <div class="vd-card-body">
+                    <div id="demo-minimal" class="vd-music-player" data-music-player
+                        data-music-player-options='{"tracks":[{"name":"01 - The Belt of Orion","url":"./music/Stellardrone/Invent the Universe/01 - The Belt of Orion.mp3"},{"name":"02 - Crystal Spheres","url":"./music/Stellardrone/Invent the Universe/02 - Crystal Spheres.mp3"},{"name":"03 - Maia Nebula","url":"./music/Stellardrone/Invent the Universe/03 - Maia Nebula.mp3"}]}'></div>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                    <button class="vd-code-snippet-tab" data-lang="js">JS</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">div</span> <span class="code-attr">id</span>=<span class="code-string">"my-player"</span> <span class="code-attr">class</span>=<span class="code-string">"vd-music-player"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                                <pre class="vd-code-snippet-pane" data-lang="js"><code><span class="code-keyword">const</span> tracks = [
+  { name: <span class="code-string">'Track 01'</span>, url: <span class="code-string">'./music/track-01.mp3'</span> },
+  { name: <span class="code-string">'Track 02'</span>, url: <span class="code-string">'./music/track-02.mp3'</span> },
+];
+
+VanduoMusicPlayer.initPlayer(
+  document.getElementById(<span class="code-string">'my-player'</span>),
+  { tracks }
+);</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h4>With Progress Bar</h4>
+                    <p class="vd-text-sm vd-text-muted vd-mb-0">Enable <code>showProgress: true</code> for a seek bar + elapsed/duration times</p>
+                </div>
+                <div class="vd-card-body">
+                    <div id="demo-progress" class="vd-music-player" data-music-player
+                        data-music-player-options='{"tracks":[{"name":"04 - Approaching the Heliopause","url":"./music/Stellardrone/Invent the Universe/04 - Approaching the Heliopause.mp3"},{"name":"05 - Millions of Stars","url":"./music/Stellardrone/Invent the Universe/05 - Millions of Stars.mp3"}],"showProgress":true}'></div>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="js">JS</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="js"><code>VanduoMusicPlayer.initPlayer(el, {
+  tracks,
+  showProgress: <span class="code-keyword">true</span>,
+});</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ──────────────────────────────────────────────────────
+         SHUFFLE + PLAYLIST
+    ───────────────────────────────────────────────────────── -->
+    <div class="vd-row">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h4>With Shuffle</h4>
+                    <p class="vd-text-sm vd-text-muted vd-mb-0">Start shuffled with <code>shuffle: true</code>, or tap the shuffle button to toggle</p>
+                </div>
+                <div class="vd-card-body">
+                    <div id="demo-shuffle" class="vd-music-player" data-music-player
+                        data-music-player-options='{"tracks":[{"name":"01 - The Belt of Orion","url":"./music/Stellardrone/Invent the Universe/01 - The Belt of Orion.mp3"},{"name":"02 - Crystal Spheres","url":"./music/Stellardrone/Invent the Universe/02 - Crystal Spheres.mp3"},{"name":"03 - Maia Nebula","url":"./music/Stellardrone/Invent the Universe/03 - Maia Nebula.mp3"},{"name":"04 - Approaching the Heliopause","url":"./music/Stellardrone/Invent the Universe/04 - Approaching the Heliopause.mp3"},{"name":"05 - Millions of Stars","url":"./music/Stellardrone/Invent the Universe/05 - Millions of Stars.mp3"}],"shuffle":true}'></div>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="js">JS</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="js"><code>VanduoMusicPlayer.initPlayer(el, {
+  tracks,
+  shuffle: <span class="code-keyword">true</span>,
+});</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h4>With Playlist</h4>
+                    <p class="vd-text-sm vd-text-muted vd-mb-0">Enable <code>showPlaylist: true</code> to reveal a collapsible track list</p>
+                </div>
+                <div class="vd-card-body">
+                    <div id="demo-playlist" class="vd-music-player" data-music-player
+                        data-music-player-options='{"tracks":[{"name":"06 - Pale Blue Dot","url":"./music/Stellardrone/Invent the Universe/06 - Pale Blue Dot.mp3"},{"name":"07 - An Ocean of Galaxies","url":"./music/Stellardrone/Invent the Universe/07 - An Ocean of Galaxies.mp3"},{"name":"08 - Infinite Void","url":"./music/Stellardrone/Invent the Universe/08 - Infinite Void.mp3"},{"name":"09 - The Edge of Forever","url":"./music/Stellardrone/Invent the Universe/09 - The Edge of Forever.mp3"}],"showPlaylist":true}'></div>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="js">JS</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="js"><code>VanduoMusicPlayer.initPlayer(el, {
+  tracks,
+  showPlaylist: <span class="code-keyword">true</span>,
+});</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ──────────────────────────────────────────────────────
+         LAYOUT VARIANTS
+    ───────────────────────────────────────────────────────── -->
+    <div class="vd-row">
+        <div class="vd-col-12 vd-col-md-4">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h4>Compact</h4>
+                    <p class="vd-text-sm vd-text-muted vd-mb-0">Minimal floating bar, no track name shown</p>
+                </div>
+                <div class="vd-card-body">
+                    <div id="demo-compact" class="vd-music-player vd-music-player-compact" data-music-player
+                        data-music-player-options='{"tracks":[{"name":"01 - The Belt of Orion","url":"./music/Stellardrone/Invent the Universe/01 - The Belt of Orion.mp3"},{"name":"02 - Crystal Spheres","url":"./music/Stellardrone/Invent the Universe/02 - Crystal Spheres.mp3"}]}'></div>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-music-player
+  vd-music-player-compact"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-4">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h4>Small</h4>
+                </div>
+                <div class="vd-card-body">
+                    <div id="demo-sm" class="vd-music-player vd-music-player-sm" data-music-player
+                        data-music-player-options='{"tracks":[{"name":"01 - The Belt of Orion","url":"./music/Stellardrone/Invent the Universe/01 - The Belt of Orion.mp3"},{"name":"02 - Crystal Spheres","url":"./music/Stellardrone/Invent the Universe/02 - Crystal Spheres.mp3"}]}'></div>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-music-player
+  vd-music-player-sm"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-4">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h4>Large</h4>
+                </div>
+                <div class="vd-card-body">
+                    <div id="demo-lg" class="vd-music-player vd-music-player-lg" data-music-player
+                        data-music-player-options='{"tracks":[{"name":"01 - The Belt of Orion","url":"./music/Stellardrone/Invent the Universe/01 - The Belt of Orion.mp3"},{"name":"02 - Crystal Spheres","url":"./music/Stellardrone/Invent the Universe/02 - Crystal Spheres.mp3"}]}'></div>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-music-player
+  vd-music-player-lg"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ──────────────────────────────────────────────────────
+         INLINE + FULL-FEATURED + DARK THEME
+    ───────────────────────────────────────────────────────── -->
+    <div class="vd-row">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h4>Inline Layout — All Features</h4>
+                    <p class="vd-text-sm vd-text-muted vd-mb-0">Full-width bar with progress bar, shuffle and playlist</p>
+                </div>
+                <div class="vd-card-body">
+                    <div id="demo-inline" class="vd-music-player vd-music-player-inline" data-music-player
+                        data-music-player-options='{"tracks":[{"name":"01 - The Belt of Orion","url":"./music/Stellardrone/Invent the Universe/01 - The Belt of Orion.mp3"},{"name":"02 - Crystal Spheres","url":"./music/Stellardrone/Invent the Universe/02 - Crystal Spheres.mp3"},{"name":"03 - Maia Nebula","url":"./music/Stellardrone/Invent the Universe/03 - Maia Nebula.mp3"},{"name":"04 - Approaching the Heliopause","url":"./music/Stellardrone/Invent the Universe/04 - Approaching the Heliopause.mp3"},{"name":"05 - Millions of Stars","url":"./music/Stellardrone/Invent the Universe/05 - Millions of Stars.mp3"},{"name":"06 - Pale Blue Dot","url":"./music/Stellardrone/Invent the Universe/06 - Pale Blue Dot.mp3"},{"name":"07 - An Ocean of Galaxies","url":"./music/Stellardrone/Invent the Universe/07 - An Ocean of Galaxies.mp3"},{"name":"08 - Infinite Void","url":"./music/Stellardrone/Invent the Universe/08 - Infinite Void.mp3"},{"name":"09 - The Edge of Forever","url":"./music/Stellardrone/Invent the Universe/09 - The Edge of Forever.mp3"}],"showProgress":true,"showPlaylist":true,"shuffle":false}'></div>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                    <button class="vd-code-snippet-tab" data-lang="js">JS</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">div</span> <span class="code-attr">id</span>=<span class="code-string">"my-player"</span> <span class="code-attr">class</span>=<span class="code-string">"vd-music-player vd-music-player-inline"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                                <pre class="vd-code-snippet-pane" data-lang="js"><code>VanduoMusicPlayer.initPlayer(
+  document.getElementById(<span class="code-string">'my-player'</span>),
+  {
+    tracks,
+    showProgress: <span class="code-keyword">true</span>,
+    showPlaylist: <span class="code-keyword">true</span>,
+    shuffle: <span class="code-keyword">false</span>,
+  }
+);</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ──────────────────────────────────────────────────────
+         PROGRAMMATIC API
+    ───────────────────────────────────────────────────────── -->
+    <div class="vd-row">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h4>Programmatic API</h4>
+                </div>
+                <div class="vd-card-body">
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="js">JS</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="js"><code><span class="code-keyword">const</span> el = document.getElementById(<span class="code-string">'my-player'</span>);
+
+<span class="code-comment">// Transport</span>
+VanduoMusicPlayer.play(el);
+VanduoMusicPlayer.pause(el);
+VanduoMusicPlayer.toggle(el);
+VanduoMusicPlayer.next(el);
+VanduoMusicPlayer.previous(el);
+
+<span class="code-comment">// Go to a specific track (0-based index)</span>
+VanduoMusicPlayer.setTrack(el, <span class="code-number">2</span>);
+
+<span class="code-comment">// Volume (0 to 1)</span>
+VanduoMusicPlayer.setVolume(el, <span class="code-number">0.75</span>);
+
+<span class="code-comment">// Toggle shuffle programmatically</span>
+VanduoMusicPlayer.shuffle(el);
+
+<span class="code-comment">// Get current state</span>
+<span class="code-keyword">const</span> state = VanduoMusicPlayer.getState(el);
+<span class="code-comment">// { isPlaying, currentIndex, currentTrack, volume, shuffle, tracks }</span>
+
+<span class="code-comment">// Tear down</span>
+VanduoMusicPlayer.destroy(el);
+VanduoMusicPlayer.destroyAll();
+
+<span class="code-comment">// Re-init after dynamic markup changes</span>
+Vanduo.reinit(<span class="code-string">'musicPlayer'</span>);</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ──────────────────────────────────────────────────────
+         EVENTS
+    ───────────────────────────────────────────────────────── -->
+    <div class="vd-row">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h4>Custom Events</h4>
+                </div>
+                <div class="vd-card-body">
+                                        <div class="vd-code-snippet" data-collapsible>
+                                                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                                                        <span class="vd-code-snippet-toggle-icon"></span>
+                                                        <span>View Code</span>
+                                                </button>
+                                                <div class="vd-code-snippet-content">
+                                                        <div class="vd-code-snippet-header">
+                                                                <div class="vd-code-snippet-tabs" role="tablist">
+                                                                        <button class="vd-code-snippet-tab is-active" data-lang="js">JS</button>
+                                                                </div>
+                                                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                                                        <span class="vd-code-snippet-copy-icon"></span>
+                                                                        <span class="vd-code-snippet-copy-text">Copy</span>
+                                                                </button>
+                                                        </div>
+                                                        <div class="vd-code-snippet-body">
+                                                                <pre class="vd-code-snippet-pane is-active" data-lang="js"><code>el.addEventListener(<span class="code-string">'musicplayer:play'</span>, () =&gt; {
+    console.log(<span class="code-string">'Playback started'</span>);
+});
+
+el.addEventListener(<span class="code-string">'musicplayer:pause'</span>, () =&gt; {
+    console.log(<span class="code-string">'Playback paused'</span>);
+});
+
+el.addEventListener(<span class="code-string">'musicplayer:trackchange'</span>, (<span class="code-keyword">event</span>) =&gt; {
+    <span class="code-keyword">const</span> { index, name, url } = event.detail;
+    console.log(<span class="code-string">'Track changed to:'</span>, index, name, url);
+});
+
+el.addEventListener(<span class="code-string">'musicplayer:volumechange'</span>, (<span class="code-keyword">event</span>) =&gt; {
+    console.log(<span class="code-string">'Volume:'</span>, event.detail.volume);
+});
+
+el.addEventListener(<span class="code-string">'musicplayer:ended'</span>, () =&gt; {
+    <span class="code-comment">// Fires only when autoAdvance is false on the last track.</span>
+    console.log(<span class="code-string">'Playback ended'</span>);
+});</code></pre>
+                                                        </div>
+                                                </div>
+                                        </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h4>CSS Variables</h4>
+                </div>
+                <div class="vd-card-body">
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="css">CSS</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="css"><code><span class="code-selector">:root</span> {
+  <span class="code-comment">/* Accent */</span>
+  <span class="code-property">--music-player-accent</span>: <span class="code-value">var(--color-primary)</span>;
+
+  <span class="code-comment">/* Surfaces */</span>
+  <span class="code-property">--music-player-bg</span>: <span class="code-value">var(--bg-primary)</span>;
+  <span class="code-property">--music-player-bg-secondary</span>: <span class="code-value">var(--bg-secondary)</span>;
+  <span class="code-property">--music-player-border</span>: <span class="code-value">var(--border-color)</span>;
+
+  <span class="code-comment">/* Text */</span>
+  <span class="code-property">--music-player-text</span>: <span class="code-value">var(--text-primary)</span>;
+  <span class="code-property">--music-player-text-muted</span>: <span class="code-value">var(--text-muted)</span>;
+
+  <span class="code-comment">/* Range track */</span>
+  <span class="code-property">--music-player-track-bg</span>: <span class="code-value">var(--border-color)</span>;
+  <span class="code-property">--music-player-track-fill</span>: <span class="code-value">var(--color-primary)</span>;
+
+  <span class="code-comment">/* Sizing */</span>
+  <span class="code-property">--music-player-btn-size</span>: <span class="code-value">2.125rem</span>;
+  <span class="code-property">--music-player-padding-x</span>: <span class="code-value">1.3125rem</span>;
+  <span class="code-property">--music-player-padding-y</span>: <span class="code-value">0.8125rem</span>;
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ──────────────────────────────────────────────────────
+         OPTIONS TABLE
+    ───────────────────────────────────────────────────────── -->
+    <div class="vd-row">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h4>Options Reference</h4>
+                </div>
+                <div class="vd-card-body vd-overflow-x-auto">
+                    <table class="vd-table vd-table-striped">
+                        <thead>
+                            <tr>
+                                <th>Option</th>
+                                <th>Type</th>
+                                <th>Default</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>tracks</code></td>
+                                <td>Array</td>
+                                <td><code>[]</code></td>
+                                <td>Array of <code>{ name, url }</code> objects. <code>name</code> is displayed; <code>url</code> is the audio file path.</td>
+                            </tr>
+                            <tr>
+                                <td><code>volume</code></td>
+                                <td>number</td>
+                                <td><code>0.5</code></td>
+                                <td>Initial playback volume between 0 and 1.</td>
+                            </tr>
+                            <tr>
+                                <td><code>shuffle</code></td>
+                                <td>boolean</td>
+                                <td><code>false</code></td>
+                                <td>Shuffle the track list on init. Also shows the shuffle toggle button.</td>
+                            </tr>
+                            <tr>
+                                <td><code>showProgress</code></td>
+                                <td>boolean</td>
+                                <td><code>false</code></td>
+                                <td>Show a seek bar with elapsed/total time display.</td>
+                            </tr>
+                            <tr>
+                                <td><code>showPlaylist</code></td>
+                                <td>boolean</td>
+                                <td><code>false</code></td>
+                                <td>Show a collapsible track list panel. Also shows the shuffle button.</td>
+                            </tr>
+                            <tr>
+                                <td><code>autoAdvance</code></td>
+                                <td>boolean</td>
+                                <td><code>true</code></td>
+                                <td>Automatically play the next track when the current one ends.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ──────────────────────────────────────────────────────
+         ATTRIBUTION (Stellardrone demo tracks)
+    ───────────────────────────────────────────────────────── -->
+    <div class="vd-row">
+        <div class="vd-col-12">
+            <div class="vd-card demo-card">
+                <div class="vd-card-body">
+                    <p class="vd-text-sm vd-text-muted vd-mb-2">
+                        <i class="ph ph-music-notes" style="color:var(--color-primary);margin-right:0.375rem;"></i>
+                        <strong>Demo tracks:</strong> Music by
+                        <a href="https://stellardrone.bandcamp.com/" target="_blank" rel="noopener noreferrer">Stellardrone</a>
+                        from the album <em>Invent the Universe</em>, used with attribution.
+                        Available on <a href="https://stellardrone.bandcamp.com/" target="_blank" rel="noopener noreferrer">Bandcamp</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
