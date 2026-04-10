@@ -1,4 +1,4 @@
-/*! Vanduo v1.3.2 | Built: 2026-04-06T19:04:41.601Z | git:8e08b38 | development */
+/*! Vanduo v1.3.3 | Built: 2026-04-10T16:33:15.132Z | git:281f4f6 | development */
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
@@ -132,7 +132,7 @@ module.exports = __toCommonJS(index_exports);
 // js/vanduo.js
 (function() {
   "use strict";
-  const VANDUO_VERSION = true ? "1.3.2" : "0.0.0-dev";
+  const VANDUO_VERSION = true ? "1.3.3" : "0.0.0-dev";
   const Vanduo2 = {
     version: VANDUO_VERSION,
     components: {},
@@ -3831,6 +3831,7 @@ module.exports = __toCommonJS(index_exports);
     loadPreferences: function() {
       this.state.theme = this.getStorageValue(this.STORAGE_KEYS.THEME, this.DEFAULTS.THEME);
       this.state.primary = this.getStorageValue(this.STORAGE_KEYS.PRIMARY, this.getDefaultPrimary(this.state.theme));
+      this._normalizeDefaultPrimaryIfStaleWithStoredTheme();
       this.state.neutral = this.getStorageValue(this.STORAGE_KEYS.NEUTRAL, this.DEFAULTS.NEUTRAL);
       this.state.radius = this.getStorageValue(this.STORAGE_KEYS.RADIUS, this.DEFAULTS.RADIUS);
       this.state.font = this.getStorageValue(this.STORAGE_KEYS.FONT, this.DEFAULTS.FONT);
@@ -3916,12 +3917,10 @@ module.exports = __toCommonJS(index_exports);
         mode = this.DEFAULTS.THEME;
       }
       this._isApplying = true;
-      const currentMode = this.state.theme;
-      const oldDefault = this.getDefaultPrimary(currentMode);
-      if (this.state.primary === oldDefault) {
-        const newDefault = this.getDefaultPrimary(mode);
-        if (newDefault !== this.state.primary) {
-          this.applyPrimary(newDefault);
+      if (this.isUsingDefaultPrimary()) {
+        const expected = this.getDefaultPrimary(mode);
+        if (this.state.primary !== expected) {
+          this.applyPrimary(expected);
         }
       }
       this.state.theme = mode;
@@ -4163,6 +4162,20 @@ module.exports = __toCommonJS(index_exports);
     isUsingDefaultPrimary: function() {
       return this.state.primary === this.DEFAULTS.PRIMARY_LIGHT || this.state.primary === this.DEFAULTS.PRIMARY_DARK;
     },
+    /**
+     * When primary is still one of the auto-default palette keys (black/amber) but
+     * localStorage was written under a different theme (or OS changed in system mode),
+     * align in-memory state before applyAllPreferences runs — avoids amber+light / black+dark drift.
+     */
+    _normalizeDefaultPrimaryIfStaleWithStoredTheme: function() {
+      if (!this.isUsingDefaultPrimary()) {
+        return;
+      }
+      const expected = this.getDefaultPrimary(this.state.theme);
+      if (this.state.primary !== expected) {
+        this.state.primary = expected;
+      }
+    },
     bindEvents: function() {
       if (this.elements.trigger) {
         this.addListener(this.elements.trigger, "click", (e) => {
@@ -4401,6 +4414,9 @@ module.exports = __toCommonJS(index_exports);
       this._onMediaChange = (_e) => {
         if (this.state.preference === "system") {
           this.applyTheme();
+          if (window.ThemeCustomizer && typeof window.ThemeCustomizer.applyTheme === "function" && !window.ThemeCustomizer._isApplying) {
+            window.ThemeCustomizer.applyTheme("system");
+          }
         }
       };
       this._mediaQuery.addEventListener("change", this._onMediaChange);

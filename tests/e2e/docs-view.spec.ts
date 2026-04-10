@@ -230,8 +230,9 @@ test.describe('4. Documentation View', () => {
             
             expect(currentTheme).toBe('dark');
 
-            // Wait for primary color to update ( coordination happens async )
-            await page.waitForTimeout(200);
+            await page.waitForFunction(() => {
+                return document.documentElement.getAttribute('data-primary') === 'amber';
+            }, { timeout: 5000 });
 
             // Verify primary color changed to amber (dark mode default per docs)
             const darkPrimary = await page.evaluate(() => {
@@ -244,14 +245,33 @@ test.describe('4. Documentation View', () => {
             
             expect(currentTheme).toBe('light');
 
-            // Wait for primary color to update
-            await page.waitForTimeout(200);
+            await page.waitForFunction(() => {
+                return document.documentElement.getAttribute('data-primary') === 'black';
+            }, { timeout: 5000 });
 
             // Verify back to black primary
             const lightPrimary = await page.evaluate(() => {
                 return document.documentElement.getAttribute('data-primary');
             });
             expect(lightPrimary).toBe('black');
+        });
+
+        test('normalizes stale default primary when theme and storage disagree after reload', async ({ page }) => {
+            await page.emulateMedia({ colorScheme: 'light' });
+            await page.goto('/#home');
+            await waitForSPA(page);
+            await expectLocalFrameworkAssets(page);
+
+            await page.evaluate(() => {
+                localStorage.setItem('vanduo-theme-preference', 'light');
+                localStorage.setItem('vanduo-primary-color', 'amber');
+            });
+            await page.reload();
+            await waitForSPA(page);
+
+            await page.waitForFunction(() => {
+                return document.documentElement.getAttribute('data-primary') === 'black';
+            }, { timeout: 5000 });
         });
 
         test('ThemeCustomizer reset stays in sync with ThemeSwitcher', async ({ page }) => {

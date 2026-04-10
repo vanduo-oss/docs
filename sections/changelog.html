@@ -15,6 +15,72 @@
         <div class="vd-container-responsive" style="max-width: 1200px;">
 
             <!-- ═══════════════════════════════════════════════ -->
+            <!-- Version 1.3.3                                   -->
+            <!-- ═══════════════════════════════════════════════ -->
+            <article class="version-card">
+                <header class="version-header">
+                    <span class="vd-badge vd-badge-primary" style="font-size: 1rem; padding: 0.5rem 1rem;">v1.3.3</span>
+                    <span style="color: var(--text-secondary); font-size: 0.95rem;">
+                        <i class="ph ph-calendar mr-1"></i>April 10, 2026
+                    </span>
+                    <span class="vd-badge vd-badge-info" style="font-size: 0.75rem;">Latest</span>
+                </header>
+                <div class="version-body">
+                    <div class="vd-row">
+                        <div class="vd-col-12 vd-col-md-6">
+                            <h4><i class="ph ph-cube mr-2" style="color: var(--color-primary);"></i>Framework</h4>
+                            <div class="change-group">
+                                <h5>Bug Fixes</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-paint-brush" style="color: var(--color-primary);"></i>
+                                        <div>
+                                            <strong>Fix: Theme default primary drift (black / amber)</strong>
+                                            <p><code>ThemeCustomizer</code> now normalizes stale <code>black</code>/<code>amber</code> pairs against the saved theme mode and <code>prefers-color-scheme</code> when <code>system</code> is selected, so <code>data-primary</code> stays aligned after reloads and OS theme changes. <code>ThemeSwitcher</code> re-invokes customizer sync when the OS scheme changes in system mode.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="change-group">
+                                <h5>Tests</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-check-circle" style="color: var(--color-success);"></i>
+                                        <div>
+                                            <strong>Added Playwright coverage for stale cross-default storage</strong>
+                                            <p>Framework and docs tests cover light/dark/system reload paths and primary alignment.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="vd-col-12 vd-col-md-6">
+                            <h4><i class="ph ph-book-open-text mr-2" style="color: var(--color-primary);"></i>Documentation</h4>
+                            <div class="change-group">
+                                <h5>Updates</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-database" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: Theme customizer demo storage keys aligned with framework</strong>
+                                            <p>Docs demos use <code>vanduo-radius</code> and <code>vanduo-font-preference</code> (with one-time migration from legacy keys). Demo UI fallbacks use the theme customizer defaults instead of a hard-coded <code>cyan</code> primary.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-bookmark-simple" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: Version and CDN pins to v1.3.3</strong>
+                                            <p>Package metadata, changelog, landing badges, and jsDelivr examples now reference <strong>v1.3.3</strong>.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ═══════════════════════════════════════════════ -->
             <!-- Version 1.3.2                                   -->
             <!-- ═══════════════════════════════════════════════ -->
             <article class="version-card">
@@ -23,7 +89,6 @@
                     <span style="color: var(--text-secondary); font-size: 0.95rem;">
                         <i class="ph ph-calendar mr-1"></i>April 6, 2026
                     </span>
-                    <span class="vd-badge vd-badge-info" style="font-size: 0.75rem;">Latest</span>
                 </header>
                 <div class="version-body">
                     <div class="vd-row">
@@ -2533,6 +2598,10 @@
                 </div>
             </article>
 
+            <nav class="vd-mt-6" aria-label="Changelog pagination" id="changelog-pagination-nav" hidden>
+                <ul class="vd-pagination pagination vd-pagination-center" id="changelog-pagination" data-pagination data-total-pages="1" data-current-page="1" data-max-visible="7">
+                </ul>
+            </nav>
         </div>
     </div>
 </section>

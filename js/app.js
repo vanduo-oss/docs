@@ -300,6 +300,7 @@ async function loadPage(pageId) {
         if (typeof Vanduo !== 'undefined') Vanduo.init();
         hideDisabledCodeTabs(container);
         wireRouteLinks(container);
+        initChangelogPagination(pageId, container);
         initHexGridDemo();
     } catch (err) {
         console.error(err);
@@ -561,6 +562,64 @@ function wireRouteLinks(container) {
             navigate(route);
         });
     });
+}
+
+/* ── Changelog pagination ─────────────────────── */
+function initChangelogPagination(pageId, container) {
+    if (pageId !== 'changelog' || !container) return;
+
+    var section = container.querySelector('#changelog');
+    if (!section) return;
+
+    var cards = Array.from(section.querySelectorAll('article.version-card'));
+    if (!cards.length) return;
+
+    var nav = section.querySelector('#changelog-pagination-nav');
+    var pagination = section.querySelector('#changelog-pagination');
+    if (!nav || !pagination) return;
+
+    var pageSize = 3;
+    var totalPages = Math.ceil(cards.length / pageSize);
+
+    function applyPage(pageNumber) {
+        var safePage = Math.max(1, Math.min(totalPages, pageNumber || 1));
+        cards.forEach(function (card, index) {
+            var cardPage = Math.floor(index / pageSize) + 1;
+            var isVisible = cardPage === safePage;
+            card.hidden = !isVisible;
+            card.setAttribute('aria-hidden', isVisible ? 'false' : 'true');
+        });
+
+        if (typeof window.VanduoPagination !== 'undefined' && typeof window.VanduoPagination.update === 'function') {
+            window.VanduoPagination.update(pagination, {
+                totalPages: totalPages,
+                currentPage: safePage,
+                maxVisible: 7
+            });
+        } else {
+            pagination.dataset.totalPages = String(totalPages);
+            pagination.dataset.currentPage = String(safePage);
+            pagination.dataset.maxVisible = '7';
+        }
+    }
+
+    if (pagination._changelogPageHandler) {
+        pagination.removeEventListener('pagination:change', pagination._changelogPageHandler);
+    }
+
+    pagination.dataset.totalPages = String(totalPages);
+    pagination.dataset.currentPage = '1';
+    pagination.dataset.maxVisible = '7';
+
+    nav.hidden = totalPages <= 1;
+    applyPage(1);
+
+    pagination._changelogPageHandler = function (e) {
+        var detailPage = e && e.detail ? Number(e.detail.page) : 1;
+        applyPage(detailPage);
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+    pagination.addEventListener('pagination:change', pagination._changelogPageHandler);
 }
 
 /* ── Initialize vd-hex demo on Labs page ───────── */
@@ -945,7 +1004,7 @@ document.addEventListener('click', function (e) {
         var radius = radiusBtn.getAttribute('data-radius');
         if (radius) {
             document.documentElement.setAttribute('data-radius', radius);
-            localStorage.setItem('vanduo-border-radius', radius);
+            localStorage.setItem('vanduo-radius', radius);
             updateCustomizerDemoState();
         }
     }
@@ -974,15 +1033,37 @@ function applyTheme(theme) {
     localStorage.setItem('vanduo-theme-preference', theme);
 }
 
+/** Copy legacy demo keys into framework storage keys once (radius/font). */
+function migrateLegacyCustomizerDemoStorage() {
+    try {
+        if (!localStorage.getItem('vanduo-radius') && localStorage.getItem('vanduo-border-radius')) {
+            localStorage.setItem('vanduo-radius', localStorage.getItem('vanduo-border-radius'));
+        }
+        if (!localStorage.getItem('vanduo-font-preference') && localStorage.getItem('vanduo-font-family')) {
+            localStorage.setItem('vanduo-font-preference', localStorage.getItem('vanduo-font-family'));
+        }
+    } catch (_e) {
+        /* ignore */
+    }
+}
+
 // Theme Customizer Demo - Font Family
 function initFontSelectListener() {
     var fontSelect = document.querySelector('.font-select');
     if (fontSelect) {
+        try {
+            var storedFont = localStorage.getItem('vanduo-font-preference');
+            if (storedFont) {
+                fontSelect.value = storedFont;
+            }
+        } catch (_e) {
+            /* ignore */
+        }
         fontSelect.addEventListener('change', function() {
             var font = this.value;
             if (font) {
                 document.documentElement.setAttribute('data-font', font);
-                localStorage.setItem('vanduo-font-family', font);
+                localStorage.setItem('vanduo-font-preference', font);
                 updateCustomizerDemoState();
             }
         });
@@ -993,7 +1074,14 @@ function initFontSelectListener() {
 function updateCustomizerDemoState() {
     var html = document.documentElement;
     var theme = html.getAttribute('data-theme') || 'system';
-    var primary = html.getAttribute('data-primary') || 'cyan';
+    var primary = html.getAttribute('data-primary');
+    if (!primary && window.ThemeCustomizer && typeof window.ThemeCustomizer.getDefaultPrimary === 'function') {
+        var tm = (window.ThemeCustomizer.state && window.ThemeCustomizer.state.theme) ? window.ThemeCustomizer.state.theme : 'system';
+        primary = window.ThemeCustomizer.getDefaultPrimary(tm);
+    }
+    if (!primary) {
+        primary = 'black';
+    }
     var neutral = html.getAttribute('data-neutral') || 'neutral';
     var radius = html.getAttribute('data-radius') || '0.375';
 
@@ -1027,6 +1115,7 @@ function updateCustomizerDemoState() {
 
 // Initialize customizer demo on page load
 document.addEventListener('DOMContentLoaded', function() {
+    migrateLegacyCustomizerDemoStorage();
     initFontSelectListener();
     updateCustomizerDemoState();
 });
