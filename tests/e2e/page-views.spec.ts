@@ -99,10 +99,33 @@ test.describe('3. Page Views', () => {
             const title = changelogSection.locator('h1, h2').first();
             await expect(title).toContainText('Changelog');
 
-            // Verify at least one release note is present, or the API limit fallback alert
-            // Verify at least one version card is present
             const releases = changelogSection.locator('.version-card');
             await expect(releases.first()).toBeVisible({ timeout: 10000 });
+
+            const initialVisibleCards = await page.evaluate(() => {
+                return document.querySelectorAll('#changelog .version-card:not([hidden])').length;
+            });
+            expect(initialVisibleCards).toBe(3);
+
+            const pagination = changelogSection.locator('#changelog-pagination-nav');
+            await expect(pagination).toBeVisible();
+
+            const firstVisibleVersionBefore = await page.evaluate(() => {
+                const firstVisible = document.querySelector('#changelog .version-card:not([hidden]) .vd-badge-primary');
+                return firstVisible ? firstVisible.textContent : null;
+            });
+
+            await changelogSection.getByRole('link', { name: 'Next' }).click();
+            await page.waitForFunction(() => {
+                return document.querySelector('#changelog-pagination')?.getAttribute('data-current-page') === '2';
+            });
+
+            const firstVisibleVersionAfter = await page.evaluate(() => {
+                const firstVisible = document.querySelector('#changelog .version-card:not([hidden]) .vd-badge-primary');
+                return firstVisible ? firstVisible.textContent : null;
+            });
+
+            expect(firstVisibleVersionAfter).not.toBe(firstVisibleVersionBefore);
         });
     });
 
