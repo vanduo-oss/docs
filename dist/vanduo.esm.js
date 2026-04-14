@@ -1,4 +1,4 @@
-/*! Vanduo v1.3.3 | Built: 2026-04-10T16:33:15.132Z | git:281f4f6 | development */
+/*! Vanduo v1.3.4 | Built: 2026-04-14T20:33:24.238Z | git:73e3db5 | development */
 
 // js/utils/lifecycle.js
 (function() {
@@ -107,7 +107,7 @@
 // js/vanduo.js
 (function() {
   "use strict";
-  const VANDUO_VERSION = true ? "1.3.3" : "0.0.0-dev";
+  const VANDUO_VERSION = true ? "1.3.4" : "0.0.0-dev";
   const Vanduo2 = {
     version: VANDUO_VERSION,
     components: {},
@@ -2158,6 +2158,31 @@
       });
     },
     /**
+     * Initialize scroll-aware glass/transparent behaviour for a navbar.
+     * Adds/removes `.vd-navbar-scrolled` when the page scrolls past a threshold.
+     * Threshold: `data-scroll-threshold` attribute (px) or the navbar's own height.
+     * @param {HTMLElement} navbar - Navbar element
+     * @returns {Function|null} Cleanup function, or null if not applicable
+     */
+    initScrollWatcher: function(navbar) {
+      const isGlass = navbar.classList.contains("vd-navbar-glass");
+      const isTransparent = navbar.classList.contains("vd-navbar-transparent");
+      if (!isGlass && !isTransparent) {
+        return null;
+      }
+      const getThreshold = () => {
+        const attr = parseInt(navbar.dataset.scrollThreshold, 10);
+        return isNaN(attr) ? navbar.offsetHeight || 60 : attr;
+      };
+      const onScroll = () => {
+        const scrolled = window.scrollY > getThreshold();
+        navbar.classList.toggle("vd-navbar-scrolled", scrolled);
+      };
+      onScroll();
+      window.addEventListener("scroll", onScroll, { passive: true });
+      return () => window.removeEventListener("scroll", onScroll);
+    },
+    /**
      * Initialize a single navbar
      * @param {HTMLElement} navbar - Navbar element
      */
@@ -2165,10 +2190,17 @@
       const toggle = navbar.querySelector(".vd-navbar-toggle, .vd-navbar-burger");
       const menu = navbar.querySelector(".vd-navbar-menu");
       const overlay = navbar.querySelector(".vd-navbar-overlay") || this.createOverlay(navbar);
+      const cleanupFunctions = [];
+      const scrollWatcherCleanup = this.initScrollWatcher(navbar);
+      if (scrollWatcherCleanup) {
+        cleanupFunctions.push(scrollWatcherCleanup);
+      }
       if (!toggle || !menu) {
+        if (cleanupFunctions.length) {
+          this.instances.set(navbar, { toggle: null, menu: null, overlay: null, cleanup: cleanupFunctions });
+        }
         return;
       }
-      const cleanupFunctions = [];
       const toggleClickHandler = (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -5623,6 +5655,8 @@
     touchState: null,
     // Feedback element
     feedbackElement: null,
+    // Shared selector used by init and touch reorder
+    containerSelector: ".vd-draggable-container, .vd-draggable-container-vertical",
     /**
      * Initialize draggable components
      */
@@ -5634,7 +5668,7 @@
         }
         this.initDraggable(element);
       });
-      const containers = document.querySelectorAll(".vd-draggable-container, .vd-draggable-container-vertical");
+      const containers = document.querySelectorAll(this.containerSelector);
       containers.forEach((container) => {
         if (!this.instances.has(container)) {
           this.initContainer(container);
@@ -5878,10 +5912,16 @@
      */
     handleTouchStart: function(e, element) {
       const touch = e.touches[0];
+      const rect = element.getBoundingClientRect();
       this.touchState = {
         element,
         startX: touch.clientX,
         startY: touch.clientY,
+        lastX: touch.clientX,
+        lastY: touch.clientY,
+        // Keep preview anchored to the original grab point.
+        offsetX: touch.clientX - rect.left,
+        offsetY: touch.clientY - rect.top,
         startTime: Date.now(),
         isDragging: false
       };
@@ -5894,6 +5934,8 @@
     handleTouchMove: function(e, element) {
       if (!this.touchState) return;
       const touch = e.touches[0];
+      this.touchState.lastX = touch.clientX;
+      this.touchState.lastY = touch.clientY;
       const deltaX = touch.clientX - this.touchState.startX;
       const deltaY = touch.clientY - this.touchState.startY;
       if (Math.abs(deltaX) > 10 || Math.abs(deltaY) > 10) {
@@ -5906,7 +5948,10 @@
             element,
             initialPosition: { x: this.touchState.startX, y: this.touchState.startY },
             initialBounds: element.getBoundingClientRect(),
-            data: this.getData(element)
+            data: this.getData(element),
+            // Preserve where inside the element the drag started for accurate ghost positioning.
+            offsetX: this.touchState.offsetX,
+            offsetY: this.touchState.offsetY
           };
           element.dispatchEvent(new CustomEvent("draggable:start", {
             bubbles: true,
@@ -5928,7 +5973,8 @@
               delta: { x: deltaX, y: deltaY }
             }
           }));
-          const container = element.closest(".vd-draggable-container");
+          this.updateTouchDropZone(touch.clientX, touch.clientY);
+          const container = element.closest(this.containerSelector);
           if (container && container.contains(element)) {
             this.handleReorder(container, element, touch.clientX, touch.clientY);
           }
@@ -5943,6 +5989,17 @@
     handleTouchEnd: function(e, element) {
       if (this.touchState && this.touchState.isDragging) {
         if (e.cancelable) e.preventDefault();
+        const endTouch = e.changedTouches?.[0];
+        const endPosition = {
+          x: endTouch?.clientX ?? this.touchState.lastX ?? this.touchState.startX,
+          y: endTouch?.clientY ?? this.touchState.lastY ?? this.touchState.startY
+        };
+        const dropZone = this.resolveDropZoneAtPoint(endPosition.x, endPosition.y) || this.touchState.overZone;
+        if (dropZone) {
+          this.dispatchDrop(dropZone, endPosition);
+        } else if (this.touchState.overZone) {
+          this.touchState.overZone.classList.remove("is-drag-over");
+        }
         element.classList.remove("is-dragging");
         element.classList.add("is-dropped");
         element.setAttribute("aria-grabbed", "false");
@@ -5950,7 +6007,6 @@
         if (this.feedbackElement) {
           this.feedbackElement.classList.add("hidden");
         }
-        const endTouch = e.changedTouches[0];
         const data = this.currentDrag?.data || this.getData(element);
         const startX = this.touchState?.startX || 0;
         const startY = this.touchState?.startY || 0;
@@ -5959,10 +6015,10 @@
           detail: {
             element,
             data,
-            position: { x: endTouch.clientX, y: endTouch.clientY },
+            position: endPosition,
             delta: {
-              x: endTouch.clientX - startX,
-              y: endTouch.clientY - startY
+              x: endPosition.x - startX,
+              y: endPosition.y - startY
             }
           }
         }));
@@ -6003,6 +6059,58 @@
      */
     handleDrop: function(e, zone) {
       e.preventDefault();
+      this.dispatchDrop(zone, { x: e.clientX, y: e.clientY });
+    },
+    /**
+     * Resolve a drop zone from viewport coordinates
+     * @param {number} x
+     * @param {number} y
+     * @returns {HTMLElement|null}
+     */
+    resolveDropZoneAtPoint: function(x, y) {
+      if (!Number.isFinite(x) || !Number.isFinite(y)) return null;
+      if (typeof document.elementsFromPoint === "function") {
+        const stacked = document.elementsFromPoint(x, y);
+        for (const element of stacked) {
+          const zone = element.closest(".vd-drop-zone");
+          if (zone) return zone;
+        }
+      }
+      const target = document.elementFromPoint(x, y);
+      const targetZone = target ? target.closest(".vd-drop-zone") : null;
+      if (targetZone) return targetZone;
+      const zones = document.querySelectorAll(".vd-drop-zone");
+      for (const zone of zones) {
+        const rect = zone.getBoundingClientRect();
+        if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
+          return zone;
+        }
+      }
+      return null;
+    },
+    /**
+     * Track and update active drop-zone hover state on touch devices
+     * @param {number} x
+     * @param {number} y
+     */
+    updateTouchDropZone: function(x, y) {
+      if (!this.touchState) return;
+      const nextZone = this.resolveDropZoneAtPoint(x, y);
+      const prevZone = this.touchState.overZone || null;
+      if (prevZone && prevZone !== nextZone) {
+        prevZone.classList.remove("is-drag-over");
+      }
+      if (nextZone && nextZone !== prevZone) {
+        nextZone.classList.add("is-drag-over");
+      }
+      this.touchState.overZone = nextZone || null;
+    },
+    /**
+     * Dispatch a normalized drop event for mouse and touch flows
+     * @param {HTMLElement} zone
+     * @param {{x:number, y:number}} position
+     */
+    dispatchDrop: function(zone, position) {
       zone.classList.remove("is-drag-over");
       zone.dispatchEvent(new CustomEvent("draggable:drop", {
         bubbles: true,
@@ -6010,7 +6118,7 @@
           zone,
           element: this.currentDrag?.element,
           data: this.currentDrag?.data,
-          position: { x: e.clientX, y: e.clientY }
+          position
         }
       }));
     },
@@ -6111,9 +6219,11 @@
       this.feedbackElement.innerHTML = "";
       const clone = this.currentDrag.element.cloneNode(true);
       this.feedbackElement.appendChild(clone);
+      const offsetX = this.currentDrag.offsetX ?? 20;
+      const offsetY = this.currentDrag.offsetY ?? 20;
       Object.assign(this.feedbackElement.style, {
-        left: x - 20 + "px",
-        top: y - 20 + "px",
+        left: x - offsetX + "px",
+        top: y - offsetY + "px",
         width: rect.width + "px",
         height: rect.height + "px"
       });
@@ -6399,6 +6509,67 @@
     window.Vanduo.register("LazyLoad", VanduoLazyLoad);
   }
   window.VanduoLazyLoad = VanduoLazyLoad;
+})();
+
+// js/components/glass.js
+(function() {
+  "use strict";
+  const GlassScroll = {
+    /** @type {Map<Element, IntersectionObserver>} */
+    observers: /* @__PURE__ */ new Map(),
+    init: function() {
+      document.querySelectorAll("[data-glass-scroll]").forEach((el) => {
+        if (this.observers.has(el)) return;
+        this.initElement(el);
+      });
+    },
+    /**
+     * Wire up a single scroll-activated glass element.
+     * @param {HTMLElement} el
+     */
+    initElement: function(el) {
+      const sentinelSelector = el.dataset.glassSentinel;
+      let sentinel;
+      if (sentinelSelector) {
+        sentinel = document.querySelector(sentinelSelector);
+      }
+      if (!sentinel) {
+        sentinel = el.previousElementSibling;
+      }
+      if (!sentinel) {
+        el.classList.add("is-glass-active");
+        return;
+      }
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            el.classList.toggle("is-glass-active", !entry.isIntersecting);
+          });
+        },
+        { threshold: 0, rootMargin: "0px" }
+      );
+      observer.observe(sentinel);
+      this.observers.set(el, observer);
+    },
+    /**
+     * Disconnect and remove a single element's observer.
+     * @param {HTMLElement} el
+     */
+    destroy: function(el) {
+      const observer = this.observers.get(el);
+      if (observer) {
+        observer.disconnect();
+        this.observers.delete(el);
+      }
+    },
+    destroyAll: function() {
+      this.observers.forEach((observer, el) => this.destroy(el));
+    }
+  };
+  if (typeof window.Vanduo !== "undefined") {
+    window.Vanduo.register("glassScroll", GlassScroll);
+  }
+  window.VanduoGlassScroll = GlassScroll;
 })();
 
 // js/components/flow.js

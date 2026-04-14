@@ -15,6 +15,117 @@
         <div class="vd-container-responsive" style="max-width: 1200px;">
 
             <!-- ═══════════════════════════════════════════════ -->
+            <!-- Version 1.3.4                                   -->
+            <!-- ═══════════════════════════════════════════════ -->
+            <article class="version-card">
+                <header class="version-header">
+                    <span class="vd-badge vd-badge-primary" style="font-size: 1rem; padding: 0.5rem 1rem;">v1.3.4</span>
+                    <span style="color: var(--text-secondary); font-size: 0.95rem;">
+                        <i class="ph ph-calendar mr-1"></i>April 14, 2026
+                    </span>
+                    <span class="vd-badge vd-badge-info" style="font-size: 0.75rem;">Latest</span>
+                </header>
+                <div class="version-body">
+                    <div class="vd-row">
+                        <div class="vd-col-12 vd-col-md-6">
+                            <h4><i class="ph ph-cube mr-2" style="color: var(--color-primary);"></i>Framework</h4>
+                            <div class="change-group">
+                                <h5>New Features</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-drop-half-bottom" style="color: var(--color-primary);"></i>
+                                        <div>
+                                            <strong>New: Glass Effects system — <code>effects/glass.css</code></strong>
+                                            <p>Introduced a complete frosted-glass surface system built on <code>backdrop-filter</code>. Core class <code>.vd-glass</code> provides translucent background, specular highlight sheen, noise texture, and box shadow. Size variants <code>.vd-glass-sm / md / lg / xl</code> tune blur and opacity. Modifiers <code>.vd-glass-tinted</code>, <code>.vd-glass-floating</code>, and <code>.vd-glass-contrast</code> cover the most common use patterns. Full <code>prefers-reduced-transparency</code> and <code>@supports not (backdrop-filter)</code> fallbacks included.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-palette" style="color: var(--color-primary);"></i>
+                                        <div>
+                                            <strong>New: Glass design tokens in <code>tokens.css</code></strong>
+                                            <p>Added <code>--glass-blur</code>, <code>--glass-saturate</code>, <code>--glass-bg-opacity</code>, <code>--glass-bg-light / dark</code>, <code>--glass-border-light / dark</code>, <code>--glass-highlight-alpha</code>, <code>--glass-shadow</code>, and <code>--glass-noise-opacity</code> with automatic light and dark-mode overrides via <code>[data-theme="dark"]</code> and <code>@media (prefers-color-scheme: dark)</code>. All tokens are aliased as <code>--vd-glass-*</code> in <code>vd-aliases.css</code>.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-layout" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>New: Glass modifier classes for existing components</strong>
+                                            <p>Opt-in <code>.vd-*-glass</code> modifier added to Navbar, Modal, Dropdown, Tooltip, Toast, Card, and FAB components, enabling frosted glass on any of them with a single class.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-arrow-fat-lines-up" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>New: Scroll-activated glass — <code>.vd-navbar-glass</code> &amp; <code>data-glass-scroll</code></strong>
+                                            <p>Navbar gains scroll-aware glass activation: transparent at rest, frosted on scroll. Threshold configurable via <code>data-scroll-threshold</code>. A generic <code>data-glass-scroll</code> + <code>data-glass-sentinel</code> attribute API (powered by <code>IntersectionObserver</code> in the new <code>glass.js</code> component) brings the same pattern to any element. The inactive state <code>[data-glass-scroll]:not(.is-glass-active)</code> is CSS-only; the JS toggles <code>.is-glass-active</code>.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="change-group">
+                                <h5>Updates</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-grid-four" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: vd-hex selection stays aligned while rotating the grid</strong>
+                                            <p>The labs <code>VdHexGrid</code> now re-syncs <code>selectedHex</code> references after grid regeneration, preventing stale selection coordinates during rotation, size updates, and dimension changes.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="vd-col-12 vd-col-md-6">
+                            <h4><i class="ph ph-book-open-text mr-2" style="color: var(--color-primary);"></i>Documentation</h4>
+                            <div class="change-group">
+                                <h5>New Features</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-drop-half-bottom" style="color: var(--color-primary);"></i>
+                                        <div>
+                                            <strong>New: Glass Effects documentation page</strong>
+                                            <p>Added <code>docs/sections/effects/glass.html</code> with a hero demo, token reference table, size variant showcase, modifier demos, component integration examples, a live scroll-activated glass demo using the <code>data-glass-scroll</code> pattern, and accessibility notes. Registered under the Effects category in <code>sections.json</code>.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-sparkle" style="color: var(--color-primary);"></i>
+                                        <div>
+                                            <strong>New: Docs site-wide glass visual upgrade</strong>
+                                            <p>Applied glass effects across the docs UI: scroll-activated frosted navbar (<code>.vd-navbar-glass</code>), frosted global search modal, glass feature cards and showcase cards on the home page, glass entry tiles and status/version cards on the docs landing, glass footer, and subtle frosted sidebar backdrop. A full-viewport ambient radial gradient (primary + info orbs, fixed attachment) now underlies every page.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="change-group">
+                                <h5>Bug Fixes</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-bug-beetle" style="color: var(--color-warning);"></i>
+                                        <div>
+                                            <strong>Fix: Labs vd-hex demo selected cell now follows rotation</strong>
+                                            <p>The docs Labs demo now reflects the corrected <code>VdHexGrid</code> behavior, so selected hex highlighting remains in sync with rotated grid geometry.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="change-group">
+                                <h5>Updates</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-bookmark-simple" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: Version and CDN pins to v1.3.4</strong>
+                                            <p>Package metadata, changelog, landing badges, and jsDelivr fallback URL now reference <strong>v1.3.4</strong>.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ═══════════════════════════════════════════════ -->
             <!-- Version 1.3.3                                   -->
             <!-- ═══════════════════════════════════════════════ -->
             <article class="version-card">
@@ -23,7 +134,6 @@
                     <span style="color: var(--text-secondary); font-size: 0.95rem;">
                         <i class="ph ph-calendar mr-1"></i>April 10, 2026
                     </span>
-                    <span class="vd-badge vd-badge-info" style="font-size: 0.75rem;">Latest</span>
                 </header>
                 <div class="version-body">
                     <div class="vd-row">

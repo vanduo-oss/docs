@@ -49,7 +49,7 @@
                 : (isLocalPreview ? 'local' : 'cdn');
             var basePath = mode === 'local'
                 ? './dist'
-                : 'https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.3.3/dist';
+                : 'https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.3.4/dist';
 
             window.__VANDUO_FRAMEWORK_ASSET_MODE = mode;
             window.__VANDUO_FRAMEWORK_ASSETS = {
@@ -106,7 +106,7 @@
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <!-- ── Navbar ──────────────────────────────────────── -->
-    <nav class="vd-navbar vd-navbar-fixed">
+    <nav class="vd-navbar vd-navbar-fixed vd-navbar-glass vd-glass-contrast">
         <div class="vd-navbar-container">
             <div class="vd-navbar-brand">
                 <div class="vd-navbar-brand-wrap">
@@ -180,7 +180,7 @@
     </main>
 
     <!-- ── Footer ─────────────────────────────────────── -->
-    <footer class="vd-footer">
+    <footer class="vd-footer vd-glass">
         <div class="vd-footer-container">
             <div class="vd-row">
                 <div class="vd-col-12 vd-col-md-4">

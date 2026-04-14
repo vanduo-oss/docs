@@ -181,6 +181,14 @@ export class VdHexGrid {
             }
         }
     }
+
+    /**
+     * Keep selected hex reference in sync after grid regeneration
+     */
+    _resyncSelectedHex() {
+        if (!this.selectedHex) return;
+        this.selectedHex = this.hexes.get(`${this.selectedHex.q},${this.selectedHex.r}`) ?? null;
+    }
     
     /**
      * Render the hex grid on canvas
@@ -409,6 +417,7 @@ export class VdHexGrid {
     setSize(size) {
         this.size = size;
         this._generateGrid();
+        this._resyncSelectedHex();
         this._render();
     }
     
@@ -419,6 +428,7 @@ export class VdHexGrid {
         this.width = width;
         this.height = height;
         this._generateGrid();
+        this._resyncSelectedHex();
         this._render();
     }
     
@@ -743,6 +753,7 @@ export class VdHexGrid {
     setRotation(rotation) {
         this.rotation = rotation;
         this._generateGrid();
+        this._resyncSelectedHex();
         this._render();
     }
     

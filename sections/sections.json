@@ -604,6 +604,13 @@
           "name": "Effects",
           "sections": [
             {
+              "id": "glass",
+              "title": "Glass Effects",
+              "file": "effects/glass.html",
+              "icon": "ph-drop-half-bottom",
+              "keywords": ["glass", "frosted", "blur", "backdrop", "translucent", "liquid"]
+            },
+            {
               "id": "ripple",
               "title": "Ripple / Waves",
               "file": "components/ripple.html",
