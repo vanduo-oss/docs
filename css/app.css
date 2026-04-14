@@ -58,6 +58,29 @@
 
         body {
             overscroll-behavior-y: none;
+            background:
+                radial-gradient(ellipse 80vw 65vh at 78% 7%, rgba(var(--vd-color-primary-rgb), 0.18) 0%, transparent 60%),
+                radial-gradient(ellipse 65vw 55vh at 12% 22%, rgba(var(--vd-color-info-rgb), 0.14) 0%, transparent 55%);
+            background-attachment: fixed;
+            background-color: var(--bg-primary);
+        }
+
+        [data-theme="dark"] body {
+            background:
+                radial-gradient(ellipse 80vw 65vh at 78% 7%, rgba(var(--vd-color-primary-rgb), 0.32) 0%, transparent 55%),
+                radial-gradient(ellipse 65vw 55vh at 12% 22%, rgba(var(--vd-color-info-rgb), 0.26) 0%, transparent 50%);
+            background-attachment: fixed;
+            background-color: var(--bg-primary);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme]) body {
+                background:
+                    radial-gradient(ellipse 80vw 65vh at 78% 7%, rgba(var(--vd-color-primary-rgb), 0.32) 0%, transparent 55%),
+                    radial-gradient(ellipse 65vw 55vh at 12% 22%, rgba(var(--vd-color-info-rgb), 0.26) 0%, transparent 50%);
+                background-attachment: fixed;
+                background-color: var(--bg-primary);
+            }
         }
 
         .vd-navbar-brand-wrap {
@@ -445,9 +468,12 @@
             height: calc(100vh - 80px);
             overflow-y: auto;
             padding-right: 0.5rem;
-            border-right: 1px solid var(--border-color);
+            border-right: 1px solid var(--vd-glass-border-light, var(--border-color));
             display: flex;
             flex-direction: column;
+            background: var(--vd-glass-bg-light);
+            backdrop-filter: blur(8px) saturate(1.4);
+            -webkit-backdrop-filter: blur(8px) saturate(1.4);
         }
 
 
@@ -588,7 +614,9 @@
                 border-right: none;
                 padding-right: 0;
                 margin-bottom: 2rem;
-                background: var(--bg-primary);
+                background: color-mix(in srgb, var(--bg-primary) 88%, transparent);
+                backdrop-filter: blur(10px) saturate(1.35);
+                -webkit-backdrop-filter: blur(10px) saturate(1.35);
                 z-index: 10;
             }
 
@@ -612,6 +640,27 @@
         /* ── Footer tweaks ──────────────────────────────── */
         .vd-footer {
             padding: var(--footer-padding-y-sm) var(--footer-padding-x) 0;
+        }
+
+        .vd-footer.vd-glass {
+            margin-top: 2rem;
+            border-top: 1px solid var(--vd-glass-border-light);
+            border-radius: 1rem 1rem 0 0;
+            background-image: linear-gradient(180deg,
+                color-mix(in srgb, var(--bg-secondary) 88%, transparent) 0%,
+                color-mix(in srgb, var(--bg-primary) 92%, transparent) 100%),
+                linear-gradient(0deg, var(--vd-glass-bg-light), var(--vd-glass-bg-light));
+            box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.06);
+        }
+
+        [data-theme="dark"] .vd-footer.vd-glass {
+            box-shadow: 0 -12px 36px rgba(0, 0, 0, 0.35);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme]) .vd-footer.vd-glass {
+                box-shadow: 0 -12px 36px rgba(0, 0, 0, 0.35);
+            }
         }
 
         .vd-footer-made-with {
@@ -652,6 +701,17 @@
         /* Hero bottom padding: sized so gap to search bar matches CTA button spacing (--spacing-6) */
         .hero-zone #hero {
             padding-bottom: calc(2rem + var(--spacing-6, 1.5rem)) !important;
+        }
+
+        /* ── Global ambient gradient — all pages ──────────────────────────── */
+        /* Lives on body with background-attachment: fixed so the orbs cover   */
+        /* the full viewport on every route and never clip at section edges.   */
+
+        /* Suppress the white specular highlight pseudo-element on home cards  */
+        /* and footer — it reads as an unwanted white stripe over dark bgs.   */
+        section#home .vd-glass::before,
+        footer.vd-glass::before {
+            display: none;
         }
 
         /* Hero CTA: Fibonacci 5:4:2 (largest first, middle gets more room for "Browse Components") */
@@ -987,7 +1047,9 @@
         .labs-header {
             padding: 144px 0 55px;
             text-align: center;
-            background: linear-gradient(135deg, var(--color-primary-alpha-10), var(--color-info-alpha-10));
+            background: linear-gradient(135deg,
+                rgba(var(--primary-rgb, var(--vd-color-primary-rgb)), 0.16) 0%,
+                rgba(var(--info-rgb, var(--vd-color-info-rgb)), 0.1) 100%);
         }
 
         .about-header h1,
@@ -1525,9 +1587,9 @@
             position: fixed;
             inset: 0;
             z-index: 9998;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.2s ease;
@@ -1547,10 +1609,12 @@
             z-index: 9999;
             width: 92%;
             max-width: 640px;
-            background: var(--bg-primary);
-            border: 1px solid var(--border-color);
+            background: var(--vd-glass-bg-light);
+            backdrop-filter: blur(var(--vd-glass-blur, 12px)) saturate(var(--vd-glass-saturate, 1.8));
+            -webkit-backdrop-filter: blur(var(--vd-glass-blur, 12px)) saturate(var(--vd-glass-saturate, 1.8));
+            border: 1px solid var(--vd-glass-border-light);
             border-radius: calc(var(--card-border-radius) * 1.5);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+            box-shadow: var(--vd-glass-shadow), 0 30px 70px rgba(0, 0, 0, 0.45);
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.2s ease, transform 0.2s ease;
@@ -1572,7 +1636,7 @@
             align-items: center;
             gap: 0.75rem;
             padding: 1rem 1.25rem;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--vd-glass-border-light);
         }
 
         .global-search-header .global-search-icon {
@@ -1707,7 +1771,7 @@
             align-items: center;
             gap: 1.25rem;
             padding: 0.6rem 1.25rem;
-            border-top: 1px solid var(--border-color);
+            border-top: 1px solid var(--vd-glass-border-light);
             font-size: 0.7rem;
             color: var(--text-secondary);
         }
@@ -1794,10 +1858,24 @@
             transition: border-color 0.2s, box-shadow 0.2s;
         }
 
+        .hero-search.vd-glass {
+            background: var(--vd-glass-bg-light);
+            border-color: var(--vd-glass-border-light);
+            box-shadow: var(--vd-glass-shadow);
+            backdrop-filter: blur(var(--vd-glass-blur)) saturate(var(--vd-glass-saturate));
+            -webkit-backdrop-filter: blur(var(--vd-glass-blur)) saturate(var(--vd-glass-saturate));
+        }
+
         .hero-search:hover,
         .hero-search:focus-within {
             border-color: var(--color-primary);
             box-shadow: 0 0 0 3px var(--color-primary-alpha-10);
+        }
+
+        .hero-search.vd-glass:hover,
+        .hero-search.vd-glass:focus-within {
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px var(--color-primary-alpha-10), var(--vd-glass-shadow);
         }
 
         .hero-search i {

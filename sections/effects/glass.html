@@ -1,0 +1,438 @@
+<section id="glass">
+    <h4 class="demo-title"><i class="ph ph-drop-half-bottom"></i>Glass Effects</h4>
+    <p class="vd-mb-6">
+        Vanduo glass effects provide an opt-in frosted surface system built with <code>backdrop-filter</code>,
+        translucent layers, highlight sheen, and accessibility fallbacks.
+    </p>
+
+    <div class="vd-row">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card" id="demo-glass-hero">
+                <div class="vd-card-header">
+                    <h4>Hero Surface</h4>
+                </div>
+                <div class="vd-card-body" style="background: radial-gradient(circle at 20% 20%, #8ec5fc 0%, #e0c3fc 40%, #d9afd9 70%, #97d9e1 100%); border-radius: var(--btn-border-radius-lg); min-height: 300px; display: flex; align-items: center; justify-content: center; padding: 2rem;">
+                    <div class="vd-glass vd-glass-lg vd-glass-tinted vd-glass-floating" style="max-width: 520px; width: 100%; border-radius: var(--btn-border-radius-lg); padding: 1.5rem;">
+                        <h4 style="margin-top: 0;">GlassSurface</h4>
+                        <p style="margin-bottom: 1rem;">Use <code>.vd-glass</code> for frosted surfaces over rich backgrounds, then add size and behavior modifiers as needed.</p>
+                        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                            <button class="vd-btn vd-btn-primary">Primary Action</button>
+                            <button class="vd-btn vd-btn-outline">Secondary</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html" data-extract="#demo-glass-hero .vd-card-body"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vd-row">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-glass-sizes">
+                <div class="vd-card-header">
+                    <h4>Size Variants</h4>
+                </div>
+                <div class="vd-card-body" style="background: linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%); border-radius: var(--btn-border-radius); display: grid; gap: 0.75rem; padding: 1rem;">
+                    <div class="vd-glass vd-glass-sm" style="padding: 0.75rem; border-radius: var(--btn-border-radius);"><strong>.vd-glass-sm</strong></div>
+                    <div class="vd-glass vd-glass-md" style="padding: 0.75rem; border-radius: var(--btn-border-radius);"><strong>.vd-glass-md</strong></div>
+                    <div class="vd-glass vd-glass-lg" style="padding: 0.75rem; border-radius: var(--btn-border-radius);"><strong>.vd-glass-lg</strong></div>
+                    <div class="vd-glass vd-glass-xl" style="padding: 0.75rem; border-radius: var(--btn-border-radius);"><strong>.vd-glass-xl</strong></div>
+                </div>
+            </div>
+
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html" data-extract="#demo-glass-sizes .vd-card-body"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-glass-modifiers">
+                <div class="vd-card-header">
+                    <h4>Modifiers</h4>
+                </div>
+                <div class="vd-card-body" style="background: linear-gradient(120deg, #fccb90 0%, #d57eeb 100%); border-radius: var(--btn-border-radius); display: grid; gap: 0.75rem; padding: 1rem;">
+                    <div class="vd-glass vd-glass-tinted" style="padding: 0.9rem; border-radius: var(--btn-border-radius);">.vd-glass-tinted</div>
+                    <div class="vd-glass vd-glass-floating" style="padding: 0.9rem; border-radius: var(--btn-border-radius);">.vd-glass-floating</div>
+                    <div class="vd-glass vd-glass-contrast" style="padding: 0.9rem; border-radius: var(--btn-border-radius);">.vd-glass-contrast</div>
+                </div>
+            </div>
+
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html" data-extract="#demo-glass-modifiers .vd-card-body"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vd-row">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h4><i class="ph ph-sliders mr-2" style="color: var(--color-primary);"></i>Glass Tokens</h4>
+                </div>
+                <div class="vd-card-body">
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Token</th>
+                                    <th>Purpose</th>
+                                    <th>Default</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>--vd-glass-blur</code></td><td>Backdrop blur amount</td><td><code>12px</code></td></tr>
+                                <tr><td><code>--vd-glass-saturate</code></td><td>Backdrop saturation boost</td><td><code>1.8</code></td></tr>
+                                <tr><td><code>--vd-glass-bg-opacity</code></td><td>Glass opacity base</td><td><code>0.65</code></td></tr>
+                                <tr><td><code>--vd-glass-bg-light</code></td><td>Light translucent surface</td><td><code>rgba(255,255,255,var(--vd-glass-bg-opacity))</code></td></tr>
+                                <tr><td><code>--vd-glass-bg-dark</code></td><td>Dark translucent surface</td><td><code>rgba(30,30,30,var(--vd-glass-bg-opacity))</code></td></tr>
+                                <tr><td><code>--vd-glass-border-light</code></td><td>Glass edge stroke</td><td><code>rgba(255,255,255,var(--vd-glass-border-alpha))</code></td></tr>
+                                <tr><td><code>--vd-glass-highlight-alpha</code></td><td>Specular sheen intensity</td><td><code>0.25</code></td></tr>
+                                <tr><td><code>--vd-glass-shadow</code></td><td>Depth shadow for floating glass</td><td><code>0 8px 32px rgba(0,0,0,0.12)</code></td></tr>
+                                <tr><td><code>--vd-glass-noise-opacity</code></td><td>Noise grain overlay strength</td><td><code>0.03</code></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vd-row">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card" id="demo-glass-components">
+                <div class="vd-card-header">
+                    <h4>Component Integration</h4>
+                </div>
+                <div class="vd-card-body" style="background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%); border-radius: var(--btn-border-radius); padding: 1rem;">
+                    <div class="vd-navbar vd-navbar-glass" style="border-radius: var(--btn-border-radius); margin-bottom: 1rem;">
+                        <a class="vd-navbar-brand" href="#">Vanduo</a>
+                        <ul class="vd-navbar-nav" style="position: static; transform: none;">
+                            <li><a class="vd-nav-link active" href="#">Glass</a></li>
+                            <li><a class="vd-nav-link" href="#">Docs</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="vd-row">
+                        <div class="vd-col-12 vd-col-md-6">
+                            <div class="vd-card vd-card-glass" style="border-radius: var(--btn-border-radius);">
+                                <div class="vd-card-header">Card Glass</div>
+                                <div class="vd-card-body">Apply <code>.vd-card-glass</code> for elevated frosted cards.</div>
+                            </div>
+                        </div>
+                        <div class="vd-col-12 vd-col-md-6">
+                            <div class="vd-toast vd-toast-glass is-visible" style="position: static; transform: none; width: 100%;">
+                                <div class="vd-toast-content">
+                                    <div class="vd-toast-title">Toast Glass</div>
+                                    <div class="vd-toast-message">Use <code>.vd-toast-glass</code> for floating notifications.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; justify-content: flex-end; margin-top: 1rem;">
+                        <button class="vd-fab vd-fab-glass" aria-label="Glass action">
+                            <i class="ph ph-plus"></i>
+                        </button>
+                    </div>
+
+                    <button class="vd-btn vd-btn-primary vd-mt-3" data-modal="#glass-modal-demo">Open Glass Modal</button>
+                    <div class="vd-modal vd-modal-glass" id="glass-modal-demo">
+                        <div class="vd-modal-backdrop vd-modal-glass-backdrop"></div>
+                        <div class="vd-modal-dialog">
+                            <div class="vd-modal-content">
+                                <div class="vd-modal-header">
+                                    <h4 class="vd-modal-title">Modal Glass</h4>
+                                    <button class="vd-modal-close" data-dismiss="modal" aria-label="Close">&times;</button>
+                                </div>
+                                <div class="vd-modal-body">
+                                    The <code>.vd-modal-glass</code> variant applies frosted glass styling to modal surfaces.
+                                </div>
+                                <div class="vd-modal-footer">
+                                    <button class="vd-btn vd-btn-secondary" data-dismiss="modal">Close</button>
+                                    <button class="vd-btn vd-btn-primary">Confirm</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html" data-extract="#demo-glass-components .vd-card-body"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vd-row">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h4><i class="ph ph-wheelchair mr-2" style="color: var(--color-primary);"></i>Accessibility</h4>
+                </div>
+                <div class="vd-card-body">
+                    <ul>
+                        <li>Glass classes include <code>prefers-reduced-transparency: reduce</code> fallbacks that disable blur and return to solid surfaces.</li>
+                        <li>Floating interactions respect <code>prefers-reduced-motion: reduce</code>.</li>
+                        <li>Use <code>.vd-glass-contrast</code> on busy backgrounds to improve text legibility.</li>
+                        <li>Keep body text contrast above WCAG AA by testing overlays in both light and dark themes.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h4><i class="ph ph-paint-brush mr-2" style="color: var(--color-primary);"></i>Theming</h4>
+                </div>
+                <div class="vd-card-body">
+                    <p class="vd-mb-3">Override glass tokens per app, theme, or component scope.</p>
+                    <div class="vd-code-snippet">
+                        <div class="vd-code-snippet-content is-open">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="css">CSS</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="css"><code><span class="code-selector">:root</span> {
+  <span class="code-property">--vd-glass-blur</span>: <span class="code-value">14px</span>;
+  <span class="code-property">--vd-glass-bg-opacity</span>: <span class="code-value">0.7</span>;
+  <span class="code-property">--vd-glass-shadow</span>: <span class="code-value">0 14px 40px rgba(0, 0, 0, 0.2)</span>;
+}
+
+<span class="code-selector">.marketing-hero .vd-glass</span> {
+  <span class="code-property">--vd-glass-tint</span>: <span class="code-value">rgba(34, 184, 207, 0.18)</span>;
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Scroll-Activated Glass ─────────────────────────── -->
+    <div class="vd-row vd-mt-8">
+        <div class="vd-col-12">
+            <h5 class="vd-mb-2"><i class="ph ph-arrow-up mr-2" style="color: var(--color-primary);"></i>Scroll-Activated Glass</h5>
+            <p class="vd-mb-4">
+                Two complementary APIs let you activate glass effects on scroll rather than at page-load time.
+                The framework handles all the observer/listener logic — no custom JavaScript required.
+            </p>
+        </div>
+    </div>
+
+    <!-- Navbar pattern -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card demo-card">
+                <div class="vd-card-header">
+                    <h6 class="vd-mb-0"><code>.vd-navbar-glass</code> — Navbar scroll activation</h6>
+                </div>
+                <div class="vd-card-body">
+                    <p class="vd-mb-3">
+                        Add <code>.vd-navbar-glass</code> to any <code>.vd-navbar-fixed</code> or <code>.vd-navbar-sticky</code>.
+                        The navbar starts fully transparent and gains the frosted glass surface once the user scrolls past its height
+                        (or a custom threshold set with <code>data-scroll-threshold</code>).
+                        The <code>.vd-navbar-scrolled</code> class is toggled automatically by the framework.
+                    </p>
+                    <div class="vd-code-snippet">
+                        <div class="vd-code-snippet-content is-open">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-tag">&lt;nav</span> <span class="code-attr">class</span>=<span class="code-value">"vd-navbar vd-navbar-fixed vd-navbar-glass"</span><span class="code-tag">&gt;</span>
+  ...
+<span class="code-tag">&lt;/nav&gt;</span>
+
+<span class="code-comment">&lt;!-- Custom scroll threshold (px) --&gt;</span>
+<span class="code-tag">&lt;nav</span> <span class="code-attr">class</span>=<span class="code-value">"vd-navbar vd-navbar-fixed vd-navbar-glass"</span>
+     <span class="code-attr">data-scroll-threshold</span>=<span class="code-value">"120"</span><span class="code-tag">&gt;</span>
+  ...
+<span class="code-tag">&lt;/nav&gt;</span></code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="vd-mt-3 vd-mb-0" style="font-size: 0.875rem; color: var(--vd-text-secondary);">
+                        The docs navbar above is a live example — scroll this page to see the effect.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Generic data-glass-scroll pattern -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card demo-card" style="height: 100%;">
+                <div class="vd-card-header">
+                    <h6 class="vd-mb-0"><code>data-glass-scroll</code> — Generic activation</h6>
+                </div>
+                <div class="vd-card-body">
+                    <p class="vd-mb-3">
+                        Any element — sidebar, floating panel, sticky header — can adopt scroll-aware glass
+                        by pairing <code>.vd-glass</code> with the <code>data-glass-scroll</code> attribute.
+                        The framework uses <code>IntersectionObserver</code> to watch a sentinel element
+                        (previous sibling by default, or a CSS selector via <code>data-glass-sentinel</code>)
+                        and toggles <code>.is-glass-active</code> automatically.
+                    </p>
+                    <ul class="vd-mb-0" style="font-size: 0.9rem;">
+                        <li>No JavaScript required in your markup</li>
+                        <li>Works on any scrollable container, not just the window</li>
+                        <li>CSS handles the inactive→active transition via <code>transition</code></li>
+                        <li>Falls back to always-active when no sentinel is found</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="vd-col-12 vd-col-md-6">
+            <!-- Live demo: scrollable container with glass panel inside -->
+            <div class="vd-card demo-card" id="demo-glass-scroll">
+                <div class="vd-card-header">
+                    <h6 class="vd-mb-0">Live demo</h6>
+                </div>
+                <div class="vd-card-body" style="padding: 0; overflow: hidden; border-radius: 0 0 var(--btn-border-radius-lg) var(--btn-border-radius-lg);">
+                    <div style="height: 260px; overflow-y: auto; position: relative;" id="glass-scroll-demo-container">
+                        <div id="glass-scroll-sentinel" style="height: 80px; background: linear-gradient(135deg, #8ec5fc 0%, #e0c3fc 100%); display: flex; align-items: center; justify-content: center;">
+                            <span style="font-size: 0.8rem; opacity: 0.75;">↑ scroll sentinel</span>
+                        </div>
+
+                        <div style="padding: 1.5rem; background: linear-gradient(160deg, #d9afd9 0%, #97d9e1 100%); min-height: 400px;">
+                            <div class="vd-glass vd-glass-tinted"
+                                 data-glass-scroll
+                                 data-glass-sentinel="#glass-scroll-sentinel"
+                                 style="position: sticky; top: 0; padding: 0.75rem 1rem; border-radius: var(--btn-border-radius); z-index: 10; margin-bottom: 1rem;">
+                                <span style="font-size: 0.875rem; font-weight: 500;">Sticky glass panel — activates on scroll</span>
+                            </div>
+                            <p style="font-size: 0.875rem; opacity: 0.8; margin: 0;">Scroll inside this box to see the glass surface activate once the sentinel element above leaves the viewport.</p>
+                            <div style="height: 300px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Code snippet for data-glass-scroll -->
+    <div class="vd-row">
+        <div class="vd-col-12">
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code — data-glass-scroll pattern</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Sentinel: the element whose disappearance triggers glass activation --&gt;</span>
+<span class="code-tag">&lt;div</span> <span class="code-attr">id</span>=<span class="code-value">"my-sentinel"</span><span class="code-tag">&gt;</span>...<span class="code-tag">&lt;/div&gt;</span>
+
+<span class="code-comment">&lt;!-- Glass element: transparent at rest, frosted once sentinel leaves view --&gt;</span>
+<span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-value">"vd-glass"</span>
+     <span class="code-attr">data-glass-scroll</span>
+     <span class="code-attr">data-glass-sentinel</span>=<span class="code-value">"#my-sentinel"</span><span class="code-tag">&gt;</span>
+  Sticky panel content
+<span class="code-tag">&lt;/div&gt;</span>
+
+<span class="code-comment">&lt;!-- Without explicit sentinel: uses the previous sibling automatically --&gt;</span>
+<span class="code-tag">&lt;div</span> <span class="code-attr">id</span>=<span class="code-value">"hero"</span><span class="code-tag">&gt;</span>...<span class="code-tag">&lt;/div&gt;</span>
+<span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-value">"vd-glass"</span> <span class="code-attr">data-glass-scroll</span><span class="code-tag">&gt;</span>
+  Activates when #hero scrolls out of view
+<span class="code-tag">&lt;/div&gt;</span></code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
