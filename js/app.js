@@ -41,6 +41,10 @@ let scrollSpyTicking = false;
 let activeDocSectionId = null;
 let pendingDocNavigationId = null;
 let pendingDocNavigationReleaseTimer = null;
+let docScrollLoaderEl = null;
+let docScrollLoaderTargetId = null;
+let docScrollLoaderFallbackTimer = null;
+let requestedDocScrollLoaderSectionId = null;
 
 function releasePendingDocNavigation(delayMs = 0) {
     if (pendingDocNavigationReleaseTimer) {
@@ -55,6 +59,22 @@ function releasePendingDocNavigation(delayMs = 0) {
         return;
     }
     pendingDocNavigationId = null;
+}
+
+function clearDocScrollLoaderFallbackTimer() {
+    if (docScrollLoaderFallbackTimer) {
+        clearTimeout(docScrollLoaderFallbackTimer);
+        docScrollLoaderFallbackTimer = null;
+    }
+}
+
+function requestDocScrollLoaderForRoute(route) {
+    if (typeof route !== 'string' || !route.startsWith('docs/')) {
+        requestedDocScrollLoaderSectionId = null;
+        return;
+    }
+    var parsed = parseHash('#' + route);
+    requestedDocScrollLoaderSectionId = parsed && parsed.section ? parsed.section : null;
 }
 
 /* ── Loading placeholders ─────────────────────── */
@@ -105,6 +125,85 @@ function getPagePlaceholderHtml() {
         + '<div class="vd-spinner vd-spinner-sm vd-spinner-error" style="animation-delay: -0.3s;"></div>'
         + '<div class="vd-spinner vd-spinner-sm vd-spinner-info" style="animation-delay: -0.45s;"></div></div>'
         + '<span class="vd-dynamic-loader-text">Loading...</span></div></div>';
+}
+
+function getDocScrollLoaderHtml() {
+    return '<div class="vd-skeleton-card" style="position: relative; min-height: 220px; padding: 1.5rem; overflow: hidden;">'
+        + '<div class="vd-skeleton vd-skeleton-heading-lg" style="margin-bottom: 1.25rem;"></div>'
+        + '<div class="vd-skeleton vd-skeleton-paragraph">'
+        + '<div class="vd-skeleton vd-skeleton-text"></div>'
+        + '<div class="vd-skeleton vd-skeleton-text"></div>'
+        + '<div class="vd-skeleton vd-skeleton-text"></div></div>'
+        + '<div style="margin-top: 1.25rem;"></div>'
+        + '<div class="vd-skeleton vd-skeleton-rect-sm" style="margin-bottom: 1.25rem;"></div>'
+        + '<div class="vd-skeleton vd-skeleton-paragraph">'
+        + '<div class="vd-skeleton vd-skeleton-text"></div>'
+        + '<div class="vd-skeleton vd-skeleton-text"></div></div>'
+        + '<div class="vd-dynamic-loader" style="position: absolute; inset: 0;">'
+        + '<div class="vd-dynamic-loader-grid">'
+        + '<div class="vd-spinner vd-spinner-sm vd-spinner-success" style="animation-delay: 0s;"></div>'
+        + '<div class="vd-spinner vd-spinner-sm vd-spinner-warning" style="animation-delay: -0.15s;"></div>'
+        + '<div class="vd-spinner vd-spinner-sm vd-spinner-error" style="animation-delay: -0.3s;"></div>'
+        + '<div class="vd-spinner vd-spinner-sm vd-spinner-info" style="animation-delay: -0.45s;"></div></div>'
+        + '<span class="vd-dynamic-loader-text">Finding section...</span></div></div>';
+}
+
+function hideDocScrollLoader() {
+    clearDocScrollLoaderFallbackTimer();
+    if (docScrollLoaderEl) {
+        docScrollLoaderEl.remove();
+        docScrollLoaderEl = null;
+    }
+    docScrollLoaderTargetId = null;
+}
+
+function showDocScrollLoader(sectionId) {
+    if (!sectionId) return;
+    var docsView = document.getElementById('docs-view');
+    if (!docsView || !docsView.classList.contains('is-active')) return;
+
+    hideDocScrollLoader();
+
+    docScrollLoaderEl = document.createElement('div');
+    docScrollLoaderEl.className = 'doc-scroll-loader-card';
+    docScrollLoaderEl.setAttribute('role', 'status');
+    docScrollLoaderEl.setAttribute('aria-live', 'polite');
+    docScrollLoaderEl.innerHTML = getDocScrollLoaderHtml();
+    document.body.appendChild(docScrollLoaderEl);
+    window.requestAnimationFrame(function () {
+        if (docScrollLoaderEl) docScrollLoaderEl.classList.add('is-visible');
+    });
+
+    docScrollLoaderTargetId = sectionId;
+    clearDocScrollLoaderFallbackTimer();
+    docScrollLoaderFallbackTimer = setTimeout(hideDocScrollLoader, 4500);
+}
+
+function settleDocScrollLoader(sectionId) {
+    if (!docScrollLoaderEl || !sectionId || docScrollLoaderTargetId !== sectionId) return;
+
+    var deadline = Date.now() + 3200;
+    function checkScrollCompletion() {
+        if (!docScrollLoaderEl || docScrollLoaderTargetId !== sectionId) return;
+        var target = document.getElementById(sectionId);
+        if (!target) {
+            if (Date.now() >= deadline) {
+                hideDocScrollLoader();
+            } else {
+                window.requestAnimationFrame(checkScrollCompletion);
+            }
+            return;
+        }
+
+        var reachedTarget = target.getBoundingClientRect().top <= (SCROLL_SPY_OFFSET + 10);
+        if (reachedTarget || Date.now() >= deadline) {
+            hideDocScrollLoader();
+            return;
+        }
+        window.requestAnimationFrame(checkScrollCompletion);
+    }
+
+    window.requestAnimationFrame(checkScrollCompletion);
 }
 
 /* ── Title Update Helper ──────────────────────── */
@@ -314,6 +413,7 @@ function showView(view) {
 
 /* ── Page loading (Home / About / Changelog) ── */
 async function loadPage(pageId) {
+    hideDocScrollLoader();
     if (currentView === pageId && document.getElementById(pageId)) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
@@ -362,6 +462,11 @@ async function preloadSectionsBefore(tabKey, targetSectionId) {
 }
 
 async function loadSection(sectionId, autoScroll = true) {
+    if (autoScroll && requestedDocScrollLoaderSectionId === sectionId) {
+        showDocScrollLoader(sectionId);
+        requestedDocScrollLoaderSectionId = null;
+    }
+
     if (autoScroll) {
         pendingDocNavigationId = sectionId;
     }
@@ -369,6 +474,7 @@ async function loadSection(sectionId, autoScroll = true) {
     if (loadedSections.has(sectionId)) {
         var el = document.getElementById(sectionId);
         if (el && autoScroll) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (autoScroll) settleDocScrollLoader(sectionId);
         setActiveNavLink(sectionId);
         if (autoScroll) releasePendingDocNavigation(450);
         return;
@@ -384,6 +490,7 @@ async function loadSection(sectionId, autoScroll = true) {
         if (loadedSections.has(sectionId)) {
             var existingSection = document.getElementById(sectionId);
             if (existingSection) existingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            settleDocScrollLoader(sectionId);
             setActiveNavLink(sectionId);
             setDocumentTitle(meta.section.title);
             if (window.history && window.history.replaceState) {
@@ -448,6 +555,7 @@ async function loadSection(sectionId, autoScroll = true) {
 
         var target = document.getElementById(sectionId);
         if (target && autoScroll) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (autoScroll) settleDocScrollLoader(sectionId);
 
         if (autoScroll) {
             setActiveNavLink(sectionId);
@@ -459,6 +567,7 @@ async function loadSection(sectionId, autoScroll = true) {
             releasePendingDocNavigation(450);
         }
     } catch (err) {
+        hideDocScrollLoader();
         placeholder.remove();
         console.error(err);
         container.insertAdjacentHTML('beforeend',
@@ -470,6 +579,7 @@ async function loadSection(sectionId, autoScroll = true) {
 
 /* ── Switch docs tab ──────────────────────────── */
 async function switchTab(tabKey) {
+    hideDocScrollLoader();
     if (currentTab === tabKey) return;
     currentTab = tabKey;
     setActiveDocMode(tabKey);
@@ -1511,6 +1621,7 @@ function closeGlobalSearch() {
 function selectGlobalSearchResult(index) {
     var result = globalSearchState.results[index];
     if (!result) return;
+    requestDocScrollLoaderForRoute(result.route);
     closeGlobalSearch();
     navigate(result.route);
 }
@@ -1719,6 +1830,7 @@ function initGlobalSearch() {
     function selectHeroResult(index) {
         var result = heroSearchState.results[index];
         if (!result) return;
+        requestDocScrollLoaderForRoute(result.route);
         closeHeroDropdown();
         var input = document.getElementById('hero-search-input');
         if (input) { input.value = ''; input.blur(); }

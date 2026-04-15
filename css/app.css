@@ -1397,7 +1397,42 @@
             }
         }
 
+        .doc-scroll-loader-card {
+            position: fixed;
+            top: 96px;
+            left: 50%;
+            width: min(40rem, calc(100vw - 2rem));
+            transform: translateX(-50%);
+            z-index: 1200;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.18s ease;
+        }
+
+        .doc-scroll-loader-card.is-visible {
+            opacity: 1;
+        }
+
+        .doc-scroll-loader-card .vd-skeleton-card {
+            border: 1px solid var(--border-color);
+            border-radius: var(--card-border-radius);
+            background: var(--bg-primary);
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.16);
+        }
+
+        @media (max-width: 767.98px) {
+            .doc-scroll-loader-card {
+                top: 84px;
+                width: calc(100vw - 1.5rem);
+            }
+        }
+
         /* reduced-motion for morph is handled by framework morph.css */
+        @media (prefers-reduced-motion: reduce) {
+            .doc-scroll-loader-card {
+                transition: none;
+            }
+        }
 
         /* ── Global Search ──────────────────────────────── */
 
