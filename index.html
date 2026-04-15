@@ -132,10 +132,8 @@
             <div class="vd-navbar-menu">
                 <ul class="vd-navbar-nav">
                     <li><a href="#home" class="vd-nav-link" data-route="home">Home</a></li>
-                    <li><a href="#docs" class="vd-nav-link" data-route="docs">Documentation</a></li>
-<li><a href="#changelog" class="vd-nav-link" data-route="changelog">Changelog</a></li>
-<li><a href="#about" class="vd-nav-link" data-route="about">About</a></li>
-<li><a href="#labs" class="vd-nav-link" data-route="labs">Labs</a></li>
+                    <li><a href="#docs" class="vd-nav-link" data-route="docs">Docs</a></li>
+                    <li><a href="#labs" class="vd-nav-link" data-route="labs">Labs</a></li>
                 </ul>
             </div>
         </div>
@@ -150,16 +148,23 @@
         <!-- Docs view (Components / Guides tabs) -->
         <div id="docs-view">
             <div class="vd-container-responsive">
-                <div class="doc-tabs-wrapper">
-                    <div class="doc-tabs">
-                        <a href="#docs/components" class="doc-tab" data-tab="components"><i
-                                class="ph ph-cube"></i>Components</a>
-                        <a href="#docs/guides" class="doc-tab" data-tab="guides"><i class="ph ph-compass"></i>Guides</a>
-                    </div>
-                </div>
-
                 <div class="vd-row">
                     <aside class="vd-col-12 vd-col-lg-2 doc-sidebar">
+                        <div class="doc-water-toggle-wrapper" aria-label="Docs mode switch">
+                            <button type="button" class="vd-morph doc-water-toggle" id="doc-water-toggle"
+                                data-vd-morph="manual" aria-pressed="false" aria-label="Switch to Guides">
+                                <span class="vd-morph-wave" aria-hidden="true"></span>
+                                <span class="vd-morph-shine" aria-hidden="true"></span>
+                                <span class="vd-morph-content vd-morph-current" aria-hidden="true">
+                                    <i class="doc-water-icon ph ph-cube"></i>
+                                    <span class="doc-water-label">Components</span>
+                                </span>
+                                <span class="vd-morph-content vd-morph-next" aria-hidden="true">
+                                    <i class="doc-water-icon ph ph-compass"></i>
+                                    <span class="doc-water-label">Guides</span>
+                                </span>
+                            </button>
+                        </div>
                         <div class="doc-sidebar-filter">
                             <i class="ph ph-funnel-simple" aria-hidden="true"></i>
                             <input type="search" class="doc-sidebar-filter-input" id="doc-sidebar-filter-input"
@@ -168,7 +173,7 @@
 
                         <button class="doc-sidebar-toggle" aria-label="Toggle navigation" aria-expanded="false">Table of
                             Contents</button>
-                        <nav class="doc-nav" aria-label="Documentation sections">
+                        <nav class="doc-nav" aria-label="Docs sections">
                             <ul class="doc-nav-list" id="dynamic-nav-list"></ul>
                         </nav>
                     </aside>
@@ -193,7 +198,7 @@
                         <h4>Quick Links</h4>
                         <ul class="vd-footer-links">
                             <li><a href="#home" data-route="home">Home</a></li>
-                            <li><a href="#docs" data-route="docs">Documentation</a></li>
+                            <li><a href="#docs" data-route="docs">Docs</a></li>
                             <li><a href="#changelog" data-route="changelog">Changelog</a></li>
                             <li><a href="#about" data-route="about">About</a></li>
                         </ul>
@@ -205,6 +210,9 @@
                         <ul class="vd-footer-links">
                             <li><a href="https://github.com/vanduo-oss/framework" target="_blank"
                                     rel="noopener">GitHub</a></li>
+                            <li><a href="https://www.npmjs.com/package/@vanduo-oss/framework" target="_blank"
+                                    rel="noopener">NPM</a></li>
+                            <li><a href="#kilo-oss" data-route="kilo-oss">Kilo OSS</a></li>
                             <li><a href="https://github.com/vanduo-oss/framework/blob/main/LICENSE">License</a>
                             </li>
                         </ul>
@@ -212,7 +220,7 @@
                 </div>
             </div>
             <div class="vd-footer-bottom">
-                <p class="vd-text-center vd-text-muted">&copy; 2026, Vanduo Framework. MIT License.</p>
+                <p class="vd-text-center vd-text-muted">2026, Vanduo Framework. MIT License.</p>
             </div>
         </div>
     </footer>

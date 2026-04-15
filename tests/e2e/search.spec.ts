@@ -9,9 +9,7 @@ async function waitForSPA(page: import('@playwright/test').Page) {
 
 test.describe('2. Search Functionality', () => {
 
-    test('Cmd+K opens global search modal (or focuses hero search on home)', async ({ page, isMobile }) => {
-        // Note: Cmd+K might be overridden by browser shortcuts in some test environments,
-        // but we can try dispatching the keyboard event directly.
+    test('Cmd+K opens global search modal from docs and home', async ({ page }) => {
         await page.goto('/#about');
         await waitForSPA(page);
 
@@ -32,14 +30,11 @@ test.describe('2. Search Functionality', () => {
         await page.goto('/#home');
         await waitForSPA(page);
 
-        // On mobile, the hero search might not be visible, but let's test desktop behavior
-        if (!isMobile) {
-            await page.keyboard.press(`${modifier}+k`);
-            await page.waitForTimeout(300);
-
-            const heroSearchInput = page.locator('#hero-search-input');
-            await expect(heroSearchInput).toBeFocused();
-        }
+        await page.keyboard.press(`${modifier}+k`);
+        await page.waitForTimeout(300);
+        await expect(modal).toHaveClass(/is-open/);
+        const globalSearchInput = page.locator('#global-search-input');
+        await expect(globalSearchInput).toBeFocused();
     });
 
     test('Search input accurately filters across multiple sections', async ({ page }) => {

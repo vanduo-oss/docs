@@ -39,6 +39,23 @@ let currentView = null;
 let currentTab = null;
 let scrollSpyTicking = false;
 let activeDocSectionId = null;
+let pendingDocNavigationId = null;
+let pendingDocNavigationReleaseTimer = null;
+
+function releasePendingDocNavigation(delayMs = 0) {
+    if (pendingDocNavigationReleaseTimer) {
+        clearTimeout(pendingDocNavigationReleaseTimer);
+        pendingDocNavigationReleaseTimer = null;
+    }
+    if (delayMs > 0) {
+        pendingDocNavigationReleaseTimer = setTimeout(function () {
+            pendingDocNavigationId = null;
+            pendingDocNavigationReleaseTimer = null;
+        }, delayMs);
+        return;
+    }
+    pendingDocNavigationId = null;
+}
 
 /* ── Loading placeholders ─────────────────────── */
 /*
@@ -233,11 +250,33 @@ function filterSidebarNav(query) {
     }
 }
 
-/* ── Doc-tabs state ───────────────────────────── */
-function setActiveTab(tabKey) {
-    document.querySelectorAll('.doc-tab').forEach(function (tab) {
-        tab.classList.toggle('active', tab.getAttribute('data-tab') === tabKey);
-    });
+/* ── Docs mode toggle state ───────────────────── */
+
+var _toggleMorphing = false;
+
+function _setToggleContent(el, tabKey) {
+    var isGuides = tabKey === 'guides';
+    var icon = el.querySelector('.doc-water-icon');
+    var label = el.querySelector('.doc-water-label');
+    if (icon) icon.className = isGuides ? 'doc-water-icon ph ph-compass' : 'doc-water-icon ph ph-cube';
+    if (label) label.textContent = isGuides ? 'Guides' : 'Components';
+}
+
+function setActiveDocMode(tabKey) {
+    var toggle = document.getElementById('doc-water-toggle');
+    if (!toggle) return;
+
+    var isGuides = tabKey === 'guides';
+    toggle.setAttribute('aria-pressed', String(isGuides));
+    toggle.setAttribute('aria-label', isGuides ? 'Switch to Components' : 'Switch to Guides');
+
+    if (_toggleMorphing) return;
+
+    var current = toggle.querySelector('.vd-morph-current');
+    var next = toggle.querySelector('.vd-morph-next');
+    var oppositeTab = isGuides ? 'components' : 'guides';
+    if (current) _setToggleContent(current, tabKey);
+    if (next) _setToggleContent(next, oppositeTab);
 }
 
 /* ── Navbar active state ──────────────────────── */
@@ -309,23 +348,57 @@ async function loadPage(pageId) {
 }
 
 /* ── Section loading (docs) ───────────────────── */
+async function preloadSectionsBefore(tabKey, targetSectionId) {
+    var orderedIds = getOrderedIds(tabKey);
+    var targetIndex = orderedIds.indexOf(targetSectionId);
+    if (targetIndex <= 0) return;
+
+    for (var i = 0; i < targetIndex; i++) {
+        var id = orderedIds[i];
+        if (!loadedSections.has(id) && !loadingSections.has(id)) {
+            await loadSection(id, false);
+        }
+    }
+}
+
 async function loadSection(sectionId, autoScroll = true) {
+    if (autoScroll) {
+        pendingDocNavigationId = sectionId;
+    }
+
     if (loadedSections.has(sectionId)) {
         var el = document.getElementById(sectionId);
         if (el && autoScroll) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
         setActiveNavLink(sectionId);
+        if (autoScroll) releasePendingDocNavigation(450);
         return;
     }
-    if (loadingSections.has(sectionId)) {
-        return; // Deduplicate
-    }
-    loadingSections.add(sectionId);
 
     var meta = findSectionMeta(sectionId);
     if (!meta) {
-        loadingSections.delete(sectionId);
         return;
     }
+
+    if (autoScroll) {
+        await preloadSectionsBefore(meta.tab, sectionId);
+        if (loadedSections.has(sectionId)) {
+            var existingSection = document.getElementById(sectionId);
+            if (existingSection) existingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            setActiveNavLink(sectionId);
+            setDocumentTitle(meta.section.title);
+            if (window.history && window.history.replaceState) {
+                window.history.replaceState(null, '', '#docs/' + sectionId);
+            }
+            activeDocSectionId = sectionId;
+            releasePendingDocNavigation(450);
+            return;
+        }
+    }
+
+    if (loadingSections.has(sectionId)) {
+        return;
+    }
+    loadingSections.add(sectionId);
 
     var container = document.getElementById('dynamic-content');
     var orderedIds = getOrderedIds(meta.tab);
@@ -364,6 +437,7 @@ async function loadSection(sectionId, autoScroll = true) {
             if (typeof Vanduo !== 'undefined') Vanduo.init();
             hideDisabledCodeTabs(sectionEl);
             wireRouteLinks(sectionEl);
+            initSectionDemos(sectionEl);
             // Incrementally observe the new section element rather than
             // rebuilding the entire observer on every load.
             observeSection(sectionEl);
@@ -381,6 +455,8 @@ async function loadSection(sectionId, autoScroll = true) {
             if (window.history && window.history.replaceState) {
                 window.history.replaceState(null, '', '#docs/' + sectionId);
             }
+            activeDocSectionId = sectionId;
+            releasePendingDocNavigation(450);
         }
     } catch (err) {
         placeholder.remove();
@@ -396,7 +472,7 @@ async function loadSection(sectionId, autoScroll = true) {
 async function switchTab(tabKey) {
     if (currentTab === tabKey) return;
     currentTab = tabKey;
-    setActiveTab(tabKey);
+    setActiveDocMode(tabKey);
 
     var container = document.getElementById('dynamic-content');
     container.innerHTML = '';
@@ -426,6 +502,7 @@ const SCROLL_SPY_OFFSET = 96;
 
 function syncActiveDocSection(sectionId) {
     if (!sectionId) return;
+    if (pendingDocNavigationId && sectionId !== pendingDocNavigationId) return;
     activeDocSectionId = sectionId;
     setActiveNavLink(sectionId);
     var meta = findSectionMeta(sectionId);
@@ -771,6 +848,7 @@ function parseHash(hash) {
     if (!h || h === 'home') return { view: 'home' };
     if (h === 'about') return { view: 'about' };
     if (h === 'changelog') return { view: 'changelog' };
+    if (h === 'kilo-oss') return { view: 'kilo-oss' };
     if (h === 'docs') return { view: 'docs-landing' };
     if (h === 'labs') return { view: 'labs' };
     if (h === 'docs/components') return { view: 'docs', tab: 'components', section: null };
@@ -795,7 +873,7 @@ async function navigate(route) {
 async function handleRoute() {
     var parsed = parseHash(location.hash);
 
-    if (parsed.view === 'home' || parsed.view === 'about' || parsed.view === 'changelog' || parsed.view === 'docs-landing' || parsed.view === 'labs') {
+    if (parsed.view === 'home' || parsed.view === 'about' || parsed.view === 'changelog' || parsed.view === 'kilo-oss' || parsed.view === 'docs-landing' || parsed.view === 'labs') {
         await loadPage(parsed.view);
         if (parsed.view === 'docs-landing') {
             setActiveNavbarLink('docs');
@@ -818,6 +896,65 @@ async function handleRoute() {
     }
 }
 
+/* ── Section-specific demo wiring ─────────────── */
+function initSectionDemos(sectionEl) {
+    if (!sectionEl) return;
+
+    var badge = sectionEl.querySelector('#demo-morph-badge-btn');
+    if (badge && !badge._morphBadgeInit) {
+        badge._morphBadgeInit = true;
+        var states  = JSON.parse(badge.getAttribute('data-morph-states')  || '[]');
+        var classes = JSON.parse(badge.getAttribute('data-morph-classes') || '[]');
+        var icons   = JSON.parse(badge.getAttribute('data-morph-icons')  || '[]');
+        var idx = 0;
+        var morphing = false;
+
+        badge.addEventListener('click', function (e) {
+            if (morphing) return;
+            morphing = true;
+
+            var nextIdx = (idx + 1) % states.length;
+            var afterIdx = (nextIdx + 1) % states.length;
+
+            var next = badge.querySelector('.vd-morph-next');
+            if (next) {
+                next.innerHTML = '<i class="ph ' + icons[nextIdx] + '" style="margin-right:0.35rem;"></i> ' + states[nextIdx];
+            }
+
+            var wave = badge.querySelector('.vd-morph-wave');
+            if (wave) {
+                var rect = badge.getBoundingClientRect();
+                wave.style.left = ((e.clientX || rect.left + rect.width / 2) - rect.left) + 'px';
+                wave.style.top  = ((e.clientY || rect.top  + rect.height / 2) - rect.top) + 'px';
+            }
+
+            badge.classList.add('is-morphing');
+
+            setTimeout(function () {
+                badge.classList.remove('is-morphing');
+
+                classes.forEach(function (c) { badge.classList.remove(c); });
+                badge.classList.add(classes[nextIdx]);
+
+                var current = badge.querySelector('.vd-morph-current');
+                var nextEl  = badge.querySelector('.vd-morph-next');
+                if (current) {
+                    current.innerHTML = '<i class="ph ' + icons[nextIdx] + '" style="margin-right:0.35rem;"></i> ' + states[nextIdx];
+                }
+                if (nextEl) {
+                    nextEl.innerHTML = '<i class="ph ' + icons[afterIdx] + '" style="margin-right:0.35rem;"></i> ' + states[afterIdx];
+                }
+
+                idx = nextIdx;
+                morphing = false;
+
+                badge.classList.add('morph-done');
+                setTimeout(function () { badge.classList.remove('morph-done'); }, 350);
+            }, 520);
+        });
+    }
+}
+
 /* ── Event listeners ──────────────────────────── */
 document.querySelectorAll('.vd-navbar-nav .vd-nav-link[data-route]').forEach(function (link) {
     link.addEventListener('click', function (e) {
@@ -835,25 +972,70 @@ if (brandLink) {
     });
 }
 
-document.querySelectorAll('.doc-tab[data-tab]').forEach(function (tab) {
-    tab.addEventListener('click', function (e) {
-        e.preventDefault();
-        var tabKey = tab.getAttribute('data-tab');
-        var tabRoutes = { components: 'docs/components', guides: 'docs/guides' };
-        navigate(tabRoutes[tabKey] || 'docs');
-    });
-});
+var docWaterToggle = document.getElementById('doc-water-toggle');
+if (docWaterToggle) {
+    docWaterToggle.addEventListener('click', function (e) {
+        if (_toggleMorphing) return;
 
-/* ── Track doc-tabs-wrapper height for sticky sidebar (--doc-tabs-height) ── */
+        var toggle = this;
+        var parsed = parseHash(location.hash);
+        var activeTab = currentTab || parsed.tab || 'components';
+        var destTab = activeTab === 'guides' ? 'components' : 'guides';
+        var oppositeTab = destTab === 'guides' ? 'components' : 'guides';
+
+        var next = toggle.querySelector('.vd-morph-next');
+        if (next) _setToggleContent(next, destTab);
+
+        var wave = toggle.querySelector('.vd-morph-wave');
+        if (wave) {
+            var rect = toggle.getBoundingClientRect();
+            wave.style.left = ((e.clientX || rect.left + rect.width / 2) - rect.left) + 'px';
+            wave.style.top  = ((e.clientY || rect.top  + rect.height / 2) - rect.top)  + 'px';
+        }
+
+        _toggleMorphing = true;
+        toggle.classList.add('is-morphing');
+
+        var morphDuration = 700;
+
+        setTimeout(function () {
+            toggle.classList.remove('is-morphing');
+
+            var current = toggle.querySelector('.vd-morph-current');
+            var nextEl  = toggle.querySelector('.vd-morph-next');
+            if (current) _setToggleContent(current, destTab);
+            if (nextEl)  _setToggleContent(nextEl,  oppositeTab);
+
+            var toGuides = destTab === 'guides';
+            toggle.setAttribute('aria-pressed', String(toGuides));
+            toggle.setAttribute('aria-label', toGuides ? 'Switch to Components' : 'Switch to Guides');
+
+            _toggleMorphing = false;
+
+            toggle.classList.add('morph-done');
+            setTimeout(function () { toggle.classList.remove('morph-done'); }, 350);
+        }, morphDuration);
+
+        var tabRoutes = { components: 'docs/components', guides: 'docs/guides' };
+        navigate(tabRoutes[destTab] || 'docs/components');
+    });
+}
+
+/* ── Track Water Morph wrapper height for sticky sidebar (--doc-tabs-height) ── */
 (function () {
-    var wrapper = document.querySelector('.doc-tabs-wrapper');
-    if (!wrapper) return;
+    var wrapper = document.querySelector('.doc-water-toggle-wrapper');
+    if (!wrapper) {
+        document.documentElement.style.setProperty('--doc-tabs-height', '0px');
+        return;
+    }
+    var updateHeightVar = function () {
+        document.documentElement.style.setProperty('--doc-tabs-height', wrapper.offsetHeight + 'px');
+    };
     var ro = new ResizeObserver(function () {
-        document.documentElement.style.setProperty(
-            '--doc-tabs-height', wrapper.offsetHeight + 'px'
-        );
+        updateHeightVar();
     });
     ro.observe(wrapper);
+    updateHeightVar();
 })();
 
 /* ── Mobile TOC toggle ─────────────────────── */
@@ -1194,12 +1376,21 @@ function buildGlobalSearchIndex() {
     });
     globalSearchIndex.push({
         id: 'docs-landing',
-        title: 'Documentation',
+        title: 'Docs',
         category: 'Pages',
         tab: 'Pages',
         keywords: 'documentation doc docs components guides',
         icon: 'ph-book-open',
         route: 'docs'
+    });
+    globalSearchIndex.push({
+        id: 'kilo-oss',
+        title: 'Kilo OSS',
+        category: 'Pages',
+        tab: 'Pages',
+        keywords: 'kilo oss sponsorship open source story vanduo',
+        icon: 'ph-heart',
+        route: 'kilo-oss'
     });
 }
 

@@ -15,6 +15,114 @@
         <div class="vd-container-responsive" style="max-width: 1200px;">
 
             <!-- ═══════════════════════════════════════════════ -->
+            <!-- Version 1.3.5                                   -->
+            <!-- ═══════════════════════════════════════════════ -->
+            <article class="version-card">
+                <header class="version-header">
+                    <span class="vd-badge vd-badge-primary" style="font-size: 1rem; padding: 0.5rem 1rem;">v1.3.5</span>
+                    <span style="color: var(--text-secondary); font-size: 0.95rem;">
+                        <i class="ph ph-calendar mr-1"></i>April 15, 2026
+                    </span>
+                    <span class="vd-badge vd-badge-info" style="font-size: 0.75rem;">Latest</span>
+                </header>
+                <div class="version-body">
+                    <div class="vd-row">
+                        <div class="vd-col-12 vd-col-md-6">
+                            <h4><i class="ph ph-cube mr-2" style="color: var(--color-primary);"></i>Framework</h4>
+                            <div class="change-group">
+                                <h5>New</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-drop" style="color: var(--color-success);"></i>
+                                        <div>
+                                            <strong>New: Water Morph effect component</strong>
+                                            <p>A liquid wave content-swap effect. Add <code>.vd-morph</code> or <code>data-vd-morph</code> to any element, provide <code>.vd-morph-current</code> / <code>.vd-morph-next</code> content layers, and clicking triggers a radial wave that dissolves the old state and reveals the new one. Size variants (<code>.vd-morph-sm</code>, <code>.vd-morph-lg</code>), custom <code>--morph-wave-color</code>, and a programmatic <code>VanduoMorph.morph(el)</code> API are included. Respects <code>prefers-reduced-motion</code>.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <h5>Updates</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-chat-circle-text" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: Default tooltip colors follow page theme</strong>
+                                            <p>Default tooltips (<code>tooltips.css</code>) now use a light surface on light UI and a dark surface on dark UI, instead of always using a high-contrast inverted chip. Explicit <code>vd-tooltip-light</code> / <code>vd-tooltip-dark</code> variants remain available.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-test-tube" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: Tablet Playwright projects use correct browsers</strong>
+                                            <p><code>Chromium Tablet</code> and <code>WebKit Tablet</code> projects in <code>playwright.config.ts</code> now set <code>browserName</code> explicitly (<code>chromium</code> / <code>webkit</code>) so tablet runs match their names and CI results stay reliable.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-timer" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: CI tablet test job timeout increased</strong>
+                                            <p>The GitHub Actions tablet workflow job timeout was raised from 20 to 45 minutes so full tablet suites can finish without spurious cancellations on slower runners.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="vd-col-12 vd-col-md-6">
+                            <h4><i class="ph ph-book-open-text mr-2" style="color: var(--color-primary);"></i>Documentation</h4>
+                            <div class="change-group">
+                                <h5>New</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-drop" style="color: var(--color-success);"></i>
+                                        <div>
+                                            <strong>New: Water Morph docs section</strong>
+                                            <p>A dedicated <a href="#docs/morph">Water Morph</a> page under Effects with four interactive demos: Mode Toggle, Theme Preview Card, Status Badge cycle, and Caption Reveal. Each demo has collapsible code snippets and the section includes full API reference tables and accessibility notes.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-arrows-split" style="color: var(--color-success);"></i>
+                                        <div>
+                                            <strong>New: Docs Components/Guides toggle uses framework Water Morph</strong>
+                                            <p>The sidebar toggle button now uses the framework <code>.vd-morph</code> classes instead of duplicated CSS keyframes, reducing docs-specific CSS by ~260 lines while keeping the same liquid wave animation.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <h5>Updates</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-drop-half-bottom" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: Glass docs demos now emphasize visual distinctions</strong>
+                                            <p>The glass documentation page (<code>docs/sections/effects/glass.html</code>) now includes a “Why Distinctions Can Look Subtle” explainer, higher-frequency comparison backdrops, side-by-side baseline vs glass sample rows for all size variants and modifiers, and interactive diagnostics controls for backdrop mode plus forced floating hover preview.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-magnifying-glass" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: E2E search tests match global search UX</strong>
+                                            <p>Playwright specs for home page views and search (<code>page-views.spec.ts</code>, <code>search.spec.ts</code>) now assert the global search modal and trigger flow instead of removed hero inline search inputs, keeping CI aligned with the current site.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <h4><i class="ph ph-flask mr-2" style="color: var(--color-primary);"></i>Labs</h4>
+                            <div class="change-group">
+                                <h5>Updates</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-check-circle" style="color: var(--color-success);"></i>
+                                        <div>
+                                            <strong>Update: vd-hex Playwright test coverage</strong>
+                                            <p>The <code>labs</code> repo adds Playwright (<code>playwright.config.ts</code>), a static harness page, and tests for <code>utils/hex-math.js</code> and <code>VdHexGrid</code> (interaction, terrain, pathfinding, theme observer) so vd-hex behavior is covered in the browser.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ═══════════════════════════════════════════════ -->
             <!-- Version 1.3.4                                   -->
             <!-- ═══════════════════════════════════════════════ -->
             <article class="version-card">
@@ -23,7 +131,6 @@
                     <span style="color: var(--text-secondary); font-size: 0.95rem;">
                         <i class="ph ph-calendar mr-1"></i>April 14, 2026
                     </span>
-                    <span class="vd-badge vd-badge-info" style="font-size: 0.75rem;">Latest</span>
                 </header>
                 <div class="version-body">
                     <div class="vd-row">
@@ -115,7 +222,7 @@
                                         <i class="ph ph-bookmark-simple" style="color: var(--color-info);"></i>
                                         <div>
                                             <strong>Update: Version and CDN pins to v1.3.4</strong>
-                                            <p>Package metadata, changelog, landing badges, and jsDelivr fallback URL now reference <strong>v1.3.4</strong>.</p>
+                                            <p>Package metadata, changelog, landing badges, and jsDelivr fallback URL now reference <strong>v1.3.4</strong></p>
                                         </div>
                                     </li>
                                 </ul>
@@ -180,7 +287,7 @@
                                         <i class="ph ph-bookmark-simple" style="color: var(--color-info);"></i>
                                         <div>
                                             <strong>Update: Version and CDN pins to v1.3.3</strong>
-                                            <p>Package metadata, changelog, landing badges, and jsDelivr examples now reference <strong>v1.3.3</strong>.</p>
+                                            <p>Package metadata, changelog, landing badges, and jsDelivr examples now reference <strong>v1.3.3</strong></p>
                                         </div>
                                     </li>
                                 </ul>

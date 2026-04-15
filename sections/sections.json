@@ -17,13 +17,18 @@
     },
     {
       "id": "docs-landing",
-      "title": "Documentation",
+      "title": "Docs",
       "file": "docs-landing.html"
     },
     {
       "id": "labs",
       "title": "Labs",
       "file": "labs.html"
+    },
+    {
+      "id": "kilo-oss",
+      "title": "Kilo OSS",
+      "file": "kilo-oss.html"
     }
   ],
   "tabs": {
@@ -616,6 +621,13 @@
               "file": "components/ripple.html",
               "icon": "ph-wave-sine",
               "keywords": ["ripple", "waves", "click", "effect", "animation"]
+            },
+            {
+              "id": "morph",
+              "title": "Water Morph",
+              "file": "effects/morph.html",
+              "icon": "ph-drop",
+              "keywords": ["morph", "water", "liquid", "wave", "transition", "swap", "toggle", "effect"]
             }
           ]
         }
