@@ -25,30 +25,29 @@ test.describe('3. Page Views', () => {
             await expect(getStartedBtn).toBeVisible();
         });
 
-        test('Hero search works', async ({ page, isMobile }) => {
-            // Hero search is usually hidden or overlayed on mobile
-            test.skip(!!isMobile, 'Hero search tested mainly on desktop');
-
+        test('Global search works from home view', async ({ page }) => {
             await page.goto('/');
             await waitForSPA(page);
 
-            const heroSearchInput = page.locator('#hero-search-input');
-            await expect(heroSearchInput).toBeVisible();
+            const trigger = page.locator('#global-search-trigger');
+            await expect(trigger).toBeVisible();
+            await trigger.click();
 
-            await heroSearchInput.fill('card');
+            const modal = page.locator('#global-search-modal');
+            await expect(modal).toHaveClass(/is-open/);
+
+            const input = page.locator('#global-search-input');
+            await expect(input).toBeFocused();
+            await input.fill('card');
             await page.waitForTimeout(300);
 
-            const dropdown = page.locator('#hero-search-dropdown');
-            await expect(dropdown).toBeVisible();
-
-            const results = dropdown.locator('.global-search-result');
+            const results = page.locator('#global-search-results .global-search-result');
             await expect(results).not.toHaveCount(0);
 
-            // Click first result
             await results.first().click();
             await page.waitForTimeout(500);
-
             await expect(page).toHaveURL(/.*#docs\//);
+            await expect(modal).not.toHaveClass(/is-open/);
         });
 
         test('Links to Docs and GitHub work', async ({ page }) => {

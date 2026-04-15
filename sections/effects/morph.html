@@ -1,0 +1,406 @@
+<section id="morph">
+    <h4 class="demo-title"><i class="ph ph-drop"></i>Water Morph</h4>
+    <p class="vd-mb-6">
+        A liquid wave content-swap effect. Click triggers an expanding radial wave from the pointer
+        position while the old content dissolves and the new content emerges. Works on any element.
+    </p>
+
+    <style>
+        #morph .morph-demo-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+        }
+        #morph .morph-demo-toggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 10rem;
+            min-height: 2.5rem;
+            padding: 0.65rem 1.25rem;
+            border: 1px solid color-mix(in srgb, var(--color-primary) 35%, var(--border-color));
+            border-radius: var(--btn-border-radius);
+            background: color-mix(in srgb, var(--color-primary) 12%, var(--bg-secondary));
+            color: var(--color-primary);
+            font-weight: 600;
+            font-size: 0.875rem;
+            box-shadow: 0 2px 8px color-mix(in srgb, var(--color-primary) 14%, transparent);
+            transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
+        }
+        #morph .morph-demo-toggle:hover {
+            border-color: color-mix(in srgb, var(--color-primary) 55%, var(--border-color));
+            background: color-mix(in srgb, var(--color-primary) 18%, var(--bg-secondary));
+            box-shadow: 0 3px 12px color-mix(in srgb, var(--color-primary) 22%, transparent);
+        }
+
+        #morph .morph-theme-card {
+            width: 260px;
+            height: 160px;
+            border-radius: var(--card-border-radius);
+            border: 1px solid var(--border-color);
+        }
+        #morph .morph-theme-card .vd-morph-content {
+            flex-direction: column;
+            gap: 0.5rem;
+            padding: 1.5rem;
+        }
+        #morph .morph-theme-card .morph-theme-icon {
+            font-size: 2rem;
+        }
+        #morph .morph-theme-card .morph-theme-label {
+            font-weight: 700;
+            font-size: 1rem;
+        }
+        #morph .morph-theme-card .morph-theme-sub {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        #morph .morph-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 6rem;
+            padding: 0.45rem 1rem;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            border: none;
+        }
+        #morph .morph-badge-online {
+            background: var(--color-success-alpha-10, rgba(16,185,129,0.1));
+            color: var(--color-success, #10b981);
+            --morph-wave-color: var(--color-success, #10b981);
+        }
+        #morph .morph-badge-away {
+            background: var(--color-warning-alpha-10, rgba(245,158,11,0.1));
+            color: var(--color-warning, #f59e0b);
+            --morph-wave-color: var(--color-warning, #f59e0b);
+        }
+        #morph .morph-badge-offline {
+            background: var(--color-error-alpha-10, rgba(239,68,68,0.1));
+            color: var(--color-error, #ef4444);
+            --morph-wave-color: var(--color-error, #ef4444);
+        }
+
+        #morph .morph-caption-card {
+            width: 100%;
+            max-width: 340px;
+            border-radius: var(--card-border-radius);
+            border: 1px solid var(--border-color);
+            background: var(--bg-secondary);
+            min-height: 80px;
+        }
+        #morph .morph-caption-card .vd-morph-content {
+            padding: 1rem 1.25rem;
+            text-align: left;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.25rem;
+        }
+        #morph .morph-caption-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+        #morph .morph-caption-body {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+    </style>
+
+    <!-- Demo 1: Mode Toggle -->
+    <div class="vd-row">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-morph-toggle">
+                <div class="vd-card-header">
+                    <h4>Mode Toggle</h4>
+                </div>
+                <div class="vd-card-body">
+                    <p class="vd-text-sm vd-text-muted vd-mb-4">Click to morph between two labeled states. The wave originates from your pointer.</p>
+                    <div class="morph-demo-row">
+                        <button class="vd-morph morph-demo-toggle" data-vd-morph id="demo-morph-toggle-btn">
+                            <span class="vd-morph-content vd-morph-current">
+                                <i class="ph ph-sun" style="margin-right:0.4rem;"></i> Light Mode
+                            </span>
+                            <span class="vd-morph-content vd-morph-next">
+                                <i class="ph ph-moon" style="margin-right:0.4rem;"></i> Dark Mode
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-morph"</span> <span class="code-attr">data-vd-morph</span>&gt;
+  &lt;<span class="code-tag">span</span> <span class="code-attr">class</span>=<span class="code-string">"vd-morph-content vd-morph-current"</span>&gt;
+    &lt;<span class="code-tag">i</span> <span class="code-attr">class</span>=<span class="code-string">"ph ph-sun"</span>&gt;&lt;/<span class="code-tag">i</span>&gt; Light Mode
+  &lt;/<span class="code-tag">span</span>&gt;
+  &lt;<span class="code-tag">span</span> <span class="code-attr">class</span>=<span class="code-string">"vd-morph-content vd-morph-next"</span>&gt;
+    &lt;<span class="code-tag">i</span> <span class="code-attr">class</span>=<span class="code-string">"ph ph-moon"</span>&gt;&lt;/<span class="code-tag">i</span>&gt; Dark Mode
+  &lt;/<span class="code-tag">span</span>&gt;
+&lt;/<span class="code-tag">button</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Demo 2: Theme Preview Card -->
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-morph-theme">
+                <div class="vd-card-header">
+                    <h4>Theme Preview Card</h4>
+                </div>
+                <div class="vd-card-body">
+                    <p class="vd-text-sm vd-text-muted vd-mb-4">Morph works on any container. This card-sized element swaps its entire surface.</p>
+                    <div class="vd-morph morph-theme-card" data-vd-morph id="demo-morph-theme-card" style="background: var(--bg-secondary);">
+                        <span class="vd-morph-content vd-morph-current">
+                            <i class="ph ph-sun morph-theme-icon" style="color:var(--color-warning,#f59e0b);"></i>
+                            <span class="morph-theme-label">Light Theme</span>
+                            <span class="morph-theme-sub">Clean and bright</span>
+                        </span>
+                        <span class="vd-morph-content vd-morph-next">
+                            <i class="ph ph-moon-stars morph-theme-icon" style="color:var(--color-primary);"></i>
+                            <span class="morph-theme-label">Dark Theme</span>
+                            <span class="morph-theme-sub">Easy on the eyes</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-morph theme-card"</span> <span class="code-attr">data-vd-morph</span>&gt;
+  &lt;<span class="code-tag">span</span> <span class="code-attr">class</span>=<span class="code-string">"vd-morph-content vd-morph-current"</span>&gt;
+    &lt;<span class="code-tag">i</span> <span class="code-attr">class</span>=<span class="code-string">"ph ph-sun"</span>&gt;&lt;/<span class="code-tag">i</span>&gt;
+    &lt;<span class="code-tag">span</span>&gt;Light Theme&lt;/<span class="code-tag">span</span>&gt;
+  &lt;/<span class="code-tag">span</span>&gt;
+  &lt;<span class="code-tag">span</span> <span class="code-attr">class</span>=<span class="code-string">"vd-morph-content vd-morph-next"</span>&gt;
+    &lt;<span class="code-tag">i</span> <span class="code-attr">class</span>=<span class="code-string">"ph ph-moon-stars"</span>&gt;&lt;/<span class="code-tag">i</span>&gt;
+    &lt;<span class="code-tag">span</span>&gt;Dark Theme&lt;/<span class="code-tag">span</span>&gt;
+  &lt;/<span class="code-tag">span</span>&gt;
+&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vd-row">
+        <!-- Demo 3: Status Badge -->
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-morph-badge">
+                <div class="vd-card-header">
+                    <h4>Status Badge Morph</h4>
+                </div>
+                <div class="vd-card-body">
+                    <p class="vd-text-sm vd-text-muted vd-mb-4">Click to cycle through statuses. Each state overrides <code>--morph-wave-color</code> for a matching wave.</p>
+                    <div class="morph-demo-row">
+                        <span class="vd-morph vd-morph-sm morph-badge morph-badge-online" data-vd-morph="manual" id="demo-morph-badge-btn"
+                              data-morph-states='["Online","Away","Offline"]'
+                              data-morph-classes='["morph-badge-online","morph-badge-away","morph-badge-offline"]'
+                              data-morph-icons='["ph-wifi-high","ph-coffee","ph-wifi-slash"]'>
+                            <span class="vd-morph-wave" aria-hidden="true"></span>
+                            <span class="vd-morph-shine" aria-hidden="true"></span>
+                            <span class="vd-morph-content vd-morph-current">
+                                <i class="ph ph-wifi-high" style="margin-right:0.35rem;"></i> Online
+                            </span>
+                            <span class="vd-morph-content vd-morph-next">
+                                <i class="ph ph-coffee" style="margin-right:0.35rem;"></i> Away
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Override --morph-wave-color per status --&gt;</span>
+&lt;<span class="code-tag">span</span> <span class="code-attr">class</span>=<span class="code-string">"vd-morph vd-morph-sm badge-online"</span> <span class="code-attr">data-vd-morph</span>&gt;
+  &lt;<span class="code-tag">span</span> <span class="code-attr">class</span>=<span class="code-string">"vd-morph-content vd-morph-current"</span>&gt;
+    &lt;<span class="code-tag">i</span> <span class="code-attr">class</span>=<span class="code-string">"ph ph-wifi-high"</span>&gt;&lt;/<span class="code-tag">i</span>&gt; Online
+  &lt;/<span class="code-tag">span</span>&gt;
+  &lt;<span class="code-tag">span</span> <span class="code-attr">class</span>=<span class="code-string">"vd-morph-content vd-morph-next"</span>&gt;
+    &lt;<span class="code-tag">i</span> <span class="code-attr">class</span>=<span class="code-string">"ph ph-coffee"</span>&gt;&lt;/<span class="code-tag">i</span>&gt; Away
+  &lt;/<span class="code-tag">span</span>&gt;
+&lt;/<span class="code-tag">span</span>&gt;
+
+<span class="code-comment">&lt;!-- CSS: .badge-online { --morph-wave-color: var(--color-success); } --&gt;</span></code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Demo 4: Caption Reveal -->
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-morph-caption">
+                <div class="vd-card-header">
+                    <h4>Caption Reveal</h4>
+                </div>
+                <div class="vd-card-body">
+                    <p class="vd-text-sm vd-text-muted vd-mb-4">Morph text-heavy content with <code>.vd-morph-lg</code> for a slower, dramatic effect.</p>
+                    <div class="vd-morph vd-morph-lg morph-caption-card" data-vd-morph id="demo-morph-caption-card">
+                        <span class="vd-morph-content vd-morph-current">
+                            <span class="morph-caption-title">Mountain Sunrise</span>
+                            <span class="morph-caption-body">Click to reveal details</span>
+                        </span>
+                        <span class="vd-morph-content vd-morph-next">
+                            <span class="morph-caption-title">Mountain Sunrise</span>
+                            <span class="morph-caption-body">Golden light spills across alpine ridges at 5,200m elevation. Shot at f/8, 1/250s during the September equinox.</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- .vd-morph-lg slows the wave for dramatic reveals --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-morph vd-morph-lg caption-card"</span> <span class="code-attr">data-vd-morph</span>&gt;
+  &lt;<span class="code-tag">span</span> <span class="code-attr">class</span>=<span class="code-string">"vd-morph-content vd-morph-current"</span>&gt;
+    &lt;<span class="code-tag">span</span>&gt;Mountain Sunrise&lt;/<span class="code-tag">span</span>&gt;
+    &lt;<span class="code-tag">span</span>&gt;Click to reveal details&lt;/<span class="code-tag">span</span>&gt;
+  &lt;/<span class="code-tag">span</span>&gt;
+  &lt;<span class="code-tag">span</span> <span class="code-attr">class</span>=<span class="code-string">"vd-morph-content vd-morph-next"</span>&gt;
+    &lt;<span class="code-tag">span</span>&gt;Mountain Sunrise&lt;/<span class="code-tag">span</span>&gt;
+    &lt;<span class="code-tag">span</span>&gt;Golden light spills across alpine ridges...&lt;/<span class="code-tag">span</span>&gt;
+  &lt;/<span class="code-tag">span</span>&gt;
+&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Badge cycling logic is in docs/js/app.js (initMorphBadgeDemo) since
+         dynamically loaded <script> tags don't execute via innerHTML. -->
+
+    <!-- API Reference -->
+    <div class="vd-card vd-card-glow demo-card" id="demo-morph-api">
+        <div class="vd-card-header">
+            <h4><i class="ph ph-list-dashes mr-2" style="color: var(--color-primary);"></i>API Reference</h4>
+        </div>
+        <div class="vd-card-body">
+            <h4>CSS Classes</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr><th>Class</th><th>Description</th><th>Type</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>.vd-morph</code></td><td>Enable water morph on an element</td><td>Base</td></tr>
+                        <tr><td><code>.vd-morph-sm</code></td><td>Shorter, snappier morph (0.5s)</td><td>Modifier</td></tr>
+                        <tr><td><code>.vd-morph-lg</code></td><td>Slower, more dramatic morph (1s)</td><td>Modifier</td></tr>
+                        <tr><td><code>.vd-morph-wave</code></td><td>Radial wave layer (auto-created by JS if absent)</td><td>Internal</td></tr>
+                        <tr><td><code>.vd-morph-shine</code></td><td>Light-sweep layer (auto-created by JS if absent)</td><td>Internal</td></tr>
+                        <tr><td><code>.vd-morph-content</code></td><td>Content wrapper — required on both states</td><td>Structure</td></tr>
+                        <tr><td><code>.vd-morph-current</code></td><td>Currently visible content layer</td><td>State</td></tr>
+                        <tr><td><code>.vd-morph-next</code></td><td>Hidden content layer revealed on morph</td><td>State</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4>CSS Custom Properties</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr><th>Variable</th><th>Default</th><th>Description</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>--morph-duration</code></td><td>0.75s</td><td>Total animation duration</td></tr>
+                        <tr><td><code>--morph-easing</code></td><td>cubic-bezier(0.2, 0.8, 0.35, 1)</td><td>Wave expansion timing</td></tr>
+                        <tr><td><code>--morph-wave-color</code></td><td>var(--color-primary)</td><td>Wave gradient base colour (override per-element)</td></tr>
+                        <tr><td><code>--morph-blur-peak</code></td><td>11px</td><td>Maximum blur at wave peak</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4>JavaScript API</h4>
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr><th>Method</th><th>Description</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>VanduoMorph.init()</code></td><td>Auto-initialize all <code>.vd-morph</code> / <code>[data-vd-morph]</code> elements</td></tr>
+                        <tr><td><code>VanduoMorph.morph(el)</code></td><td>Trigger morph programmatically (wave from center)</td></tr>
+                        <tr><td><code>VanduoMorph.destroy(el)</code></td><td>Remove listeners from one element</td></tr>
+                        <tr><td><code>VanduoMorph.destroyAll()</code></td><td>Tear down all instances</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accessibility -->
+    <div class="vd-card vd-card-glow demo-card">
+        <div class="vd-card-header">
+            <h4><i class="ph ph-wheelchair mr-2" style="color: var(--color-primary);"></i>Accessibility</h4>
+        </div>
+        <div class="vd-card-body">
+            <ul>
+                <li>Wave and shine layers use <code>aria-hidden="true"</code> and carry no semantic content</li>
+                <li>Animation fully respects <code>prefers-reduced-motion: reduce</code> &mdash; content swaps instantly with no wave</li>
+                <li>Non-button morph elements should include <code>role</code> and <code>tabindex</code> for keyboard access</li>
+                <li>The component works with <code>Enter</code> and <code>Space</code> keys on natively focusable elements</li>
+            </ul>
+        </div>
+    </div>
+</section>

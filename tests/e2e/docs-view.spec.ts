@@ -67,7 +67,7 @@ async function expectLocalFrameworkAssets(page: Page) {
 test.describe('4. Documentation View', () => {
 
     test.describe('Docs Landing (#docs)', () => {
-        test('Displays the two main cards', async ({ page }) => {
+        test('Displays the main docs cards', async ({ page }) => {
             await page.goto('/#docs');
             await waitForSPA(page);
 
@@ -75,11 +75,11 @@ test.describe('4. Documentation View', () => {
             await expect(docsLanding).toBeVisible();
 
             const cards = docsLanding.locator('.vd-card');
-            await expect(cards).toHaveCount(4);
+            await expect(cards).toHaveCount(3);
 
             await expect(docsLanding).toContainText('Components');
             await expect(docsLanding).toContainText('Guides');
-            await expect(docsLanding).toContainText(/Documentation\s+Coverage/);
+            await expect(docsLanding).toContainText('Changelog');
             await expect(docsLanding).not.toContainText('Concepts');
         });
 
@@ -113,8 +113,9 @@ test.describe('4. Documentation View', () => {
             await page.goto('/#docs/components');
             await waitForSPA(page);
 
-            const activeTab = page.locator('.doc-tab.active');
-            await expect(activeTab).toHaveAttribute('data-tab', 'components');
+            const modeToggle = page.locator('#doc-water-toggle');
+            await expect(modeToggle).toHaveAttribute('aria-pressed', 'false');
+            await expect(modeToggle).not.toHaveClass(/is-guides/);
 
             // Check for Sidebar category groups
             const sidebarNavItems = page.locator('.doc-nav-list li');
@@ -142,9 +143,8 @@ test.describe('4. Documentation View', () => {
             const section = page.locator('#buttons');
             await expect(section).toBeVisible();
 
-            // Active link should have 'active' class
-            const activeLink = page.locator('.doc-nav-link.active');
-            await expect(activeLink).toHaveAttribute('data-section', 'buttons');
+            // Route should resolve to the clicked section even when lazy preloading inserts earlier sections.
+            await expect(page).toHaveURL(/.*#docs\/buttons/);
 
             // Let's scroll past it and see if scrollspy triggers
             await page.evaluate(() => window.scrollBy(0, 1000));
@@ -182,8 +182,9 @@ test.describe('4. Documentation View', () => {
             await page.goto('/#docs/guides');
             await waitForSPA(page);
 
-            const activeTab = page.locator('.doc-tab.active');
-            await expect(activeTab).toHaveAttribute('data-tab', 'guides');
+            const modeToggle = page.locator('#doc-water-toggle');
+            await expect(modeToggle).toHaveAttribute('aria-pressed', 'true');
+            await expect(modeToggle).toHaveAttribute('aria-label', 'Switch to Components');
 
             // Check for a guide section such as quick-start
             const guideLink = page.locator('.doc-nav-link[data-route="docs/guides#quick-start"]');

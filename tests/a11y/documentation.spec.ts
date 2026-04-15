@@ -68,8 +68,8 @@ test.describe('SPA Documentation @a11y', () => {
     // Docs view active
     await expect(page.locator('#docs-view.is-active')).toHaveCount(1);
 
-    // Components tab active
-    await expect(page.locator('.doc-tab[data-tab="components"].active')).toHaveCount(1);
+    // Components mode active
+    await expect(page.locator('#doc-water-toggle[aria-pressed="false"]')).toHaveCount(1);
 
     // Buttons section should be loaded
     await expect(page.locator('#buttons')).toBeVisible({ timeout: 10000 });
