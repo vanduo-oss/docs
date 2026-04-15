@@ -117,6 +117,28 @@ test.describe('2. Search Functionality', () => {
         await expect(page).toHaveURL(/.*#docs\//);
     });
 
+    test('Shows transient docs loader while scrolling to deep search result', async ({ page }) => {
+        await page.goto('/#about');
+        await waitForSPA(page);
+
+        await page.locator('#global-search-trigger').click();
+
+        const searchInput = page.locator('#global-search-input');
+        await searchInput.fill('transfer');
+        await page.waitForTimeout(300);
+
+        const transferResult = page.locator('#global-search-results .global-search-result[data-route="docs/transfer"]').first();
+        await expect(transferResult).toBeVisible();
+        await transferResult.click({ force: true });
+
+        const transientLoader = page.locator('.doc-scroll-loader-card');
+        await expect(transientLoader).toBeVisible({ timeout: 3000 });
+        await expect(transientLoader).toBeHidden({ timeout: 10000 });
+
+        await expect(page).toHaveURL(/.*#docs\//);
+        await expect(page.locator('#transfer')).toBeAttached();
+    });
+
     test('No results state displays correctly', async ({ page }) => {
         await page.goto('/#about');
         await waitForSPA(page);
