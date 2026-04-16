@@ -477,6 +477,22 @@
             --doc-tabs-height: 0px;
         }
 
+        [data-theme="dark"] .doc-sidebar {
+            background: transparent;
+            border-right-color: transparent;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme]) .doc-sidebar {
+                background: transparent;
+                border-right-color: transparent;
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+            }
+        }
+
         /* ── Water Morph Toggle (docs-specific layout) ─ */
 
         .doc-water-toggle-wrapper {
