@@ -17,29 +17,19 @@ test.describe('1. Global Navigation & Layout', () => {
         // Initial state
         await expect(page.locator('#home')).toBeVisible();
 
-        // Click 'About' link in desktop navbar
-        // If on mobile, open hamburger first
+        // Click 'Docs' link in the primary navbar menu.
+        // About/Changelog live in the footer only now, so the navbar menu
+        // exposes Home / Docs / Labs.
         const toggle = page.locator('.vd-navbar-toggle');
         if (await toggle.isVisible()) {
             await toggle.click();
             await page.waitForTimeout(300);
         }
-        await page.locator('.vd-navbar-menu .vd-nav-link[data-route="about"]').click();
+        await page.locator('.vd-navbar-menu .vd-nav-link[data-route="docs"]').click();
 
-        // Verify SPA routing to #about
-        await expect(page).toHaveURL(/.*#about/);
-        await expect(page.locator('#about')).toBeVisible();
-
-        // Ensure no full page reload happened (window object remains same)
-        const isSameWindow = await page.evaluate(() => {
-            if (!window['spaTested']) {
-                window['spaTested'] = true;
-                return false;
-            }
-            return true; // if true, reload didn't happen
-        });
-        // This trick: first evaluate sets it. If we route and evaluate again, it should be true.
-        // Let's do it properly:
+        // Verify SPA routing to #docs
+        await expect(page).toHaveURL(/.*#docs/);
+        await expect(page.locator('#docs-landing')).toBeVisible();
     });
 
 

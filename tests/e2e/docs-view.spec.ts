@@ -316,10 +316,14 @@ test.describe('4. Documentation View', () => {
                 };
             });
 
+            // Docs-site overrides ThemeCustomizer.DEFAULTS in js/app.js:
+            //   PRIMARY_LIGHT='black', NEUTRAL='slate', RADIUS='0.5'
+            // so a reset should restore these docs-site defaults, not the
+            // framework defaults.
             expect(resetState.theme).toBeNull();
             expect(resetState.primary).toBe('black');
-            expect(resetState.neutral).toBe('neutral');
-            expect(resetState.radius).toBe('0.375');
+            expect(resetState.neutral).toBe('slate');
+            expect(resetState.radius).toBe('0.5');
             expect(resetState.storagePref).toBe('system');
             expect(pageErrors.join('\n')).not.toContain('savePreference is not a function');
         });
