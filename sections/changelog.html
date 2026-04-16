@@ -35,8 +35,8 @@
                                     <li class="change-item">
                                         <i class="ph ph-info" style="color: var(--color-info);"></i>
                                         <div>
-                                            <strong>No framework changes in this release</strong>
-                                            <p>Framework bundle remains pinned at <strong>v1.3.5</strong>. This is a docs-only release focused on mobile navigation UX, deep-link performance, and offline resilience.</p>
+                                            <strong>No framework changes</strong>
+                                            <p>Framework bundle remains pinned at <strong>v1.3.5</strong>. Docs-only release focused on navigation speed and feel.</p>
                                         </div>
                                     </li>
                                 </ul>
@@ -48,97 +48,69 @@
                                 <h5>New</h5>
                                 <ul class="change-list">
                                     <li class="change-item">
-                                        <i class="ph ph-database" style="color: var(--color-success);"></i>
+                                        <i class="ph ph-lightning" style="color: var(--color-success);"></i>
                                         <div>
-                                            <strong>New: Section HTML cache with <code>VanduoSectionCache</code></strong>
-                                            <p>An in-memory LRU cache (backed by <code>sessionStorage</code>) now stores fetched section HTML so revisiting a page is effectively instant. Delivered as a standalone module at <code>js/section-cache.js</code>, consulted by <code>loadSection</code> and populated by both navigation and prefetching paths.</p>
-                                        </div>
-                                    </li>
-                                    <li class="change-item">
-                                        <i class="ph ph-cursor-click" style="color: var(--color-success);"></i>
-                                        <div>
-                                            <strong>New: Hover / touch prefetching</strong>
-                                            <p>Sidebar links and global search results now warm the section cache on <code>pointerenter</code> and <code>touchstart</code>, so the target section is typically ready before the click lands.</p>
-                                        </div>
-                                    </li>
-                                    <li class="change-item">
-                                        <i class="ph ph-hourglass-low" style="color: var(--color-success);"></i>
-                                        <div>
-                                            <strong>New: Idle warm-up of the current tab</strong>
-                                            <p>After the initial section loads, <code>requestIdleCallback</code> (with a <code>setTimeout</code> fallback) quietly prefetches the remaining sections of the active tab (Components or Guides), making in-tab navigation feel synchronous.</p>
-                                        </div>
-                                    </li>
-                                    <li class="change-item">
-                                        <i class="ph ph-cloud-check" style="color: var(--color-success);"></i>
-                                        <div>
-                                            <strong>New: Service worker for section HTML</strong>
-                                            <p>Added <code>docs/sw.js</code> — a minimal stale-while-revalidate service worker scoped to <code>/sections/**</code>. It serves cached HTML instantly while refreshing in the background, and is versioned so old caches are cleaned on activate. Registered only on non-local origins.</p>
-                                        </div>
-                                    </li>
-                                    <li class="change-item">
-                                        <i class="ph ph-arrows-clockwise" style="color: var(--color-success);"></i>
-                                        <div>
-                                            <strong>New: View Transitions during section swaps</strong>
-                                            <p>When the browser supports it, <code>document.startViewTransition</code> wraps section replacement so the old and new content cross-fade instead of flashing.</p>
+                                            <strong>New: Instant section navigation</strong>
+                                            <p>Section HTML is now cached in-memory (LRU + <code>sessionStorage</code>), prefetched on hover/touch and idle, served by a stale-while-revalidate service worker at <code>sw.js</code>, and swapped via <code>document.startViewTransition</code> when supported.</p>
                                         </div>
                                     </li>
                                 </ul>
                                 <h5>Updates</h5>
                                 <ul class="change-list">
                                     <li class="change-item">
+                                        <i class="ph ph-crosshair" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: Deep-link scroll lands reliably on far sections</strong>
+                                            <p>Search or deep-linking to bottom-of-sidebar sections (<em>Glass</em>, <em>Morph</em>, <em>Ripple</em>…) now uses an instant <code>scrollIntoView</code> that bypasses the global <code>scroll-behavior: smooth</code>, so concurrent layout shifts from sibling <code>Vanduo.init()</code> can no longer cancel the scroll mid-path and the URL is no longer hijacked by scroll-spy before landing.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
                                         <i class="ph ph-spinner-gap" style="color: var(--color-info);"></i>
                                         <div>
                                             <strong>Update: Instant mobile TOC feedback</strong>
-                                            <p>Clicking a sidebar / mobile TOC link now immediately shows the skeleton scroll loader and adds an <code>.is-navigating</code> pressed state to the link, so users get visual confirmation before the section loads. Previously, mobile Chrome taps felt unresponsive during the fetch.</p>
+                                            <p>Sidebar / mobile TOC taps now immediately show the skeleton scroll loader and an <code>.is-navigating</code> pressed state, so there's no unresponsive gap during the fetch.</p>
                                         </div>
                                     </li>
                                     <li class="change-item">
-                                        <i class="ph ph-lightning" style="color: var(--color-info);"></i>
+                                        <i class="ph ph-flow-arrow" style="color: var(--color-info);"></i>
                                         <div>
-                                            <strong>Update: Parallel preload for deep-link navigation</strong>
-                                            <p><code>preloadSectionsBefore</code> now fetches preceding sections in parallel with a concurrency limit (<code>Promise.all</code>, max 6 in flight) instead of serially. Deep-linking into a section far down the list — especially via global search results — arrives dramatically faster on mobile networks.</p>
-                                        </div>
-                                    </li>
-                                    <li class="change-item">
-                                        <i class="ph ph-x-circle" style="color: var(--color-info);"></i>
-                                        <div>
-                                            <strong>Update: Abortable navigation</strong>
-                                            <p><code>handleRoute</code> threads an <code>AbortController</code> through <code>switchTab</code>, <code>loadSection</code>, and <code>preloadSectionsBefore</code>. Rapid successive clicks now cancel stale fetches instead of racing each other, preventing jumps to the previously-requested section.</p>
+                                            <strong>Update: Parallel &amp; abortable deep-link preload</strong>
+                                            <p><code>preloadSectionsBefore</code> now fetches up to 6 preceding sections in parallel, and <code>handleRoute</code> threads an <code>AbortController</code> so rapid clicks cancel stale fetches instead of racing to the wrong section.</p>
                                         </div>
                                     </li>
                                     <li class="change-item">
                                         <i class="ph ph-gauge" style="color: var(--color-info);"></i>
                                         <div>
-                                            <strong>Update: Offscreen section rendering optimized</strong>
-                                            <p><code>#dynamic-content &gt; section</code> now uses <code>content-visibility: auto</code> with <code>contain-intrinsic-size</code>, letting the browser skip layout and paint of offscreen sections until they scroll near the viewport.</p>
+                                            <strong>Update: Offscreen render optimizations</strong>
+                                            <p>Sections use <code>content-visibility: auto</code> with <code>contain-intrinsic-size</code>, and <code>#dynamic-content</code> enables <code>overflow-anchor</code> to stabilize scroll during parallel inserts.</p>
                                         </div>
                                     </li>
                                     <li class="change-item">
-                                        <i class="ph ph-anchor-simple" style="color: var(--color-info);"></i>
+                                        <i class="ph ph-sidebar" style="color: var(--color-info);"></i>
                                         <div>
-                                            <strong>Update: Scroll anchoring during parallel inserts</strong>
-                                            <p>Added <code>overflow-anchor: auto</code> on <code>#dynamic-content</code> and a re-anchor pass in <code>settleDocScrollLoader</code> that calls <code>scrollIntoView</code> on the target section if preceding content inserted after scroll caused the anchor to drift.</p>
+                                            <strong>Update: Sidebar blends with dark theme</strong>
+                                            <p>The docs sidebar surface now follows the theme, removing the harsh contrast edge in dark mode.</p>
                                         </div>
                                     </li>
                                     <li class="change-item">
-                                        <i class="ph ph-link" style="color: var(--color-info);"></i>
+                                        <i class="ph ph-drop" style="color: var(--color-info);"></i>
                                         <div>
-                                            <strong>Update: <code>sections/sections.json</code> prefetched on load</strong>
-                                            <p>Added <code>&lt;link rel="prefetch"&gt;</code> for the sections metadata so the very first navigation doesn't wait on it.</p>
+                                            <strong>Update: Home feature cards morph on click, glow on hover</strong>
+                                            <p>The nine feature cards on the home page now reveal their details via the Water Morph wave, and hover adds a subtle card-glow accent.</p>
                                         </div>
                                     </li>
                                     <li class="change-item">
                                         <i class="ph ph-palette" style="color: var(--color-info);"></i>
                                         <div>
-                                            <strong>Update: Theme customizer defaults for docs site</strong>
-                                            <p>Docs-site <code>ThemeCustomizer.DEFAULTS</code> override now uses <code>slate</code> for neutral and <code>0.5</code> for radius (previously <code>neutral</code> / <code>0.375</code>), giving a softer default look. The local storage defaults table on the Theme Customizer component page was updated to match.</p>
+                                            <strong>Update: Softer theme customizer defaults</strong>
+                                            <p>Docs-site <code>ThemeCustomizer.DEFAULTS</code> now use <code>slate</code> neutral and <code>0.5</code> radius.</p>
                                         </div>
                                     </li>
                                     <li class="change-item">
                                         <i class="ph ph-bookmark-simple" style="color: var(--color-info);"></i>
                                         <div>
                                             <strong>Update: Docs meta version bumped to v1.3.6</strong>
-                                            <p><code>package.json</code>, JSON-LD <code>softwareVersion</code>, and the <code>&lt;meta&gt;</code> / Open Graph / Twitter titles now reference <strong>v1.3.6</strong>. The framework CDN pin remains at <code>@v1.3.5</code>.</p>
+                                            <p>Framework CDN pin remains at <code>@v1.3.5</code>.</p>
                                         </div>
                                     </li>
                                 </ul>
