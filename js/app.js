@@ -13,8 +13,8 @@ if (typeof window.Vanduo === 'undefined') {
             FONT: 'lato',
             PRIMARY_LIGHT: 'black',
             PRIMARY_DARK: 'amber',
-            NEUTRAL: 'neutral',
-            RADIUS: '0.375'
+            NEUTRAL: 'slate',
+            RADIUS: '0.5'
         });
     }
     window.Vanduo.init();
