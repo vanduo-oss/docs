@@ -45,6 +45,10 @@ let docScrollLoaderEl = null;
 let docScrollLoaderTargetId = null;
 let docScrollLoaderFallbackTimer = null;
 let requestedDocScrollLoaderSectionId = null;
+let currentNavigationController = null;
+const SECTION_PRELOAD_CONCURRENCY = 6;
+const sectionPrefetching = new Set();
+let docsWarmupTimer = null;
 
 function releasePendingDocNavigation(delayMs = 0) {
     if (pendingDocNavigationReleaseTimer) {
@@ -66,6 +70,12 @@ function clearDocScrollLoaderFallbackTimer() {
         clearTimeout(docScrollLoaderFallbackTimer);
         docScrollLoaderFallbackTimer = null;
     }
+}
+
+function clearNavigatingNavLinks() {
+    document.querySelectorAll('.doc-nav-link.is-navigating').forEach(function (link) {
+        link.classList.remove('is-navigating');
+    });
 }
 
 function requestDocScrollLoaderForRoute(route) {
@@ -150,6 +160,7 @@ function getDocScrollLoaderHtml() {
 
 function hideDocScrollLoader() {
     clearDocScrollLoaderFallbackTimer();
+    clearNavigatingNavLinks();
     if (docScrollLoaderEl) {
         docScrollLoaderEl.remove();
         docScrollLoaderEl = null;
@@ -195,7 +206,13 @@ function settleDocScrollLoader(sectionId) {
             return;
         }
 
-        var reachedTarget = target.getBoundingClientRect().top <= (SCROLL_SPY_OFFSET + 10);
+        var targetTop = target.getBoundingClientRect().top;
+        var driftedDown = targetTop > (SCROLL_SPY_OFFSET + 32);
+        if (driftedDown) {
+            target.scrollIntoView({ behavior: 'auto', block: 'start' });
+            targetTop = target.getBoundingClientRect().top;
+        }
+        var reachedTarget = targetTop <= (SCROLL_SPY_OFFSET + 10);
         if (reachedTarget || Date.now() >= deadline) {
             hideDocScrollLoader();
             return;
@@ -243,6 +260,45 @@ function getOrderedIds(tabKey) {
     var tab = registry.tabs[tabKey];
     if (!tab) return [];
     return tab.categories.flatMap(function (c) { return c.sections.map(function (s) { return s.id; }); });
+}
+
+function parseSectionIdFromRoute(route) {
+    if (typeof route !== 'string' || !route.startsWith('docs/')) return null;
+    var parsed = parseHash('#' + route);
+    return parsed && parsed.section ? parsed.section : null;
+}
+
+function getCachedSectionHtml(sectionId) {
+    if (!window.VanduoSectionCache || !sectionId) return null;
+    return window.VanduoSectionCache.get(sectionId);
+}
+
+function setCachedSectionHtml(sectionId, html) {
+    if (!window.VanduoSectionCache || !sectionId || typeof html !== 'string') return;
+    window.VanduoSectionCache.set(sectionId, html);
+}
+
+async function prefetchSection(sectionId, options = {}) {
+    if (!sectionId || loadedSections.has(sectionId) || loadingSections.has(sectionId)) return;
+    if (getCachedSectionHtml(sectionId)) return;
+    if (sectionPrefetching.has(sectionId)) return;
+
+    var meta = findSectionMeta(sectionId);
+    if (!meta || !meta.section || !meta.section.file) return;
+
+    sectionPrefetching.add(sectionId);
+    try {
+        var res = await fetch(SECTIONS_BASE + meta.section.file, { signal: options.signal });
+        if (!res.ok) return;
+        var html = await res.text();
+        if (html) setCachedSectionHtml(sectionId, html);
+    } catch (err) {
+        if (!err || err.name !== 'AbortError') {
+            console.warn('Section prefetch failed for', sectionId, err);
+        }
+    } finally {
+        sectionPrefetching.delete(sectionId);
+    }
 }
 
 /* ── Registry loading ─────────────────────────── */
@@ -448,20 +504,45 @@ async function loadPage(pageId) {
 }
 
 /* ── Section loading (docs) ───────────────────── */
-async function preloadSectionsBefore(tabKey, targetSectionId) {
+async function preloadSectionsBefore(tabKey, targetSectionId, options = {}) {
+    var signal = options.signal;
     var orderedIds = getOrderedIds(tabKey);
     var targetIndex = orderedIds.indexOf(targetSectionId);
     if (targetIndex <= 0) return;
 
+    var pendingIds = [];
     for (var i = 0; i < targetIndex; i++) {
         var id = orderedIds[i];
         if (!loadedSections.has(id) && !loadingSections.has(id)) {
-            await loadSection(id, false);
+            pendingIds.push(id);
         }
     }
+
+    if (!pendingIds.length) {
+        setupInfiniteScroll();
+        return;
+    }
+
+    var cursor = 0;
+    var workerCount = Math.min(SECTION_PRELOAD_CONCURRENCY, pendingIds.length);
+    async function worker() {
+        while (cursor < pendingIds.length) {
+            if (signal && signal.aborted) return;
+            var id = pendingIds[cursor];
+            cursor += 1;
+            await loadSection(id, false, { signal: signal, skipInfiniteRefresh: true });
+        }
+    }
+
+    await Promise.all(Array.from({ length: workerCount }, worker));
+    setupInfiniteScroll();
 }
 
-async function loadSection(sectionId, autoScroll = true) {
+async function loadSection(sectionId, autoScroll = true, options = {}) {
+    var signal = options.signal;
+    var skipInfiniteRefresh = options.skipInfiniteRefresh === true;
+    if (signal && signal.aborted) return;
+
     if (autoScroll && requestedDocScrollLoaderSectionId === sectionId) {
         showDocScrollLoader(sectionId);
         requestedDocScrollLoaderSectionId = null;
@@ -486,7 +567,8 @@ async function loadSection(sectionId, autoScroll = true) {
     }
 
     if (autoScroll) {
-        await preloadSectionsBefore(meta.tab, sectionId);
+        await preloadSectionsBefore(meta.tab, sectionId, { signal: signal });
+        if (signal && signal.aborted) return;
         if (loadedSections.has(sectionId)) {
             var existingSection = document.getElementById(sectionId);
             if (existingSection) existingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -531,15 +613,25 @@ async function loadSection(sectionId, autoScroll = true) {
     setActiveNavLink(sectionId);
 
     try {
-        var url = SECTIONS_BASE + meta.section.file;
-        var res = await fetch(url);
-        if (!res.ok) throw new Error('Failed to load ' + url);
-        var html = await res.text();
+        var html = getCachedSectionHtml(sectionId);
+        if (!html) {
+            var url = SECTIONS_BASE + meta.section.file;
+            var res = await fetch(url, { signal: signal });
+            if (!res.ok) throw new Error('Failed to load ' + url);
+            html = await res.text();
+            setCachedSectionHtml(sectionId, html);
+        }
         var wrap = document.createElement('div');
         wrap.innerHTML = html.trim();
         var sectionEl = wrap.firstElementChild;
         if (sectionEl) {
-            container.replaceChild(sectionEl, placeholder);
+            if (document.startViewTransition && autoScroll) {
+                await document.startViewTransition(function () {
+                    container.replaceChild(sectionEl, placeholder);
+                }).finished;
+            } else {
+                container.replaceChild(sectionEl, placeholder);
+            }
             loadedSections.add(sectionId);
             if (typeof Vanduo !== 'undefined') Vanduo.init();
             hideDisabledCodeTabs(sectionEl);
@@ -551,7 +643,9 @@ async function loadSection(sectionId, autoScroll = true) {
         } else {
             placeholder.remove();
         }
-        setupInfiniteScroll();
+        if (!skipInfiniteRefresh) {
+            setupInfiniteScroll();
+        }
 
         var target = document.getElementById(sectionId);
         if (target && autoScroll) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -567,6 +661,10 @@ async function loadSection(sectionId, autoScroll = true) {
             releasePendingDocNavigation(450);
         }
     } catch (err) {
+        if (err && err.name === 'AbortError') {
+            placeholder.remove();
+            return;
+        }
         hideDocScrollLoader();
         placeholder.remove();
         console.error(err);
@@ -578,7 +676,9 @@ async function loadSection(sectionId, autoScroll = true) {
 }
 
 /* ── Switch docs tab ──────────────────────────── */
-async function switchTab(tabKey) {
+async function switchTab(tabKey, options = {}) {
+    var signal = options.signal;
+    if (signal && signal.aborted) return;
     hideDocScrollLoader();
     if (currentTab === tabKey) return;
     currentTab = tabKey;
@@ -603,8 +703,10 @@ async function switchTab(tabKey) {
 
     var orderedIds = getOrderedIds(tabKey);
     if (orderedIds.length > 0) {
-        await loadSection(orderedIds[0]);
+        await loadSection(orderedIds[0], true, { signal: signal });
     }
+    if (signal && signal.aborted) return;
+    scheduleDocsWarmup(tabKey);
 }
 
 /* ── Scroll-spy ───────────────────────────────── */
@@ -733,7 +835,30 @@ function loadNextSection() {
 
     var nextIndex = maxIndex + 1;
     if (nextIndex < orderedIds.length) {
-        loadSection(orderedIds[nextIndex], false); // autoScroll = false
+        loadSection(orderedIds[nextIndex], false, { skipInfiniteRefresh: true }) // autoScroll = false
+            .finally(function () {
+                setupInfiniteScroll();
+            });
+    }
+}
+
+function scheduleDocsWarmup(tabKey) {
+    if (!tabKey) return;
+    if (docsWarmupTimer) {
+        clearTimeout(docsWarmupTimer);
+        docsWarmupTimer = null;
+    }
+
+    var runWarmup = function () {
+        getOrderedIds(tabKey).forEach(function (id) {
+            prefetchSection(id);
+        });
+    };
+
+    if (typeof window.requestIdleCallback === 'function') {
+        window.requestIdleCallback(runWarmup, { timeout: 1500 });
+    } else {
+        docsWarmupTimer = setTimeout(runWarmup, 500);
     }
 }
 
@@ -981,6 +1106,12 @@ async function navigate(route) {
 }
 
 async function handleRoute() {
+    if (currentNavigationController) {
+        currentNavigationController.abort();
+    }
+    currentNavigationController = new AbortController();
+    var signal = currentNavigationController.signal;
+
     var parsed = parseHash(location.hash);
 
     if (parsed.view === 'home' || parsed.view === 'about' || parsed.view === 'changelog' || parsed.view === 'kilo-oss' || parsed.view === 'docs-landing' || parsed.view === 'labs') {
@@ -998,11 +1129,15 @@ async function handleRoute() {
     setActiveNavbarLink('docs');
 
     if (currentTab !== parsed.tab) {
-        await switchTab(parsed.tab);
+        await switchTab(parsed.tab, { signal: signal });
+        if (signal.aborted) return;
     }
 
     if (parsed.section) {
-        await loadSection(parsed.section);
+        await loadSection(parsed.section, true, { signal: signal });
+        if (!signal.aborted) {
+            scheduleDocsWarmup(parsed.tab);
+        }
     }
 }
 
@@ -1174,11 +1309,24 @@ if (dynamicNavList) {
         if (!link) return;
         e.preventDefault();
         var id = link.getAttribute('data-section');
+        clearNavigatingNavLinks();
+        link.classList.add('is-navigating');
+        requestDocScrollLoaderForRoute('docs/' + id);
         closeMobileToc();
         var sidebarFilterInput = document.getElementById('doc-sidebar-filter-input');
         if (sidebarFilterInput) { sidebarFilterInput.value = ''; filterSidebarNav(''); }
         navigate('docs/' + id);
     });
+    dynamicNavList.addEventListener('pointerenter', function (e) {
+        var link = e.target.closest('.doc-nav-link[data-section]');
+        if (!link) return;
+        prefetchSection(link.getAttribute('data-section'));
+    }, true);
+    dynamicNavList.addEventListener('touchstart', function (e) {
+        var link = e.target.closest('.doc-nav-link[data-section]');
+        if (!link) return;
+        prefetchSection(link.getAttribute('data-section'));
+    }, { passive: true });
 }
 
 /* ── Sidebar filter events ────────────────────── */
@@ -1713,6 +1861,18 @@ function initGlobalSearch() {
             selectGlobalSearchResult(idx);
         }
     });
+    document.getElementById('global-search-results').addEventListener('pointerover', function (e) {
+        var item = e.target.closest('.global-search-result[data-route]');
+        if (!item) return;
+        var sectionId = parseSectionIdFromRoute(item.dataset.route);
+        if (sectionId) prefetchSection(sectionId);
+    });
+    document.getElementById('global-search-results').addEventListener('touchstart', function (e) {
+        var item = e.target.closest('.global-search-result[data-route]');
+        if (!item) return;
+        var sectionId = parseSectionIdFromRoute(item.dataset.route);
+        if (sectionId) prefetchSection(sectionId);
+    }, { passive: true });
 
     // Cmd/Ctrl+K global shortcut
     document.addEventListener('keydown', function (e) {
@@ -1911,6 +2071,18 @@ function initGlobalSearch() {
             closeHeroDropdown();
         }
     });
+    document.addEventListener('pointerover', function (e) {
+        var item = e.target.closest('.hero-search-dropdown .global-search-result[data-route]');
+        if (!item) return;
+        var sectionId = parseSectionIdFromRoute(item.getAttribute('data-route'));
+        if (sectionId) prefetchSection(sectionId);
+    });
+    document.addEventListener('touchstart', function (e) {
+        var item = e.target.closest('.hero-search-dropdown .global-search-result[data-route]');
+        if (!item) return;
+        var sectionId = parseSectionIdFromRoute(item.getAttribute('data-route'));
+        if (sectionId) prefetchSection(sectionId);
+    }, { passive: true });
 }
 
 /* ── Dark Mode Toggle Icon Sync ───────────────── */
@@ -1984,4 +2156,15 @@ function initGlobalSearch() {
     });
 
     await handleRoute();
+
+    if ('serviceWorker' in navigator) {
+        var isLocalPreview = window.location.protocol === 'file:'
+            || window.location.hostname === 'localhost'
+            || window.location.hostname === '127.0.0.1';
+        if (!isLocalPreview) {
+            navigator.serviceWorker.register('./sw.js').catch(function (err) {
+                console.warn('Service worker registration failed', err);
+            });
+        }
+    }
 })();
