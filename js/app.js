@@ -191,15 +191,39 @@ function showDocScrollLoader(sectionId) {
 }
 
 function settleDocScrollLoader(sectionId) {
-    if (!docScrollLoaderEl || !sectionId || docScrollLoaderTargetId !== sectionId) return;
+    // Release the scroll-spy hijack guard only after this function is done
+    // verifying the landing — avoids URL/title being overwritten to the
+    // section currently in viewport mid-scroll on long deep links.
+    function releaseGuardIfMatching() {
+        if (pendingDocNavigationId === sectionId) {
+            releasePendingDocNavigation(0);
+        }
+    }
+
+    if (!docScrollLoaderEl || !sectionId || docScrollLoaderTargetId !== sectionId) {
+        // Loader was not mounted for this nav (e.g. back/forward hashchange).
+        // Still run one rAF-deferred release so any in-flight smooth scroll
+        // or layout reflow settles before scroll-spy takes over the URL.
+        if (pendingDocNavigationId === sectionId) {
+            window.requestAnimationFrame(function () {
+                window.requestAnimationFrame(releaseGuardIfMatching);
+            });
+        }
+        return;
+    }
 
     var deadline = Date.now() + 3200;
+    var stableFrames = 0;
     function checkScrollCompletion() {
-        if (!docScrollLoaderEl || docScrollLoaderTargetId !== sectionId) return;
+        if (!docScrollLoaderEl || docScrollLoaderTargetId !== sectionId) {
+            releaseGuardIfMatching();
+            return;
+        }
         var target = document.getElementById(sectionId);
         if (!target) {
             if (Date.now() >= deadline) {
                 hideDocScrollLoader();
+                releaseGuardIfMatching();
             } else {
                 window.requestAnimationFrame(checkScrollCompletion);
             }
@@ -209,12 +233,29 @@ function settleDocScrollLoader(sectionId) {
         var targetTop = target.getBoundingClientRect().top;
         var driftedDown = targetTop > (SCROLL_SPY_OFFSET + 32);
         if (driftedDown) {
-            target.scrollIntoView({ behavior: 'auto', block: 'start' });
+            // 'instant' to bypass the global `html { scroll-behavior: smooth }`
+            // so drift correction actually snaps rather than animating.
+            target.scrollIntoView({ behavior: 'instant', block: 'start' });
             targetTop = target.getBoundingClientRect().top;
+            stableFrames = 0;
         }
-        var reachedTarget = targetTop <= (SCROLL_SPY_OFFSET + 10);
-        if (reachedTarget || Date.now() >= deadline) {
+        var reachedTarget = targetTop <= (SCROLL_SPY_OFFSET + 10) && targetTop >= -4;
+        if (reachedTarget) {
+            // Require a couple of stable frames so late layout shifts
+            // (icon font swap, lazy demo init) get one more correction pass
+            // before we tear the loader down and release the guard.
+            stableFrames += 1;
+            if (stableFrames >= 2) {
+                hideDocScrollLoader();
+                releaseGuardIfMatching();
+                return;
+            }
+        } else {
+            stableFrames = 0;
+        }
+        if (Date.now() >= deadline) {
             hideDocScrollLoader();
+            releaseGuardIfMatching();
             return;
         }
         window.requestAnimationFrame(checkScrollCompletion);
@@ -463,6 +504,11 @@ function showView(view) {
     } else {
         docsView.classList.remove('is-active');
         pageView.classList.add('is-active');
+        // Reset transient docs state so the scroll-spy can't clobber the
+        // new URL/title with a stale section while docs-view is hidden.
+        activeDocSectionId = null;
+        scrollSpyTicking = false;
+        releasePendingDocNavigation(0);
     }
     currentView = view;
 }
@@ -554,7 +600,12 @@ async function loadSection(sectionId, autoScroll = true, options = {}) {
 
     if (loadedSections.has(sectionId)) {
         var el = document.getElementById(sectionId);
-        if (el && autoScroll) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // 'instant' — deep-link/search to an already-loaded but far-away
+        // section (e.g. bottom-of-sidebar like 'glass') can animate for
+        // longer than the scroll-spy guard, letting spy hijack the URL
+        // mid-scroll. 'instant' also bypasses the global
+        // `html { scroll-behavior: smooth }` override.
+        if (el && autoScroll) el.scrollIntoView({ behavior: 'instant', block: 'start' });
         if (autoScroll) settleDocScrollLoader(sectionId);
         setActiveNavLink(sectionId);
         if (autoScroll) releasePendingDocNavigation(450);
@@ -571,7 +622,11 @@ async function loadSection(sectionId, autoScroll = true, options = {}) {
         if (signal && signal.aborted) return;
         if (loadedSections.has(sectionId)) {
             var existingSection = document.getElementById(sectionId);
-            if (existingSection) existingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // 'instant' bypasses the global `html { scroll-behavior: smooth }`;
+            // deep-link targets may be far from current scroll, and a smooth
+            // scroll gets cancelled/mis-targeted by concurrent layout shifts
+            // from in-flight Vanduo.init on preloaded siblings.
+            if (existingSection) existingSection.scrollIntoView({ behavior: 'instant', block: 'start' });
             settleDocScrollLoader(sectionId);
             setActiveNavLink(sectionId);
             setDocumentTitle(meta.section.title);
@@ -579,7 +634,6 @@ async function loadSection(sectionId, autoScroll = true, options = {}) {
                 window.history.replaceState(null, '', '#docs/' + sectionId);
             }
             activeDocSectionId = sectionId;
-            releasePendingDocNavigation(450);
             return;
         }
     }
@@ -648,7 +702,11 @@ async function loadSection(sectionId, autoScroll = true, options = {}) {
         }
 
         var target = document.getElementById(sectionId);
-        if (target && autoScroll) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // 'instant' (not 'auto') — the global `html { scroll-behavior: smooth }`
+        // in css/app.css makes 'auto' fall back to smooth, which gets cancelled
+        // or mis-targeted by concurrent layout shifts from in-flight Vanduo.init
+        // on preloaded siblings. 'instant' bypasses CSS scroll-behavior.
+        if (target && autoScroll) target.scrollIntoView({ behavior: 'instant', block: 'start' });
         if (autoScroll) settleDocScrollLoader(sectionId);
 
         if (autoScroll) {
@@ -658,7 +716,6 @@ async function loadSection(sectionId, autoScroll = true, options = {}) {
                 window.history.replaceState(null, '', '#docs/' + sectionId);
             }
             activeDocSectionId = sectionId;
-            releasePendingDocNavigation(450);
         }
     } catch (err) {
         if (err && err.name === 'AbortError') {
@@ -702,8 +759,10 @@ async function switchTab(tabKey, options = {}) {
     closeMobileToc();
 
     var orderedIds = getOrderedIds(tabKey);
-    if (orderedIds.length > 0) {
-        await loadSection(orderedIds[0], true, { signal: signal });
+    var targetId = options.initialSectionId
+        || (orderedIds.length > 0 ? orderedIds[0] : null);
+    if (targetId) {
+        await loadSection(targetId, true, { signal: signal });
     }
     if (signal && signal.aborted) return;
     scheduleDocsWarmup(tabKey);
@@ -714,6 +773,8 @@ const SCROLL_SPY_OFFSET = 96;
 
 function syncActiveDocSection(sectionId) {
     if (!sectionId) return;
+    var docsView = document.getElementById('docs-view');
+    if (!docsView || !docsView.classList.contains('is-active')) return;
     if (pendingDocNavigationId && sectionId !== pendingDocNavigationId) return;
     activeDocSectionId = sectionId;
     setActiveNavLink(sectionId);
@@ -755,6 +816,8 @@ function getActiveDocSectionId() {
 
 function updateActiveDocSection() {
     scrollSpyTicking = false;
+    var docsView = document.getElementById('docs-view');
+    if (!docsView || !docsView.classList.contains('is-active')) return;
     var nextSectionId = getActiveDocSectionId();
     if (!nextSectionId || nextSectionId === activeDocSectionId) return;
     syncActiveDocSection(nextSectionId);
@@ -1129,11 +1192,15 @@ async function handleRoute() {
     setActiveNavbarLink('docs');
 
     if (currentTab !== parsed.tab) {
-        await switchTab(parsed.tab, { signal: signal });
+        await switchTab(parsed.tab, {
+            signal: signal,
+            initialSectionId: parsed.section || undefined
+        });
         if (signal.aborted) return;
-    }
-
-    if (parsed.section) {
+        if (parsed.section) {
+            scheduleDocsWarmup(parsed.tab);
+        }
+    } else if (parsed.section) {
         await loadSection(parsed.section, true, { signal: signal });
         if (!signal.aborted) {
             scheduleDocsWarmup(parsed.tab);

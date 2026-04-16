@@ -1,4 +1,4 @@
-/*! Vanduo v1.3.5 | Built: 2026-04-15T18:39:53.955Z | git:3ca4f62 | development */
+/*! Vanduo v1.3.5 | Built: 2026-04-16T18:28:05.128Z | git:ff3bb53 | development */
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
