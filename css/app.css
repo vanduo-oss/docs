@@ -576,6 +576,12 @@
             font-weight: 500;
         }
 
+        .doc-nav-link.is-navigating {
+            color: var(--color-primary);
+            background-color: var(--bg-secondary);
+            opacity: 0.9;
+        }
+
         .doc-nav-link i {
             font-size: 1.1em;
             margin-right: 0.375rem;
@@ -1368,6 +1374,15 @@
         /* Full-width docs container — remove max-width constraint */
         #docs-view .vd-container-responsive {
             max-width: none;
+        }
+
+        #dynamic-content {
+            overflow-anchor: auto;
+        }
+
+        #dynamic-content > section {
+            content-visibility: auto;
+            contain-intrinsic-size: 1px 600px;
         }
 
         @media (max-width: 767.98px) {
