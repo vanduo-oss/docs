@@ -7,10 +7,10 @@ NPM Package: https://www.npmjs.com/package/@vanduo-oss/framework
 
 ## Current Snapshot
 
-- Docs are aligned with the **v1.3.4** release surface.
-- Production docs load the pinned framework CDN bundle from `@v1.3.4`, while local preview resolves framework assets from `./dist` and refreshes them from the sibling framework repo when available.
+- Docs are aligned with the **v1.3.7** release surface.
+- Production docs load the pinned framework CDN bundle from `@v1.3.7`, while local preview resolves framework assets from `./dist` and refreshes them from the sibling framework repo when available.
 - Theme tooling is documented as two separate components: Theme Switcher for lightweight system/light/dark toggles and Theme Customizer for full palette, neutral, radius, and font control.
-- v1.3.4 introduces the Glass Effects documentation page (Effects category) and a site-wide glass visual upgrade across the docs UI.
+- v1.3.7 includes the Glass Effects documentation page (Effects category) and a site-wide glass visual upgrade across the docs UI.
 
 ## Labs
 

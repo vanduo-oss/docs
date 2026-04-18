@@ -15,6 +15,129 @@
         <div class="vd-container-responsive" style="max-width: 1200px;">
 
             <!-- ═══════════════════════════════════════════════ -->
+            <!-- Version 1.3.7                                   -->
+            <!-- ═══════════════════════════════════════════════ -->
+            <article class="version-card">
+                <header class="version-header">
+                    <span class="vd-badge vd-badge-primary" style="font-size: 1rem; padding: 0.5rem 1rem;">v1.3.7</span>
+                    <span style="color: var(--text-secondary); font-size: 0.95rem;">
+                        <i class="ph ph-calendar mr-1"></i>April 18, 2026
+                    </span>
+                    <span class="vd-badge vd-badge-info" style="font-size: 0.75rem;">Latest</span>
+                </header>
+                <div class="version-body">
+                    <div class="vd-row">
+                        <div class="vd-col-12 vd-col-md-6">
+                            <h4><i class="ph ph-cube mr-2" style="color: var(--color-primary);"></i>Framework</h4>
+                            <div class="change-group">
+                                <h5>New</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-lightning" style="color: var(--color-success);"></i>
+                                        <div>
+                                            <strong>New: Expanding Cards</strong>
+                                            <p>Horizontal flex strip that expands one panel at a time (<code>.vd-expanding-cards</code> / <code>.vd-expanding-card</code>), adapted from the MIT-licensed <a href="https://codepen.io/z-/pen/OBPJKK" target="_blank" rel="noopener noreferrer">Expanding flex cards</a> CodePen.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <h5>Updates</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-drop" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: Water Morph — no post-morph bounce</strong>
+                                            <p>Removed the completion scale bounce (<code>.morph-done</code> / <code>vd-morph-bounce</code>) so the wave transition alone finishes the swap—easier on the eyes when reading.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-rectangle" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: Card elevation contrast</strong>
+                                            <p>Elevated cards use a stronger shadow token (and a subtle hover lift on non-link cards) so they read clearly against outlined and filled variants.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-calendar" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: Datepicker (<code>VanduoDatepicker</code>)</strong>
+                                            <p>Format tokens <code>YYYY</code> / <code>MM</code> / <code>DD</code> now work case-insensitively (fixes values sticking as the literal mask). Initial <code>value</code> is parsed using the same format; min/max use local-midnight <code>YYYY-MM-DD</code> parsing; opening syncs to the selected month; calendar uses <code>role="grid"</code>, column headers, <code>aria-disabled</code> on blocked days, and keyboard navigation (arrows, Home/End, Page Up/Down, Enter/Space, Escape). Closing after pick or Escape no longer reopens the popup when focus returns to the input.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-circle-half" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: Spotlight radii</strong>
+                                            <p>Spotlight tooltip, nav buttons, and highlight target use global radius tokens (<code>--card-border-radius</code>, <code>--btn-border-radius-sm</code>, and <code>--spotlight-target-radius</code>, defaulting to <code>--btn-border-radius</code>).</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-clock-countdown" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: Timeline — <code>.vd-timeline-animated</code></strong>
+                                            <p>Optional scroll-reveal modifier with staggered delays and <code>VanduoTimeline</code> (<code>IntersectionObserver</code>; respects <code>prefers-reduced-motion</code>).</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="vd-col-12 vd-col-md-6">
+                            <h4><i class="ph ph-book-open-text mr-2" style="color: var(--color-primary);"></i>Documentation</h4>
+                            <div class="change-group">
+                                <h5>New</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-lightning" style="color: var(--color-success);"></i>
+                                        <div>
+                                            <strong>New: Expanding Cards docs</strong>
+                                            <p>Full section with image strip + solid-color demos, attribution to the original CodePen, and class reference.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <h5>Updates</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-drop" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: Water Morph demos</strong>
+                                            <p>Caption reveal spacing; larger status badges; Priority and Build Status morph-badge examples; manual badge demos no longer add a bounce class.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-rectangle" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: Cards documentation</strong>
+                                            <p>Clearer variant comparisons, dedicated Glow / Glass / Morph demos, compact &amp; spacious sizing, expanded class reference.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-calendar" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: Datepicker documentation</strong>
+                                            <p>Clearer copy for pre-selected/custom format, month/year/decade navigation, and min/max demos; API table notes case-insensitive format tokens and grid roles; accessibility list matches the component.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-bookmark-simple" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: Docs &amp; CDN pins to v1.3.7</strong>
+                                            <p>Site metadata, bundled <code>docs/dist</code> framework assets, and jsDelivr examples now reference <strong>v1.3.7</strong>.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-clock-countdown" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: Timeline documentation</strong>
+                                            <p>Demos use <code>.vd-timeline-animated</code> with scroll-into-view reveal; API table and alerts document the modifier and <code>--vd-timeline-reveal-delay</code>.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ═══════════════════════════════════════════════ -->
             <!-- Version 1.3.6                                   -->
             <!-- ═══════════════════════════════════════════════ -->
             <article class="version-card">
@@ -23,7 +146,6 @@
                     <span style="color: var(--text-secondary); font-size: 0.95rem;">
                         <i class="ph ph-calendar mr-1"></i>April 16, 2026
                     </span>
-                    <span class="vd-badge vd-badge-info" style="font-size: 0.75rem;">Latest</span>
                 </header>
                 <div class="version-body">
                     <div class="vd-row">

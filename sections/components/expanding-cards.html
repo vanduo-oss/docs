@@ -1,0 +1,203 @@
+<section id="expanding-cards">
+    <h4 class="demo-title"><i class="ph ph-cards-three"></i>Expanding Cards</h4>
+    <p class="vd-text-muted vd-mb-6">A horizontal strip of panels that expand on focus — one stays wide while the others stay slim. Click a panel to expand it; use <kbd>←</kbd> <kbd>→</kbd> when a panel is focused.</p>
+
+    <style>
+        #expanding-cards .expanding-cards-wrap {
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+        #expanding-cards .expanding-cards-wrap .vd-expanding-cards {
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+
+    <h5 class="vd-mb-3">Photo strip</h5>
+    <p class="vd-text-sm vd-text-muted vd-mb-4">Uses background images on each <code>.vd-expanding-card</code> via <code>--vd-expanding-card-bg</code>.</p>
+    <div class="expanding-cards-wrap vd-mb-8">
+        <div class="vd-expanding-cards" data-vd-expanding-cards>
+            <div class="vd-expanding-card is-active"
+                style="--vd-expanding-card-bg: url(https://66.media.tumblr.com/6fb397d822f4f9f4596dff2085b18f2e/tumblr_nzsvb4p6xS1qho82wo1_1280.jpg);">
+                <div class="vd-expanding-card-shadow"></div>
+                <div class="vd-expanding-card-label">
+                    <div class="vd-expanding-card-icon"><i class="ph ph-footprints"></i></div>
+                    <div class="vd-expanding-card-info">
+                        <div class="vd-expanding-card-title">Alpine trail</div>
+                        <div class="vd-expanding-card-subtitle">Morning ridge walk</div>
+                    </div>
+                </div>
+            </div>
+            <div class="vd-expanding-card"
+                style="--vd-expanding-card-bg: url(https://66.media.tumblr.com/8b69cdde47aa952e4176b4200052abf4/tumblr_o51p7mFFF21qho82wo1_1280.jpg);">
+                <div class="vd-expanding-card-shadow"></div>
+                <div class="vd-expanding-card-label">
+                    <div class="vd-expanding-card-icon"><i class="ph ph-snowflake"></i></div>
+                    <div class="vd-expanding-card-info">
+                        <div class="vd-expanding-card-title">Winter pass</div>
+                        <div class="vd-expanding-card-subtitle">High elevation snow</div>
+                    </div>
+                </div>
+            </div>
+            <div class="vd-expanding-card"
+                style="--vd-expanding-card-bg: url(https://66.media.tumblr.com/5af3f8303456e376ceda1517553ba786/tumblr_o4986gakjh1qho82wo1_1280.jpg);">
+                <div class="vd-expanding-card-shadow"></div>
+                <div class="vd-expanding-card-label">
+                    <div class="vd-expanding-card-icon"><i class="ph ph-tree-evergreen"></i></div>
+                    <div class="vd-expanding-card-info">
+                        <div class="vd-expanding-card-title">Forest edge</div>
+                        <div class="vd-expanding-card-subtitle">Evergreen canopy</div>
+                    </div>
+                </div>
+            </div>
+            <div class="vd-expanding-card"
+                style="--vd-expanding-card-bg: url(https://66.media.tumblr.com/5516a22e0cdacaa85311ec3f8fd1e9ef/tumblr_o45jwvdsL11qho82wo1_1280.jpg);">
+                <div class="vd-expanding-card-shadow"></div>
+                <div class="vd-expanding-card-label">
+                    <div class="vd-expanding-card-icon"><i class="ph ph-drop"></i></div>
+                    <div class="vd-expanding-card-info">
+                        <div class="vd-expanding-card-title">Coastal mist</div>
+                        <div class="vd-expanding-card-subtitle">Ocean spray</div>
+                    </div>
+                </div>
+            </div>
+            <div class="vd-expanding-card"
+                style="--vd-expanding-card-bg: url(https://66.media.tumblr.com/f19901f50b79604839ca761cd6d74748/tumblr_o65rohhkQL1qho82wo1_1280.jpg);">
+                <div class="vd-expanding-card-shadow"></div>
+                <div class="vd-expanding-card-label">
+                    <div class="vd-expanding-card-icon"><i class="ph ph-sun-horizon"></i></div>
+                    <div class="vd-expanding-card-info">
+                        <div class="vd-expanding-card-title">Desert dusk</div>
+                        <div class="vd-expanding-card-subtitle">Last light</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h5 class="vd-mb-3">Solid brand colors</h5>
+    <p class="vd-text-sm vd-text-muted vd-mb-4">Set <code>--vd-expanding-card-bg</code> to a flat color and <code>--vd-expanding-card-bg-default</code> on each card so the icon circle matches.</p>
+    <div class="expanding-cards-wrap vd-mb-8">
+        <div class="vd-expanding-cards" data-vd-expanding-cards>
+            <div class="vd-expanding-card is-active"
+                style="--vd-expanding-card-bg: var(--color-primary); --vd-expanding-card-bg-default: var(--color-primary);">
+                <div class="vd-expanding-card-shadow"></div>
+                <div class="vd-expanding-card-label">
+                    <div class="vd-expanding-card-icon"><i class="ph ph-paint-brush"></i></div>
+                    <div class="vd-expanding-card-info">
+                        <div class="vd-expanding-card-title">Design</div>
+                        <div class="vd-expanding-card-subtitle">Tokens &amp; themes</div>
+                    </div>
+                </div>
+            </div>
+            <div class="vd-expanding-card"
+                style="--vd-expanding-card-bg: var(--color-success); --vd-expanding-card-bg-default: var(--color-success);">
+                <div class="vd-expanding-card-shadow"></div>
+                <div class="vd-expanding-card-label">
+                    <div class="vd-expanding-card-icon"><i class="ph ph-shield-check"></i></div>
+                    <div class="vd-expanding-card-info">
+                        <div class="vd-expanding-card-title">Quality</div>
+                        <div class="vd-expanding-card-subtitle">A11y &amp; tests</div>
+                    </div>
+                </div>
+            </div>
+            <div class="vd-expanding-card"
+                style="--vd-expanding-card-bg: var(--color-warning); --vd-expanding-card-bg-default: var(--color-warning);">
+                <div class="vd-expanding-card-shadow"></div>
+                <div class="vd-expanding-card-label">
+                    <div class="vd-expanding-card-icon"><i class="ph ph-rocket-launch"></i></div>
+                    <div class="vd-expanding-card-info">
+                        <div class="vd-expanding-card-title">Ship</div>
+                        <div class="vd-expanding-card-subtitle">Release cadence</div>
+                    </div>
+                </div>
+            </div>
+            <div class="vd-expanding-card"
+                style="--vd-expanding-card-bg: var(--color-info); --vd-expanding-card-bg-default: var(--color-info);">
+                <div class="vd-expanding-card-shadow"></div>
+                <div class="vd-expanding-card-label">
+                    <div class="vd-expanding-card-icon"><i class="ph ph-book-open-text"></i></div>
+                    <div class="vd-expanding-card-info">
+                        <div class="vd-expanding-card-title">Docs</div>
+                        <div class="vd-expanding-card-subtitle">Guides &amp; API</div>
+                    </div>
+                </div>
+            </div>
+            <div class="vd-expanding-card"
+                style="--vd-expanding-card-bg: var(--color-error); --vd-expanding-card-bg-default: var(--color-error);">
+                <div class="vd-expanding-card-shadow"></div>
+                <div class="vd-expanding-card-label">
+                    <div class="vd-expanding-card-icon"><i class="ph ph-bug"></i></div>
+                    <div class="vd-expanding-card-info">
+                        <div class="vd-expanding-card-title">Issues</div>
+                        <div class="vd-expanding-card-subtitle">Triage &amp; fixes</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vd-alert vd-alert-info vd-mb-8" role="status">
+        <div class="vd-alert-content">
+            <strong>Attribution</strong>
+            <p class="vd-mb-0">Interaction and layout are adapted from the MIT-licensed CodePen <a href="https://codepen.io/z-/pen/OBPJKK" target="_blank" rel="noopener noreferrer">“Expanding flex cards”</a> by Zed Dash. Vanduo adds prefixed class names, documentation, optional keyboard navigation, and reduced-motion handling.</p>
+        </div>
+    </div>
+
+    <div class="vd-code-snippet vd-mb-8" data-collapsible>
+        <button class="vd-code-snippet-toggle" aria-expanded="false">
+            <span class="vd-code-snippet-toggle-icon"></span>
+            <span>View Code</span>
+        </button>
+        <div class="vd-code-snippet-content">
+            <div class="vd-code-snippet-header">
+                <div class="vd-code-snippet-tabs" role="tablist">
+                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                </div>
+                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                    <span class="vd-code-snippet-copy-icon"></span>
+                    <span class="vd-code-snippet-copy-text">Copy</span>
+                </button>
+            </div>
+            <div class="vd-code-snippet-body">
+                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-expanding-cards"</span> <span class="code-attr">data-vd-expanding-cards</span>&gt;
+  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-expanding-card is-active"</span>
+       <span class="code-attr">style</span>=<span class="code-string">"--vd-expanding-card-bg: url(...);"</span>&gt;
+    &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-expanding-card-shadow"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+    &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-expanding-card-label"</span>&gt;
+      &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-expanding-card-icon"</span>&gt;…&lt;/<span class="code-tag">div</span>&gt;
+      &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-expanding-card-info"</span>&gt;
+        &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-expanding-card-title"</span>&gt;Title&lt;/<span class="code-tag">div</span>&gt;
+        &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-expanding-card-subtitle"</span>&gt;Subtitle&lt;/<span class="code-tag">div</span>&gt;
+      &lt;/<span class="code-tag">div</span>&gt;
+    &lt;/<span class="code-tag">div</span>&gt;
+  &lt;/<span class="code-tag">div</span>&gt;
+&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="vd-card vd-card-glow demo-card">
+        <div class="vd-card-header">
+            <h4><i class="ph ph-list-dashes mr-2" style="color: var(--color-primary);"></i>Class reference</h4>
+        </div>
+        <div class="vd-card-body">
+            <div class="vd-table-responsive">
+                <table class="vd-table vd-table-striped">
+                    <thead>
+                        <tr><th>Class / attribute</th><th>Description</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>.vd-expanding-cards</code></td><td>Flex row container. Initialized automatically unless <code>data-vd-expanding-cards="manual"</code>.</td></tr>
+                        <tr><td><code>.vd-expanding-card</code></td><td>Single panel. Active panel has <code>.is-active</code>.</td></tr>
+                        <tr><td><code>--vd-expanding-card-bg</code></td><td>Background image or color for the panel.</td></tr>
+                        <tr><td><code>--vd-expanding-card-bg-default</code></td><td>Fallback color (nth-child presets or your own) — drives icon circle text color.</td></tr>
+                        <tr><td><code>.vd-expanding-card-shadow</code></td><td>Bottom gradient scrim.</td></tr>
+                        <tr><td><code>.vd-expanding-card-label</code></td><td>Icon + title row anchored to the corner.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="vd-text-sm vd-text-muted vd-mb-0"><strong>JS:</strong> <code>VanduoExpandingCards.init()</code> runs with <code>Vanduo.init()</code>. Use <code>Vanduo.reinit('expandingCards')</code> after injecting markup.</p>
+        </div>
+    </div>
+</section>

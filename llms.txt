@@ -2,8 +2,8 @@
 > Pure HTML, CSS, JS framework for designing beautiful websites.
 > Zero runtime dependencies, no mandatory build tools, just clean and simple code.
 > MIT Licensed. https://vanduo.dev
-> Current docs snapshot is aligned with framework v1.3.5.
-> The live docs shell loads the pinned framework CDN bundle from @v1.3.5.
+> Current docs snapshot is aligned with framework v1.3.7.
+> The live docs shell loads the pinned framework CDN bundle from @v1.3.7.
 
 ## What is Vanduo?
 Vanduo is a lightweight front-end framework built on plain HTML, CSS, and JavaScript.
@@ -38,6 +38,7 @@ All content is hash-routed. Main sections:
 - #docs/components — UI components (buttons, cards, forms, alerts, etc.)
 - #docs/effects/glass — Glass Effects system (new in v1.3.4): frosted surfaces, tokens, scroll-activation
 - #docs/morph         — Water Morph effect (new in v1.3.5): liquid wave content-swap, mode toggle, theme card, status badge, caption reveal demos
+- #docs/expanding-cards — Expanding flex card strip (v1.3.7): photo + solid-color demos, MIT CodePen attribution
 - #docs/theme-switcher   — Lightweight light/dark/system toggle component
 - #docs/theme-customizer — Full runtime theming panel component
 - #docs/guides     — Getting started, lazy loading, theme customizer, ESM vs IIFE

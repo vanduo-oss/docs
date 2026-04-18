@@ -57,16 +57,26 @@
             opacity: 0.7;
         }
 
+        #morph .morph-badge-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1rem;
+        }
         #morph .morph-badge {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            min-width: 6rem;
-            padding: 0.45rem 1rem;
+            min-width: 9rem;
+            padding: 0.7rem 1.4rem;
             border-radius: 999px;
             font-weight: 600;
-            font-size: 0.8rem;
+            font-size: 0.95rem;
             border: none;
+        }
+        #morph .morph-badge i {
+            font-size: 1.1rem;
+            margin-right: 0.35rem;
         }
         #morph .morph-badge-online {
             background: var(--color-success-alpha-10, rgba(16,185,129,0.1));
@@ -83,6 +93,41 @@
             color: var(--color-error, #ef4444);
             --morph-wave-color: var(--color-error, #ef4444);
         }
+        #morph .morph-badge-priority-low {
+            background: color-mix(in srgb, var(--color-info, #0ea5e9) 12%, transparent);
+            color: var(--color-info, #0ea5e9);
+            --morph-wave-color: var(--color-info, #0ea5e9);
+        }
+        #morph .morph-badge-priority-medium {
+            background: var(--color-warning-alpha-10, rgba(245,158,11,0.1));
+            color: var(--color-warning, #f59e0b);
+            --morph-wave-color: var(--color-warning, #f59e0b);
+        }
+        #morph .morph-badge-priority-high {
+            background: color-mix(in srgb, #ea580c 14%, transparent);
+            color: #ea580c;
+            --morph-wave-color: #ea580c;
+        }
+        #morph .morph-badge-priority-urgent {
+            background: var(--color-error-alpha-10, rgba(239,68,68,0.1));
+            color: var(--color-error, #ef4444);
+            --morph-wave-color: var(--color-error, #ef4444);
+        }
+        #morph .morph-badge-build-passing {
+            background: var(--color-success-alpha-10, rgba(16,185,129,0.1));
+            color: var(--color-success, #10b981);
+            --morph-wave-color: var(--color-success, #10b981);
+        }
+        #morph .morph-badge-build-running {
+            background: color-mix(in srgb, var(--color-primary) 12%, var(--bg-secondary));
+            color: var(--color-primary);
+            --morph-wave-color: var(--color-primary);
+        }
+        #morph .morph-badge-build-failed {
+            background: var(--color-error-alpha-10, rgba(239,68,68,0.1));
+            color: var(--color-error, #ef4444);
+            --morph-wave-color: var(--color-error, #ef4444);
+        }
 
         #morph .morph-caption-card {
             width: 100%;
@@ -90,14 +135,14 @@
             border-radius: var(--card-border-radius);
             border: 1px solid var(--border-color);
             background: var(--bg-secondary);
-            min-height: 80px;
+            min-height: 120px;
         }
         #morph .morph-caption-card .vd-morph-content {
-            padding: 1rem 1.25rem;
+            padding: 1.5rem 1.75rem;
             text-align: left;
             flex-direction: column;
             align-items: flex-start;
-            gap: 0.25rem;
+            gap: 0.5rem;
         }
         #morph .morph-caption-title {
             font-weight: 700;
@@ -224,19 +269,45 @@
                     <h4>Status Badge Morph</h4>
                 </div>
                 <div class="vd-card-body">
-                    <p class="vd-text-sm vd-text-muted vd-mb-4">Click to cycle through statuses. Each state overrides <code>--morph-wave-color</code> for a matching wave.</p>
-                    <div class="morph-demo-row">
-                        <span class="vd-morph vd-morph-sm morph-badge morph-badge-online" data-vd-morph="manual" id="demo-morph-badge-btn"
+                    <p class="vd-text-sm vd-text-muted vd-mb-4">Click any badge to cycle. Each state overrides <code>--morph-wave-color</code> for a matching wave.</p>
+                    <div class="morph-badge-stack">
+                        <span class="vd-morph morph-badge morph-badge-online" data-vd-morph="manual" id="demo-morph-badge-btn"
                               data-morph-states='["Online","Away","Offline"]'
                               data-morph-classes='["morph-badge-online","morph-badge-away","morph-badge-offline"]'
                               data-morph-icons='["ph-wifi-high","ph-coffee","ph-wifi-slash"]'>
                             <span class="vd-morph-wave" aria-hidden="true"></span>
                             <span class="vd-morph-shine" aria-hidden="true"></span>
                             <span class="vd-morph-content vd-morph-current">
-                                <i class="ph ph-wifi-high" style="margin-right:0.35rem;"></i> Online
+                                <i class="ph ph-wifi-high"></i> Online
                             </span>
                             <span class="vd-morph-content vd-morph-next">
-                                <i class="ph ph-coffee" style="margin-right:0.35rem;"></i> Away
+                                <i class="ph ph-coffee"></i> Away
+                            </span>
+                        </span>
+                        <span class="vd-morph morph-badge morph-badge-priority-low" data-vd-morph="manual" id="demo-morph-badge-priority"
+                              data-morph-states='["Low","Medium","High","Urgent"]'
+                              data-morph-classes='["morph-badge-priority-low","morph-badge-priority-medium","morph-badge-priority-high","morph-badge-priority-urgent"]'
+                              data-morph-icons='["ph-circle","ph-warning-circle","ph-fire","ph-flag"]'>
+                            <span class="vd-morph-wave" aria-hidden="true"></span>
+                            <span class="vd-morph-shine" aria-hidden="true"></span>
+                            <span class="vd-morph-content vd-morph-current">
+                                <i class="ph ph-circle"></i> Low
+                            </span>
+                            <span class="vd-morph-content vd-morph-next">
+                                <i class="ph ph-warning-circle"></i> Medium
+                            </span>
+                        </span>
+                        <span class="vd-morph morph-badge morph-badge-build-passing" data-vd-morph="manual" id="demo-morph-badge-build"
+                              data-morph-states='["Passing","Running","Failed"]'
+                              data-morph-classes='["morph-badge-build-passing","morph-badge-build-running","morph-badge-build-failed"]'
+                              data-morph-icons='["ph-check-circle","ph-spinner-gap","ph-x-circle"]'>
+                            <span class="vd-morph-wave" aria-hidden="true"></span>
+                            <span class="vd-morph-shine" aria-hidden="true"></span>
+                            <span class="vd-morph-content vd-morph-current">
+                                <i class="ph ph-check-circle"></i> Passing
+                            </span>
+                            <span class="vd-morph-content vd-morph-next">
+                                <i class="ph ph-spinner-gap"></i> Running
                             </span>
                         </span>
                     </div>
@@ -329,8 +400,8 @@
         </div>
     </div>
 
-    <!-- Badge cycling logic is in docs/js/app.js (initMorphBadgeDemo) since
-         dynamically loaded <script> tags don't execute via innerHTML. -->
+    <!-- Manual morph-badge cycling for elements with data-vd-morph="manual" + data-morph-states
+         is wired in docs/js/app.js → initSectionDemos(). -->
 
     <!-- API Reference -->
     <div class="vd-card vd-card-glow demo-card" id="demo-morph-api">

@@ -47,6 +47,11 @@ async function getFrameworkAssetInfo(page: Page) {
     });
 }
 
+async function getNormalizedText(locator: ReturnType<Page['locator']>) {
+    const text = await locator.evaluate((el) => el.textContent || '');
+    return text.replace(/\s+/g, ' ').trim();
+}
+
 async function expectLocalFrameworkAssets(page: Page) {
     await page.waitForFunction(() => {
         const runtimeWindow = window as Window & {
@@ -115,6 +120,7 @@ test.describe('4. Documentation View', () => {
 
             const modeToggle = page.locator('#doc-water-toggle');
             await expect(modeToggle).toHaveAttribute('aria-pressed', 'false');
+            await expect.poll(async () => getNormalizedText(modeToggle)).toBe('Components Guides');
             await expect(modeToggle).not.toHaveClass(/is-guides/);
 
             // Check for Sidebar category groups
@@ -185,6 +191,7 @@ test.describe('4. Documentation View', () => {
             const modeToggle = page.locator('#doc-water-toggle');
             await expect(modeToggle).toHaveAttribute('aria-pressed', 'true');
             await expect(modeToggle).toHaveAttribute('aria-label', 'Switch to Components');
+            await expect.poll(async () => getNormalizedText(modeToggle)).toBe('Guides Components');
 
             // Check for a guide section such as quick-start
             const guideLink = page.locator('.doc-nav-link[data-route="docs/guides#quick-start"]');

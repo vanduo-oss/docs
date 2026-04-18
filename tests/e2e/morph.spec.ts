@@ -59,6 +59,17 @@ test.describe('Water Morph – Docs Section', () => {
         await expect(badge).toHaveClass(/morph-badge-away/);
     });
 
+    test('Priority badge demo – click cycles', async ({ page }) => {
+        const badge = page.locator('#demo-morph-badge-priority');
+        await expect(badge).toBeVisible();
+        await expect(badge.locator('.vd-morph-current')).toContainText('Low');
+
+        await badge.click();
+
+        await expect(badge.locator('.vd-morph-current')).toContainText('Medium', { timeout: 8000 });
+        await expect(badge).toHaveClass(/morph-badge-priority-medium/);
+    });
+
     test('Caption reveal demo – click reveals expanded text', async ({ page }) => {
         const card = page.locator('#demo-morph-caption-card');
         await expect(card).toBeVisible();
@@ -75,6 +86,14 @@ test.describe('Water Morph – Docs Section', () => {
         await page.keyboard.press('Enter');
 
         await expect(btn.locator('.vd-morph-current')).toContainText('Dark Mode', { timeout: 8000 });
+    });
+
+    test('no morph-done class after mode toggle completes', async ({ page }) => {
+        const btn = page.locator('#demo-morph-toggle-btn');
+        await btn.click();
+        await expect(btn.locator('.vd-morph-current')).toContainText('Dark Mode', { timeout: 8000 });
+        await page.waitForTimeout(500);
+        await expect(btn).not.toHaveClass(/morph-done/);
     });
 
     test('programmatic morph via VanduoMorph.morph()', async ({ page }) => {

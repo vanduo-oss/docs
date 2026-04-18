@@ -450,12 +450,34 @@ function filterSidebarNav(query) {
 
 var _toggleMorphing = false;
 
+function _getMorphDurationMs(el) {
+    var duration = 750;
+    if (!el) return duration;
+    var custom = getComputedStyle(el).getPropertyValue('--morph-duration');
+    if (custom) {
+        var parsed = parseFloat(custom);
+        if (!isNaN(parsed)) duration = parsed * (custom.indexOf('ms') !== -1 ? 1 : 1000);
+    }
+    return duration;
+}
+
 function _setToggleContent(el, tabKey) {
     var isGuides = tabKey === 'guides';
     var icon = el.querySelector('.doc-water-icon');
     var label = el.querySelector('.doc-water-label');
     if (icon) icon.className = isGuides ? 'doc-water-icon ph ph-compass' : 'doc-water-icon ph ph-cube';
     if (label) label.textContent = isGuides ? 'Guides' : 'Components';
+}
+
+/** Keep .vd-morph-current before .vd-morph-next in the tree so flattened text order matches the visible state. */
+function _orderDocWaterToggleLayers(toggle) {
+    if (!toggle) return;
+    var current = toggle.querySelector('.vd-morph-current');
+    var next = toggle.querySelector('.vd-morph-next');
+    if (!current || !next) return;
+    if (current.compareDocumentPosition(next) & Node.DOCUMENT_POSITION_PRECEDING) {
+        toggle.insertBefore(current, next);
+    }
 }
 
 function setActiveDocMode(tabKey) {
@@ -473,6 +495,7 @@ function setActiveDocMode(tabKey) {
     var oppositeTab = isGuides ? 'components' : 'guides';
     if (current) _setToggleContent(current, tabKey);
     if (next) _setToggleContent(next, oppositeTab);
+    _orderDocWaterToggleLayers(toggle);
 }
 
 /* ── Navbar active state ──────────────────────── */
@@ -1212,14 +1235,23 @@ async function handleRoute() {
 function initSectionDemos(sectionEl) {
     if (!sectionEl) return;
 
-    var badge = sectionEl.querySelector('#demo-morph-badge-btn');
-    if (badge && !badge._morphBadgeInit) {
+    sectionEl.querySelectorAll('[data-vd-morph="manual"][data-morph-states]').forEach(function (badge) {
+        if (badge._morphBadgeInit) return;
         badge._morphBadgeInit = true;
         var states  = JSON.parse(badge.getAttribute('data-morph-states')  || '[]');
         var classes = JSON.parse(badge.getAttribute('data-morph-classes') || '[]');
         var icons   = JSON.parse(badge.getAttribute('data-morph-icons')  || '[]');
         var idx = 0;
         var morphing = false;
+
+        var morphMs = 750;
+        try {
+            var d = getComputedStyle(badge).getPropertyValue('--morph-duration').trim();
+            if (d) {
+                var parsed = parseFloat(d);
+                if (!isNaN(parsed)) morphMs = parsed * (d.indexOf('ms') !== -1 ? 1 : 1000);
+            }
+        } catch (_e) { /* noop */ }
 
         badge.addEventListener('click', function (e) {
             if (morphing) return;
@@ -1259,12 +1291,9 @@ function initSectionDemos(sectionEl) {
 
                 idx = nextIdx;
                 morphing = false;
-
-                badge.classList.add('morph-done');
-                setTimeout(function () { badge.classList.remove('morph-done'); }, 350);
-            }, 520);
+            }, morphMs);
         });
-    }
+    });
 }
 
 /* ── Event listeners ──────────────────────────── */
@@ -1286,51 +1315,31 @@ if (brandLink) {
 
 var docWaterToggle = document.getElementById('doc-water-toggle');
 if (docWaterToggle) {
-    docWaterToggle.addEventListener('click', function (e) {
+    docWaterToggle.addEventListener('click', function () {
         if (_toggleMorphing) return;
 
         var toggle = this;
         var parsed = parseHash(location.hash);
         var activeTab = currentTab || parsed.tab || 'components';
         var destTab = activeTab === 'guides' ? 'components' : 'guides';
-        var oppositeTab = destTab === 'guides' ? 'components' : 'guides';
 
         var next = toggle.querySelector('.vd-morph-next');
         if (next) _setToggleContent(next, destTab);
 
-        var wave = toggle.querySelector('.vd-morph-wave');
-        if (wave) {
-            var rect = toggle.getBoundingClientRect();
-            wave.style.left = ((e.clientX || rect.left + rect.width / 2) - rect.left) + 'px';
-            wave.style.top  = ((e.clientY || rect.top  + rect.height / 2) - rect.top)  + 'px';
-        }
-
         _toggleMorphing = true;
-        toggle.classList.add('is-morphing');
-
-        var morphDuration = 700;
-
-        setTimeout(function () {
-            toggle.classList.remove('is-morphing');
-
-            var current = toggle.querySelector('.vd-morph-current');
-            var nextEl  = toggle.querySelector('.vd-morph-next');
-            if (current) _setToggleContent(current, destTab);
-            if (nextEl)  _setToggleContent(nextEl,  oppositeTab);
-
-            var toGuides = destTab === 'guides';
-            toggle.setAttribute('aria-pressed', String(toGuides));
-            toggle.setAttribute('aria-label', toGuides ? 'Switch to Components' : 'Switch to Guides');
-
-            _toggleMorphing = false;
-
-            toggle.classList.add('morph-done');
-            setTimeout(function () { toggle.classList.remove('morph-done'); }, 350);
-        }, morphDuration);
 
         var tabRoutes = { components: 'docs/components', guides: 'docs/guides' };
         navigate(tabRoutes[destTab] || 'docs/components');
-    });
+
+        var morphDuration = _getMorphDurationMs(toggle);
+        // Defer the final sync to the next frame so VanduoMorph has already swapped current/next.
+        setTimeout(function () {
+            requestAnimationFrame(function () {
+                _toggleMorphing = false;
+                setActiveDocMode(destTab);
+            });
+        }, morphDuration);
+    }, true);
 }
 
 /* ── Track Water Morph wrapper height for sticky sidebar (--doc-tabs-height) ── */
