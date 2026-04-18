@@ -1,96 +1,165 @@
 <section id="cards">
     <h4 class="demo-title"><i class="ph ph-rectangle"></i>Cards</h4>
+    <p class="vd-text-muted vd-mb-6">Cards group content with consistent padding, borders, and elevation. Combine variants with <code>.vd-card-glow</code>, <code>.vd-card-glass</code>, or the Water Morph effect for richer demos.</p>
 
-    <div class="vd-row">
+    <style>
+        #cards .cards-glass-stage {
+            border-radius: var(--card-border-radius);
+            padding: 2rem;
+            background:
+                linear-gradient(135deg,
+                    color-mix(in srgb, var(--color-primary) 35%, transparent) 0%,
+                    color-mix(in srgb, var(--color-primary) 8%, var(--bg-secondary)) 45%,
+                    color-mix(in srgb, var(--color-success) 20%, var(--bg-secondary)) 100%);
+            border: 1px solid var(--border-color);
+        }
+        #cards .cards-morph-inner {
+            min-height: 7rem;
+            border-radius: calc(var(--card-border-radius) - 2px);
+            border: 1px solid var(--border-color);
+            background: var(--bg-secondary);
+        }
+        #cards .cards-morph-inner .vd-morph-content {
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 0.35rem;
+            padding: 1.25rem 1.5rem;
+            text-align: left;
+        }
+    </style>
+
+    <!-- Variants -->
+    <h5 class="vd-mb-3"><i class="ph ph-squares-four mr-1"></i>Variants</h5>
+    <p class="vd-text-sm vd-text-muted vd-mb-4"><strong>Elevated</strong> is the default: medium shadow (stronger in dark mode). <strong>Outlined</strong> drops the shadow for a crisp border. <strong>Filled</strong> uses a subtle surface tint and no border.</p>
+    <div class="vd-row vd-mb-10">
         <div class="vd-col-12 vd-col-md-4">
-            <div class="vd-card vd-card-glow demo-card" id="demo-card-elevated">
+            <div class="vd-card vd-card-elevated demo-card" id="demo-card-elevated">
                 <div class="vd-card-header">
                     <h4>Elevated Card</h4>
                 </div>
                 <div class="vd-card-body">
-                    <p>This is an elevated card with shadow. It's the default card style.</p>
+                    <p>Default elevated surface — compare the shadow to outlined and filled.</p>
                 </div>
                 <div class="vd-card-footer">
-                    <button class="vd-btn vd-btn-primary vd-btn-sm">Action</button>
+                    <button type="button" class="vd-btn vd-btn-primary vd-btn-sm">Action</button>
                 </div>
             </div>
         </div>
 
         <div class="vd-col-12 vd-col-md-4">
-            <div class="vd-card vd-card-glow vd-card-outlined demo-card">
+            <div class="vd-card vd-card-outlined demo-card">
                 <div class="vd-card-header">
                     <h4>Outlined Card</h4>
                 </div>
                 <div class="vd-card-body">
-                    <p>This is an outlined card with border and no shadow.</p>
+                    <p>Border only, no drop shadow — ideal on busy backgrounds.</p>
                 </div>
                 <div class="vd-card-footer">
-                    <button class="vd-btn vd-btn-outline vd-btn-sm">Action</button>
+                    <button type="button" class="vd-btn vd-btn-outline vd-btn-sm">Action</button>
                 </div>
             </div>
         </div>
 
         <div class="vd-col-12 vd-col-md-4">
-            <div class="vd-card vd-card-glow vd-card-filled demo-card">
+            <div class="vd-card vd-card-filled demo-card">
                 <div class="vd-card-header">
                     <h4>Filled Card</h4>
                 </div>
                 <div class="vd-card-body">
-                    <p>This is a filled card with background color and no border.</p>
+                    <p>Secondary background fill, no border — reads as a soft panel.</p>
                 </div>
                 <div class="vd-card-footer">
-                    <button class="vd-btn vd-btn-primary vd-btn-sm">Action</button>
+                    <button type="button" class="vd-btn vd-btn-primary vd-btn-sm">Action</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Card Glow Effect -->
-    <div class="vd-row">
+    <!-- Glow -->
+    <h5 class="vd-mb-3"><i class="ph ph-sparkle mr-1"></i>Glow on hover</h5>
+    <p class="vd-text-sm vd-text-muted vd-mb-4">Add <code>.vd-card-glow</code> for a soft primary-tinted halo and border shift on hover (in addition to the elevated hover lift when applicable).</p>
+    <div class="vd-row vd-mb-10">
+        <div class="vd-col-12 vd-col-md-6 vd-col-lg-4">
+            <div class="vd-card vd-card-glow demo-card" id="demo-card-glow-hover">
+                <div class="vd-card-body vd-text-center">
+                    <p class="vd-mb-0"><strong>Hover this card</strong></p>
+                    <p class="vd-text-sm vd-text-muted vd-mb-0">Glow uses <code>--card-glow-color</code> / <code>--card-glow-border-color</code>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Glass -->
+    <h5 class="vd-mb-3"><i class="ph ph-drop-half-bottom mr-1"></i>Glass (frosted)</h5>
+    <p class="vd-text-sm vd-text-muted vd-mb-4"><code>.vd-card-glass</code> applies the glass token stack from the <a href="#docs/glass">Glass Effects</a> system — best seen over imagery or gradients. Respects <code>prefers-reduced-transparency</code> via the glass utilities.</p>
+    <div class="vd-row vd-mb-10">
         <div class="vd-col-12">
-            <div class="vd-card vd-card-glow demo-card vd-mb-8">
+            <div class="cards-glass-stage vd-mb-4">
+                <div class="vd-card vd-card-glass demo-card" id="demo-card-glass" style="max-width: 420px;">
+                    <div class="vd-card-header">
+                        <h4>Glass Card</h4>
+                    </div>
+                    <div class="vd-card-body">
+                        <p class="vd-mb-0">Backdrop blur and translucent fill let the stage show through.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Morph -->
+    <h5 class="vd-mb-3"><i class="ph ph-drop mr-1"></i>Morph inside a card</h5>
+    <p class="vd-text-sm vd-text-muted vd-mb-4">Pair a card shell with the Water Morph effect to swap summary ↔ detail. Uses <code>.vd-morph-lg</code> for a slower wave.</p>
+    <div class="vd-row vd-mb-10">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-card-morph-wrap">
                 <div class="vd-card-header">
-                    <h4><i class="ph ph-sparkle mr-2" style="color: var(--color-primary);"></i>Card
-                        Glow Effect</h4>
+                    <h4>Interactive surface</h4>
                 </div>
                 <div class="vd-card-body">
-                    <p class="vd-mb-5">Add a gentle glow effect to any card with the
-                        <code>.vd-card-glow</code> class. On hover, cards emit a soft primary-colored
-                        glow using CSS box-shadow.
-                    </p>
-                    <div class="vd-code-snippet" data-collapsible>
-                        <button class="vd-code-snippet-toggle" aria-expanded="false">
-                            <span class="vd-code-snippet-toggle-icon"></span>
-                            <span>View Code</span>
-                        </button>
-                        <div class="vd-code-snippet-content">
-                            <div class="vd-code-snippet-header">
-                                <div class="vd-code-snippet-tabs" role="tablist">
-                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
-                                </div>
-                                <button class="vd-code-snippet-copy" aria-label="Copy code">
-                                    <span class="vd-code-snippet-copy-icon"></span>
-                                    <span class="vd-code-snippet-copy-text">Copy</span>
-                                </button>
-                            </div>
-                            <div class="vd-code-snippet-body">
-                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Card with glow effect on hover --&gt;</span>
-&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-card vd-card-glow"</span>&gt;
-  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-card-body"</span>&gt;Hover over this card&lt;/<span class="code-tag">div</span>&gt;
-&lt;/<span class="code-tag">div</span>&gt;</code></pre>
-                            </div>
-                        </div>
+                    <div class="vd-morph vd-morph-lg cards-morph-inner" data-vd-morph id="demo-card-morph-block" role="button" tabindex="0">
+                        <span class="vd-morph-content vd-morph-current">
+                            <span class="vd-font-semibold">Fibonacci spacing</span>
+                            <span class="vd-text-sm vd-text-muted">Click to read more</span>
+                        </span>
+                        <span class="vd-morph-content vd-morph-next">
+                            <span class="vd-font-semibold">Fibonacci spacing</span>
+                            <span class="vd-text-sm vd-text-muted">Margins and padding use the golden-ratio scale for harmonious rhythm across components.</span>
+                        </span>
                     </div>
-                    <p class="vd-mt-5 vd-text-sm vd-text-muted"><strong>Tip:</strong> The glow color
-                        adapts
-                        to your theme's primary color. Works beautifully with dark mode too!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Density -->
+    <h5 class="vd-mb-3"><i class="ph ph-arrows-out-line-horizontal mr-1"></i>Compact &amp; spacious</h5>
+    <div class="vd-row vd-mb-10">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-compact demo-card">
+                <div class="vd-card-header">
+                    <h4>Compact</h4>
+                </div>
+                <div class="vd-card-body">
+                    <p class="vd-mb-0"><code>.vd-card-compact</code> tightens header, body, and footer padding.</p>
+                </div>
+            </div>
+        </div>
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-spacious demo-card">
+                <div class="vd-card-header">
+                    <h4>Spacious</h4>
+                </div>
+                <div class="vd-card-body">
+                    <p class="vd-mb-0"><code>.vd-card-spacious</code> uses larger Fibonacci padding for airy layouts.</p>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Code Snippet for Cards -->
-    <div class="vd-code-snippet" data-collapsible>
+    <div class="vd-code-snippet vd-mb-10" data-collapsible>
         <button class="vd-code-snippet-toggle" aria-expanded="false">
             <span class="vd-code-snippet-toggle-icon"></span>
             <span>View Code</span>
@@ -128,8 +197,7 @@
                 <pre class="vd-code-snippet-pane" data-lang="css"><code><span class="code-selector">.vd-card</span> {
   <span class="code-property">background-color</span>: <span class="code-value">var(--card-bg)</span>;
   <span class="code-property">border-radius</span>: <span class="code-value">var(--card-border-radius)</span>;
-  <span class="code-property">box-shadow</span>: <span class="code-value">var(--shadow-md)</span>;
-  <span class="code-property">overflow</span>: <span class="code-value">hidden</span>;
+  <span class="code-property">box-shadow</span>: <span class="code-value">var(--card-shadow-elevated)</span>;
 }
 
 <span class="code-selector">.vd-card-outlined</span> {
@@ -139,7 +207,8 @@
 
 <span class="code-selector">.vd-card-filled</span> {
   <span class="code-property">box-shadow</span>: <span class="code-value">none</span>;
-  <span class="code-property">background-color</span>: <span class="code-value">var(--bg-secondary)</span>;
+  <span class="code-property">background-color</span>: <span class="code-value">var(--card-bg-filled)</span>;
+  <span class="code-property">border</span>: <span class="code-value">none</span>;
 }</code></pre>
             </div>
         </div>
@@ -168,6 +237,11 @@
                                     <td>Base</td>
                                 </tr>
                                 <tr>
+                                    <td><code>.vd-card-elevated</code></td>
+                                    <td>Explicit elevated shadow (same as default <code>.vd-card</code>)</td>
+                                    <td>Variant</td>
+                                </tr>
+                                <tr>
                                     <td><code>.vd-card-outlined</code></td>
                                     <td>Outlined card with border, no shadow</td>
                                     <td>Variant</td>
@@ -178,8 +252,23 @@
                                     <td>Variant</td>
                                 </tr>
                                 <tr>
+                                    <td><code>.vd-card-glass</code></td>
+                                    <td>Frosted glass surface (see Glass Effects tokens)</td>
+                                    <td>Variant</td>
+                                </tr>
+                                <tr>
                                     <td><code>.vd-card-glow</code></td>
                                     <td>Adds soft primary-colored glow on hover</td>
+                                    <td>Modifier</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.vd-card-compact</code></td>
+                                    <td>Reduces padding on header, body, footer</td>
+                                    <td>Modifier</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.vd-card-spacious</code></td>
+                                    <td>Increases padding on header, body, footer</td>
                                     <td>Modifier</td>
                                 </tr>
                                 <tr>

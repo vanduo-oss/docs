@@ -484,6 +484,13 @@
               "keywords": ["carousel", "slider", "flow", "slideshow", "swipe", "autoplay"]
             },
             {
+              "id": "expanding-cards",
+              "title": "Expanding Cards",
+              "file": "components/expanding-cards.html",
+              "icon": "ph-cards-three",
+              "keywords": ["expanding", "cards", "flex", "reveal", "hover", "interactive", "media"]
+            },
+            {
               "id": "spotlight",
               "title": "Spotlight / Feature Discovery",
               "file": "components/spotlight.html",

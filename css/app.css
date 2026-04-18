@@ -221,7 +221,7 @@
         .theme-customizer-inline {
             padding: 1rem;
             background: var(--bg-secondary);
-            border-radius: var(--radius-md);
+            border-radius: var(--btn-border-radius-lg);
         }
 
         .theme-customizer-inline .color-swatch {
@@ -322,7 +322,7 @@
             gap: 0.75rem;
             padding: 1rem 1.25rem;
             background: var(--bg-secondary);
-            border-radius: var(--radius-md);
+            border-radius: var(--btn-border-radius);
             min-height: 4.25rem;
         }
 
@@ -1156,17 +1156,7 @@
             color: var(--color-primary) !important;
         }
 
-        /* Restrict card glow to actionable cards only (clickable or with action controls) */
-        .vd-card-glow:hover {
-            box-shadow: var(--card-shadow-elevated);
-            border-color: var(--card-border-color);
-        }
-
-        .vd-card-actionable.vd-card-glow:hover {
-            box-shadow: 0 0 15px 0 var(--card-glow-color), var(--card-shadow);
-            border-color: var(--card-glow-border-color);
-        }
-
+        /* Glow uses framework .vd-card-glow:hover from vanduo.min.css (do not reset here). */
         a:hover .vd-card-actionable.vd-card-glow {
             box-shadow: 0 0 15px 0 var(--card-glow-color), var(--shadow-xl);
             border-color: var(--card-glow-border-color);

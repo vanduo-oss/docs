@@ -1,7 +1,9 @@
 <section id="timeline">
     <h4 class="demo-title"><i class="ph ph-clock-countdown"></i>Timeline</h4>
-    <p class="vd-mb-8">Display chronological events in a vertical track. A pure CSS component — no JavaScript required.
+    <p class="vd-mb-8">Display chronological events in a vertical track. By default the timeline is pure CSS — no JavaScript required.
         Supports alternating layout and color-coded markers for different event states.</p>
+
+    <p class="vd-mb-6 vd-text-muted"><strong>Animated demos:</strong> Scroll to this section to watch each timeline reveal item-by-item. Add <code>.vd-timeline-animated</code> on <code>.vd-timeline</code> to opt in; the framework sets staggered <code>--vd-timeline-reveal-delay</code> per item (auto-init via <code>Vanduo.init()</code>). With <code>.vd-timeline-alternating</code>, items animate in from the left and right on desktop (same stagger); on narrow viewports the motion stays vertical. Add <code>.vd-timeline-playback</code> together with <code>.vd-timeline-animated</code> to drive reveals from buttons (<code>data-vd-timeline-prev</code>, <code>data-vd-timeline-next</code>, <code>data-vd-timeline-play</code>, <code>data-vd-timeline-pause</code>) in the <strong>direct parent</strong> of the timeline (e.g. <code>.vd-card-body</code> wrapping both the toolbar and the list)—scroll-based <code>IntersectionObserver</code> is not used in playback mode.</p>
 
     <!-- Basic Vertical Timeline -->
     <div class="vd-row vd-mb-6">
@@ -11,7 +13,7 @@
                     <h4><i class="ph ph-list-numbers"></i> Basic Timeline</h4>
                 </div>
                 <div class="vd-card-body">
-                    <div class="vd-timeline">
+                    <div class="vd-timeline vd-timeline-animated">
                         <div class="vd-timeline-item">
                             <div class="vd-timeline-marker vd-timeline-success"></div>
                             <div class="vd-timeline-content">
@@ -56,7 +58,7 @@
                     <h4><i class="ph ph-palette"></i> Color Variants</h4>
                 </div>
                 <div class="vd-card-body">
-                    <div class="vd-timeline">
+                    <div class="vd-timeline vd-timeline-animated">
                         <div class="vd-timeline-item">
                             <div class="vd-timeline-marker vd-timeline-marker-lg vd-timeline-success">
                                 <i class="ph ph-check"></i>
@@ -98,7 +100,7 @@
                     <h4><i class="ph ph-arrows-left-right"></i> Alternating Timeline</h4>
                 </div>
                 <div class="vd-card-body">
-                    <div class="vd-timeline vd-timeline-alternating">
+                    <div class="vd-timeline vd-timeline-alternating vd-timeline-animated">
                         <div class="vd-timeline-item">
                             <div class="vd-timeline-marker vd-timeline-success"></div>
                             <div class="vd-timeline-content">
@@ -129,6 +131,59 @@
                                 <span class="vd-timeline-date">17:00</span>
                                 <h4 class="vd-timeline-title">Release Shipped</h4>
                                 <p class="vd-timeline-text">Version 2.4.0 published to npm and CDN. Changelog updated.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Playback timeline -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card" id="demo-timeline-playback">
+                <div class="vd-card-header">
+                    <h4><i class="ph ph-play-circle"></i> Playback timeline</h4>
+                </div>
+                <div class="vd-card-body">
+                    <div class="vd-btn-group vd-mb-4" role="toolbar" aria-label="Timeline playback">
+                        <button type="button" class="vd-btn vd-btn-outline-secondary vd-btn-sm" data-vd-timeline-prev aria-label="Previous event"><i class="ph ph-skip-back" aria-hidden="true"></i> Back</button>
+                        <button type="button" class="vd-btn vd-btn-outline-secondary vd-btn-sm" data-vd-timeline-next aria-label="Next event">Next <i class="ph ph-skip-forward" aria-hidden="true"></i></button>
+                        <button type="button" class="vd-btn vd-btn-outline-secondary vd-btn-sm" data-vd-timeline-play aria-label="Play timeline">Play</button>
+                        <button type="button" class="vd-btn vd-btn-outline-secondary vd-btn-sm" data-vd-timeline-pause aria-label="Pause timeline" disabled>Pause</button>
+                    </div>
+                    <div class="vd-timeline vd-timeline-alternating vd-timeline-animated vd-timeline-playback">
+                        <div class="vd-timeline-item">
+                            <div class="vd-timeline-marker vd-timeline-success"></div>
+                            <div class="vd-timeline-content">
+                                <span class="vd-timeline-date">Step 1</span>
+                                <h4 class="vd-timeline-title">Kickoff</h4>
+                                <p class="vd-timeline-text">Goals and scope confirmed for the milestone.</p>
+                            </div>
+                        </div>
+                        <div class="vd-timeline-item">
+                            <div class="vd-timeline-marker"></div>
+                            <div class="vd-timeline-content">
+                                <span class="vd-timeline-date">Step 2</span>
+                                <h4 class="vd-timeline-title">Implementation</h4>
+                                <p class="vd-timeline-text">Feature work merged behind a feature flag.</p>
+                            </div>
+                        </div>
+                        <div class="vd-timeline-item">
+                            <div class="vd-timeline-marker"></div>
+                            <div class="vd-timeline-content">
+                                <span class="vd-timeline-date">Step 3</span>
+                                <h4 class="vd-timeline-title">Verification</h4>
+                                <p class="vd-timeline-text">QA sign-off and docs updated before release.</p>
+                            </div>
+                        </div>
+                        <div class="vd-timeline-item">
+                            <div class="vd-timeline-marker vd-timeline-success"></div>
+                            <div class="vd-timeline-content">
+                                <span class="vd-timeline-date">Step 4</span>
+                                <h4 class="vd-timeline-title">Ship</h4>
+                                <p class="vd-timeline-text">Flag enabled for all users; monitoring dashboards green.</p>
                             </div>
                         </div>
                     </div>
@@ -192,6 +247,18 @@
                                     <td>Modifier that alternates items left and right of the center line (desktop only).</td>
                                 </tr>
                                 <tr>
+                                    <td><code>.vd-timeline-animated</code></td>
+                                    <td>Optional modifier (use with <code>.vd-timeline</code>) for fade/slide-in and marker pop-in. With scroll (default), items gain <code>.is-revealed</code> when scrolled into view. With <code>.vd-timeline-playback</code>, items are revealed only via controls (see below). Delays use <code>--vd-timeline-reveal-delay</code> (set per item by <code>VanduoTimeline</code>).</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.vd-timeline-playback</code></td>
+                                    <td>Use with <code>.vd-timeline-animated</code>. Disables scroll-driven reveal; place <code>data-vd-timeline-prev</code>, <code>data-vd-timeline-next</code>, <code>data-vd-timeline-play</code>, and <code>data-vd-timeline-pause</code> on buttons inside the timeline&rsquo;s <strong>direct parent</strong> (e.g. toolbar and list share a <code>.vd-card-body</code>). Cumulative reveal: next/back add or remove <code>.is-revealed</code> on items in order; play auto-advances on an interval until the end or pause.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>--vd-timeline-reveal-delay</code></td>
+                                    <td>Per-item transition delay for the reveal animation (inline-set when using the animated modifier; first items stagger ~140ms apart, capped after the eighth).</td>
+                                </tr>
+                                <tr>
                                     <td><code>.vd-timeline-success</code></td>
                                     <td>Colors the marker with the success (green) palette.</td>
                                 </tr>
@@ -209,7 +276,7 @@
 
                     <div class="vd-alert vd-alert-info vd-mt-5">
                         <i class="ph ph-code"></i>
-                        <div><strong>No JavaScript needed.</strong> The timeline is a pure CSS component. No initialization or event handling is required.</div>
+                        <div><strong>Default: CSS only.</strong> Static timelines need no JavaScript. With <code>.vd-timeline-animated</code> alone, the framework runs one shared <code>IntersectionObserver</code> (auto-init via <code>Vanduo.init()</code>) to add <code>.is-revealed</code>. With <code>.vd-timeline-playback</code>, there is no observer—only the buttons. Use <code>VanduoTimeline.reinit()</code> after injecting new timeline markup.</div>
                     </div>
                 </div>
             </div>

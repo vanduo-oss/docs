@@ -8,6 +8,10 @@
             <div class="vd-card vd-card-glow demo-card" id="demo-datepicker-basic">
                 <div class="vd-card-header"><h4>Basic Datepicker</h4></div>
                 <div class="vd-card-body">
+                    <p class="vd-text-sm vd-text-muted vd-mb-4">Minimal setup: add <code>data-vd-datepicker</code> to a text
+                        input (these demos use <code>readonly</code> so typing is off). With no format attribute, picked
+                        dates are written as <code>YYYY-MM-DD</code>. Focus the field to open the calendar and choose a
+                        day.</p>
                     <div class="vd-form-group">
                         <label for="dp-basic">Select a Date</label>
                         <input type="text" id="dp-basic" class="vd-input" placeholder="YYYY-MM-DD"
@@ -45,9 +49,12 @@
             <div class="vd-card vd-card-glow demo-card" id="demo-datepicker-preselect">
                 <div class="vd-card-header"><h4>Pre-selected Value & Custom Format</h4></div>
                 <div class="vd-card-body">
+                    <p class="vd-text-sm vd-text-muted vd-mb-4">Beyond basic: set <code>value</code> and
+                        <code>data-vd-datepicker-format</code> so the initial string is parsed and new picks match that
+                        pattern. Tokens: <code>YYYY</code>, <code>MM</code>, <code>DD</code> (case-insensitive).</p>
                     <div class="vd-form-group">
                         <label for="dp-preselect">Birthday</label>
-                        <input type="text" id="dp-preselect" class="vd-input" value="03/15/1995"
+                        <input type="text" id="dp-preselect" class="vd-input" value="01/15/2026"
                             data-vd-datepicker
                             data-vd-datepicker-format="MM/DD/YYYY"
                             readonly>
@@ -70,7 +77,7 @@
                             <div class="vd-code-snippet-body">
                                 <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">input</span> <span class="code-attr">type</span>=<span class="code-string">"text"</span>
   <span class="code-attr">class</span>=<span class="code-string">"vd-input"</span>
-  <span class="code-attr">value</span>=<span class="code-string">"03/15/1995"</span>
+  <span class="code-attr">value</span>=<span class="code-string">"01/15/2026"</span>
   <span class="code-attr">data-vd-datepicker</span>
   <span class="code-attr">data-vd-datepicker-format</span>=<span class="code-string">"MM/DD/YYYY"</span>
   <span class="code-attr">readonly</span>&gt;</code></pre>
@@ -87,12 +94,15 @@
             <div class="vd-card vd-card-glow demo-card" id="demo-datepicker-minmax">
                 <div class="vd-card-header"><h4>Min / Max Date Constraints</h4></div>
                 <div class="vd-card-body">
+                    <p class="vd-text-sm vd-text-muted vd-mb-4">Use <code>data-vd-datepicker-min</code> and
+                        <code>data-vd-datepicker-max</code> with <code>YYYY-MM-DD</code> bounds. Out-of-range days are
+                        disabled; the view snaps to a month that contains selectable dates.</p>
                     <div class="vd-form-group">
-                        <label for="dp-minmax">Appointment (next 30 days only)</label>
+                        <label for="dp-minmax">Appointment (May 2026 only)</label>
                         <input type="text" id="dp-minmax" class="vd-input" placeholder="Pick a date…"
                             data-vd-datepicker
-                            data-vd-datepicker-min="2026-03-11"
-                            data-vd-datepicker-max="2026-04-10"
+                            data-vd-datepicker-min="2026-05-01"
+                            data-vd-datepicker-max="2026-05-31"
                             readonly>
                     </div>
                     <div class="vd-code-snippet" data-collapsible>
@@ -114,8 +124,8 @@
                                 <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">input</span> <span class="code-attr">type</span>=<span class="code-string">"text"</span>
   <span class="code-attr">class</span>=<span class="code-string">"vd-input"</span>
   <span class="code-attr">data-vd-datepicker</span>
-  <span class="code-attr">data-vd-datepicker-min</span>=<span class="code-string">"2026-03-11"</span>
-  <span class="code-attr">data-vd-datepicker-max</span>=<span class="code-string">"2026-04-10"</span>
+  <span class="code-attr">data-vd-datepicker-min</span>=<span class="code-string">"2026-05-01"</span>
+  <span class="code-attr">data-vd-datepicker-max</span>=<span class="code-string">"2026-05-31"</span>
   <span class="code-attr">readonly</span>&gt;</code></pre>
                             </div>
                         </div>
@@ -128,12 +138,13 @@
             <div class="vd-card vd-card-glow demo-card" id="demo-datepicker-navigation">
                 <div class="vd-card-header"><h4>Month / Year Navigation</h4></div>
                 <div class="vd-card-body">
-                    <p class="vd-text-sm vd-text-muted vd-mb-4">All datepickers include built-in month/year navigation.
-                        Click the month/year header to switch between month and year views. Arrow buttons step through
-                        months.</p>
+                    <p class="vd-text-sm vd-text-muted vd-mb-4">This card uses <code>DD.MM.YYYY</code> to show a
+                        non-default format; navigation is the same as everywhere. Click the month/year title to switch
+                        day → month → year (decade) views; arrows step by month, year, or decade depending on
+                        the level.</p>
                     <div class="vd-form-group">
                         <label for="dp-nav">Event Date</label>
-                        <input type="text" id="dp-nav" class="vd-input" placeholder="DD.MM.YYYY"
+                        <input type="text" id="dp-nav" class="vd-input" value="18.04.2026" placeholder="DD.MM.YYYY"
                             data-vd-datepicker
                             data-vd-datepicker-format="DD.MM.YYYY"
                             readonly>
@@ -156,6 +167,7 @@
                             <div class="vd-code-snippet-body">
                                 <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">input</span> <span class="code-attr">type</span>=<span class="code-string">"text"</span>
   <span class="code-attr">class</span>=<span class="code-string">"vd-input"</span>
+  <span class="code-attr">value</span>=<span class="code-string">"18.04.2026"</span>
   <span class="code-attr">placeholder</span>=<span class="code-string">"DD.MM.YYYY"</span>
   <span class="code-attr">data-vd-datepicker</span>
   <span class="code-attr">data-vd-datepicker-format</span>=<span class="code-string">"DD.MM.YYYY"</span>
@@ -183,7 +195,8 @@
                     <tbody>
                         <tr><td><code>.vd-datepicker-popup</code></td><td>The floating calendar container positioned below the input</td></tr>
 <tr><td><code>.vd-datepicker-header</code></td><td>Header row with month/year label and navigation arrows</td></tr>
-<tr><td><code>.vd-datepicker-days</code></td><td>7-column CSS grid holding day cells</td></tr>
+<tr><td><code>.vd-datepicker-grid</code></td><td>Wraps the weekday row and week rows (<code>role="grid"</code>)</td></tr>
+<tr><td><code>.vd-datepicker-days</code></td><td>Legacy 7-column grid class (week rows use <code>.vd-datepicker-row</code>)</td></tr>
 <tr><td><code>.vd-datepicker-day</code></td><td>Individual day cell button</td></tr>
                         <tr><td><code>.vd-datepicker-day.is-today</code></td><td>Highlights today's date with a ring indicator</td></tr>
                         <tr><td><code>.vd-datepicker-day.is-selected</code></td><td>The currently selected date (filled primary color)</td></tr>
@@ -201,7 +214,7 @@
                     </thead>
                     <tbody>
                         <tr><td><code>data-vd-datepicker</code></td><td>Activates the datepicker on the input</td></tr>
-                        <tr><td><code>data-vd-datepicker-format</code></td><td>Date format string. Tokens: <code>YYYY</code>, <code>MM</code>, <code>DD</code>. Default: <code>"YYYY-MM-DD"</code></td></tr>
+                        <tr><td><code>data-vd-datepicker-format</code></td><td>Date format string. Tokens: <code>YYYY</code>, <code>MM</code>, <code>DD</code> (matched case-insensitively). Default: <code>"YYYY-MM-DD"</code></td></tr>
                         <tr><td><code>data-vd-datepicker-min</code></td><td>Earliest selectable date in <code>YYYY-MM-DD</code> format</td></tr>
                         <tr><td><code>data-vd-datepicker-max</code></td><td>Latest selectable date in <code>YYYY-MM-DD</code> format</td></tr>
                     </tbody>
@@ -243,7 +256,7 @@
         <div class="vd-card-body">
             <ul>
                 <li>The popup has <code>role="dialog"</code> and <code>aria-label="Choose date"</code></li>
-                <li>Day grid uses <code>role="grid"</code> with <code>role="gridcell"</code> for each day</li>
+                <li>Calendar uses <code>role="grid"</code>; weekday labels use <code>role="columnheader"</code>; in-month days use <code>role="gridcell"</code></li>
                 <li><kbd>←</kbd> / <kbd>→</kbd> move by day; <kbd>↑</kbd> / <kbd>↓</kbd> move by week</li>
                 <li><kbd>Home</kbd> / <kbd>End</kbd> jump to start/end of the current week</li>
                 <li><kbd>Page Up</kbd> / <kbd>Page Down</kbd> navigate by month</li>
