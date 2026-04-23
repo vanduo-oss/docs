@@ -131,6 +131,16 @@
                                         </div>
                                     </li>
                                 </ul>
+                                <h5>Fixes</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-bug" style="color: var(--color-error);"></i>
+                                        <div>
+                                            <strong>Fix: First-attempt navigation lands on wrong section</strong>
+                                            <p>Searching for or sidebar-clicking a late section (e.g. <em>Glass Effects</em>) from the homepage could scroll to an unrelated section on the first attempt. <code>preloadSectionsBefore</code> was calling <code>setupInfiniteScroll</code> prematurely, allowing the sentinel <code>IntersectionObserver</code> to trigger a background <code>loadSection</code> that blocked the explicit navigation via the <code>loadingSections</code> guard — causing it to silently return with no scroll or URL update. Removed the premature sentinel setup calls and added a <code>requestAnimationFrame</code> polling fallback so any navigation that arrives while the target is mid-load still waits and lands correctly.</p>
+                                        </div>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
