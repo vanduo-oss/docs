@@ -1171,7 +1171,6 @@ function parseHash(hash) {
     if (h === 'changelog') return { view: 'changelog' };
     if (h === 'kilo-oss') return { view: 'kilo-oss' };
     if (h === 'docs') return { view: 'docs-landing' };
-    if (h === 'labs') return { view: 'labs' };
     if (h === 'docs/components') return { view: 'docs', tab: 'components', section: null };
     if (h === 'docs/guides') return { view: 'docs', tab: 'guides', section: null };
     if (h.startsWith('docs/')) {
@@ -1200,13 +1199,10 @@ async function handleRoute() {
 
     var parsed = parseHash(location.hash);
 
-    if (parsed.view === 'home' || parsed.view === 'about' || parsed.view === 'changelog' || parsed.view === 'kilo-oss' || parsed.view === 'docs-landing' || parsed.view === 'labs') {
+    if (parsed.view === 'home' || parsed.view === 'about' || parsed.view === 'changelog' || parsed.view === 'kilo-oss' || parsed.view === 'docs-landing') {
         await loadPage(parsed.view);
         if (parsed.view === 'docs-landing') {
             setActiveNavbarLink('docs');
-        }
-        if (parsed.view === 'labs') {
-            setActiveNavbarLink('labs');
         }
         return;
     }
