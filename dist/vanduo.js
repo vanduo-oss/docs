@@ -1,4 +1,4 @@
-/*! Vanduo v1.3.7 | Built: 2026-04-18T11:53:11.606Z | git:ff3bb53 | development */
+/*! Vanduo v1.3.8 | Built: 2026-04-22T21:46:13.240Z | git:f7cfd78 | development */
 (() => {
   // js/utils/lifecycle.js
   (function() {
@@ -107,7 +107,7 @@
   // js/vanduo.js
   (function() {
     "use strict";
-    const VANDUO_VERSION = true ? "1.3.7" : "0.0.0-dev";
+    const VANDUO_VERSION = true ? "1.3.8" : "0.0.0-dev";
     const Vanduo2 = {
       version: VANDUO_VERSION,
       components: {},
@@ -8000,16 +8000,16 @@
       const order = [];
       let i = 0;
       while (i < format.length) {
-        const slice = format.slice(i).toLowerCase();
-        if (slice.startsWith("yyyy")) {
+        const slice = format.slice(i);
+        if (slice.toLowerCase().startsWith("yyyy")) {
           regex += "(\\d{4})";
           order.push("y");
           i += 4;
-        } else if (slice.startsWith("mm")) {
+        } else if (slice.toLowerCase().startsWith("mm")) {
           regex += "(\\d{2})";
           order.push("m");
           i += 2;
-        } else if (slice.startsWith("dd")) {
+        } else if (slice.toLowerCase().startsWith("dd")) {
           regex += "(\\d{2})";
           order.push("d");
           i += 2;
@@ -8050,14 +8050,14 @@
       let out = "";
       let i = 0;
       while (i < format.length) {
-        const slice = format.slice(i).toLowerCase();
-        if (slice.startsWith("yyyy")) {
+        const slice = format.slice(i);
+        if (slice.toLowerCase().startsWith("yyyy")) {
           out += yyyy;
           i += 4;
-        } else if (slice.startsWith("mm")) {
+        } else if (slice.toLowerCase().startsWith("mm")) {
           out += mm;
           i += 2;
-        } else if (slice.startsWith("dd")) {
+        } else if (slice.toLowerCase().startsWith("dd")) {
           out += dd;
           i += 2;
         } else {
@@ -9441,6 +9441,9 @@
       const s = Math.floor(seconds % 60);
       return m + ":" + (s < 10 ? "0" : "") + s;
     }
+    function persistStorageKey(id) {
+      return "vanduo:music-player:" + (id && id.trim() ? id.trim() : "default") + ":pos";
+    }
     function updateRangeFill(input) {
       const min = parseFloat(input.min) || 0;
       const max = parseFloat(input.max) || 1;
@@ -9467,7 +9470,16 @@
         shuffle: false,
         showProgress: false,
         showPlaylist: false,
-        autoAdvance: true
+        autoAdvance: true,
+        glass: false,
+        detachable: false,
+        /** @type {null|string} */
+        floatingPosition: null,
+        draggable: false,
+        minimizable: false,
+        startMinimized: false,
+        persistPosition: false,
+        persistKey: ""
       },
       /**
        * Auto-initialize all .vd-music-player / [data-music-player] elements.
@@ -9507,7 +9519,18 @@
           showProgress: opts.showProgress,
           showPlaylist: opts.showPlaylist,
           autoAdvance: opts.autoAdvance,
-          audio: null
+          audio: null,
+          glass: Boolean(opts.glass),
+          detachable: Boolean(opts.detachable),
+          floatingPosition: opts.floatingPosition || "bottom-right",
+          draggable: Boolean(opts.draggable) && Boolean(opts.detachable),
+          minimizable: Boolean(opts.minimizable),
+          startMinimized: Boolean(opts.startMinimized),
+          persistPosition: Boolean(opts.persistPosition),
+          persistKey: typeof opts.persistKey === "string" ? opts.persistKey : "",
+          isDetached: false,
+          isMinimized: false,
+          _startMinimizeApplied: false
         };
         const audio = new Audio();
         audio.volume = state.volume;
@@ -9520,6 +9543,10 @@
           btnNext: container.querySelector(".vd-music-player-btn-next"),
           btnShuffle: container.querySelector(".vd-music-player-btn-shuffle"),
           btnPlaylist: container.querySelector(".vd-music-player-btn-playlist"),
+          btnDetach: container.querySelector(".vd-music-player-btn-detach"),
+          btnAttach: container.querySelector(".vd-music-player-btn-attach"),
+          btnMinimize: container.querySelector(".vd-music-player-btn-minimize"),
+          dragHandle: container.querySelector(".vd-music-player-drag-handle"),
           trackName: container.querySelector(".vd-music-player-track-name"),
           volumeSlider: container.querySelector(".vd-music-player-volume-slider"),
           volumeIcon: container.querySelector(".vd-music-player-volume-icon"),
@@ -9776,11 +9803,38 @@
             () => refs.playlistPanel.removeEventListener("click", panelHandler)
           );
         }
+        if (refs.btnDetach) {
+          const h = () => {
+            this.detach(container);
+          };
+          refs.btnDetach.addEventListener("click", h);
+          cleanupFunctions.push(() => refs.btnDetach.removeEventListener("click", h));
+        }
+        if (refs.btnAttach) {
+          const h = () => {
+            this.attach(container);
+          };
+          refs.btnAttach.addEventListener("click", h);
+          cleanupFunctions.push(() => refs.btnAttach.removeEventListener("click", h));
+        }
+        if (refs.btnMinimize) {
+          const h = () => {
+            this.toggleMinimize(container);
+          };
+          refs.btnMinimize.addEventListener("click", h);
+          cleanupFunctions.push(() => refs.btnMinimize.removeEventListener("click", h));
+        }
         renderPlayIcon();
         renderTrackName();
         renderVolumeIcon();
         if (opts.showPlaylist) renderPlaylistItems();
-        this.instances.set(container, { state, audio, refs, cleanup: cleanupFunctions });
+        this.instances.set(container, {
+          state,
+          audio,
+          refs,
+          cleanup: cleanupFunctions,
+          ui: { restore: null, unbindDrag: null }
+        });
         container.setAttribute("data-music-player-initialized", "true");
       },
       /* ─── DOM builder ─────────────────────────────────────── */
@@ -9797,6 +9851,51 @@
         container.setAttribute("aria-label", "Music Player");
         if (state.showProgress) container.classList.add("has-progress");
         if (state.showPlaylist) container.classList.add("has-playlist");
+        if (state.glass) container.classList.add("vd-music-player-glass");
+        if (state.draggable) container.classList.add("vd-music-player-draggable");
+        if (state.detachable || state.minimizable) {
+          const tb = document.createElement("div");
+          tb.className = "vd-music-player-toolbar";
+          tb.setAttribute("role", "toolbar");
+          tb.setAttribute("aria-label", "Player window");
+          if (state.draggable) {
+            const h = document.createElement("button");
+            h.type = "button";
+            h.className = "vd-music-player-drag-handle";
+            h.setAttribute("aria-label", "Drag to move player");
+            h.appendChild(icon("dots-six-vertical"));
+            tb.appendChild(h);
+          }
+          const tSp = document.createElement("span");
+          tSp.className = "vd-music-player-toolbar-spacer";
+          tSp.setAttribute("aria-hidden", "true");
+          tb.appendChild(tSp);
+          if (state.minimizable) {
+            const bMin = document.createElement("button");
+            bMin.type = "button";
+            bMin.className = "vd-music-player-btn vd-music-player-btn-minimize";
+            bMin.setAttribute("aria-label", "Minimize player");
+            bMin.setAttribute("aria-expanded", "true");
+            bMin.appendChild(icon("minus"));
+            tb.appendChild(bMin);
+          }
+          if (state.detachable) {
+            const bOut = document.createElement("button");
+            bOut.type = "button";
+            bOut.className = "vd-music-player-btn vd-music-player-btn-detach";
+            bOut.setAttribute("aria-label", "Detach player");
+            bOut.appendChild(icon("arrows-out"));
+            tb.appendChild(bOut);
+            const bIn = document.createElement("button");
+            bIn.type = "button";
+            bIn.className = "vd-music-player-btn vd-music-player-btn-attach";
+            bIn.setAttribute("aria-label", "Attach player");
+            bIn.appendChild(icon("arrows-in"));
+            tb.appendChild(bIn);
+          }
+          container.classList.add("vd-music-player-has-chrome");
+          container.appendChild(tb);
+        }
         const info = document.createElement("div");
         info.className = "vd-music-player-info";
         const iconWrap = document.createElement("span");
@@ -9990,6 +10089,304 @@
         inst.refs.btnShuffle.click();
       },
       /**
+       * Float the player above the page. Requires { detachable: true } at init.
+       * @param {HTMLElement} container
+       * @param {string} [position] 'bottom-left' or 'bottom-right'
+       */
+      detach: function(container, position) {
+        const inst = this.instances.get(container);
+        if (!inst || !inst.state.detachable || inst.state.isDetached) return;
+        const s = inst.state;
+        inst.ui = inst.ui || { restore: null, unbindDrag: null };
+        s.isDetached = true;
+        inst.ui.restore = {
+          parent: container.parentNode,
+          next: container.nextSibling
+        };
+        document.body.appendChild(container);
+        container.classList.add("vd-music-player-floating", "vd-music-player-detached");
+        const pos = position != null && position !== void 0 ? position : s.floatingPosition;
+        this._setCornerPosition(
+          container,
+          pos === "bottom-left" || pos === "bottom-right" ? pos : "bottom-right"
+        );
+        this._loadPersistedPosition(container, inst);
+        if (s.startMinimized && !s._startMinimizeApplied) {
+          s._startMinimizeApplied = true;
+          this.minimize(container);
+        }
+        this._bindFloatingDrag(inst);
+        container.dispatchEvent(new CustomEvent("musicplayer:detach", { bubbles: true }));
+      },
+      /**
+       * Return a detached player to its original place in the document.
+       * @param {HTMLElement} container
+       */
+      attach: function(container) {
+        const inst = this.instances.get(container);
+        if (!inst || !inst.state.isDetached) return;
+        this._unbindFloatingDrag(inst);
+        inst.state.isDetached = false;
+        const r = inst.ui && inst.ui.restore;
+        container.classList.remove(
+          "vd-music-player-floating",
+          "vd-music-player-detached",
+          "vd-music-player-floating-bottom-left",
+          "vd-music-player-floating-bottom-right",
+          "is-position-custom"
+        );
+        container.style.removeProperty("--music-player-floating-top");
+        container.style.removeProperty("--music-player-floating-left");
+        if (r && r.parent && r.parent.isConnected) {
+          r.parent.insertBefore(container, r.next);
+        }
+        if (inst.ui) {
+          inst.ui.restore = null;
+          inst.ui.unbindDrag = null;
+        }
+        container.dispatchEvent(new CustomEvent("musicplayer:attach", { bubbles: true }));
+      },
+      /**
+       * Collapse to essential controls. Requires { minimizable: true } at init.
+       * @param {HTMLElement} container
+       */
+      minimize: function(container) {
+        const inst = this.instances.get(container);
+        if (!inst || !inst.state.minimizable || inst.state.isMinimized) return;
+        const s = inst.state;
+        s.isMinimized = true;
+        container.classList.add("vd-music-player-minimized");
+        this._setMinimizeButtonState(inst, true);
+        if (inst.refs.playlistPanel && inst.refs.playlistPanel.classList.contains("is-open") && inst.refs.btnPlaylist) {
+          inst.refs.playlistPanel.classList.remove("is-open");
+          inst.refs.btnPlaylist.classList.remove("is-active");
+          inst.refs.btnPlaylist.setAttribute("aria-expanded", "false");
+        }
+        container.dispatchEvent(new CustomEvent("musicplayer:minimize", { bubbles: true }));
+      },
+      /**
+       * Restore from minimized state.
+       * @param {HTMLElement} container
+       */
+      expand: function(container) {
+        const inst = this.instances.get(container);
+        if (!inst || !inst.state.minimizable || !inst.state.isMinimized) return;
+        inst.state.isMinimized = false;
+        container.classList.remove("vd-music-player-minimized");
+        this._setMinimizeButtonState(inst, false);
+        container.dispatchEvent(new CustomEvent("musicplayer:expand", { bubbles: true }));
+      },
+      /**
+       * Toggle minimize / expand.
+       * @param {HTMLElement} container
+       */
+      toggleMinimize: function(container) {
+        const inst = this.instances.get(container);
+        if (!inst || !inst.state.minimizable) return;
+        if (inst.state.isMinimized) {
+          this.expand(container);
+        } else {
+          this.minimize(container);
+        }
+      },
+      /**
+       * Set floating corner or pixel position (detached only).
+       * @param {HTMLElement} container
+       * @param {string|{x:number,y:number}} position 'bottom-left' | 'bottom-right' | { x, y } viewport
+       */
+      setPosition: function(container, position) {
+        const inst = this.instances.get(container);
+        if (!inst || !inst.state.isDetached) return;
+        if (typeof position === "string") {
+          this._setCornerPosition(
+            container,
+            position === "bottom-left" || position === "bottom-right" ? position : "bottom-right"
+          );
+        } else if (position && typeof position.x === "number" && typeof position.y === "number") {
+          this._setCustomPositionFromRect(container, position.x, position.y);
+        }
+        if (inst.state.persistPosition) {
+          const r = container.getBoundingClientRect();
+          this._savePositionPixels(inst, r.left, r.top);
+        }
+      },
+      /**
+       * @param {Object} inst
+       * @param {boolean} minimized
+       */
+      _setMinimizeButtonState: function(inst, minimized) {
+        const b = inst.refs && inst.refs.btnMinimize;
+        if (!b) return;
+        b.innerHTML = "";
+        b.appendChild(icon(minimized ? "plus" : "minus"));
+        b.setAttribute("aria-label", minimized ? "Expand player" : "Minimize player");
+        b.setAttribute("aria-expanded", minimized ? "false" : "true");
+      },
+      /**
+       * @param {HTMLElement} container
+       * @param {string} which 'bottom-left' | 'bottom-right'
+       */
+      _setCornerPosition: function(container, which) {
+        container.classList.remove("is-position-custom", "vd-music-player-floating-bottom-left", "vd-music-player-floating-bottom-right");
+        container.style.removeProperty("--music-player-floating-top");
+        container.style.removeProperty("--music-player-floating-left");
+        if (which === "bottom-left") {
+          container.classList.add("vd-music-player-floating-bottom-left");
+        } else {
+          container.classList.add("vd-music-player-floating-bottom-right");
+        }
+      },
+      /**
+       * @param {HTMLElement} container
+       * @param {number} left
+       * @param {number} top
+       */
+      _setCustomPositionFromRect: function(container, left, top) {
+        container.classList.remove("vd-music-player-floating-bottom-left", "vd-music-player-floating-bottom-right");
+        container.classList.add("is-position-custom");
+        container.style.setProperty("--music-player-floating-left", left + "px");
+        container.style.setProperty("--music-player-floating-top", top + "px");
+      },
+      /**
+       * @param {HTMLElement} container
+       * @param {Object} inst
+       */
+      _loadPersistedPosition: function(container, inst) {
+        if (!inst.state.persistPosition) return;
+        const key = this._persistKeyForInstance(inst, container);
+        let raw = null;
+        if (typeof window.safeStorageGet === "function") {
+          raw = window.safeStorageGet(key, null);
+        } else {
+          try {
+            raw = localStorage.getItem(key);
+          } catch (_e) {
+            raw = null;
+          }
+        }
+        if (!raw) return;
+        try {
+          const o = JSON.parse(raw);
+          if (o && typeof o.x === "number" && typeof o.y === "number") {
+            this._setCustomPositionFromRect(container, o.x, o.y);
+          }
+        } catch (_err) {
+        }
+      },
+      /**
+       * @param {Object} inst
+       * @param {number} x
+       * @param {number} y
+       */
+      _savePositionPixels: function(inst, x, y) {
+        if (!inst.state.persistPosition) return;
+        const container = this._containerOf(inst);
+        if (!container) return;
+        const key = this._persistKeyForInstance(inst, container);
+        const val = JSON.stringify({ x, y });
+        if (typeof window.safeStorageSet === "function") {
+          window.safeStorageSet(key, val);
+        } else {
+          try {
+            localStorage.setItem(key, val);
+          } catch (_e) {
+          }
+        }
+      },
+      /**
+       * @param {Object} inst
+       * @param {HTMLElement} container
+       * @returns {string}
+       */
+      _persistKeyForInstance: function(inst, container) {
+        const pk = inst.state.persistKey;
+        if (pk && String(pk).trim()) return persistStorageKey(String(pk).trim());
+        return persistStorageKey(container.id || "");
+      },
+      /**
+       * @param {Object} inst
+       */
+      _unbindFloatingDrag: function(inst) {
+        if (inst.ui && typeof inst.ui.unbindDrag === "function") {
+          inst.ui.unbindDrag();
+          inst.ui.unbindDrag = null;
+        }
+      },
+      /**
+       * Free-form pointer drag on the handle. Vanduo's `draggable` component uses HTML5
+       * drag/drop for list reordering; floating players use pointer events on the handle instead.
+       * @param {Object} inst
+       */
+      _bindFloatingDrag: function(inst) {
+        this._unbindFloatingDrag(inst);
+        const h = inst.refs && inst.refs.dragHandle;
+        if (!h || !inst.state || !inst.state.draggable) return;
+        const self = this;
+        const container = this._containerOf(inst);
+        if (!container) return;
+        let startX = 0;
+        let startY = 0;
+        let origL = 0;
+        let origT = 0;
+        let activeDrag = false;
+        const onDown = function(e) {
+          if (e.pointerType === "mouse" && e.button !== 0) return;
+          e.preventDefault();
+          activeDrag = true;
+          const r = container.getBoundingClientRect();
+          origL = r.left;
+          origT = r.top;
+          startX = e.clientX;
+          startY = e.clientY;
+          self._setCustomPositionFromRect(container, origL, origT);
+          try {
+            h.setPointerCapture(e.pointerId);
+          } catch (_err) {
+          }
+        };
+        const onMove = function(e) {
+          if (!activeDrag) return;
+          const dx = e.clientX - startX;
+          const dy = e.clientY - startY;
+          let nl = origL + dx;
+          let nt = origT + dy;
+          const r = container.getBoundingClientRect();
+          const w = r.width;
+          const ph = r.height;
+          const vw = window.innerWidth;
+          const vh = window.innerHeight;
+          const pad = 8;
+          nl = Math.max(pad, Math.min(nl, vw - w - pad));
+          nt = Math.max(pad, Math.min(nt, vh - ph - pad));
+          self._setCustomPositionFromRect(container, nl, nt);
+        };
+        const onUp = function(e) {
+          if (!activeDrag) return;
+          activeDrag = false;
+          if (typeof h.hasPointerCapture === "function" && h.hasPointerCapture(e.pointerId)) {
+            try {
+              h.releasePointerCapture(e.pointerId);
+            } catch (_e) {
+            }
+          }
+          if (inst.state.persistPosition) {
+            const r = container.getBoundingClientRect();
+            self._savePositionPixels(inst, r.left, r.top);
+          }
+        };
+        h.addEventListener("pointerdown", onDown);
+        h.addEventListener("pointermove", onMove);
+        h.addEventListener("pointerup", onUp);
+        h.addEventListener("pointercancel", onUp);
+        inst.ui = inst.ui || { restore: null, unbindDrag: null };
+        inst.ui.unbindDrag = function() {
+          h.removeEventListener("pointerdown", onDown);
+          h.removeEventListener("pointermove", onMove);
+          h.removeEventListener("pointerup", onUp);
+          h.removeEventListener("pointercancel", onUp);
+        };
+      },
+      /**
        * Return a shallow copy of the current player state.
        * @param {HTMLElement} container
        * @returns {Object|null}
@@ -10004,7 +10401,9 @@
           currentTrack: s.tracks[s.currentIndex] || null,
           volume: s.volume,
           shuffle: s.shuffle,
-          tracks: s.tracks.slice()
+          tracks: s.tracks.slice(),
+          isDetached: Boolean(s.isDetached),
+          isMinimized: Boolean(s.isMinimized)
         };
       },
       /**
@@ -10014,6 +10413,13 @@
       destroy: function(container) {
         const inst = this.instances.get(container);
         if (!inst) return;
+        this._unbindFloatingDrag(inst);
+        if (inst.state && inst.state.isDetached) {
+          try {
+            this.attach(container);
+          } catch (_e) {
+          }
+        }
         inst.cleanup.forEach((fn) => fn());
         this.instances.delete(container);
         container.removeAttribute("data-music-player-initialized");
@@ -10082,6 +10488,794 @@
     }
     window.VanduoMusicPlayer = MusicPlayer;
   })();
+
+  // js/utils/hex-math.js
+  function rotatePoint(x, y, rotation = 0) {
+    if (!rotation) {
+      return { x, y };
+    }
+    const cosRot = Math.cos(rotation);
+    const sinRot = Math.sin(rotation);
+    return {
+      x: x * cosRot - y * sinRot,
+      y: x * sinRot + y * cosRot
+    };
+  }
+  function unrotatePoint(x, y, rotation = 0) {
+    return rotatePoint(x, y, -rotation);
+  }
+  function hexToPixel(q, r, size, rotation = 0) {
+    const baseX = size * 1.5 * q;
+    const baseY = size * Math.sqrt(3) * (r + q * 0.5);
+    return rotatePoint(baseX, baseY, rotation);
+  }
+  function pixelToHex(px, py, size, rotation = 0) {
+    const point = unrotatePoint(px, py, rotation);
+    const q = 2 / 3 * point.x / size;
+    const r = (-1 / 3 * point.x + Math.sqrt(3) / 3 * point.y) / size;
+    return axialRound(q, r);
+  }
+  function axialRound(q, r) {
+    const s = -q - r;
+    let rq = Math.round(q);
+    let rr = Math.round(r);
+    let rs = Math.round(s);
+    const qDiff = Math.abs(rq - q);
+    const rDiff = Math.abs(rr - r);
+    const sDiff = Math.abs(rs - s);
+    if (qDiff > rDiff && qDiff > sDiff) {
+      rq = -rr - rs;
+    } else if (rDiff > sDiff) {
+      rr = -rq - rs;
+    }
+    return { q: rq, r: rr };
+  }
+  function getHexCorners(x, y, size, rotation = 0) {
+    const corners = [];
+    for (let i = 0; i < 6; i++) {
+      const angleRad = Math.PI / 180 * (60 * i) + rotation;
+      corners.push({
+        x: x + size * Math.cos(angleRad),
+        y: y + size * Math.sin(angleRad)
+      });
+    }
+    return corners;
+  }
+  function getAdjacentHexes(q, r) {
+    return [
+      { q: q + 1, r },
+      { q: q + 1, r: r - 1 },
+      { q, r: r - 1 },
+      { q: q - 1, r },
+      { q: q - 1, r: r + 1 },
+      { q, r: r + 1 }
+    ];
+  }
+  function hexDistance(q1, r1, q2, r2) {
+    return (Math.abs(q1 - q2) + Math.abs(q1 + r1 - q2 - r2) + Math.abs(r1 - r2)) / 2;
+  }
+  var TerrainType = Object.freeze({
+    GRASSLAND: "Grassland",
+    PLAINS: "Plains",
+    DESERT: "Desert",
+    TUNDRA: "Tundra",
+    SNOW: "Snow",
+    MOUNTAIN: "Mountain",
+    OCEAN: "Ocean",
+    COAST: "Coast"
+  });
+  var TERRAIN_COLORS = Object.freeze({
+    [TerrainType.GRASSLAND]: "#47602f",
+    [TerrainType.PLAINS]: "#6e6838",
+    [TerrainType.DESERT]: "#bd9a60",
+    [TerrainType.TUNDRA]: "#75787b",
+    [TerrainType.SNOW]: "#cfdce4",
+    [TerrainType.MOUNTAIN]: "#464543",
+    [TerrainType.OCEAN]: "#1d354c",
+    [TerrainType.COAST]: "#295170"
+  });
+  var DEFAULT_TERRAIN_COLOR = "#FF00FF";
+  var TERRAIN_YIELDS = Object.freeze({
+    [TerrainType.GRASSLAND]: { food: 2, production: 0, gold: 0 },
+    [TerrainType.PLAINS]: { food: 1, production: 1, gold: 0 },
+    [TerrainType.DESERT]: { food: 0, production: 1, gold: 0 },
+    [TerrainType.TUNDRA]: { food: 1, production: 0, gold: 0 },
+    [TerrainType.SNOW]: { food: 0, production: 0, gold: 0 },
+    [TerrainType.COAST]: { food: 1, production: 0, gold: 0 },
+    [TerrainType.OCEAN]: { food: 0, production: 0, gold: 0 },
+    [TerrainType.MOUNTAIN]: { food: 0, production: 0, gold: 0 }
+  });
+  var TERRAIN_MOVEMENT_COSTS = Object.freeze({
+    [TerrainType.GRASSLAND]: 1,
+    [TerrainType.PLAINS]: 1,
+    [TerrainType.DESERT]: 1,
+    [TerrainType.TUNDRA]: 1,
+    [TerrainType.SNOW]: 2,
+    [TerrainType.COAST]: 1,
+    [TerrainType.OCEAN]: 999,
+    // Impassable for land units
+    [TerrainType.MOUNTAIN]: 999
+    // Impassable
+  });
+  function isPassable(terrainType) {
+    const cost = TERRAIN_MOVEMENT_COSTS[terrainType];
+    return cost !== void 0 && cost < 999;
+  }
+  function getMovementCost(terrainType) {
+    return TERRAIN_MOVEMENT_COSTS[terrainType] ?? 999;
+  }
+  function getTerrainYields(terrainType) {
+    return TERRAIN_YIELDS[terrainType] || { food: 0, production: 0, gold: 0 };
+  }
+  function getTerrainColor(terrainType) {
+    return TERRAIN_COLORS[terrainType] || DEFAULT_TERRAIN_COLOR;
+  }
+
+  // js/components/vd-hex.js
+  var ZOOM_MIN = 0.3;
+  var ZOOM_MAX = 3;
+  var ZOOM_FACTOR = 0.1;
+  var DRAG_THRESHOLD = 2;
+  var VdHexGrid = class {
+    constructor({ element, canvas, size = 30, width = 10, height = 10, rotation = 0 }) {
+      this.element = element;
+      this.canvas = canvas;
+      this.size = size;
+      this.width = width;
+      this.height = height;
+      this.rotation = rotation;
+      this.hexes = /* @__PURE__ */ new Map();
+      this.selectedHex = null;
+      this.listeners = {};
+      this.transform = { x: 0, y: 0, scale: 1 };
+      this.dragging = false;
+      this.lastPos = null;
+      this.hasMoved = false;
+      this.themeColors = this._getThemeColors();
+      this.customRenderCallback = null;
+      if (!this.canvas) {
+        this.canvas = element.querySelector("canvas") || document.createElement("canvas");
+        if (!element.contains(this.canvas)) {
+          element.appendChild(this.canvas);
+        }
+      }
+      this.ctx = this.canvas.getContext("2d");
+      this._generateGrid();
+      this._render();
+      this._setupEvents();
+      this._observeThemeChanges();
+    }
+    /**
+     * Get theme colors from CSS custom properties
+     */
+    _getThemeColors() {
+      const root = document.documentElement;
+      const style = getComputedStyle(root);
+      return {
+        bgPrimary: style.getPropertyValue("--bg-primary").trim() || "#ffffff",
+        bgSecondary: style.getPropertyValue("--bg-secondary").trim() || "#f5f5f5",
+        borderColor: style.getPropertyValue("--border-color").trim() || "#e0e0e0",
+        colorPrimary: style.getPropertyValue("--color-primary").trim() || "#3b82f6",
+        textColor: style.getPropertyValue("--text-primary").trim() || "#1f2937",
+        textMuted: style.getPropertyValue("--text-muted").trim() || "#6b7280"
+      };
+    }
+    /**
+     * Observe theme changes and re-render when theme changes
+     */
+    _observeThemeChanges() {
+      this._themeObserver = new MutationObserver(() => {
+        this.themeColors = this._getThemeColors();
+        this._render();
+      });
+      this._themeObserver.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ["data-theme"]
+      });
+    }
+    /**
+     * Disconnect the theme observer and remove all canvas event listeners.
+     * Call this before discarding the instance (e.g. on SPA page unload).
+     */
+    destroy() {
+      if (this._themeObserver) {
+        this._themeObserver.disconnect();
+        this._themeObserver = null;
+      }
+    }
+    /**
+     * Convert screen coordinates to world coordinates
+     */
+    _screenToWorld(screenX, screenY) {
+      const rect = this.canvas.getBoundingClientRect();
+      const canvasX = screenX - rect.left;
+      const canvasY = screenY - rect.top;
+      return {
+        x: (canvasX - this.transform.x) / this.transform.scale,
+        y: (canvasY - this.transform.y) / this.transform.scale
+      };
+    }
+    /**
+     * Convert client coordinates to canvas-local coordinates
+     */
+    _clientToCanvas(clientX, clientY) {
+      const rect = this.canvas.getBoundingClientRect();
+      return {
+        x: clientX - rect.left,
+        y: clientY - rect.top
+      };
+    }
+    /**
+     * Generate hex grid data
+     */
+    _generateGrid() {
+      this.hexes.clear();
+      for (let r = 0; r < this.height; r++) {
+        const qOffset = Math.floor(r / 2);
+        for (let q = -qOffset; q < this.width - qOffset; q++) {
+          const pixel = hexToPixel(q, r, this.size, this.rotation);
+          const hex = {
+            q,
+            r,
+            x: pixel.x,
+            y: pixel.y,
+            fill: this.themeColors.bgSecondary,
+            stroke: this.themeColors.borderColor,
+            adjacent: getAdjacentHexes(q, r),
+            terrain: null,
+            data: {}
+          };
+          this.hexes.set(`${q},${r}`, hex);
+        }
+      }
+    }
+    /**
+     * Keep selected hex reference in sync after grid regeneration
+     */
+    _resyncSelectedHex() {
+      if (!this.selectedHex) return;
+      this.selectedHex = this.hexes.get(`${this.selectedHex.q},${this.selectedHex.r}`) ?? null;
+    }
+    /**
+     * Render the hex grid on canvas
+     */
+    _render() {
+      const rect = this.canvas.getBoundingClientRect();
+      const displayWidth = rect.width || 800;
+      const displayHeight = rect.height || 400;
+      this.canvas.width = displayWidth;
+      this.canvas.height = displayHeight;
+      this.ctx.fillStyle = this.themeColors.bgPrimary;
+      this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+      this.ctx.save();
+      this.ctx.translate(this.transform.x, this.transform.y);
+      this.ctx.scale(this.transform.scale, this.transform.scale);
+      this.hexes.forEach((hex) => {
+        this._drawHex(hex);
+        if (this.customRenderCallback) {
+          this.customRenderCallback(this.ctx, hex, this.size);
+        }
+      });
+      if (this.selectedHex) {
+        this._drawHex(this.selectedHex, true);
+      }
+      this.ctx.restore();
+    }
+    /**
+     * Draw a single hex
+     */
+    _drawHex(hex, isSelected = false) {
+      const corners = getHexCorners(hex.x, hex.y, this.size, this.rotation);
+      this.ctx.beginPath();
+      this.ctx.moveTo(corners[0].x, corners[0].y);
+      for (let i = 1; i < corners.length; i++) {
+        this.ctx.lineTo(corners[i].x, corners[i].y);
+      }
+      this.ctx.closePath();
+      let fill;
+      if (isSelected) {
+        fill = this.themeColors.colorPrimary;
+      } else if (hex.terrain) {
+        fill = getTerrainColor(hex.terrain);
+      } else if (hex.fill) {
+        fill = hex.fill;
+      } else {
+        fill = this.themeColors.bgSecondary;
+      }
+      this.ctx.fillStyle = fill;
+      this.ctx.fill();
+      const stroke = isSelected ? this.themeColors.colorPrimary : hex.stroke || this.themeColors.borderColor;
+      this.ctx.strokeStyle = stroke;
+      this.ctx.lineWidth = isSelected ? 3 : 1;
+      this.ctx.stroke();
+      if (isSelected) {
+        this.ctx.fillStyle = "#ffffff";
+        this.ctx.font = "10px monospace";
+        this.ctx.textAlign = "center";
+        this.ctx.textBaseline = "middle";
+        this.ctx.fillText(`${hex.q},${hex.r}`, hex.x, hex.y);
+      }
+    }
+    /**
+     * Set up mouse/touch events for hex selection, pan, and zoom
+     */
+    _setupEvents() {
+      this.touchState = {
+        initialDistance: 0,
+        initialScale: 1,
+        touches: []
+      };
+      this.canvas.addEventListener("pointerdown", (e) => {
+        this.dragging = true;
+        this.hasMoved = false;
+        this.lastPos = { x: e.clientX, y: e.clientY };
+        this.canvas.style.cursor = "grabbing";
+      });
+      this.canvas.addEventListener("pointermove", (e) => {
+        if (!this.dragging) return;
+        const cur = { x: e.clientX, y: e.clientY };
+        const dx = cur.x - this.lastPos.x;
+        const dy = cur.y - this.lastPos.y;
+        if (Math.abs(dx) > DRAG_THRESHOLD || Math.abs(dy) > DRAG_THRESHOLD) {
+          this.hasMoved = true;
+        }
+        this.transform.x += dx;
+        this.transform.y += dy;
+        this.lastPos = cur;
+        this._render();
+      });
+      const stopDrag = () => {
+        this.dragging = false;
+        if (!this.hasMoved) {
+          this.canvas.style.cursor = "pointer";
+        }
+      };
+      this.canvas.addEventListener("pointerup", stopDrag);
+      this.canvas.addEventListener("pointerleave", stopDrag);
+      this.canvas.addEventListener("click", (e) => {
+        if (this.hasMoved) return;
+        const worldPos = this._screenToWorld(e.clientX, e.clientY);
+        const hexCoords = pixelToHex(worldPos.x, worldPos.y, this.size, this.rotation);
+        const hex = this.hexes.get(`${hexCoords.q},${hexCoords.r}`);
+        if (hex) {
+          this.selectedHex = hex;
+          this._render();
+          this._emit("select", hex);
+        }
+      });
+      this.canvas.addEventListener("wheel", (e) => {
+        e.preventDefault();
+        const zoomFactor = e.deltaY > 0 ? 1 - ZOOM_FACTOR : 1 + ZOOM_FACTOR;
+        const newScale = Math.max(ZOOM_MIN, Math.min(this.transform.scale * zoomFactor, ZOOM_MAX));
+        const mouse = this._clientToCanvas(e.clientX, e.clientY);
+        const scaleDiff = newScale / this.transform.scale;
+        this.transform.x = mouse.x - (mouse.x - this.transform.x) * scaleDiff;
+        this.transform.y = mouse.y - (mouse.y - this.transform.y) * scaleDiff;
+        this.transform.scale = newScale;
+        this._render();
+        this._emit("zoom", { scale: this.transform.scale });
+      }, { passive: false });
+      this.canvas.addEventListener("touchstart", (e) => {
+        if (e.touches.length === 2) {
+          e.preventDefault();
+          this.touchState.touches = Array.from(e.touches);
+          this.touchState.initialDistance = this._getTouchDistance(e.touches);
+          this.touchState.initialScale = this.transform.scale;
+        }
+      }, { passive: false });
+      this.canvas.addEventListener("touchmove", (e) => {
+        if (e.touches.length === 2) {
+          e.preventDefault();
+          const currentDistance = this._getTouchDistance(e.touches);
+          const scale = currentDistance / this.touchState.initialDistance * this.touchState.initialScale;
+          const newScale = Math.max(ZOOM_MIN, Math.min(scale, ZOOM_MAX));
+          const centerClientX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+          const centerClientY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+          const center = this._clientToCanvas(centerClientX, centerClientY);
+          const scaleDiff = newScale / this.transform.scale;
+          this.transform.x = center.x - (center.x - this.transform.x) * scaleDiff;
+          this.transform.y = center.y - (center.y - this.transform.y) * scaleDiff;
+          this.transform.scale = newScale;
+          this._render();
+          this._emit("zoom", { scale: this.transform.scale });
+        }
+      }, { passive: false });
+      this.canvas.addEventListener("touchend", () => {
+        this.touchState.touches = [];
+      });
+      this.canvas.addEventListener("mouseenter", () => {
+        this.canvas.style.cursor = "grab";
+      });
+      this.canvas.addEventListener("mouseleave", () => {
+        this.canvas.style.cursor = "default";
+      });
+    }
+    /**
+     * Calculate distance between two touch points
+     * @param {TouchList} touches - Touch list
+     * @returns {number} Distance in pixels
+     */
+    _getTouchDistance(touches) {
+      if (touches.length < 2) return 0;
+      const dx = touches[0].clientX - touches[1].clientX;
+      const dy = touches[0].clientY - touches[1].clientY;
+      return Math.sqrt(dx * dx + dy * dy);
+    }
+    /**
+     * Set hex size
+     */
+    setSize(size) {
+      this.size = size;
+      this._generateGrid();
+      this._resyncSelectedHex();
+      this._render();
+    }
+    /**
+     * Set grid dimensions
+     */
+    setDimensions(width, height) {
+      this.width = width;
+      this.height = height;
+      this._generateGrid();
+      this._resyncSelectedHex();
+      this._render();
+    }
+    /**
+     * Reset grid to defaults
+     */
+    reset() {
+      this.size = 30;
+      this.width = 15;
+      this.height = 10;
+      this.rotation = 0;
+      this.selectedHex = null;
+      this.transform = { x: 0, y: 0, scale: 1 };
+      this._generateGrid();
+      this._render();
+    }
+    /**
+     * Fill hexes with random colors
+     */
+    fillRandom() {
+      const colors = ["#f0f0f0", "#d4e5d4", "#e5d4d4", "#d4d4e5", "#e5e5d4", "#d4e5e5", "#e8e8e8", "#d0d0d0"];
+      this.hexes.forEach((hex) => {
+        hex.fill = colors[Math.floor(Math.random() * colors.length)];
+      });
+      this._render();
+    }
+    /**
+     * Get hex by coordinates
+     */
+    getHex(q, r) {
+      return this.hexes.get(`${q},${r}`);
+    }
+    /**
+     * Get all hexes
+     */
+    getAllHexes() {
+      return Array.from(this.hexes.values());
+    }
+    /**
+     * Set hex fill color
+     */
+    setHexFill(q, r, color) {
+      const hex = this.hexes.get(`${q},${r}`);
+      if (hex) {
+        hex.fill = color;
+        this._render();
+      }
+    }
+    /**
+     * Reset view to default position
+     */
+    resetView() {
+      this.transform = { x: 0, y: 0, scale: 1 };
+      this._render();
+      this._emit("pan", { x: 0, y: 0 });
+      this._emit("zoom", { scale: 1 });
+    }
+    /**
+     * Zoom in
+     */
+    zoomIn() {
+      const newScale = Math.min(this.transform.scale * (1 + ZOOM_FACTOR), ZOOM_MAX);
+      this.transform.scale = newScale;
+      this._render();
+      this._emit("zoom", { scale: this.transform.scale });
+    }
+    /**
+     * Zoom out
+     */
+    zoomOut() {
+      const newScale = Math.max(this.transform.scale * (1 - ZOOM_FACTOR), ZOOM_MIN);
+      this.transform.scale = newScale;
+      this._render();
+      this._emit("zoom", { scale: this.transform.scale });
+    }
+    /**
+     * Get current transform state
+     */
+    getTransform() {
+      return { ...this.transform };
+    }
+    /**
+     * Subscribe to events
+     */
+    on(event, callback) {
+      if (!this.listeners[event]) {
+        this.listeners[event] = [];
+      }
+      this.listeners[event].push(callback);
+    }
+    /**
+     * Emit events
+     */
+    _emit(event, data) {
+      if (this.listeners[event]) {
+        this.listeners[event].forEach((callback) => callback(data));
+      }
+    }
+    // ═══════════════════════════════════════════════════════
+    // Terrain System
+    // ═══════════════════════════════════════════════════════
+    /**
+     * Set terrain type for a hex
+     * @param {number} q - Hex column
+     * @param {number} r - Hex row
+     * @param {string} terrainType - Terrain type (e.g., 'GRASSLAND', 'OCEAN')
+     */
+    setHexTerrain(q, r, terrainType) {
+      const hex = this.hexes.get(`${q},${r}`);
+      if (hex) {
+        hex.terrain = terrainType;
+        this._render();
+      }
+    }
+    /**
+     * Get terrain type for a hex
+     * @param {number} q - Hex column
+     * @param {number} r - Hex row
+     * @returns {string|null} Terrain type or null
+     */
+    getHexTerrain(q, r) {
+      const hex = this.hexes.get(`${q},${r}`);
+      return hex ? hex.terrain : null;
+    }
+    /**
+     * Generate random terrain for all hexes
+     */
+    generateRandomTerrain() {
+      const terrainTypes = Object.values(TerrainType);
+      this.hexes.forEach((hex) => {
+        hex.terrain = terrainTypes[Math.floor(Math.random() * terrainTypes.length)];
+      });
+      this._render();
+    }
+    /**
+     * Get terrain yields for a hex
+     * @param {number} q - Hex column
+     * @param {number} r - Hex row
+     * @returns {Object} Yields object {food, production, gold}
+     */
+    getHexYields(q, r) {
+      const terrain = this.getHexTerrain(q, r);
+      return terrain ? getTerrainYields(terrain) : { food: 0, production: 0, gold: 0 };
+    }
+    /**
+     * Get movement cost for a hex
+     * @param {number} q - Hex column
+     * @param {number} r - Hex row
+     * @returns {number} Movement cost
+     */
+    getHexMovementCost(q, r) {
+      const terrain = this.getHexTerrain(q, r);
+      return terrain ? getMovementCost(terrain) : 999;
+    }
+    /**
+     * Check if hex is passable
+     * @param {number} q - Hex column
+     * @param {number} r - Hex row
+     * @returns {boolean} True if passable
+     */
+    isHexPassable(q, r) {
+      const terrain = this.getHexTerrain(q, r);
+      return terrain ? isPassable(terrain) : false;
+    }
+    // ═══════════════════════════════════════════════════════
+    // Hex Data Attachment
+    // ═══════════════════════════════════════════════════════
+    /**
+     * Set custom data for a hex
+     * @param {number} q - Hex column
+     * @param {number} r - Hex row
+     * @param {Object} data - Custom data object
+     */
+    setHexData(q, r, data) {
+      const hex = this.hexes.get(`${q},${r}`);
+      if (hex) {
+        hex.data = { ...hex.data, ...data };
+      }
+    }
+    /**
+     * Get custom data for a hex
+     * @param {number} q - Hex column
+     * @param {number} r - Hex row
+     * @returns {Object} Custom data object
+     */
+    getHexData(q, r) {
+      const hex = this.hexes.get(`${q},${r}`);
+      return hex ? hex.data : {};
+    }
+    /**
+     * Clear custom data for a hex
+     * @param {number} q - Hex column
+     * @param {number} r - Hex row
+     */
+    clearHexData(q, r) {
+      const hex = this.hexes.get(`${q},${r}`);
+      if (hex) {
+        hex.data = {};
+      }
+    }
+    // ═══════════════════════════════════════════════════════
+    // Distance & Pathfinding
+    // ═══════════════════════════════════════════════════════
+    /**
+     * Calculate distance between two hexes
+     * @param {number} q1 - First hex q coordinate
+     * @param {number} r1 - First hex r coordinate
+     * @param {number} q2 - Second hex q coordinate
+     * @param {number} r2 - Second hex r coordinate
+     * @returns {number} Distance in hex steps
+     */
+    hexDistance(q1, r1, q2, r2) {
+      return hexDistance(q1, r1, q2, r2);
+    }
+    /**
+     * Get valid moves from a hex within movement points
+     * @param {number} q - Starting hex column
+     * @param {number} r - Starting hex row
+     * @param {number} movementPoints - Available movement points
+     * @returns {Array<{q: number, r: number}>} Array of valid hex coordinates
+     */
+    getValidMoves(q, r, movementPoints) {
+      const validHexes = [];
+      const adjacent = getAdjacentHexes(q, r);
+      for (const hex of adjacent) {
+        if (!this.hexes.has(`${hex.q},${hex.r}`)) continue;
+        const cost = this.getHexMovementCost(hex.q, hex.r);
+        if (cost < 999 && movementPoints >= cost) {
+          validHexes.push(hex);
+        }
+      }
+      return validHexes;
+    }
+    /**
+     * Get path between two hexes (simple BFS)
+     * @param {number} startQ - Starting hex column
+     * @param {number} startR - Starting hex row
+     * @param {number} endQ - Ending hex column
+     * @param {number} endR - Ending hex row
+     * @returns {Array<{q: number, r: number}>} Array of hex coordinates forming path
+     */
+    getPath(startQ, startR, endQ, endR) {
+      const startKey = `${startQ},${startR}`;
+      const endKey = `${endQ},${endR}`;
+      if (!this.hexes.has(startKey) || !this.hexes.has(endKey)) {
+        return [];
+      }
+      const queue = [[startQ, startR]];
+      const visited = /* @__PURE__ */ new Set([startKey]);
+      const parent = /* @__PURE__ */ new Map();
+      while (queue.length > 0) {
+        const [currentQ, currentR] = queue.shift();
+        const currentKey = `${currentQ},${currentR}`;
+        if (currentKey === endKey) {
+          const path = [];
+          let key = endKey;
+          while (key) {
+            const [q, r] = key.split(",").map(Number);
+            path.unshift({ q, r });
+            key = parent.get(key);
+          }
+          return path;
+        }
+        const adjacent = getAdjacentHexes(currentQ, currentR);
+        for (const neighbor of adjacent) {
+          const neighborKey = `${neighbor.q},${neighbor.r}`;
+          if (this.hexes.has(neighborKey) && !visited.has(neighborKey)) {
+            if (this.isHexPassable(neighbor.q, neighbor.r)) {
+              visited.add(neighborKey);
+              parent.set(neighborKey, currentKey);
+              queue.push([neighbor.q, neighbor.r]);
+            }
+          }
+        }
+      }
+      return [];
+    }
+    // ═══════════════════════════════════════════════════════
+    // Grid Rotation
+    // ═══════════════════════════════════════════════════════
+    /**
+     * Set grid rotation
+     * @param {number} rotation - Rotation in radians
+     */
+    setRotation(rotation) {
+      this.rotation = rotation;
+      this._generateGrid();
+      this._resyncSelectedHex();
+      this._render();
+    }
+    /**
+     * Get current grid rotation
+     * @returns {number} Rotation in radians
+     */
+    getRotation() {
+      return this.rotation;
+    }
+    // ═══════════════════════════════════════════════════════
+    // Custom Rendering
+    // ═══════════════════════════════════════════════════════
+    /**
+     * Set custom render callback for each hex
+     * @param {function} callback - Called with (ctx, hex, size) for each hex
+     */
+    setCustomRender(callback) {
+      this.customRenderCallback = callback;
+      this._render();
+    }
+    /**
+     * Clear custom render callback
+     */
+    clearCustomRender() {
+      this.customRenderCallback = null;
+      this._render();
+    }
+    // ═══════════════════════════════════════════════════════
+    // Utility Methods
+    // ═══════════════════════════════════════════════════════
+    /**
+     * Check if hex exists at coordinates
+     * @param {number} q - Hex column
+     * @param {number} r - Hex row
+     * @returns {boolean}
+     */
+    hasHex(q, r) {
+      return this.hexes.has(`${q},${r}`);
+    }
+    /**
+     * Get hex count
+     * @returns {number} Number of hexes in grid
+     */
+    getHexCount() {
+      return this.hexes.size;
+    }
+    /**
+     * Export terrain data as JSON
+     * @returns {Object} Terrain data object
+     */
+    exportTerrainData() {
+      const data = {};
+      this.hexes.forEach((hex, key) => {
+        if (hex.terrain) {
+          data[key] = hex.terrain;
+        }
+      });
+      return data;
+    }
+    /**
+     * Import terrain data from JSON
+     * @param {Object} data - Terrain data object
+     */
+    importTerrainData(data) {
+      Object.entries(data).forEach(([key, terrain]) => {
+        const hex = this.hexes.get(key);
+        if (hex) hex.terrain = terrain;
+      });
+      this._render();
+    }
+  };
 
   // js/index.js
   var Vanduo = window.Vanduo;

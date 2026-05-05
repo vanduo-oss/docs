@@ -1,4 +1,4 @@
-// Hex math utilities adapted for Vanduo framework
+// Hex math utilities — Canonical source: framework/js/utils/hex-math.js
 // Based on web-civ utils/hex-math.js
 
 /**

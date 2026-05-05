@@ -1,0 +1,270 @@
+<section id="badges">
+    <h4 class="demo-title"><i class="ph ph-tag"></i>Badges</h4>
+    <p class="vd-mb-8">Small inline status indicators, counters, and labels. Badges scale with their parent font size and support contextual color variants, pill shapes, and three size tiers.</p>
+
+    <!-- Variants Demo -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-badges-variants">
+                <div class="vd-card-header"><h4>Contextual Variants</h4></div>
+                <div class="vd-card-body" style="display:flex; gap:.75rem; flex-wrap:wrap; align-items:center;">
+                    <span class="vd-badge">Default</span>
+                    <span class="vd-badge vd-badge-primary">Primary</span>
+                    <span class="vd-badge vd-badge-secondary">Secondary</span>
+                    <span class="vd-badge vd-badge-success">Success</span>
+                    <span class="vd-badge vd-badge-warning">Warning</span>
+                    <span class="vd-badge vd-badge-error">Error</span>
+                    <span class="vd-badge vd-badge-info">Info</span>
+                    <span class="vd-badge vd-badge-light">Light</span>
+                    <span class="vd-badge vd-badge-dark">Dark</span>
+                </div>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Default (secondary color) --&gt;</span>
+&lt;<span class="code-tag">span</span> <span class="code-attr">class</span>=<span class="code-string">"vd-badge"</span>&gt;Default&lt;/<span class="code-tag">span</span>&gt;
+
+&lt;<span class="code-tag">span</span> <span class="code-attr">class</span>=<span class="code-string">"vd-badge vd-badge-primary"</span>&gt;Primary&lt;/<span class="code-tag">span</span>&gt;
+&lt;<span class="code-tag">span</span> <span class="code-attr">class</span>=<span class="code-string">"vd-badge vd-badge-secondary"</span>&gt;Secondary&lt;/<span class="code-tag">span</span>&gt;
+&lt;<span class="code-tag">span</span> <span class="code-attr">class</span>=<span class="code-string">"vd-badge vd-badge-success"</span>&gt;Success&lt;/<span class="code-tag">span</span>&gt;
+&lt;<span class="code-tag">span</span> <span class="code-attr">class</span>=<span class="code-string">"vd-badge vd-badge-warning"</span>&gt;Warning&lt;/<span class="code-tag">span</span>&gt;
+&lt;<span class="code-tag">span</span> <span class="code-attr">class</span>=<span class="code-string">"vd-badge vd-badge-error"</span>&gt;Error&lt;/<span class="code-tag">span</span>&gt;
+&lt;<span class="code-tag">span</span> <span class="code-attr">class</span>=<span class="code-string">"vd-badge vd-badge-info"</span>&gt;Info&lt;/<span class="code-tag">span</span>&gt;
+&lt;<span class="code-tag">span</span> <span class="code-attr">class</span>=<span class="code-string">"vd-badge vd-badge-light"</span>&gt;Light&lt;/<span class="code-tag">span</span>&gt;
+&lt;<span class="code-tag">span</span> <span class="code-attr">class</span>=<span class="code-string">"vd-badge vd-badge-dark"</span>&gt;Dark&lt;/<span class="code-tag">span</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-badges-pills-sizes">
+                <div class="vd-card-header"><h4>Pill, Outlined &amp; Sizes</h4></div>
+                <div class="vd-card-body">
+                    <p class="vd-text-sm vd-text-muted vd-mb-3">Pill shape</p>
+                    <div style="display:flex; gap:.5rem; flex-wrap:wrap; margin-bottom:1rem;">
+                        <span class="vd-badge vd-badge-pill vd-badge-primary">New</span>
+                        <span class="vd-badge vd-badge-pill vd-badge-success">Done</span>
+                        <span class="vd-badge vd-badge-pill vd-badge-error">Blocked</span>
+                    </div>
+
+                    <p class="vd-text-sm vd-text-muted vd-mb-3">Outlined</p>
+                    <div style="display:flex; gap:.5rem; flex-wrap:wrap; margin-bottom:1rem;">
+                        <span class="vd-badge vd-badge-outlined vd-badge-primary">Pro</span>
+                        <span class="vd-badge vd-badge-outlined vd-badge-warning">Beta</span>
+                    </div>
+
+                    <p class="vd-text-sm vd-text-muted vd-mb-3">Sizes</p>
+                    <div style="display:flex; gap:.5rem; flex-wrap:wrap; align-items:center;">
+                        <span class="vd-badge vd-badge-sm vd-badge-primary">Small</span>
+                        <span class="vd-badge vd-badge-primary">Default</span>
+                        <span class="vd-badge vd-badge-lg vd-badge-primary">Large</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Pill badges (fully rounded) --&gt;</span>
+&lt;<span class="code-tag">span</span> <span class="code-attr">class</span>=<span class="code-string">"vd-badge vd-badge-pill vd-badge-primary"</span>&gt;New&lt;/<span class="code-tag">span</span>&gt;
+
+<span class="code-comment">&lt;!-- Outlined badges --&gt;</span>
+&lt;<span class="code-tag">span</span> <span class="code-attr">class</span>=<span class="code-string">"vd-badge vd-badge-outlined vd-badge-primary"</span>&gt;Pro&lt;/<span class="code-tag">span</span>&gt;
+
+<span class="code-comment">&lt;!-- Sizes --&gt;</span>
+&lt;<span class="code-tag">span</span> <span class="code-attr">class</span>=<span class="code-string">"vd-badge vd-badge-sm vd-badge-primary"</span>&gt;Small&lt;/<span class="code-tag">span</span>&gt;
+&lt;<span class="code-tag">span</span> <span class="code-attr">class</span>=<span class="code-string">"vd-badge vd-badge-lg vd-badge-primary"</span>&gt;Large&lt;/<span class="code-tag">span</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Positioned Demo -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card" id="demo-badges-positioned">
+                <div class="vd-card-header"><h4>Positioned Badges (Buttons &amp; Icons)</h4></div>
+                <div class="vd-card-body" style="display:flex; gap:1.5rem; flex-wrap:wrap; align-items:center;">
+                    <button class="vd-btn vd-btn-primary" style="position:relative;">
+                        Notifications
+                        <span class="vd-badge vd-badge-error" style="position:absolute; top:-6px; right:-6px;">3</span>
+                    </button>
+                    <button class="vd-btn vd-btn-icon vd-btn-secondary" style="position:relative;">
+                        <i class="ph ph-envelope"></i>
+                        <span class="vd-badge vd-badge-pill vd-badge-primary" style="position:absolute; top:-4px; right:-4px;">12</span>
+                    </button>
+                    <span style="position:relative; display:inline-block;">
+                        <i class="ph ph-shopping-cart" style="font-size:1.5rem;"></i>
+                        <span class="vd-badge vd-badge-sm vd-badge-success vd-badge-pill" style="position:absolute; top:-4px; right:-8px;">New</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Badge on a button --&gt;</span>
+&lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-btn vd-btn-primary"</span> <span class="code-attr">style</span>=<span class="code-string">"position:relative;"</span>&gt;
+  Notifications
+  &lt;<span class="code-tag">span</span> <span class="code-attr">class</span>=<span class="code-string">"vd-badge vd-badge-error"</span>
+        <span class="code-attr">style</span>=<span class="code-string">"position:absolute; top:-6px; right:-6px;"</span>&gt;3&lt;/<span class="code-tag">span</span>&gt;
+&lt;/<span class="code-tag">button</span>&gt;
+
+<span class="code-comment">&lt;!-- Badge on an icon button --&gt;</span>
+&lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-btn vd-btn-icon vd-btn-secondary"</span> <span class="code-attr">style</span>=<span class="code-string">"position:relative;"</span>&gt;
+  &lt;<span class="code-tag">i</span> <span class="code-attr">class</span>=<span class="code-string">"ph ph-envelope"</span>&gt;&lt;/<span class="code-tag">i</span>&gt;
+  &lt;<span class="code-tag">span</span> <span class="code-attr">class</span>=<span class="code-string">"vd-badge vd-badge-pill vd-badge-primary"</span>
+        <span class="code-attr">style</span>=<span class="code-string">"position:absolute; top:-4px; right:-4px;"</span>&gt;12&lt;/<span class="code-tag">span</span>&gt;
+&lt;/<span class="code-tag">button</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- API Reference -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header"><h4><i class="ph ph-list-dashes mr-2" style="color: var(--color-primary);"></i>API Reference</h4></div>
+                <div class="vd-card-body">
+                    <h4>CSS Classes</h4>
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead><tr><th>Class</th><th>Description</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>.vd-badge</code></td><td>Base badge. Inline-block with padding, rounded corners, and centered text.</td></tr>
+                                <tr><td><code>.vd-badge-primary</code></td><td>Primary color background with white text.</td></tr>
+                                <tr><td><code>.vd-badge-secondary</code></td><td>Secondary (teal/green) background.</td></tr>
+                                <tr><td><code>.vd-badge-success</code></td><td>Green success background.</td></tr>
+                                <tr><td><code>.vd-badge-warning</code></td><td>Amber warning background.</td></tr>
+                                <tr><td><code>.vd-badge-error</code></td><td>Red error background.</td></tr>
+                                <tr><td><code>.vd-badge-danger</code></td><td>Alias for <code>.vd-badge-error</code>.</td></tr>
+                                <tr><td><code>.vd-badge-info</code></td><td>Cyan info background.</td></tr>
+                                <tr><td><code>.vd-badge-light</code></td><td>Light gray background (inverted in dark mode).</td></tr>
+                                <tr><td><code>.vd-badge-dark</code></td><td>Dark gray background with light text.</td></tr>
+                                <tr><td><code>.vd-badge-pill</code></td><td>Fully rounded pill shape (<code>border-radius: 50rem</code>).</td></tr>
+                                <tr><td><code>.vd-badge-outlined</code></td><td>Transparent background with colored border and text.</td></tr>
+                                <tr><td><code>.vd-badge-sm</code></td><td>Compact size (<code>font-size: 0.65em</code>).</td></tr>
+                                <tr><td><code>.vd-badge-lg</code></td><td>Large size (<code>font-size: 0.875em</code>).</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="vd-mt-6">CSS Variables</h4>
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead><tr><th>Variable</th><th>Default</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>--badge-padding-y</code></td><td><code>0.25em</code></td></tr>
+                                <tr><td><code>--badge-padding-x</code></td><td><code>0.4em</code> (ratio ~phi)</td></tr>
+                                <tr><td><code>--badge-padding-y-sm</code></td><td><code>0.15em</code></td></tr>
+                                <tr><td><code>--badge-padding-x-sm</code></td><td><code>0.25em</code> (ratio ~phi)</td></tr>
+                                <tr><td><code>--badge-padding-y-lg</code></td><td><code>0.35em</code></td></tr>
+                                <tr><td><code>--badge-padding-x-lg</code></td><td><code>0.55em</code> (ratio ~phi)</td></tr>
+                                <tr><td><code>--badge-font-size</code></td><td><code>0.75em</code></td></tr>
+                                <tr><td><code>--badge-font-weight</code></td><td><code>var(--font-weight-semibold)</code></td></tr>
+                                <tr><td><code>--badge-border-radius</code></td><td><code>var(--btn-border-radius-sm)</code></td></tr>
+                                <tr><td><code>--badge-pill-border-radius</code></td><td><code>50rem</code></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accessibility -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header"><h4><i class="ph ph-wheelchair mr-2" style="color: var(--color-primary);"></i>Accessibility</h4></div>
+                <div class="vd-card-body">
+                    <ul>
+                        <li>Badges are inline elements; ensure they are placed inside a parent with sufficient text context.</li>
+                        <li>For counter badges (e.g., "3" on a notification bell), wrap the parent button in an <code>aria-label</code> that includes the count: <code>aria-label="Notifications, 3 unread"</code>.</li>
+                        <li>All badge color combinations meet WCAG contrast requirements against both light and dark backgrounds.</li>
+                        <li>Avoid using badges alone to convey critical status — pair with text or tooltips.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- What's Next block -->
+    <div class="vd-mt-8" style="border-top: 1px solid var(--border-color); padding-top: 2.5rem; padding-bottom: 3rem;">
+        <h4 class="vd-text-lg vd-mb-5"><i class="ph ph-arrow-circle-right"></i> What's Next?</h4>
+        <div class="vd-row" style="gap: 1.25rem;">
+            <div class="vd-col-12 vd-col-md-4 vd-mb-4">
+                <a href="#docs/alerts" data-route="docs/alerts" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
+                    <div class="vd-card-body">
+                        <h4 class="vd-text-md vd-mb-2">Alerts</h4>
+                        <p class="vd-text-sm vd-text-muted vd-mb-0">Larger contextual feedback messages with icons, links, and dismissible close buttons.</p>
+                    </div>
+                </a>
+            </div>
+            <div class="vd-col-12 vd-col-md-4 vd-mb-4">
+                <a href="#docs/buttons" data-route="docs/buttons" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
+                    <div class="vd-card-body">
+                        <h4 class="vd-text-md vd-mb-2">Buttons</h4>
+                        <p class="vd-text-sm vd-text-muted vd-mb-0">Badges pair naturally with buttons, cards, and navigation items — see all button variants.</p>
+                    </div>
+                </a>
+            </div>
+            <div class="vd-col-12 vd-col-md-4 vd-mb-4">
+                <a href="#docs/cards" data-route="docs/cards" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
+                    <div class="vd-card-body">
+                        <h4 class="vd-text-md vd-mb-2">Cards</h4>
+                        <p class="vd-text-sm vd-text-muted vd-mb-0">Combine badges with card headers, footers, and image overlays for rich content UIs.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

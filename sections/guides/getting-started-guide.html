@@ -140,14 +140,14 @@ cd my-first-vanduo-site</code></pre>
     &lt;<span class="code-tag">title</span>&gt;My First Vanduo Site&lt;/<span class="code-tag">title</span>&gt;
 
     <span class="code-comment">&lt;!-- Vanduo CSS — this gives you the entire design system --&gt;</span>
-    &lt;<span class="code-tag">link</span> <span class="code-attr">rel</span>=<span class="code-string">"stylesheet"</span> <span class="code-attr">href</span>=<span class="code-string">"https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.3.7/dist/vanduo.min.css"</span>&gt;
+    &lt;<span class="code-tag">link</span> <span class="code-attr">rel</span>=<span class="code-string">"stylesheet"</span> <span class="code-attr">href</span>=<span class="code-string">"https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.3.8/dist/vanduo.min.css"</span>&gt;
 &lt;/<span class="code-tag">head</span>&gt;
 &lt;<span class="code-tag">body</span>&gt;
 
     <span class="code-comment">&lt;!-- Your content will go here --&gt;</span>
 
     <span class="code-comment">&lt;!-- Vanduo JS — enables interactive components --&gt;</span>
-    &lt;<span class="code-tag">script</span> <span class="code-attr">src</span>=<span class="code-string">"https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.3.7/dist/vanduo.min.js"</span>&gt;&lt;/<span class="code-tag">script</span>&gt;
+    &lt;<span class="code-tag">script</span> <span class="code-attr">src</span>=<span class="code-string">"https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.3.8/dist/vanduo.min.js"</span>&gt;&lt;/<span class="code-tag">script</span>&gt;
     &lt;<span class="code-tag">script</span>&gt;Vanduo.init();&lt;/<span class="code-tag">script</span>&gt;
 &lt;/<span class="code-tag">body</span>&gt;
 &lt;/<span class="code-tag">html</span>&gt;</code></pre>
@@ -157,9 +157,9 @@ cd my-first-vanduo-site</code></pre>
                     <div class="vd-alert vd-alert-info vd-mt-4">
                         <i class="ph ph-lightbulb"></i>
                         <div>
-                            <strong>Pro tip:</strong> For production, pin to a specific version like
-                            <code>@v1.3.7</code> instead of <code>@main</code> so your site doesn't unexpectedly change
-                            when the framework updates.
+                            <strong>Pro tip:</strong> The template above is pinned to <code>@v1.3.8</code>. When new
+                            versions are released, update the version number in both the CSS and JS URLs to get the
+                            latest features and fixes.
                         </div>
                     </div>
                     <div class="vd-alert vd-alert-primary vd-mt-3">
@@ -524,6 +524,29 @@ npx http-server . -p 3000
         </div>
     </div>
 
+    <!-- What's Next block -->
+    <div class="vd-mt-8" style="border-top: 1px solid var(--border-color); padding-top: 2.5rem; padding-bottom: 3rem;">
+        <h4 class="vd-text-lg vd-mb-5"><i class="ph ph-arrow-circle-right"></i> What's Next?</h4>
+        <div class="vd-row" style="gap: 1.25rem;">
+            <div class="vd-col-12 vd-col-md-6 vd-mb-4">
+                <a href="#docs/starter-templates" data-route="docs/starter-templates" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
+                    <div class="vd-card-body">
+                        <h4 class="vd-text-md vd-mb-2">Starter Templates</h4>
+                        <p class="vd-text-sm vd-text-muted vd-mb-0">Skip the assembly — copy-paste complete pages for landing sites, dashboards, blogs, and login forms.</p>
+                    </div>
+                </a>
+            </div>
+            <div class="vd-col-12 vd-col-md-6 vd-mb-4">
+                <a href="#docs/first-layout" data-route="docs/first-layout" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
+                    <div class="vd-card-body">
+                        <h4 class="vd-text-md vd-mb-2">Building Your First Layout</h4>
+                        <p class="vd-text-sm vd-text-muted vd-mb-0">Deep dive into containers, rows, columns, breakpoints, and responsive design.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
     <!-- The Complete File -->
     <div class="vd-row vd-mb-6">
         <div class="vd-col-12">
@@ -557,7 +580,7 @@ npx http-server . -p 3000
     &lt;<span class="code-tag">meta</span> <span class="code-attr">charset</span>=<span class="code-string">"UTF-8"</span>&gt;
     &lt;<span class="code-tag">meta</span> <span class="code-attr">name</span>=<span class="code-string">"viewport"</span> <span class="code-attr">content</span>=<span class="code-string">"width=device-width, initial-scale=1.0"</span>&gt;
     &lt;<span class="code-tag">title</span>&gt;My First Vanduo Site&lt;/<span class="code-tag">title</span>&gt;
-    &lt;<span class="code-tag">link</span> <span class="code-attr">rel</span>=<span class="code-string">"stylesheet"</span> <span class="code-attr">href</span>=<span class="code-string">"https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.3.7/dist/vanduo.min.css"</span>&gt;
+    &lt;<span class="code-tag">link</span> <span class="code-attr">rel</span>=<span class="code-string">"stylesheet"</span> <span class="code-attr">href</span>=<span class="code-string">"https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.3.8/dist/vanduo.min.css"</span>&gt;
 &lt;/<span class="code-tag">head</span>&gt;
 &lt;<span class="code-tag">body</span>&gt;
     &lt;<span class="code-tag">nav</span> <span class="code-attr">class</span>=<span class="code-string">"vd-navbar"</span>&gt;
@@ -637,7 +660,7 @@ npx http-server . -p 3000
         &lt;/<span class="code-tag">div</span>&gt;
     &lt;/<span class="code-tag">footer</span>&gt;
 
-    &lt;<span class="code-tag">script</span> <span class="code-attr">src</span>=<span class="code-string">"https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.3.7/dist/vanduo.min.js"</span>&gt;&lt;/<span class="code-tag">script</span>&gt;
+    &lt;<span class="code-tag">script</span> <span class="code-attr">src</span>=<span class="code-string">"https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.3.8/dist/vanduo.min.js"</span>&gt;&lt;/<span class="code-tag">script</span>&gt;
     &lt;<span class="code-tag">script</span>&gt;Vanduo.init();&lt;/<span class="code-tag">script</span>&gt;
 &lt;/<span class="code-tag">body</span>&gt;
 &lt;/<span class="code-tag">html</span>&gt;</code></pre>

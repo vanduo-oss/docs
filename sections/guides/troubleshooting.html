@@ -1,0 +1,488 @@
+<section id="troubleshooting">
+    <h4 class="demo-title"><i class="ph ph-wrench"></i>Troubleshooting &amp; FAQ <code class="vd-text-sm">Guide</code></h4>
+    <p class="vd-mb-8">Stuck? This guide covers the most common issues when building with Vanduo — from missing components to dark mode quirks — and shows you exactly how to fix them.</p>
+
+    <!-- Issue 1 -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h4><span class="vd-badge vd-badge-primary" style="margin-right: 8px;">#1</span> <i class="ph ph-list"></i> My navbar toggle doesn't work on mobile</h4>
+                </div>
+                <div class="vd-card-body">
+                    <p><strong>Symptom:</strong> Tapping the hamburger icon on mobile does nothing — the menu doesn't expand.</p>
+                    <p class="vd-mt-4"><strong>Most likely cause:</strong> <code>Vanduo.init()</code> was not called, or it was called before the navbar existed in the DOM.</p>
+
+                    <div class="vd-code-snippet vd-mt-5" data-collapsible data-expanded="true">
+                        <button class="vd-code-snippet-toggle" aria-expanded="true"><span class="vd-code-snippet-toggle-icon"></span><span>View Code</span></button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">Fix</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code"><span class="vd-code-snippet-copy-icon"></span><span class="vd-code-snippet-copy-text">Copy</span></button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Make sure the navbar HTML is ABOVE the script tag --&gt;</span>
+&lt;<span class="code-tag">nav</span> <span class="code-attr">class</span>=<span class="code-string">"vd-navbar"</span>&gt;...&lt;/<span class="code-tag">nav</span>&gt;
+
+<span class="code-comment">&lt;!-- Then load and init Vanduo at the bottom of &lt;body&gt; --&gt;</span>
+&lt;<span class="code-tag">script</span> <span class="code-attr">src</span>=<span class="code-string">"https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.3.8/dist/vanduo.min.js"</span>&gt;&lt;/<span class="code-tag">script</span>&gt;
+&lt;<span class="code-tag">script</span>&gt;Vanduo.init();&lt;/<span class="code-tag">script</span>&gt;
+&lt;/<span class="code-tag">body</span>&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="vd-alert vd-alert-info vd-mt-4">
+                        <i class="ph ph-lightbulb"></i>
+                        <div>
+                            <strong>SPA users:</strong> If you're using React, Vue, or another framework that swaps DOM content without page reloads, you must call <code>Vanduo.init()</code> <em>after</em> the navbar is rendered. See <a href="#docs/framework-integration" data-route="docs/framework-integration">Framework Integration</a> for lifecycle examples.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Issue 2 -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h4><span class="vd-badge vd-badge-primary" style="margin-right: 8px;">#2</span> <i class="ph ph-moon"></i> Dark mode doesn't persist after refresh</h4>
+                </div>
+                <div class="vd-card-body">
+                    <p><strong>Symptom:</strong> User toggles dark mode, reloads the page, and it reverts to light mode (or follows the OS).</p>
+                    <p class="vd-mt-4"><strong>Most likely cause:</strong> The <code>data-theme</code> attribute on <code>&lt;html&gt;</code> is set to <code>"system"</code> (the default), which means it always follows the OS preference on page load.</p>
+
+                    <div class="vd-code-snippet vd-mt-5" data-collapsible data-expanded="true">
+                        <button class="vd-code-snippet-toggle" aria-expanded="true"><span class="vd-code-snippet-toggle-icon"></span><span>View Code</span></button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">Fix</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code"><span class="vd-code-snippet-copy-icon"></span><span class="vd-code-snippet-copy-text">Copy</span></button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Option A: Set an explicit default so it doesn't flip back --&gt;</span>
+&lt;<span class="code-tag">html</span> <span class="code-attr">lang</span>=<span class="code-string">"en"</span> <span class="code-attr">data-theme</span>=<span class="code-string">"dark"</span>&gt;
+
+<span class="code-comment">&lt;!-- Option B: Use the Theme Switcher component (saves to localStorage) --&gt;</span>
+&lt;<span class="code-tag">button</span> <span class="code-attr">data-toggle</span>=<span class="code-string">"theme"</span> <span class="code-attr">aria-label</span>=<span class="code-string">"Toggle theme"</span>&gt;
+  &lt;<span class="code-tag">i</span> <span class="code-attr">class</span>=<span class="code-string">"ph ph-moon"</span>&gt;&lt;/<span class="code-tag">i</span>&gt;
+&lt;/<span class="code-tag">button</span>&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="vd-mt-4"><strong>How it works:</strong> The built-in <code>data-toggle="theme"</code> button saves the user's choice to <code>localStorage</code> under the key <code>vanduo-theme-preference</code>. On page load, Vanduo reads this key and applies <code>data-theme="light"</code> or <code>data-theme="dark"</code> automatically — but only if you included the Vanduo JS file <em>in the head or early body</em>, before the browser paints.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Issue 3 -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h4><span class="vd-badge vd-badge-primary" style="margin-right: 8px;">#3</span> <i class="ph ph-app-window"></i> Components don't work after SPA route change</h4>
+                </div>
+                <div class="vd-card-body">
+                    <p><strong>Symptom:</strong> Navbar, dropdowns, modals, or tabs work on first page load but stop working after navigating to a new route in a React/Vue/Svelte app.</p>
+                    <p class="vd-mt-4"><strong>Root cause:</strong> Single-page apps replace DOM elements without a full page reload. Vanduo's event listeners were attached to the old DOM nodes, which no longer exist.</p>
+
+                    <div class="vd-code-snippet vd-mt-5" data-collapsible data-expanded="true">
+                        <button class="vd-code-snippet-toggle" aria-expanded="true"><span class="vd-code-snippet-toggle-icon"></span><span>View Code</span></button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="js">React Fix</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code"><span class="vd-code-snippet-copy-icon"></span><span class="vd-code-snippet-copy-text">Copy</span></button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="js"><code><span class="code-keyword">import</span> { useEffect } <span class="code-keyword">from</span> <span class="code-string">'react'</span>;
+<span class="code-keyword">import</span> { Vanduo } <span class="code-keyword">from</span> <span class="code-string">'@vanduo-oss/framework'</span>;
+
+<span class="code-keyword">export default function</span> <span class="code-function">MyPage</span>() {
+  <span class="code-function">useEffect</span>(() =&gt; {
+    Vanduo.<span class="code-function">init</span>();
+    <span class="code-keyword">return</span> () =&gt; Vanduo.<span class="code-function">destroy</span>();
+  }, []);
+
+  <span class="code-keyword">return</span> (...);
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="vd-mt-4"><strong>The pattern is the same in every framework:</strong> call <code>Vanduo.init()</code> in the mounting lifecycle hook of each page component that uses Vanduo interactive features. Static content (grids, cards, typography) works without it — only JS-driven components need re-initialization.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Issue 4 -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h4><span class="vd-badge vd-badge-primary" style="margin-right: 8px;">#4</span> <i class="ph ph-palette"></i> My custom theme colors aren't applying</h4>
+                </div>
+                <div class="vd-card-body">
+                    <p><strong>Symptom:</strong> You added custom CSS with <code>--color-primary: #ff0000;</code> but buttons are still blue.</p>
+                    <p class="vd-mt-4"><strong>Most likely cause:</strong> Your custom CSS is loaded <em>before</em> Vanduo's CSS, so Vanduo's defaults override yours.</p>
+
+                    <div class="vd-code-snippet vd-mt-5" data-collapsible data-expanded="true">
+                        <button class="vd-code-snippet-toggle" aria-expanded="true"><span class="vd-code-snippet-toggle-icon"></span><span>View Code</span></button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">Correct Order</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code"><span class="vd-code-snippet-copy-icon"></span><span class="vd-code-snippet-copy-text">Copy</span></button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- 1. Vanduo first --&gt;</span>
+&lt;<span class="code-tag">link</span> <span class="code-attr">rel</span>=<span class="code-string">"stylesheet"</span> <span class="code-attr">href</span>=<span class="code-string">"vanduo.min.css"</span>&gt;
+
+<span class="code-comment">&lt;!-- 2. Your overrides second (wins the cascade) --&gt;</span>
+&lt;<span class="code-tag">link</span> <span class="code-attr">rel</span>=<span class="code-string">"stylesheet"</span> <span class="code-attr">href</span>=<span class="code-string">"css/my-theme.css"</span>&gt;
+
+<span class="code-comment">&lt;!-- WRONG: this would be overridden by vanduo.min.css --&gt;</span>
+<span class="code-comment">&lt;link rel="stylesheet" href="css/my-theme.css"&gt;</span>
+<span class="code-comment">&lt;link rel="stylesheet" href="vanduo.min.css"&gt;</span></code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="vd-alert vd-alert-info vd-mt-4">
+                        <i class="ph ph-lightbulb"></i>
+                        <div>
+                            <strong>Verify in DevTools:</strong> Open Chrome DevTools → Elements → select a button → Computed tab → filter for <code>--color-primary</code>. If it shows Vanduo's default, your CSS isn't loaded or isn't after Vanduo's.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Issue 5 -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h4><span class="vd-badge vd-badge-primary" style="margin-right: 8px;">#5</span> <i class="ph ph-smiley-sad"></i> Icons aren't showing up</h4>
+                </div>
+                <div class="vd-card-body">
+                    <p><strong>Symptom:</strong> You see empty squares or nothing where an icon should be.</p>
+
+                    <div class="vd-row vd-mt-4">
+                        <div class="vd-col-12 vd-col-md-4 vd-mb-4">
+                            <div class="vd-card" style="border-top: 3px solid var(--color-error);">
+                                <div class="vd-card-header"><h4><i class="ph ph-x-circle" style="color: var(--color-error);"></i> Wrong</h4></div>
+                                <div class="vd-card-body">
+                                    <code>&lt;i class="ph-home"&gt;&lt;/i&gt;</code>
+                                    <p class="vd-text-sm vd-text-muted vd-mt-2">Missing weight prefix. The icon font doesn't know which weight to use.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="vd-col-12 vd-col-md-4 vd-mb-4">
+                            <div class="vd-card" style="border-top: 3px solid var(--color-success);">
+                                <div class="vd-card-header"><h4><i class="ph ph-check-circle" style="color: var(--color-success);"></i> Right</h4></div>
+                                <div class="vd-card-body">
+                                    <code>&lt;i class="ph ph-home"&gt;&lt;/i&gt;</code>
+                                    <p class="vd-text-sm vd-text-muted vd-mt-2">First <code>ph</code> = font family. Second <code>ph-home</code> = icon name + weight.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="vd-col-12 vd-col-md-4 vd-mb-4">
+                            <div class="vd-card" style="border-top: 3px solid var(--color-info);">
+                                <div class="vd-card-header"><h4><i class="ph ph-info" style="color: var(--color-info);"></i> Bold</h4></div>
+                                <div class="vd-card-body">
+                                    <code>&lt;i class="ph-fill ph-home"&gt;&lt;/i&gt;</code>
+                                    <p class="vd-text-sm vd-text-muted vd-mt-2">Use <code>ph-fill</code> for filled weight. Other options: <code>ph-bold</code>, <code>ph-light</code>, <code>ph-thin</code>, <code>ph-duotone</code>.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="vd-mt-4"><strong>Also check:</strong> Did you include the Phosphor icon CSS? If you're using the full Vanduo bundle (<code>vanduo.min.css</code>), icons are included. If you're importing component CSS individually, add <code>css/icons/icons.css</code>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Issue 6 -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h4><span class="vd-badge vd-badge-primary" style="margin-right: 8px;">#6</span> <i class="ph ph-cards"></i> Cards don't have shadows in dark mode</h4>
+                </div>
+                <div class="vd-card-body">
+                    <p><strong>Symptom:</strong> Cards look flat in dark mode — no visible shadow or depth.</p>
+                    <p class="vd-mt-4"><strong>This is by design:</strong> Vanduo's shadows use <code>rgba()</code> alpha blending. On dark backgrounds, low-alpha black shadows are nearly invisible. The framework compensates with slightly stronger borders and surface tints in dark mode.</p>
+
+                    <div class="vd-alert vd-alert-info vd-mt-4">
+                        <i class="ph ph-lightbulb"></i>
+                        <div>
+                            <strong>Want more depth?</strong> You can boost shadows in dark mode by overriding the shadow variables in your custom CSS: <code>--shadow-md: 0 8px 24px rgba(0,0,0,0.4);</code>. Or switch cards to <code>.vd-card-outlined</code> for a crisp border that reads clearly in both modes.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Issue 7 -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h4><span class="vd-badge vd-badge-primary" style="margin-right: 8px;">#7</span> <i class="ph ph-cloud-arrow-down"></i> VanduoLazyLoad shows 'undefined'</h4>
+                </div>
+                <div class="vd-card-body">
+                    <p><strong>Symptom:</strong> Your code references <code>VanduoLazyLoad</code> and throws <code>undefined</code> or <code>is not defined</code>.</p>
+                    <p class="vd-mt-4"><strong>Most likely causes:</strong></p>
+                    <ul class="vd-mt-3">
+                        <li class="vd-mb-2">You're running in a server-side rendering (SSR) context where <code>window</code> doesn't exist.</li>
+                        <li class="vd-mb-2">You imported the lazy-loader module but didn't include the main Vanduo JS bundle.</li>
+                    </ul>
+
+                    <div class="vd-code-snippet vd-mt-5" data-collapsible data-expanded="true">
+                        <button class="vd-code-snippet-toggle" aria-expanded="true"><span class="vd-code-snippet-toggle-icon"></span><span>View Code</span></button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="js">Fix</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code"><span class="vd-code-snippet-copy-icon"></span><span class="vd-code-snippet-copy-text">Copy</span></button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="js"><code><span class="code-comment">// Guard for SSR — only run in the browser</span>
+<span class="code-keyword">if</span> (<span class="code-keyword">typeof</span> window !== <span class="code-string">'undefined'</span> && window.VanduoLazyLoad) {
+  window.VanduoLazyLoad.observe(element, (target) =&gt; {
+    target.src = target.dataset.src;
+  });
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Issue 8 -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h4><span class="vd-badge vd-badge-primary" style="margin-right: 8px;">#8</span> <i class="ph ph-paint-brush"></i> Theme Customizer and Theme Switcher seem to conflict</h4>
+                </div>
+                <div class="vd-card-body">
+                    <p><strong>Symptom:</strong> You have both a Theme Switcher (light/dark toggle) and a Theme Customizer (color/font picker) on the same page. Clicking one seems to reset the other.</p>
+                    <p class="vd-mt-4"><strong>This is by design:</strong> Both components share the <code>vanduo-theme-preference</code> localStorage key for the light/dark/system mode. The Theme Customizer also stores independent keys for primary color, neutral palette, radius, and font family.</p>
+
+                    <div class="vd-alert vd-alert-info vd-mt-4">
+                        <i class="ph ph-lightbulb"></i>
+                        <div>
+                            <strong>How they coordinate:</strong> Theme Switcher only toggles <code>data-theme</code>. Theme Customizer reads the current theme and applies color/font overrides on top. If you change the theme via Switcher, Customizer re-applies its stored color/font overrides. This is intentional — users expect their brand color to persist even when switching between light and dark.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Issue 9 -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h4><span class="vd-badge vd-badge-primary" style="margin-right: 8px;">#9</span> <i class="ph ph-crosshair"></i> Scrollspy highlights the wrong section</h4>
+                </div>
+                <div class="vd-card-body">
+                    <p><strong>Symptom:</strong> Clicking a sidebar link scrolls to the right place, but the active highlight in the sidebar is on a different item.</p>
+                    <p class="vd-mt-4"><strong>Most likely cause:</strong> The <code>href</code> on your sidebar links doesn't exactly match the <code>id</code> of the target section.</p>
+
+                    <div class="vd-code-snippet vd-mt-5" data-collapsible data-expanded="true">
+                        <button class="vd-code-snippet-toggle" aria-expanded="true"><span class="vd-code-snippet-toggle-icon"></span><span>View Code</span></button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">Correct</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code"><span class="vd-code-snippet-copy-icon"></span><span class="vd-code-snippet-copy-text">Copy</span></button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Sidebar link --&gt;</span>
+&lt;<span class="code-tag">a</span> <span class="code-attr">href</span>=<span class="code-string">"#installation"</span> <span class="code-attr">class</span>=<span class="code-string">"vd-nav-link"</span>&gt;Installation&lt;/<span class="code-tag">a</span>&gt;
+
+<span class="code-comment">&lt;!-- MUST match exactly --&gt;</span>
+&lt;<span class="code-tag">section</span> <span class="code-attr">id</span>=<span class="code-string">"installation"</span>&gt;
+  &lt;<span class="code-tag">h2</span>&gt;Installation&lt;/<span class="code-tag">h2</span>&gt;
+&lt;/<span class="code-tag">section</span>&gt;
+
+<span class="code-comment">&lt;!-- WRONG: href is "install" but id is "installation" --&gt;</span>
+<span class="code-comment">&lt;a href="#install"&gt;...&lt;/a&gt;  &lt;!-- does NOT match id="installation" --&gt;</span></code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="vd-mt-4"><strong>Also check:</strong> Are multiple sections visible in the viewport at once? Scrollspy uses IntersectionObserver and activates the <em>most visible</em> section. If your sections are very short, increase their <code>min-height</code> or add padding so only one is dominant at a time.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Issue 10 -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h4><span class="vd-badge vd-badge-primary" style="margin-right: 8px;">#10</span> <i class="ph ph-textbox"></i> Forms look unstyled</h4>
+                </div>
+                <div class="vd-card-body">
+                    <p><strong>Symptom:</strong> Inputs, checkboxes, and select dropdowns look like browser defaults — no Vanduo styling.</p>
+                    <p class="vd-mt-4"><strong>Most likely cause:</strong> Missing the required classes. Vanduo doesn't style bare <code>&lt;input&gt;</code> elements — you must add <code>.vd-input</code> (or <code>.vd-form-group</code> wrapper) and use the specific markup patterns for checkboxes/radios/switches.</p>
+
+                    <div class="vd-row vd-mt-4">
+                        <div class="vd-col-12 vd-col-md-6 vd-mb-4">
+                            <div class="vd-card" style="border-top: 3px solid var(--color-error);">
+                                <div class="vd-card-header"><h4><i class="ph ph-x-circle" style="color: var(--color-error);"></i> Unstyled</h4></div>
+                                <div class="vd-card-body">
+                                    <input type="text" placeholder="Bare input">
+                                    <p class="vd-text-sm vd-text-muted vd-mt-2">No classes = browser default styling.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="vd-col-12 vd-col-md-6 vd-mb-4">
+                            <div class="vd-card" style="border-top: 3px solid var(--color-success);">
+                                <div class="vd-card-header"><h4><i class="ph ph-check-circle" style="color: var(--color-success);"></i> Styled</h4></div>
+                                <div class="vd-card-body">
+                                    <div class="vd-form-group vd-mb-0">
+                                        <input type="text" class="vd-input" placeholder="With vd-input class">
+                                    </div>
+                                    <p class="vd-text-sm vd-text-muted vd-mt-2">Add <code>.vd-input</code> and wrap in <code>.vd-form-group</code>.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="vd-alert vd-alert-info vd-mt-4">
+                        <i class="ph ph-lightbulb"></i>
+                        <div>
+                            <strong>Check the Forms component page</strong> for the exact markup patterns for checkboxes (<code>.checkbox</code> wrapper), radios (<code>.radio</code> wrapper), switches (<code>.switch</code> wrapper), and ranges (<code>.range</code> class). Each requires specific child elements that Vanduo's CSS targets.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Debugging Section -->
+    <div class="vd-row vd-mb-8">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h4><i class="ph ph-bug"></i> Debugging Techniques</h4>
+                </div>
+                <div class="vd-card-body">
+                    <h4 class="vd-mb-3">Inspecting CSS Variables in DevTools</h4>
+                    <p class="vd-mb-4">Not sure which custom property is applying to an element? Chrome DevTools can show you every active variable:</p>
+                    <ol class="vd-mb-5">
+                        <li class="vd-mb-2">Right-click the element → <strong>Inspect</strong></li>
+                        <li class="vd-mb-2">Select the element in the Elements tree</li>
+                        <li class="vd-mb-2">Open the <strong>Computed</strong> tab (next to Styles)</li>
+                        <li class="vd-mb-2">In the filter box, type <code>--</code> — this shows every CSS custom property currently computed for that element</li>
+                        <li>Look for the variable you overrode (e.g., <code>--color-primary</code>). If it shows the default instead of your value, your CSS isn't loaded or isn't winning the cascade.</li>
+                    </ol>
+
+                    <h4 class="vd-mt-8 vd-mb-3">Finding the Right Class Name</h4>
+                    <p class="vd-mb-4">If you're not sure what class a component needs, there are two quick ways to find out:</p>
+                    <div class="vd-row vd-mt-4">
+                        <div class="vd-col-12 vd-col-md-6 vd-mb-4">
+                            <div class="vd-card">
+                                <div class="vd-card-body">
+                                    <h5><i class="ph ph-browser" style="color: var(--color-primary);"></i> DevTools Console</h5>
+                                    <p class="vd-text-sm vd-text-muted vd-mb-3">Inspect an existing Vanduo element and read its classes:</p>
+                                    <div class="vd-code-snippet" data-collapsible data-expanded="true" style="margin: 0;">
+                                        <div class="vd-code-snippet-content">
+                                            <div class="vd-code-snippet-body">
+                                                <pre class="vd-code-snippet-pane is-active" data-lang="js"><code>document.querySelector('.vd-btn').classList
+<span class="code-comment">// DOMTokenList(3) ['vd-btn', 'vd-btn-primary', 'vd-btn-sm']</span></code></pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="vd-col-12 vd-col-md-6 vd-mb-4">
+                            <div class="vd-card">
+                                <div class="vd-card-body">
+                                    <h5><i class="ph ph-terminal" style="color: var(--color-success);"></i> Grep the Framework</h5>
+                                    <p class="vd-text-sm vd-text-muted vd-mb-3">Search the CSS source for patterns:</p>
+                                    <div class="vd-code-snippet" data-collapsible data-expanded="true" style="margin: 0;">
+                                        <div class="vd-code-snippet-content">
+                                            <div class="vd-code-snippet-body">
+                                                <pre class="vd-code-snippet-pane is-active" data-lang="bash"><code><span class="code-comment"># Find all button variants</span>
+grep -r <span class="code-string">"\.vd-btn-"</span> css/components/buttons.css
+
+<span class="code-comment"># Find all card modifiers</span>
+grep -r <span class="code-string">"\.vd-card-"</span> css/components/cards.css</code></pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ask the Community -->
+    <div class="vd-row vd-mb-8">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card" style="text-align: center;">
+                <div class="vd-card-body vd-p-13">
+                    <i class="ph ph-users-three" style="font-size: 3rem; color: var(--color-primary);"></i>
+                    <h4 class="vd-mt-5">Still stuck?</h4>
+                    <p class="vd-text-muted vd-mb-8">The Vanduo community is here to help. Search existing discussions or open a new one with a minimal reproduction.</p>
+                    <a href="https://github.com/vanduo-oss/framework/discussions" target="_blank" rel="noopener noreferrer" class="vd-btn vd-btn-primary">
+                        <i class="ph ph-chat-circle-text"></i> GitHub Discussions
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- What's Next block -->
+    <div class="vd-mt-8" style="border-top: 1px solid var(--border-color); padding-top: 2.5rem; padding-bottom: 3rem;">
+        <h4 class="vd-text-lg vd-mb-5"><i class="ph ph-arrow-circle-right"></i> What's Next?</h4>
+        <div class="vd-row" style="gap: 1.25rem;">
+            <div class="vd-col-12 vd-col-md-6 vd-mb-4">
+                <a href="#docs/framework-integration" data-route="docs/framework-integration" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
+                    <div class="vd-card-body">
+                        <h4 class="vd-text-md vd-mb-2">Framework Integration</h4>
+                        <p class="vd-text-sm vd-text-muted vd-mb-0">Lifecycle wiring for React, Vue, Nuxt, and Svelte to prevent component re-init issues.</p>
+                    </div>
+                </a>
+            </div>
+            <div class="vd-col-12 vd-col-md-6 vd-mb-4">
+                <a href="#docs/accessibility-essentials" data-route="docs/accessibility-essentials" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
+                    <div class="vd-card-body">
+                        <h4 class="vd-text-md vd-mb-2">Accessibility Essentials</h4>
+                        <p class="vd-text-sm vd-text-muted vd-mb-0">Ensure your fixes don't break screen reader or keyboard support.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

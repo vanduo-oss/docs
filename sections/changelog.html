@@ -15,11 +15,11 @@
         <div class="vd-container-responsive" style="max-width: 1200px;">
 
             <!-- ═══════════════════════════════════════════════ -->
-            <!-- Version 1.3.7                                   -->
+            <!-- Version 1.3.8                                   -->
             <!-- ═══════════════════════════════════════════════ -->
             <article class="version-card">
                 <header class="version-header">
-                    <span class="vd-badge vd-badge-primary" style="font-size: 1rem; padding: 0.5rem 1rem;">v1.3.7</span>
+                    <span class="vd-badge vd-badge-primary" style="font-size: 1rem; padding: 0.5rem 1rem;">v1.3.8</span>
                     <span style="color: var(--text-secondary); font-size: 0.95rem;">
                         <i class="ph ph-calendar mr-1"></i>April 18, 2026
                     </span>
@@ -96,6 +96,13 @@
                                 <h5>Updates</h5>
                                 <ul class="change-list">
                                     <li class="change-item">
+                                        <i class="ph ph-shield-check" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: Docs security hardening</strong>
+                                            <p>Dynamic page/section HTML now uses safe DOM parsing with dangerous tags and attributes stripped; morph badges render via DOM nodes instead of <code>innerHTML</code>; tooltips/popovers require explicit SVG opt-in; suggest URLs are same-origin by default with optional allowlist.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
                                         <i class="ph ph-drop" style="color: var(--color-info);"></i>
                                         <div>
                                             <strong>Update: Water Morph demos</strong>
@@ -119,8 +126,8 @@
                                     <li class="change-item">
                                         <i class="ph ph-bookmark-simple" style="color: var(--color-info);"></i>
                                         <div>
-                                            <strong>Update: Docs &amp; CDN pins to v1.3.7</strong>
-                                            <p>Site metadata, bundled <code>docs/dist</code> framework assets, and jsDelivr examples now reference <strong>v1.3.7</strong>.</p>
+                                            <strong>Update: Docs &amp; CDN pins to v1.3.8</strong>
+                                            <p>Site metadata, bundled <code>docs/dist</code> framework assets, and jsDelivr examples now reference <strong>v1.3.8</strong>.</p>
                                         </div>
                                     </li>
                                     <li class="change-item">
@@ -626,21 +633,21 @@
                                 <h5><span class="vd-badge vd-badge-danger" style="font-size:0.7rem;vertical-align:middle;margin-right:0.35rem;">Critical</span> Security Fixes</h5>
                                 <ul class="change-list">
                                     <li class="change-item">
-                                        <i class="ph ph-shield-warning" style="color: var(--color-danger);"></i>
+                                        <i class="ph ph-shield-warning" style="color: var(--color-error);"></i>
                                         <div>
                                             <strong>Suggest — XSS in <code>renderItems()</code></strong>
                                             <p><code>renderItems()</code> now escapes text through <code>_escapeHtml()</code> before applying the highlight regex via <code>innerHTML</code>. Previously, raw server/user data was inserted directly — a malicious suggestion could execute arbitrary scripts.</p>
                                         </div>
                                     </li>
                                     <li class="change-item">
-                                        <i class="ph ph-shield-warning" style="color: var(--color-danger);"></i>
+                                        <i class="ph ph-shield-warning" style="color: var(--color-error);"></i>
                                         <div>
                                             <strong>Select — 3 broken <code>querySelector</code> selectors fixed</strong>
                                             <p>Selector <code>.vd-custom-select-option</code> corrected to <code>.custom-select-option</code> in <code>updateSelectedOptions()</code>, <code>openDropdown()</code>, and <code>handleKeydown()</code>. Keyboard navigation and programmatic updates were silently failing.</p>
                                         </div>
                                     </li>
                                     <li class="change-item">
-                                        <i class="ph ph-shield-warning" style="color: var(--color-danger);"></i>
+                                        <i class="ph ph-shield-warning" style="color: var(--color-error);"></i>
                                         <div>
                                             <strong>Select — <code>generateId()</code> now assigns <code>element.id</code></strong>
                                             <p><code>generateId()</code> assigns the generated ID to <code>element.id</code> before returning. Previously ARIA <code>aria-labelledby</code> pointed to a nonexistent ID, breaking screen-reader label association.</p>
@@ -1960,7 +1967,7 @@
                                 </h4>
                                 <ul class="change-list">
                                     <li class="change-item">
-                                        <i class="ph ph-bug" style="color: var(--color-danger);"></i>
+                                        <i class="ph ph-bug" style="color: var(--color-error);"></i>
                                         <div>
                                             <strong>Fix: Code snippet "Copied!" text truncated</strong>
                                             <p>The <code>::after</code> pseudo-element on

@@ -1,0 +1,254 @@
+<section id="alerts">
+    <h4 class="demo-title"><i class="ph ph-bell"></i>Alerts</h4>
+    <p class="vd-mb-8">Contextual feedback messages for typical user actions. Choose from semantic color variants, add dismissible close buttons, or combine icons with text for richer communication. Alerts are fully CSS-driven — no JavaScript required for static use.</p>
+
+    <!-- Variants Demo -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-alerts-variants">
+                <div class="vd-card-header"><h4>Semantic Variants</h4></div>
+                <div class="vd-card-body">
+                    <div class="vd-alert vd-alert-primary vd-mb-3">
+                        <i class="ph ph-info"></i>
+                        <div><strong>Primary.</strong> A general informational message for the user.</div>
+                    </div>
+                    <div class="vd-alert vd-alert-success vd-mb-3">
+                        <i class="ph ph-check-circle"></i>
+                        <div><strong>Success.</strong> Your changes have been saved successfully.</div>
+                    </div>
+                    <div class="vd-alert vd-alert-warning vd-mb-3">
+                        <i class="ph ph-warning"></i>
+                        <div><strong>Warning.</strong> Your subscription expires in 3 days.</div>
+                    </div>
+                    <div class="vd-alert vd-alert-error vd-mb-3">
+                        <i class="ph ph-x-circle"></i>
+                        <div><strong>Error.</strong> Unable to connect to the server. Please try again.</div>
+                    </div>
+                    <div class="vd-alert vd-alert-info vd-mb-0">
+                        <i class="ph ph-lightbulb"></i>
+                        <div><strong>Tip.</strong> You can customize alert colors via CSS variables.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Primary alert --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-alert vd-alert-primary"</span>&gt;
+  &lt;<span class="code-tag">i</span> <span class="code-attr">class</span>=<span class="code-string">"ph ph-info"</span>&gt;&lt;/<span class="code-tag">i</span>&gt;
+  &lt;<span class="code-tag">div</span>&gt;&lt;<span class="code-tag">strong</span>&gt;Primary.&lt;/<span class="code-tag">strong</span>&gt; A general message.&lt;/<span class="code-tag">div</span>&gt;
+&lt;/<span class="code-tag">div</span>&gt;
+
+<span class="code-comment">&lt;!-- Success alert --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-alert vd-alert-success"</span>&gt;
+  &lt;<span class="code-tag">i</span> <span class="code-attr">class</span>=<span class="code-string">"ph ph-check-circle"</span>&gt;&lt;/<span class="code-tag">i</span>&gt;
+  &lt;<span class="code-tag">div</span>&gt;Your changes have been saved.&lt;/<span class="code-tag">div</span>&gt;
+&lt;/<span class="code-tag">div</span>&gt;
+
+<span class="code-comment">&lt;!-- Warning alert --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-alert vd-alert-warning"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;
+
+<span class="code-comment">&lt;!-- Error alert (also .vd-alert-danger alias) --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-alert vd-alert-error"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;
+
+<span class="code-comment">&lt;!-- Info alert --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-alert vd-alert-info"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-alerts-dismissible">
+                <div class="vd-card-header"><h4>Dismissible &amp; With Actions</h4></div>
+                <div class="vd-card-body">
+                    <div class="vd-alert vd-alert-success vd-alert-dismissible vd-mb-3">
+                        <i class="ph ph-check-circle"></i>
+                        <div>Profile updated successfully.</div>
+                        <button class="vd-alert-close" aria-label="Close alert">&times;</button>
+                    </div>
+                    <div class="vd-alert vd-alert-warning vd-mb-3">
+                        <i class="ph ph-warning"></i>
+                        <div>
+                            <strong>Storage warning.</strong> You are using 95% of your quota.
+                            <a href="#" class="vd-alert-link">Upgrade now</a>
+                        </div>
+                    </div>
+                    <div class="vd-alert vd-alert-primary vd-mb-0">
+                        <i class="ph ph-info"></i>
+                        <div>
+                            <h5 class="vd-alert-heading">New features available</h5>
+                            <p class="vd-mb-0 vd-text-sm">Dark mode, custom themes, and more are now live. <a href="#" class="vd-alert-link">Learn more</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Dismissible alert --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-alert vd-alert-success vd-alert-dismissible"</span>&gt;
+  &lt;<span class="code-tag">i</span> <span class="code-attr">class</span>=<span class="code-string">"ph ph-check-circle"</span>&gt;&lt;/<span class="code-tag">i</span>&gt;
+  &lt;<span class="code-tag">div</span>&gt;Profile updated.&lt;/<span class="code-tag">div</span>&gt;
+  &lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-alert-close"</span> <span class="code-attr">aria-label</span>=<span class="code-string">"Close alert"</span>&gt;&amp;times;&lt;/<span class="code-tag">button</span>&gt;
+&lt;/<span class="code-tag">div</span>&gt;
+
+<span class="code-comment">&lt;!-- Alert with link --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-alert vd-alert-warning"</span>&gt;
+  &lt;<span class="code-tag">i</span> <span class="code-attr">class</span>=<span class="code-string">"ph ph-warning"</span>&gt;&lt;/<span class="code-tag">i</span>&gt;
+  &lt;<span class="code-tag">div</span>&gt;
+    Storage warning. &lt;<span class="code-tag">a</span> <span class="code-attr">href</span>=<span class="code-string">"#"</span> <span class="code-attr">class</span>=<span class="code-string">"vd-alert-link"</span>&gt;Upgrade now&lt;/<span class="code-tag">a</span>&gt;
+  &lt;/<span class="code-tag">div</span>&gt;
+&lt;/<span class="code-tag">div</span>&gt;
+
+<span class="code-comment">&lt;!-- Alert with heading --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-alert vd-alert-primary"</span>&gt;
+  &lt;<span class="code-tag">i</span> <span class="code-attr">class</span>=<span class="code-string">"ph ph-info"</span>&gt;&lt;/<span class="code-tag">i</span>&gt;
+  &lt;<span class="code-tag">div</span>&gt;
+    &lt;<span class="code-tag">h5</span> <span class="code-attr">class</span>=<span class="code-string">"vd-alert-heading"</span>&gt;New features&lt;/<span class="code-tag">h5</span>&gt;
+    &lt;<span class="code-tag">p</span> <span class="code-attr">class</span>=<span class="code-string">"vd-mb-0 vd-text-sm"</span>&gt;Dark mode and more.&lt;/<span class="code-tag">p</span>&gt;
+  &lt;/<span class="code-tag">div</span>&gt;
+&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CSS Variables -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header"><h4>CSS Variables</h4></div>
+                <div class="vd-card-body">
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead><tr><th>Variable</th><th>Default</th><th>Description</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>--alert-padding-x</code></td><td><code>1.3125rem</code> (21px)</td><td>Horizontal padding (Fibonacci)</td></tr>
+                                <tr><td><code>--alert-padding-y</code></td><td><code>0.8125rem</code> (13px)</td><td>Vertical padding (Fibonacci, ratio ~phi)</td></tr>
+                                <tr><td><code>--alert-border-radius</code></td><td><code>var(--btn-border-radius)</code></td><td>Corner rounding</td></tr>
+                                <tr><td><code>--alert-border-width</code></td><td><code>1px</code></td><td>Border thickness</td></tr>
+                                <tr><td><code>--alert-primary-bg</code></td><td><code>var(--color-primary-alpha-10)</code></td><td>Primary variant background</td></tr>
+                                <tr><td><code>--alert-success-bg</code></td><td><code>var(--color-success-alpha-10)</code></td><td>Success variant background</td></tr>
+                                <tr><td><code>--alert-warning-bg</code></td><td><code>var(--color-warning-alpha-10)</code></td><td>Warning variant background</td></tr>
+                                <tr><td><code>--alert-error-bg</code></td><td><code>var(--color-error-alpha-10)</code></td><td>Error variant background</td></tr>
+                                <tr><td><code>--alert-info-bg</code></td><td><code>var(--color-info-alpha-10)</code></td><td>Info variant background</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- API Reference -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header"><h4><i class="ph ph-list-dashes mr-2" style="color: var(--color-primary);"></i>API Reference</h4></div>
+                <div class="vd-card-body">
+                    <h4>CSS Classes</h4>
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead><tr><th>Class</th><th>Description</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>.vd-alert</code></td><td>Base alert container. Flex layout with icon + content.</td></tr>
+                                <tr><td><code>.vd-alert-primary</code></td><td>Blue accent variant for general information.</td></tr>
+                                <tr><td><code>.vd-alert-success</code></td><td>Green accent variant for positive feedback.</td></tr>
+                                <tr><td><code>.vd-alert-warning</code></td><td>Amber accent variant for cautionary messages.</td></tr>
+                                <tr><td><code>.vd-alert-error</code></td><td>Red accent variant for errors and failures.</td></tr>
+                                <tr><td><code>.vd-alert-danger</code></td><td>Alias for <code>.vd-alert-error</code>.</td></tr>
+                                <tr><td><code>.vd-alert-info</code></td><td>Cyan accent variant for tips and hints.</td></tr>
+                                <tr><td><code>.vd-alert-dismissible</code></td><td>Adds right padding for a close button.</td></tr>
+                                <tr><td><code>.vd-alert-close</code></td><td>Close button positioned at top-right.</td></tr>
+                                <tr><td><code>.vd-alert-link</code></td><td>Styled link inside an alert with matching variant color.</td></tr>
+                                <tr><td><code>.vd-alert-heading</code></td><td>Heading style for titled alerts.</td></tr>
+                                <tr><td><code>.vd-alert-icon</code></td><td>Flex container for the icon (auto-generated structure).</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accessibility -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header"><h4><i class="ph ph-wheelchair mr-2" style="color: var(--color-primary);"></i>Accessibility</h4></div>
+                <div class="vd-card-body">
+                    <ul>
+                        <li>Use <code>role="alert"</code> on dynamically injected alerts so screen readers announce them immediately.</li>
+                        <li>Dismissible alerts should have a <code>button</code> with an <code>aria-label="Close alert"</code>, not just an icon.</li>
+                        <li>Icons inside alerts should have <code>aria-hidden="true"</code> if they are decorative; otherwise provide text alternatives.</li>
+                        <li>Color is never the sole indicator — pair variants with distinct icons and clear text.</li>
+                        <li>Alert links (<code>.vd-alert-link</code>) maintain sufficient contrast against all variant backgrounds.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- What's Next block -->
+    <div class="vd-mt-8" style="border-top: 1px solid var(--border-color); padding-top: 2.5rem; padding-bottom: 3rem;">
+        <h4 class="vd-text-lg vd-mb-5"><i class="ph ph-arrow-circle-right"></i> What's Next?</h4>
+        <div class="vd-row" style="gap: 1.25rem;">
+            <div class="vd-col-12 vd-col-md-4 vd-mb-4">
+                <a href="#docs/toast" data-route="docs/toast" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
+                    <div class="vd-card-body">
+                        <h4 class="vd-text-md vd-mb-2">Toast Notifications</h4>
+                        <p class="vd-text-sm vd-text-muted vd-mb-0">Transient popup notifications with auto-dismiss, positioning, and actions.</p>
+                    </div>
+                </a>
+            </div>
+            <div class="vd-col-12 vd-col-md-4 vd-mb-4">
+                <a href="#docs/badges" data-route="docs/badges" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
+                    <div class="vd-card-body">
+                        <h4 class="vd-text-md vd-mb-2">Badges</h4>
+                        <p class="vd-text-sm vd-text-muted vd-mb-0">Small status indicators, counters, and labels that pair perfectly with alerts.</p>
+                    </div>
+                </a>
+            </div>
+            <div class="vd-col-12 vd-col-md-4 vd-mb-4">
+                <a href="#docs/modals" data-route="docs/modals" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
+                    <div class="vd-card-body">
+                        <h4 class="vd-text-md vd-mb-2">Modals</h4>
+                        <p class="vd-text-sm vd-text-muted vd-mb-0">Overlay dialogs for confirmations, forms, and critical messages.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

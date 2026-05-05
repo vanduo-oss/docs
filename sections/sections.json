@@ -21,9 +21,9 @@
       "file": "docs-landing.html"
     },
     {
-      "id": "labs",
-      "title": "Labs",
-      "file": "labs.html"
+      "id": "templates",
+      "title": "Templates",
+      "file": "templates.html"
     },
     {
       "id": "kilo-oss",
@@ -115,9 +115,9 @@
             }
           ]
         },
-        {
-          "name": "Components",
-          "sections": [
+          {
+            "name": "Components",
+            "sections": [
             {
               "id": "theme-customizer",
               "title": "Theme Customizer",
@@ -265,12 +265,101 @@
                 "volume",
                 "media"
               ]
-            }
-          ]
-        },
-        {
-          "name": "Data Display",
-          "sections": [
+            },
+            {
+              "id": "dropdown",
+              "title": "Dropdown",
+              "file": "components/dropdown.html",
+              "icon": "ph-caret-down",
+              "keywords": [
+                "dropdown",
+                "menu",
+                "select",
+                "options",
+                "split button"
+              ]
+            },
+            {
+              "id": "modals",
+              "title": "Modals",
+              "file": "components/modals.html",
+              "icon": "ph-squares-four",
+              "keywords": [
+                "modal",
+                "dialog",
+                "popup",
+                "overlay",
+                "confirm",
+                "glass"
+              ]
+            },
+            {
+              "id": "tooltips",
+              "title": "Tooltips",
+              "file": "components/tooltips.html",
+              "icon": "ph-tooltip",
+              "keywords": [
+                "tooltip",
+                "hint",
+                "popover",
+                "hover",
+                "title",
+                "glass"
+              ]
+            },
+            {
+              "id": "progress",
+              "title": "Progress",
+              "file": "components/progress.html",
+              "icon": "ph-chart-bar",
+              "keywords": [
+                "progress",
+                "bar",
+                "loading",
+                "percentage",
+                "striped",
+                "indeterminate"
+              ]
+            },
+            {
+              "id": "spinner",
+              "title": "Spinners",
+              "file": "components/spinner.html",
+                "icon": "ph-spinner",
+                "keywords": [
+                  "spinner",
+                  "loader",
+                  "loading",
+                  "dots",
+                  "circular",
+                  "indicator"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Canvas & Visualization",
+            "sections": [
+              {
+                "id": "vd-hex",
+                "title": "vd-hex Grid",
+                "file": "canvas/vd-hex.html",
+                "icon": "ph-hexagon",
+                "keywords": [
+                  "hex grid",
+                  "canvas",
+                  "visualization",
+                  "game",
+                  "terrain",
+                  "pathfinding",
+                  "axial coordinates"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Data Display",
+            "sections": [
             {
               "id": "avatars",
               "title": "Avatars",
@@ -285,13 +374,15 @@
             {
               "id": "badges",
               "title": "Badges",
-              "file": "data-display/badges.html",
+              "file": "components/badges.html",
               "icon": "ph-tag",
               "keywords": [
                 "badge",
                 "pill",
                 "tag",
-                "label"
+                "label",
+                "counter",
+                "status"
               ]
             },
             {
@@ -327,15 +418,17 @@
             {
               "id": "alerts",
               "title": "Alerts",
-              "file": "feedback/alerts.html",
-              "icon": "ph-warning-circle",
+              "file": "components/alerts.html",
+              "icon": "ph-bell",
               "keywords": [
                 "alert",
                 "notification",
                 "message",
                 "warning",
                 "error",
-                "success"
+                "success",
+                "dismissible",
+                "banner"
               ]
             },
             {
@@ -366,13 +459,15 @@
             {
               "id": "skeleton",
               "title": "Skeleton",
-              "file": "feedback/skeleton.html",
+              "file": "components/skeleton.html",
               "icon": "ph-selection-background",
               "keywords": [
                 "skeleton",
                 "ghost",
                 "loading",
-                "placeholder"
+                "placeholder",
+                "shimmer",
+                "pulse"
               ]
             }
           ]
@@ -397,14 +492,16 @@
             {
               "id": "toasts",
               "title": "Toast Notifications",
-              "file": "interactive/toasts.html",
+              "file": "components/toast.html",
               "icon": "ph-bell-ringing",
               "keywords": [
                 "toast",
                 "notification",
                 "alert",
                 "message",
-                "snackbar"
+                "snackbar",
+                "auto-dismiss",
+                "position"
               ]
             }
           ]
@@ -415,13 +512,16 @@
             {
               "id": "tabs",
               "title": "Tabs",
-              "file": "interactive/tabs.html",
+              "file": "components/tabs.html",
               "icon": "ph-tabs",
               "keywords": [
                 "tabs",
                 "tab",
                 "panel",
-                "switch"
+                "switch",
+                "pills",
+                "boxed",
+                "vertical"
               ]
             },
             {
@@ -697,6 +797,39 @@
               ]
             },
             {
+              "id": "starter-templates",
+              "title": "Starter Templates",
+              "file": "guides/starter-templates.html",
+              "icon": "ph-files",
+              "keywords": [
+                "template",
+                "starter",
+                "boilerplate",
+                "landing page",
+                "dashboard",
+                "blog",
+                "auth",
+                "login",
+                "signup",
+                "example"
+              ]
+            },
+            {
+              "id": "migration-comparison",
+              "title": "Migration Comparison",
+              "file": "guides/migration-comparison.html",
+              "icon": "ph-arrows-left-right",
+              "keywords": [
+                "bootstrap",
+                "tailwind",
+                "migration",
+                "comparison",
+                "switch",
+                "convert",
+                "migrate"
+              ]
+            },
+            {
               "id": "esm-vs-iife",
               "title": "ESM vs IIFE vs Legacy",
               "file": "guides/esm-vs-iife.html",
@@ -816,6 +949,22 @@
                 "contrast",
                 "wcag",
                 "inclusive"
+              ]
+            },
+            {
+              "id": "troubleshooting",
+              "title": "Troubleshooting & FAQ",
+              "file": "guides/troubleshooting.html",
+              "icon": "ph-wrench",
+              "keywords": [
+                "troubleshooting",
+                "faq",
+                "debug",
+                "fix",
+                "problem",
+                "error",
+                "help",
+                "issue"
               ]
             }
           ]

@@ -131,6 +131,95 @@ export default function VanduoProvider({ children }) {
                             </div>
                         </div>
                     </div>
+
+                    <h4 class="vd-mt-6 vd-mb-3">Vue 3</h4>
+                    <div class="vd-code-snippet" data-collapsible data-expanded="true">
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="js">App.vue</button>
+                                </div>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="js"><code>&lt;script setup&gt;
+import { onMounted, onUnmounted } from 'vue';
+import { Vanduo } from '@vanduo-oss/framework';
+
+onMounted(() =&gt; {
+  Vanduo.init();
+});
+
+onUnmounted(() =&gt; {
+  Vanduo.destroy();
+});
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;slot /&gt;
+&lt;/template&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 class="vd-mt-6 vd-mb-3">Nuxt 3</h4>
+                    <div class="vd-code-snippet" data-collapsible data-expanded="true">
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="js">plugins/vanduo.client.ts</button>
+                                </div>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="js"><code>// plugins/vanduo.client.ts
+// The .client suffix ensures this only runs in the browser
+
+import { Vanduo } from '@vanduo-oss/framework';
+
+export default defineNuxtPlugin(() =&gt; {
+  Vanduo.init();
+
+  // Re-init on route changes (Nuxt replaces DOM without full reload)
+  const router = useRouter();
+  router.afterEach(() =&gt; {
+    Vanduo.init();
+  });
+});</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="vd-alert vd-alert-info vd-mt-3">
+                        <i class="ph ph-lightbulb"></i>
+                        <div>
+                            <strong>Nuxt CSS:</strong> Add Vanduo's stylesheet in <code>nuxt.config.ts</code>:
+                            <code>css: ['@vanduo-oss/framework/dist/vanduo.css']</code>
+                        </div>
+                    </div>
+
+                    <h4 class="vd-mt-6 vd-mb-3">Svelte / SvelteKit</h4>
+                    <div class="vd-code-snippet" data-collapsible data-expanded="true">
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="js">+layout.svelte</button>
+                                </div>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="js"><code>&lt;script&gt;
+  import { onMount } from 'svelte';
+  import { Vanduo } from '@vanduo-oss/framework';
+  import '@vanduo-oss/framework/dist/vanduo.css';
+
+  onMount(() =&gt; {
+    Vanduo.init();
+    return () =&gt; Vanduo.destroy();
+  });
+&lt;/script&gt;
+
+&lt;slot /&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -140,7 +229,7 @@ export default function VanduoProvider({ children }) {
     <div class="vd-mt-8" style="border-top: 1px solid var(--border-color); padding-top: 2.5rem; padding-bottom: 3rem;">
         <h4 class="vd-text-lg vd-mb-5"><i class="ph ph-arrow-circle-right"></i> What's Next?</h4>
         <div class="vd-row" style="gap: 1.25rem;">
-            <div class="vd-col-12 vd-col-md-6 vd-mb-4">
+            <div class="vd-col-12 vd-col-md-4 vd-mb-4">
                 <a href="#docs/first-layout" data-route="docs/first-layout" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
                     <div class="vd-card-body">
                         <h4 class="vd-text-md vd-mb-2">Building Your First Layout</h4>
@@ -148,11 +237,19 @@ export default function VanduoProvider({ children }) {
                     </div>
                 </a>
             </div>
-            <div class="vd-col-12 vd-col-md-6 vd-mb-4">
+            <div class="vd-col-12 vd-col-md-4 vd-mb-4">
                 <a href="#docs/esm-vs-iife" data-route="docs/esm-vs-iife" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
                     <div class="vd-card-body">
                         <h4 class="vd-text-md vd-mb-2">ESM vs IIFE vs Legacy</h4>
                         <p class="vd-text-sm vd-text-muted vd-mb-0">Understand which JavaScript module format is right for your project.</p>
+                    </div>
+                </a>
+            </div>
+            <div class="vd-col-12 vd-col-md-4 vd-mb-4">
+                <a href="#docs/troubleshooting" data-route="docs/troubleshooting" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
+                    <div class="vd-card-body">
+                        <h4 class="vd-text-md vd-mb-2">Troubleshooting</h4>
+                        <p class="vd-text-sm vd-text-muted vd-mb-0">Running into bundler or import issues? Find common fixes, DevTools techniques, and community support links.</p>
                     </div>
                 </a>
             </div>

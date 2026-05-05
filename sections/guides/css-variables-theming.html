@@ -13,7 +13,7 @@
                     <p>Vanduo's variables are layered to give you massive control with minimal effort:</p>
                     <ol class="vd-mb-4">
                         <li class="vd-mb-2"><strong>1. Theme Colors:</strong> The highest level. Defines what "Primary" or "Success" actually means.</li>
-                        <li class="vd-mb-2"><strong>2. Component Tokens:</strong> Variables scoped to specific components (e.g., <code>--btn-height</code> or <code>--card-bg</code>).</li>
+                        <li class="vd-mb-2"><strong>2. Component Tokens:</strong> Variables scoped to specific components (e.g., <code>--card-bg</code> or <code>--btn-border-radius</code>).</li>
                         <li class="vd-mb-2"><strong>3. Utility Variables:</strong> Core infrastructure like spacing steps and border radii.</li>
                     </ol>
 
@@ -125,8 +125,8 @@ html[data-theme="dark"] {
                         <tbody>
                             <tr>
                                 <td><strong>Buttons</strong></td>
-                                <td><code>--btn-height</code>, <code>--btn-border-radius</code>, <code>--btn-font-weight</code></td>
-                                <td>Size, shape, and text weight of all buttons</td>
+                                <td><code>--btn-border-radius</code>, <code>--btn-padding-y</code>, <code>--btn-padding-x</code></td>
+                                <td>Shape and internal spacing of all buttons</td>
                             </tr>
                             <tr>
                                 <td><strong>Cards</strong></td>
@@ -145,8 +145,8 @@ html[data-theme="dark"] {
                             </tr>
                             <tr>
                                 <td><strong>Modal</strong></td>
-                                <td><code>--modal-bg</code>, <code>--modal-backdrop</code>, <code>--modal-border-radius</code></td>
-                                <td>Dialog appearance and overlay</td>
+                                <td><code>--modal-bg</code>, <code>--modal-backdrop-bg</code></td>
+                                <td>Dialog background and overlay color</td>
                             </tr>
                         </tbody>
                     </table>
@@ -227,7 +227,7 @@ html[data-theme="dark"] {
   --color-primary: #6d28d9;
   --color-primary-hover: #5b21b6;
   --color-success: #059669;
-  --color-danger: #dc2626;
+  --color-error: #dc2626;
 }
 
 /* ── Typography ───────────────────────────── */
@@ -363,7 +363,7 @@ setTheme('light');</code></pre>
                     <div class="vd-row">
                         <div class="vd-col-12 vd-col-md-6 vd-mb-4">
                             <!-- Visual Demo -->
-                            <div style="--btn-border-radius: 9999px; --card-border-radius: 1.5rem; --input-border-radius: 9999px; --modal-border-radius: 1.5rem; height: 100%;">
+                            <div style="--btn-border-radius: 9999px; --card-border-radius: 1.5rem; --input-border-radius: 9999px; height: 100%;">
                                 <div class="vd-card" style="height: 100%;">
                                     <div class="vd-card-body">
                                         <h5 class="vd-mb-3">Welcome Back</h5>
@@ -388,7 +388,6 @@ setTheme('light');</code></pre>
   --btn-border-radius: 9999px;
   --card-border-radius: 1.5rem;
   --input-border-radius: 9999px;
-  --modal-border-radius: 1.5rem;
 }</code></pre>
                                     </div>
                                 </div>
@@ -444,6 +443,7 @@ setTheme('light');</code></pre>
                                     <div class="vd-code-snippet-header">
                                         <div class="vd-code-snippet-tabs" role="tablist">
                                             <button class="vd-code-snippet-tab is-active" data-lang="css">CSS</button>
+                                            <button class="vd-code-snippet-tab" data-lang="html">HTML</button>
                                         </div>
                                         <button class="vd-code-snippet-copy" aria-label="Copy code"><span class="vd-code-snippet-copy-icon"></span><span class="vd-code-snippet-copy-text">Copy</span></button>
                                     </div>
@@ -459,6 +459,24 @@ setTheme('light');</code></pre>
   --card-padding: 1rem;
   --card-border-radius: 0.375rem;
 }</code></pre>
+                                        <pre class="vd-code-snippet-pane" data-lang="html"><code><span class="code-comment">&lt;!-- Apply the class to a wrapper element --&gt;</span>
+&lt;<span class="code-tag">section</span> <span class="code-attr">class</span>=<span class="code-string">"landing-page"</span>&gt;
+  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-container"</span>&gt;
+    &lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-btn vd-btn-primary"</span>&gt;
+      <span class="code-comment">&lt;!-- Pill-shaped, green (landing-page overrides) --&gt;</span>
+      Call to Action
+    &lt;/<span class="code-tag">button</span>&gt;
+  &lt;/<span class="code-tag">div</span>&gt;
+&lt;/<span class="code-tag">section</span>&gt;
+
+&lt;<span class="code-tag">section</span> <span class="code-attr">class</span>=<span class="code-string">"dashboard"</span>&gt;
+  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-container"</span>&gt;
+    &lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-btn vd-btn-primary"</span>&gt;
+      <span class="code-comment">&lt;!-- Square, indigo (dashboard overrides) --&gt;</span>
+      View Report
+    &lt;/<span class="code-tag">button</span>&gt;
+  &lt;/<span class="code-tag">div</span>&gt;
+&lt;/<span class="code-tag">section</span>&gt;</code></pre>
                                     </div>
                                 </div>
                             </div>

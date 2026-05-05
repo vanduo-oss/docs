@@ -430,48 +430,152 @@ document.addEventListener(<span class="code-string">'lazysection:error'</span>, 
                     <h4><i class="ph ph-sparkle"></i> Real-world Patterns</h4>
                 </div>
                 <div class="vd-card-body">
-                    <div class="vd-row">
-                        <div class="vd-col-12 vd-col-md-6 vd-mb-4">
-                            <div class="vd-card">
-                                <div class="vd-card-body">
-                                    <h4><i class="ph ph-image" style="color:var(--color-primary);"></i> Lazy Images</h4>
-                                    <p class="vd-text-sm">Use <code>observe()</code> to swap <code>data-src</code> →
-                                        <code>src</code> when images enter view — native browser lazy loading without
-                                        the <code>loading="lazy"</code> attribute.</p>
+
+                    <h4 class="vd-mt-3 vd-mb-3"><i class="ph ph-image" style="color:var(--color-primary);"></i> Lazy Images</h4>
+                    <p>Swap <code>data-src</code> to <code>src</code> when images scroll into view:</p>
+                    <div class="vd-code-snippet" data-collapsible data-expanded="true">
+                        <button class="vd-code-snippet-toggle" aria-expanded="true">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                    <button class="vd-code-snippet-tab" data-lang="js">JS</button>
                                 </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- HTML: use data-src instead of src --&gt;</span>
+&lt;<span class="code-tag">img</span> <span class="code-attr">data-src</span>=<span class="code-string">"photos/landscape.jpg"</span>
+     <span class="code-attr">alt</span>=<span class="code-string">"Mountain landscape"</span>
+     <span class="code-attr">width</span>=<span class="code-string">"800"</span> <span class="code-attr">height</span>=<span class="code-string">"450"</span>
+     <span class="code-attr">style</span>=<span class="code-string">"background: var(--bg-secondary);"</span>&gt;</code></pre>
+                                <pre class="vd-code-snippet-pane" data-lang="js"><code><span class="code-comment">// JS: observe each image</span>
+document.querySelectorAll(<span class="code-string">'img[data-src]'</span>).forEach((img) =&gt; {
+  VanduoLazyLoad.observe(img, (el) =&gt; {
+    el.src = el.dataset.src;
+    el.removeAttribute(<span class="code-string">'data-src'</span>);
+  }, { rootMargin: <span class="code-string">'200px'</span> });  <span class="code-comment">// prefetch before visible</span>
+});</code></pre>
                             </div>
                         </div>
-                        <div class="vd-col-12 vd-col-md-6 vd-mb-4">
-                            <div class="vd-card">
-                                <div class="vd-card-body">
-                                    <h4><i class="ph ph-chart-bar" style="color:var(--color-success);"></i> Lazy Charts
-                                    </h4>
-                                    <p class="vd-text-sm">Initialize chart libraries only when the chart container
-                                        scrolls into view — avoids unnecessary JS execution on content users never see.
-                                    </p>
+                    </div>
+
+                    <h4 class="vd-mt-8 vd-mb-3"><i class="ph ph-chart-bar" style="color:var(--color-success);"></i> Lazy Charts</h4>
+                    <p>Initialize expensive chart libraries only when the container scrolls into view:</p>
+                    <div class="vd-code-snippet" data-collapsible data-expanded="true">
+                        <button class="vd-code-snippet-toggle" aria-expanded="true">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="js">JS</button>
                                 </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="js"><code><span class="code-keyword">const</span> chartEl = document.getElementById(<span class="code-string">'revenue-chart'</span>);
+
+VanduoLazyLoad.observe(chartEl, <span class="code-keyword">async</span> (el) =&gt; {
+  <span class="code-comment">// Only load the chart library when the user scrolls here</span>
+  <span class="code-keyword">const</span> { Chart } = <span class="code-keyword">await</span> <span class="code-function">import</span>(<span class="code-string">'chart.js'</span>);
+  <span class="code-keyword">new</span> Chart(el, {
+    type: <span class="code-string">'bar'</span>,
+    data: { <span class="code-comment">/* ... */</span> }
+  });
+});</code></pre>
                             </div>
                         </div>
-                        <div class="vd-col-12 vd-col-md-6 vd-mb-4">
-                            <div class="vd-card">
-                                <div class="vd-card-body">
-                                    <h4><i class="ph ph-rows" style="color:var(--color-info);"></i> Paginated Content
-                                    </h4>
-                                    <p class="vd-text-sm">Place a sentinel element at the bottom of a list. When it
-                                        enters view, fetch the next page and append it — infinite scroll without a
-                                        framework.</p>
+                    </div>
+
+                    <h4 class="vd-mt-8 vd-mb-3"><i class="ph ph-rows" style="color:var(--color-info);"></i> Infinite Scroll (Paginated Content)</h4>
+                    <p>Place a sentinel at the bottom of a list. When it enters view, fetch and append the next page:</p>
+                    <div class="vd-code-snippet" data-collapsible data-expanded="true">
+                        <button class="vd-code-snippet-toggle" aria-expanded="true">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                    <button class="vd-code-snippet-tab" data-lang="js">JS</button>
                                 </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">div</span> <span class="code-attr">id</span>=<span class="code-string">"post-list"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+&lt;<span class="code-tag">div</span> <span class="code-attr">id</span>=<span class="code-string">"scroll-sentinel"</span> <span class="code-attr">style</span>=<span class="code-string">"height: 1px;"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                                <pre class="vd-code-snippet-pane" data-lang="js"><code><span class="code-keyword">let</span> page = 1;
+<span class="code-keyword">const</span> sentinel = document.getElementById(<span class="code-string">'scroll-sentinel'</span>);
+
+VanduoLazyLoad.observe(sentinel, <span class="code-keyword">async</span> () =&gt; {
+  <span class="code-keyword">const</span> res = <span class="code-keyword">await</span> <span class="code-function">fetch</span>(<span class="code-string">`/api/posts?page=${page}`</span>);
+  <span class="code-keyword">const</span> posts = <span class="code-keyword">await</span> res.<span class="code-function">json</span>();
+
+  <span class="code-keyword">const</span> list = document.getElementById(<span class="code-string">'post-list'</span>);
+  posts.forEach((p) =&gt; {
+    list.insertAdjacentHTML(<span class="code-string">'beforeend'</span>,
+      <span class="code-string">`&lt;div class="vd-card vd-mb-4"&gt;&lt;div class="vd-card-body"&gt;&lt;h4&gt;${p.title}&lt;/h4&gt;&lt;p&gt;${p.excerpt}&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;`</span>
+    );
+  });
+
+  page++;
+  <span class="code-keyword">if</span> (posts.length &gt; 0) {
+    VanduoLazyLoad.observe(sentinel, <span class="code-comment">/* same callback */</span>);
+  }
+});</code></pre>
                             </div>
                         </div>
-                        <div class="vd-col-12 vd-col-md-6 vd-mb-4">
-                            <div class="vd-card">
-                                <div class="vd-card-body">
-                                    <h4><i class="ph ph-animation" style="color:var(--color-warning);"></i> Scroll
-                                        Animations</h4>
-                                    <p class="vd-text-sm">Use <code>observe()</code> to add an <code>is-visible</code>
-                                        class when elements enter view, triggering CSS transitions for fade-in,
-                                        slide-up, or reveal effects.</p>
+                    </div>
+
+                    <h4 class="vd-mt-8 vd-mb-3"><i class="ph ph-animation" style="color:var(--color-warning);"></i> Scroll Animations</h4>
+                    <p>Add a CSS class when elements enter the viewport to trigger fade-in or slide-up transitions:</p>
+                    <div class="vd-code-snippet" data-collapsible data-expanded="true">
+                        <button class="vd-code-snippet-toggle" aria-expanded="true">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="css">CSS</button>
+                                    <button class="vd-code-snippet-tab" data-lang="js">JS</button>
                                 </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="css"><code>.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}</code></pre>
+                                <pre class="vd-code-snippet-pane" data-lang="js"><code>document.querySelectorAll(<span class="code-string">'.fade-in'</span>).forEach((el) =&gt; {
+  VanduoLazyLoad.observe(el, (target) =&gt; {
+    target.classList.add(<span class="code-string">'is-visible'</span>);
+  }, { threshold: 0.15 });
+});</code></pre>
                             </div>
                         </div>
                     </div>
@@ -484,7 +588,7 @@ document.addEventListener(<span class="code-string">'lazysection:error'</span>, 
     <div class="vd-mt-8" style="border-top: 1px solid var(--border-color); padding-top: 2.5rem; padding-bottom: 3rem;">
         <h4 class="vd-text-lg vd-mb-5"><i class="ph ph-arrow-circle-right"></i> What's Next?</h4>
         <div class="vd-row" style="gap: 1.25rem;">
-            <div class="vd-col-12 vd-col-md-6 vd-mb-4">
+            <div class="vd-col-12 vd-col-md-4 vd-mb-4">
                 <a href="#docs/accessibility-essentials" data-route="docs/accessibility-essentials" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
                     <div class="vd-card-body">
                         <h4 class="vd-text-md vd-mb-2">Accessibility Essentials</h4>
@@ -492,7 +596,15 @@ document.addEventListener(<span class="code-string">'lazysection:error'</span>, 
                     </div>
                 </a>
             </div>
-            <div class="vd-col-12 vd-col-md-6 vd-mb-4">
+            <div class="vd-col-12 vd-col-md-4 vd-mb-4">
+                <a href="#docs/starter-templates" data-route="docs/starter-templates" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
+                    <div class="vd-card-body">
+                        <h4 class="vd-text-md vd-mb-2">Starter Templates</h4>
+                        <p class="vd-text-sm vd-text-muted vd-mb-0">Put lazy loading into practice with complete, production-ready templates for landing pages, dashboards, and blogs.</p>
+                    </div>
+                </a>
+            </div>
+            <div class="vd-col-12 vd-col-md-4 vd-mb-4">
                 <a href="#docs/utilities-cheat-sheet" data-route="docs/utilities-cheat-sheet" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
                     <div class="vd-card-body">
                         <h4 class="vd-text-md vd-mb-2">Utilities Cheat Sheet</h4>

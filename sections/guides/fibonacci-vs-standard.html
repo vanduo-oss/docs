@@ -18,7 +18,7 @@
                         <span style="color: var(--color-success);">3</span> &middot;
                         <span style="color: var(--color-primary);">5</span> &middot;
                         <span style="color: var(--color-warning);">8</span> &middot;
-                        <span style="color: var(--color-danger);">13</span> &middot;
+                        <span style="color: var(--color-error);">13</span> &middot;
                         <span style="color: var(--color-text-muted);">21</span> &middot;
                         <span style="color: var(--color-text-muted);">34</span> &middot; …
                     </div>
@@ -97,7 +97,7 @@
 
                     <h4 class="vd-mt-5 vd-mb-3">4-Column Fibonacci (1:2:3:5)</h4>
                     <div class="vd-row-fib-4 vd-mb-4" style="gap: 4px;">
-                        <div style="background: var(--color-danger); color: white; padding: 1rem; border-radius: var(--radius-sm); text-align: center;">1</div>
+                        <div style="background: var(--color-error); color: white; padding: 1rem; border-radius: var(--radius-sm); text-align: center;">1</div>
                         <div style="background: var(--color-warning); color: white; padding: 1rem; border-radius: var(--radius-sm); text-align: center;">2</div>
                         <div style="background: var(--color-info); color: white; padding: 1rem; border-radius: var(--radius-sm); text-align: center;">3</div>
                         <div style="background: var(--color-primary); color: white; padding: 1rem; border-radius: var(--radius-sm); text-align: center;">5</div>
@@ -168,6 +168,41 @@
                         <div>
                             <strong>Pro tip:</strong> Fibonacci layouts are great for <strong>content-heavy pages</strong> — blog layouts, article pages, portfolios. The widest column naturally draws the eye to your main content.
                         </div>
+                    </div>
+
+                    <h4 class="vd-mt-6 vd-mb-3">Fibonacci Layout Reference</h4>
+                    <p class="vd-mb-3">The <code>-alt</code> suffix means "alternative starting point" — it shifts the sequence to larger numbers for more dramatic proportions:</p>
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped vd-text-sm">
+                            <thead>
+                                <tr>
+                                    <th>Class</th>
+                                    <th>Columns</th>
+                                    <th>Ratio</th>
+                                    <th>Use Case</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>vd-row-fib-3</code></td>
+                                    <td><code>fib-2</code> + <code>fib-3</code> + <code>fib-5</code></td>
+                                    <td>2:3:5 (20% / 30% / 50%)</td>
+                                    <td>Sidebar + secondary + main</td>
+                                </tr>
+                                <tr>
+                                    <td><code>vd-row-fib-3-alt</code></td>
+                                    <td><code>fib-3</code> + <code>fib-5</code> + <code>fib-8</code></td>
+                                    <td>3:5:8 (~19% / ~31% / ~50%)</td>
+                                    <td>More dramatic hierarchy — bigger gap between smallest and largest</td>
+                                </tr>
+                                <tr>
+                                    <td><code>vd-row-fib-4</code></td>
+                                    <td><code>fib-1</code> + <code>fib-2</code> + <code>fib-3</code> + <code>fib-5</code></td>
+                                    <td>1:2:3:5 (~9% / ~18% / ~27% / ~45%)</td>
+                                    <td>Four-column layout with strong visual flow</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

@@ -164,7 +164,7 @@
                             </div>
                             <div class="vd-code-snippet-body">
                                 <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Add these before &lt;/body&gt; --&gt;</span>
-&lt;<span class="code-tag">script</span> <span class="code-attr">src</span>=<span class="code-string">"https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.3.7/dist/vanduo.min.js"</span>&gt;&lt;/<span class="code-tag">script</span>&gt;
+&lt;<span class="code-tag">script</span> <span class="code-attr">src</span>=<span class="code-string">"https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.3.8/dist/vanduo.min.js"</span>&gt;&lt;/<span class="code-tag">script</span>&gt;
 &lt;<span class="code-tag">script</span>&gt;
     // Vanduo is now available as a global object
     Vanduo.init();
@@ -195,7 +195,7 @@
                             </ul>
                         </div>
                         <div class="vd-col-6">
-                            <p><strong><i class="ph ph-x-circle" style="color: var(--color-danger);"></i> Cons:</strong>
+                            <p><strong><i class="ph ph-x-circle" style="color: var(--color-error);"></i> Cons:</strong>
                             </p>
                             <ul>
                                 <li>Loads the entire library (no tree-shaking)</li>
@@ -305,7 +305,7 @@ Vanduo.components.toast.<span class="code-function">show</span>({
                             </ul>
                         </div>
                         <div class="vd-col-6">
-                            <p><strong><i class="ph ph-x-circle" style="color: var(--color-danger);"></i> Cons:</strong>
+                            <p><strong><i class="ph ph-x-circle" style="color: var(--color-error);"></i> Cons:</strong>
                             </p>
                             <ul>
                                 <li>Needs a bundler for best results</li>
@@ -328,10 +328,15 @@ Vanduo.components.toast.<span class="code-function">show</span>({
                             class="ph ph-clock-counter-clockwise"></i> CJS — The Legacy Path</h4>
                 </div>
                 <div class="vd-card-body">
-                    <p><strong>Best for:</strong> Node.js environments, server-side rendering (SSR), older bundlers that
-                        don't support ESM, legacy codebases being gradually modernized.</p>
-                    <div class="vd-code-snippet" data-collapsible data-expanded="true">
-                        <button class="vd-code-snippet-toggle" aria-expanded="true">
+                    <div class="vd-alert vd-alert-warning vd-mb-4">
+                        <i class="ph ph-warning"></i>
+                        <div>
+                            <strong>Niche use case:</strong> CJS is for Node.js environments and server-side rendering only. It does not work in browsers. If you're building a client-side site, skip this section — use IIFE or ESM instead.
+                        </div>
+                    </div>
+                    <p><strong>Best for:</strong> Node.js SSR, older bundlers that don't support ESM.</p>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
                             <span class="vd-code-snippet-toggle-icon"></span>
                             <span>View Code</span>
                         </button>
@@ -346,44 +351,9 @@ Vanduo.components.toast.<span class="code-function">show</span>({
                                 </button>
                             </div>
                             <div class="vd-code-snippet-body">
-                                <pre class="vd-code-snippet-pane is-active" data-lang="js"><code><span class="code-comment">// CommonJS / require() syntax</span>
-<span class="code-keyword">const</span> { Vanduo } = <span class="code-function">require</span>(<span class="code-string">'@vanduo-oss/framework'</span>);
-
-<span class="code-comment">// Or point directly to the CJS file:</span>
-<span class="code-keyword">const</span> { Vanduo } = <span class="code-function">require</span>(<span class="code-string">'./dist/vanduo.cjs.js'</span>);
-
+                                <pre class="vd-code-snippet-pane is-active" data-lang="js"><code><span class="code-keyword">const</span> { Vanduo } = <span class="code-function">require</span>(<span class="code-string">'@vanduo-oss/framework'</span>);
 Vanduo.<span class="code-function">init</span>();</code></pre>
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="vd-alert vd-alert-warning vd-mt-4">
-                        <i class="ph ph-warning"></i>
-                        <div>
-                            <strong>Watch out:</strong> CJS does not work in browsers without a bundler. If you're
-                            building a client-side website, use IIFE or ESM instead. CJS is primarily for server-side
-                            code and build pipelines.
-                        </div>
-                    </div>
-
-                    <div class="vd-row vd-mt-5">
-                        <div class="vd-col-6">
-                            <p><strong><i class="ph ph-check-circle" style="color: var(--color-success);"></i>
-                                    Pros:</strong></p>
-                            <ul>
-                                <li>Works with Node.js natively</li>
-                                <li>Compatible with older tooling</li>
-                                <li>Synchronous loading</li>
-                            </ul>
-                        </div>
-                        <div class="vd-col-6">
-                            <p><strong><i class="ph ph-x-circle" style="color: var(--color-danger);"></i> Cons:</strong>
-                            </p>
-                            <ul>
-                                <li>No tree-shaking</li>
-                                <li>Not browser-native</li>
-                                <li>Being superseded by ESM in Node.js</li>
-                            </ul>
                         </div>
                     </div>
                 </div>
