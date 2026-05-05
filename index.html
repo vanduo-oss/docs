@@ -57,6 +57,9 @@
                 cssHref: basePath + '/vanduo.min.css',
                 jsSrc: basePath + '/vanduo.min.js'
             };
+            window.__VANDUO_TEMPLATES_BASE_URL = (params.get('vanduo-templates')
+                || (isLocalPreview ? 'http://localhost:8788' : 'https://templates.vanduo.dev'))
+                .replace(/\/+$/, '');
             document.documentElement.setAttribute('data-framework-assets', mode);
         })();
     </script>
@@ -101,7 +104,22 @@
     </script>
 
     <link rel="stylesheet" href="css/app.css">
-    <link rel="stylesheet" href="templates/templates.css">
+    <link id="vanduo-templates-css" rel="stylesheet">
+    <script>
+        (function () {
+            var templatesCss = document.getElementById('vanduo-templates-css');
+            if (!templatesCss) return;
+            var isNestedDocsPath = /^\/docs(\/|$)/.test(window.location.pathname || '/');
+            var primaryHref = isNestedDocsPath ? './docs/templates/templates.css' : './templates/templates.css';
+            var fallbackHref = isNestedDocsPath ? './templates/templates.css' : './docs/templates/templates.css';
+            templatesCss.setAttribute('href', primaryHref);
+            templatesCss.addEventListener('error', function handleError() {
+                if (templatesCss.getAttribute('href') !== fallbackHref) {
+                    templatesCss.setAttribute('href', fallbackHref);
+                }
+            });
+        })();
+    </script>
 </head>
 
 <body>
@@ -135,7 +153,6 @@
                 <ul class="vd-navbar-nav">
                     <li><a href="#home" class="vd-nav-link" data-route="home">Home</a></li>
                     <li><a href="#docs" class="vd-nav-link" data-route="docs">Docs</a></li>
-                    <li><a href="#templates" class="vd-nav-link" data-route="templates">Templates</a></li>
                 </ul>
             </div>
         </div>
@@ -154,7 +171,8 @@
                     <aside class="vd-col-12 vd-col-lg-2 doc-sidebar">
                         <div class="doc-water-toggle-wrapper" aria-label="Docs mode switch">
                             <button type="button" class="vd-morph doc-water-toggle" id="doc-water-toggle"
-                                data-vd-morph aria-pressed="false" aria-label="Switch to Guides">
+                                data-vd-morph data-tooltip="Click for Guides" data-tooltip-placement="bottom"
+                                aria-pressed="false" aria-label="Switch to Guides">
                                 <span class="vd-morph-content vd-morph-current" aria-hidden="true">
                                     <i class="doc-water-icon ph ph-cube"></i>
                                     <span class="doc-water-label">Components</span>
@@ -199,7 +217,6 @@
                         <ul class="vd-footer-links">
                             <li><a href="#home" data-route="home">Home</a></li>
                             <li><a href="#docs" data-route="docs">Docs</a></li>
-                            <li><a href="#templates" data-route="templates">Templates</a></li>
                             <li><a href="#changelog" data-route="changelog">Changelog</a></li>
                             <li><a href="#about" data-route="about">About</a></li>
                         </ul>

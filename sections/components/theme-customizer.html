@@ -11,6 +11,12 @@
         </div>
         <div class="vd-card-body">
             <p class="vd-mb-5">Try all the theme options below. Changes apply immediately:</p>
+            <div class="vd-mb-5">
+                <button type="button" class="vd-theme-customizer-trigger" data-theme-customizer-trigger aria-label="Open theme customizer">
+                    <i class="ph ph-paint-roller"></i>
+                </button>
+                <span class="vd-text-sm vd-text-muted vd-ml-2">Open the same dropdown panel used in the navbar.</span>
+            </div>
             
             <!-- Inline Theme Customizer -->
             <div class="theme-customizer-inline">
@@ -84,17 +90,10 @@
                     <label class="customizer-label vd-d-block vd-mb-3 vd-text-sm vd-font-semibold">Font Family</label>
                     <select class="vd-input vd-input-sm font-select" style="max-width: 250px;">
                         <option value="jetbrains-mono">JetBrains Mono</option>
-                        <option value="inter">Inter</option>
-                        <option value="open-sans">Open Sans</option>
-                        <option value="roboto">Roboto</option>
-                        <option value="lato">Lato</option>
+                        <option value="system">System Default</option>
                         <option value="ubuntu">Ubuntu</option>
-                        <option value="rubik">Rubik</option>
-                        <option value="titillium-web">Titillium Web</option>
-                        <option value="fira-sans">Fira Sans</option>
-                        <option value="source-sans-3">Source Sans 3</option>
-                        <option value="ibm-plex-sans">IBM Plex Sans</option>
-                        <option value="noto-sans">Noto Sans</option>
+                        <option value="lato">Lato</option>
+                        <option value="open-sans">Open Sans</option>
                     </select>
                 </div>
             </div>
@@ -158,8 +157,8 @@
                             Zinc, Neutral, Stone)</li>
                         <li><strong>Border Radius:</strong> 5 presets (0, 0.125rem, 0.25rem,
                             0.375rem, 0.5rem)</li>
-                        <li><strong>Font Family:</strong> 10 bundled fonts including JetBrains Mono
-                            (default) plus Google Fonts collection</li>
+                        <li><strong>Font Family:</strong> 5 curated options (JetBrains Mono, System,
+                            Ubuntu, Lato, Open Sans)</li>
                         <li><strong>Color Mode:</strong> System (default), Dark, or Light</li>
                     </ul>
                     <p class="vd-mt-5 vd-text-sm vd-text-muted">All preferences are persisted to
@@ -257,7 +256,7 @@
                                 </tr>
                                 <tr>
                                     <td><code>vanduo-font-preference</code></td>
-                                    <td><code>jetbrains-mono</code></td>
+                                    <td><code>lato</code></td>
                                     <td>Font family</td>
                                 </tr>
                                 <tr>

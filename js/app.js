@@ -22,6 +22,48 @@ if (typeof window.Vanduo === 'undefined') {
 
     // Extend theme customizer with site-specific fonts and override defaults
     if (window.ThemeCustomizer) {
+        var docsFontOptions = {
+            'jetbrains-mono': { name: 'JetBrains Mono', family: "'JetBrains Mono', monospace" },
+            'system': { name: 'System Default', family: null },
+            'ubuntu': { name: 'Ubuntu', family: "'Ubuntu', sans-serif" },
+            'lato': { name: 'Lato', family: "'Lato', sans-serif" },
+            'open-sans': { name: 'Open Sans', family: "'Open Sans', sans-serif" }
+        };
+        var preInitLegacyFontMap = {
+            'inter': 'open-sans',
+            'source-sans': 'open-sans',
+            'source-sans-3': 'open-sans',
+            'fira-sans': 'open-sans',
+            'ibm-plex': 'open-sans',
+            'ibm-plex-sans': 'open-sans',
+            'rubik': 'open-sans',
+            'titillium-web': 'open-sans',
+            'roboto': 'lato',
+            'noto-sans': 'open-sans',
+            'google-sans': 'open-sans'
+        };
+        try {
+            var storedFontBeforeInit = localStorage.getItem('vanduo-font-preference');
+            if (storedFontBeforeInit) {
+                var normalizedBeforeInit = String(storedFontBeforeInit).trim().toLowerCase();
+                if (Object.prototype.hasOwnProperty.call(preInitLegacyFontMap, normalizedBeforeInit)) {
+                    normalizedBeforeInit = preInitLegacyFontMap[normalizedBeforeInit];
+                }
+                if (!Object.prototype.hasOwnProperty.call(docsFontOptions, normalizedBeforeInit)) {
+                    normalizedBeforeInit = 'lato';
+                }
+                if (normalizedBeforeInit !== storedFontBeforeInit) {
+                    localStorage.setItem('vanduo-font-preference', normalizedBeforeInit);
+                }
+                if (normalizedBeforeInit === 'system') {
+                    document.documentElement.removeAttribute('data-font');
+                } else {
+                    document.documentElement.setAttribute('data-font', normalizedBeforeInit);
+                }
+            }
+        } catch (_e) {
+            /* ignore */
+        }
         window.ThemeCustomizer.applyTheme = function (mode) {
             var nextMode = this.THEME_MODES.includes(mode) ? mode : this.DEFAULTS.THEME;
 
@@ -55,12 +97,7 @@ if (typeof window.Vanduo === 'undefined') {
             this.dispatchEvent('mode-change', { mode: nextMode });
         };
 
-        Object.assign(window.ThemeCustomizer.FONT_OPTIONS, {
-            'google-sans': { name: 'Google Sans', family: "'Google Sans', sans-serif" },
-            'roboto': { name: 'Roboto', family: "'Roboto', sans-serif" },
-            'lato': { name: 'Lato', family: "'Lato', sans-serif" },
-            'noto-sans': { name: 'Noto Sans', family: "'Noto Sans', sans-serif" }
-        });
+        window.ThemeCustomizer.FONT_OPTIONS = docsFontOptions;
         Object.assign(window.ThemeCustomizer.DEFAULTS, {
             FONT: 'lato',
             PRIMARY_LIGHT: 'black',
@@ -332,6 +369,7 @@ function settleDocScrollLoader(sectionId) {
 
     var deadline = Date.now() + 3200;
     var stableFrames = 0;
+    var stableSince = 0;
     function checkScrollCompletion() {
         if (!docScrollLoaderEl || docScrollLoaderTargetId !== sectionId) {
             releaseGuardIfMatching();
@@ -356,20 +394,23 @@ function settleDocScrollLoader(sectionId) {
             target.scrollIntoView({ behavior: 'instant', block: 'start' });
             targetTop = target.getBoundingClientRect().top;
             stableFrames = 0;
+            stableSince = 0;
         }
         var reachedTarget = targetTop <= (SCROLL_SPY_OFFSET + 10) && targetTop >= -4;
         if (reachedTarget) {
-            // Require a couple of stable frames so late layout shifts
-            // (icon font swap, lazy demo init) get one more correction pass
-            // before we tear the loader down and release the guard.
+            // Require a short stable window so late layout shifts
+            // (icon font swap, lazy demo init, preloaded demo expansion) get
+            // another correction pass before scroll-spy can rewrite the URL.
+            if (!stableSince) stableSince = Date.now();
             stableFrames += 1;
-            if (stableFrames >= 2) {
+            if (stableFrames >= 2 && Date.now() - stableSince >= 900) {
                 hideDocScrollLoader();
                 releaseGuardIfMatching();
                 return;
             }
         } else {
             stableFrames = 0;
+            stableSince = 0;
         }
         if (Date.now() >= deadline) {
             hideDocScrollLoader();
@@ -567,6 +608,7 @@ function filterSidebarNav(query) {
 /* ── Docs mode toggle state ───────────────────── */
 
 var _toggleMorphing = false;
+var _pendingDocModeTab = null;
 
 function _getMorphDurationMs(el) {
     var duration = 750;
@@ -587,6 +629,14 @@ function _setToggleContent(el, tabKey) {
     if (label) label.textContent = isGuides ? 'Guides' : 'Components';
 }
 
+function _getToggleActionLabel(tabKey) {
+    return tabKey === 'guides' ? 'Switch to Components' : 'Switch to Guides';
+}
+
+function _getToggleTooltipText(tabKey) {
+    return tabKey === 'guides' ? 'Click for Components' : 'Click for Guides';
+}
+
 /** Keep .vd-morph-current before .vd-morph-next in the tree so flattened text order matches the visible state. */
 function _orderDocWaterToggleLayers(toggle) {
     if (!toggle) return;
@@ -604,9 +654,18 @@ function setActiveDocMode(tabKey) {
 
     var isGuides = tabKey === 'guides';
     toggle.setAttribute('aria-pressed', String(isGuides));
-    toggle.setAttribute('aria-label', isGuides ? 'Switch to Components' : 'Switch to Guides');
+    toggle.setAttribute('aria-label', _getToggleActionLabel(tabKey));
+    var tooltipText = _getToggleTooltipText(tabKey);
+    toggle.setAttribute('data-tooltip', tooltipText);
+    if (window.VanduoTooltips && typeof window.VanduoTooltips.update === 'function') {
+        window.VanduoTooltips.update(toggle, tooltipText);
+    }
 
-    if (_toggleMorphing) return;
+    if (_toggleMorphing) {
+        _pendingDocModeTab = tabKey;
+        return;
+    }
+    _pendingDocModeTab = null;
 
     var current = toggle.querySelector('.vd-morph-current');
     var next = toggle.querySelector('.vd-morph-next');
@@ -654,10 +713,55 @@ function showView(view) {
     currentView = view;
 }
 
+function initTemplatesPage(templateSlug) {
+    var root = document.getElementById('templates');
+    if (!root) return;
+
+    rewriteTemplatePreviewLinks(root);
+
+    var gallery = root.querySelector('[data-template-view="gallery"]');
+    var details = Array.from(root.querySelectorAll('[data-template-detail]'));
+    var hero = root.querySelector('.templates-hero');
+    var activeDetail = templateSlug
+        ? details.find(function (detail) {
+            return detail.getAttribute('data-template-detail') === templateSlug;
+        })
+        : null;
+
+    var inDetail = Boolean(activeDetail);
+    if (gallery) gallery.hidden = inDetail;
+    if (hero) hero.classList.toggle('is-collapsed', inDetail);
+    details.forEach(function (detail) {
+        detail.hidden = detail !== activeDetail;
+    });
+
+    if (activeDetail) {
+        var title = activeDetail.querySelector('h2');
+        if (title) setDocumentTitle(title.textContent + ' Template');
+        requestAnimationFrame(function () {
+            activeDetail.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            var focusTarget = activeDetail.querySelector('.template-back-link') || activeDetail;
+            focusTarget.focus({ preventScroll: true });
+        });
+    }
+}
+
+function rewriteTemplatePreviewLinks(root) {
+    var configuredBase = window.__VANDUO_TEMPLATES_BASE_URL || 'https://templates.vanduo.dev';
+    var base = String(configuredBase).replace(/\/+$/, '');
+    root.querySelectorAll('a[href^="https://templates.vanduo.dev/"]').forEach(function (link) {
+        var sourcePath = link.getAttribute('href').replace('https://templates.vanduo.dev', '');
+        link.href = base + sourcePath;
+    });
+}
+
 /* ── Page loading (Home / About / Changelog) ── */
-async function loadPage(pageId) {
+async function loadPage(pageId, options = {}) {
     hideDocScrollLoader();
     if (currentView === pageId && document.getElementById(pageId)) {
+        if (pageId === 'templates') {
+            initTemplatesPage(options.templateSlug || null);
+        }
         window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
     }
@@ -684,6 +788,9 @@ async function loadPage(pageId) {
         wireRouteLinks(container);
         initChangelogPagination(pageId, container);
         initHexGridDemo();
+        if (pageId === 'templates') {
+            initTemplatesPage(options.templateSlug || null);
+        }
     } catch (err) {
         console.error(err);
         container.innerHTML = '<div class="vd-alert vd-alert-error" style="margin: 2rem;">Failed to load page. Check console.</div>';
@@ -705,10 +812,7 @@ async function preloadSectionsBefore(tabKey, targetSectionId, options = {}) {
         }
     }
 
-    if (!pendingIds.length) {
-        setupInfiniteScroll();
-        return;
-    }
+    if (!pendingIds.length) return;
 
     var cursor = 0;
     var workerCount = Math.min(SECTION_PRELOAD_CONCURRENCY, pendingIds.length);
@@ -722,7 +826,31 @@ async function preloadSectionsBefore(tabKey, targetSectionId, options = {}) {
     }
 
     await Promise.all(Array.from({ length: workerCount }, worker));
-    setupInfiniteScroll();
+}
+
+function waitForLoadingSection(sectionId, signal, timeoutMs = 5000) {
+    if (loadedSections.has(sectionId)) return Promise.resolve(true);
+    if (!loadingSections.has(sectionId)) return Promise.resolve(false);
+
+    var deadline = Date.now() + timeoutMs;
+    return new Promise(function (resolve) {
+        function check() {
+            if (signal && signal.aborted) {
+                resolve(false);
+                return;
+            }
+            if (loadedSections.has(sectionId)) {
+                resolve(true);
+                return;
+            }
+            if (!loadingSections.has(sectionId) || Date.now() >= deadline) {
+                resolve(false);
+                return;
+            }
+            window.requestAnimationFrame(check);
+        }
+        window.requestAnimationFrame(check);
+    });
 }
 
 async function loadSection(sectionId, autoScroll = true, options = {}) {
@@ -780,6 +908,21 @@ async function loadSection(sectionId, autoScroll = true, options = {}) {
     }
 
     if (loadingSections.has(sectionId)) {
+        if (autoScroll) {
+            var becameAvailable = await waitForLoadingSection(sectionId, signal);
+            if (signal && signal.aborted) return;
+            if (becameAvailable) {
+                var pendingTarget = document.getElementById(sectionId);
+                if (pendingTarget) pendingTarget.scrollIntoView({ behavior: 'instant', block: 'start' });
+                settleDocScrollLoader(sectionId);
+                setActiveNavLink(sectionId);
+                setDocumentTitle(meta.section.title);
+                if (window.history && window.history.replaceState) {
+                    window.history.replaceState(null, '', '#docs/' + sectionId);
+                }
+                activeDocSectionId = sectionId;
+            }
+        }
         return;
     }
     loadingSections.add(sectionId);
@@ -1304,6 +1447,7 @@ function parseHash(hash) {
     if (h === 'about') return { view: 'about' };
     if (h === 'changelog') return { view: 'changelog' };
     if (h === 'templates') return { view: 'templates' };
+    if (h.startsWith('templates/')) return { view: 'templates', template: h.slice(10).split('/')[0] };
     if (h === 'kilo-oss') return { view: 'kilo-oss' };
     if (h === 'docs') return { view: 'docs-landing' };
     if (h === 'docs/components') return { view: 'docs', tab: 'components', section: null };
@@ -1335,7 +1479,7 @@ async function handleRoute() {
     var parsed = parseHash(location.hash);
 
     if (parsed.view === 'home' || parsed.view === 'about' || parsed.view === 'changelog' || parsed.view === 'templates' || parsed.view === 'kilo-oss' || parsed.view === 'docs-landing') {
-        await loadPage(parsed.view);
+        await loadPage(parsed.view, { templateSlug: parsed.template });
         if (parsed.view === 'docs-landing') {
             setActiveNavbarLink('docs');
         }
@@ -1500,17 +1644,27 @@ if (docWaterToggle) {
         if (next) _setToggleContent(next, destTab);
 
         _toggleMorphing = true;
+        _pendingDocModeTab = destTab;
 
         var tabRoutes = { components: 'docs/components', guides: 'docs/guides' };
         navigate(tabRoutes[destTab] || 'docs/components');
 
         var morphDuration = _getMorphDurationMs(toggle);
-        // Defer the final sync to the next frame so VanduoMorph has already swapped current/next.
+        // Wait until VanduoMorph actually finishes swapping layers to avoid
+        // a timer-order race that can momentarily re-apply the opposite label.
+        function finalizeWhenMorphSettles() {
+            if (toggle.classList.contains('is-morphing')) {
+                requestAnimationFrame(finalizeWhenMorphSettles);
+                return;
+            }
+            _toggleMorphing = false;
+            var routeTab = parseHash(location.hash).tab;
+            var finalTab = _pendingDocModeTab || routeTab || currentTab || destTab;
+            setActiveDocMode(finalTab);
+        }
+
         setTimeout(function () {
-            requestAnimationFrame(function () {
-                _toggleMorphing = false;
-                setActiveDocMode(destTab);
-            });
+            requestAnimationFrame(finalizeWhenMorphSettles);
         }, morphDuration);
     }, true);
 }
@@ -1518,23 +1672,59 @@ if (docWaterToggle) {
 /* ── Track Water Morph wrapper height for sticky sidebar (--doc-tabs-height) ── */
 (function () {
     var wrapper = document.querySelector('.doc-water-toggle-wrapper');
+    var sidebar = document.querySelector('.doc-sidebar');
     if (!wrapper) {
         document.documentElement.style.setProperty('--doc-tabs-height', '0px');
+        document.documentElement.style.setProperty('--doc-mobile-controls-height', '0px');
         return;
     }
+
+    function getVisibleOuterHeight(el) {
+        if (!el) return 0;
+        var style = getComputedStyle(el);
+        if (style.display === 'none' || style.visibility === 'hidden') return 0;
+        var marginTop = parseFloat(style.marginTop) || 0;
+        var marginBottom = parseFloat(style.marginBottom) || 0;
+        return el.offsetHeight + marginTop + marginBottom;
+    }
+
     var updateHeightVar = function () {
         var filter = document.querySelector('.doc-sidebar-filter');
+        var tocToggle = document.querySelector('.doc-sidebar-toggle');
         var gapPx = 0;
+
         if (filter) {
             gapPx = parseFloat(getComputedStyle(filter).marginTop) || 0;
         }
+
         document.documentElement.style.setProperty('--doc-tabs-height',
             (wrapper.offsetHeight + gapPx) + 'px');
+
+        if (!window.matchMedia('(max-width: 991px)').matches) {
+            document.documentElement.style.setProperty('--doc-mobile-controls-height', '0px');
+            return;
+        }
+
+        var controlsHeight = getVisibleOuterHeight(wrapper)
+            + getVisibleOuterHeight(filter)
+            + getVisibleOuterHeight(tocToggle);
+
+        document.documentElement.style.setProperty('--doc-mobile-controls-height',
+            controlsHeight + 'px');
     };
+
     var ro = new ResizeObserver(function () {
         updateHeightVar();
     });
     ro.observe(wrapper);
+    if (sidebar) ro.observe(sidebar);
+    var filterEl = document.querySelector('.doc-sidebar-filter');
+    var tocToggleEl = document.querySelector('.doc-sidebar-toggle');
+    if (filterEl) ro.observe(filterEl);
+    if (tocToggleEl) ro.observe(tocToggleEl);
+
+    window.addEventListener('resize', updateHeightVar, { passive: true });
+    window.addEventListener('hashchange', updateHeightVar);
     updateHeightVar();
 })();
 
@@ -1725,6 +1915,60 @@ function applyTheme(theme) {
     localStorage.setItem('vanduo-theme-preference', theme);
 }
 
+var SUPPORTED_CUSTOMIZER_FONTS = {
+    'jetbrains-mono': true,
+    'system': true,
+    'ubuntu': true,
+    'lato': true,
+    'open-sans': true
+};
+
+var LEGACY_CUSTOMIZER_FONT_MAP = {
+    'inter': 'open-sans',
+    'source-sans': 'open-sans',
+    'source-sans-3': 'open-sans',
+    'fira-sans': 'open-sans',
+    'ibm-plex': 'open-sans',
+    'ibm-plex-sans': 'open-sans',
+    'rubik': 'open-sans',
+    'titillium-web': 'open-sans',
+    'roboto': 'lato',
+    'noto-sans': 'open-sans',
+    'google-sans': 'open-sans',
+    'zen-dots': 'open-sans'
+};
+
+function normalizeCustomizerFontKey(fontKey) {
+    var key = String(fontKey || '').trim().toLowerCase();
+    if (!key) return 'lato';
+    if (Object.prototype.hasOwnProperty.call(LEGACY_CUSTOMIZER_FONT_MAP, key)) {
+        key = LEGACY_CUSTOMIZER_FONT_MAP[key];
+    }
+    if (Object.prototype.hasOwnProperty.call(SUPPORTED_CUSTOMIZER_FONTS, key)) {
+        return key;
+    }
+    return 'lato';
+}
+
+function applyCustomizerFontPreference(fontKey) {
+    var normalized = normalizeCustomizerFontKey(fontKey);
+    if (window.ThemeCustomizer && typeof window.ThemeCustomizer.applyFont === 'function') {
+        window.ThemeCustomizer.applyFont(normalized);
+        if (typeof window.ThemeCustomizer.updateUI === 'function') {
+            window.ThemeCustomizer.updateUI();
+        }
+        return normalized;
+    }
+
+    if (normalized === 'system') {
+        document.documentElement.removeAttribute('data-font');
+    } else {
+        document.documentElement.setAttribute('data-font', normalized);
+    }
+    localStorage.setItem('vanduo-font-preference', normalized);
+    return normalized;
+}
+
 /** Copy legacy demo keys into framework storage keys once (radius/font). */
 function migrateLegacyCustomizerDemoStorage() {
     try {
@@ -1734,32 +1978,36 @@ function migrateLegacyCustomizerDemoStorage() {
         if (!localStorage.getItem('vanduo-font-preference') && localStorage.getItem('vanduo-font-family')) {
             localStorage.setItem('vanduo-font-preference', localStorage.getItem('vanduo-font-family'));
         }
+        var storedFont = localStorage.getItem('vanduo-font-preference');
+        if (storedFont) {
+            var normalizedFont = normalizeCustomizerFontKey(storedFont);
+            if (normalizedFont !== storedFont) {
+                localStorage.setItem('vanduo-font-preference', normalizedFont);
+            }
+            if (normalizedFont === 'system') {
+                document.documentElement.removeAttribute('data-font');
+            } else {
+                document.documentElement.setAttribute('data-font', normalizedFont);
+            }
+        }
     } catch (_e) {
         /* ignore */
     }
 }
 
 // Theme Customizer Demo - Font Family
+var isFontSelectListenerInitialized = false;
 function initFontSelectListener() {
-    var fontSelect = document.querySelector('.font-select');
-    if (fontSelect) {
-        try {
-            var storedFont = localStorage.getItem('vanduo-font-preference');
-            if (storedFont) {
-                fontSelect.value = storedFont;
-            }
-        } catch (_e) {
-            /* ignore */
-        }
-        fontSelect.addEventListener('change', function() {
-            var font = this.value;
-            if (font) {
-                document.documentElement.setAttribute('data-font', font);
-                localStorage.setItem('vanduo-font-preference', font);
-                updateCustomizerDemoState();
-            }
-        });
-    }
+    if (isFontSelectListenerInitialized) return;
+    isFontSelectListenerInitialized = true;
+
+    document.addEventListener('change', function (e) {
+        var fontSelect = e.target && e.target.closest ? e.target.closest('.font-select') : null;
+        if (!fontSelect) return;
+        var normalizedFont = applyCustomizerFontPreference(fontSelect.value);
+        fontSelect.value = normalizedFont;
+        updateCustomizerDemoState();
+    });
 }
 
 // Update visual state of customizer demo buttons
@@ -1805,17 +2053,26 @@ function updateCustomizerDemoState() {
     // Update font select
     var fontSelect = document.querySelector('.font-select');
     if (fontSelect) {
-        var font = html.getAttribute('data-font') || 'jetbrains-mono';
+        var font = normalizeCustomizerFontKey(html.getAttribute('data-font') || localStorage.getItem('vanduo-font-preference') || 'lato');
         fontSelect.value = font;
     }
 }
 
-// Initialize customizer demo on page load
-document.addEventListener('DOMContentLoaded', function() {
+var isCustomizerDemoBootstrapped = false;
+function bootstrapCustomizerDemo() {
+    if (isCustomizerDemoBootstrapped) return;
+    isCustomizerDemoBootstrapped = true;
     migrateLegacyCustomizerDemoStorage();
     initFontSelectListener();
     updateCustomizerDemoState();
-});
+}
+
+// Initialize customizer demo regardless of dynamic script load timing.
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bootstrapCustomizerDemo);
+} else {
+    bootstrapCustomizerDemo();
+}
 
 document.addEventListener('draggable:drop', function (e) {
     // Draggable: Drop Zone Demo

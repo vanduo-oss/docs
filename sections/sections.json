@@ -21,11 +21,6 @@
       "file": "docs-landing.html"
     },
     {
-      "id": "templates",
-      "title": "Templates",
-      "file": "templates.html"
-    },
-    {
       "id": "kilo-oss",
       "title": "Kilo OSS",
       "file": "kilo-oss.html"
@@ -342,7 +337,7 @@
             "sections": [
               {
                 "id": "vd-hex",
-                "title": "vd-hex Grid",
+                "title": "Hex Grid",
                 "file": "canvas/vd-hex.html",
                 "icon": "ph-hexagon",
                 "keywords": [
@@ -794,24 +789,6 @@
                 "framework",
                 "integration",
                 "spa"
-              ]
-            },
-            {
-              "id": "starter-templates",
-              "title": "Starter Templates",
-              "file": "guides/starter-templates.html",
-              "icon": "ph-files",
-              "keywords": [
-                "template",
-                "starter",
-                "boilerplate",
-                "landing page",
-                "dashboard",
-                "blog",
-                "auth",
-                "login",
-                "signup",
-                "example"
               ]
             },
             {

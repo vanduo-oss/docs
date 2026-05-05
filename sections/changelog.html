@@ -21,9 +21,134 @@
                 <header class="version-header">
                     <span class="vd-badge vd-badge-primary" style="font-size: 1rem; padding: 0.5rem 1rem;">v1.3.8</span>
                     <span style="color: var(--text-secondary); font-size: 0.95rem;">
-                        <i class="ph ph-calendar mr-1"></i>April 18, 2026
+                        <i class="ph ph-calendar mr-1"></i>May 5, 2026
                     </span>
                     <span class="vd-badge vd-badge-info" style="font-size: 0.75rem;">Latest</span>
+                </header>
+                <div class="version-body">
+                    <div class="vd-row">
+                        <div class="vd-col-12 vd-col-md-6">
+                            <h4><i class="ph ph-cube mr-2" style="color: var(--color-primary);"></i>Framework</h4>
+                            <div class="change-group">
+                                <h5>New</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-hexagon" style="color: var(--color-success);"></i>
+                                        <div>
+                                            <strong>New: <code>VdHexGrid</code> canvas grid</strong>
+                                            <p>New hex-grid component for interactive maps and game-like interfaces, with pan/zoom, click selection, theme-aware rendering, terrain assignment, movement helpers, pathfinding, import/export helpers, custom render hooks, and an ESM export for bundler use.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-function" style="color: var(--color-success);"></i>
+                                        <div>
+                                            <strong>New: Hex math utilities</strong>
+                                            <p><code>hex-math.js</code> adds axial coordinate helpers, pixel conversion, rotation/unrotation, corner generation, adjacency, distance calculations, terrain colors, yields, and movement costs used by <code>VdHexGrid</code> and available for custom integrations.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <h5>Updates</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-package" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Breaking: <code>VdHexGrid</code> package split</strong>
+                                            <p><code>VdHexGrid</code> is now distributed via <code>@vanduo-oss/hex-grid</code>. Use <code>import { VdHexGrid } from '@vanduo-oss/hex-grid'</code>; it is no longer re-exported from <code>@vanduo-oss/framework</code>.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-music-notes" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: Music Player floating glass mode</strong>
+                                            <p><code>VanduoMusicPlayer</code> now supports frosted-glass styling, detachable floating players, bottom-left/bottom-right placement, drag handles, minimize/expand controls, optional persisted position, new state fields, and <code>musicplayer:detach</code> / <code>attach</code> / <code>minimize</code> / <code>expand</code> events.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-shield-check" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: Framework HTML sanitizing defaults</strong>
+                                            <p>Shared sanitizing now blocks inline SVG by default and requires explicit opt-in for trusted SVG icon content. Bubble, popover, tooltip, and toast APIs pass that opt-in deliberately; Suggest remote URLs are same-origin by default with an optional origin allowlist.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-rectangle" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Fix: Card transform rendering in Safari</strong>
+                                            <p>Card surfaces use backface visibility and <code>translateZ(0)</code> on transform states to avoid disappearing cards during hover/active transitions in Safari.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="vd-col-12 vd-col-md-6">
+                            <h4><i class="ph ph-book-open-text mr-2" style="color: var(--color-primary);"></i>Documentation</h4>
+                            <div class="change-group">
+                                <h5>New</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-hexagon" style="color: var(--color-success);"></i>
+                                        <div>
+                                            <strong>New: <code>vd-hex</code> docs page</strong>
+                                            <p>Dedicated Canvas documentation covers <code>VdHexGrid</code> setup, map controls, selection, terrain APIs, custom rendering, pathfinding, and coordinate-system notes.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <h5>Updates</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-bookmark-simple" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: Hex docs migration note</strong>
+                                            <p>Hex Grid docs now point to <code>@vanduo-oss/hex-grid</code> install/import paths and document the migration away from framework root imports.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-music-notes" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: Music Player documentation</strong>
+                                            <p>Media docs now include the glass/floating player surface, detach/minimize controls, API rows, and implementation notes for the new Music Player windowing options.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-layout" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: Docs landing layout</strong>
+                                            <p>The docs landing page now prioritizes Components, Guides, and Changelog in a wider responsive grid for faster navigation across release docs content.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-bookmark-simple" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: Docs &amp; CDN pins to v1.3.8</strong>
+                                            <p>Package metadata, site metadata, jsDelivr examples, local <code>docs/dist</code> framework assets, and synced framework component/util files now reference <strong>v1.3.8</strong>.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <h5>Fixes</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-bug" style="color: var(--color-error);"></i>
+                                        <div>
+                                            <strong>Fix: Late-section navigation stability</strong>
+                                            <p>Deep-link and search navigation now waits for already-loading sections, keeps the scroll loader visible through a short stable window, and avoids scroll-spy URL rewrites caused by late layout shifts from icons, lazy demos, or preloaded content.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ═══════════════════════════════════════════════ -->
+            <!-- Version 1.3.7                                   -->
+            <!-- ═══════════════════════════════════════════════ -->
+            <article class="version-card">
+                <header class="version-header">
+                    <span class="vd-badge vd-badge-primary" style="font-size: 1rem; padding: 0.5rem 1rem;">v1.3.7</span>
+                    <span style="color: var(--text-secondary); font-size: 0.95rem;">
+                        <i class="ph ph-calendar mr-1"></i>April 18, 2026
+                    </span>
                 </header>
                 <div class="version-body">
                     <div class="vd-row">
@@ -126,8 +251,8 @@
                                     <li class="change-item">
                                         <i class="ph ph-bookmark-simple" style="color: var(--color-info);"></i>
                                         <div>
-                                            <strong>Update: Docs &amp; CDN pins to v1.3.8</strong>
-                                            <p>Site metadata, bundled <code>docs/dist</code> framework assets, and jsDelivr examples now reference <strong>v1.3.8</strong>.</p>
+                                            <strong>Update: Docs &amp; CDN pins to v1.3.7</strong>
+                                            <p>Site metadata, bundled <code>docs/dist</code> framework assets, and jsDelivr examples now reference <strong>v1.3.7</strong>.</p>
                                         </div>
                                     </li>
                                     <li class="change-item">

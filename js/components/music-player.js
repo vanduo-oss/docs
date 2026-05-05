@@ -1049,7 +1049,7 @@
         try {
           raw = localStorage.getItem(key);
         } catch (_e) {
-          raw = null;
+          /* ignore unavailable storage */
         }
       }
       if (!raw) return;

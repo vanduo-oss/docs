@@ -4,13 +4,14 @@ Documentation and website for Vanduo, served at https://vanduo.dev.
 
 Framework repo: https://github.com/vanduo-oss/framework
 NPM Package: https://www.npmjs.com/package/@vanduo-oss/framework
+Hex Grid Package: https://www.npmjs.com/package/@vanduo-oss/hex-grid
 
 ## Current Snapshot
 
 - Docs are aligned with the **v1.3.8** release surface.
 - Production docs load the pinned framework CDN bundle from `@v1.3.8`, while local preview resolves framework assets from `./dist` and refreshes them from the sibling framework repo when available.
 - Theme tooling is documented as two separate components: Theme Switcher for lightweight system/light/dark toggles and Theme Customizer for full palette, neutral, radius, and font control.
-- v1.3.8 includes the Glass Effects documentation page (Effects category) and a site-wide glass visual upgrade across the docs UI.
+- v1.3.8 extends docs coverage for the release surface, including Expanding Cards and VdHexGrid guidance, while keeping framework metadata/CDN pins aligned.
 
 ## Labs
 

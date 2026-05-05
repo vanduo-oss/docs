@@ -47,11 +47,6 @@ async function getFrameworkAssetInfo(page: Page) {
     });
 }
 
-async function getNormalizedText(locator: ReturnType<Page['locator']>) {
-    const text = await locator.evaluate((el) => el.textContent || '');
-    return text.replace(/\s+/g, ' ').trim();
-}
-
 async function expectLocalFrameworkAssets(page: Page) {
     await page.waitForFunction(() => {
         const runtimeWindow = window as Window & {
@@ -113,6 +108,59 @@ test.describe('4. Documentation View', () => {
         });
     });
 
+    test.describe('Changelog (#changelog)', () => {
+        test('Shows v1.3.8 as latest and keeps v1.3.7 as history', async ({ page }) => {
+            await page.goto('/#changelog');
+            await waitForSPA(page);
+
+            const changelog = page.locator('#changelog');
+            await expect(changelog).toBeVisible();
+
+            const latestCard = changelog.locator('.version-card').first();
+            await expect(latestCard).toContainText('v1.3.8');
+            await expect(latestCard).toContainText('Latest');
+            await expect(latestCard).toContainText('VdHexGrid');
+            await expect(latestCard).toContainText('Docs & CDN pins to v1.3.8');
+
+            const previousCard = changelog.locator('.version-card').nth(1);
+            await expect(previousCard).toContainText('v1.3.7');
+            await expect(previousCard).not.toContainText('Latest');
+        });
+    });
+
+    test.describe('Templates (#templates)', () => {
+        test('Renders screenshot row cards without iframe previews', async ({ page }) => {
+            await page.goto('/#templates');
+            await waitForSPA(page);
+
+            const templates = page.locator('#templates');
+            await expect(templates).toBeVisible();
+            await expect(templates.locator('.template-preview-card')).toHaveCount(6);
+            await expect(templates.locator('iframe')).toHaveCount(0);
+            await expect(templates.locator('[data-template-view="gallery"] .template-shot-light')).toHaveCount(6);
+            await expect(templates.locator('[data-template-view="gallery"] .template-shot-dark')).toHaveCount(6);
+            await expect(templates.locator('.template-preview-card').first()).toContainText('View Template Page');
+            await expect(templates.locator('[data-template-view="gallery"] a[href="http://localhost:8788/portfolio/"]')).toHaveCount(1);
+
+            await expect(templates.locator('[data-template-view="gallery"] .template-shot-light').first()).toBeVisible();
+            await cycleTheme(page, 'dark');
+            await expect(templates.locator('[data-template-view="gallery"] .template-shot-dark').first()).toBeVisible();
+            await expect(templates.locator('[data-template-view="gallery"] .template-shot-light').first()).toBeHidden();
+        });
+
+        test('Opens a template detail page from the gallery route', async ({ page }) => {
+            await page.goto('/#templates/portfolio');
+            await waitForSPA(page);
+
+            const detail = page.locator('[data-template-detail="portfolio"]');
+            await expect(detail).toBeVisible();
+            await expect(detail).toContainText('Creative Portfolio');
+            await expect(detail).toContainText('Open Live Preview');
+            await expect(page.locator('[data-template-view="gallery"]')).toBeHidden();
+            await expect(page).toHaveURL(/.*#templates\/portfolio/);
+        });
+    });
+
     test.describe('Components Tab (#docs/components)', () => {
         test('Sidebar renders with correct categories and first section loads', async ({ page }) => {
             await page.goto('/#docs/components');
@@ -120,7 +168,9 @@ test.describe('4. Documentation View', () => {
 
             const modeToggle = page.locator('#doc-water-toggle');
             await expect(modeToggle).toHaveAttribute('aria-pressed', 'false');
-            await expect.poll(async () => getNormalizedText(modeToggle)).toBe('Components Guides');
+            await expect(modeToggle).toHaveAttribute('aria-label', 'Switch to Guides');
+            await expect(modeToggle).toHaveAttribute('data-tooltip', 'Click for Guides');
+            await expect(modeToggle.locator('.vd-morph-current .doc-water-label')).toHaveText('Components');
             await expect(modeToggle).not.toHaveClass(/is-guides/);
 
             // Check for Sidebar category groups
@@ -181,6 +231,42 @@ test.describe('4. Documentation View', () => {
             await expect(toggle).toHaveAttribute('aria-expanded', 'false');
         });
 
+        test('Mobile docs section starts below sticky docs controls', async ({ page, isMobile }) => {
+            test.skip(!isMobile, 'Overlap check only applies to mobile/tablet stacked docs layout');
+
+            await page.goto('/#docs/components');
+            await waitForSPA(page);
+
+            const tocToggle = page.locator('.doc-sidebar-toggle');
+            await expect(tocToggle).toBeVisible();
+            await tocToggle.click();
+
+            const targetLink = page.locator('.doc-nav-link[data-section="icons"]');
+            await expect(targetLink).toBeVisible();
+            await targetLink.click();
+
+            await expect(page).toHaveURL(/.*#docs\/icons/);
+
+            const metrics = await page.evaluate(() => {
+                const sidebar = document.querySelector('.doc-sidebar') as HTMLElement | null;
+                const targetSection = document.querySelector('#icons') as HTMLElement | null;
+                if (!sidebar || !targetSection) {
+                    return null;
+                }
+
+                const sidebarRect = sidebar.getBoundingClientRect();
+                const sectionRect = targetSection.getBoundingClientRect();
+
+                return {
+                    stickyBottom: Math.round(sidebarRect.bottom),
+                    sectionTop: Math.round(sectionRect.top)
+                };
+            });
+
+            expect(metrics).not.toBeNull();
+            expect(metrics!.sectionTop).toBeGreaterThanOrEqual(metrics!.stickyBottom - 1);
+        });
+
     });
 
     test.describe('Guides Tab (#docs/guides)', () => {
@@ -191,7 +277,8 @@ test.describe('4. Documentation View', () => {
             const modeToggle = page.locator('#doc-water-toggle');
             await expect(modeToggle).toHaveAttribute('aria-pressed', 'true');
             await expect(modeToggle).toHaveAttribute('aria-label', 'Switch to Components');
-            await expect.poll(async () => getNormalizedText(modeToggle)).toBe('Guides Components');
+            await expect(modeToggle).toHaveAttribute('data-tooltip', 'Click for Components');
+            await expect(modeToggle.locator('.vd-morph-current .doc-water-label')).toHaveText('Guides');
 
             // Check for a guide section such as quick-start
             const guideLink = page.locator('.doc-nav-link[data-route="docs/guides#quick-start"]');
@@ -200,6 +287,49 @@ test.describe('4. Documentation View', () => {
                 await page.waitForTimeout(500);
                 await expect(page.locator('#quick-start')).toBeVisible();
             }
+        });
+
+        test('Starter templates guide is a single generalized landing guide', async ({ page }) => {
+            await page.goto('/#docs/starter-templates');
+            await waitForSPA(page);
+
+            const section = page.locator('#starter-templates');
+            await expect(section).toBeVisible();
+            await expect(section).toContainText('Starter Landing Template');
+            await expect(section).toContainText('Commented Landing Page');
+            await expect(section).not.toContainText('Ops Dashboard');
+            await expect(section).not.toContainText('Creative Portfolio');
+        });
+    });
+
+    test.describe('Docs mode toggle regression', () => {
+        test('keeps active label and tooltip stable after morph completes', async ({ page }) => {
+            await page.goto('/#docs/components');
+            await waitForSPA(page);
+
+            const modeToggle = page.locator('#doc-water-toggle');
+
+            await expect(modeToggle).toHaveAttribute('aria-pressed', 'false');
+            await expect(modeToggle.locator('.vd-morph-current .doc-water-label')).toHaveText('Components');
+            await expect(modeToggle).toHaveAttribute('data-tooltip', 'Click for Guides');
+
+            await modeToggle.click();
+
+            await expect(modeToggle).toHaveAttribute('aria-pressed', 'true');
+            await expect(modeToggle.locator('.vd-morph-current .doc-water-label')).toHaveText('Guides');
+            await expect(modeToggle).toHaveAttribute('data-tooltip', 'Click for Components');
+            await page.waitForTimeout(950);
+            await expect(modeToggle.locator('.vd-morph-current .doc-water-label')).toHaveText('Guides');
+            await expect(modeToggle).toHaveAttribute('data-tooltip', 'Click for Components');
+
+            await modeToggle.click();
+
+            await expect(modeToggle).toHaveAttribute('aria-pressed', 'false');
+            await expect(modeToggle.locator('.vd-morph-current .doc-water-label')).toHaveText('Components');
+            await expect(modeToggle).toHaveAttribute('data-tooltip', 'Click for Guides');
+            await page.waitForTimeout(950);
+            await expect(modeToggle.locator('.vd-morph-current .doc-water-label')).toHaveText('Components');
+            await expect(modeToggle).toHaveAttribute('data-tooltip', 'Click for Guides');
         });
     });
 
@@ -325,14 +455,83 @@ test.describe('4. Documentation View', () => {
 
             // Docs-site overrides ThemeCustomizer.DEFAULTS in js/app.js:
             //   PRIMARY_LIGHT='black', NEUTRAL='slate', RADIUS='0.5'
-            // so a reset should restore these docs-site defaults, not the
-            // framework defaults.
-            expect(resetState.theme).toBeNull();
+            // and resolves the system theme to the active media mode.
+            expect(resetState.theme).toBe('light');
             expect(resetState.primary).toBe('black');
             expect(resetState.neutral).toBe('slate');
             expect(resetState.radius).toBe('0.5');
             expect(resetState.storagePref).toBe('system');
             expect(pageErrors.join('\n')).not.toContain('savePreference is not a function');
+        });
+
+        test('Theme customizer section trigger opens panel and font selection persists', async ({ page }) => {
+            await page.goto('/#home');
+            await waitForSPA(page);
+            await page.evaluate(() => {
+                sessionStorage.clear();
+                localStorage.clear();
+            });
+            await page.goto('/#docs/theme-customizer');
+            await waitForSPA(page);
+            await expectLocalFrameworkAssets(page);
+
+            const sectionTrigger = page.locator('#theme-customizer [data-theme-customizer-trigger]').first();
+            await expect(sectionTrigger).toBeVisible();
+            await sectionTrigger.click();
+
+            const panel = page.locator('.vd-theme-customizer-panel.is-open');
+            await expect(panel).toBeVisible();
+            await expect(sectionTrigger).toHaveAttribute('aria-expanded', 'true');
+
+            const fontSelect = page.locator('#theme-customizer .font-select');
+            await expect(fontSelect).toBeVisible();
+            await page.evaluate(() => {
+                const select = document.querySelector('#theme-customizer .font-select') as HTMLSelectElement | null;
+                if (!select) return;
+                select.value = 'open-sans';
+                select.dispatchEvent(new Event('change', { bubbles: true }));
+            });
+            await page.waitForTimeout(150);
+
+            let fontState = await page.evaluate(() => {
+                return {
+                    attr: document.documentElement.getAttribute('data-font'),
+                    stored: localStorage.getItem('vanduo-font-preference')
+                };
+            });
+            expect(fontState.attr).toBe('open-sans');
+            expect(fontState.stored).toBe('open-sans');
+
+            await page.reload();
+            await waitForSPA(page);
+            await page.goto('/#docs/theme-customizer');
+            await waitForSPA(page);
+
+            fontState = await page.evaluate(() => {
+                return {
+                    attr: document.documentElement.getAttribute('data-font'),
+                    stored: localStorage.getItem('vanduo-font-preference')
+                };
+            });
+            expect(fontState.attr).toBe('open-sans');
+            expect(fontState.stored).toBe('open-sans');
+
+            await page.evaluate(() => {
+                localStorage.setItem('vanduo-font-preference', 'source-sans-3');
+            });
+            await page.reload();
+            await waitForSPA(page);
+            await page.goto('/#docs/theme-customizer');
+            await waitForSPA(page);
+
+            const normalizedState = await page.evaluate(() => {
+                return {
+                    attr: document.documentElement.getAttribute('data-font'),
+                    stored: localStorage.getItem('vanduo-font-preference')
+                };
+            });
+            expect(normalizedState.attr).toBe('open-sans');
+            expect(normalizedState.stored).toBe('open-sans');
         });
     });
 

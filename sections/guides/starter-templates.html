@@ -1,786 +1,132 @@
 <section id="starter-templates">
-    <h4 class="demo-title"><i class="ph ph-files"></i>Starter Templates <code class="vd-text-sm">Guide</code></h4>
-    <p class="vd-mb-8">Ready-to-use page templates that demonstrate Vanduo's design system in real-world layouts. Copy, paste, and adapt — no assembly required.</p>
+    <h4 class="demo-title"><i class="ph ph-files"></i>Starter Landing Template <code class="vd-text-sm">Guide</code></h4>
+    <p class="vd-mb-6">This guide keeps one intentionally simple, comment-heavy landing page you can copy into a blank file. Advanced ready-made templates now live in the <a href="#templates" data-route="templates">Templates catalog</a>, where each template has its own notes and live preview.</p>
 
-    <!-- Template 1: Marketing Landing Page -->
-    <div class="vd-row vd-mb-8">
-        <div class="vd-col-12">
-            <div class="vd-card vd-card-glow demo-card">
-                <div class="vd-card-header">
-                    <h4><i class="ph ph-megaphone"></i> Marketing Landing Page</h4>
-                </div>
-                <div class="vd-card-body">
-                    <p class="vd-mb-4">A single-page landing site with hero section, feature grid, testimonials, pricing cards, and footer. Uses Fibonacci spacing and the full component set.</p>
-                    <div class="vd-alert vd-alert-info vd-mb-4">
-                        <i class="ph ph-lightbulb"></i>
-                        <div>
-                            <strong>Key patterns:</strong> Glass navbar, hero with CTA, 3-column feature cards, pricing tier comparison, footer with links.
+    <div class="vd-alert vd-alert-info vd-mb-6">
+        <i class="ph ph-lightbulb"></i>
+        <div>
+            <strong>Use this as your base pattern.</strong>
+            Start with a navbar, hero, proof section, feature cards, CTA, and footer. Then graduate to the full templates when you need a more complete page.
+        </div>
+    </div>
+
+    <div class="vd-card vd-card-glow demo-card">
+        <div class="vd-card-header">
+            <h4><i class="ph ph-rocket-launch"></i> Commented Landing Page</h4>
+        </div>
+        <div class="vd-card-body">
+            <p class="vd-text-muted">The comments explain why each block exists. Keep them while learning, then remove them once the page structure is familiar.</p>
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Starter Landing Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">index.html</button>
                         </div>
-                    </div>
-                    <div class="vd-code-snippet" data-collapsible>
-                        <button class="vd-code-snippet-toggle" aria-expanded="false">
-                            <span class="vd-code-snippet-toggle-icon"></span>
-                            <span>View Code</span>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
                         </button>
-                        <div class="vd-code-snippet-content">
-                            <div class="vd-code-snippet-header">
-                                <div class="vd-code-snippet-tabs" role="tablist">
-                                    <button class="vd-code-snippet-tab is-active" data-lang="html">index.html</button>
-                                </div>
-                                <button class="vd-code-snippet-copy" aria-label="Copy code">
-                                    <span class="vd-code-snippet-copy-icon"></span>
-                                    <span class="vd-code-snippet-copy-text">Copy</span>
-                                </button>
-                            </div>
-                            <div class="vd-code-snippet-body">
-                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Marketing Landing Page --&gt;</span>
-&lt;!DOCTYPE html&gt;
-&lt;html lang="en" data-theme="light"&gt;
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
 &lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-    &lt;title&gt;Vanduo — Modern Web Framework&lt;/title&gt;
-    &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.3.8/dist/vanduo.min.css"&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Starter Landing Page&lt;/title&gt;
+
+  &lt;!-- Pin the framework version in production so your page stays stable. --&gt;
+  &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.3.8/dist/vanduo.min.css"&gt;
 &lt;/head&gt;
 &lt;body&gt;
+  &lt;!-- Navigation: keep this small. A landing page should not offer too many exits. --&gt;
+  &lt;nav class="vd-navbar vd-navbar-glass"&gt;
+    &lt;div class="vd-navbar-container"&gt;
+      &lt;a href="#" class="vd-navbar-brand"&gt;Your Brand&lt;/a&gt;
+      &lt;div class="vd-navbar-menu"&gt;
+        &lt;ul class="vd-navbar-nav"&gt;
+          &lt;li&gt;&lt;a href="#features" class="vd-nav-link"&gt;Features&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href="#proof" class="vd-nav-link"&gt;Proof&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href="#start" class="vd-btn vd-btn-primary"&gt;Start&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/nav&gt;
 
-    <span class="code-comment">&lt;!-- Glass Navbar --&gt;</span>
-    &lt;nav class="vd-navbar vd-navbar-glass"&gt;
-        &lt;div class="vd-navbar-container"&gt;
-            &lt;a href="#" class="vd-navbar-brand"&gt;Vanduo&lt;/a&gt;
-            &lt;button class="vd-navbar-toggle" aria-expanded="false" aria-label="Toggle navigation"&gt;
-                &lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;
-            &lt;/button&gt;
-            &lt;div class="vd-navbar-menu" aria-hidden="true"&gt;
-                &lt;ul class="vd-navbar-nav"&gt;
-                    &lt;li&gt;&lt;a href="#features" class="vd-nav-link"&gt;Features&lt;/a&gt;&lt;/li&gt;
-                    &lt;li&gt;&lt;a href="#pricing" class="vd-nav-link"&gt;Pricing&lt;/a&gt;&lt;/li&gt;
-                    &lt;li&gt;&lt;a href="#" class="vd-nav-link"&gt;Docs&lt;/a&gt;&lt;/li&gt;
-                &lt;/ul&gt;
-                &lt;button data-toggle="theme" aria-label="Toggle theme" class="vd-btn vd-btn-sm vd-btn-outline"&gt;
-                    &lt;i class="ph ph-moon"&gt;&lt;/i&gt;
-                &lt;/button&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/nav&gt;
-
-    <span class="code-comment">&lt;!-- Hero Section --&gt;</span>
-    &lt;section class="vd-container vd-py-21"&gt;
-        &lt;div class="vd-row vd-text-center"&gt;
-            &lt;div class="vd-col-12 vd-col-md-8 vd-offset-md-2"&gt;
-                &lt;h1 class="vd-mb-5"&gt;Build beautiful sites faster&lt;/h1&gt;
-                &lt;p class="vd-text-lg vd-text-muted vd-mb-8"&gt;
-                    Vanduo is a pure CSS/JS framework with zero dependencies. 
-                    Dark mode, responsive grids, and 45+ components out of the box.
-                &lt;/p&gt;
-                &lt;div class="vd-row vd-justify-center"&gt;
-                    &lt;div class="vd-col-auto"&gt;
-                        &lt;a href="#" class="vd-btn vd-btn-primary vd-btn-lg"&gt;
-                            &lt;i class="ph ph-rocket-launch"&gt;&lt;/i&gt; Get Started
-                        &lt;/a&gt;
-                    &lt;/div&gt;
-                    &lt;div class="vd-col-auto"&gt;
-                        &lt;a href="#" class="vd-btn vd-btn-outline vd-btn-lg"&gt;
-                            &lt;i class="ph ph-book-open"&gt;&lt;/i&gt; Read Docs
-                        &lt;/a&gt;
-                    &lt;/div&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
+  &lt;!-- Hero: one promise, one supporting sentence, one primary action. --&gt;
+  &lt;main&gt;
+    &lt;section class="vd-container-responsive vd-py-21 vd-text-center"&gt;
+      &lt;span class="vd-badge vd-badge-primary"&gt;Launching now&lt;/span&gt;
+      &lt;h1 class="vd-mt-4 vd-mb-5"&gt;Build a clear landing page with Vanduo&lt;/h1&gt;
+      &lt;p class="vd-text-lg vd-text-muted vd-mb-8"&gt;
+        Use framework classes directly in HTML. No build step is required.
+      &lt;/p&gt;
+      &lt;a href="#start" class="vd-btn vd-btn-primary vd-btn-lg"&gt;Get started&lt;/a&gt;
     &lt;/section&gt;
 
-    <span class="code-comment">&lt;!-- Features Grid --&gt;</span>
-    &lt;section id="features" class="vd-container vd-py-13"&gt;
-        &lt;h2 class="vd-text-center vd-mb-13"&gt;Everything you need&lt;/h2&gt;
-        &lt;div class="vd-row"&gt;
-            &lt;div class="vd-col-12 vd-col-md-4 vd-mb-8"&gt;
-                &lt;div class="vd-card vd-card-glow vd-text-center"&gt;
-                    &lt;div class="vd-card-body"&gt;
-                        &lt;i class="ph ph-lightning" style="font-size: 2.5rem; color: var(--color-primary);"&gt;&lt;/i&gt;
-                        &lt;h4 class="vd-mt-5"&gt;Zero Dependencies&lt;/h4&gt;
-                        &lt;p class="vd-text-sm vd-text-muted"&gt;No build tools required. Drop in a CDN link and start building.&lt;/p&gt;
-                    &lt;/div&gt;
-                &lt;/div&gt;
+    &lt;!-- Feature cards: three short reasons are easier to scan than a long list. --&gt;
+    &lt;section id="features" class="vd-container-responsive vd-py-13"&gt;
+      &lt;div class="vd-row"&gt;
+        &lt;article class="vd-col-12 vd-col-md-4 vd-mb-4"&gt;
+          &lt;div class="vd-card vd-card-glow"&gt;
+            &lt;div class="vd-card-body"&gt;
+              &lt;h3&gt;Fast setup&lt;/h3&gt;
+              &lt;p class="vd-text-muted"&gt;Drop in CSS and JS, then compose with classes.&lt;/p&gt;
             &lt;/div&gt;
-            &lt;div class="vd-col-12 vd-col-md-4 vd-mb-8"&gt;
-                &lt;div class="vd-card vd-card-glow vd-text-center"&gt;
-                    &lt;div class="vd-card-body"&gt;
-                        &lt;i class="ph ph-moon" style="font-size: 2.5rem; color: var(--color-primary);"&gt;&lt;/i&gt;
-                        &lt;h4 class="vd-mt-5"&gt;Dark Mode Built-In&lt;/h4&gt;
-                        &lt;p class="vd-text-sm vd-text-muted"&gt;One attribute toggle. Every component adapts automatically.&lt;/p&gt;
-                    &lt;/div&gt;
-                &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/article&gt;
+        &lt;article class="vd-col-12 vd-col-md-4 vd-mb-4"&gt;
+          &lt;div class="vd-card vd-card-glow"&gt;
+            &lt;div class="vd-card-body"&gt;
+              &lt;h3&gt;Responsive grid&lt;/h3&gt;
+              &lt;p class="vd-text-muted"&gt;Use rows and columns for predictable layouts.&lt;/p&gt;
             &lt;/div&gt;
-            &lt;div class="vd-col-12 vd-col-md-4 vd-mb-8"&gt;
-                &lt;div class="vd-card vd-card-glow vd-text-center"&gt;
-                    &lt;div class="vd-card-body"&gt;
-                        &lt;i class="ph ph-palette" style="font-size: 2.5rem; color: var(--color-primary);"&gt;&lt;/i&gt;
-                        &lt;h4 class="vd-mt-5"&gt;Theme Customizer&lt;/h4&gt;
-                        &lt;p class="vd-text-sm vd-text-muted"&gt;Change colors, fonts, and radius at runtime. No rebuild needed.&lt;/p&gt;
-                    &lt;/div&gt;
-                &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/article&gt;
+        &lt;article class="vd-col-12 vd-col-md-4 vd-mb-4"&gt;
+          &lt;div class="vd-card vd-card-glow"&gt;
+            &lt;div class="vd-card-body"&gt;
+              &lt;h3&gt;Theme ready&lt;/h3&gt;
+              &lt;p class="vd-text-muted"&gt;Dark mode and design tokens work out of the box.&lt;/p&gt;
             &lt;/div&gt;
-        &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/article&gt;
+      &lt;/div&gt;
     &lt;/section&gt;
 
-    <span class="code-comment">&lt;!-- Pricing Cards --&gt;</span>
-    &lt;section id="pricing" class="vd-container vd-py-13"&gt;
-        &lt;h2 class="vd-text-center vd-mb-13"&gt;Simple pricing&lt;/h2&gt;
-        &lt;div class="vd-row vd-row-fib-3-alt"&gt;
-            &lt;div class="vd-col-fib-3 vd-mb-8"&gt;
-                &lt;div class="vd-card"&gt;
-                    &lt;div class="vd-card-header"&gt;
-                        &lt;h4&gt;Starter&lt;/h4&gt;
-                        &lt;span class="vd-text-2xl vd-font-bold"&gt;$0&lt;/span&gt;
-                    &lt;/div&gt;
-                    &lt;div class="vd-card-body"&gt;
-                        &lt;ul class="vd-list vd-list-none"&gt;
-                            &lt;li&gt;&lt;i class="ph ph-check"&gt;&lt;/i&gt; All components&lt;/li&gt;
-                            &lt;li&gt;&lt;i class="ph ph-check"&gt;&lt;/i&gt; Dark mode&lt;/li&gt;
-                            &lt;li&gt;&lt;i class="ph ph-check"&gt;&lt;/i&gt; CDN access&lt;/li&gt;
-                        &lt;/ul&gt;
-                    &lt;/div&gt;
-                    &lt;div class="vd-card-footer"&gt;
-                        &lt;button class="vd-btn vd-btn-outline vd-btn-block"&gt;Get Started&lt;/button&gt;
-                    &lt;/div&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-            &lt;div class="vd-col-fib-5 vd-mb-8"&gt;
-                &lt;div class="vd-card vd-card-glow vd-border-primary"&gt;
-                    &lt;div class="vd-card-header"&gt;
-                        &lt;h4&gt;Pro&lt;/h4&gt;
-                        &lt;span class="vd-text-2xl vd-font-bold"&gt;$12&lt;/span&gt;&lt;span class="vd-text-sm vd-text-muted"&gt;/mo&lt;/span&gt;
-                    &lt;/div&gt;
-                    &lt;div class="vd-card-body"&gt;
-                        &lt;ul class="vd-list vd-list-none"&gt;
-                            &lt;li&gt;&lt;i class="ph ph-check"&gt;&lt;/i&gt; Everything in Starter&lt;/li&gt;
-                            &lt;li&gt;&lt;i class="ph ph-check"&gt;&lt;/i&gt; Priority support&lt;/li&gt;
-                            &lt;li&gt;&lt;i class="ph ph-check"&gt;&lt;/i&gt; Custom themes&lt;/li&gt;
-                        &lt;/ul&gt;
-                    &lt;/div&gt;
-                    &lt;div class="vd-card-footer"&gt;
-                        &lt;button class="vd-btn vd-btn-primary vd-btn-block"&gt;Upgrade to Pro&lt;/button&gt;
-                    &lt;/div&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-            &lt;div class="vd-col-fib-8 vd-mb-8"&gt;
-                &lt;div class="vd-card"&gt;
-                    &lt;div class="vd-card-header"&gt;
-                        &lt;h4&gt;Enterprise&lt;/h4&gt;
-                        &lt;span class="vd-text-2xl vd-font-bold"&gt;Custom&lt;/span&gt;
-                    &lt;/div&gt;
-                    &lt;div class="vd-card-body"&gt;
-                        &lt;ul class="vd-list vd-list-none"&gt;
-                            &lt;li&gt;&lt;i class="ph ph-check"&gt;&lt;/i&gt; SSO &amp; SAML&lt;/li&gt;
-                            &lt;li&gt;&lt;i class="ph ph-check"&gt;&lt;/i&gt; SLA guarantee&lt;/li&gt;
-                            &lt;li&gt;&lt;i class="ph ph-check"&gt;&lt;/i&gt; Dedicated support&lt;/li&gt;
-                        &lt;/ul&gt;
-                    &lt;/div&gt;
-                    &lt;div class="vd-card-footer"&gt;
-                        &lt;button class="vd-btn vd-btn-outline vd-btn-block"&gt;Contact Sales&lt;/button&gt;
-                    &lt;/div&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
+    &lt;!-- Proof: add a metric, quote, logo row, or short case note here. --&gt;
+    &lt;section id="proof" class="vd-container-responsive vd-py-13"&gt;
+      &lt;div class="vd-card vd-card-elevated"&gt;
+        &lt;div class="vd-card-body vd-text-center"&gt;
+          &lt;h2&gt;One page, clear path, no tooling required.&lt;/h2&gt;
+          &lt;p class="vd-text-muted"&gt;Replace this with real customer proof when you have it.&lt;/p&gt;
         &lt;/div&gt;
+      &lt;/div&gt;
     &lt;/section&gt;
 
-    <span class="code-comment">&lt;!-- Footer --&gt;</span>
-    &lt;footer class="vd-footer"&gt;
-        &lt;div class="vd-container"&gt;
-            &lt;div class="vd-row"&gt;
-                &lt;div class="vd-col-12 vd-col-md-6"&gt;
-                    &lt;p&gt;&amp;copy; 2026 Vanduo. Built with Vanduo.&lt;/p&gt;
-                &lt;/div&gt;
-                &lt;div class="vd-col-12 vd-col-md-6 vd-text-right"&gt;
-                    &lt;a href="#"&gt;Privacy&lt;/a&gt; &amp;middot; &lt;a href="#"&gt;Terms&lt;/a&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/footer&gt;
+    &lt;!-- Final CTA: repeat the action after the user has seen the proof. --&gt;
+    &lt;section id="start" class="vd-container-responsive vd-py-13 vd-text-center"&gt;
+      &lt;h2&gt;Ready to customize it?&lt;/h2&gt;
+      &lt;a href="#" class="vd-btn vd-btn-primary vd-btn-lg"&gt;Start now&lt;/a&gt;
+    &lt;/section&gt;
+  &lt;/main&gt;
 
-    &lt;script src="https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.3.8/dist/vanduo.min.js"&gt;&lt;/script&gt;
-    &lt;script&gt;Vanduo.init();&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Template 2: Documentation Site -->
-    <div class="vd-row vd-mb-8">
-        <div class="vd-col-12">
-            <div class="vd-card vd-card-glow demo-card">
-                <div class="vd-card-header">
-                    <h4><i class="ph ph-book-open"></i> Documentation Site</h4>
-                </div>
-                <div class="vd-card-body">
-                    <p class="vd-mb-4">A two-column docs layout with sticky sidebar navigation, content area with headings, code snippets, and prev/next pagination. Uses standard grid with responsive collapse.</p>
-                    <div class="vd-alert vd-alert-info vd-mb-4">
-                        <i class="ph ph-lightbulb"></i>
-                        <div>
-                            <strong>Key patterns:</strong> Sticky sidebar with nav links, scrollspy for section highlighting, code snippet blocks, prev/next footer navigation.
-                        </div>
-                    </div>
-                    <div class="vd-code-snippet" data-collapsible>
-                        <button class="vd-code-snippet-toggle" aria-expanded="false">
-                            <span class="vd-code-snippet-toggle-icon"></span>
-                            <span>View Code</span>
-                        </button>
-                        <div class="vd-code-snippet-content">
-                            <div class="vd-code-snippet-header">
-                                <div class="vd-code-snippet-tabs" role="tablist">
-                                    <button class="vd-code-snippet-tab is-active" data-lang="html">index.html</button>
-                                </div>
-                                <button class="vd-code-snippet-copy" aria-label="Copy code">
-                                    <span class="vd-code-snippet-copy-icon"></span>
-                                    <span class="vd-code-snippet-copy-text">Copy</span>
-                                </button>
-                            </div>
-                            <div class="vd-code-snippet-body">
-                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Documentation Site --&gt;</span>
-&lt;!DOCTYPE html&gt;
-&lt;html lang="en" data-theme="light"&gt;
-&lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-    &lt;title&gt;Docs — Vanduo&lt;/title&gt;
-    &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.3.8/dist/vanduo.min.css"&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-    &lt;nav class="vd-navbar"&gt;
-        &lt;div class="vd-navbar-container"&gt;
-            &lt;a href="#" class="vd-navbar-brand"&gt;Vanduo Docs&lt;/a&gt;
-            &lt;button data-toggle="theme" aria-label="Toggle theme"&gt;&lt;i class="ph ph-moon"&gt;&lt;/i&gt;&lt;/button&gt;
-        &lt;/div&gt;
-    &lt;/nav&gt;
-
-    &lt;div class="vd-container vd-py-8"&gt;
-        &lt;div class="vd-row"&gt;
-            <span class="code-comment">&lt;!-- Sidebar: collapses on mobile --&gt;</span>
-            &lt;aside class="vd-col-12 vd-col-md-3"&gt;
-                &lt;nav class="vd-sidenav vd-sticky-top" style="top: 5rem;"&gt;
-                    &lt;ul class="vd-nav vd-flex-column"&gt;
-                        &lt;li&gt;&lt;a href="#overview" class="vd-nav-link active"&gt;Overview&lt;/a&gt;&lt;/li&gt;
-                        &lt;li&gt;&lt;a href="#installation" class="vd-nav-link"&gt;Installation&lt;/a&gt;&lt;/li&gt;
-                        &lt;li&gt;&lt;a href="#components" class="vd-nav-link"&gt;Components&lt;/a&gt;&lt;/li&gt;
-                        &lt;li&gt;&lt;a href="#theming" class="vd-nav-link"&gt;Theming&lt;/a&gt;&lt;/li&gt;
-                    &lt;/ul&gt;
-                &lt;/nav&gt;
-            &lt;/aside&gt;
-
-            <span class="code-comment">&lt;!-- Main Content --&gt;</span>
-            &lt;main class="vd-col-12 vd-col-md-9"&gt;
-                &lt;section id="overview" class="vd-mb-13"&gt;
-                    &lt;h1&gt;Overview&lt;/h1&gt;
-                    &lt;p class="vd-text-lg vd-text-muted"&gt;Vanduo is a modern CSS framework designed for speed and flexibility.&lt;/p&gt;
-                &lt;/section&gt;
-
-                &lt;section id="installation" class="vd-mb-13"&gt;
-                    &lt;h2&gt;Installation&lt;/h2&gt;
-                    &lt;p&gt;Include the CSS and JS files via CDN:&lt;/p&gt;
-                    &lt;div class="vd-code-snippet vd-mt-5"&gt;
-                        &lt;div class="vd-code-snippet-body"&gt;
-                            &lt;pre&gt;&lt;code&gt;&amp;lt;link rel="stylesheet" href="vanduo.min.css"&amp;gt;&lt;/code&gt;&lt;/pre&gt;
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-                &lt;/section&gt;
-
-                &lt;section id="components" class="vd-mb-13"&gt;
-                    &lt;h2&gt;Components&lt;/h2&gt;
-                    &lt;p&gt;Vanduo includes 45+ pre-built components...&lt;/p&gt;
-                &lt;/section&gt;
-
-                &lt;section id="theming" class="vd-mb-13"&gt;
-                    &lt;h2&gt;Theming&lt;/h2&gt;
-                    &lt;p&gt;Customize every aspect of the framework using CSS variables...&lt;/p&gt;
-                &lt;/section&gt;
-
-                <span class="code-comment">&lt;!-- Prev / Next --&gt;</span>
-                &lt;div class="vd-row vd-mt-13 vd-pt-8" style="border-top: 1px solid var(--border-color);"&gt;
-                    &lt;div class="vd-col-6"&gt;
-                        &lt;a href="#" class="vd-btn vd-btn-outline"&gt;
-                            &lt;i class="ph ph-arrow-left"&gt;&lt;/i&gt; Previous
-                        &lt;/a&gt;
-                    &lt;/div&gt;
-                    &lt;div class="vd-col-6 vd-text-right"&gt;
-                        &lt;a href="#" class="vd-btn vd-btn-outline"&gt;
-                            Next &lt;i class="ph ph-arrow-right"&gt;&lt;/i&gt;
-                        &lt;/a&gt;
-                    &lt;/div&gt;
-                &lt;/div&gt;
-            &lt;/main&gt;
-        &lt;/div&gt;
+  &lt;footer class="vd-footer"&gt;
+    &lt;div class="vd-container-responsive"&gt;
+      &lt;p&gt;&amp;copy; 2026 Your Brand. Built with Vanduo.&lt;/p&gt;
     &lt;/div&gt;
+  &lt;/footer&gt;
 
-    &lt;script src="https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.3.8/dist/vanduo.min.js"&gt;&lt;/script&gt;
-    &lt;script&gt;Vanduo.init();&lt;/script&gt;
+  &lt;script src="https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.3.8/dist/vanduo.min.js"&gt;&lt;/script&gt;
+  &lt;script&gt;Vanduo.init();&lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
-                            </div>
-                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Template 3: Dashboard -->
-    <div class="vd-row vd-mb-8">
-        <div class="vd-col-12">
-            <div class="vd-card vd-card-glow demo-card">
-                <div class="vd-card-header">
-                    <h4><i class="ph ph-chart-line-up"></i> Admin Dashboard</h4>
-                </div>
-                <div class="vd-card-body">
-                    <p class="vd-mb-4">A responsive dashboard with sidebar navigation, stat cards, data table, and recent activity feed. Uses standard grid for metric cards and table layout.</p>
-                    <div class="vd-alert vd-alert-info vd-mb-4">
-                        <i class="ph ph-lightbulb"></i>
-                        <div>
-                            <strong>Key patterns:</strong> Collapsible sidebar, stat cards with icons, sortable table, status badges, activity timeline.
-                        </div>
-                    </div>
-                    <div class="vd-code-snippet" data-collapsible>
-                        <button class="vd-code-snippet-toggle" aria-expanded="false">
-                            <span class="vd-code-snippet-toggle-icon"></span>
-                            <span>View Code</span>
-                        </button>
-                        <div class="vd-code-snippet-content">
-                            <div class="vd-code-snippet-header">
-                                <div class="vd-code-snippet-tabs" role="tablist">
-                                    <button class="vd-code-snippet-tab is-active" data-lang="html">index.html</button>
-                                </div>
-                                <button class="vd-code-snippet-copy" aria-label="Copy code">
-                                    <span class="vd-code-snippet-copy-icon"></span>
-                                    <span class="vd-code-snippet-copy-text">Copy</span>
-                                </button>
-                            </div>
-                            <div class="vd-code-snippet-body">
-                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Admin Dashboard --&gt;</span>
-&lt;!DOCTYPE html&gt;
-&lt;html lang="en" data-theme="dark"&gt;
-&lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-    &lt;title&gt;Dashboard — Vanduo&lt;/title&gt;
-    &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.3.8/dist/vanduo.min.css"&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-    &lt;div class="vd-container-fluid"&gt;
-        &lt;div class="vd-row"&gt;
-            <span class="code-comment">&lt;!-- Sidebar --&gt;</span>
-            &lt;aside class="vd-col-12 vd-col-lg-2 vd-bg-secondary" style="min-height: 100vh;"&gt;
-                &lt;div class="vd-p-8"&gt;
-                    &lt;h4 class="vd-mb-8"&gt;Dashboard&lt;/h4&gt;
-                    &lt;ul class="vd-nav vd-flex-column"&gt;
-                        &lt;li&gt;&lt;a href="#" class="vd-nav-link active"&gt;&lt;i class="ph ph-house"&gt;&lt;/i&gt; Overview&lt;/a&gt;&lt;/li&gt;
-                        &lt;li&gt;&lt;a href="#" class="vd-nav-link"&gt;&lt;i class="ph ph-users"&gt;&lt;/i&gt; Users&lt;/a&gt;&lt;/li&gt;
-                        &lt;li&gt;&lt;a href="#" class="vd-nav-link"&gt;&lt;i class="ph ph-chart-bar"&gt;&lt;/i&gt; Analytics&lt;/a&gt;&lt;/li&gt;
-                        &lt;li&gt;&lt;a href="#" class="vd-nav-link"&gt;&lt;i class="ph ph-gear"&gt;&lt;/i&gt; Settings&lt;/a&gt;&lt;/li&gt;
-                    &lt;/ul&gt;
-                &lt;/div&gt;
-            &lt;/aside&gt;
-
-            <span class="code-comment">&lt;!-- Main Content --&gt;</span>
-            &lt;main class="vd-col-12 vd-col-lg-10 vd-p-8"&gt;
-                &lt;h1 class="vd-mb-8"&gt;Overview&lt;/h1&gt;
-
-                <span class="code-comment">&lt;!-- Stat Cards --&gt;</span>
-                &lt;div class="vd-row vd-mb-8"&gt;
-                    &lt;div class="vd-col-6 vd-col-md-3 vd-mb-5"&gt;
-                        &lt;div class="vd-card"&gt;
-                            &lt;div class="vd-card-body"&gt;
-                                &lt;p class="vd-text-sm vd-text-muted vd-mb-2"&gt;Total Users&lt;/p&gt;
-                                &lt;p class="vd-text-2xl vd-font-bold"&gt;12,345&lt;/p&gt;
-                                &lt;span class="vd-badge vd-badge-success vd-text-xs"&gt;+12%&lt;/span&gt;
-                            &lt;/div&gt;
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-                    &lt;div class="vd-col-6 vd-col-md-3 vd-mb-5"&gt;
-                        &lt;div class="vd-card"&gt;
-                            &lt;div class="vd-card-body"&gt;
-                                &lt;p class="vd-text-sm vd-text-muted vd-mb-2"&gt;Revenue&lt;/p&gt;
-                                &lt;p class="vd-text-2xl vd-font-bold"&gt;$48.2k&lt;/p&gt;
-                                &lt;span class="vd-badge vd-badge-success vd-text-xs"&gt;+8%&lt;/span&gt;
-                            &lt;/div&gt;
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-                    &lt;div class="vd-col-6 vd-col-md-3 vd-mb-5"&gt;
-                        &lt;div class="vd-card"&gt;
-                            &lt;div class="vd-card-body"&gt;
-                                &lt;p class="vd-text-sm vd-text-muted vd-mb-2"&gt;Orders&lt;/p&gt;
-                                &lt;p class="vd-text-2xl vd-font-bold"&gt;1,234&lt;/p&gt;
-                                &lt;span class="vd-badge vd-badge-warning vd-text-xs"&gt;-3%&lt;/span&gt;
-                            &lt;/div&gt;
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-                    &lt;div class="vd-col-6 vd-col-md-3 vd-mb-5"&gt;
-                        &lt;div class="vd-card"&gt;
-                            &lt;div class="vd-card-body"&gt;
-                                &lt;p class="vd-text-sm vd-text-muted vd-mb-2"&gt;Conversion&lt;/p&gt;
-                                &lt;p class="vd-text-2xl vd-font-bold"&gt;3.2%&lt;/p&gt;
-                                &lt;span class="vd-badge vd-badge-success vd-text-xs"&gt;+0.5%&lt;/span&gt;
-                            &lt;/div&gt;
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-                &lt;/div&gt;
-
-                <span class="code-comment">&lt;!-- Data Table --&gt;</span>
-                &lt;div class="vd-card vd-mb-8"&gt;
-                    &lt;div class="vd-card-header"&gt;
-                        &lt;h4&gt;Recent Orders&lt;/h4&gt;
-                    &lt;/div&gt;
-                    &lt;div class="vd-card-body vd-p-0"&gt;
-                        &lt;div class="vd-table-responsive"&gt;
-                            &lt;table class="vd-table vd-table-striped"&gt;
-                                &lt;thead&gt;
-                                    &lt;tr&gt;
-                                        &lt;th&gt;Order&lt;/th&gt;
-                                        &lt;th&gt;Customer&lt;/th&gt;
-                                        &lt;th&gt;Status&lt;/th&gt;
-                                        &lt;th&gt;Amount&lt;/th&gt;
-                                    &lt;/tr&gt;
-                                &lt;/thead&gt;
-                                &lt;tbody&gt;
-                                    &lt;tr&gt;
-                                        &lt;td&gt;#1234&lt;/td&gt;
-                                        &lt;td&gt;Alice Smith&lt;/td&gt;
-                                        &lt;td&gt;&lt;span class="vd-badge vd-badge-success"&gt;Completed&lt;/span&gt;&lt;/td&gt;
-                                        &lt;td&gt;$120.00&lt;/td&gt;
-                                    &lt;/tr&gt;
-                                    &lt;tr&gt;
-                                        &lt;td&gt;#1235&lt;/td&gt;
-                                        &lt;td&gt;Bob Jones&lt;/td&gt;
-                                        &lt;td&gt;&lt;span class="vd-badge vd-badge-warning"&gt;Pending&lt;/span&gt;&lt;/td&gt;
-                                        &lt;td&gt;$85.50&lt;/td&gt;
-                                    &lt;/tr&gt;
-                                &lt;/tbody&gt;
-                            &lt;/table&gt;
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-                &lt;/div&gt;
-            &lt;/main&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-
-    &lt;script src="https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.3.8/dist/vanduo.min.js"&gt;&lt;/script&gt;
-    &lt;script&gt;Vanduo.init();&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Template 4: Blog Post -->
-    <div class="vd-row vd-mb-8">
-        <div class="vd-col-12">
-            <div class="vd-card vd-card-glow demo-card">
-                <div class="vd-card-header">
-                    <h4><i class="ph ph-newspaper"></i> Blog Post with Sidebar</h4>
-                </div>
-                <div class="vd-card-body">
-                    <p class="vd-mb-4">A content-first blog layout with article typography, author card, tag chips, and a sticky sidebar with related posts and newsletter signup.</p>
-                    <div class="vd-alert vd-alert-info vd-mb-4">
-                        <i class="ph ph-lightbulb"></i>
-                        <div>
-                            <strong>Key patterns:</strong> Fibonacci content/sidebar ratio, card author bio, tag chips, sticky newsletter form, prev/next article links.
-                        </div>
-                    </div>
-                    <div class="vd-code-snippet" data-collapsible>
-                        <button class="vd-code-snippet-toggle" aria-expanded="false">
-                            <span class="vd-code-snippet-toggle-icon"></span>
-                            <span>View Code</span>
-                        </button>
-                        <div class="vd-code-snippet-content">
-                            <div class="vd-code-snippet-header">
-                                <div class="vd-code-snippet-tabs" role="tablist">
-                                    <button class="vd-code-snippet-tab is-active" data-lang="html">index.html</button>
-                                </div>
-                                <button class="vd-code-snippet-copy" aria-label="Copy code">
-                                    <span class="vd-code-snippet-copy-icon"></span>
-                                    <span class="vd-code-snippet-copy-text">Copy</span>
-                                </button>
-                            </div>
-                            <div class="vd-code-snippet-body">
-                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Blog Post --&gt;</span>
-&lt;!DOCTYPE html&gt;
-&lt;html lang="en" data-theme="light"&gt;
-&lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-    &lt;title&gt;Blog Post — Vanduo&lt;/title&gt;
-    &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.3.8/dist/vanduo.min.css"&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-    &lt;nav class="vd-navbar"&gt;
-        &lt;div class="vd-navbar-container"&gt;
-            &lt;a href="#" class="vd-navbar-brand"&gt;Vanduo Blog&lt;/a&gt;
-        &lt;/div&gt;
-    &lt;/nav&gt;
-
-    &lt;article class="vd-container vd-py-13"&gt;
-        &lt;div class="vd-row"&gt;
-            <span class="code-comment">&lt;!-- Main Content: 8 columns (Fibonacci major) --&gt;</span>
-            &lt;div class="vd-col-12 vd-col-lg-8"&gt;
-                &lt;header class="vd-mb-8"&gt;
-                    &lt;h1&gt;Getting Started with CSS Variables&lt;/h1&gt;
-                    &lt;div class="vd-row items-center vd-mt-5"&gt;
-                        &lt;div class="vd-col-auto"&gt;
-                            &lt;img src="avatar.jpg" alt="Author" class="vd-rounded-full" width="40" height="40"&gt;
-                        &lt;/div&gt;
-                        &lt;div class="vd-col-auto"&gt;
-                            &lt;span class="vd-text-sm vd-font-medium"&gt;Jane Doe&lt;/span&gt;
-                            &lt;span class="vd-text-sm vd-text-muted"&gt; · Jan 15, 2026&lt;/span&gt;
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-                    &lt;div class="vd-mt-5"&gt;
-                        &lt;span class="vd-chip"&gt;CSS&lt;/span&gt;
-                        &lt;span class="vd-chip"&gt;Tutorial&lt;/span&gt;
-                        &lt;span class="vd-chip"&gt;Design&lt;/span&gt;
-                    &lt;/div&gt;
-                &lt;/header&gt;
-
-                &lt;p class="vd-text-lg vd-text-muted vd-mb-8"&gt;
-                    CSS Custom Properties (variables) have transformed how we think about theming on the web...
-                &lt;/p&gt;
-
-                &lt;h2&gt;Why CSS Variables?&lt;/h2&gt;
-                &lt;p&gt;Unlike preprocessor variables, CSS Custom Properties...&lt;/p&gt;
-
-                &lt;h2&gt;Basic Syntax&lt;/h2&gt;
-                &lt;div class="vd-code-snippet vd-mt-5 vd-mb-8"&gt;
-                    &lt;div class="vd-code-snippet-body"&gt;
-                        &lt;pre&gt;&lt;code&gt;:root {
-  --color-primary: #3b5bdb;
-}&lt;/code&gt;&lt;/pre&gt;
-                    &lt;/div&gt;
-                &lt;/div&gt;
-
-                &lt;p&gt;Continue your article content here...&lt;/p&gt;
-
-                <span class="code-comment">&lt;!-- Author Card --&gt;</span>
-                &lt;div class="vd-card vd-mt-13"&gt;
-                    &lt;div class="vd-card-body"&gt;
-                        &lt;div class="vd-row items-center"&gt;
-                            &lt;div class="vd-col-auto"&gt;
-                                &lt;img src="avatar.jpg" alt="Jane Doe" class="vd-rounded-full" width="64" height="64"&gt;
-                            &lt;/div&gt;
-                            &lt;div class="vd-col"&gt;
-                                &lt;h5 class="vd-mb-2"&gt;Jane Doe&lt;/h5&gt;
-                                &lt;p class="vd-text-sm vd-text-muted vd-mb-0"&gt;Frontend engineer and design systems enthusiast.&lt;/p&gt;
-                            &lt;/div&gt;
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-
-            <span class="code-comment">&lt;!-- Sidebar: 4 columns (Fibonacci minor) --&gt;</span>
-            &lt;aside class="vd-col-12 vd-col-lg-4"&gt;
-                &lt;div class="vd-sticky-top" style="top: 2rem;"&gt;
-                    <span class="code-comment">&lt;!-- Newsletter --&gt;</span>
-                    &lt;div class="vd-card vd-card-filled vd-mb-8"&gt;
-                        &lt;div class="vd-card-body"&gt;
-                            &lt;h5 class="vd-mb-3"&gt;Newsletter&lt;/h5&gt;
-                            &lt;p class="vd-text-sm vd-text-muted vd-mb-5"&gt;Get the latest posts delivered to your inbox.&lt;/p&gt;
-                            &lt;input type="email" class="vd-input vd-mb-3" placeholder="you@example.com"&gt;
-                            &lt;button class="vd-btn vd-btn-primary vd-btn-block"&gt;Subscribe&lt;/button&gt;
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-
-                    <span class="code-comment">&lt;!-- Related Posts --&gt;</span>
-                    &lt;div class="vd-card"&gt;
-                        &lt;div class="vd-card-header"&gt;
-                            &lt;h5&gt;Related Posts&lt;/h5&gt;
-                        &lt;/div&gt;
-                        &lt;div class="vd-card-body"&gt;
-                            &lt;ul class="vd-list vd-list-none"&gt;
-                                &lt;li class="vd-mb-3"&gt;&lt;a href="#"&gt;Understanding Grid Layouts&lt;/a&gt;&lt;/li&gt;
-                                &lt;li class="vd-mb-3"&gt;&lt;a href="#"&gt;Dark Mode Best Practices&lt;/a&gt;&lt;/li&gt;
-                                &lt;li&gt;&lt;a href="#"&gt;Accessibility Checklist&lt;/a&gt;&lt;/li&gt;
-                            &lt;/ul&gt;
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-                &lt;/div&gt;
-            &lt;/aside&gt;
-        &lt;/div&gt;
-    &lt;/article&gt;
-
-    &lt;footer class="vd-footer"&gt;
-        &lt;div class="vd-container"&gt;
-            &lt;p class="vd-text-center vd-mb-0"&gt;&amp;copy; 2026 Vanduo Blog&lt;/p&gt;
-        &lt;/div&gt;
-    &lt;/footer&gt;
-
-    &lt;script src="https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.3.8/dist/vanduo.min.js"&gt;&lt;/script&gt;
-    &lt;script&gt;Vanduo.init();&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Template 5: Authentication Forms -->
-    <div class="vd-row vd-mb-8">
-        <div class="vd-col-12">
-            <div class="vd-card vd-card-glow demo-card">
-                <div class="vd-card-header">
-                    <h4><i class="ph ph-lock-key"></i> Authentication Forms</h4>
-                </div>
-                <div class="vd-card-body">
-                    <p class="vd-mb-4">A centered login form with validation-ready markup, password visibility toggle, and a registration variant. Uses offset grid for centering and form validation attributes.</p>
-                    <div class="vd-alert vd-alert-info vd-mb-4">
-                        <i class="ph ph-lightbulb"></i>
-                        <div>
-                            <strong>Key patterns:</strong> Centered card with offset, floating labels, validation states, password toggle, social login buttons, form error alerts.
-                        </div>
-                    </div>
-                    <div class="vd-code-snippet" data-collapsible>
-                        <button class="vd-code-snippet-toggle" aria-expanded="false">
-                            <span class="vd-code-snippet-toggle-icon"></span>
-                            <span>View Code</span>
-                        </button>
-                        <div class="vd-code-snippet-content">
-                            <div class="vd-code-snippet-header">
-                                <div class="vd-code-snippet-tabs" role="tablist">
-                                    <button class="vd-code-snippet-tab is-active" data-lang="html">index.html</button>
-                                </div>
-                                <button class="vd-code-snippet-copy" aria-label="Copy code">
-                                    <span class="vd-code-snippet-copy-icon"></span>
-                                    <span class="vd-code-snippet-copy-text">Copy</span>
-                                </button>
-                            </div>
-                            <div class="vd-code-snippet-body">
-                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Authentication: Login --&gt;</span>
-&lt;!DOCTYPE html&gt;
-&lt;html lang="en" data-theme="light"&gt;
-&lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-    &lt;title&gt;Sign In — Vanduo&lt;/title&gt;
-    &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.3.8/dist/vanduo.min.css"&gt;
-    &lt;style&gt;
-        body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            background: var(--bg-secondary);
-        }
-    &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-    &lt;div class="vd-container"&gt;
-        &lt;div class="vd-row"&gt;
-            &lt;div class="vd-col-12 vd-col-md-6 vd-offset-md-3 vd-col-lg-4 vd-offset-lg-4"&gt;
-                &lt;div class="vd-card vd-card-glow"&gt;
-                    &lt;div class="vd-card-body vd-p-8"&gt;
-                        &lt;div class="vd-text-center vd-mb-8"&gt;
-                            &lt;h3 class="vd-mb-3"&gt;Welcome back&lt;/h3&gt;
-                            &lt;p class="vd-text-sm vd-text-muted vd-mb-0"&gt;Sign in to your account&lt;/p&gt;
-                        &lt;/div&gt;
-
-                        <span class="code-comment">&lt;!-- Social Login --&gt;</span>
-                        &lt;div class="vd-row vd-mb-5"&gt;
-                            &lt;div class="vd-col-6"&gt;
-                                &lt;button class="vd-btn vd-btn-outline vd-btn-block vd-btn-sm"&gt;
-                                    &lt;i class="ph ph-google-logo"&gt;&lt;/i&gt; Google
-                                &lt;/button&gt;
-                            &lt;/div&gt;
-                            &lt;div class="vd-col-6"&gt;
-                                &lt;button class="vd-btn vd-btn-outline vd-btn-block vd-btn-sm"&gt;
-                                    &lt;i class="ph ph-github-logo"&gt;&lt;/i&gt; GitHub
-                                &lt;/button&gt;
-                            &lt;/div&gt;
-                        &lt;/div&gt;
-
-                        &lt;div class="vd-text-center vd-mb-5"&gt;
-                            &lt;span class="vd-text-sm vd-text-muted"&gt;or continue with email&lt;/span&gt;
-                        &lt;/div&gt;
-
-                        <span class="code-comment">&lt;!-- Email Form --&gt;</span>
-                        &lt;form&gt;
-                            &lt;div class="vd-form-group vd-mb-5"&gt;
-                                &lt;label for="email"&gt;Email address&lt;/label&gt;
-                                &lt;input type="email" id="email" class="vd-input" placeholder="you@example.com" required&gt;
-                            &lt;/div&gt;
-                            &lt;div class="vd-form-group vd-mb-5"&gt;
-                                &lt;label for="password"&gt;Password&lt;/label&gt;
-                                &lt;div class="vd-input-group"&gt;
-                                    &lt;input type="password" id="password" class="vd-input" placeholder="••••••••" required&gt;
-                                    &lt;button type="button" class="vd-btn vd-btn-outline" data-toggle="password"&gt;
-                                        &lt;i class="ph ph-eye"&gt;&lt;/i&gt;
-                                    &lt;/button&gt;
-                                &lt;/div&gt;
-                            &lt;/div&gt;
-                            &lt;div class="vd-row items-center vd-mb-5"&gt;
-                                &lt;div class="vd-col"&gt;
-                                    &lt;label class="vd-checkbox"&gt;
-                                        &lt;input type="checkbox"&gt;
-                                        &lt;span&gt;Remember me&lt;/span&gt;
-                                    &lt;/label&gt;
-                                &lt;/div&gt;
-                                &lt;div class="vd-col-auto"&gt;
-                                    &lt;a href="#" class="vd-text-sm"&gt;Forgot password?&lt;/a&gt;
-                                &lt;/div&gt;
-                            &lt;/div&gt;
-                            &lt;button type="submit" class="vd-btn vd-btn-primary vd-btn-block"&gt;Sign In&lt;/button&gt;
-                        &lt;/form&gt;
-
-                        &lt;p class="vd-text-center vd-text-sm vd-text-muted vd-mt-8 vd-mb-0"&gt;
-                            Don't have an account? &lt;a href="#"&gt;Sign up&lt;/a&gt;
-                        &lt;/p&gt;
-                    &lt;/div&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-
-    &lt;script src="https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.3.8/dist/vanduo.min.js"&gt;&lt;/script&gt;
-    &lt;script&gt;Vanduo.init();&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- What's Next block -->
-    <div class="vd-mt-8" style="border-top: 1px solid var(--border-color); padding-top: 2.5rem; padding-bottom: 3rem;">
-        <h4 class="vd-text-lg vd-mb-5"><i class="ph ph-arrow-circle-right"></i> What's Next?</h4>
-        <div class="vd-row" style="gap: 1.25rem;">
-            <div class="vd-col-12 vd-col-md-6 vd-mb-4">
-                <a href="#docs/first-layout" data-route="docs/first-layout" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
-                    <div class="vd-card-body">
-                        <h4 class="vd-text-md vd-mb-2">Building Your First Layout</h4>
-                        <p class="vd-text-sm vd-text-muted vd-mb-0">Learn the grid system fundamentals used in these templates.</p>
-                    </div>
-                </a>
-            </div>
-            <div class="vd-col-12 vd-col-md-6 vd-mb-4">
-                <a href="#docs/css-variables-theming" data-route="docs/css-variables-theming" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
-                    <div class="vd-card-body">
-                        <h4 class="vd-text-md vd-mb-2">CSS Variables &amp; Theming</h4>
-                        <p class="vd-text-sm vd-text-muted vd-mb-0">Customize colors, spacing, and typography to match your brand.</p>
-                    </div>
-                </a>
             </div>
         </div>
     </div>

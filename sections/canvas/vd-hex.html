@@ -1,7 +1,7 @@
 <!-- Canonical vd-hex documentation. Mirror for stand-alone Labs: labs/doc/vd-hex.html — keep in sync. -->
 <section id="vd-hex">
-    <h4 class="demo-title"><i class="ph ph-hexagon"></i>vd-hex Grid</h4>
-    <p class="vd-mb-8">Interactive hex-grid canvas component with selection, pan/zoom, terrain helpers, and optional grid rotation. Built on flat-top axial coordinates — suitable for visualization, prototyping, and experimental game mechanics.</p>
+    <h4 class="demo-title"><i class="ph ph-hexagon"></i>Hex Grid</h4>
+    <p class="vd-mb-8">Vanduo Hex Grid is an interactive hex-grid canvas component with selection, pan/zoom, terrain helpers, and optional grid rotation. Built on flat-top axial coordinates — suitable for visualization, prototyping, and experimental game mechanics.</p>
 
     <!-- Canvas Container with Toolbar -->
     <div class="vd-card vd-mb-6" style="padding: 1rem;">
@@ -114,7 +114,7 @@
                         <pre class="vd-code-snippet-pane is-active" data-lang="html"><code class="language-html">&lt;div id="hex-demo-container"&gt;
     &lt;canvas id="hex-demo"&gt;&lt;/canvas&gt;
 &lt;/div&gt;</code></pre>
-                        <pre class="vd-code-snippet-pane" data-lang="js"><code class="language-javascript">import { VdHexGrid } from './hex-grid.js';
+                        <pre class="vd-code-snippet-pane" data-lang="js"><code class="language-javascript">import { VdHexGrid } from '@vanduo-oss/hex-grid';
 
 const grid = new VdHexGrid({
     element: document.getElementById('hex-demo-container'),
@@ -278,7 +278,7 @@ grid.setRotation(-Math.PI / 6);</code></pre>
                 <i class="ph ph-file-code"></i> Source Files
             </h4>
             <p class="vd-text-muted vd-mb-4">
-                The canonical source lives in the Vanduo Framework repository. Labs ships mirrors of these files as ES modules for standalone use.
+                Install with <code>pnpm add @vanduo-oss/hex-grid</code>. The package is the canonical distribution;
             </p>
             <table class="vd-table vd-table-hover">
                 <thead>
@@ -290,14 +290,14 @@ grid.setRotation(-Math.PI / 6);</code></pre>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><code>vd-hex.js</code></td>
+                        <td><code>dist/index.js</code></td>
                         <td><code>VdHexGrid</code> class — canvas grid, events, pan/zoom, terrain API</td>
-                        <td><code>framework/js/components/</code></td>
+                        <td><code>@vanduo-oss/hex-grid</code></td>
                     </tr>
                     <tr>
-                        <td><code>hex-math.js</code></td>
+                        <td><code>dist/hex-math.js</code></td>
                         <td>Axial coordinate helpers, terrain constants and utilities</td>
-                        <td><code>framework/js/utils/</code></td>
+                        <td><code>@vanduo-oss/hex-grid/hex-math</code></td>
                     </tr>
                 </tbody>
             </table>

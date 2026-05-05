@@ -72,7 +72,7 @@ export function axialRound(q, r) {
     const s = -q - r;
     let rq = Math.round(q);
     let rr = Math.round(r);
-    let rs = Math.round(s);
+    const rs = Math.round(s);
     const qDiff = Math.abs(rq - q);
     const rDiff = Math.abs(rr - r);
     const sDiff = Math.abs(rs - s);

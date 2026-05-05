@@ -17,28 +17,6 @@
     return div.innerHTML;
   }
 
-  function _appendHighlightedText(target, text, query) {
-    const safeQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const re = new RegExp(safeQuery, 'gi');
-    let lastIndex = 0;
-    let match;
-
-    while ((match = re.exec(text)) !== null) {
-      if (match.index > lastIndex) {
-        target.appendChild(document.createTextNode(text.slice(lastIndex, match.index)));
-      }
-      const span = document.createElement('span');
-      span.className = 'vd-suggest-match';
-      span.textContent = match[0];
-      target.appendChild(span);
-      lastIndex = match.index + match[0].length;
-    }
-
-    if (lastIndex < text.length) {
-      target.appendChild(document.createTextNode(text.slice(lastIndex)));
-    }
-  }
-
   /**
    * Allow same-origin URLs by default, or an explicit allowlist of origins.
    * @param {string} url
@@ -46,6 +24,17 @@
    * @returns {boolean}
    */
   function _isSafeUrl(url, allowlist) {
+    try {
+      const resolved = new URL(url, window.location.href);
+      if (resolved.origin === window.location.origin) return true;
+      return allowlist.includes(resolved.origin);
+    } catch (_e) {
+      return false;
+    }
+  }
+
+  const Suggest = {
+    instances: new Map(),
 
     init: function () {
       const inputs = document.querySelectorAll('[data-vd-suggest], [data-vd-autocomplete]');
@@ -120,7 +109,10 @@
 
           const text = typeof item === 'object' ? (item.label || item.text || String(item)) : String(item);
           if (query) {
-            _appendHighlightedText(li, text, query);
+            // Escape HTML first to prevent XSS, then highlight matches in the safe string
+            const escaped = _escapeHtml(text);
+            const re = new RegExp('(' + query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+            li.innerHTML = escaped.replace(re, '<span class="vd-suggest-match">$1</span>');
           } else {
             li.textContent = text;
           }

@@ -7,304 +7,232 @@
                     <span>Templates</span>
                 </div>
                 <div class="templates-hero-copy">
-                    <h1>Browse Vanduo templates inside the same SPA shell.</h1>
+                    <h1>Production-ready Vanduo templates</h1>
                     <p class="vd-text-lg vd-text-muted">
-                        The gallery now follows the same architecture as Home, About, Changelog, and Docs landing pages.
-                        Only the immersive previews remain separate full-screen routes.
+                        Browse screenshot-based template rows here, open implementation notes in the docs shell, and review live previews on <strong>templates.vanduo.dev</strong>
                     </p>
-                </div>
-                <div class="templates-hero-actions">
-                    <a href="#template-gallery" class="vd-btn vd-btn-primary vd-btn-lg">
-                        <i class="ph ph-arrow-down"></i>
-                        Browse Templates
-                    </a>
-                    <a href="#docs/starter-templates" data-route="docs/starter-templates" class="vd-btn vd-btn-outline vd-btn-lg">
-                        <i class="ph ph-code-block"></i>
-                        Open Starter Guide
-                    </a>
-                    <a href="https://github.com/vanduo-oss/framework" class="vd-btn vd-btn-outline vd-btn-lg"
-                        target="_blank" rel="noopener">
-                        <i class="ph ph-github-logo"></i>
-                        GitHub
-                    </a>
                 </div>
                 <div class="templates-stat-grid" aria-label="Templates overview">
                     <div class="templates-stat">
                         <strong>6</strong>
-                        <span>Full-screen preview routes shipping now</span>
+                        <span>Advanced templates hosted separately</span>
                     </div>
                     <div class="templates-stat">
-                        <strong>SPA</strong>
-                        <span>Gallery lives in the main docs application shell</span>
+                        <strong>No iframes</strong>
+                        <span>Docs catalog uses generated screenshots</span>
                     </div>
                     <div class="templates-stat">
-                        <strong>Live</strong>
-                        <span>Embedded previews instead of static screenshots</span>
+                        <strong>Rows</strong>
+                        <span>Wide cards optimized for scanning</span>
                     </div>
                     <div class="templates-stat">
-                        <strong>Focused</strong>
-                        <span>Only full-screen previews break out into dedicated HTML routes</span>
+                        <strong>Details</strong>
+                        <span>Each template has guidance and snippets</span>
                     </div>
                 </div>
             </section>
 
-            <section id="template-gallery" class="templates-section">
+            <section id="template-gallery" class="templates-section" data-template-view="gallery">
                 <div class="templates-section-heading">
                     <div>
                         <h2>Featured Templates</h2>
-                        <p class="vd-text-muted">Each card stays in the SPA gallery and opens a dedicated full-screen route when you want immersive review.</p>
+                        <p class="vd-text-muted">Each row opens a docs detail page. Live previews run on the dedicated templates subdomain.</p>
                     </div>
                 </div>
 
-                <div class="template-preview-grid">
-                    <article class="vd-card vd-card-glow template-preview-card">
-                        <div class="vd-card-header">
-                            <div class="templates-eyebrow">
-                                <i class="ph ph-megaphone"></i>
-                                <span>Marketing</span>
-                            </div>
-                            <h3 class="vd-mt-4 vd-mb-3">Launch Landing</h3>
-                            <p class="vd-text-muted vd-mb-0">Hero, feature storytelling, pricing, proof blocks, and conversion-focused CTAs.</p>
-                        </div>
-                        <div class="vd-card-body">
-                            <div class="template-preview-frame">
-                                <div class="template-preview-toolbar" aria-hidden="true">
-                                    <div class="template-preview-dots"><span></span><span></span><span></span></div>
-                                    <small>/templates/marketing-landing/</small>
-                                </div>
-                                <iframe title="Launch Landing preview" src="./templates/marketing-landing/" loading="lazy"></iframe>
-                            </div>
-                            <div class="template-tag-list" aria-label="Launch Landing details">
-                                <span class="template-tag"><i class="ph ph-rocket-launch"></i> Conversion</span>
-                                <span class="template-tag"><i class="ph ph-cards"></i> Feature blocks</span>
-                                <span class="template-tag"><i class="ph ph-credit-card"></i> Pricing</span>
-                            </div>
-                        </div>
-                        <div class="vd-card-footer">
+                <div class="template-preview-grid" aria-label="Template gallery">
+                    <article class="vd-card vd-card-glow template-preview-card" data-template-card="marketing-landing">
+                        <a href="#templates/marketing-landing" data-route="templates/marketing-landing" class="template-row-media" aria-label="Open Launch Landing details">
+                            <img class="template-shot template-shot-light" src="./images/templates/marketing-landing-light.png" alt="Launch Landing template screenshot" loading="lazy">
+                            <img class="template-shot template-shot-dark" src="./images/templates/marketing-landing-dark.png" alt="Launch Landing template screenshot" loading="lazy">
+                        </a>
+                        <div class="template-row-content">
+                            <div class="templates-eyebrow"><i class="ph ph-megaphone"></i><span>Marketing</span></div>
+                            <h3>Launch Landing</h3>
+                            <p class="vd-text-muted">Hero, feature storytelling, pricing, proof blocks, and conversion-focused CTAs.</p>
+                            <div class="template-tag-list"><span class="template-tag">Conversion</span><span class="template-tag">Feature blocks</span><span class="template-tag">Pricing</span></div>
                             <div class="template-card-actions">
-                                <a href="./templates/marketing-landing/" class="vd-btn vd-btn-primary">
-                                    <i class="ph ph-arrows-out"></i>
-                                    Full Preview
-                                </a>
-                                <a href="#docs/starter-templates" data-route="docs/starter-templates" class="vd-btn vd-btn-outline">
-                                    <i class="ph ph-code"></i>
-                                    View Guide
-                                </a>
+                                <a href="#templates/marketing-landing" data-route="templates/marketing-landing" class="vd-btn vd-btn-primary">View Template Page</a>
+                                <a href="https://templates.vanduo.dev/marketing-landing/" class="vd-btn vd-btn-outline" target="_blank" rel="noopener">Live Preview</a>
                             </div>
                         </div>
                     </article>
 
-                    <article class="vd-card vd-card-glow template-preview-card">
-                        <div class="vd-card-header">
-                            <div class="templates-eyebrow">
-                                <i class="ph ph-book-open-text"></i>
-                                <span>Documentation</span>
-                            </div>
-                            <h3 class="vd-mt-4 vd-mb-3">Knowledge Base</h3>
-                            <p class="vd-text-muted vd-mb-0">Sticky side navigation, readable content rhythm, code blocks, and content hierarchy.</p>
-                        </div>
-                        <div class="vd-card-body">
-                            <div class="template-preview-frame">
-                                <div class="template-preview-toolbar" aria-hidden="true">
-                                    <div class="template-preview-dots"><span></span><span></span><span></span></div>
-                                    <small>/templates/documentation/</small>
-                                </div>
-                                <iframe title="Knowledge Base preview" src="./templates/documentation/" loading="lazy"></iframe>
-                            </div>
-                            <div class="template-tag-list" aria-label="Knowledge Base details">
-                                <span class="template-tag"><i class="ph ph-sidebar"></i> Sticky sidebar</span>
-                                <span class="template-tag"><i class="ph ph-code-block"></i> Code snippets</span>
-                                <span class="template-tag"><i class="ph ph-compass"></i> Guided reading</span>
-                            </div>
-                        </div>
-                        <div class="vd-card-footer">
+                    <article class="vd-card vd-card-glow template-preview-card" data-template-card="documentation">
+                        <a href="#templates/documentation" data-route="templates/documentation" class="template-row-media" aria-label="Open Knowledge Base details">
+                            <img class="template-shot template-shot-light" src="./images/templates/documentation-light.png" alt="Knowledge Base template screenshot" loading="lazy">
+                            <img class="template-shot template-shot-dark" src="./images/templates/documentation-dark.png" alt="Knowledge Base template screenshot" loading="lazy">
+                        </a>
+                        <div class="template-row-content">
+                            <div class="templates-eyebrow"><i class="ph ph-book-open-text"></i><span>Documentation</span></div>
+                            <h3>Knowledge Base</h3>
+                            <p class="vd-text-muted">Sticky side navigation, readable content rhythm, code blocks, and content hierarchy.</p>
+                            <div class="template-tag-list"><span class="template-tag">Sticky sidebar</span><span class="template-tag">Code snippets</span><span class="template-tag">Guided reading</span></div>
                             <div class="template-card-actions">
-                                <a href="./templates/documentation/" class="vd-btn vd-btn-primary">
-                                    <i class="ph ph-arrows-out"></i>
-                                    Full Preview
-                                </a>
-                                <a href="#docs/starter-templates" data-route="docs/starter-templates" class="vd-btn vd-btn-outline">
-                                    <i class="ph ph-code"></i>
-                                    View Guide
-                                </a>
+                                <a href="#templates/documentation" data-route="templates/documentation" class="vd-btn vd-btn-primary">View Template Page</a>
+                                <a href="https://templates.vanduo.dev/documentation/" class="vd-btn vd-btn-outline" target="_blank" rel="noopener">Live Preview</a>
                             </div>
                         </div>
                     </article>
 
-                    <article class="vd-card vd-card-glow template-preview-card">
-                        <div class="vd-card-header">
-                            <div class="templates-eyebrow">
-                                <i class="ph ph-buildings"></i>
-                                <span>SaaS</span>
-                            </div>
-                            <h3 class="vd-mt-4 vd-mb-3">Growth SaaS</h3>
-                            <p class="vd-text-muted vd-mb-0">Value-led hero, product proof, plan comparison, and operator-friendly product surfaces.</p>
-                        </div>
-                        <div class="vd-card-body">
-                            <div class="template-preview-frame">
-                                <div class="template-preview-toolbar" aria-hidden="true">
-                                    <div class="template-preview-dots"><span></span><span></span><span></span></div>
-                                    <small>/templates/saas/</small>
-                                </div>
-                                <iframe title="Growth SaaS preview" src="./templates/saas/" loading="lazy"></iframe>
-                            </div>
-                            <div class="template-tag-list" aria-label="Growth SaaS details">
-                                <span class="template-tag"><i class="ph ph-trend-up"></i> Product growth</span>
-                                <span class="template-tag"><i class="ph ph-layout"></i> App teaser</span>
-                                <span class="template-tag"><i class="ph ph-users-three"></i> Team workflow</span>
-                            </div>
-                        </div>
-                        <div class="vd-card-footer">
+                    <article class="vd-card vd-card-glow template-preview-card" data-template-card="saas">
+                        <a href="#templates/saas" data-route="templates/saas" class="template-row-media" aria-label="Open Growth SaaS details">
+                            <img class="template-shot template-shot-light" src="./images/templates/saas-light.png" alt="Growth SaaS template screenshot" loading="lazy">
+                            <img class="template-shot template-shot-dark" src="./images/templates/saas-dark.png" alt="Growth SaaS template screenshot" loading="lazy">
+                        </a>
+                        <div class="template-row-content">
+                            <div class="templates-eyebrow"><i class="ph ph-buildings"></i><span>SaaS</span></div>
+                            <h3>Growth SaaS</h3>
+                            <p class="vd-text-muted">Value-led hero, product proof, plan comparison, and operator-friendly product surfaces.</p>
+                            <div class="template-tag-list"><span class="template-tag">Product growth</span><span class="template-tag">App teaser</span><span class="template-tag">Team workflow</span></div>
                             <div class="template-card-actions">
-                                <a href="./templates/saas/" class="vd-btn vd-btn-primary">
-                                    <i class="ph ph-arrows-out"></i>
-                                    Full Preview
-                                </a>
-                                <a href="#docs/starter-templates" data-route="docs/starter-templates" class="vd-btn vd-btn-outline">
-                                    <i class="ph ph-code"></i>
-                                    View Guide
-                                </a>
+                                <a href="#templates/saas" data-route="templates/saas" class="vd-btn vd-btn-primary">View Template Page</a>
+                                <a href="https://templates.vanduo.dev/saas/" class="vd-btn vd-btn-outline" target="_blank" rel="noopener">Live Preview</a>
                             </div>
                         </div>
                     </article>
 
-                    <article class="vd-card vd-card-glow template-preview-card">
-                        <div class="vd-card-header">
-                            <div class="templates-eyebrow">
-                                <i class="ph ph-chart-line-up"></i>
-                                <span>Dashboard</span>
-                            </div>
-                            <h3 class="vd-mt-4 vd-mb-3">Ops Dashboard</h3>
-                            <p class="vd-text-muted vd-mb-0">Sidebar app shell, metrics, chart surface, table views, and recent activity modules.</p>
-                        </div>
-                        <div class="vd-card-body">
-                            <div class="template-preview-frame">
-                                <div class="template-preview-toolbar" aria-hidden="true">
-                                    <div class="template-preview-dots"><span></span><span></span><span></span></div>
-                                    <small>/templates/dashboard/</small>
-                                </div>
-                                <iframe title="Ops Dashboard preview" src="./templates/dashboard/" loading="lazy"></iframe>
-                            </div>
-                            <div class="template-tag-list" aria-label="Ops Dashboard details">
-                                <span class="template-tag"><i class="ph ph-gauge"></i> KPI cards</span>
-                                <span class="template-tag"><i class="ph ph-chart-bar"></i> Analytics</span>
-                                <span class="template-tag"><i class="ph ph-table"></i> Operations table</span>
-                            </div>
-                        </div>
-                        <div class="vd-card-footer">
+                    <article class="vd-card vd-card-glow template-preview-card" data-template-card="dashboard">
+                        <a href="#templates/dashboard" data-route="templates/dashboard" class="template-row-media" aria-label="Open Ops Dashboard details">
+                            <img class="template-shot template-shot-light" src="./images/templates/dashboard-light.png" alt="Ops Dashboard template screenshot" loading="lazy">
+                            <img class="template-shot template-shot-dark" src="./images/templates/dashboard-dark.png" alt="Ops Dashboard template screenshot" loading="lazy">
+                        </a>
+                        <div class="template-row-content">
+                            <div class="templates-eyebrow"><i class="ph ph-chart-line-up"></i><span>Dashboard</span></div>
+                            <h3>Ops Dashboard</h3>
+                            <p class="vd-text-muted">Sidebar app shell, metrics, chart surface, table views, and recent activity modules.</p>
+                            <div class="template-tag-list"><span class="template-tag">KPI cards</span><span class="template-tag">Analytics</span><span class="template-tag">Operations table</span></div>
                             <div class="template-card-actions">
-                                <a href="./templates/dashboard/" class="vd-btn vd-btn-primary">
-                                    <i class="ph ph-arrows-out"></i>
-                                    Full Preview
-                                </a>
-                                <a href="#docs/starter-templates" data-route="docs/starter-templates" class="vd-btn vd-btn-outline">
-                                    <i class="ph ph-code"></i>
-                                    View Guide
-                                </a>
+                                <a href="#templates/dashboard" data-route="templates/dashboard" class="vd-btn vd-btn-primary">View Template Page</a>
+                                <a href="https://templates.vanduo.dev/dashboard/" class="vd-btn vd-btn-outline" target="_blank" rel="noopener">Live Preview</a>
                             </div>
                         </div>
                     </article>
 
-                    <article class="vd-card vd-card-glow template-preview-card">
-                        <div class="vd-card-header">
-                            <div class="templates-eyebrow">
-                                <i class="ph ph-user-circle"></i>
-                                <span>Portfolio</span>
-                            </div>
-                            <h3 class="vd-mt-4 vd-mb-3">Creative Portfolio</h3>
-                            <p class="vd-text-muted vd-mb-0">Personal brand front page with project cases, credibility metrics, and a contact CTA flow.</p>
-                        </div>
-                        <div class="vd-card-body">
-                            <div class="template-preview-frame">
-                                <div class="template-preview-toolbar" aria-hidden="true">
-                                    <div class="template-preview-dots"><span></span><span></span><span></span></div>
-                                    <small>/templates/portfolio/</small>
-                                </div>
-                                <iframe title="Creative Portfolio preview" src="./templates/portfolio/" loading="lazy"></iframe>
-                            </div>
-                            <div class="template-tag-list" aria-label="Creative Portfolio details">
-                                <span class="template-tag"><i class="ph ph-briefcase"></i> Case studies</span>
-                                <span class="template-tag"><i class="ph ph-image-square"></i> Visual work</span>
-                                <span class="template-tag"><i class="ph ph-handshake"></i> Contact ready</span>
-                            </div>
-                        </div>
-                        <div class="vd-card-footer">
+                    <article class="vd-card vd-card-glow template-preview-card" data-template-card="portfolio">
+                        <a href="#templates/portfolio" data-route="templates/portfolio" class="template-row-media" aria-label="Open Creative Portfolio details">
+                            <img class="template-shot template-shot-light" src="./images/templates/portfolio-light.png" alt="Creative Portfolio template screenshot" loading="lazy">
+                            <img class="template-shot template-shot-dark" src="./images/templates/portfolio-dark.png" alt="Creative Portfolio template screenshot" loading="lazy">
+                        </a>
+                        <div class="template-row-content">
+                            <div class="templates-eyebrow"><i class="ph ph-user-circle"></i><span>Portfolio</span></div>
+                            <h3>Creative Portfolio</h3>
+                            <p class="vd-text-muted">Personal brand front page with project cases, credibility metrics, and a contact CTA flow.</p>
+                            <div class="template-tag-list"><span class="template-tag">Case studies</span><span class="template-tag">Visual work</span><span class="template-tag">Contact ready</span></div>
                             <div class="template-card-actions">
-                                <a href="./templates/portfolio/" class="vd-btn vd-btn-primary">
-                                    <i class="ph ph-arrows-out"></i>
-                                    Full Preview
-                                </a>
-                                <a href="#docs/starter-templates" data-route="docs/starter-templates" class="vd-btn vd-btn-outline">
-                                    <i class="ph ph-code"></i>
-                                    View Guide
-                                </a>
+                                <a href="#templates/portfolio" data-route="templates/portfolio" class="vd-btn vd-btn-primary">View Template Page</a>
+                                <a href="https://templates.vanduo.dev/portfolio/" class="vd-btn vd-btn-outline" target="_blank" rel="noopener">Live Preview</a>
                             </div>
                         </div>
                     </article>
 
-                    <article class="vd-card vd-card-glow template-preview-card">
-                        <div class="vd-card-header">
-                            <div class="templates-eyebrow">
-                                <i class="ph ph-newspaper"></i>
-                                <span>Blog</span>
-                            </div>
-                            <h3 class="vd-mt-4 vd-mb-3">Editorial Journal</h3>
-                            <p class="vd-text-muted vd-mb-0">Featured article hero, secondary stories, category rhythm, and a high-legibility reading surface.</p>
-                        </div>
-                        <div class="vd-card-body">
-                            <div class="template-preview-frame">
-                                <div class="template-preview-toolbar" aria-hidden="true">
-                                    <div class="template-preview-dots"><span></span><span></span><span></span></div>
-                                    <small>/templates/blog/</small>
-                                </div>
-                                <iframe title="Editorial Journal preview" src="./templates/blog/" loading="lazy"></iframe>
-                            </div>
-                            <div class="template-tag-list" aria-label="Editorial Journal details">
-                                <span class="template-tag"><i class="ph ph-pencil-line"></i> Editorial layout</span>
-                                <span class="template-tag"><i class="ph ph-book-open"></i> Reading focus</span>
-                                <span class="template-tag"><i class="ph ph-tag"></i> Category cards</span>
-                            </div>
-                        </div>
-                        <div class="vd-card-footer">
+                    <article class="vd-card vd-card-glow template-preview-card" data-template-card="blog">
+                        <a href="#templates/blog" data-route="templates/blog" class="template-row-media" aria-label="Open Editorial Journal details">
+                            <img class="template-shot template-shot-light" src="./images/templates/blog-light.png" alt="Editorial Journal template screenshot" loading="lazy">
+                            <img class="template-shot template-shot-dark" src="./images/templates/blog-dark.png" alt="Editorial Journal template screenshot" loading="lazy">
+                        </a>
+                        <div class="template-row-content">
+                            <div class="templates-eyebrow"><i class="ph ph-newspaper"></i><span>Blog</span></div>
+                            <h3>Editorial Journal</h3>
+                            <p class="vd-text-muted">Featured article hero, secondary stories, category rhythm, and a high-legibility reading surface.</p>
+                            <div class="template-tag-list"><span class="template-tag">Editorial layout</span><span class="template-tag">Reading focus</span><span class="template-tag">Category cards</span></div>
                             <div class="template-card-actions">
-                                <a href="./templates/blog/" class="vd-btn vd-btn-primary">
-                                    <i class="ph ph-arrows-out"></i>
-                                    Full Preview
-                                </a>
-                                <a href="#docs/starter-templates" data-route="docs/starter-templates" class="vd-btn vd-btn-outline">
-                                    <i class="ph ph-code"></i>
-                                    View Guide
-                                </a>
+                                <a href="#templates/blog" data-route="templates/blog" class="vd-btn vd-btn-primary">View Template Page</a>
+                                <a href="https://templates.vanduo.dev/blog/" class="vd-btn vd-btn-outline" target="_blank" rel="noopener">Live Preview</a>
                             </div>
                         </div>
                     </article>
                 </div>
             </section>
 
-            <section class="templates-section">
-                <div class="templates-section-heading">
+            <section class="templates-section template-detail" data-template-view="detail" data-template-detail="marketing-landing" hidden>
+                <a href="#templates" data-route="templates" class="template-back-link"><i class="ph ph-arrow-left" aria-hidden="true"></i> All templates</a>
+                <div class="template-detail-hero template-surface">
+                    <img class="template-shot template-shot-light" src="./images/templates/marketing-landing-light.png" alt="Launch Landing template screenshot">
+                            <img class="template-shot template-shot-dark" src="./images/templates/marketing-landing-dark.png" alt="Launch Landing template screenshot">
                     <div>
-                        <h2>Why This Structure Wins</h2>
-                        <p class="vd-text-muted">The gallery now follows the same navigation system as the rest of the site while preserving dedicated full-screen previews.</p>
+                        <div class="templates-eyebrow"><i class="ph ph-megaphone"></i><span>Marketing</span></div>
+                        <h2>Launch Landing</h2>
+                        <p class="vd-text-lg vd-text-muted">Use this for launches, waitlists, pricing experiments, and conversion-focused campaigns.</p>
+                        <div class="template-card-actions">
+                            <a href="https://templates.vanduo.dev/marketing-landing/" class="vd-btn vd-btn-primary" target="_blank" rel="noopener">Open Live Preview</a>
+                            <a href="#docs/starter-templates" data-route="docs/starter-templates" class="vd-btn vd-btn-outline">Starter Landing Guide</a>
+                        </div>
                     </div>
                 </div>
-                <div class="template-feature-grid">
-                    <div class="template-feature-card">
-                        <i class="ph ph-app-window"></i>
-                        <h3 class="vd-mb-3">Single App Shell</h3>
-                        <p class="vd-text-muted vd-mb-0">Templates now load through the same SPA page pipeline as Home, About, Changelog, and Docs landing.</p>
-                    </div>
-                    <div class="template-feature-card">
-                        <i class="ph ph-monitor-play"></i>
-                        <h3 class="vd-mb-3">Live Visual Comparison</h3>
-                        <p class="vd-text-muted vd-mb-0">Users can still compare real embedded previews in one scroll pass instead of jumping between disconnected pages.</p>
-                    </div>
-                    <div class="template-feature-card">
-                        <i class="ph ph-arrows-out-simple"></i>
-                        <h3 class="vd-mb-3">Dedicated Preview Routes</h3>
-                        <p class="vd-text-muted vd-mb-0">Only the immersive template previews stay as separate HTML documents, exactly where that separation adds value.</p>
-                    </div>
+                <div class="template-detail-grid">
+                    <article class="vd-card"><div class="vd-card-body"><h3>Build Advice</h3><p>Lead with one promise, keep proof close to the first CTA, and trim the page to one primary conversion path.</p></div></article>
+                    <article class="vd-card"><div class="vd-card-body"><h3>Sections</h3><p>Glass navbar, hero CTA, feature grid, pricing tiers, social proof, and footer.</p></div></article>
                 </div>
+                <div class="vd-code-snippet" data-collapsible>
+                    <button class="vd-code-snippet-toggle" aria-expanded="false"><span class="vd-code-snippet-toggle-icon"></span><span>View Launch Landing snippet</span></button>
+                    <div class="vd-code-snippet-content"><div class="vd-code-snippet-header"><div class="vd-code-snippet-tabs" role="tablist"><button class="vd-code-snippet-tab is-active" data-lang="html">index.html</button></div><button class="vd-code-snippet-copy" aria-label="Copy code"><span class="vd-code-snippet-copy-icon"></span><span class="vd-code-snippet-copy-text">Copy</span></button></div><div class="vd-code-snippet-body"><pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;section class="vd-container-responsive vd-py-21 vd-text-center"&gt;
+  &lt;span class="vd-badge vd-badge-primary"&gt;Launching now&lt;/span&gt;
+  &lt;h1 class="vd-mt-4"&gt;Build beautiful sites faster&lt;/h1&gt;
+  &lt;p class="vd-text-lg vd-text-muted"&gt;One promise, one proof path, one primary CTA.&lt;/p&gt;
+  &lt;a href="#pricing" class="vd-btn vd-btn-primary vd-btn-lg"&gt;Start building&lt;/a&gt;
+&lt;/section&gt;</code></pre></div></div>
+                </div>
+            </section>
+
+            <section class="templates-section template-detail" data-template-view="detail" data-template-detail="documentation" hidden>
+                <a href="#templates" data-route="templates" class="template-back-link"><i class="ph ph-arrow-left" aria-hidden="true"></i> All templates</a>
+                <div class="template-detail-hero template-surface">
+                    <img class="template-shot template-shot-light" src="./images/templates/documentation-light.png" alt="Knowledge Base template screenshot">
+                            <img class="template-shot template-shot-dark" src="./images/templates/documentation-dark.png" alt="Knowledge Base template screenshot">
+                    <div><div class="templates-eyebrow"><i class="ph ph-book-open-text"></i><span>Documentation</span></div><h2>Knowledge Base</h2><p class="vd-text-lg vd-text-muted">Use this for product docs, API guides, onboarding manuals, and long-form reference material.</p><div class="template-card-actions"><a href="https://templates.vanduo.dev/documentation/" class="vd-btn vd-btn-primary" target="_blank" rel="noopener">Open Live Preview</a><a href="#docs/starter-templates" data-route="docs/starter-templates" class="vd-btn vd-btn-outline">Starter Landing Guide</a></div></div>
+                </div>
+                <div class="template-detail-grid"><article class="vd-card"><div class="vd-card-body"><h3>Build Advice</h3><p>Keep navigation shallow, make examples copyable, and add signposts at the start and end of each section.</p></div></article><article class="vd-card"><div class="vd-card-body"><h3>Sections</h3><p>Docs shell, sidebar, article body, code sample, callout, and next steps.</p></div></article></div>
+                <div class="vd-code-snippet" data-collapsible><button class="vd-code-snippet-toggle" aria-expanded="false"><span class="vd-code-snippet-toggle-icon"></span><span>View Knowledge Base snippet</span></button><div class="vd-code-snippet-content"><div class="vd-code-snippet-body"><pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;aside class="vd-card vd-card-glow"&gt;Docs navigation&lt;/aside&gt;
+&lt;article class="vd-card"&gt;
+  &lt;h1&gt;Getting started&lt;/h1&gt;
+  &lt;p&gt;Explain the happy path first, then branch into details.&lt;/p&gt;
+&lt;/article&gt;</code></pre></div></div></div>
+            </section>
+
+            <section class="templates-section template-detail" data-template-view="detail" data-template-detail="saas" hidden>
+                <a href="#templates" data-route="templates" class="template-back-link"><i class="ph ph-arrow-left" aria-hidden="true"></i> All templates</a>
+                <div class="template-detail-hero template-surface"><img class="template-shot template-shot-light" src="./images/templates/saas-light.png" alt="Growth SaaS template screenshot">
+                            <img class="template-shot template-shot-dark" src="./images/templates/saas-dark.png" alt="Growth SaaS template screenshot"><div><div class="templates-eyebrow"><i class="ph ph-buildings"></i><span>SaaS</span></div><h2>Growth SaaS</h2><p class="vd-text-lg vd-text-muted">Use this for product-led growth sites and early-stage sales pages.</p><div class="template-card-actions"><a href="https://templates.vanduo.dev/saas/" class="vd-btn vd-btn-primary" target="_blank" rel="noopener">Open Live Preview</a><a href="#docs/starter-templates" data-route="docs/starter-templates" class="vd-btn vd-btn-outline">Starter Landing Guide</a></div></div></div>
+                <div class="template-detail-grid"><article class="vd-card"><div class="vd-card-body"><h3>Build Advice</h3><p>Tie each section to a buying question: what it does, who trusts it, how it works, and what it costs.</p></div></article><article class="vd-card"><div class="vd-card-body"><h3>Sections</h3><p>Value hero, metrics, product preview, workflow cards, plans, and FAQ.</p></div></article></div>
+                <div class="vd-code-snippet" data-collapsible><button class="vd-code-snippet-toggle" aria-expanded="false"><span class="vd-code-snippet-toggle-icon"></span><span>View Growth SaaS snippet</span></button><div class="vd-code-snippet-content"><div class="vd-code-snippet-body"><pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;div class="vd-row"&gt;
+  &lt;div class="vd-col-12 vd-col-md-4"&gt;&lt;div class="vd-card"&gt;Metric&lt;/div&gt;&lt;/div&gt;
+  &lt;div class="vd-col-12 vd-col-md-8"&gt;&lt;div class="vd-card vd-card-glow"&gt;Product preview&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></div></div></div>
+            </section>
+
+            <section class="templates-section template-detail" data-template-view="detail" data-template-detail="dashboard" hidden>
+                <a href="#templates" data-route="templates" class="template-back-link"><i class="ph ph-arrow-left" aria-hidden="true"></i> All templates</a>
+                <div class="template-detail-hero template-surface"><img class="template-shot template-shot-light" src="./images/templates/dashboard-light.png" alt="Ops Dashboard template screenshot">
+                            <img class="template-shot template-shot-dark" src="./images/templates/dashboard-dark.png" alt="Ops Dashboard template screenshot"><div><div class="templates-eyebrow"><i class="ph ph-chart-line-up"></i><span>Dashboard</span></div><h2>Ops Dashboard</h2><p class="vd-text-lg vd-text-muted">Use this for internal dashboards, admin panels, metrics views, and command centers.</p><div class="template-card-actions"><a href="https://templates.vanduo.dev/dashboard/" class="vd-btn vd-btn-primary" target="_blank" rel="noopener">Open Live Preview</a><a href="#docs/starter-templates" data-route="docs/starter-templates" class="vd-btn vd-btn-outline">Starter Landing Guide</a></div></div></div>
+                <div class="template-detail-grid"><article class="vd-card"><div class="vd-card-body"><h3>Build Advice</h3><p>Prioritize scan speed: strongest metric first, consistent table density, and clear empty/error states.</p></div></article><article class="vd-card"><div class="vd-card-body"><h3>Sections</h3><p>App sidebar, KPI cards, chart panel, table, activity feed, and filters.</p></div></article></div>
+                <div class="vd-code-snippet" data-collapsible><button class="vd-code-snippet-toggle" aria-expanded="false"><span class="vd-code-snippet-toggle-icon"></span><span>View Ops Dashboard snippet</span></button><div class="vd-code-snippet-content"><div class="vd-code-snippet-body"><pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;section class="vd-row"&gt;
+  &lt;article class="vd-col-12 vd-col-md-3"&gt;&lt;div class="vd-card"&gt;KPI&lt;/div&gt;&lt;/article&gt;
+  &lt;article class="vd-col-12 vd-col-md-9"&gt;&lt;div class="vd-card"&gt;Operations table&lt;/div&gt;&lt;/article&gt;
+&lt;/section&gt;</code></pre></div></div></div>
+            </section>
+
+            <section class="templates-section template-detail" data-template-view="detail" data-template-detail="portfolio" hidden>
+                <a href="#templates" data-route="templates" class="template-back-link"><i class="ph ph-arrow-left" aria-hidden="true"></i> All templates</a>
+                <div class="template-detail-hero template-surface"><img class="template-shot template-shot-light" src="./images/templates/portfolio-light.png" alt="Creative Portfolio template screenshot">
+                            <img class="template-shot template-shot-dark" src="./images/templates/portfolio-dark.png" alt="Creative Portfolio template screenshot"><div><div class="templates-eyebrow"><i class="ph ph-user-circle"></i><span>Portfolio</span></div><h2>Creative Portfolio</h2><p class="vd-text-lg vd-text-muted">Use this for personal brands, agencies, designers, developers, and independent product builders.</p><div class="template-card-actions"><a href="https://templates.vanduo.dev/portfolio/" class="vd-btn vd-btn-primary" target="_blank" rel="noopener">Open Live Preview</a><a href="#docs/starter-templates" data-route="docs/starter-templates" class="vd-btn vd-btn-outline">Starter Landing Guide</a></div></div></div>
+                <div class="template-detail-grid"><article class="vd-card"><div class="vd-card-body"><h3>Build Advice</h3><p>Let the best work carry the page, then add enough process and proof to make the next conversation easy.</p></div></article><article class="vd-card"><div class="vd-card-body"><h3>Sections</h3><p>Profile hero, project cards, process, metrics, testimonials, and contact.</p></div></article></div>
+                <div class="vd-code-snippet" data-collapsible><button class="vd-code-snippet-toggle" aria-expanded="false"><span class="vd-code-snippet-toggle-icon"></span><span>View Creative Portfolio snippet</span></button><div class="vd-code-snippet-content"><div class="vd-code-snippet-body"><pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;section class="vd-container-responsive vd-py-13"&gt;
+  &lt;h1&gt;Selected work and case studies&lt;/h1&gt;
+  &lt;div class="vd-row"&gt;&lt;div class="vd-col-12 vd-col-md-6"&gt;&lt;div class="vd-card vd-card-glow"&gt;Project&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/section&gt;</code></pre></div></div></div>
+            </section>
+
+            <section class="templates-section template-detail" data-template-view="detail" data-template-detail="blog" hidden>
+                <a href="#templates" data-route="templates" class="template-back-link"><i class="ph ph-arrow-left" aria-hidden="true"></i> All templates</a>
+                <div class="template-detail-hero template-surface"><img class="template-shot template-shot-light" src="./images/templates/blog-light.png" alt="Editorial Journal template screenshot">
+                            <img class="template-shot template-shot-dark" src="./images/templates/blog-dark.png" alt="Editorial Journal template screenshot"><div><div class="templates-eyebrow"><i class="ph ph-newspaper"></i><span>Blog</span></div><h2>Editorial Journal</h2><p class="vd-text-lg vd-text-muted">Use this for editorial sites, founder blogs, publication pages, and content marketing hubs.</p><div class="template-card-actions"><a href="https://templates.vanduo.dev/blog/" class="vd-btn vd-btn-primary" target="_blank" rel="noopener">Open Live Preview</a><a href="#docs/starter-templates" data-route="docs/starter-templates" class="vd-btn vd-btn-outline">Starter Landing Guide</a></div></div></div>
+                <div class="template-detail-grid"><article class="vd-card"><div class="vd-card-body"><h3>Build Advice</h3><p>Make the reading path obvious: one lead story, predictable rhythm, and enough whitespace for long sessions.</p></div></article><article class="vd-card"><div class="vd-card-body"><h3>Sections</h3><p>Featured story, article grid, categories, newsletter, author card, and archive.</p></div></article></div>
+                <div class="vd-code-snippet" data-collapsible><button class="vd-code-snippet-toggle" aria-expanded="false"><span class="vd-code-snippet-toggle-icon"></span><span>View Editorial Journal snippet</span></button><div class="vd-code-snippet-content"><div class="vd-code-snippet-body"><pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;article class="vd-card vd-card-glow"&gt;
+  &lt;span class="vd-badge vd-badge-primary"&gt;Featured&lt;/span&gt;
+  &lt;h2&gt;The lead story goes here&lt;/h2&gt;
+  &lt;p&gt;Use strong hierarchy and generous line length for reading focus.&lt;/p&gt;
+&lt;/article&gt;</code></pre></div></div></div>
             </section>
         </div>
     </div>
