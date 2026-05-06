@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Vanduo Framework v1.3.7. Pure HTML, CSS, JS framework for beautiful websites. Zero runtime dependencies, no mandatory build tools, just clean code.">
+        content="Vanduo Framework v1.3.8. Pure HTML, CSS, JS framework for beautiful websites. Zero runtime dependencies, no mandatory build tools, just clean code.">
     <meta name="author" content="Vanduo Framework">
     <meta name="keywords"
         content="CSS framework, HTML framework, JavaScript framework, static website, no dependencies, pure CSS, pure JavaScript, responsive design, UI components, Lithuania">
@@ -18,7 +18,7 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://vanduo.dev/">
-    <meta property="og:title" content="Vanduo Framework v1.3.7 - Pure HTML, CSS, JS Framework">
+    <meta property="og:title" content="Vanduo Framework v1.3.8 - Pure HTML, CSS, JS Framework">
     <meta property="og:description"
         content="Essential just like water is. Zero-dependency framework for beautiful static websites.">
     <meta property="og:image" content="https://vanduo.dev/images/og-image.png">
@@ -28,7 +28,7 @@
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://vanduo.dev/">
-    <meta name="twitter:title" content="Vanduo Framework v1.3.7 - Pure HTML, CSS, JS Framework">
+    <meta name="twitter:title" content="Vanduo Framework v1.3.8 - Pure HTML, CSS, JS Framework">
     <meta name="twitter:description"
         content="Essential just like water is. Zero-dependency framework for beautiful static websites.">
     <meta name="twitter:image" content="https://vanduo.dev/images/twitter-card.png">
@@ -49,14 +49,20 @@
                 : (isLocalPreview ? 'local' : 'cdn');
             var basePath = mode === 'local'
                 ? './dist'
-                : 'https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.3.7/dist';
+                : 'https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.3.8/dist';
+            var assetQuery = mode === 'local'
+                ? '?dev=' + Date.now()
+                : '';
 
             window.__VANDUO_FRAMEWORK_ASSET_MODE = mode;
             window.__VANDUO_FRAMEWORK_ASSETS = {
                 mode: mode,
-                cssHref: basePath + '/vanduo.min.css',
-                jsSrc: basePath + '/vanduo.min.js'
+                cssHref: basePath + '/vanduo.min.css' + assetQuery,
+                jsSrc: basePath + '/vanduo.min.js' + assetQuery
             };
+            window.__VANDUO_TEMPLATES_BASE_URL = (params.get('vanduo-templates')
+                || (isLocalPreview ? 'http://localhost:8788' : 'https://templates.vanduo.dev'))
+                .replace(/\/+$/, '');
             document.documentElement.setAttribute('data-framework-assets', mode);
         })();
     </script>
@@ -94,13 +100,29 @@
         "price": "0",
         "priceCurrency": "USD"
       },
-    "softwareVersion": "1.3.7",
+    "softwareVersion": "1.3.8",
       "license": "https://opensource.org/licenses/MIT",
       "programmingLanguage": ["HTML", "CSS", "JavaScript"]
     }
     </script>
 
     <link rel="stylesheet" href="css/app.css">
+    <link id="vanduo-templates-css" rel="stylesheet">
+    <script>
+        (function () {
+            var templatesCss = document.getElementById('vanduo-templates-css');
+            if (!templatesCss) return;
+            var isNestedDocsPath = /^\/docs(\/|$)/.test(window.location.pathname || '/');
+            var primaryHref = isNestedDocsPath ? './docs/templates/templates.css' : './templates/templates.css';
+            var fallbackHref = isNestedDocsPath ? './templates/templates.css' : './docs/templates/templates.css';
+            templatesCss.setAttribute('href', primaryHref);
+            templatesCss.addEventListener('error', function handleError() {
+                if (templatesCss.getAttribute('href') !== fallbackHref) {
+                    templatesCss.setAttribute('href', fallbackHref);
+                }
+            });
+        })();
+    </script>
 </head>
 
 <body>
@@ -119,13 +141,13 @@
                 <button class="global-search-trigger" id="global-search-trigger" aria-label="Open global search">
                     <i class="ph ph-magnifying-glass"></i>
                 </button>
+                <button type="button" class="vd-theme-customizer-trigger" data-theme-customizer-trigger
+                    aria-label="Open theme customizer">
+                    <i class="ph ph-paint-roller"></i>
+                </button>
                 <button class="dark-mode-toggle" id="dark-mode-toggle" data-toggle="theme"
                     aria-label="Toggle dark mode">
                     <i class="ph ph-moon"></i>
-                </button>
-                <button class="vd-theme-customizer-trigger" data-theme-customizer-trigger
-                    aria-label="Open theme customizer">
-                    <i class="ph ph-paint-roller"></i>
                 </button>
             </div>
             <button class="vd-navbar-toggle"
@@ -152,7 +174,8 @@
                     <aside class="vd-col-12 vd-col-lg-2 doc-sidebar">
                         <div class="doc-water-toggle-wrapper" aria-label="Docs mode switch">
                             <button type="button" class="vd-morph doc-water-toggle" id="doc-water-toggle"
-                                data-vd-morph aria-pressed="false" aria-label="Switch to Guides">
+                                data-vd-morph data-tooltip="Click for Guides" data-tooltip-placement="bottom"
+                                aria-pressed="false" aria-label="Switch to Guides">
                                 <span class="vd-morph-content vd-morph-current" aria-hidden="true">
                                     <i class="doc-water-icon ph ph-cube"></i>
                                     <span class="doc-water-label">Components</span>

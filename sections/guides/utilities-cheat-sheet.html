@@ -193,12 +193,21 @@
 <tr><td><code>vd-d-flex</code></td><td><code>display: flex;</code></td></tr>
 <tr><td><code>vd-d-inline-flex</code></td><td><code>display: inline-flex;</code></td></tr>
 <tr><td><code>vd-flex-col</code></td><td><code>flex-direction: column;</code></td></tr>
-<tr><td><code>justify-start</code></td><td><code>justify-content: flex-start;</code></td></tr>
+                            <tr><td><code>justify-start</code></td><td><code>justify-content: flex-start;</code></td></tr>
 <tr><td><code>justify-center</code></td><td><code>justify-content: center;</code></td></tr>
 <tr><td><code>justify-between</code></td><td><code>justify-content: space-between;</code></td></tr>
+<tr><td><code>justify-end</code></td><td><code>justify-content: flex-end;</code></td></tr>
 <tr><td><code>items-center</code></td><td><code>align-items: center;</code></td></tr>
+<tr><td><code>items-start</code></td><td><code>align-items: flex-start;</code></td></tr>
+<tr><td><code>items-end</code></td><td><code>align-items: flex-end;</code></td></tr>
                         </tbody>
                     </table>
+                    <div class="vd-alert vd-alert-info vd-mt-3">
+                        <i class="ph ph-lightbulb"></i>
+                        <div>
+                            <strong>Naming note:</strong> Flexbox alignment utilities (<code>justify-*</code>, <code>items-*</code>) intentionally omit the <code>vd-</code> prefix for brevity. All other utility classes (spacing, typography, colors, display) use the <code>vd-</code> prefix.
+                        </div>
+                    </div>
                     <div class="vd-code-snippet vd-mt-4" data-collapsible data-expanded="true">
                         <div class="vd-code-snippet-content">
                             <div class="vd-code-snippet-header">

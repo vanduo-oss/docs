@@ -48,8 +48,8 @@ test.describe('5. Interactive Demos & Code Snippets', () => {
             await page.goto('/#docs/toast');
             await waitForSPA(page);
 
-            // Click a Toast demo button
-            const toastBtn = page.getByRole('button', { name: 'Show Default Toast' }).first();
+            // Click a Toast demo button (v1.3.7 layout uses 'Success Toast')
+            const toastBtn = page.getByRole('button', { name: 'Success Toast' }).first();
             if (await toastBtn.isVisible()) {
                 await toastBtn.click();
 
@@ -59,24 +59,106 @@ test.describe('5. Interactive Demos & Code Snippets', () => {
             }
         });
 
-        test('Modal demo opens modal', async ({ page }) => {
+        test('Offcanvas demo opens the bottom panel as a viewport overlay', async ({ page }) => {
+            await page.goto('/#docs/offcanvas');
+            await waitForSPA(page);
+
+            const trigger = page.locator('[data-sidenav-toggle="#offcanvas-bottom-demo"]').first();
+            const panel = page.locator('#offcanvas-bottom-demo');
+
+            await trigger.click();
+            await expect(panel).toHaveClass(/is-open/);
+            await expect.poll(() => panel.evaluate((node) => node.parentElement === document.body)).toBe(true);
+
+            const metrics = await panel.evaluate((node) => {
+                const rect = node.getBoundingClientRect();
+                return { bottom: rect.bottom, viewportHeight: window.innerHeight };
+            });
+
+            expect(Math.abs(metrics.bottom - metrics.viewportHeight)).toBeLessThanOrEqual(2);
+        });
+
+        test('Modal demo opens above its backdrop', async ({ page }) => {
             await page.goto('/#docs/modals');
             await waitForSPA(page);
 
-            // Click a Modal demo button
-            const modalBtn = page.getByRole('button', { name: 'Open Default Modal' }).first();
-            if (await modalBtn.isVisible()) {
-                await modalBtn.click();
+            const modalBtn = page.locator('[data-modal="#demo-modal-default"]').first();
+            const modal = page.locator('#demo-modal-default');
 
-                const modal = page.locator('#demo-modal-first');
-                await expect(modal).toBeVisible();
-                await expect(modal).toHaveClass(/is-active/);
+            await modalBtn.click();
+            await expect(modal).toHaveClass(/is-open/);
+            await expect.poll(() => modal.evaluate((node) => node.parentElement === document.body)).toBe(true);
 
-                // Close it
-                await page.keyboard.press('Escape');
-                await page.waitForTimeout(300);
-                await expect(modal).not.toHaveClass(/is-active/);
-            }
+            const layerInfo = await page.evaluate(() => {
+                const modalEl = document.querySelector('#demo-modal-default');
+                const backdropEl = document.querySelector('.vd-modal-backdrop.is-visible');
+                return {
+                    modalZ: modalEl ? Number(window.getComputedStyle(modalEl).zIndex) : 0,
+                    backdropZ: backdropEl ? Number(window.getComputedStyle(backdropEl).zIndex) : 0
+                };
+            });
+
+            expect(layerInfo.modalZ).toBeGreaterThan(layerInfo.backdropZ);
+
+            await page.keyboard.press('Escape');
+            await expect(modal).not.toHaveClass(/is-open/);
+        });
+
+        test('Sidenav demo opens as a real left-edge overlay', async ({ page }) => {
+            await page.goto('/#docs/sidenav');
+            await waitForSPA(page);
+
+            const trigger = page.locator('[data-sidenav-toggle="#demo-sidenav-inline"]').first();
+            const sidenav = page.locator('#demo-sidenav-inline');
+
+            await trigger.click();
+            await expect(sidenav).toHaveClass(/is-open/);
+            await expect.poll(() => sidenav.evaluate((node) => node.parentElement === document.body)).toBe(true);
+
+            const left = await sidenav.evaluate((node) => node.getBoundingClientRect().left);
+            expect(Math.abs(left)).toBeLessThanOrEqual(1);
+        });
+
+        test('Dropdown demo leaves the code toggle unobscured', async ({ page }) => {
+            await page.goto('/#docs/dropdown');
+            await waitForSPA(page);
+
+            const toggle = page.locator('#demo-dropdown-basic [data-vd-dropdown-toggle]').first();
+            const menu = page.locator('#demo-dropdown-basic .vd-dropdown-menu').first();
+            const snippetToggle = page.locator('#demo-dropdown-basic + .vd-code-snippet .vd-code-snippet-toggle').first();
+
+            await toggle.click();
+            await expect(menu).toHaveClass(/is-open/);
+
+            const bounds = await Promise.all([
+                menu.evaluate((node) => {
+                    const rect = node.getBoundingClientRect();
+                    return { bottom: rect.bottom };
+                }),
+                snippetToggle.evaluate((node) => {
+                    const rect = node.getBoundingClientRect();
+                    return { top: rect.top };
+                })
+            ]);
+
+            expect(bounds[0].bottom).toBeLessThanOrEqual(bounds[1].top);
+        });
+
+        test('Stepper demo previous and next controls change the active step', async ({ page }) => {
+            await page.goto('/#docs/stepper');
+            await waitForSPA(page);
+            await page.waitForSelector('#stepper-h-demo', { state: 'attached', timeout: 25000 });
+
+            const stepper = page.locator('#stepper-h-demo');
+            const activeLabel = stepper.locator('.vd-stepper-item.is-active .vd-stepper-label');
+
+            await expect(activeLabel).toContainText('Preferences');
+
+            await page.locator('[data-stepper-demo-control="next"][data-stepper-target="#stepper-h-demo"]').click();
+            await expect(activeLabel).toContainText('Confirmation');
+
+            await page.locator('[data-stepper-demo-control="prev"][data-stepper-target="#stepper-h-demo"]').click();
+            await expect(activeLabel).toContainText('Preferences');
         });
 
         test('Spotlight demo starts without missing-handler errors', async ({ page }) => {

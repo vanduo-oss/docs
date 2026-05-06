@@ -1,0 +1,352 @@
+<section id="tabs">
+    <h4 class="demo-title"><i class="ph ph-tabs"></i>Tabs</h4>
+    <p class="vd-mb-8">Organize content into switchable panes. Tabs support horizontal and vertical layouts, multiple visual styles (default underline, boxed, pills, bordered), size variants, and fade animations — all CSS-driven with optional JavaScript for pane switching.</p>
+
+    <!-- Style Variants Demo -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-tabs-default">
+                <div class="vd-card-header"><h4>Default (Underline)</h4></div>
+                <div class="vd-card-body">
+                    <div class="vd-tabs" id="tabs-default-demo">
+                        <ul class="vd-tab-list" role="tablist">
+                            <li class="vd-tab-item" role="presentation">
+                                <button class="vd-tab-link is-active" role="tab" aria-selected="true" data-tab-target="tab-default-1">Overview</button>
+                            </li>
+                            <li class="vd-tab-item" role="presentation">
+                                <button class="vd-tab-link" role="tab" aria-selected="false" data-tab-target="tab-default-2">Features</button>
+                            </li>
+                            <li class="vd-tab-item" role="presentation">
+                                <button class="vd-tab-link" role="tab" aria-selected="false" data-tab-target="tab-default-3">Settings</button>
+                            </li>
+                        </ul>
+                        <div class="vd-tab-content">
+                            <div class="vd-tab-pane is-active" id="tab-default-1" role="tabpanel">
+                                <p class="vd-mb-0">The default tab style uses an underline indicator on the active tab. Clean and minimal.</p>
+                            </div>
+                            <div class="vd-tab-pane" id="tab-default-2" role="tabpanel">
+                                <p class="vd-mb-0">Each tab pane can contain any HTML content — text, forms, tables, or cards.</p>
+                            </div>
+                            <div class="vd-tab-pane" id="tab-default-3" role="tabpanel">
+                                <p class="vd-mb-0">Tab content is lazy-loaded by default: only the active pane is visible until switched.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Default underline tabs --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-tabs"</span>&gt;
+  &lt;<span class="code-tag">ul</span> <span class="code-attr">class</span>=<span class="code-string">"vd-tab-list"</span> <span class="code-attr">role</span>=<span class="code-string">"tablist"</span>&gt;
+    &lt;<span class="code-tag">li</span> <span class="code-attr">class</span>=<span class="code-string">"vd-tab-item"</span> <span class="code-attr">role</span>=<span class="code-string">"presentation"</span>&gt;
+      &lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-tab-link is-active"</span>
+              <span class="code-attr">role</span>=<span class="code-string">"tab"</span> <span class="code-attr">aria-selected</span>=<span class="code-string">"true"</span>
+              <span class="code-attr">data-tab-target</span>=<span class="code-string">"pane-1"</span>&gt;Tab 1&lt;/<span class="code-tag">button</span>&gt;
+    &lt;/<span class="code-tag">li</span>&gt;
+    &lt;<span class="code-tag">li</span> <span class="code-attr">class</span>=<span class="code-string">"vd-tab-item"</span> <span class="code-attr">role</span>=<span class="code-string">"presentation"</span>&gt;
+      &lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-tab-link"</span>
+              <span class="code-attr">role</span>=<span class="code-string">"tab"</span> <span class="code-attr">aria-selected</span>=<span class="code-string">"false"</span>
+              <span class="code-attr">data-tab-target</span>=<span class="code-string">"pane-2"</span>&gt;Tab 2&lt;/<span class="code-tag">button</span>&gt;
+    &lt;/<span class="code-tag">li</span>&gt;
+  &lt;/<span class="code-tag">ul</span>&gt;
+  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-tab-content"</span>&gt;
+    &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-tab-pane is-active"</span>
+         <span class="code-attr">id</span>=<span class="code-string">"pane-1"</span> <span class="code-attr">role</span>=<span class="code-string">"tabpanel"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;
+    &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-tab-pane"</span>
+         <span class="code-attr">id</span>=<span class="code-string">"pane-2"</span> <span class="code-attr">role</span>=<span class="code-string">"tabpanel"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;
+  &lt;/<span class="code-tag">div</span>&gt;
+&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-tabs-boxed">
+                <div class="vd-card-header"><h4>Boxed Tabs</h4></div>
+                <div class="vd-card-body">
+                    <div class="vd-tabs vd-tabs-boxed" id="tabs-boxed-demo">
+                        <ul class="vd-tab-list" role="tablist">
+                            <li class="vd-tab-item" role="presentation">
+                                <button class="vd-tab-link is-active" role="tab" aria-selected="true" data-tab-target="tab-boxed-1">Account</button>
+                            </li>
+                            <li class="vd-tab-item" role="presentation">
+                                <button class="vd-tab-link" role="tab" aria-selected="false" data-tab-target="tab-boxed-2">Security</button>
+                            </li>
+                            <li class="vd-tab-item" role="presentation">
+                                <button class="vd-tab-link" role="tab" aria-selected="false" data-tab-target="tab-boxed-3">Billing</button>
+                            </li>
+                        </ul>
+                        <div class="vd-tab-content">
+                            <div class="vd-tab-pane is-active" id="tab-boxed-1" role="tabpanel">
+                                <p class="vd-mb-0">Boxed tabs sit inside a rounded container with a subtle background. The active tab gets an elevated card appearance.</p>
+                            </div>
+                            <div class="vd-tab-pane" id="tab-boxed-2" role="tabpanel">
+                                <p class="vd-mb-0">Security settings include two-factor authentication, session management, and API keys.</p>
+                            </div>
+                            <div class="vd-tab-pane" id="tab-boxed-3" role="tabpanel">
+                                <p class="vd-mb-0">Billing history, upcoming invoices, and payment method management.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Boxed tabs --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-tabs vd-tabs-boxed"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;
+
+<span class="code-comment">&lt;!-- Pill tabs --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-tabs vd-tabs-pills"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;
+
+<span class="code-comment">&lt;!-- Bordered tabs --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-tabs vd-tabs-bordered"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pills, Bordered, Vertical Demo -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-tabs-pills-bordered">
+                <div class="vd-card-header"><h4>Pills &amp; Bordered</h4></div>
+                <div class="vd-card-body">
+                    <p class="vd-text-sm vd-text-muted vd-mb-3">Pills</p>
+                    <div class="vd-tabs vd-tabs-pills vd-mb-5" id="tabs-pills-demo">
+                        <ul class="vd-tab-list" role="tablist">
+                            <li class="vd-tab-item" role="presentation"><button class="vd-tab-link is-active" role="tab" aria-selected="true" data-tab-target="tab-pill-1">Active</button></li>
+                            <li class="vd-tab-item" role="presentation"><button class="vd-tab-link" role="tab" aria-selected="false" data-tab-target="tab-pill-2">Link</button></li>
+                            <li class="vd-tab-item" role="presentation"><button class="vd-tab-link disabled" role="tab" aria-selected="false" tabindex="-1">Disabled</button></li>
+                        </ul>
+                        <div class="vd-tab-content">
+                            <div class="vd-tab-pane is-active" id="tab-pill-1" role="tabpanel"><p class="vd-mb-0">Pill tabs use a solid background fill for the active state — great for dashboards and toolbars.</p></div>
+                            <div class="vd-tab-pane" id="tab-pill-2" role="tabpanel"><p class="vd-mb-0">Inactive pills blend into the background until hovered or selected.</p></div>
+                        </div>
+                    </div>
+
+                    <p class="vd-text-sm vd-text-muted vd-mb-3">Bordered</p>
+                    <div class="vd-tabs vd-tabs-bordered" id="tabs-bordered-demo">
+                        <ul class="vd-tab-list" role="tablist">
+                            <li class="vd-tab-item" role="presentation"><button class="vd-tab-link is-active" role="tab" aria-selected="true" data-tab-target="tab-bordered-1">Home</button></li>
+                            <li class="vd-tab-item" role="presentation"><button class="vd-tab-link" role="tab" aria-selected="false" data-tab-target="tab-bordered-2">Profile</button></li>
+                        </ul>
+                        <div class="vd-tab-content">
+                            <div class="vd-tab-pane is-active" id="tab-bordered-1" role="tabpanel"><p class="vd-mb-0">Bordered tabs wrap the entire list in a frame for a more defined look.</p></div>
+                            <div class="vd-tab-pane" id="tab-bordered-2" role="tabpanel"><p class="vd-mb-0">Useful when tabs sit inside a card or panel with other content nearby.</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-tabs-vertical">
+                <div class="vd-card-header"><h4>Vertical Tabs</h4></div>
+                <div class="vd-card-body">
+                    <div class="vd-tabs vd-tabs-vertical" id="tabs-vertical-demo">
+                        <ul class="vd-tab-list" role="tablist">
+                            <li class="vd-tab-item" role="presentation">
+                                <button class="vd-tab-link is-active" role="tab" aria-selected="true" data-tab-target="tab-v-1"><i class="ph ph-user mr-2"></i>Profile</button>
+                            </li>
+                            <li class="vd-tab-item" role="presentation">
+                                <button class="vd-tab-link" role="tab" aria-selected="false" data-tab-target="tab-v-2"><i class="ph ph-gear mr-2"></i>Settings</button>
+                            </li>
+                            <li class="vd-tab-item" role="presentation">
+                                <button class="vd-tab-link" role="tab" aria-selected="false" data-tab-target="tab-v-3"><i class="ph ph-bell mr-2"></i>Notifications</button>
+                            </li>
+                            <li class="vd-tab-item" role="presentation">
+                                <button class="vd-tab-link" role="tab" aria-selected="false" data-tab-target="tab-v-4"><i class="ph ph-credit-card mr-2"></i>Billing</button>
+                            </li>
+                        </ul>
+                        <div class="vd-tab-content">
+                            <div class="vd-tab-pane is-active" id="tab-v-1" role="tabpanel">
+                                <p class="vd-mb-0">Vertical tabs stack the tab list on the left and content on the right — ideal for settings pages and multi-step forms.</p>
+                            </div>
+                            <div class="vd-tab-pane" id="tab-v-2" role="tabpanel">
+                                <p class="vd-mb-0">Settings include theme, language, password, and connected apps.</p>
+                            </div>
+                            <div class="vd-tab-pane" id="tab-v-3" role="tabpanel">
+                                <p class="vd-mb-0">Notification preferences for email, push, and in-app alerts.</p>
+                            </div>
+                            <div class="vd-tab-pane" id="tab-v-4" role="tabpanel">
+                                <p class="vd-mb-0">Payment methods, invoices, and subscription details.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Vertical tabs --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-tabs vd-tabs-vertical"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;
+
+<span class="code-comment">&lt;!-- Fade animation --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-tabs vd-tabs-fade"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;
+
+<span class="code-comment">&lt;!-- Small tabs --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-tabs vd-tabs-sm"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-tabs vd-tabs-lg"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CSS Variables -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header"><h4>CSS Variables</h4></div>
+                <div class="vd-card-body">
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead><tr><th>Variable</th><th>Default</th><th>Description</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>--tab-padding-x</code></td><td><code>1.3125rem</code> (21px)</td><td>Horizontal padding (Fibonacci)</td></tr>
+                                <tr><td><code>--tab-padding-y</code></td><td><code>0.8125rem</code> (13px)</td><td>Vertical padding (Fibonacci, ratio ~phi)</td></tr>
+                                <tr><td><code>--tab-padding-x-sm</code></td><td><code>0.8125rem</code></td><td>Small variant horizontal</td></tr>
+                                <tr><td><code>--tab-padding-y-sm</code></td><td><code>0.5rem</code></td><td>Small variant vertical</td></tr>
+                                <tr><td><code>--tab-padding-x-lg</code></td><td><code>2.125rem</code> (34px)</td><td>Large variant horizontal</td></tr>
+                                <tr><td><code>--tab-padding-y-lg</code></td><td><code>1.3125rem</code> (21px)</td><td>Large variant vertical</td></tr>
+                                <tr><td><code>--tab-border-width</code></td><td><code>2px</code></td><td>Active underline thickness</td></tr>
+                                <tr><td><code>--tab-text</code></td><td><code>var(--text-secondary)</code></td><td>Inactive tab text color</td></tr>
+                                <tr><td><code>--tab-text-hover</code></td><td><code>var(--text-primary)</code></td><td>Hover text color</td></tr>
+                                <tr><td><code>--tab-text-active</code></td><td><code>var(--color-primary)</code></td><td>Active tab text color</td></tr>
+                                <tr><td><code>--tab-border</code></td><td><code>var(--border-color)</code></td><td>Tab list bottom border</td></tr>
+                                <tr><td><code>--tab-border-active</code></td><td><code>var(--color-primary)</code></td><td>Active indicator color</td></tr>
+                                <tr><td><code>--tab-bg-hover</code></td><td><code>var(--bg-secondary)</code></td><td>Hover background</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- API Reference -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header"><h4><i class="ph ph-list-dashes mr-2" style="color: var(--color-primary);"></i>API Reference</h4></div>
+                <div class="vd-card-body">
+                    <h4>CSS Classes</h4>
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead><tr><th>Class</th><th>Description</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>.vd-tabs</code></td><td>Base container. Flex column wrapping the tab list and content.</td></tr>
+                                <tr><td><code>.vd-tab-list</code></td><td>Horizontal list of tab buttons. Wraps to multiple lines on small screens.</td></tr>
+                                <tr><td><code>.vd-tab-item</code></td><td>List item wrapper for each tab button.</td></tr>
+                                <tr><td><code>.vd-tab-link</code></td><td>The clickable tab button. Use <code>.is-active</code> for the selected tab.</td></tr>
+                                <tr><td><code>.vd-tab-link.disabled</code></td><td>Non-interactive tab with muted styling and <code>not-allowed</code> cursor.</td></tr>
+                                <tr><td><code>.vd-tab-content</code></td><td>Wrapper around all tab panes with top padding.</td></tr>
+                                <tr><td><code>.vd-tab-pane</code></td><td>Individual content panel. Use <code>.is-active</code> to show.</td></tr>
+                                <tr><td><code>.vd-tabs-fade</code></td><td>Adds cross-fade animation when switching panes.</td></tr>
+                                <tr><td><code>.vd-tabs-boxed</code></td><td>Rounded pill container with elevated active tab.</td></tr>
+                                <tr><td><code>.vd-tabs-pills</code></td><td>Solid fill active state on rounded buttons.</td></tr>
+                                <tr><td><code>.vd-tabs-bordered</code></td><td>Framed tab list with border wrapping all tabs.</td></tr>
+                                <tr><td><code>.vd-tabs-vertical</code></td><td>Stacks tab list on the left, content on the right (desktop).</td></tr>
+                                <tr><td><code>.vd-tabs-sm</code></td><td>Compact tab sizing.</td></tr>
+                                <tr><td><code>.vd-tabs-lg</code></td><td>Large tab sizing.</td></tr>
+                                <tr><td><code>.is-active</code></td><td>State class on both the tab link and its matching pane.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="vd-mt-6">Data Attributes</h4>
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead><tr><th>Attribute</th><th>Description</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>data-tab-target="id"</code></td><td>On a <code>.vd-tab-link</code>, specifies the pane <code>id</code> to activate.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="vd-mt-6">JavaScript Methods</h4>
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead><tr><th>Method</th><th>Description</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>VanduoTabs.init()</code></td><td>Wires up all <code>[data-tab-target]</code> triggers for automatic pane switching.</td></tr>
+                                <tr><td><code>VanduoTabs.show(el, targetId)</code></td><td>Programmatically switch to the pane with the given <code>id</code> inside the tabs container.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accessibility -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header"><h4><i class="ph ph-wheelchair mr-2" style="color: var(--color-primary);"></i>Accessibility</h4></div>
+                <div class="vd-card-body">
+                    <ul>
+                        <li>Use <code>role="tablist"</code> on <code>.vd-tab-list</code>, <code>role="tab"</code> on each button, and <code>role="tabpanel"</code> on each pane.</li>
+                        <li>Set <code>aria-selected="true"</code> on the active tab and <code>aria-selected="false"</code> on inactive tabs.</li>
+                        <li>Connect tabs to panes with <code>aria-controls</code> (pointing to pane <code>id</code>) and <code>aria-labelledby</code> (on the pane pointing to tab <code>id</code>).</li>
+                        <li><kbd>←</kbd> / <kbd>→</kbd> arrow keys move focus between tabs when focus is inside the tab list.</li>
+                        <li><kbd>Home</kbd> focuses the first tab; <kbd>End</kbd> focuses the last.</li>
+                        <li>Disabled tabs should have <code>tabindex="-1"</code> and <code>aria-disabled="true"</code>.</li>
+                        <li>Tab content should be focusable (or contain focusable elements) so keyboard users can reach it.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

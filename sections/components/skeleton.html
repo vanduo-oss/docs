@@ -1,0 +1,361 @@
+<section id="skeleton">
+    <h4 class="demo-title"><i class="ph ph-circles-three"></i>Skeleton</h4>
+    <p class="vd-mb-8">Loading placeholders that mimic the shape of content before it arrives. Skeletons use a shimmering animation by default and support text lines, headings, circles (avatars), rectangles (images), buttons, inputs, lists, and grids — all composable to match your actual layout.</p>
+
+    <!-- Text & Shapes Demo -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-skeleton-text">
+                <div class="vd-card-header"><h4>Text &amp; Heading</h4></div>
+                <div class="vd-card-body">
+                    <div class="vd-skeleton vd-skeleton-heading vd-mb-5"></div>
+                    <div class="vd-skeleton vd-skeleton-text vd-mb-3"></div>
+                    <div class="vd-skeleton vd-skeleton-text vd-mb-3"></div>
+                    <div class="vd-skeleton vd-skeleton-text"></div>
+
+                    <p class="vd-text-sm vd-text-muted vd-mt-5 vd-mb-3">Sizes</p>
+                    <div class="vd-skeleton vd-skeleton-text vd-skeleton-text-xs vd-mb-3"></div>
+                    <div class="vd-skeleton vd-skeleton-text vd-skeleton-text-sm vd-mb-3"></div>
+                    <div class="vd-skeleton vd-skeleton-text vd-mb-3"></div>
+                    <div class="vd-skeleton vd-skeleton-text vd-skeleton-text-lg vd-mb-3"></div>
+                    <div class="vd-skeleton vd-skeleton-text vd-skeleton-text-xl"></div>
+                </div>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Heading placeholder --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-skeleton vd-skeleton-heading"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+
+<span class="code-comment">&lt;!-- Text lines (last one auto-shorts to 80%) --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-skeleton vd-skeleton-text"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-skeleton vd-skeleton-text"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-skeleton vd-skeleton-text"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+
+<span class="code-comment">&lt;!-- Text sizes --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-skeleton vd-skeleton-text vd-skeleton-text-xs"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-skeleton vd-skeleton-text vd-skeleton-text-sm"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-skeleton vd-skeleton-text vd-skeleton-text-lg"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-skeleton vd-skeleton-text vd-skeleton-text-xl"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-skeleton-shapes">
+                <div class="vd-card-header"><h4>Circles, Rectangles &amp; Form Elements</h4></div>
+                <div class="vd-card-body">
+                    <p class="vd-text-sm vd-text-muted vd-mb-3">Circles (avatars)</p>
+                    <div style="display:flex; gap:1rem; align-items:center; margin-bottom:1.5rem;">
+                        <div class="vd-skeleton vd-skeleton-circle vd-skeleton-circle-xs"></div>
+                        <div class="vd-skeleton vd-skeleton-circle vd-skeleton-circle-sm"></div>
+                        <div class="vd-skeleton vd-skeleton-circle vd-skeleton-circle-md"></div>
+                        <div class="vd-skeleton vd-skeleton-circle"></div>
+                        <div class="vd-skeleton vd-skeleton-circle vd-skeleton-circle-lg"></div>
+                        <div class="vd-skeleton vd-skeleton-circle vd-skeleton-circle-xl"></div>
+                    </div>
+
+                    <p class="vd-text-sm vd-text-muted vd-mb-3">Rectangles (images)</p>
+                    <div style="display:flex; gap:1rem; align-items:flex-end; margin-bottom:1.5rem;">
+                        <div class="vd-skeleton vd-skeleton-rect vd-skeleton-rect-sm" style="width:120px;"></div>
+                        <div class="vd-skeleton vd-skeleton-rect" style="width:120px;"></div>
+                        <div class="vd-skeleton vd-skeleton-rect vd-skeleton-rect-lg" style="width:120px;"></div>
+                    </div>
+
+                    <p class="vd-text-sm vd-text-muted vd-mb-3">Form elements</p>
+                    <div class="vd-skeleton vd-skeleton-input vd-mb-3"></div>
+                    <div class="vd-skeleton vd-skeleton-button vd-mb-3"></div>
+                    <div class="vd-skeleton vd-skeleton-button vd-skeleton-button-sm vd-mb-3"></div>
+                    <div class="vd-skeleton vd-skeleton-button vd-skeleton-button-lg"></div>
+                </div>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Circles (avatars) --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-skeleton vd-skeleton-circle vd-skeleton-circle-xs"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-skeleton vd-skeleton-circle vd-skeleton-circle-sm"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-skeleton vd-skeleton-circle vd-skeleton-circle-md"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-skeleton vd-skeleton-circle"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-skeleton vd-skeleton-circle vd-skeleton-circle-lg"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-skeleton vd-skeleton-circle vd-skeleton-circle-xl"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+
+<span class="code-comment">&lt;!-- Rectangles (images) --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-skeleton vd-skeleton-rect"</span> <span class="code-attr">style</span>=<span class="code-string">"width:200px;"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-skeleton vd-skeleton-rect vd-skeleton-rect-lg"</span> <span class="code-attr">style</span>=<span class="code-string">"width:200px;"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+
+<span class="code-comment">&lt;!-- Form placeholders --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-skeleton vd-skeleton-input"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-skeleton vd-skeleton-button"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-skeleton vd-skeleton-button vd-skeleton-button-sm"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card, List & Grid Demo -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-skeleton-composite">
+                <div class="vd-card-header"><h4>Composite: Card &amp; List</h4></div>
+                <div class="vd-card-body">
+                    <p class="vd-text-sm vd-text-muted vd-mb-3">Card placeholder</p>
+                    <div class="vd-skeleton vd-skeleton-card vd-mb-5">
+                        <div class="vd-skeleton vd-skeleton-heading vd-mb-3"></div>
+                        <div class="vd-skeleton vd-skeleton-text vd-mb-2"></div>
+                        <div class="vd-skeleton vd-skeleton-text vd-mb-2"></div>
+                        <div class="vd-skeleton vd-skeleton-text" style="width:80%;"></div>
+                    </div>
+
+                    <p class="vd-text-sm vd-text-muted vd-mb-3">List placeholder</p>
+                    <div class="vd-skeleton vd-skeleton-list">
+                        <div class="vd-skeleton-list-item">
+                            <div class="vd-skeleton vd-skeleton-circle vd-skeleton-circle-sm"></div>
+                            <div class="vd-skeleton-list-item-content">
+                                <div class="vd-skeleton vd-skeleton-text vd-skeleton-text-sm vd-mb-2"></div>
+                                <div class="vd-skeleton vd-skeleton-text" style="width:70%;"></div>
+                            </div>
+                        </div>
+                        <div class="vd-skeleton-list-item">
+                            <div class="vd-skeleton vd-skeleton-circle vd-skeleton-circle-sm"></div>
+                            <div class="vd-skeleton-list-item-content">
+                                <div class="vd-skeleton vd-skeleton-text vd-skeleton-text-sm vd-mb-2"></div>
+                                <div class="vd-skeleton vd-skeleton-text" style="width:60%;"></div>
+                            </div>
+                        </div>
+                        <div class="vd-skeleton-list-item">
+                            <div class="vd-skeleton vd-skeleton-circle vd-skeleton-circle-sm"></div>
+                            <div class="vd-skeleton-list-item-content">
+                                <div class="vd-skeleton vd-skeleton-text vd-skeleton-text-sm vd-mb-2"></div>
+                                <div class="vd-skeleton vd-skeleton-text" style="width:80%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Card placeholder --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-skeleton vd-skeleton-card"</span>&gt;
+  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-skeleton vd-skeleton-heading vd-mb-3"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-skeleton vd-skeleton-text"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-skeleton vd-skeleton-text"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+&lt;/<span class="code-tag">div</span>&gt;
+
+<span class="code-comment">&lt;!-- List placeholder --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-skeleton vd-skeleton-list"</span>&gt;
+  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-skeleton-list-item"</span>&gt;
+    &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-skeleton vd-skeleton-circle vd-skeleton-circle-sm"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+    &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-skeleton-list-item-content"</span>&gt;
+      &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-skeleton vd-skeleton-text vd-skeleton-text-sm"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+      &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-skeleton vd-skeleton-text"</span> <span class="code-attr">style</span>=<span class="code-string">"width:70%;"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+    &lt;/<span class="code-tag">div</span>&gt;
+  &lt;/<span class="code-tag">div</span>&gt;
+&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-skeleton-grid">
+                <div class="vd-card-header"><h4>Grid &amp; Width Utilities</h4></div>
+                <div class="vd-card-body">
+                    <p class="vd-text-sm vd-text-muted vd-mb-3">Grid layout</p>
+                    <div class="vd-skeleton vd-skeleton-grid vd-mb-5">
+                        <div class="vd-skeleton vd-skeleton-rect"></div>
+                        <div class="vd-skeleton vd-skeleton-rect"></div>
+                        <div class="vd-skeleton vd-skeleton-rect"></div>
+                        <div class="vd-skeleton vd-skeleton-rect"></div>
+                    </div>
+
+                    <p class="vd-text-sm vd-text-muted vd-mb-3">Width utilities</p>
+                    <div class="vd-skeleton vd-skeleton-text vd-skeleton-w-full vd-mb-3"></div>
+                    <div class="vd-skeleton vd-skeleton-text vd-skeleton-w-3-4 vd-mb-3"></div>
+                    <div class="vd-skeleton vd-skeleton-text vd-skeleton-w-2-3 vd-mb-3"></div>
+                    <div class="vd-skeleton vd-skeleton-text vd-skeleton-w-1-2 vd-mb-3"></div>
+                    <div class="vd-skeleton vd-skeleton-text vd-skeleton-w-1-3 vd-mb-3"></div>
+                    <div class="vd-skeleton vd-skeleton-text vd-skeleton-w-1-4 vd-mb-5"></div>
+
+                    <p class="vd-text-sm vd-text-muted vd-mb-3">No animation (static)</p>
+                    <div class="vd-skeleton vd-skeleton-static vd-skeleton-text vd-mb-3"></div>
+                    <p class="vd-text-sm vd-text-muted vd-mb-3">Pulse animation</p>
+                    <div class="vd-skeleton vd-skeleton-pulse vd-skeleton-text"></div>
+                </div>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Grid placeholder --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-skeleton vd-skeleton-grid"</span>&gt;
+  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-skeleton vd-skeleton-rect"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-skeleton vd-skeleton-rect"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-skeleton vd-skeleton-rect"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+&lt;/<span class="code-tag">div</span>&gt;
+
+<span class="code-comment">&lt;!-- Width utilities --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-skeleton vd-skeleton-text vd-skeleton-w-full"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-skeleton vd-skeleton-text vd-skeleton-w-3-4"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-skeleton vd-skeleton-text vd-skeleton-w-1-2"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-skeleton vd-skeleton-text vd-skeleton-w-1-4"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+
+<span class="code-comment">&lt;!-- Static (no shimmer) --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-skeleton vd-skeleton-static vd-skeleton-text"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+
+<span class="code-comment">&lt;!-- Pulse animation --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-skeleton vd-skeleton-pulse vd-skeleton-text"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CSS Variables -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header"><h4>CSS Variables</h4></div>
+                <div class="vd-card-body">
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead><tr><th>Variable</th><th>Default</th><th>Description</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>--skeleton-bg</code></td><td><code>var(--color-gray-200)</code></td><td>Base placeholder color</td></tr>
+                                <tr><td><code>--skeleton-shimmer</code></td><td><code>var(--color-gray-100)</code></td><td>Shimmer highlight color</td></tr>
+                                <tr><td><code>--skeleton-border-radius</code></td><td><code>var(--btn-border-radius)</code></td><td>Default corner rounding</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- API Reference -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header"><h4><i class="ph ph-list-dashes mr-2" style="color: var(--color-primary);"></i>API Reference</h4></div>
+                <div class="vd-card-body">
+                    <h4>CSS Classes</h4>
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead><tr><th>Class</th><th>Description</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>.vd-skeleton</code></td><td>Base placeholder with shimmer animation and overflow hidden.</td></tr>
+                                <tr><td><code>.vd-skeleton-text</code></td><td>Single text line (1rem height, 100% width, last sibling auto-shorts to 80%).</td></tr>
+                                <tr><td><code>.vd-skeleton-text-xs</code></td><td>Extra small text line (0.75rem).</td></tr>
+                                <tr><td><code>.vd-skeleton-text-sm</code></td><td>Small text line (0.875rem).</td></tr>
+                                <tr><td><code>.vd-skeleton-text-lg</code></td><td>Large text line (1.25rem).</td></tr>
+                                <tr><td><code>.vd-skeleton-text-xl</code></td><td>Extra large text line (1.5rem).</td></tr>
+                                <tr><td><code>.vd-skeleton-paragraph</code></td><td>Column wrapper for multiple text lines with built-in gap and progressive line widths.</td></tr>
+                                <tr><td><code>.vd-skeleton-heading</code></td><td>Heading placeholder (1.5rem, 60% width).</td></tr>
+                                <tr><td><code>.vd-skeleton-heading-lg</code></td><td>Large heading (2rem, 50% width).</td></tr>
+                                <tr><td><code>.vd-skeleton-circle</code></td><td>Circle shape (border-radius: 50%, 3rem default).</td></tr>
+                                <tr><td><code>.vd-skeleton-circle-xs</code> … <code>-xl</code></td><td>Circle sizes from 1.5rem to 5rem.</td></tr>
+                                <tr><td><code>.vd-skeleton-rect</code></td><td>Rectangle placeholder (100% width, 200px height).</td></tr>
+                                <tr><td><code>.vd-skeleton-rect-sm</code></td><td>Small rectangle (100px height).</td></tr>
+                                <tr><td><code>.vd-skeleton-rect-lg</code></td><td>Large rectangle (300px height).</td></tr>
+                                <tr><td><code>.vd-skeleton-button</code></td><td>Button placeholder (2.5rem height, 6rem width).</td></tr>
+                                <tr><td><code>.vd-skeleton-button-sm</code></td><td>Small button (2rem height, 4rem width).</td></tr>
+                                <tr><td><code>.vd-skeleton-button-lg</code></td><td>Large button (3rem height, 8rem width).</td></tr>
+                                <tr><td><code>.vd-skeleton-input</code></td><td>Input placeholder (2.5rem height, 100% width).</td></tr>
+                                <tr><td><code>.vd-skeleton-card</code></td><td>Card wrapper with padding and border.</td></tr>
+                                <tr><td><code>.vd-skeleton-list</code></td><td>Vertical flex list for rows with avatar + text.</td></tr>
+                                <tr><td><code>.vd-skeleton-list-item</code></td><td>Flex row with circle and content columns.</td></tr>
+                                <tr><td><code>.vd-skeleton-list-item-content</code></td><td>Content column inside a list item.</td></tr>
+                                <tr><td><code>.vd-skeleton-grid</code></td><td>CSS grid container for card/image placeholders.</td></tr>
+                                <tr><td><code>.vd-skeleton-table-row</code></td><td>Flex row placeholder for table-like loading states, with bottom border spacing.</td></tr>
+                                <tr><td><code>.vd-skeleton-w-*</code></td><td>Width utilities: <code>-w-full</code>, <code>-w-3-4</code>, <code>-w-2-3</code>, <code>-w-1-2</code>, <code>-w-1-3</code>, <code>-w-1-4</code>.</td></tr>
+                                <tr><td><code>.vd-skeleton-static</code></td><td>Disables the shimmer animation.</td></tr>
+                                <tr><td><code>.vd-skeleton-pulse</code></td><td>Replaces shimmer with an opacity pulse animation.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accessibility -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header"><h4><i class="ph ph-wheelchair mr-2" style="color: var(--color-primary);"></i>Accessibility</h4></div>
+                <div class="vd-card-body">
+                    <ul>
+                        <li>Always wrap skeleton placeholders in an <code>aria-live="polite"</code> region and replace them with real content once loaded, so screen readers announce the change.</li>
+                        <li>Use <code>aria-busy="true"</code> on the container while skeletons are visible to indicate the region is updating.</li>
+                        <li>Shimmer animation is disabled when <code>prefers-reduced-motion: reduce</code> is active — the placeholder becomes a static color block.</li>
+                        <li>Avoid leaving skeletons visible for extended periods. If loading takes more than a few seconds, show a progress indicator or retry option.</li>
+                        <li>Ensure skeleton colors maintain sufficient contrast against the page background in both light and dark themes.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

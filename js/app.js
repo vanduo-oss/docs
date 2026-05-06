@@ -1,14 +1,103 @@
 if (typeof window.Vanduo === 'undefined') {
     console.error('Vanduo failed to load from CDN. Check network/CDN availability.');
 } else {
+    function getResolvedThemeMode(mode) {
+        if (mode !== 'system') {
+            return mode;
+        }
+        return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+            ? 'dark'
+            : 'light';
+    }
+
+    function applyResolvedDocsTheme(mode) {
+        document.documentElement.setAttribute('data-theme', getResolvedThemeMode(mode));
+    }
+
+    if (window.Vanduo.components && window.Vanduo.components.themeSwitcher) {
+        window.Vanduo.components.themeSwitcher.applyTheme = function () {
+            applyResolvedDocsTheme(this.state.preference);
+        };
+    }
+
     // Extend theme customizer with site-specific fonts and override defaults
     if (window.ThemeCustomizer) {
-        Object.assign(window.ThemeCustomizer.FONT_OPTIONS, {
-            'google-sans': { name: 'Google Sans', family: "'Google Sans', sans-serif" },
-            'roboto': { name: 'Roboto', family: "'Roboto', sans-serif" },
+        var docsFontOptions = {
+            'jetbrains-mono': { name: 'JetBrains Mono', family: "'JetBrains Mono', monospace" },
+            'system': { name: 'System Default', family: null },
+            'ubuntu': { name: 'Ubuntu', family: "'Ubuntu', sans-serif" },
             'lato': { name: 'Lato', family: "'Lato', sans-serif" },
-            'noto-sans': { name: 'Noto Sans', family: "'Noto Sans', sans-serif" }
-        });
+            'open-sans': { name: 'Open Sans', family: "'Open Sans', sans-serif" }
+        };
+        var preInitLegacyFontMap = {
+            'inter': 'open-sans',
+            'source-sans': 'open-sans',
+            'source-sans-3': 'open-sans',
+            'fira-sans': 'open-sans',
+            'ibm-plex': 'open-sans',
+            'ibm-plex-sans': 'open-sans',
+            'rubik': 'open-sans',
+            'titillium-web': 'open-sans',
+            'roboto': 'lato',
+            'noto-sans': 'open-sans',
+            'google-sans': 'open-sans'
+        };
+        try {
+            var storedFontBeforeInit = localStorage.getItem('vanduo-font-preference');
+            if (storedFontBeforeInit) {
+                var normalizedBeforeInit = String(storedFontBeforeInit).trim().toLowerCase();
+                if (Object.prototype.hasOwnProperty.call(preInitLegacyFontMap, normalizedBeforeInit)) {
+                    normalizedBeforeInit = preInitLegacyFontMap[normalizedBeforeInit];
+                }
+                if (!Object.prototype.hasOwnProperty.call(docsFontOptions, normalizedBeforeInit)) {
+                    normalizedBeforeInit = 'lato';
+                }
+                if (normalizedBeforeInit !== storedFontBeforeInit) {
+                    localStorage.setItem('vanduo-font-preference', normalizedBeforeInit);
+                }
+                if (normalizedBeforeInit === 'system') {
+                    document.documentElement.removeAttribute('data-font');
+                } else {
+                    document.documentElement.setAttribute('data-font', normalizedBeforeInit);
+                }
+            }
+        } catch (_e) {
+            /* ignore */
+        }
+        window.ThemeCustomizer.applyTheme = function (mode) {
+            var nextMode = this.THEME_MODES.includes(mode) ? mode : this.DEFAULTS.THEME;
+
+            this._isApplying = true;
+
+            if (this.isUsingDefaultPrimary()) {
+                var expected = this.getDefaultPrimary(nextMode);
+                if (this.state.primary !== expected) {
+                    this.applyPrimary(expected);
+                }
+            }
+
+            this.state.theme = nextMode;
+            applyResolvedDocsTheme(nextMode);
+            this.savePreference(this.STORAGE_KEYS.THEME, nextMode);
+
+            if (window.Vanduo && window.Vanduo.components.themeSwitcher) {
+                var themeSwitcher = window.Vanduo.components.themeSwitcher;
+                if (themeSwitcher.state && themeSwitcher.state.preference !== nextMode) {
+                    themeSwitcher.state.preference = nextMode;
+                    if (typeof themeSwitcher.setStorageValue === 'function') {
+                        themeSwitcher.setStorageValue(themeSwitcher.STORAGE_KEY, nextMode);
+                    }
+                    if (typeof themeSwitcher.updateUI === 'function') {
+                        themeSwitcher.updateUI();
+                    }
+                }
+            }
+
+            this._isApplying = false;
+            this.dispatchEvent('mode-change', { mode: nextMode });
+        };
+
+        window.ThemeCustomizer.FONT_OPTIONS = docsFontOptions;
         Object.assign(window.ThemeCustomizer.DEFAULTS, {
             FONT: 'lato',
             PRIMARY_LIGHT: 'black',
@@ -26,6 +115,72 @@ function hideDisabledCodeTabs(container) {
     container.querySelectorAll('.vd-code-snippet-tab[disabled]').forEach(function (tab) {
         tab.style.display = 'none';
     });
+}
+
+/* ── Safe HTML injection for docs content ─────────── */
+function safeInjectHtml(container, html) {
+    if (!container) return;
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(String(html || '').trim(), 'text/html');
+
+    const DANGEROUS_TAGS = ['SCRIPT', 'IFRAME', 'OBJECT', 'EMBED', 'FORM', 'BASE', 'LINK', 'META'];
+    for (const tag of DANGEROUS_TAGS) {
+        const els = doc.querySelectorAll(tag);
+        for (let i = els.length - 1; i >= 0; i--) {
+            els[i].parentNode.removeChild(els[i]);
+        }
+    }
+
+    function sanitizeNode(node) {
+        if (node.nodeType === Node.ELEMENT_NODE) {
+            const attrs = node.attributes;
+            for (let i = attrs.length - 1; i >= 0; i--) {
+                const attrName = attrs[i].name.toLowerCase();
+                const attrValue = (attrs[i].value || '').toLowerCase();
+                const trimmedValue = attrValue.trim();
+                if (
+                    attrName.startsWith('on') ||
+                    attrName === 'srcdoc' ||
+                    trimmedValue.startsWith('javascript:') ||
+                    trimmedValue.startsWith('data:') ||
+                    trimmedValue.startsWith('vbscript:')
+                ) {
+                    node.removeAttribute(attrs[i].name);
+                }
+            }
+            const children = node.childNodes;
+            for (let i = 0; i < children.length; i++) {
+                sanitizeNode(children[i]);
+            }
+        }
+    }
+    sanitizeNode(doc.body);
+
+    while (container.firstChild) {
+        container.removeChild(container.firstChild);
+    }
+    Array.from(doc.body.childNodes).forEach(function (node) {
+        container.appendChild(document.adoptNode(node));
+    });
+}
+
+function setMorphBadgeContent(target, icon, label) {
+    if (!target) return;
+    const safeIcon = String(icon || '').replace(/[^a-z0-9-\s]/gi, '').trim();
+    const text = label == null ? '' : String(label);
+
+    while (target.firstChild) {
+        target.removeChild(target.firstChild);
+    }
+
+    if (safeIcon) {
+        const iEl = document.createElement('i');
+        iEl.className = 'ph ' + safeIcon;
+        iEl.style.marginRight = '0.35rem';
+        target.appendChild(iEl);
+    }
+
+    target.appendChild(document.createTextNode(text));
 }
 
 /* ── Constants ────────────────────────────────── */
@@ -214,6 +369,7 @@ function settleDocScrollLoader(sectionId) {
 
     var deadline = Date.now() + 3200;
     var stableFrames = 0;
+    var stableSince = 0;
     function checkScrollCompletion() {
         if (!docScrollLoaderEl || docScrollLoaderTargetId !== sectionId) {
             releaseGuardIfMatching();
@@ -238,20 +394,23 @@ function settleDocScrollLoader(sectionId) {
             target.scrollIntoView({ behavior: 'instant', block: 'start' });
             targetTop = target.getBoundingClientRect().top;
             stableFrames = 0;
+            stableSince = 0;
         }
         var reachedTarget = targetTop <= (SCROLL_SPY_OFFSET + 10) && targetTop >= -4;
         if (reachedTarget) {
-            // Require a couple of stable frames so late layout shifts
-            // (icon font swap, lazy demo init) get one more correction pass
-            // before we tear the loader down and release the guard.
+            // Require a short stable window so late layout shifts
+            // (icon font swap, lazy demo init, preloaded demo expansion) get
+            // another correction pass before scroll-spy can rewrite the URL.
+            if (!stableSince) stableSince = Date.now();
             stableFrames += 1;
-            if (stableFrames >= 2) {
+            if (stableFrames >= 2 && Date.now() - stableSince >= 900) {
                 hideDocScrollLoader();
                 releaseGuardIfMatching();
                 return;
             }
         } else {
             stableFrames = 0;
+            stableSince = 0;
         }
         if (Date.now() >= deadline) {
             hideDocScrollLoader();
@@ -449,6 +608,7 @@ function filterSidebarNav(query) {
 /* ── Docs mode toggle state ───────────────────── */
 
 var _toggleMorphing = false;
+var _pendingDocModeTab = null;
 
 function _getMorphDurationMs(el) {
     var duration = 750;
@@ -469,6 +629,14 @@ function _setToggleContent(el, tabKey) {
     if (label) label.textContent = isGuides ? 'Guides' : 'Components';
 }
 
+function _getToggleActionLabel(tabKey) {
+    return tabKey === 'guides' ? 'Switch to Components' : 'Switch to Guides';
+}
+
+function _getToggleTooltipText(tabKey) {
+    return tabKey === 'guides' ? 'Click for Components' : 'Click for Guides';
+}
+
 /** Keep .vd-morph-current before .vd-morph-next in the tree so flattened text order matches the visible state. */
 function _orderDocWaterToggleLayers(toggle) {
     if (!toggle) return;
@@ -486,9 +654,18 @@ function setActiveDocMode(tabKey) {
 
     var isGuides = tabKey === 'guides';
     toggle.setAttribute('aria-pressed', String(isGuides));
-    toggle.setAttribute('aria-label', isGuides ? 'Switch to Components' : 'Switch to Guides');
+    toggle.setAttribute('aria-label', _getToggleActionLabel(tabKey));
+    var tooltipText = _getToggleTooltipText(tabKey);
+    toggle.setAttribute('data-tooltip', tooltipText);
+    if (window.VanduoTooltips && typeof window.VanduoTooltips.update === 'function') {
+        window.VanduoTooltips.update(toggle, tooltipText);
+    }
 
-    if (_toggleMorphing) return;
+    if (_toggleMorphing) {
+        _pendingDocModeTab = tabKey;
+        return;
+    }
+    _pendingDocModeTab = null;
 
     var current = toggle.querySelector('.vd-morph-current');
     var next = toggle.querySelector('.vd-morph-next');
@@ -536,10 +713,55 @@ function showView(view) {
     currentView = view;
 }
 
+function initTemplatesPage(templateSlug) {
+    var root = document.getElementById('templates');
+    if (!root) return;
+
+    rewriteTemplatePreviewLinks(root);
+
+    var gallery = root.querySelector('[data-template-view="gallery"]');
+    var details = Array.from(root.querySelectorAll('[data-template-detail]'));
+    var hero = root.querySelector('.templates-hero');
+    var activeDetail = templateSlug
+        ? details.find(function (detail) {
+            return detail.getAttribute('data-template-detail') === templateSlug;
+        })
+        : null;
+
+    var inDetail = Boolean(activeDetail);
+    if (gallery) gallery.hidden = inDetail;
+    if (hero) hero.classList.toggle('is-collapsed', inDetail);
+    details.forEach(function (detail) {
+        detail.hidden = detail !== activeDetail;
+    });
+
+    if (activeDetail) {
+        var title = activeDetail.querySelector('h2');
+        if (title) setDocumentTitle(title.textContent + ' Template');
+        requestAnimationFrame(function () {
+            activeDetail.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            var focusTarget = activeDetail.querySelector('.template-back-link') || activeDetail;
+            focusTarget.focus({ preventScroll: true });
+        });
+    }
+}
+
+function rewriteTemplatePreviewLinks(root) {
+    var configuredBase = window.__VANDUO_TEMPLATES_BASE_URL || 'https://templates.vanduo.dev';
+    var base = String(configuredBase).replace(/\/+$/, '');
+    root.querySelectorAll('a[href^="https://templates.vanduo.dev/"]').forEach(function (link) {
+        var sourcePath = link.getAttribute('href').replace('https://templates.vanduo.dev', '');
+        link.href = base + sourcePath;
+    });
+}
+
 /* ── Page loading (Home / About / Changelog) ── */
-async function loadPage(pageId) {
+async function loadPage(pageId, options = {}) {
     hideDocScrollLoader();
     if (currentView === pageId && document.getElementById(pageId)) {
+        if (pageId === 'templates') {
+            initTemplatesPage(options.templateSlug || null);
+        }
         window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
     }
@@ -560,12 +782,15 @@ async function loadPage(pageId) {
         var res = await fetch(SECTIONS_BASE + page.file);
         if (!res.ok) throw new Error('Failed to load ' + page.file);
         var html = await res.text();
-        container.innerHTML = html.trim();
+        safeInjectHtml(container, html);
         if (typeof Vanduo !== 'undefined') Vanduo.init();
         hideDisabledCodeTabs(container);
         wireRouteLinks(container);
         initChangelogPagination(pageId, container);
         initHexGridDemo();
+        if (pageId === 'templates') {
+            initTemplatesPage(options.templateSlug || null);
+        }
     } catch (err) {
         console.error(err);
         container.innerHTML = '<div class="vd-alert vd-alert-error" style="margin: 2rem;">Failed to load page. Check console.</div>';
@@ -587,10 +812,7 @@ async function preloadSectionsBefore(tabKey, targetSectionId, options = {}) {
         }
     }
 
-    if (!pendingIds.length) {
-        setupInfiniteScroll();
-        return;
-    }
+    if (!pendingIds.length) return;
 
     var cursor = 0;
     var workerCount = Math.min(SECTION_PRELOAD_CONCURRENCY, pendingIds.length);
@@ -604,7 +826,31 @@ async function preloadSectionsBefore(tabKey, targetSectionId, options = {}) {
     }
 
     await Promise.all(Array.from({ length: workerCount }, worker));
-    setupInfiniteScroll();
+}
+
+function waitForLoadingSection(sectionId, signal, timeoutMs = 5000) {
+    if (loadedSections.has(sectionId)) return Promise.resolve(true);
+    if (!loadingSections.has(sectionId)) return Promise.resolve(false);
+
+    var deadline = Date.now() + timeoutMs;
+    return new Promise(function (resolve) {
+        function check() {
+            if (signal && signal.aborted) {
+                resolve(false);
+                return;
+            }
+            if (loadedSections.has(sectionId)) {
+                resolve(true);
+                return;
+            }
+            if (!loadingSections.has(sectionId) || Date.now() >= deadline) {
+                resolve(false);
+                return;
+            }
+            window.requestAnimationFrame(check);
+        }
+        window.requestAnimationFrame(check);
+    });
 }
 
 async function loadSection(sectionId, autoScroll = true, options = {}) {
@@ -662,6 +908,21 @@ async function loadSection(sectionId, autoScroll = true, options = {}) {
     }
 
     if (loadingSections.has(sectionId)) {
+        if (autoScroll) {
+            var becameAvailable = await waitForLoadingSection(sectionId, signal);
+            if (signal && signal.aborted) return;
+            if (becameAvailable) {
+                var pendingTarget = document.getElementById(sectionId);
+                if (pendingTarget) pendingTarget.scrollIntoView({ behavior: 'instant', block: 'start' });
+                settleDocScrollLoader(sectionId);
+                setActiveNavLink(sectionId);
+                setDocumentTitle(meta.section.title);
+                if (window.history && window.history.replaceState) {
+                    window.history.replaceState(null, '', '#docs/' + sectionId);
+                }
+                activeDocSectionId = sectionId;
+            }
+        }
         return;
     }
     loadingSections.add(sectionId);
@@ -699,8 +960,8 @@ async function loadSection(sectionId, autoScroll = true, options = {}) {
             setCachedSectionHtml(sectionId, html);
         }
         var wrap = document.createElement('div');
-        wrap.innerHTML = html.trim();
-        var sectionEl = wrap.firstElementChild;
+        safeInjectHtml(wrap, html);
+        var sectionEl = wrap.querySelector('#' + sectionId) || wrap.firstElementChild;
         if (sectionEl) {
             if (document.startViewTransition && autoScroll) {
                 await document.startViewTransition(function () {
@@ -1024,85 +1285,101 @@ function initChangelogPagination(pageId, container) {
 // Module-level ref so we can destroy the previous instance before re-initialising
 // (prevents MutationObserver leak when the SPA navigates away and back to Labs).
 var _hexGridInstance = null;
+var _hexGridDemoScope = null;
 
-function initHexGridDemo() {
-    var demoContainer = document.getElementById('hex-demo-container');
-    var demoCanvas = document.getElementById('hex-demo');
-    
+function initHexGridDemo(scope) {
+    var containerRoot = scope || document;
+    var scopeToken = scope && scope.id ? scope.id : 'global';
+
+    var demoContainer = (containerRoot && containerRoot.querySelector)
+        ? containerRoot.querySelector('#hex-demo-container')
+        : document.getElementById('hex-demo-container');
+    var demoCanvas = (containerRoot && containerRoot.querySelector)
+        ? containerRoot.querySelector('#hex-demo')
+        : document.getElementById('hex-demo');
+
     if (!demoContainer || !demoCanvas) return;
 
-    // Destroy any previous instance to disconnect its MutationObserver
-    if (_hexGridInstance) {
+    var isNewScope = _hexGridDemoScope !== scopeToken
+        || !_hexGridInstance
+        || !_hexGridInstance.element
+        || !_hexGridInstance.element.isConnected
+        || (_hexGridInstance.element !== demoContainer);
+
+    if (isNewScope && _hexGridInstance) {
         _hexGridInstance.destroy();
         _hexGridInstance = null;
     }
-    
+
+    if (_hexGridInstance) return;
+
     // Dynamic import to avoid loading on other pages
-    import('./hex-grid.js').then(function(module) {
+    import('./hex-grid.js').then(function (module) {
         var VdHexGrid = module.VdHexGrid;
-        var sizeSlider = document.getElementById('hex-size-slider');
-        var widthSlider = document.getElementById('hex-width-slider');
-        var heightSlider = document.getElementById('hex-height-slider');
-        var rotationSlider = document.getElementById('hex-rotation-slider');
-        
+        var sizeSlider = containerRoot.querySelector('#hex-size-slider');
+        var widthSlider = containerRoot.querySelector('#hex-width-slider');
+        var heightSlider = containerRoot.querySelector('#hex-height-slider');
+        var rotationSlider = containerRoot.querySelector('#hex-rotation-slider');
+
         var grid = new VdHexGrid({
             element: demoContainer,
             canvas: demoCanvas,
-            size: parseInt(sizeSlider?.value || '30'),
-            width: parseInt(widthSlider?.value || '15'),
-            height: parseInt(heightSlider?.value || '10')
+            size: parseInt(sizeSlider && sizeSlider.value || '30', 10),
+            width: parseInt(widthSlider && widthSlider.value || '15', 10),
+            height: parseInt(heightSlider && heightSlider.value || '10', 10)
         });
         _hexGridInstance = grid;
-        
+        _hexGridDemoScope = scopeToken;
+
         // Wire up controls
-        var sizeValue = document.getElementById('hex-size-value');
-        var widthValue = document.getElementById('hex-width-value');
-        var heightValue = document.getElementById('hex-height-value');
-        var rotationValue = document.getElementById('hex-rotation-value');
-        var resetBtn = document.getElementById('hex-reset-btn');
-        var fillBtn = document.getElementById('hex-fill-btn');
-        var infoCard = document.getElementById('hex-info-card');
-        
+        var sizeValue = containerRoot.querySelector('#hex-size-value');
+        var widthValue = containerRoot.querySelector('#hex-width-value');
+        var heightValue = containerRoot.querySelector('#hex-height-value');
+        var rotationValue = containerRoot.querySelector('#hex-rotation-value');
+        var resetBtn = containerRoot.querySelector('#hex-reset-btn');
+        var fillBtn = containerRoot.querySelector('#hex-fill-btn');
+        var infoCard = containerRoot.querySelector('#hex-info-card');
+
         // Toolbar buttons
-        var zoomInBtn = document.getElementById('hex-zoom-in');
-        var zoomOutBtn = document.getElementById('hex-zoom-out');
-        var resetViewBtn = document.getElementById('hex-reset-view');
-        var zoomLevelSpan = document.getElementById('hex-zoom-level');
-        
+        var zoomInBtn = containerRoot.querySelector('#hex-zoom-in');
+        var zoomOutBtn = containerRoot.querySelector('#hex-zoom-out');
+        var resetViewBtn = containerRoot.querySelector('#hex-reset-view');
+        var zoomLevelSpan = containerRoot.querySelector('#hex-zoom-level');
+
         if (sizeSlider && sizeValue) {
-            sizeSlider.addEventListener('input', function(e) {
+            sizeSlider.addEventListener('input', function (e) {
                 sizeValue.textContent = e.target.value + 'px';
-                grid.setSize(parseInt(e.target.value));
+                grid.setSize(parseInt(e.target.value, 10));
             });
         }
-        
+
         if (widthSlider && widthValue) {
-            widthSlider.addEventListener('input', function(e) {
+            widthSlider.addEventListener('input', function (e) {
                 widthValue.textContent = e.target.value;
-                grid.setDimensions(parseInt(e.target.value), grid.height);
+                grid.setDimensions(parseInt(e.target.value, 10), grid.height);
             });
         }
-        
+
         if (heightSlider && heightValue) {
-            heightSlider.addEventListener('input', function(e) {
+            heightSlider.addEventListener('input', function (e) {
                 heightValue.textContent = e.target.value;
-                grid.setDimensions(grid.width, parseInt(e.target.value));
+                grid.setDimensions(grid.width, parseInt(e.target.value, 10));
             });
         }
-        
+
         if (rotationSlider && rotationValue) {
-            rotationSlider.addEventListener('input', function(e) {
+            rotationSlider.addEventListener('input', function (e) {
                 var deg = parseInt(e.target.value, 10);
                 rotationValue.textContent = deg + '\u00b0';
                 grid.setRotation(deg * Math.PI / 180);
             });
         }
-        
+
         if (resetBtn) {
-            resetBtn.addEventListener('click', function() {
-                if (sizeSlider) sizeSlider.value = 30;
-                if (widthSlider) widthSlider.value = 15;
-                if (heightSlider) heightSlider.value = 10;
+            resetBtn.addEventListener('click', function () {
+                if (sizeSlider) sizeSlider.value = '30';
+                if (widthSlider) widthSlider.value = '15';
+                if (heightSlider) heightSlider.value = '10';
                 if (rotationSlider) rotationSlider.value = '0';
                 if (sizeValue) sizeValue.textContent = '30px';
                 if (widthValue) widthValue.textContent = '15';
@@ -1111,54 +1388,54 @@ function initHexGridDemo() {
                 grid.reset();
             });
         }
-        
+
         if (fillBtn) {
-            fillBtn.addEventListener('click', function() {
+            fillBtn.addEventListener('click', function () {
                 grid.fillRandom();
             });
         }
-        
+
         // Toolbar button handlers
         if (zoomInBtn) {
-            zoomInBtn.addEventListener('click', function() {
+            zoomInBtn.addEventListener('click', function () {
                 grid.zoomIn();
             });
         }
-        
+
         if (zoomOutBtn) {
-            zoomOutBtn.addEventListener('click', function() {
+            zoomOutBtn.addEventListener('click', function () {
                 grid.zoomOut();
             });
         }
-        
+
         if (resetViewBtn) {
-            resetViewBtn.addEventListener('click', function() {
+            resetViewBtn.addEventListener('click', function () {
                 grid.resetView();
             });
         }
-        
+
         // Listen for zoom events to update zoom level indicator
-        grid.on('zoom', function(data) {
+        grid.on('zoom', function (data) {
             if (zoomLevelSpan) {
                 var percent = Math.round(data.scale * 100);
                 zoomLevelSpan.textContent = percent + '%';
             }
         });
-        
+
         // Listen for selection events
-        grid.on('select', function(hex) {
+        grid.on('select', function (hex) {
             if (infoCard) infoCard.style.display = 'block';
-            var coords = document.getElementById('hex-coords');
-            var pixelX = document.getElementById('hex-pixel-x');
-            var pixelY = document.getElementById('hex-pixel-y');
-            var adjacent = document.getElementById('hex-adjacent');
-            
+            var coords = containerRoot.querySelector('#hex-coords');
+            var pixelX = containerRoot.querySelector('#hex-pixel-x');
+            var pixelY = containerRoot.querySelector('#hex-pixel-y');
+            var adjacent = containerRoot.querySelector('#hex-adjacent');
+
             if (coords) coords.textContent = '(' + hex.q + ', ' + hex.r + ')';
             if (pixelX) pixelX.textContent = Math.round(hex.x);
             if (pixelY) pixelY.textContent = Math.round(hex.y);
-            if (adjacent) adjacent.textContent = hex.adjacent?.length || 0;
+            if (adjacent) adjacent.textContent = (hex.adjacent && hex.adjacent.length) || 0;
         });
-    }).catch(function(err) {
+    }).catch(function (err) {
         console.error('Failed to load VdHexGrid:', err);
     });
 }
@@ -1169,6 +1446,8 @@ function parseHash(hash) {
     if (!h || h === 'home') return { view: 'home' };
     if (h === 'about') return { view: 'about' };
     if (h === 'changelog') return { view: 'changelog' };
+    if (h === 'templates') return { view: 'templates' };
+    if (h.startsWith('templates/')) return { view: 'templates', template: h.slice(10).split('/')[0] };
     if (h === 'kilo-oss') return { view: 'kilo-oss' };
     if (h === 'docs') return { view: 'docs-landing' };
     if (h === 'docs/components') return { view: 'docs', tab: 'components', section: null };
@@ -1199,8 +1478,8 @@ async function handleRoute() {
 
     var parsed = parseHash(location.hash);
 
-    if (parsed.view === 'home' || parsed.view === 'about' || parsed.view === 'changelog' || parsed.view === 'kilo-oss' || parsed.view === 'docs-landing') {
-        await loadPage(parsed.view);
+    if (parsed.view === 'home' || parsed.view === 'about' || parsed.view === 'changelog' || parsed.view === 'templates' || parsed.view === 'kilo-oss' || parsed.view === 'docs-landing') {
+        await loadPage(parsed.view, { templateSlug: parsed.template });
         if (parsed.view === 'docs-landing') {
             setActiveNavbarLink('docs');
         }
@@ -1231,6 +1510,47 @@ async function handleRoute() {
 function initSectionDemos(sectionEl) {
     if (!sectionEl) return;
 
+    sectionEl.querySelectorAll('[data-fab-speed-dial-toggle]').forEach(function (toggle) {
+        if (toggle._fabSpeedDialInit) return;
+        toggle._fabSpeedDialInit = true;
+        toggle.addEventListener('click', function (e) {
+            e.preventDefault();
+            var menu = toggle.closest('.vd-fab-menu');
+            if (!menu) return;
+            menu.classList.toggle('is-open');
+            toggle.setAttribute('aria-expanded', menu.classList.contains('is-open') ? 'true' : 'false');
+        });
+    });
+
+    sectionEl.querySelectorAll('[data-demo-no-nav]').forEach(function (link) {
+        if (link._demoNoNavInit) return;
+        link._demoNoNavInit = true;
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+        });
+    });
+
+    sectionEl.querySelectorAll('[data-stepper-demo-control]').forEach(function (button) {
+        if (button._stepperDemoControlInit) return;
+        button._stepperDemoControlInit = true;
+        button.addEventListener('click', function (e) {
+            e.preventDefault();
+            var action = button.getAttribute('data-stepper-demo-control');
+            var targetSelector = button.getAttribute('data-stepper-target');
+            var stepper = targetSelector ? sectionEl.querySelector(targetSelector) : null;
+            if (!stepper && targetSelector) {
+                stepper = document.querySelector(targetSelector);
+            }
+            if (!stepper || !window.VanduoStepper) return;
+
+            if (action === 'next') {
+                window.VanduoStepper.next(stepper);
+            } else if (action === 'prev') {
+                window.VanduoStepper.prev(stepper);
+            }
+        });
+    });
+
     sectionEl.querySelectorAll('[data-vd-morph="manual"][data-morph-states]').forEach(function (badge) {
         if (badge._morphBadgeInit) return;
         badge._morphBadgeInit = true;
@@ -1258,7 +1578,7 @@ function initSectionDemos(sectionEl) {
 
             var next = badge.querySelector('.vd-morph-next');
             if (next) {
-                next.innerHTML = '<i class="ph ' + icons[nextIdx] + '" style="margin-right:0.35rem;"></i> ' + states[nextIdx];
+                setMorphBadgeContent(next, icons[nextIdx], states[nextIdx]);
             }
 
             var wave = badge.querySelector('.vd-morph-wave');
@@ -1279,15 +1599,110 @@ function initSectionDemos(sectionEl) {
                 var current = badge.querySelector('.vd-morph-current');
                 var nextEl  = badge.querySelector('.vd-morph-next');
                 if (current) {
-                    current.innerHTML = '<i class="ph ' + icons[nextIdx] + '" style="margin-right:0.35rem;"></i> ' + states[nextIdx];
+                    setMorphBadgeContent(current, icons[nextIdx], states[nextIdx]);
                 }
                 if (nextEl) {
-                    nextEl.innerHTML = '<i class="ph ' + icons[afterIdx] + '" style="margin-right:0.35rem;"></i> ' + states[afterIdx];
+                    setMorphBadgeContent(nextEl, icons[afterIdx], states[afterIdx]);
                 }
 
                 idx = nextIdx;
                 morphing = false;
             }, morphMs);
+        });
+    });
+
+    if (sectionEl.id === 'vd-hex') {
+        initHexGridDemo(sectionEl);
+    }
+
+    if (sectionEl.id === 'music-player') {
+        initMusicPlayerDemos(sectionEl);
+    }
+
+    if (sectionEl.id === 'toasts') {
+        initToastDemos(sectionEl);
+    }
+}
+
+/* ── Music Player demo wiring ─────────────────── */
+function initMusicPlayerDemos(sectionEl) {
+    var MP = window.VanduoMusicPlayer;
+    if (!MP) return;
+
+    var d1 = sectionEl.querySelector('#demo-detach');
+    var d2 = sectionEl.querySelector('#demo-floating-pro');
+
+    var btnDetach  = sectionEl.querySelector('#btn-detach-demo');
+    var btnAttach  = sectionEl.querySelector('#btn-attach-demo');
+    if (btnDetach && d1) {
+        btnDetach.addEventListener('click', function () { MP.detach(d1, 'bottom-left'); });
+    }
+    if (btnAttach && d1) {
+        btnAttach.addEventListener('click', function () { MP.attach(d1); });
+    }
+
+    var btnFloatPro    = sectionEl.querySelector('#btn-float-pro');
+    var btnFloatExpand = sectionEl.querySelector('#btn-float-expand');
+    var btnFloatAttach = sectionEl.querySelector('#btn-float-attach');
+    if (btnFloatPro && d2) {
+        btnFloatPro.addEventListener('click', function () {
+            MP.detach(d2, 'bottom-right');
+            setTimeout(function () { MP.minimize(d2); }, 150);
+        });
+    }
+    if (btnFloatExpand && d2) {
+        btnFloatExpand.addEventListener('click', function () { MP.expand(d2); });
+    }
+    if (btnFloatAttach && d2) {
+        btnFloatAttach.addEventListener('click', function () { MP.attach(d2); });
+    }
+}
+
+/* ── Toast demo wiring ────────────────────────── */
+function initToastDemos(sectionEl) {
+    if (!window.Toast) return;
+
+    sectionEl.querySelectorAll('[data-toast-demo]').forEach(function (btn) {
+        if (btn._toastDemoInit) return;
+        btn._toastDemoInit = true;
+
+        var demoType = btn.getAttribute('data-toast-demo');
+        btn.addEventListener('click', function () {
+            switch (demoType) {
+                case 'success':
+                    Toast.success('Operation completed successfully!');
+                    break;
+                case 'error':
+                    Toast.error('An error occurred!');
+                    break;
+                case 'warning':
+                    Toast.warning('Please review your input.');
+                    break;
+                case 'info':
+                    Toast.info('Here is some information.');
+                    break;
+                case 'with-title':
+                    Toast.show({
+                        title: 'With Title',
+                        message: 'This toast has a title and message.',
+                        type: 'info'
+                    });
+                    break;
+                case 'long-duration':
+                    Toast.show({
+                        message: 'This toast will stay for 10 seconds.',
+                        type: 'success',
+                        duration: 10000
+                    });
+                    break;
+                case 'bottom-left':
+                    Toast.show({
+                        message: 'Bottom left position.',
+                        type: 'warning',
+                        position: 'bottom-left'
+                    });
+                    break;
+            }
         });
     });
 }
@@ -1323,17 +1738,27 @@ if (docWaterToggle) {
         if (next) _setToggleContent(next, destTab);
 
         _toggleMorphing = true;
+        _pendingDocModeTab = destTab;
 
         var tabRoutes = { components: 'docs/components', guides: 'docs/guides' };
         navigate(tabRoutes[destTab] || 'docs/components');
 
         var morphDuration = _getMorphDurationMs(toggle);
-        // Defer the final sync to the next frame so VanduoMorph has already swapped current/next.
+        // Wait until VanduoMorph actually finishes swapping layers to avoid
+        // a timer-order race that can momentarily re-apply the opposite label.
+        function finalizeWhenMorphSettles() {
+            if (toggle.classList.contains('is-morphing')) {
+                requestAnimationFrame(finalizeWhenMorphSettles);
+                return;
+            }
+            _toggleMorphing = false;
+            var routeTab = parseHash(location.hash).tab;
+            var finalTab = _pendingDocModeTab || routeTab || currentTab || destTab;
+            setActiveDocMode(finalTab);
+        }
+
         setTimeout(function () {
-            requestAnimationFrame(function () {
-                _toggleMorphing = false;
-                setActiveDocMode(destTab);
-            });
+            requestAnimationFrame(finalizeWhenMorphSettles);
         }, morphDuration);
     }, true);
 }
@@ -1341,17 +1766,59 @@ if (docWaterToggle) {
 /* ── Track Water Morph wrapper height for sticky sidebar (--doc-tabs-height) ── */
 (function () {
     var wrapper = document.querySelector('.doc-water-toggle-wrapper');
+    var sidebar = document.querySelector('.doc-sidebar');
     if (!wrapper) {
         document.documentElement.style.setProperty('--doc-tabs-height', '0px');
+        document.documentElement.style.setProperty('--doc-mobile-controls-height', '0px');
         return;
     }
+
+    function getVisibleOuterHeight(el) {
+        if (!el) return 0;
+        var style = getComputedStyle(el);
+        if (style.display === 'none' || style.visibility === 'hidden') return 0;
+        var marginTop = parseFloat(style.marginTop) || 0;
+        var marginBottom = parseFloat(style.marginBottom) || 0;
+        return el.offsetHeight + marginTop + marginBottom;
+    }
+
     var updateHeightVar = function () {
-        document.documentElement.style.setProperty('--doc-tabs-height', wrapper.offsetHeight + 'px');
+        var filter = document.querySelector('.doc-sidebar-filter');
+        var tocToggle = document.querySelector('.doc-sidebar-toggle');
+        var gapPx = 0;
+
+        if (filter) {
+            gapPx = parseFloat(getComputedStyle(filter).marginTop) || 0;
+        }
+
+        document.documentElement.style.setProperty('--doc-tabs-height',
+            (wrapper.offsetHeight + gapPx) + 'px');
+
+        if (!window.matchMedia('(max-width: 991px)').matches) {
+            document.documentElement.style.setProperty('--doc-mobile-controls-height', '0px');
+            return;
+        }
+
+        var controlsHeight = getVisibleOuterHeight(wrapper)
+            + getVisibleOuterHeight(filter)
+            + getVisibleOuterHeight(tocToggle);
+
+        document.documentElement.style.setProperty('--doc-mobile-controls-height',
+            controlsHeight + 'px');
     };
+
     var ro = new ResizeObserver(function () {
         updateHeightVar();
     });
     ro.observe(wrapper);
+    if (sidebar) ro.observe(sidebar);
+    var filterEl = document.querySelector('.doc-sidebar-filter');
+    var tocToggleEl = document.querySelector('.doc-sidebar-toggle');
+    if (filterEl) ro.observe(filterEl);
+    if (tocToggleEl) ro.observe(tocToggleEl);
+
+    window.addEventListener('resize', updateHeightVar, { passive: true });
+    window.addEventListener('hashchange', updateHeightVar);
     updateHeightVar();
 })();
 
@@ -1522,8 +1989,7 @@ document.addEventListener('click', function (e) {
     }
 });
 
-// Apply theme using the real framework component behavior so system mode
-// matches the navbar implementation exactly.
+// Apply theme using the real framework component behavior.
 function applyTheme(theme) {
     var themeSwitcher = window.Vanduo
         && window.Vanduo.components
@@ -1534,15 +2000,67 @@ function applyTheme(theme) {
         return;
     }
 
-    // Fallback: mirror the framework's system handling by removing the
-    // attribute instead of setting data-theme="system".
     if (theme === 'system') {
-        document.documentElement.removeAttribute('data-theme');
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
     } else {
         document.documentElement.setAttribute('data-theme', theme);
     }
-
     localStorage.setItem('vanduo-theme-preference', theme);
+}
+
+var SUPPORTED_CUSTOMIZER_FONTS = {
+    'jetbrains-mono': true,
+    'system': true,
+    'ubuntu': true,
+    'lato': true,
+    'open-sans': true
+};
+
+var LEGACY_CUSTOMIZER_FONT_MAP = {
+    'inter': 'open-sans',
+    'source-sans': 'open-sans',
+    'source-sans-3': 'open-sans',
+    'fira-sans': 'open-sans',
+    'ibm-plex': 'open-sans',
+    'ibm-plex-sans': 'open-sans',
+    'rubik': 'open-sans',
+    'titillium-web': 'open-sans',
+    'roboto': 'lato',
+    'noto-sans': 'open-sans',
+    'google-sans': 'open-sans',
+    'zen-dots': 'open-sans'
+};
+
+function normalizeCustomizerFontKey(fontKey) {
+    var key = String(fontKey || '').trim().toLowerCase();
+    if (!key) return 'lato';
+    if (Object.prototype.hasOwnProperty.call(LEGACY_CUSTOMIZER_FONT_MAP, key)) {
+        key = LEGACY_CUSTOMIZER_FONT_MAP[key];
+    }
+    if (Object.prototype.hasOwnProperty.call(SUPPORTED_CUSTOMIZER_FONTS, key)) {
+        return key;
+    }
+    return 'lato';
+}
+
+function applyCustomizerFontPreference(fontKey) {
+    var normalized = normalizeCustomizerFontKey(fontKey);
+    if (window.ThemeCustomizer && typeof window.ThemeCustomizer.applyFont === 'function') {
+        window.ThemeCustomizer.applyFont(normalized);
+        if (typeof window.ThemeCustomizer.updateUI === 'function') {
+            window.ThemeCustomizer.updateUI();
+        }
+        return normalized;
+    }
+
+    if (normalized === 'system') {
+        document.documentElement.removeAttribute('data-font');
+    } else {
+        document.documentElement.setAttribute('data-font', normalized);
+    }
+    localStorage.setItem('vanduo-font-preference', normalized);
+    return normalized;
 }
 
 /** Copy legacy demo keys into framework storage keys once (radius/font). */
@@ -1554,38 +2072,47 @@ function migrateLegacyCustomizerDemoStorage() {
         if (!localStorage.getItem('vanduo-font-preference') && localStorage.getItem('vanduo-font-family')) {
             localStorage.setItem('vanduo-font-preference', localStorage.getItem('vanduo-font-family'));
         }
+        var storedFont = localStorage.getItem('vanduo-font-preference');
+        if (storedFont) {
+            var normalizedFont = normalizeCustomizerFontKey(storedFont);
+            if (normalizedFont !== storedFont) {
+                localStorage.setItem('vanduo-font-preference', normalizedFont);
+            }
+            if (normalizedFont === 'system') {
+                document.documentElement.removeAttribute('data-font');
+            } else {
+                document.documentElement.setAttribute('data-font', normalizedFont);
+            }
+        }
     } catch (_e) {
         /* ignore */
     }
 }
 
 // Theme Customizer Demo - Font Family
+var isFontSelectListenerInitialized = false;
 function initFontSelectListener() {
-    var fontSelect = document.querySelector('.font-select');
-    if (fontSelect) {
-        try {
-            var storedFont = localStorage.getItem('vanduo-font-preference');
-            if (storedFont) {
-                fontSelect.value = storedFont;
-            }
-        } catch (_e) {
-            /* ignore */
-        }
-        fontSelect.addEventListener('change', function() {
-            var font = this.value;
-            if (font) {
-                document.documentElement.setAttribute('data-font', font);
-                localStorage.setItem('vanduo-font-preference', font);
-                updateCustomizerDemoState();
-            }
-        });
-    }
+    if (isFontSelectListenerInitialized) return;
+    isFontSelectListenerInitialized = true;
+
+    document.addEventListener('change', function (e) {
+        var fontSelect = e.target && e.target.closest ? e.target.closest('.font-select') : null;
+        if (!fontSelect) return;
+        var normalizedFont = applyCustomizerFontPreference(fontSelect.value);
+        fontSelect.value = normalizedFont;
+        updateCustomizerDemoState();
+    });
 }
 
 // Update visual state of customizer demo buttons
 function updateCustomizerDemoState() {
     var html = document.documentElement;
-    var theme = html.getAttribute('data-theme') || 'system';
+    var theme = 'system';
+    try {
+        theme = localStorage.getItem('vanduo-theme-preference') || 'system';
+    } catch (_e) {
+        theme = 'system';
+    }
     var primary = html.getAttribute('data-primary');
     if (!primary && window.ThemeCustomizer && typeof window.ThemeCustomizer.getDefaultPrimary === 'function') {
         var tm = (window.ThemeCustomizer.state && window.ThemeCustomizer.state.theme) ? window.ThemeCustomizer.state.theme : 'system';
@@ -1620,17 +2147,26 @@ function updateCustomizerDemoState() {
     // Update font select
     var fontSelect = document.querySelector('.font-select');
     if (fontSelect) {
-        var font = html.getAttribute('data-font') || 'jetbrains-mono';
+        var font = normalizeCustomizerFontKey(html.getAttribute('data-font') || localStorage.getItem('vanduo-font-preference') || 'lato');
         fontSelect.value = font;
     }
 }
 
-// Initialize customizer demo on page load
-document.addEventListener('DOMContentLoaded', function() {
+var isCustomizerDemoBootstrapped = false;
+function bootstrapCustomizerDemo() {
+    if (isCustomizerDemoBootstrapped) return;
+    isCustomizerDemoBootstrapped = true;
     migrateLegacyCustomizerDemoStorage();
     initFontSelectListener();
     updateCustomizerDemoState();
-});
+}
+
+// Initialize customizer demo regardless of dynamic script load timing.
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bootstrapCustomizerDemo);
+} else {
+    bootstrapCustomizerDemo();
+}
 
 document.addEventListener('draggable:drop', function (e) {
     // Draggable: Drop Zone Demo
@@ -2191,9 +2727,6 @@ function initGlobalSearch() {
         });
     });
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-
-    // Also listen for OS preference changes when in system mode
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateIcon);
 })();
 
 /* ── Init ───────────────────────────────────── */

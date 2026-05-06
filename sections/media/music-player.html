@@ -1,10 +1,11 @@
 <section id="music-player">
     <h4 class="demo-title"><i class="ph ph-music-note"></i>Music Player</h4>
     <p class="vd-mb-4">A fully accessible HTML5 audio player component with transport controls,
-        volume, and optional shuffle, seek bar, and playlist features. Zero external dependencies,
+        volume, optional shuffle, seek bar, playlist, glass surface, and a detachable floating mode
+        (corner placement, pointer-drag reposition, minimizable). Zero external dependencies,
         powered by the native Audio API, and it automatically adapts to the active Vanduo theme.</p>
-    <p class="vd-text-sm vd-text-muted vd-mb-8">To keep the docs lightweight, all live demos below use one bundled sample track:
-        <em>Pale Blue Dot</em>. In real usage, pass as many tracks as you need.</p>
+    <p class="vd-text-sm vd-text-muted vd-mb-8">To keep the docs lightweight, all live demos below use a bundled sample playlist from
+        <em>Invent the Universe</em>, with <em>Pale Blue Dot</em> as the default first track.</p>
 
     <!-- ──────────────────────────────────────────────────────
          MINIMAL PLAYER (default)
@@ -18,7 +19,7 @@
                 </div>
                 <div class="vd-card-body">
                     <div id="demo-minimal" class="vd-music-player" data-music-player
-                        data-music-player-options='{"tracks":[{"name":"Pale Blue Dot","url":"./music/Stellardrone/Invent the Universe/06 - Pale Blue Dot.mp3"}]}'></div>
+                        data-music-player-options='{"tracks":[{"name":"Pale Blue Dot","url":"./music/Stellardrone/Invent the Universe/06 - Pale Blue Dot.mp3"},{"name":"Maia Nebula","url":"./music/Stellardrone/Invent the Universe/03 - Maia Nebula.mp3"},{"name":"Approaching the Heliopause","url":"./music/Stellardrone/Invent the Universe/04 - Approaching the Heliopause.mp3"},{"name":"An Ocean of Galaxies","url":"./music/Stellardrone/Invent the Universe/07 - An Ocean of Galaxies.mp3"},{"name":"Infinite Void","url":"./music/Stellardrone/Invent the Universe/08 - Infinite Void.mp3"}]}'></div>
                     <div class="vd-code-snippet" data-collapsible>
                         <button class="vd-code-snippet-toggle" aria-expanded="false">
                             <span class="vd-code-snippet-toggle-icon"></span>
@@ -38,10 +39,11 @@
                             <div class="vd-code-snippet-body">
                                 <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">div</span> <span class="code-attr">id</span>=<span class="code-string">"my-player"</span> <span class="code-attr">class</span>=<span class="code-string">"vd-music-player"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;</code></pre>
                                                                 <pre class="vd-code-snippet-pane" data-lang="js"><code><span class="code-keyword">const</span> tracks = [
-    {
-        name: <span class="code-string">'Pale Blue Dot'</span>,
-        url: <span class="code-string">'./music/Stellardrone/Invent the Universe/06 - Pale Blue Dot.mp3'</span>,
-    },
+    { name: <span class="code-string">'Pale Blue Dot'</span>, url: <span class="code-string">'./music/Stellardrone/Invent the Universe/06 - Pale Blue Dot.mp3'</span> },
+    { name: <span class="code-string">'Maia Nebula'</span>, url: <span class="code-string">'./music/Stellardrone/Invent the Universe/03 - Maia Nebula.mp3'</span> },
+    { name: <span class="code-string">'Approaching the Heliopause'</span>, url: <span class="code-string">'./music/Stellardrone/Invent the Universe/04 - Approaching the Heliopause.mp3'</span> },
+    { name: <span class="code-string">'An Ocean of Galaxies'</span>, url: <span class="code-string">'./music/Stellardrone/Invent the Universe/07 - An Ocean of Galaxies.mp3'</span> },
+    { name: <span class="code-string">'Infinite Void'</span>, url: <span class="code-string">'./music/Stellardrone/Invent the Universe/08 - Infinite Void.mp3'</span> },
 ];
 
 VanduoMusicPlayer.initPlayer(
@@ -63,7 +65,7 @@ VanduoMusicPlayer.initPlayer(
                 </div>
                 <div class="vd-card-body">
                     <div id="demo-progress" class="vd-music-player" data-music-player
-                        data-music-player-options='{"tracks":[{"name":"Pale Blue Dot","url":"./music/Stellardrone/Invent the Universe/06 - Pale Blue Dot.mp3"}],"showProgress":true}'></div>
+                        data-music-player-options='{"tracks":[{"name":"Pale Blue Dot","url":"./music/Stellardrone/Invent the Universe/06 - Pale Blue Dot.mp3"},{"name":"Maia Nebula","url":"./music/Stellardrone/Invent the Universe/03 - Maia Nebula.mp3"},{"name":"Approaching the Heliopause","url":"./music/Stellardrone/Invent the Universe/04 - Approaching the Heliopause.mp3"},{"name":"An Ocean of Galaxies","url":"./music/Stellardrone/Invent the Universe/07 - An Ocean of Galaxies.mp3"},{"name":"Infinite Void","url":"./music/Stellardrone/Invent the Universe/08 - Infinite Void.mp3"}],"showProgress":true}'></div>
                     <div class="vd-code-snippet" data-collapsible>
                         <button class="vd-code-snippet-toggle" aria-expanded="false">
                             <span class="vd-code-snippet-toggle-icon"></span>
@@ -100,11 +102,11 @@ VanduoMusicPlayer.initPlayer(
             <div class="vd-card vd-card-glow demo-card">
                 <div class="vd-card-header">
                     <h4>With Shuffle</h4>
-                    <p class="vd-text-sm vd-text-muted vd-mb-0">Start shuffled with <code>shuffle: true</code>, or tap the shuffle button to toggle. The docs demo uses one bundled track, but the option works the same for longer lists.</p>
+                    <p class="vd-text-sm vd-text-muted vd-mb-0">Start shuffled with <code>shuffle: true</code>, or tap the shuffle button to toggle. The docs demo playlist includes multiple bundled tracks so you can see the behavior directly.</p>
                 </div>
                 <div class="vd-card-body">
                     <div id="demo-shuffle" class="vd-music-player" data-music-player
-                        data-music-player-options='{"tracks":[{"name":"Pale Blue Dot","url":"./music/Stellardrone/Invent the Universe/06 - Pale Blue Dot.mp3"}],"shuffle":true}'></div>
+                        data-music-player-options='{"tracks":[{"name":"Pale Blue Dot","url":"./music/Stellardrone/Invent the Universe/06 - Pale Blue Dot.mp3"},{"name":"Maia Nebula","url":"./music/Stellardrone/Invent the Universe/03 - Maia Nebula.mp3"},{"name":"Approaching the Heliopause","url":"./music/Stellardrone/Invent the Universe/04 - Approaching the Heliopause.mp3"},{"name":"An Ocean of Galaxies","url":"./music/Stellardrone/Invent the Universe/07 - An Ocean of Galaxies.mp3"},{"name":"Infinite Void","url":"./music/Stellardrone/Invent the Universe/08 - Infinite Void.mp3"}],"shuffle":true}'></div>
                     <div class="vd-code-snippet" data-collapsible>
                         <button class="vd-code-snippet-toggle" aria-expanded="false">
                             <span class="vd-code-snippet-toggle-icon"></span>
@@ -136,11 +138,11 @@ VanduoMusicPlayer.initPlayer(
             <div class="vd-card vd-card-glow demo-card">
                 <div class="vd-card-header">
                     <h4>With Playlist</h4>
-                    <p class="vd-text-sm vd-text-muted vd-mb-0">Enable <code>showPlaylist: true</code> to reveal a collapsible track list. The bundled docs sample shows the UI using one tracked song.</p>
+                    <p class="vd-text-sm vd-text-muted vd-mb-0">Enable <code>showPlaylist: true</code> to reveal a collapsible track list for all bundled demo tracks.</p>
                 </div>
                 <div class="vd-card-body">
                     <div id="demo-playlist" class="vd-music-player" data-music-player
-                        data-music-player-options='{"tracks":[{"name":"Pale Blue Dot","url":"./music/Stellardrone/Invent the Universe/06 - Pale Blue Dot.mp3"}],"showPlaylist":true}'></div>
+                        data-music-player-options='{"tracks":[{"name":"Pale Blue Dot","url":"./music/Stellardrone/Invent the Universe/06 - Pale Blue Dot.mp3"},{"name":"Maia Nebula","url":"./music/Stellardrone/Invent the Universe/03 - Maia Nebula.mp3"},{"name":"Approaching the Heliopause","url":"./music/Stellardrone/Invent the Universe/04 - Approaching the Heliopause.mp3"},{"name":"An Ocean of Galaxies","url":"./music/Stellardrone/Invent the Universe/07 - An Ocean of Galaxies.mp3"},{"name":"Infinite Void","url":"./music/Stellardrone/Invent the Universe/08 - Infinite Void.mp3"}],"showPlaylist":true}'></div>
                     <div class="vd-code-snippet" data-collapsible>
                         <button class="vd-code-snippet-toggle" aria-expanded="false">
                             <span class="vd-code-snippet-toggle-icon"></span>
@@ -181,7 +183,7 @@ VanduoMusicPlayer.initPlayer(
                 </div>
                 <div class="vd-card-body">
                     <div id="demo-compact" class="vd-music-player vd-music-player-compact" data-music-player
-                        data-music-player-options='{"tracks":[{"name":"Pale Blue Dot","url":"./music/Stellardrone/Invent the Universe/06 - Pale Blue Dot.mp3"}]}'></div>
+                        data-music-player-options='{"tracks":[{"name":"Pale Blue Dot","url":"./music/Stellardrone/Invent the Universe/06 - Pale Blue Dot.mp3"},{"name":"Maia Nebula","url":"./music/Stellardrone/Invent the Universe/03 - Maia Nebula.mp3"},{"name":"Approaching the Heliopause","url":"./music/Stellardrone/Invent the Universe/04 - Approaching the Heliopause.mp3"},{"name":"An Ocean of Galaxies","url":"./music/Stellardrone/Invent the Universe/07 - An Ocean of Galaxies.mp3"},{"name":"Infinite Void","url":"./music/Stellardrone/Invent the Universe/08 - Infinite Void.mp3"}]}'></div>
                     <div class="vd-code-snippet" data-collapsible>
                         <button class="vd-code-snippet-toggle" aria-expanded="false">
                             <span class="vd-code-snippet-toggle-icon"></span>
@@ -214,7 +216,7 @@ VanduoMusicPlayer.initPlayer(
                 </div>
                 <div class="vd-card-body">
                     <div id="demo-sm" class="vd-music-player vd-music-player-sm" data-music-player
-                        data-music-player-options='{"tracks":[{"name":"Pale Blue Dot","url":"./music/Stellardrone/Invent the Universe/06 - Pale Blue Dot.mp3"}]}'></div>
+                        data-music-player-options='{"tracks":[{"name":"Pale Blue Dot","url":"./music/Stellardrone/Invent the Universe/06 - Pale Blue Dot.mp3"},{"name":"Maia Nebula","url":"./music/Stellardrone/Invent the Universe/03 - Maia Nebula.mp3"},{"name":"Approaching the Heliopause","url":"./music/Stellardrone/Invent the Universe/04 - Approaching the Heliopause.mp3"},{"name":"An Ocean of Galaxies","url":"./music/Stellardrone/Invent the Universe/07 - An Ocean of Galaxies.mp3"},{"name":"Infinite Void","url":"./music/Stellardrone/Invent the Universe/08 - Infinite Void.mp3"}]}'></div>
                     <div class="vd-code-snippet" data-collapsible>
                         <button class="vd-code-snippet-toggle" aria-expanded="false">
                             <span class="vd-code-snippet-toggle-icon"></span>
@@ -247,7 +249,7 @@ VanduoMusicPlayer.initPlayer(
                 </div>
                 <div class="vd-card-body">
                     <div id="demo-lg" class="vd-music-player vd-music-player-lg" data-music-player
-                        data-music-player-options='{"tracks":[{"name":"Pale Blue Dot","url":"./music/Stellardrone/Invent the Universe/06 - Pale Blue Dot.mp3"}]}'></div>
+                        data-music-player-options='{"tracks":[{"name":"Pale Blue Dot","url":"./music/Stellardrone/Invent the Universe/06 - Pale Blue Dot.mp3"},{"name":"Maia Nebula","url":"./music/Stellardrone/Invent the Universe/03 - Maia Nebula.mp3"},{"name":"Approaching the Heliopause","url":"./music/Stellardrone/Invent the Universe/04 - Approaching the Heliopause.mp3"},{"name":"An Ocean of Galaxies","url":"./music/Stellardrone/Invent the Universe/07 - An Ocean of Galaxies.mp3"},{"name":"Infinite Void","url":"./music/Stellardrone/Invent the Universe/08 - Infinite Void.mp3"}]}'></div>
                     <div class="vd-code-snippet" data-collapsible>
                         <button class="vd-code-snippet-toggle" aria-expanded="false">
                             <span class="vd-code-snippet-toggle-icon"></span>
@@ -286,7 +288,7 @@ VanduoMusicPlayer.initPlayer(
                 </div>
                 <div class="vd-card-body">
                     <div id="demo-inline" class="vd-music-player vd-music-player-inline" data-music-player
-                        data-music-player-options='{"tracks":[{"name":"Pale Blue Dot","url":"./music/Stellardrone/Invent the Universe/06 - Pale Blue Dot.mp3"}],"showProgress":true,"showPlaylist":true,"shuffle":false}'></div>
+                        data-music-player-options='{"tracks":[{"name":"Pale Blue Dot","url":"./music/Stellardrone/Invent the Universe/06 - Pale Blue Dot.mp3"},{"name":"Maia Nebula","url":"./music/Stellardrone/Invent the Universe/03 - Maia Nebula.mp3"},{"name":"Approaching the Heliopause","url":"./music/Stellardrone/Invent the Universe/04 - Approaching the Heliopause.mp3"},{"name":"An Ocean of Galaxies","url":"./music/Stellardrone/Invent the Universe/07 - An Ocean of Galaxies.mp3"},{"name":"Infinite Void","url":"./music/Stellardrone/Invent the Universe/08 - Infinite Void.mp3"}],"showProgress":true,"showPlaylist":true,"shuffle":false}'></div>
                     <div class="vd-code-snippet" data-collapsible>
                         <button class="vd-code-snippet-toggle" aria-expanded="false">
                             <span class="vd-code-snippet-toggle-icon"></span>
@@ -314,6 +316,140 @@ VanduoMusicPlayer.initPlayer(
     shuffle: <span class="code-keyword">false</span>,
   }
 );</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ──────────────────────────────────────────────────────
+         GLASS + FLOATING / DETACHABLE
+    ───────────────────────────────────────────────────────── -->
+    <div class="vd-row">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h4>Glass surface</h4>
+                    <p class="vd-text-sm vd-text-muted vd-mb-0">Frosted glass styling via <code>glass: true</code> or the
+                        <code>vd-music-player-glass</code> class (uses the same tokens as <code>vd-glass</code>).
+                        This demo also has <code>detachable: true</code> and <code>minimizable: true</code> so you can
+                        detach it (floating glass player) and minimize it using the built-in buttons.</p>
+                </div>
+                <div class="vd-card-body">
+                    <!-- Vibrant background so the frosted glass effect is visible -->
+                    <div class="vd-p-4 vd-mb-4" style="border-radius: var(--border-radius, 0.5rem); background: linear-gradient(120deg, #ff6b6b 0%, #4ecdc4 50%, #45b7d1 100%); position: relative; overflow: hidden;">
+                        <div style="position: absolute; inset: 0; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4) 0%, transparent 50%), radial-gradient(circle at 70% 70%, rgba(255,215,0,0.3) 0%, transparent 40%);"></div>
+                        <div id="demo-glass" class="vd-music-player" data-music-player
+                            data-music-player-options='{"tracks":[{"name":"Pale Blue Dot","url":"./music/Stellardrone/Invent the Universe/06 - Pale Blue Dot.mp3"},{"name":"Maia Nebula","url":"./music/Stellardrone/Invent the Universe/03 - Maia Nebula.mp3"},{"name":"Approaching the Heliopause","url":"./music/Stellardrone/Invent the Universe/04 - Approaching the Heliopause.mp3"},{"name":"An Ocean of Galaxies","url":"./music/Stellardrone/Invent the Universe/07 - An Ocean of Galaxies.mp3"},{"name":"Infinite Void","url":"./music/Stellardrone/Invent the Universe/08 - Infinite Void.mp3"}],"showProgress":true,"glass":true,"detachable":true,"minimizable":true}'></div>
+                    </div>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="js">JS</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="js"><code>VanduoMusicPlayer.initPlayer(el, {
+  tracks,
+  showProgress: <span class="code-keyword">true</span>,
+  glass: <span class="code-keyword">true</span>,
+});</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h4>Detachable floating player</h4>
+                    <p class="vd-text-sm vd-text-muted vd-mb-0">Use <code>detachable: true</code>, <code>draggable: true</code>,
+                        and <code>minimizable: true</code>. Click <strong>Try it</strong> to detach to bottom-left (with drag handle
+                        and minimize button), or use the built-in player controls.</p>
+                </div>
+                <div class="vd-card-body">
+                    <div id="demo-detach" class="vd-music-player" data-music-player
+                        data-music-player-options='{"tracks":[{"name":"Pale Blue Dot","url":"./music/Stellardrone/Invent the Universe/06 - Pale Blue Dot.mp3"},{"name":"Maia Nebula","url":"./music/Stellardrone/Invent the Universe/03 - Maia Nebula.mp3"},{"name":"Approaching the Heliopause","url":"./music/Stellardrone/Invent the Universe/04 - Approaching the Heliopause.mp3"},{"name":"An Ocean of Galaxies","url":"./music/Stellardrone/Invent the Universe/07 - An Ocean of Galaxies.mp3"},{"name":"Infinite Void","url":"./music/Stellardrone/Invent the Universe/08 - Infinite Void.mp3"}],"showProgress":true,"detachable":true,"draggable":true,"minimizable":true,"floatingPosition":"bottom-left","glass":true}'></div>
+                    <div class="vd-mt-4 vd-d-flex vd-gap-2">
+                        <button id="btn-detach-demo" class="vd-btn vd-btn-primary vd-btn-sm">
+                            <i class="ph ph-arrows-out"></i> Detach to bottom-left
+                        </button>
+                        <button id="btn-attach-demo" class="vd-btn vd-btn-secondary vd-btn-sm">
+                            <i class="ph ph-arrows-in"></i> Attach back
+                        </button>
+                    </div>
+                    <p class="vd-text-sm vd-text-muted vd-mt-3 vd-mb-0">Or call <code>VanduoMusicPlayer.detach(el, 'bottom-right')</code> from your script.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vd-row">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h4>Draggable + minimizable (floating)</h4>
+                    <p class="vd-text-sm vd-text-muted vd-mb-0"><code>draggable: true</code> shows a handle you can drag when detached.
+                        <code>minimizable: true</code> adds collapse/expand. Click <strong>Detach &amp; minimize</strong> to see it float and collapse.</p>
+                </div>
+                <div class="vd-card-body">
+                    <div id="demo-floating-pro" class="vd-music-player vd-music-player-sm" data-music-player
+                        data-music-player-options='{"tracks":[{"name":"Pale Blue Dot","url":"./music/Stellardrone/Invent the Universe/06 - Pale Blue Dot.mp3"},{"name":"Maia Nebula","url":"./music/Stellardrone/Invent the Universe/03 - Maia Nebula.mp3"},{"name":"Approaching the Heliopause","url":"./music/Stellardrone/Invent the Universe/04 - Approaching the Heliopause.mp3"},{"name":"An Ocean of Galaxies","url":"./music/Stellardrone/Invent the Universe/07 - An Ocean of Galaxies.mp3"},{"name":"Infinite Void","url":"./music/Stellardrone/Invent the Universe/08 - Infinite Void.mp3"}],"showProgress":true,"showPlaylist":true,"detachable":true,"draggable":true,"minimizable":true,"glass":true,"floatingPosition":"bottom-right"}'></div>
+                    <div class="vd-mt-4 vd-d-flex vd-gap-2 vd-flex-wrap">
+                        <button id="btn-float-pro" class="vd-btn vd-btn-primary vd-btn-sm">
+                            <i class="ph ph-arrows-out"></i> Detach &amp; minimize
+                        </button>
+                        <button id="btn-float-expand" class="vd-btn vd-btn-secondary vd-btn-sm">
+                            <i class="ph ph-arrows-in-line-vertical"></i> Expand
+                        </button>
+                        <button id="btn-float-attach" class="vd-btn vd-btn-secondary vd-btn-sm">
+                            <i class="ph ph-arrows-in"></i> Attach back
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet vd-mt-4" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="js">JS</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="js"><code>VanduoMusicPlayer.initPlayer(el, {
+  tracks,
+  showProgress: <span class="code-keyword">true</span>,
+  showPlaylist: <span class="code-keyword">true</span>,
+  detachable: <span class="code-keyword">true</span>,
+  draggable: <span class="code-keyword">true</span>,
+  minimizable: <span class="code-keyword">true</span>,
+  glass: <span class="code-keyword">true</span>,
+  floatingPosition: <span class="code-string">'bottom-right'</span>,
+});
+
+<span class="code-comment">// Later...</span>
+VanduoMusicPlayer.detach(el, <span class="code-string">'bottom-right'</span>);
+VanduoMusicPlayer.minimize(el);
+VanduoMusicPlayer.expand(el);
+VanduoMusicPlayer.attach(el);</code></pre>
                             </div>
                         </div>
                     </div>
@@ -366,9 +502,20 @@ VanduoMusicPlayer.setVolume(el, <span class="code-number">0.75</span>);
 <span class="code-comment">// Toggle shuffle programmatically</span>
 VanduoMusicPlayer.shuffle(el);
 
+<span class="code-comment">// Float above the page (requires detachable: true at init)</span>
+VanduoMusicPlayer.detach(el, <span class="code-string">'bottom-right'</span>);
+VanduoMusicPlayer.attach(el);
+VanduoMusicPlayer.setPosition(el, <span class="code-string">'bottom-left'</span>);
+VanduoMusicPlayer.setPosition(el, { x: <span class="code-number">24</span>, y: <span class="code-number">120</span> });
+
+<span class="code-comment">// Minimize / expand (requires minimizable: true at init)</span>
+VanduoMusicPlayer.minimize(el);
+VanduoMusicPlayer.expand(el);
+VanduoMusicPlayer.toggleMinimize(el);
+
 <span class="code-comment">// Get current state</span>
 <span class="code-keyword">const</span> state = VanduoMusicPlayer.getState(el);
-<span class="code-comment">// { isPlaying, currentIndex, currentTrack, volume, shuffle, tracks }</span>
+<span class="code-comment">// { isPlaying, currentIndex, currentTrack, volume, shuffle, tracks, isDetached, isMinimized }</span>
 
 <span class="code-comment">// Tear down</span>
 VanduoMusicPlayer.destroy(el);
@@ -430,6 +577,22 @@ el.addEventListener(<span class="code-string">'musicplayer:volumechange'</span>,
 el.addEventListener(<span class="code-string">'musicplayer:ended'</span>, () =&gt; {
     <span class="code-comment">// Fires only when autoAdvance is false on the last track.</span>
     console.log(<span class="code-string">'Playback ended'</span>);
+});
+
+el.addEventListener(<span class="code-string">'musicplayer:detach'</span>, () =&gt; {
+    console.log(<span class="code-string">'Player is floating'</span>);
+});
+
+el.addEventListener(<span class="code-string">'musicplayer:attach'</span>, () =&gt; {
+    console.log(<span class="code-string">'Player was docked'</span>);
+});
+
+el.addEventListener(<span class="code-string">'musicplayer:minimize'</span>, () =&gt; {
+    console.log(<span class="code-string">'Minimized'</span>);
+});
+
+el.addEventListener(<span class="code-string">'musicplayer:expand'</span>, () =&gt; {
+    console.log(<span class="code-string">'Expanded'</span>);
 });</code></pre>
                                                         </div>
                                                 </div>
@@ -481,6 +644,17 @@ el.addEventListener(<span class="code-string">'musicplayer:ended'</span>, () =&g
   <span class="code-property">--music-player-btn-size</span>: <span class="code-value">2.125rem</span>;
   <span class="code-property">--music-player-padding-x</span>: <span class="code-value">1.3125rem</span>;
   <span class="code-property">--music-player-padding-y</span>: <span class="code-value">0.8125rem</span>;
+
+  <span class="code-comment">/* Glass (vd-music-player-glass) — also uses --vd-glass-blur, etc. */</span>
+  <span class="code-property">--music-player-glass-bg</span>: <span class="code-value">var(--vd-glass-bg-light)</span>;
+  <span class="code-property">--music-player-glass-border</span>: <span class="code-value">var(--vd-glass-border-light)</span>;
+  <span class="code-property">--music-player-glass-shadow</span>: <span class="code-value">var(--vd-glass-shadow)</span>;
+
+  <span class="code-comment">/* Floating / detached */</span>
+  <span class="code-property">--music-player-floating-z</span>: <span class="code-value">10050</span>;
+  <span class="code-property">--music-player-floating-offset</span>: <span class="code-value">1rem</span>;
+  <span class="code-property">--music-player-floating-left</span>: <span class="code-value">1rem</span>; <span class="code-comment">/* with .is-position-custom */</span>
+  <span class="code-property">--music-player-floating-top</span>: <span class="code-value">1rem</span>;
 }</code></pre>
                             </div>
                         </div>
@@ -546,6 +720,54 @@ el.addEventListener(<span class="code-string">'musicplayer:ended'</span>, () =&g
                                 <td><code>true</code></td>
                                 <td>Automatically play the next track when the current one ends.</td>
                             </tr>
+                            <tr>
+                                <td><code>glass</code></td>
+                                <td>boolean</td>
+                                <td><code>false</code></td>
+                                <td>Frosted-glass surface (<code>vd-music-player-glass</code>); pairs with theme <code>--vd-glass-*</code> tokens.</td>
+                            </tr>
+                            <tr>
+                                <td><code>detachable</code></td>
+                                <td>boolean</td>
+                                <td><code>false</code></td>
+                                <td>Show detach/attach controls and allow <code>VanduoMusicPlayer.detach()</code> to float the player above the page.</td>
+                            </tr>
+                            <tr>
+                                <td><code>floatingPosition</code></td>
+                                <td>string</td>
+                                <td><code>'bottom-right'</code></td>
+                                <td>After detaching: <code>'bottom-left'</code> or <code>'bottom-right'</code> (override by passing a string to <code>detach(el, position)</code>).</td>
+                            </tr>
+                            <tr>
+                                <td><code>draggable</code></td>
+                                <td>boolean</td>
+                                <td><code>false</code></td>
+                                <td>When <code>detachable</code> is true, show a drag handle and allow pointer-dragging while floating (not HTML5 list DnD).</td>
+                            </tr>
+                            <tr>
+                                <td><code>minimizable</code></td>
+                                <td>boolean</td>
+                                <td><code>false</code></td>
+                                <td>Show a control to collapse the player to essential transport + volume.</td>
+                            </tr>
+                            <tr>
+                                <td><code>startMinimized</code></td>
+                                <td>boolean</td>
+                                <td><code>false</code></td>
+                                <td>On the first <code>detach()</code>, start in the minimized layout.</td>
+                            </tr>
+                            <tr>
+                                <td><code>persistPosition</code></td>
+                                <td>boolean</td>
+                                <td><code>false</code></td>
+                                <td>Save floating <code>{x, y}</code> to <code>localStorage</code> (via <code>safeStorage</code> when available).</td>
+                            </tr>
+                            <tr>
+                                <td><code>persistKey</code></td>
+                                <td>string</td>
+                                <td><code>''</code> (from element <code>id</code>)</td>
+                                <td>Storage key suffix for <code>persistPosition</code>; defaults from the element&rsquo;s <code>id</code> attribute.</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -562,13 +784,13 @@ el.addEventListener(<span class="code-string">'musicplayer:ended'</span>, () =&g
                 <div class="vd-card-body">
                     <p class="vd-text-sm vd-text-muted vd-mb-2">
                         <i class="ph ph-music-notes" style="color:var(--color-primary);margin-right:0.375rem;"></i>
-                        <strong>Bundled demo audio:</strong> <em>Pale Blue Dot</em> by
+                        <strong>Bundled demo audio:</strong> a curated track set from
                         <a href="https://stellardrone.bandcamp.com/" target="_blank" rel="noopener noreferrer">Stellardrone</a>
                         from the album <em>Invent the Universe</em>. Source:
                         <a href="https://stellardrone.bandcamp.com/album/invent-the-universe" target="_blank" rel="noopener noreferrer">Bandcamp</a>.
                         Licensed under
                         <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>.
-                        No changes were made to the bundled audio file.
+                        No changes were made to the bundled audio files.
                     </p>
                 </div>
             </div>

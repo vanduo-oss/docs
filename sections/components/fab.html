@@ -300,8 +300,7 @@
                 <div class="vd-card-body" style="padding:2rem;">
                     <p class="vd-text-sm vd-text-muted vd-mb-4">Group related actions behind a single FAB trigger. Clicking the main button reveals a stack of smaller action buttons with a staggered entrance animation.</p>
                     <div class="vd-fab-menu" id="demo-speed-dial">
-                        <button class="vd-fab" aria-label="Toggle speed dial" aria-expanded="false"
-                                onclick="var m=this.parentElement; m.classList.toggle('is-open'); this.setAttribute('aria-expanded', m.classList.contains('is-open'));">
+                        <button class="vd-fab" aria-label="Toggle speed dial" aria-expanded="false" data-fab-speed-dial-toggle>
                             <i class="ph ph-plus"></i>
                         </button>
                         <div class="vd-fab-actions">
@@ -341,7 +340,7 @@
 &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-fab-menu"</span>&gt;
   &lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-fab"</span> <span class="code-attr">aria-label</span>=<span class="code-string">"Toggle menu"</span>
           <span class="code-attr">aria-expanded</span>=<span class="code-string">"false"</span>
-          <span class="code-attr">onclick</span>=<span class="code-string">"this.parentElement.classList.toggle('is-open')"</span>&gt;
+          <span class="code-attr">data-fab-speed-dial-toggle</span>&gt;
     &lt;<span class="code-tag">i</span> <span class="code-attr">class</span>=<span class="code-string">"ph ph-plus"</span>&gt;&lt;/<span class="code-tag">i</span>&gt;
   &lt;/<span class="code-tag">button</span>&gt;
   &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-fab-actions"</span>&gt;
@@ -376,7 +375,7 @@
                     </ul>
                 </div>
                 <div class="vd-col-12 vd-col-md-6">
-                    <h4 style="color: var(--color-danger);">Don't</h4>
+                    <h4 style="color: var(--color-error);">Don't</h4>
                     <ul>
                         <li>Don't place more than one fixed FAB on a page &mdash; it dilutes focus</li>
                         <li>Don't use a FAB for minor or infrequent actions &mdash; use a regular <code>.vd-btn</code></li>

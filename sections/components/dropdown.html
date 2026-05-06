@@ -1,0 +1,297 @@
+<section id="dropdown">
+    <h4 class="demo-title"><i class="ph ph-caret-down"></i>Dropdown</h4>
+    <p class="vd-mb-8">Toggleable contextual overlays for displaying lists of links, actions, or custom content. Dropdowns support directional placement, glass styling, split buttons, and dark mode out of the box.</p>
+
+    <!-- Basic & Variants Demo -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card dropdown-demo-card" id="demo-dropdown-basic">
+                <div class="vd-card-header"><h4>Basic Dropdown</h4></div>
+                <div class="vd-card-body" style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center;">
+                    <div class="vd-dropdown">
+                        <button class="vd-btn vd-btn-primary vd-dropdown-toggle" data-vd-dropdown-toggle>
+                            Actions <i class="ph ph-caret-down"></i>
+                        </button>
+                        <ul class="vd-dropdown-menu">
+                            <li><a class="vd-dropdown-item" href="#" onclick="event.preventDefault()">Edit</a></li>
+                            <li><a class="vd-dropdown-item" href="#" onclick="event.preventDefault()">Duplicate</a></li>
+                            <li><a class="vd-dropdown-item" href="#" onclick="event.preventDefault()">Archive</a></li>
+                            <li><div class="vd-dropdown-divider"></div></li>
+                            <li><a class="vd-dropdown-item vd-dropdown-item-danger" href="#" onclick="event.preventDefault()">Delete</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Basic dropdown --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-dropdown"</span>&gt;
+  &lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-btn vd-btn-primary vd-dropdown-toggle"</span>
+          <span class="code-attr">data-vd-dropdown-toggle</span>&gt;
+    Actions &lt;<span class="code-tag">i</span> <span class="code-attr">class</span>=<span class="code-string">"ph ph-caret-down"</span>&gt;&lt;/<span class="code-tag">i</span>&gt;
+  &lt;/<span class="code-tag">button</span>&gt;
+  &lt;<span class="code-tag">ul</span> <span class="code-attr">class</span>=<span class="code-string">"vd-dropdown-menu"</span>&gt;
+    &lt;<span class="code-tag">li</span>&gt;&lt;<span class="code-tag">a</span> <span class="code-attr">class</span>=<span class="code-string">"vd-dropdown-item"</span> <span class="code-attr">href</span>=<span class="code-string">"#"</span>&gt;Edit&lt;/<span class="code-tag">a</span>&gt;&lt;/<span class="code-tag">li</span>&gt;
+    &lt;<span class="code-tag">li</span>&gt;&lt;<span class="code-tag">a</span> <span class="code-attr">class</span>=<span class="code-string">"vd-dropdown-item"</span> <span class="code-attr">href</span>=<span class="code-string">"#"</span>&gt;Duplicate&lt;/<span class="code-tag">a</span>&gt;&lt;/<span class="code-tag">li</span>&gt;
+    &lt;<span class="code-tag">li</span>&gt;&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-dropdown-divider"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;&lt;/<span class="code-tag">li</span>&gt;
+    &lt;<span class="code-tag">li</span>&gt;&lt;<span class="code-tag">a</span> <span class="code-attr">class</span>=<span class="code-string">"vd-dropdown-item vd-dropdown-item-danger"</span> <span class="code-attr">href</span>=<span class="code-string">"#"</span>&gt;Delete&lt;/<span class="code-tag">a</span>&gt;&lt;/<span class="code-tag">li</span>&gt;
+  &lt;/<span class="code-tag">ul</span>&gt;
+&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card dropdown-demo-card" id="demo-dropdown-split">
+                <div class="vd-card-header"><h4>Split Button &amp; Glass</h4></div>
+                <div class="vd-card-body" style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center;">
+                    <div class="vd-dropdown vd-dropdown-split">
+                        <button class="vd-btn vd-btn-primary">Save</button>
+                        <button class="vd-btn vd-btn-primary vd-dropdown-toggle" data-vd-dropdown-toggle aria-label="Save options">
+                            <i class="ph ph-caret-down"></i>
+                        </button>
+                        <ul class="vd-dropdown-menu">
+                            <li><a class="vd-dropdown-item" href="#" onclick="event.preventDefault()">Save &amp; Publish</a></li>
+                            <li><a class="vd-dropdown-item" href="#" onclick="event.preventDefault()">Save as Draft</a></li>
+                        </ul>
+                    </div>
+                    <div class="vd-dropdown vd-dropdown-glass">
+                        <button class="vd-btn vd-btn-outline vd-dropdown-toggle" data-vd-dropdown-toggle>
+                            Glass Menu <i class="ph ph-caret-down"></i>
+                        </button>
+                        <ul class="vd-dropdown-menu">
+                            <li><a class="vd-dropdown-item" href="#" onclick="event.preventDefault()">Profile</a></li>
+                            <li><a class="vd-dropdown-item" href="#" onclick="event.preventDefault()">Settings</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Split button dropdown --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-dropdown vd-dropdown-split"</span>&gt;
+  &lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-btn vd-btn-primary"</span>&gt;Save&lt;/<span class="code-tag">button</span>&gt;
+  &lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-btn vd-btn-primary vd-dropdown-toggle"</span>
+          <span class="code-attr">data-vd-dropdown-toggle</span> <span class="code-attr">aria-label</span>=<span class="code-string">"Save options"</span>&gt;
+    &lt;<span class="code-tag">i</span> <span class="code-attr">class</span>=<span class="code-string">"ph ph-caret-down"</span>&gt;&lt;/<span class="code-tag">i</span>&gt;
+  &lt;/<span class="code-tag">button</span>&gt;
+  &lt;<span class="code-tag">ul</span> <span class="code-attr">class</span>=<span class="code-string">"vd-dropdown-menu"</span>&gt;...&lt;/<span class="code-tag">ul</span>&gt;
+&lt;/<span class="code-tag">div</span>&gt;
+
+<span class="code-comment">&lt;!-- Glass dropdown --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-dropdown vd-dropdown-glass"</span>&gt;
+  &lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-btn vd-btn-outline vd-dropdown-toggle"</span>
+          <span class="code-attr">data-vd-dropdown-toggle</span>&gt;Glass Menu&lt;/<span class="code-tag">button</span>&gt;
+  &lt;<span class="code-tag">ul</span> <span class="code-attr">class</span>=<span class="code-string">"vd-dropdown-menu"</span>&gt;...&lt;/<span class="code-tag">ul</span>&gt;
+&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Directions & Header Demo -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card" id="demo-dropdown-directions">
+                <div class="vd-card-header"><h4>Directions &amp; Menu Structure</h4></div>
+                <div class="vd-card-body">
+                    <div class="vd-row" style="gap:1rem; margin-bottom:1.5rem;">
+                        <div class="vd-col-auto">
+                            <div class="vd-dropdown vd-dropdown-dropup">
+                                <button class="vd-btn vd-btn-secondary vd-dropdown-toggle" data-vd-dropdown-toggle>
+                                    Dropup <i class="ph ph-caret-up"></i>
+                                </button>
+                                <ul class="vd-dropdown-menu">
+                                    <li><a class="vd-dropdown-item" href="#" onclick="event.preventDefault()">Action</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="vd-col-auto">
+                            <div class="vd-dropdown vd-dropdown-dropright">
+                                <button class="vd-btn vd-btn-secondary vd-dropdown-toggle" data-vd-dropdown-toggle>
+                                    Dropright <i class="ph ph-caret-right"></i>
+                                </button>
+                                <ul class="vd-dropdown-menu">
+                                    <li><a class="vd-dropdown-item" href="#" onclick="event.preventDefault()">Action</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="vd-col-auto">
+                            <div class="vd-dropdown vd-dropdown-dropleft">
+                                <button class="vd-btn vd-btn-secondary vd-dropdown-toggle" data-vd-dropdown-toggle>
+                                    <i class="ph ph-caret-left"></i> Dropleft
+                                </button>
+                                <ul class="vd-dropdown-menu">
+                                    <li><a class="vd-dropdown-item" href="#" onclick="event.preventDefault()">Action</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="vd-text-sm vd-text-muted vd-mb-3">Header, disabled item, and active state:</p>
+                    <div class="vd-dropdown" style="display:inline-block;">
+                        <button class="vd-btn vd-btn-outline vd-dropdown-toggle" data-vd-dropdown-toggle>
+                            Filter <i class="ph ph-funnel"></i>
+                        </button>
+                        <ul class="vd-dropdown-menu">
+                            <li><div class="vd-dropdown-header">Sort by</div></li>
+                            <li><a class="vd-dropdown-item is-active" href="#" onclick="event.preventDefault()">Relevance</a></li>
+                            <li><a class="vd-dropdown-item" href="#" onclick="event.preventDefault()">Newest</a></li>
+                            <li><a class="vd-dropdown-item" href="#" onclick="event.preventDefault()">Popular</a></li>
+                            <li><div class="vd-dropdown-divider"></div></li>
+                            <li><div class="vd-dropdown-header">Options</div></li>
+                            <li><a class="vd-dropdown-item disabled" href="#" onclick="event.preventDefault()">Advanced (Pro)</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Directions --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-dropdown vd-dropdown-dropup"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-dropdown vd-dropdown-dropright"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-dropdown vd-dropdown-dropleft"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;
+
+<span class="code-comment">&lt;!-- Menu with header, active, disabled --&gt;</span>
+&lt;<span class="code-tag">ul</span> <span class="code-attr">class</span>=<span class="code-string">"vd-dropdown-menu"</span>&gt;
+  &lt;<span class="code-tag">li</span>&gt;&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-dropdown-header"</span>&gt;Sort by&lt;/<span class="code-tag">div</span>&gt;&lt;/<span class="code-tag">li</span>&gt;
+  &lt;<span class="code-tag">li</span>&gt;&lt;<span class="code-tag">a</span> <span class="code-attr">class</span>=<span class="code-string">"vd-dropdown-item is-active"</span> <span class="code-attr">href</span>=<span class="code-string">"#"</span>&gt;Relevance&lt;/<span class="code-tag">a</span>&gt;&lt;/<span class="code-tag">li</span>&gt;
+  &lt;<span class="code-tag">li</span>&gt;&lt;<span class="code-tag">a</span> <span class="code-attr">class</span>=<span class="code-string">"vd-dropdown-item"</span> <span class="code-attr">href</span>=<span class="code-string">"#"</span>&gt;Newest&lt;/<span class="code-tag">a</span>&gt;&lt;/<span class="code-tag">li</span>&gt;
+  &lt;<span class="code-tag">li</span>&gt;&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-dropdown-divider"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;&lt;/<span class="code-tag">li</span>&gt;
+  &lt;<span class="code-tag">li</span>&gt;&lt;<span class="code-tag">a</span> <span class="code-attr">class</span>=<span class="code-string">"vd-dropdown-item disabled"</span> <span class="code-attr">href</span>=<span class="code-string">"#"</span>&gt;Advanced&lt;/<span class="code-tag">a</span>&gt;&lt;/<span class="code-tag">li</span>&gt;
+&lt;/<span class="code-tag">ul</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- API Reference -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header"><h4><i class="ph ph-list-dashes mr-2" style="color: var(--color-primary);"></i>API Reference</h4></div>
+                <div class="vd-card-body">
+                    <h4>CSS Classes</h4>
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead><tr><th>Class</th><th>Description</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>.vd-dropdown</code></td><td>Base wrapper that establishes positioning context for the menu.</td></tr>
+                                <tr><td><code>.vd-dropdown-toggle</code></td><td>Applied to the trigger button. Adds caret icon and cursor behavior.</td></tr>
+                                <tr><td><code>.vd-dropdown-menu</code></td><td>The popup list container. Hidden by default; shown when parent has <code>.is-open</code>.</td></tr>
+                                <tr><td><code>.vd-dropdown-item</code></td><td>Individual menu link or button.</td></tr>
+                                <tr><td><code>.vd-dropdown-item.is-active</code></td><td>Highlighted state for the currently selected item.</td></tr>
+                                <tr><td><code>.vd-dropdown-item.disabled</code></td><td>Muted, non-interactive item.</td></tr>
+                                <tr><td><code>.vd-dropdown-item-danger</code></td><td>Red-text variant for destructive actions (e.g., Delete).</td></tr>
+                                <tr><td><code>.vd-dropdown-header</code></td><td>Non-interactive label inside the menu.</td></tr>
+                                <tr><td><code>.vd-dropdown-divider</code></td><td>Horizontal separator between groups.</td></tr>
+                                <tr><td><code>.vd-dropdown-split</code></td><td>Modifier on <code>.vd-dropdown</code> for split-button layout.</td></tr>
+                                <tr><td><code>.vd-dropdown-glass</code></td><td>Applies glassmorphism background to the menu.</td></tr>
+                                <tr><td><code>.vd-dropdown-dropup</code></td><td>Menu opens above the trigger.</td></tr>
+                                <tr><td><code>.vd-dropdown-dropright</code></td><td>Menu opens to the right.</td></tr>
+                                <tr><td><code>.vd-dropdown-dropleft</code></td><td>Menu opens to the left.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="vd-mt-6">Data Attributes</h4>
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead><tr><th>Attribute</th><th>Description</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>data-vd-dropdown-toggle</code></td><td>Required on the trigger to bind open/close behavior.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="vd-mt-6">CSS Variables</h4>
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead><tr><th>Variable</th><th>Default</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>--dropdown-bg</code></td><td><code>var(--color-white)</code></td></tr>
+                                <tr><td><code>--dropdown-border-color</code></td><td><code>var(--border-color)</code></td></tr>
+                                <tr><td><code>--dropdown-item-padding-y</code></td><td><code>0.5rem</code> (8px)</td></tr>
+                                <tr><td><code>--dropdown-item-padding-x</code></td><td><code>0.8125rem</code> (13px)</td></tr>
+                                <tr><td><code>--dropdown-min-width</code></td><td><code>13rem</code> (~208px)</td></tr>
+                                <tr><td><code>--dropdown-z-index</code></td><td><code>1000</code></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accessibility -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header"><h4><i class="ph ph-wheelchair mr-2" style="color: var(--color-primary);"></i>Accessibility</h4></div>
+                <div class="vd-card-body">
+                    <ul>
+                        <li>The toggle button should have <code>aria-haspopup="listbox"</code> and toggle <code>aria-expanded</code> when the menu opens and closes.</li>
+                        <li>Use <code>&lt;ul&gt;</code> and <code>&lt;li&gt;</code> for the menu to convey list semantics to screen readers.</li>
+                        <li>Disabled items should use <code>aria-disabled="true"</code> on the anchor (or avoid using clickable elements).</li>
+                        <li>Active items should have <code>aria-current="true"</code>.</li>
+                        <li>On open, focus should move to the first non-disabled item; on close, focus returns to the toggle button.</li>
+                        <li><kbd>Escape</kbd> closes the menu and returns focus to the toggle.</li>
+                        <li><kbd>↑</kbd> / <kbd>↓</kbd> arrow keys navigate items when the menu is open.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Full-screen preview for the Vanduo dashboard starter template.">
+    <title>Dashboard Template</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="stylesheet" href="../../dist/vanduo.min.css">
+    <link rel="stylesheet" href="../../css/app.css">
+    <link rel="stylesheet" href="../templates.css">
+</head>
+
+<body class="template-shell template-preview-page" data-theme="dark">
+    <a href="#preview-main" class="skip-link">Skip to main content</a>
+
+    <nav class="vd-navbar vd-navbar-fixed vd-navbar-glass vd-glass-contrast">
+        <div class="vd-navbar-container">
+            <div class="vd-navbar-brand">
+                <div class="vd-navbar-brand-wrap">
+                    <a href="../../index.html#home">Vanduo</a>
+                </div>
+            </div>
+            <div class="template-navbar-actions">
+                <a href="../../index.html#templates" class="vd-btn vd-btn-sm vd-btn-outline">
+                    <i class="ph ph-arrow-left"></i>
+                    <span class="vd-btn-text">All Templates</span>
+                </a>
+                <button class="dark-mode-toggle vd-btn vd-btn-sm vd-btn-outline" data-toggle="theme"
+                    aria-label="Toggle dark mode">
+                    <i class="ph ph-sun"></i>
+                </button>
+            </div>
+            <button class="vd-navbar-toggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+            <div class="vd-navbar-menu">
+                <ul class="vd-navbar-nav">
+                    <li><a href="../../index.html#templates" class="vd-nav-link">Templates</a></li>
+                    <li><a href="../../index.html#docs/starter-templates" class="vd-nav-link">Guide</a></li>
+                    <li><a href="https://github.com/vanduo-oss/framework" class="vd-nav-link" target="_blank"
+                            rel="noopener">GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main id="preview-main" class="template-main preview-page-shell">
+        <div class="template-surface">
+            <div class="preview-header">
+                <div class="preview-header-meta">
+                    <span class="templates-eyebrow"><i class="ph ph-chart-line-up"></i><span>Dashboard Template</span></span>
+                    <h1>Ops Dashboard</h1>
+                    <span class="vd-text-muted">For admin tools, analytics portals, and operational interfaces.</span>
+                </div>
+                <div class="preview-header-actions">
+                    <a href="../../index.html#templates" class="vd-btn vd-btn-outline"><i class="ph ph-grid-four"></i> Gallery</a>
+                    <a href="../../index.html#docs/starter-templates" class="vd-btn vd-btn-outline">
+                        <i class="ph ph-code-block"></i> Starter Guide
+                    </a>
+                </div>
+            </div>
+
+            <div class="preview-canvas">
+                <div class="dashboard-layout">
+                    <aside class="dashboard-sidebar dashboard-panel">
+                        <span class="templates-eyebrow"><i class="ph ph-gauge"></i><span>Operations</span></span>
+                        <h2 class="vd-mt-5 vd-mb-6">Workspace</h2>
+                        <ul class="vd-nav vd-flex-column vd-list-none">
+                            <li><a href="#" class="vd-nav-link active"><i class="ph ph-house"></i> Overview</a></li>
+                            <li><a href="#" class="vd-nav-link"><i class="ph ph-users-three"></i> Users</a></li>
+                            <li><a href="#" class="vd-nav-link"><i class="ph ph-chart-bar"></i> Analytics</a></li>
+                            <li><a href="#" class="vd-nav-link"><i class="ph ph-broadcast"></i> Deployments</a></li>
+                            <li><a href="#" class="vd-nav-link"><i class="ph ph-gear-six"></i> Settings</a></li>
+                        </ul>
+                        <div class="vd-alert vd-alert-info vd-mt-8">
+                            <i class="ph ph-lightning"></i>
+                            <div>Optimized for fast scanning and modular dashboard composition.</div>
+                        </div>
+                    </aside>
+
+                    <section class="dashboard-content">
+                        <div class="dashboard-topbar">
+                            <div>
+                                <span class="templates-eyebrow"><i class="ph ph-chart-pie-slice"></i><span>Daily pulse</span></span>
+                                <h2 class="vd-mt-4 vd-mb-2">Operations overview</h2>
+                                <p class="vd-text-muted vd-mb-0">Track performance, incidents, revenue, and team activity from one shell.</p>
+                            </div>
+                            <div class="preview-header-actions">
+                                <button class="vd-btn vd-btn-outline"><i class="ph ph-funnel-simple"></i> Filter</button>
+                                <button class="vd-btn vd-btn-primary"><i class="ph ph-plus"></i> New Report</button>
+                            </div>
+                        </div>
+
+                        <div class="dashboard-metric-grid">
+                            <div class="vd-card dashboard-metric">
+                                <div class="vd-card-body">
+                                    <p class="vd-text-sm vd-text-muted vd-mb-2">MRR</p>
+                                    <strong style="font-size: 1.6rem;">$48.2k</strong>
+                                    <p class="vd-text-sm" style="color: var(--color-success);">+8.4% this month</p>
+                                </div>
+                            </div>
+                            <div class="vd-card dashboard-metric">
+                                <div class="vd-card-body">
+                                    <p class="vd-text-sm vd-text-muted vd-mb-2">Active Users</p>
+                                    <strong style="font-size: 1.6rem;">12,345</strong>
+                                    <p class="vd-text-sm" style="color: var(--color-success);">+1,204 this week</p>
+                                </div>
+                            </div>
+                            <div class="vd-card dashboard-metric">
+                                <div class="vd-card-body">
+                                    <p class="vd-text-sm vd-text-muted vd-mb-2">Incidents</p>
+                                    <strong style="font-size: 1.6rem;">3</strong>
+                                    <p class="vd-text-sm" style="color: var(--color-warning);">2 need review</p>
+                                </div>
+                            </div>
+                            <div class="vd-card dashboard-metric">
+                                <div class="vd-card-body">
+                                    <p class="vd-text-sm vd-text-muted vd-mb-2">Conversion</p>
+                                    <strong style="font-size: 1.6rem;">3.2%</strong>
+                                    <p class="vd-text-sm" style="color: var(--color-success);">+0.5% from last week</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dashboard-panel dashboard-chart">
+                            <div class="vd-row">
+                                <div class="vd-col-12 vd-col-md-7">
+                                    <h3 class="vd-mb-2">Revenue trend</h3>
+                                    <p class="vd-text-muted vd-mb-0">A chart zone that can later be replaced with a real visualization component.</p>
+                                </div>
+                                <div class="vd-col-12 vd-col-md-5" style="display: flex; justify-content: flex-end; align-items: start;">
+                                    <span class="template-tag"><i class="ph ph-clock"></i> Last 30 days</span>
+                                </div>
+                            </div>
+                            <div class="dashboard-chart-bars" aria-hidden="true">
+                                <span style="height: 48%;"></span>
+                                <span style="height: 72%;"></span>
+                                <span style="height: 58%;"></span>
+                                <span style="height: 80%;"></span>
+                                <span style="height: 66%;"></span>
+                                <span style="height: 92%;"></span>
+                                <span style="height: 70%;"></span>
+                                <span style="height: 77%;"></span>
+                                <span style="height: 84%;"></span>
+                                <span style="height: 61%;"></span>
+                                <span style="height: 89%;"></span>
+                                <span style="height: 96%;"></span>
+                            </div>
+                        </div>
+
+                        <div class="dashboard-grid">
+                            <div class="dashboard-panel dashboard-table-card">
+                                <h3 class="vd-mb-5">Recent orders</h3>
+                                <div class="vd-table-responsive">
+                                    <table class="vd-table vd-table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Order</th>
+                                                <th>Customer</th>
+                                                <th>Status</th>
+                                                <th>Value</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>#1284</td>
+                                                <td>Alice Smith</td>
+                                                <td><span class="vd-badge vd-badge-success">Paid</span></td>
+                                                <td>$1,240</td>
+                                            </tr>
+                                            <tr>
+                                                <td>#1283</td>
+                                                <td>Marcos Lee</td>
+                                                <td><span class="vd-badge vd-badge-warning">Pending</span></td>
+                                                <td>$420</td>
+                                            </tr>
+                                            <tr>
+                                                <td>#1282</td>
+                                                <td>Nora Patel</td>
+                                                <td><span class="vd-badge vd-badge-info">Review</span></td>
+                                                <td>$880</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="dashboard-panel dashboard-activity">
+                                <h3 class="vd-mb-2">Recent activity</h3>
+                                <p class="vd-text-muted">Compact timeline blocks keep the shell operational and readable.</p>
+                                <div class="dashboard-activity-list">
+                                    <div class="dashboard-activity-item">
+                                        <strong>Deployment completed</strong>
+                                        <p class="vd-text-muted vd-mb-0">API edge rollout finished 8 minutes ago.</p>
+                                    </div>
+                                    <div class="dashboard-activity-item">
+                                        <strong>Team invite accepted</strong>
+                                        <p class="vd-text-muted vd-mb-0">A new workspace member joined the analytics squad.</p>
+                                    </div>
+                                    <div class="dashboard-activity-item">
+                                        <strong>Monthly export ready</strong>
+                                        <p class="vd-text-muted vd-mb-0">Your finance report is available for download.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../template-runtime.js"></script>
+    <script src="../../dist/vanduo.min.js"></script>
+    <script>
+        if (typeof window.Vanduo !== 'undefined') {
+            window.Vanduo.init();
+        }
+    </script>
+</body>
+
+</html>

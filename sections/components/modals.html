@@ -1,0 +1,364 @@
+<section id="modals">
+    <h4 class="demo-title"><i class="ph ph-squares-four"></i>Modals</h4>
+    <p class="vd-mb-8">Overlay dialogs for confirmations, forms, and focused user tasks. Modals support four size tiers, glassmorphism styling, scrollable content, static backdrops, and are fully keyboard accessible.</p>
+
+    <!-- Size Variants Demo -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card" id="demo-modal-sizes">
+                <div class="vd-card-header"><h4>Modal Sizes</h4></div>
+                <div class="vd-card-body" style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center;">
+                    <button class="vd-btn vd-btn-primary" data-modal="#demo-modal-sm">Small (233px)</button>
+                    <button class="vd-btn vd-btn-primary" data-modal="#demo-modal-default">Default (377px)</button>
+                    <button class="vd-btn vd-btn-primary" data-modal="#demo-modal-lg">Large (610px)</button>
+                    <button class="vd-btn vd-btn-primary" data-modal="#demo-modal-xl">Extra Large (987px)</button>
+                </div>
+            </div>
+            <div class="vd-modal" id="demo-modal-sm">
+                <div class="vd-modal-dialog vd-modal-sm">
+                    <div class="vd-modal-content">
+                        <div class="vd-modal-header">
+                            <h5 class="vd-modal-title">Small Modal</h5>
+                            <button class="vd-modal-close" aria-label="Close">&times;</button>
+                        </div>
+                        <div class="vd-modal-body">
+                            <p class="vd-mb-0">This is the small modal size. Perfect for confirmations and short messages.</p>
+                        </div>
+                        <div class="vd-modal-footer">
+                            <button class="vd-btn vd-btn-outline-secondary" data-dismiss="modal">Cancel</button>
+                            <button class="vd-btn vd-btn-primary">Confirm</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="vd-modal" id="demo-modal-default">
+                <div class="vd-modal-dialog">
+                    <div class="vd-modal-content">
+                        <div class="vd-modal-header">
+                            <h5 class="vd-modal-title">Default Modal</h5>
+                            <button class="vd-modal-close" aria-label="Close">&times;</button>
+                        </div>
+                        <div class="vd-modal-body">
+                            <p class="vd-mb-0">The default modal width is 377px — a comfortable size for most dialogs and forms.</p>
+                        </div>
+                        <div class="vd-modal-footer">
+                            <button class="vd-btn vd-btn-outline-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="vd-modal" id="demo-modal-lg">
+                <div class="vd-modal-dialog vd-modal-lg">
+                    <div class="vd-modal-content">
+                        <div class="vd-modal-header">
+                            <h5 class="vd-modal-title">Large Modal</h5>
+                            <button class="vd-modal-close" aria-label="Close">&times;</button>
+                        </div>
+                        <div class="vd-modal-body">
+                            <p class="vd-mb-0">Large modals (610px) work well for complex forms, image galleries, or multi-step wizards.</p>
+                        </div>
+                        <div class="vd-modal-footer">
+                            <button class="vd-btn vd-btn-outline-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="vd-modal" id="demo-modal-xl">
+                <div class="vd-modal-dialog vd-modal-xl">
+                    <div class="vd-modal-content">
+                        <div class="vd-modal-header">
+                            <h5 class="vd-modal-title">Extra Large Modal</h5>
+                            <button class="vd-modal-close" aria-label="Close">&times;</button>
+                        </div>
+                        <div class="vd-modal-body">
+                            <p class="vd-mb-0">Extra large modals (987px) span most of the viewport. Use sparingly for dashboards, preview panes, or large data tables.</p>
+                        </div>
+                        <div class="vd-modal-footer">
+                            <button class="vd-btn vd-btn-outline-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Trigger button --&gt;</span>
+&lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-btn vd-btn-primary"</span>
+        <span class="code-attr">data-modal</span>=<span class="code-string">"#my-modal"</span>&gt;
+  Open Modal
+&lt;/<span class="code-tag">button</span>&gt;
+
+<span class="code-comment">&lt;!-- Modal markup --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-modal"</span> <span class="code-attr">id</span>=<span class="code-string">"my-modal"</span>&gt;
+  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-modal-dialog vd-modal-lg"</span>&gt;
+    &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-modal-content"</span>&gt;
+
+      &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-modal-header"</span>&gt;
+        &lt;<span class="code-tag">h5</span> <span class="code-attr">class</span>=<span class="code-string">"vd-modal-title"</span>&gt;Modal Title&lt;/<span class="code-tag">h5</span>&gt;
+        &lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-modal-close"</span>
+                <span class="code-attr">aria-label</span>=<span class="code-string">"Close"</span>&gt;&amp;times;&lt;/<span class="code-tag">button</span>&gt;
+      &lt;/<span class="code-tag">div</span>&gt;
+
+      &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-modal-body"</span>&gt;
+        &lt;<span class="code-tag">p</span>&gt;Modal content goes here.&lt;/<span class="code-tag">p</span>&gt;
+      &lt;/<span class="code-tag">div</span>&gt;
+
+      &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-modal-footer"</span>&gt;
+        &lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-btn vd-btn-outline-secondary"</span>
+                <span class="code-attr">data-dismiss</span>=<span class="code-string">"modal"</span>&gt;Cancel&lt;/<span class="code-tag">button</span>&gt;
+        &lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-btn vd-btn-primary"</span>&gt;Save&lt;/<span class="code-tag">button</span>&gt;
+      &lt;/<span class="code-tag">div</span>&gt;
+
+    &lt;/<span class="code-tag">div</span>&gt;
+  &lt;/<span class="code-tag">div</span>&gt;
+&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Glass & Scrollable Demo -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-modal-glass">
+                <div class="vd-card-header"><h4>Glass Modal</h4></div>
+                <div class="vd-card-body" style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center;">
+                    <button class="vd-btn vd-btn-primary" data-modal="#demo-modal-glass-el">Open Glass Modal</button>
+                </div>
+            </div>
+            <div class="vd-modal vd-modal-glass" id="demo-modal-glass-el">
+                <div class="vd-modal-dialog">
+                    <div class="vd-modal-content">
+                        <div class="vd-modal-header">
+                            <h5 class="vd-modal-title">Glass Modal</h5>
+                            <button class="vd-modal-close" aria-label="Close">&times;</button>
+                        </div>
+                        <div class="vd-modal-body">
+                            <p class="vd-mb-0">Add <code>.vd-modal-glass</code> to the modal root for a frosted-glass backdrop and panel.</p>
+                        </div>
+                        <div class="vd-modal-footer">
+                            <button class="vd-btn vd-btn-outline-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Glass modal --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-modal vd-modal-glass"</span> <span class="code-attr">id</span>=<span class="code-string">"glass-modal"</span>&gt;
+  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-modal-dialog"</span>&gt;
+    &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-modal-content"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;
+  &lt;/<span class="code-tag">div</span>&gt;
+&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-modal-static">
+                <div class="vd-card-header"><h4>Static Backdrop</h4></div>
+                <div class="vd-card-body" style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center;">
+                    <button class="vd-btn vd-btn-primary" data-modal="#demo-modal-static-el">Static Backdrop</button>
+                </div>
+            </div>
+            <div class="vd-modal vd-modal-static" id="demo-modal-static-el">
+                <div class="vd-modal-dialog vd-modal-sm">
+                    <div class="vd-modal-content">
+                        <div class="vd-modal-header">
+                            <h5 class="vd-modal-title">Confirm Delete</h5>
+                            <button class="vd-modal-close" aria-label="Close">&times;</button>
+                        </div>
+                        <div class="vd-modal-body">
+                            <p class="vd-mb-0">Clicking the backdrop won't close this modal. The user must explicitly choose an action.</p>
+                        </div>
+                        <div class="vd-modal-footer">
+                            <button class="vd-btn vd-btn-outline-secondary" data-dismiss="modal">Cancel</button>
+                            <button class="vd-btn vd-btn-error">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Static backdrop (clicking outside won't close) --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-modal vd-modal-static"</span> <span class="code-attr">id</span>=<span class="code-string">"confirm-modal"</span>&gt;
+  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-modal-dialog vd-modal-sm"</span>&gt;
+    &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-modal-content"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;
+  &lt;/<span class="code-tag">div</span>&gt;
+&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CSS Variables -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header"><h4>CSS Variables</h4></div>
+                <div class="vd-card-body">
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead><tr><th>Variable</th><th>Default</th><th>Description</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>--modal-bg</code></td><td><code>var(--color-white)</code></td><td>Modal content background</td></tr>
+                                <tr><td><code>--modal-backdrop-bg</code></td><td><code>rgba(0,0,0,0.5)</code></td><td>Backdrop overlay color</td></tr>
+                                <tr><td><code>--modal-border-color</code></td><td><code>var(--border-color)</code></td><td>Content border color</td></tr>
+                                <tr><td><code>--modal-padding</code></td><td><code>1.3125rem</code> (21px)</td><td>Content padding (Fibonacci)</td></tr>
+                                <tr><td><code>--modal-header-padding</code></td><td><code>1.3125rem</code></td><td>Header padding</td></tr>
+                                <tr><td><code>--modal-body-padding</code></td><td><code>1.3125rem</code></td><td>Body padding</td></tr>
+                                <tr><td><code>--modal-footer-padding</code></td><td><code>1.3125rem</code></td><td>Footer padding</td></tr>
+                                <tr><td><code>--modal-width-sm</code></td><td><code>233px</code></td><td>Small width (fib 13)</td></tr>
+                                <tr><td><code>--modal-width</code></td><td><code>377px</code></td><td>Default width (fib 14)</td></tr>
+                                <tr><td><code>--modal-width-lg</code></td><td><code>610px</code></td><td>Large width (fib 15)</td></tr>
+                                <tr><td><code>--modal-width-xl</code></td><td><code>987px</code></td><td>XL width (fib 16)</td></tr>
+                                <tr><td><code>--modal-z-index</code></td><td><code>1050</code></td><td>Modal stacking</td></tr>
+                                <tr><td><code>--modal-backdrop-z-index</code></td><td><code>1040</code></td><td>Backdrop stacking</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- API Reference -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header"><h4><i class="ph ph-list-dashes mr-2" style="color: var(--color-primary);"></i>API Reference</h4></div>
+                <div class="vd-card-body">
+                    <h4>CSS Classes</h4>
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead><tr><th>Class</th><th>Description</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>.vd-modal</code></td><td>Base modal container. Hidden by default; shown with <code>.is-open</code>.</td></tr>
+                                <tr><td><code>.vd-modal-dialog</code></td><td>Centered wrapper that constrains width and handles entrance animation.</td></tr>
+                                <tr><td><code>.vd-modal-content</code></td><td>White/glass card containing header, body, and footer.</td></tr>
+                                <tr><td><code>.vd-modal-header</code></td><td>Top bar with title and close button.</td></tr>
+                                <tr><td><code>.vd-modal-title</code></td><td>Heading style for the modal title.</td></tr>
+                                <tr><td><code>.vd-modal-close</code></td><td>Close button positioned at top-right of the header.</td></tr>
+                                <tr><td><code>.vd-modal-body</code></td><td>Scrollable content area.</td></tr>
+                                <tr><td><code>.vd-modal-footer</code></td><td>Bottom action bar, typically for buttons.</td></tr>
+                                <tr><td><code>.vd-modal-sm</code></td><td>Small width modifier on <code>.vd-modal-dialog</code>.</td></tr>
+                                <tr><td><code>.vd-modal-lg</code></td><td>Large width modifier.</td></tr>
+                                <tr><td><code>.vd-modal-xl</code></td><td>Extra large width modifier.</td></tr>
+                                <tr><td><code>.vd-modal-glass</code></td><td>Frosted glass backdrop and translucent panel.</td></tr>
+                                <tr><td><code>.vd-modal-static</code></td><td>Backdrop click does not close the modal.</td></tr>
+                                <tr><td><code>.vd-modal-scrollable</code></td><td>Allows the modal body to scroll independently when content overflows.</td></tr>
+                                <tr><td><code>.is-open</code></td><td>State class toggled by JavaScript to show the modal.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="vd-mt-6">Data Attributes</h4>
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead><tr><th>Attribute</th><th>Description</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>data-modal="#id"</code></td><td>Placed on a trigger button to open the targeted modal.</td></tr>
+                                <tr><td><code>data-dismiss="modal"</code></td><td>Placed on any button inside the modal to close it when clicked.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="vd-mt-6">JavaScript Methods</h4>
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead><tr><th>Method</th><th>Description</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>VanduoModals.open(el)</code></td><td>Open the modal element programmatically.</td></tr>
+                                <tr><td><code>VanduoModals.close(el)</code></td><td>Close the modal element.</td></tr>
+                                <tr><td><code>VanduoModals.toggle(el)</code></td><td>Toggle open/closed state.</td></tr>
+                                <tr><td><code>VanduoModals.init()</code></td><td>Wire up all <code>[data-modal]</code> and <code>[data-dismiss="modal"]</code> triggers.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="vd-mt-6">Events</h4>
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead><tr><th>Event</th><th>Description</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>modal:open</code></td><td>Fired on the modal element when it opens.</td></tr>
+                                <tr><td><code>modal:close</code></td><td>Fired on the modal element when it closes.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accessibility -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header"><h4><i class="ph ph-wheelchair mr-2" style="color: var(--color-primary);"></i>Accessibility</h4></div>
+                <div class="vd-card-body">
+                    <ul>
+                        <li>When opened, focus moves to the first focusable element inside the modal (typically the close button).</li>
+                        <li>Focus is trapped within the modal while open — <kbd>Tab</kbd> cycles through modal contents only.</li>
+                        <li><kbd>Escape</kbd> closes the modal unless <code>.vd-modal-static</code> is present.</li>
+                        <li>The modal container receives <code>role="dialog"</code> and <code>aria-modal="true"</code>.</li>
+                        <li>Use <code>aria-labelledby</code> on <code>.vd-modal</code> pointing to <code>.vd-modal-title</code> so screen readers announce the title.</li>
+                        <li>On close, focus returns to the trigger element that opened the modal.</li>
+                        <li>The backdrop blocks interaction with the rest of the page and is marked <code>aria-hidden="true"</code>.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

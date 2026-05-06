@@ -1,0 +1,310 @@
+<section id="progress">
+    <h4 class="demo-title"><i class="ph ph-chart-bar"></i>Progress</h4>
+    <p class="vd-mb-8">Linear progress bars with semantic color variants, multiple sizes, striped and animated styles, and indeterminate mode. Progress bars are fully CSS-driven — set the width via inline style or utility classes and the bar animates smoothly.</p>
+
+    <!-- Variants & Sizes Demo -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-progress-variants">
+                <div class="vd-card-header"><h4>Semantic Variants</h4></div>
+                <div class="vd-card-body">
+                    <p class="vd-text-sm vd-text-muted vd-mb-2">Primary (default)</p>
+                    <div class="vd-progress vd-mb-5">
+                        <div class="vd-progress-bar" style="width: 45%;"></div>
+                    </div>
+
+                    <p class="vd-text-sm vd-text-muted vd-mb-2">Success</p>
+                    <div class="vd-progress vd-mb-5">
+                        <div class="vd-progress-bar vd-progress-success" style="width: 75%;"></div>
+                    </div>
+
+                    <p class="vd-text-sm vd-text-muted vd-mb-2">Warning</p>
+                    <div class="vd-progress vd-mb-5">
+                        <div class="vd-progress-bar vd-progress-warning" style="width: 60%;"></div>
+                    </div>
+
+                    <p class="vd-text-sm vd-text-muted vd-mb-2">Error</p>
+                    <div class="vd-progress vd-mb-5">
+                        <div class="vd-progress-bar vd-progress-error" style="width: 90%;"></div>
+                    </div>
+
+                    <p class="vd-text-sm vd-text-muted vd-mb-2">Info</p>
+                    <div class="vd-progress vd-mb-0">
+                        <div class="vd-progress-bar vd-progress-info" style="width: 30%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Primary (default) --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-progress"</span>&gt;
+  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-progress-bar"</span> <span class="code-attr">style</span>=<span class="code-string">"width: 45%;"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+&lt;/<span class="code-tag">div</span>&gt;
+
+<span class="code-comment">&lt;!-- Success, Warning, Error, Info --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-progress-bar vd-progress-success"</span> <span class="code-attr">style</span>=<span class="code-string">"width: 75%;"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-progress-bar vd-progress-warning"</span> <span class="code-attr">style</span>=<span class="code-string">"width: 60%;"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-progress-bar vd-progress-error"</span> <span class="code-attr">style</span>=<span class="code-string">"width: 90%;"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-progress-bar vd-progress-info"</span> <span class="code-attr">style</span>=<span class="code-string">"width: 30%;"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-progress-sizes">
+                <div class="vd-card-header"><h4>Sizes &amp; Striped</h4></div>
+                <div class="vd-card-body">
+                    <p class="vd-text-sm vd-text-muted vd-mb-2">Extra Small (3px)</p>
+                    <div class="vd-progress vd-progress-xs vd-mb-5">
+                        <div class="vd-progress-bar" style="width: 60%;"></div>
+                    </div>
+
+                    <p class="vd-text-sm vd-text-muted vd-mb-2">Small (5px)</p>
+                    <div class="vd-progress vd-progress-sm vd-mb-5">
+                        <div class="vd-progress-bar" style="width: 60%;"></div>
+                    </div>
+
+                    <p class="vd-text-sm vd-text-muted vd-mb-2">Default (8px)</p>
+                    <div class="vd-progress vd-mb-5">
+                        <div class="vd-progress-bar" style="width: 60%;"></div>
+                    </div>
+
+                    <p class="vd-text-sm vd-text-muted vd-mb-2">Large (13px)</p>
+                    <div class="vd-progress vd-progress-lg vd-mb-5">
+                        <div class="vd-progress-bar" style="width: 60%;"></div>
+                    </div>
+
+                    <p class="vd-text-sm vd-text-muted vd-mb-2">Extra Large (21px)</p>
+                    <div class="vd-progress vd-progress-xl vd-mb-5">
+                        <div class="vd-progress-bar" style="width: 60%;">60%</div>
+                    </div>
+
+                    <p class="vd-text-sm vd-text-muted vd-mb-2">Striped &amp; Animated</p>
+                    <div class="vd-progress vd-progress-lg vd-progress-striped vd-progress-animated vd-mb-0">
+                        <div class="vd-progress-bar" style="width: 75%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Sizes --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-progress vd-progress-xs"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-progress vd-progress-sm"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-progress vd-progress-lg"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-progress vd-progress-xl"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;
+
+<span class="code-comment">&lt;!-- Striped + Animated --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-progress vd-progress-striped vd-progress-animated"</span>&gt;
+  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-progress-bar"</span> <span class="code-attr">style</span>=<span class="code-string">"width: 75%;"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+&lt;/<span class="code-tag">div</span>&gt;
+
+<span class="code-comment">&lt;!-- Indeterminate (animated loading bar) --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-progress vd-progress-indeterminate"</span>&gt;
+  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-progress-bar"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Indeterminate & Multiple Bars Demo -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-progress-indeterminate">
+                <div class="vd-card-header"><h4>Indeterminate</h4></div>
+                <div class="vd-card-body">
+                    <p class="vd-text-sm vd-text-muted vd-mb-3">Use when the exact progress percentage is unknown.</p>
+                    <div class="vd-progress vd-progress-lg vd-progress-indeterminate vd-mb-0">
+                        <div class="vd-progress-bar"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Indeterminate (no width needed) --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-progress vd-progress-indeterminate"</span>&gt;
+  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-progress-bar"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-progress-multiple">
+                <div class="vd-card-header"><h4>Multiple Bars &amp; Labeled</h4></div>
+                <div class="vd-card-body">
+                    <p class="vd-text-sm vd-text-muted vd-mb-3">Stack multiple bars to show segmented progress.</p>
+                    <div class="vd-progress vd-progress-lg vd-mb-5">
+                        <div class="vd-progress-bar vd-progress-success" style="width: 25%;">25%</div>
+                        <div class="vd-progress-bar vd-progress-warning" style="width: 15%;">15%</div>
+                        <div class="vd-progress-bar" style="width: 10%;">10%</div>
+                    </div>
+                    <p class="vd-text-sm vd-text-muted vd-mb-3">With percentage label (XL size only)</p>
+                    <div class="vd-progress vd-progress-xl vd-mb-0">
+                        <div class="vd-progress-bar vd-progress-success" style="width: 82%;">82%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Multiple bars --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-progress vd-progress-lg"</span>&gt;
+  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-progress-bar vd-progress-success"</span>
+       <span class="code-attr">style</span>=<span class="code-string">"width: 25%;"</span>&gt;25%&lt;/<span class="code-tag">div</span>&gt;
+  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-progress-bar vd-progress-warning"</span>
+       <span class="code-attr">style</span>=<span class="code-string">"width: 15%;"</span>&gt;15%&lt;/<span class="code-tag">div</span>&gt;
+  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-progress-bar"</span>
+       <span class="code-attr">style</span>=<span class="code-string">"width: 10%;"</span>&gt;10%&lt;/<span class="code-tag">div</span>&gt;
+&lt;/<span class="code-tag">div</span>&gt;
+
+<span class="code-comment">&lt;!-- Labeled (XL) --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-progress vd-progress-xl"</span>&gt;
+  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-progress-bar vd-progress-success"</span>
+       <span class="code-attr">style</span>=<span class="code-string">"width: 82%;"</span>&gt;82%&lt;/<span class="code-tag">div</span>&gt;
+&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CSS Variables -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header"><h4>CSS Variables</h4></div>
+                <div class="vd-card-body">
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead><tr><th>Variable</th><th>Default</th><th>Description</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>--progress-height</code></td><td><code>8px</code></td><td>Default track height</td></tr>
+                                <tr><td><code>--progress-bg</code></td><td><code>var(--bg-tertiary)</code></td><td>Track background color</td></tr>
+                                <tr><td><code>--progress-bar-bg</code></td><td><code>var(--color-primary)</code></td><td>Default bar fill color</td></tr>
+                                <tr><td><code>--progress-border-radius</code></td><td><code>var(--radius-fib-5, 5px)</code></td><td>Track and bar rounding</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- API Reference -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header"><h4><i class="ph ph-list-dashes mr-2" style="color: var(--color-primary);"></i>API Reference</h4></div>
+                <div class="vd-card-body">
+                    <h4>CSS Classes</h4>
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead><tr><th>Class</th><th>Description</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>.vd-progress</code></td><td>Base track container with rounded overflow.</td></tr>
+                                <tr><td><code>.vd-progress-bar</code></td><td>The colored fill bar. Width controlled via inline style or utility class.</td></tr>
+                                <tr><td><code>.vd-progress-success</code></td><td>Green fill variant.</td></tr>
+                                <tr><td><code>.vd-progress-warning</code></td><td>Amber fill variant.</td></tr>
+                                <tr><td><code>.vd-progress-error</code></td><td>Red fill variant.</td></tr>
+                                <tr><td><code>.vd-progress-info</code></td><td>Cyan fill variant.</td></tr>
+                                <tr><td><code>.vd-progress-xs</code></td><td>Extra small track height (3px).</td></tr>
+                                <tr><td><code>.vd-progress-sm</code></td><td>Small track height (5px).</td></tr>
+                                <tr><td><code>.vd-progress-lg</code></td><td>Large track height (13px).</td></tr>
+                                <tr><td><code>.vd-progress-xl</code></td><td>Extra large track height (21px). Supports text labels inside the bar.</td></tr>
+                                <tr><td><code>.vd-progress-striped</code></td><td>Diagonal stripe overlay on the bar.</td></tr>
+                                <tr><td><code>.vd-progress-animated</code></td><td>Animates the stripes scrolling horizontally.</td></tr>
+                                <tr><td><code>.vd-progress-indeterminate</code></td><td>Animates a partial-width bar back and forth across the track.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accessibility -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header"><h4><i class="ph ph-wheelchair mr-2" style="color: var(--color-primary);"></i>Accessibility</h4></div>
+                <div class="vd-card-body">
+                    <ul>
+                        <li>Wrap progress bars in an element with <code>role="progressbar"</code>, <code>aria-valuenow</code>, <code>aria-valuemin="0"</code>, and <code>aria-valuemax="100"</code>.</li>
+                        <li>Provide an <code>aria-label</code> or <code>aria-labelledby</code> describing what is progressing (e.g., "Uploading file.jpg").</li>
+                        <li>For indeterminate bars, omit <code>aria-valuenow</code> and add <code>aria-valuetext="Loading..."</code> instead.</li>
+                        <li>Animations respect <code>prefers-reduced-motion: reduce</code> — stripes and indeterminate motion are disabled.</li>
+                        <li>Dark mode automatically adjusts <code>--progress-bg</code> for sufficient contrast.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

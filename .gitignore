@@ -26,7 +26,7 @@ node_modules/
 /music/Stellardrone/*
 !/music/Stellardrone/Invent the Universe/
 /music/Stellardrone/Invent the Universe/*
-!/music/Stellardrone/Invent the Universe/06 - Pale Blue Dot.mp3
+!/music/Stellardrone/Invent the Universe/*.mp3
 
 # SEO placeholder images (replace with actual brand assets)
 # /images/og-image.png

@@ -1,0 +1,308 @@
+<section id="spinner">
+    <h4 class="demo-title"><i class="ph ph-spinner"></i>Spinners</h4>
+    <p class="vd-mb-8">Canonical reference for Vanduo loading spinners: border spinner, dot bounce, growing pulse, sizes and color modifiers, plus the signature quad-grid loader (<code>.vd-dynamic-loader*</code>). Styles ship in <code>framework/css/components/spinner.css</code>, imported by the main <code>vanduo.css</code> bundle — copy HTML only; no extra layout CSS is required. For loading UX patterns (progress handoff, placeholders), see <a href="#docs/preloader">Preloader</a>.</p>
+
+    <!-- Border Spinner Demo -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-spinner-border">
+                <div class="vd-card-header"><h4>Border Spinner</h4></div>
+                <div class="vd-card-body">
+                    <p class="vd-text-sm vd-text-muted vd-mb-3">Sizes</p>
+                    <div style="display:flex; gap:1.5rem; align-items:center; flex-wrap:wrap; margin-bottom:1.5rem;">
+                        <div class="vd-spinner vd-spinner-xs"></div>
+                        <div class="vd-spinner vd-spinner-sm"></div>
+                        <div class="vd-spinner"></div>
+                        <div class="vd-spinner vd-spinner-lg"></div>
+                        <div class="vd-spinner vd-spinner-xl"></div>
+                    </div>
+
+                    <p class="vd-text-sm vd-text-muted vd-mb-3">Colors</p>
+                    <div style="display:flex; gap:1.5rem; align-items:center; flex-wrap:wrap; margin-bottom:1.5rem;">
+                        <div class="vd-spinner"></div>
+                        <div class="vd-spinner vd-spinner-success"></div>
+                        <div class="vd-spinner vd-spinner-warning"></div>
+                        <div class="vd-spinner vd-spinner-error"></div>
+                        <div class="vd-spinner vd-spinner-info"></div>
+                        <div class="vd-spinner vd-spinner-light" style="background:var(--color-gray-800);padding:4px;border-radius:4px;"></div>
+                        <div class="vd-spinner vd-spinner-dark"></div>
+                    </div>
+
+                    <p class="vd-text-sm vd-text-muted vd-mb-3">Inside buttons</p>
+                    <div style="display:flex; gap:.75rem; flex-wrap:wrap; margin-bottom:1.5rem;">
+                        <button class="vd-btn vd-btn-primary" disabled>
+                            <span class="vd-spinner vd-spinner-sm" style="border-color:rgba(255,255,255,0.3);border-top-color:#fff;vertical-align:middle;margin-right:.5rem;"></span>
+                            Loading...
+                        </button>
+                        <button class="vd-btn vd-btn-outline" disabled>
+                            <span class="vd-spinner vd-spinner-sm" style="vertical-align:middle;margin-right:.5rem;"></span>
+                            Saving
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Sizes --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-spinner vd-spinner-xs"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-spinner vd-spinner-sm"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-spinner"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-spinner vd-spinner-lg"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-spinner vd-spinner-xl"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+
+<span class="code-comment">&lt;!-- Colors --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-spinner vd-spinner-success"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-spinner vd-spinner-warning"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-spinner vd-spinner-error"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-spinner vd-spinner-info"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-spinner vd-spinner-light"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-spinner vd-spinner-dark"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+
+<span class="code-comment">&lt;!-- Inside button --&gt;</span>
+&lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-btn vd-btn-primary"</span> <span class="code-attr">disabled</span>&gt;
+  &lt;<span class="code-tag">span</span> <span class="code-attr">class</span>=<span class="code-string">"vd-spinner vd-spinner-sm"</span>
+        <span class="code-attr">style</span>=<span class="code-string">"border-color:rgba(255,255,255,0.3);
+               border-top-color:#fff;"</span>&gt;
+  &lt;/<span class="code-tag">span</span>&gt;
+  Loading...
+&lt;/<span class="code-tag">button</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card" id="demo-spinner-dots-grow">
+                <div class="vd-card-header"><h4>Dots &amp; Growing Spinner</h4></div>
+                <div class="vd-card-body">
+                    <p class="vd-text-sm vd-text-muted vd-mb-3">Dot bounce</p>
+                    <div style="display:flex; gap:1.5rem; align-items:center; flex-wrap:wrap; margin-bottom:1.5rem;">
+                        <div class="vd-spinner-dots"><span></span></div>
+                        <div class="vd-spinner-dots" style="--spinner-color:var(--color-success);"><span></span></div>
+                        <div class="vd-spinner-dots" style="--spinner-color:var(--color-error);"><span></span></div>
+                    </div>
+
+                    <p class="vd-text-sm vd-text-muted vd-mb-3">Growing pulse</p>
+                    <div style="display:flex; gap:1.5rem; align-items:center; flex-wrap:wrap; margin-bottom:1.5rem;">
+                        <div class="vd-spinner-grow vd-spinner-sm"></div>
+                        <div class="vd-spinner-grow"></div>
+                        <div class="vd-spinner-grow vd-spinner-lg" style="--spinner-color:var(--color-success);"></div>
+                        <div class="vd-spinner-grow vd-spinner-xl" style="--spinner-color:var(--color-error);"></div>
+                    </div>
+
+                    <p class="vd-text-sm vd-text-muted vd-mb-3">Centering helper</p>
+                    <div class="vd-spinner-center vd-mb-0" style="border:1px dashed var(--border-color); border-radius:var(--btn-border-radius);">
+                        <div class="vd-spinner vd-spinner-lg"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Dot bounce spinner --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-spinner-dots"</span>&gt;&lt;<span class="code-tag">span</span>&gt;&lt;/<span class="code-tag">span</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+
+<span class="code-comment">&lt;!-- Growing pulse spinner --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-spinner-grow vd-spinner-sm"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-spinner-grow"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-spinner-grow vd-spinner-lg"</span>
+     <span class="code-attr">style</span>=<span class="code-string">"--spinner-color:var(--color-success);"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+
+<span class="code-comment">&lt;!-- Centered loader area --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-spinner-center"</span>&gt;
+  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-spinner vd-spinner-lg"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quad Loader Demo -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card" id="demo-spinner-quad">
+                <div class="vd-card-header"><h4>Quad Loader (Signature Vanduo Loader)</h4></div>
+                <div class="vd-card-body">
+                    <p class="vd-text-sm vd-text-muted vd-mb-4">The grid applies staggered rotation via <code>.vd-dynamic-loader-grid</code> (nth-child delays in CSS). Optional inline <code>animation-delay</code> overrides are only needed if you want custom rhythm.</p>
+                    <div class="vd-dynamic-loader vd-mb-5">
+                        <div class="vd-dynamic-loader-grid">
+                            <div class="vd-spinner vd-spinner-sm" style="--spinner-color:var(--color-primary);"></div>
+                            <div class="vd-spinner vd-spinner-sm" style="--spinner-color:var(--color-secondary);"></div>
+                            <div class="vd-spinner vd-spinner-sm" style="--spinner-color:var(--color-success);"></div>
+                            <div class="vd-spinner vd-spinner-sm" style="--spinner-color:var(--color-warning);"></div>
+                        </div>
+                        <div class="vd-dynamic-loader-text">Loading your workspace...</div>
+                    </div>
+
+                    <p class="vd-text-sm vd-text-muted vd-mb-3">Overlay on a skeleton card</p>
+                    <div class="vd-dynamic-loader-card" style="min-height:180px;">
+                        <div class="vd-dynamic-loader">
+                            <div class="vd-dynamic-loader-grid">
+                                <div class="vd-spinner vd-spinner-sm" style="--spinner-color:var(--color-primary);"></div>
+                                <div class="vd-spinner vd-spinner-sm" style="--spinner-color:var(--color-secondary);"></div>
+                                <div class="vd-spinner vd-spinner-sm" style="--spinner-color:var(--color-success);"></div>
+                                <div class="vd-spinner vd-spinner-sm" style="--spinner-color:var(--color-warning);"></div>
+                            </div>
+                            <div class="vd-dynamic-loader-text">Please wait...</div>
+                        </div>
+                        <div class="vd-skeleton vd-skeleton-text vd-mb-3"></div>
+                        <div class="vd-skeleton vd-skeleton-text vd-mb-3"></div>
+                        <div class="vd-skeleton vd-skeleton-text"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Code Snippet -->
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Quad loader --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-dynamic-loader"</span>&gt;
+  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-dynamic-loader-grid"</span>&gt;
+    &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-spinner vd-spinner-sm"</span>
+         <span class="code-attr">style</span>=<span class="code-string">"--spinner-color:var(--color-primary);"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+    &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-spinner vd-spinner-sm"</span>
+         <span class="code-attr">style</span>=<span class="code-string">"--spinner-color:var(--color-secondary);"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+    &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-spinner vd-spinner-sm"</span>
+         <span class="code-attr">style</span>=<span class="code-string">"--spinner-color:var(--color-success);"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+    &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-spinner vd-spinner-sm"</span>
+         <span class="code-attr">style</span>=<span class="code-string">"--spinner-color:var(--color-warning);"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+  &lt;/<span class="code-tag">div</span>&gt;
+  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-dynamic-loader-text"</span>&gt;Loading...&lt;/<span class="code-tag">div</span>&gt;
+&lt;/<span class="code-tag">div</span>&gt;
+
+<span class="code-comment">&lt;!-- Overlay on skeleton card --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-dynamic-loader-card"</span>&gt;
+  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-dynamic-loader"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;
+  <span class="code-comment">&lt;!-- skeleton placeholders underneath --&gt;</span>
+  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-skeleton vd-skeleton-text"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
+&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CSS Variables -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header"><h4>CSS Variables</h4></div>
+                <div class="vd-card-body">
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead><tr><th>Variable</th><th>Default</th><th>Description</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>--spinner-size</code></td><td><code>2rem</code></td><td>Default spinner diameter</td></tr>
+                                <tr><td><code>--spinner-border-width</code></td><td><code>3px</code></td><td>Border spinner track thickness</td></tr>
+                                <tr><td><code>--spinner-color</code></td><td><code>var(--color-primary)</code></td><td>Active/accent color</td></tr>
+                                <tr><td><code>--spinner-speed</code></td><td><code>0.65s</code></td><td>Rotation duration</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- API Reference -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header"><h4><i class="ph ph-list-dashes mr-2" style="color: var(--color-primary);"></i>API Reference</h4></div>
+                <div class="vd-card-body">
+                    <h4>CSS Classes</h4>
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead><tr><th>Class</th><th>Description</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>.vd-spinner</code></td><td>Border spinner — a rotating circular border. Default size 2rem.</td></tr>
+                                <tr><td><code>.vd-spinner-xs</code></td><td>1rem diameter, 2px border.</td></tr>
+                                <tr><td><code>.vd-spinner-sm</code></td><td>1.5rem diameter, 2px border.</td></tr>
+                                <tr><td><code>.vd-spinner-lg</code></td><td>3rem diameter, 4px border.</td></tr>
+                                <tr><td><code>.vd-spinner-xl</code></td><td>4rem diameter, 5px border.</td></tr>
+                                <tr><td><code>.vd-spinner-success</code></td><td>Green accent color.</td></tr>
+                                <tr><td><code>.vd-spinner-warning</code></td><td>Amber accent color.</td></tr>
+                                <tr><td><code>.vd-spinner-error</code></td><td>Red accent color.</td></tr>
+                                <tr><td><code>.vd-spinner-info</code></td><td>Cyan accent color.</td></tr>
+                                <tr><td><code>.vd-spinner-light</code></td><td>White accent (for dark backgrounds).</td></tr>
+                                <tr><td><code>.vd-spinner-dark</code></td><td>Dark text color accent.</td></tr>
+                                <tr><td><code>.vd-spinner-dots</code></td><td>Three bouncing dots loader.</td></tr>
+                                <tr><td><code>.vd-spinner-grow</code></td><td>Pulsing circle that grows and fades in a loop.</td></tr>
+                                <tr><td><code>.vd-spinner-center</code></td><td>Flex container that centers a spinner with padding.</td></tr>
+                                <tr><td><code>.vd-dynamic-loader</code></td><td>Signature 2x2 quad spinner grid with label.</td></tr>
+                                <tr><td><code>.vd-dynamic-loader-grid</code></td><td>The 2x2 CSS grid of spinners.</td></tr>
+                                <tr><td><code>.vd-dynamic-loader-text</code></td><td>Muted label below the quad grid.</td></tr>
+                                <tr><td><code>.vd-dynamic-loader-card</code></td><td>Relative container that hosts a full-cover <code>.vd-dynamic-loader</code> overlay.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Accessibility -->
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header"><h4><i class="ph ph-wheelchair mr-2" style="color: var(--color-primary);"></i>Accessibility</h4></div>
+                <div class="vd-card-body">
+                    <ul>
+                        <li>Always include an <code>aria-label</code> or visually-hidden text describing the loading state: <code>&lt;div class="vd-spinner" aria-label="Loading..."&gt;&lt;/div&gt;</code>.</li>
+                        <li>When used inside buttons, the button itself should have <code>aria-disabled="true"</code> or <code>disabled</code> to prevent repeated submissions.</li>
+                        <li>For page-level loading (quad loader), wrap it in an element with <code>role="status"</code> and <code>aria-live="polite"</code> so screen readers announce the loading state.</li>
+                        <li>Spinners are decorative for sighted users but meaningful for screen reader users — never omit the accessible name.</li>
+                        <li>Animations slow down to 1.5s when <code>prefers-reduced-motion: reduce</code> is active to minimize vestibular discomfort.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

@@ -99,8 +99,8 @@ test.describe('Theme Customizer @a11y', () => {
     const options = await fontSelect.locator('option').allTextContents();
     expect(options).toContain('Ubuntu');
     expect(options).toContain('Open Sans');
-    expect(options).toContain('Rubik');
-    expect(options).toContain('Titillium Web');
+    expect(options).toContain('Lato');
+    expect(options).toContain('JetBrains Mono');
   });
 });
 

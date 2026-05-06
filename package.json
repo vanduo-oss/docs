@@ -1,11 +1,12 @@
 {
   "name": "vanduo-docs",
-  "version": "1.3.7",
+  "version": "1.3.8",
   "private": true,
   "description": "Vanduo documentation and website",
   "scripts": {
     "sync:framework": "node scripts/sync-framework-assets.js",
     "preview:local": "pnpm run sync:framework && npx --yes serve -l 8787",
+    "preview:with-templates": "node scripts/preview-with-templates.js",
     "test": "playwright test",
     "test:ui": "playwright test --ui",
     "test:headed": "playwright test --headed",
@@ -21,7 +22,7 @@
     "report": "playwright show-report"
   },
   "devDependencies": {
-    "@playwright/test": "^1.58.2"
+    "@playwright/test": "^1.59.1"
   },
   "engines": {
     "node": ">=18.0.0",

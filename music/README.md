@@ -1,15 +1,18 @@
 Bundled demo audio used by the docs Music Player examples.
 
-Included file:
-- `Stellardrone/Invent the Universe/06 - Pale Blue Dot.mp3`
+Included files:
+- `Stellardrone/Invent the Universe/06 - Pale Blue Dot.mp3` (default first track in demos)
+- `Stellardrone/Invent the Universe/03 - Maia Nebula.mp3`
+- `Stellardrone/Invent the Universe/04 - Approaching the Heliopause.mp3`
+- `Stellardrone/Invent the Universe/07 - An Ocean of Galaxies.mp3`
+- `Stellardrone/Invent the Universe/08 - Infinite Void.mp3`
 
 Attribution:
-- Track: `Pale Blue Dot`
 - Artist: Stellardrone
 - Album: `Invent the Universe`
 - Source: https://stellardrone.bandcamp.com/album/invent-the-universe
 - License: CC BY 4.0 https://creativecommons.org/licenses/by/4.0/
 
 Notes:
-- The bundled file is included unchanged.
-- This folder intentionally tracks only one sample MP3 to keep the docs repo size down.
+- Bundled files are included unchanged.
+- This folder tracks a small curated multi-track sample set for the docs player demos.

@@ -1,4 +1,4 @@
-// Hex math utilities adapted for Vanduo framework
+// Hex math utilities — Canonical source: framework/js/utils/hex-math.js
 // Based on web-civ utils/hex-math.js
 
 /**
@@ -72,7 +72,7 @@ export function axialRound(q, r) {
     const s = -q - r;
     let rq = Math.round(q);
     let rr = Math.round(r);
-    let rs = Math.round(s);
+    const rs = Math.round(s);
     const qDiff = Math.abs(rq - q);
     const rDiff = Math.abs(rr - r);
     const sDiff = Math.abs(rs - s);

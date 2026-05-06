@@ -80,6 +80,26 @@ function syncFrameworkAssets() {
     cpSync(sourcePath, targetPath, { recursive: true, force: true });
   });
 
+  // Sync framework JS component and util files needed by docs demos.
+  const frameworkJsDir = path.join(frameworkRoot, 'js');
+  const docsJsDir = path.join(docsRoot, 'js');
+
+  const jsSubdirs = ['components', 'utils'];
+  jsSubdirs.forEach((subdir) => {
+    const src = path.join(frameworkJsDir, subdir);
+    const dst = path.join(docsJsDir, subdir);
+    if (existsSync(src)) {
+      mkdirSync(dst, { recursive: true });
+      const entries = readdirSync(src);
+      entries.forEach((entry) => {
+        if (entry.endsWith('.js')) {
+          cpSync(path.join(src, entry), path.join(dst, entry), { force: true });
+        }
+      });
+      console.log('[sync-framework-assets] Synced ' + entries.filter(e => e.endsWith('.js')).length + ' files from framework/js/' + subdir + '/ → docs/js/' + subdir + '/');
+    }
+  });
+
   console.log(
     '[sync-framework-assets] Synced ' + frameworkEntries.length + ' framework entries into ' + docsDistDir + '.'
   );

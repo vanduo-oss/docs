@@ -110,9 +110,9 @@
             }
           ]
         },
-        {
-          "name": "Components",
-          "sections": [
+          {
+            "name": "Components",
+            "sections": [
             {
               "id": "theme-customizer",
               "title": "Theme Customizer",
@@ -260,12 +260,105 @@
                 "volume",
                 "media"
               ]
+            },
+            {
+              "id": "dropdown",
+              "title": "Dropdown",
+              "file": "components/dropdown.html",
+              "icon": "ph-caret-down",
+              "keywords": [
+                "dropdown",
+                "menu",
+                "select",
+                "options",
+                "split button"
+              ]
+            },
+            {
+              "id": "modals",
+              "title": "Modals",
+              "file": "components/modals.html",
+              "icon": "ph-squares-four",
+              "keywords": [
+                "modal",
+                "dialog",
+                "popup",
+                "overlay",
+                "confirm",
+                "glass"
+              ]
+            },
+            {
+              "id": "tooltips",
+              "title": "Tooltips",
+              "file": "components/tooltips.html",
+              "icon": "ph-chat-centered",
+              "keywords": [
+                "tooltip",
+                "hint",
+                "popover",
+                "hover",
+                "title",
+                "glass"
+              ]
+            },
+            {
+              "id": "progress",
+              "title": "Progress",
+              "file": "components/progress.html",
+              "icon": "ph-chart-bar",
+              "keywords": [
+                "progress",
+                "bar",
+                "loading",
+                "percentage",
+                "striped",
+                "indeterminate"
+              ]
+            },
+            {
+              "id": "spinner",
+              "title": "Spinners",
+              "file": "components/spinner.html",
+              "icon": "ph-spinner",
+              "keywords": [
+                "spinner",
+                "loader",
+                "loading",
+                "dots",
+                "circular",
+                "indicator",
+                "quad",
+                "quad loader",
+                "dynamic loader",
+                "skeleton overlay"
+              ]
             }
-          ]
-        },
-        {
-          "name": "Data Display",
-          "sections": [
+            ]
+          },
+          {
+            "name": "Canvas & Visualization",
+            "sections": [
+              {
+                "id": "vd-hex",
+                "title": "Hex Grid",
+                "file": "canvas/vd-hex.html",
+                "icon": "ph-hexagon",
+                "keywords": [
+                  "hex grid",
+                  "canvas",
+                  "visualization",
+                  "game",
+                  "terrain",
+                  "pathfinding",
+                  "axial coordinates"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Data Display",
+            "sections": [
             {
               "id": "avatars",
               "title": "Avatars",
@@ -280,13 +373,15 @@
             {
               "id": "badges",
               "title": "Badges",
-              "file": "data-display/badges.html",
+              "file": "components/badges.html",
               "icon": "ph-tag",
               "keywords": [
                 "badge",
                 "pill",
                 "tag",
-                "label"
+                "label",
+                "counter",
+                "status"
               ]
             },
             {
@@ -322,15 +417,17 @@
             {
               "id": "alerts",
               "title": "Alerts",
-              "file": "feedback/alerts.html",
-              "icon": "ph-warning-circle",
+              "file": "components/alerts.html",
+              "icon": "ph-bell",
               "keywords": [
                 "alert",
                 "notification",
                 "message",
                 "warning",
                 "error",
-                "success"
+                "success",
+                "dismissible",
+                "banner"
               ]
             },
             {
@@ -353,7 +450,10 @@
               "keywords": [
                 "preloader",
                 "loading",
+                "loading patterns",
                 "spinner",
+                "quad loader",
+                "dynamic loader",
                 "circular",
                 "progress"
               ]
@@ -361,13 +461,18 @@
             {
               "id": "skeleton",
               "title": "Skeleton",
-              "file": "feedback/skeleton.html",
-              "icon": "ph-selection-background",
+              "file": "components/skeleton.html",
+              "icon": "ph-circles-three",
               "keywords": [
                 "skeleton",
                 "ghost",
                 "loading",
-                "placeholder"
+                "placeholder",
+                "shimmer",
+                "pulse",
+                "lazy",
+                "VanduoLazyLoad",
+                "data-vd-lazy"
               ]
             }
           ]
@@ -376,30 +481,32 @@
           "name": "Overlay",
           "sections": [
             {
-              "id": "interactive",
-              "title": "Interactive Components",
-              "file": "interactive/interactive.html",
-              "icon": "ph-hand-pointing",
+              "id": "accordion",
+              "title": "Accordion / Collapsible",
+              "file": "components/accordion.html",
+              "icon": "ph-list-plus",
               "keywords": [
-                "interactive",
-                "collapsible",
                 "accordion",
-                "dropdown",
-                "modal",
-                "tooltip"
+                "collapsible",
+                "expand",
+                "collapse",
+                "faq",
+                "disclosure"
               ]
             },
             {
               "id": "toasts",
               "title": "Toast Notifications",
-              "file": "interactive/toasts.html",
+              "file": "components/toast.html",
               "icon": "ph-bell-ringing",
               "keywords": [
                 "toast",
                 "notification",
                 "alert",
                 "message",
-                "snackbar"
+                "snackbar",
+                "auto-dismiss",
+                "position"
               ]
             }
           ]
@@ -410,13 +517,16 @@
             {
               "id": "tabs",
               "title": "Tabs",
-              "file": "interactive/tabs.html",
+              "file": "components/tabs.html",
               "icon": "ph-tabs",
               "keywords": [
                 "tabs",
                 "tab",
                 "panel",
-                "switch"
+                "switch",
+                "pills",
+                "boxed",
+                "vertical"
               ]
             },
             {
@@ -692,6 +802,21 @@
               ]
             },
             {
+              "id": "migration-comparison",
+              "title": "Migration Comparison",
+              "file": "guides/migration-comparison.html",
+              "icon": "ph-arrows-left-right",
+              "keywords": [
+                "bootstrap",
+                "tailwind",
+                "migration",
+                "comparison",
+                "switch",
+                "convert",
+                "migrate"
+              ]
+            },
+            {
               "id": "esm-vs-iife",
               "title": "ESM vs IIFE vs Legacy",
               "file": "guides/esm-vs-iife.html",
@@ -812,6 +937,22 @@
                 "wcag",
                 "inclusive"
               ]
+            },
+            {
+              "id": "troubleshooting",
+              "title": "Troubleshooting & FAQ",
+              "file": "guides/troubleshooting.html",
+              "icon": "ph-wrench",
+              "keywords": [
+                "troubleshooting",
+                "faq",
+                "debug",
+                "fix",
+                "problem",
+                "error",
+                "help",
+                "issue"
+              ]
             }
           ]
         },
@@ -828,6 +969,11 @@
                 "load",
                 "loading",
                 "performance",
+                "VanduoLazyLoad",
+                "data-vd-lazy",
+                "skeleton",
+                "spinner",
+                "placeholder",
                 "intersection observer",
                 "observer",
                 "intersection",
