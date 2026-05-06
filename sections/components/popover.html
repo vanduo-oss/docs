@@ -37,7 +37,7 @@
                         <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Basic popover via data attribute --&gt;</span>
 &lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-btn vd-btn-primary"</span>
         <span class="code-attr">data-vd-bubble</span>=<span class="code-string">"This is a simple popover message."</span>&gt;
-  Hover me
+  Click me
 &lt;/<span class="code-tag">button</span>&gt;
 
 <span class="code-comment">&lt;!-- Alias: data-vd-popover also works --&gt;</span>
@@ -161,7 +161,7 @@
                 </div>
                 <div class="vd-card-body" style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center;">
                     <span class="vd-btn vd-btn-outline-secondary" data-vd-bubble="A compact bubble with no header — just content." data-vd-bubble-placement="top">
-                        Hover for info
+                        Click for info
                     </span>
                     <span class="vd-btn vd-btn-outline-secondary" data-vd-bubble="Works on any element, not just buttons." data-vd-bubble-placement="right">
                         Any element
@@ -246,7 +246,7 @@
                         <tr>
                             <td><code>data-vd-bubble-placement</code></td>
                             <td>Position relative to trigger: <code>top</code>, <code>right</code>, <code>bottom</code>, <code>left</code></td>
-                            <td><code>top</code></td>
+                            <td><code>bottom</code></td>
                         </tr>
                     </tbody>
                 </table>
@@ -320,45 +320,12 @@
         </div>
         <div class="vd-card-body">
             <ul>
-                <li>Trigger elements receive <code>aria-describedby</code> pointing to the popover ID</li>
-                <li>The popover uses <code>role="tooltip"</code> for untitled and <code>role="dialog"</code> for titled variants</li>
+                <li>Trigger elements get <code>aria-haspopup="dialog"</code>, <code>aria-expanded</code>, and <code>aria-controls</code> pointing to the generated popover ID</li>
+                <li>The popover panel is a non-modal <code>role="dialog"</code> with <code>aria-modal="false"</code></li>
                 <li>Close buttons include <code>aria-label="Close"</code> for screen readers</li>
                 <li>Popover is dismissed on <kbd>Escape</kbd> keypress</li>
-                <li>Focus is trapped inside titled popovers and returned to the trigger on close</li>
-                <li>Popover auto-repositions to stay within the viewport (collision detection)</li>
+                <li>Position is clamped to the viewport horizontally; minimum top offset prevents off-screen placement (no automatic flip to alternate sides)</li>
             </ul>
-        </div>
-    </div>
-    <!-- What's Next -->
-    <div class="vd-row vd-mt-10">
-        <div class="vd-col-12">
-            <h5 class="vd-mb-5"><i class="ph ph-arrow-circle-right mr-2" style="color: var(--color-primary);"></i>What's Next</h5>
-            <div class="vd-row">
-                <div class="vd-col-12 vd-col-md-4">
-                    <a href="#docs/tooltips" class="vd-card vd-card-glow demo-card" style="text-decoration: none; color: inherit;">
-                        <div class="vd-card-body">
-                            <h5 class="vd-mb-2"><i class="ph ph-tooltip mr-2" style="color: var(--color-primary);"></i>Tooltips</h5>
-                            <p class="vd-text-sm vd-text-muted vd-mb-0">Use lightweight hover hints alongside click-triggered popovers.</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="vd-col-12 vd-col-md-4">
-                    <a href="#docs/dropdown" class="vd-card vd-card-glow demo-card" style="text-decoration: none; color: inherit;">
-                        <div class="vd-card-body">
-                            <h5 class="vd-mb-2"><i class="ph ph-caret-down mr-2" style="color: var(--color-primary);"></i>Dropdown</h5>
-                            <p class="vd-text-sm vd-text-muted vd-mb-0">Choose dropdown menus for structured lists of options.</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="vd-col-12 vd-col-md-4">
-                    <a href="#docs/buttons" class="vd-card vd-card-glow demo-card" style="text-decoration: none; color: inherit;">
-                        <div class="vd-card-body">
-                            <h5 class="vd-mb-2"><i class="ph ph-cursor-click mr-2" style="color: var(--color-primary);"></i>Buttons</h5>
-                            <p class="vd-text-sm vd-text-muted vd-mb-0">Trigger popovers from button clicks with contextual actions.</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
         </div>
     </div>
 </section>

@@ -1,91 +1,26 @@
-<section id="toast">
-    <h4 class="demo-title"><i class="ph ph-bell"></i>Toast Notifications</h4>
-    <p class="vd-mb-8">Transient popup notifications that appear and auto-dismiss after a set duration. Toasts support six screen positions, five semantic variants, action buttons, and persistent (non-auto-dismiss) mode. Use them for success confirmations, errors, warnings, and general updates.</p>
+<section id="toasts">
+    <h4 class="demo-title"><i class="ph ph-bell-ringing"></i>Toast Notifications</h4>
 
-    <!-- Position & Variant Demo -->
-    <div class="vd-row vd-mb-6">
+    <div class="vd-row">
         <div class="vd-col-12 vd-col-md-6">
-            <div class="vd-card vd-card-glow demo-card" id="demo-toast-variants">
-                <div class="vd-card-header"><h4>Toast Variants</h4></div>
-                <div class="vd-card-body">
-                    <div class="vd-toast vd-toast-success vd-mb-3" role="status" style="position:static; transform:none; opacity:1; pointer-events:auto;">
-                        <i class="ph ph-check-circle vd-toast-icon"></i>
-                        <div class="vd-toast-body">Your changes have been saved.</div>
-                        <button class="vd-toast-close" aria-label="Close">&times;</button>
-                    </div>
-                    <div class="vd-toast vd-toast-error vd-mb-3" role="alert" style="position:static; transform:none; opacity:1; pointer-events:auto;">
-                        <i class="ph ph-x-circle vd-toast-icon"></i>
-                        <div class="vd-toast-body">Unable to save changes. Please try again.</div>
-                        <button class="vd-toast-close" aria-label="Close">&times;</button>
-                    </div>
-                    <div class="vd-toast vd-toast-warning vd-mb-3" role="status" style="position:static; transform:none; opacity:1; pointer-events:auto;">
-                        <i class="ph ph-warning vd-toast-icon"></i>
-                        <div class="vd-toast-body">Your session will expire in 5 minutes.</div>
-                        <button class="vd-toast-close" aria-label="Close">&times;</button>
-                    </div>
-                    <div class="vd-toast vd-toast-info vd-mb-3" role="status" style="position:static; transform:none; opacity:1; pointer-events:auto;">
-                        <i class="ph ph-info vd-toast-icon"></i>
-                        <div class="vd-toast-body">A new version is available. <a href="#" class="vd-toast-link">Refresh</a></div>
-                        <button class="vd-toast-close" aria-label="Close">&times;</button>
-                    </div>
-                    <div class="vd-toast vd-toast-primary" role="status" style="position:static; transform:none; opacity:1; pointer-events:auto;">
-                        <i class="ph ph-star vd-toast-icon"></i>
-                        <div class="vd-toast-body">Welcome back! You have 3 new notifications.</div>
-                        <button class="vd-toast-close" aria-label="Close">&times;</button>
-                    </div>
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h4>Toast Types</h4>
                 </div>
-            </div>
-
-            <!-- Code Snippet -->
-            <div class="vd-code-snippet" data-collapsible>
-                <button class="vd-code-snippet-toggle" aria-expanded="false">
-                    <span class="vd-code-snippet-toggle-icon"></span>
-                    <span>View Code</span>
-                </button>
-                <div class="vd-code-snippet-content">
-                    <div class="vd-code-snippet-header">
-                        <div class="vd-code-snippet-tabs" role="tablist">
-                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
-                        </div>
-                        <button class="vd-code-snippet-copy" aria-label="Copy code">
-                            <span class="vd-code-snippet-copy-icon"></span>
-                            <span class="vd-code-snippet-copy-text">Copy</span>
-                        </button>
-                    </div>
-                    <div class="vd-code-snippet-body">
-                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Static toast markup (position:static for demo only) --&gt;</span>
-&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-toast vd-toast-success"</span> <span class="code-attr">role</span>=<span class="code-string">"status"</span>&gt;
-  &lt;<span class="code-tag">i</span> <span class="code-attr">class</span>=<span class="code-string">"ph ph-check-circle vd-toast-icon"</span>&gt;&lt;/<span class="code-tag">i</span>&gt;
-  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-toast-body"</span>&gt;Your changes have been saved.&lt;/<span class="code-tag">div</span>&gt;
-  &lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-toast-close"</span> <span class="code-attr">aria-label</span>=<span class="code-string">"Close"</span>&gt;&amp;times;&lt;/<span class="code-tag">button</span>&gt;
-&lt;/<span class="code-tag">div</span>&gt;
-
-<span class="code-comment">&lt;!-- Error toast --&gt;</span>
-&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-toast vd-toast-error"</span> <span class="code-attr">role</span>=<span class="code-string">"alert"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;
-
-<span class="code-comment">&lt;!-- Warning, info, primary variants --&gt;</span>
-&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-toast vd-toast-warning"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;
-&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-toast vd-toast-info"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;
-&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-toast vd-toast-primary"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;</code></pre>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="vd-col-12 vd-col-md-6">
-            <div class="vd-card vd-card-glow demo-card" id="demo-toast-js">
-                <div class="vd-card-header"><h4>JavaScript API</h4></div>
                 <div class="vd-card-body">
-                    <p class="vd-mb-4">Programmatically show toasts with custom content, duration, and position.</p>
-                    <div class="vd-code-snippet" data-collapsible data-expanded="true">
-                        <button class="vd-code-snippet-toggle" aria-expanded="true">
+                    <button class="vd-btn vd-btn-success" data-toast-demo="success">Success Toast</button>
+                    <button class="vd-btn vd-btn-error" data-toast-demo="error">Error Toast</button>
+                    <button class="vd-btn vd-btn-warning" data-toast-demo="warning">Warning Toast</button>
+                    <button class="vd-btn vd-btn-info" data-toast-demo="info">Info Toast</button>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
                             <span class="vd-code-snippet-toggle-icon"></span>
                             <span>View Code</span>
                         </button>
                         <div class="vd-code-snippet-content">
                             <div class="vd-code-snippet-header">
                                 <div class="vd-code-snippet-tabs" role="tablist">
-                                    <button class="vd-code-snippet-tab is-active" data-lang="js">JS</button>
+                                    <button class="vd-code-snippet-tab is-active" data-lang="javascript">JavaScript</button>
                                 </div>
                                 <button class="vd-code-snippet-copy" aria-label="Copy code">
                                     <span class="vd-code-snippet-copy-icon"></span>
@@ -93,98 +28,63 @@
                                 </button>
                             </div>
                             <div class="vd-code-snippet-body">
-                                <pre class="vd-code-snippet-pane is-active" data-lang="js"><code><span class="code-comment">// Simple toast</span>
-VanduoToast.show(<span class="code-string">'Profile updated successfully'</span>, {
-  variant: <span class="code-string">'success'</span>,
-  duration: 3000,
-  position: <span class="code-string">'top-right'</span>
-});
-
-<span class="code-comment">// Toast with action button</span>
-VanduoToast.show(<span class="code-string">'New message received'</span>, {
-  variant: <span class="code-string">'primary'</span>,
-  duration: 5000,
-  position: <span class="code-string">'bottom-left'</span>,
-  actions: [
-    { label: <span class="code-string">'View'</span>, onClick: () => <span class="code-function">console</span>.log(<span class="code-string">'viewed'</span>) }
-  ]
-});
-
-<span class="code-comment">// Persistent toast (no auto-dismiss)</span>
-VanduoToast.show(<span class="code-string">'Connection lost'</span>, {
-  variant: <span class="code-string">'error'</span>,
-  duration: <span class="code-keyword">false</span>,
-  position: <span class="code-string">'top-center'</span>
-});
-
-<span class="code-comment">// Dismiss all toasts</span>
-VanduoToast.dismissAll();</code></pre>
+                                <pre class="vd-code-snippet-pane is-active" data-lang="javascript"><code><span class="code-comment">// Simple toast types</span>
+Toast.<span class="code-function">success</span>(<span class="code-string">'Operation completed successfully!'</span>);
+Toast.<span class="code-function">error</span>(<span class="code-string">'An error occurred!'</span>);
+Toast.<span class="code-function">warning</span>(<span class="code-string">'Please review your input.'</span>);
+Toast.<span class="code-function">info</span>(<span class="code-string">'Here is some information.'</span>);</code></pre>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Positions Demo -->
-    <div class="vd-row vd-mb-6">
-        <div class="vd-col-12">
-            <div class="vd-card vd-card-glow demo-card" id="demo-toast-positions">
-                <div class="vd-card-header"><h4>Positions</h4></div>
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h4>Toast Options</h4>
+                </div>
                 <div class="vd-card-body">
-                    <div class="vd-row">
-                        <div class="vd-col-12 vd-col-md-4 vd-mb-3">
-                            <h5 class="vd-text-sm vd-text-muted vd-mb-2">Top</h5>
-                            <div class="vd-toast" role="status" style="position:static; transform:none; opacity:1; pointer-events:auto;">
-                                <div class="vd-toast-body">Top-Left</div>
-                            </div>
-                            <div class="vd-toast vd-toast-success" role="status" style="position:static; transform:none; opacity:1; pointer-events:auto;">
-                                <div class="vd-toast-body">Top-Center</div>
-                            </div>
-                            <div class="vd-toast vd-toast-warning" role="status" style="position:static; transform:none; opacity:1; pointer-events:auto;">
-                                <div class="vd-toast-body">Top-Right</div>
-                            </div>
-                        </div>
-                        <div class="vd-col-12 vd-col-md-4 vd-mb-3">
-                            <h5 class="vd-text-sm vd-text-muted vd-mb-2">Bottom</h5>
-                            <div class="vd-toast" role="status" style="position:static; transform:none; opacity:1; pointer-events:auto;">
-                                <div class="vd-toast-body">Bottom-Left</div>
-                            </div>
-                            <div class="vd-toast vd-toast-info" role="status" style="position:static; transform:none; opacity:1; pointer-events:auto;">
-                                <div class="vd-toast-body">Bottom-Center</div>
-                            </div>
-                            <div class="vd-toast vd-toast-error" role="alert" style="position:static; transform:none; opacity:1; pointer-events:auto;">
-                                <div class="vd-toast-body">Bottom-Right</div>
-                            </div>
-                        </div>
-                        <div class="vd-col-12 vd-col-md-4">
-                            <h5 class="vd-text-sm vd-text-muted vd-mb-2">Position classes</h5>
-                            <div class="vd-code-snippet" data-collapsible data-expanded="true">
-                                <button class="vd-code-snippet-toggle" aria-expanded="true">
-                                    <span class="vd-code-snippet-toggle-icon"></span>
-                                    <span>View Code</span>
-                                </button>
-                                <div class="vd-code-snippet-content">
-                                    <div class="vd-code-snippet-header">
-                                        <div class="vd-code-snippet-tabs" role="tablist">
-                                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
-                                        </div>
-                                        <button class="vd-code-snippet-copy" aria-label="Copy code">
-                                            <span class="vd-code-snippet-copy-icon"></span>
-                                            <span class="vd-code-snippet-copy-text">Copy</span>
-                                        </button>
-                                    </div>
-                                    <div class="vd-code-snippet-body">
-                                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Container positions --&gt;</span>
-&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-toast-container vd-toast-container-top-left"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;
-&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-toast-container vd-toast-container-top-center"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;
-&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-toast-container vd-toast-container-top-right"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;
-&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-toast-container vd-toast-container-bottom-left"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;
-&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-toast-container vd-toast-container-bottom-center"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;
-&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-toast-container vd-toast-container-bottom-right"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;</code></pre>
-                                    </div>
+                    <button class="vd-btn vd-btn-primary" data-toast-demo="with-title">With Title</button>
+                    <button class="vd-btn vd-btn-primary" data-toast-demo="long-duration">Long Duration</button>
+                    <button class="vd-btn vd-btn-primary" data-toast-demo="bottom-left">Bottom Left</button>
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="javascript">JavaScript</button>
                                 </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="javascript"><code><span class="code-comment">// Toast with title</span>
+Toast.<span class="code-function">show</span>({
+  title: <span class="code-string">'With Title'</span>,
+  message: <span class="code-string">'This toast has a title and message.'</span>,
+  type: <span class="code-string">'info'</span>
+});
+
+<span class="code-comment">// Long duration (10 seconds)</span>
+Toast.<span class="code-function">show</span>({
+  message: <span class="code-string">'This toast will stay for 10 seconds.'</span>,
+  type: <span class="code-string">'success'</span>,
+  duration: <span class="code-number">10000</span>
+});
+
+<span class="code-comment">// Custom position</span>
+Toast.<span class="code-function">show</span>({
+  message: <span class="code-string">'Bottom left position.'</span>,
+  type: <span class="code-string">'warning'</span>,
+  position: <span class="code-string">'bottom-left'</span>
+});</code></pre>
                             </div>
                         </div>
                     </div>
@@ -192,138 +92,44 @@ VanduoToast.dismissAll();</code></pre>
             </div>
         </div>
     </div>
-
-    <!-- CSS Variables -->
-    <div class="vd-row vd-mb-6">
-        <div class="vd-col-12">
-            <div class="vd-card vd-card-glow demo-card">
-                <div class="vd-card-header"><h4>CSS Variables</h4></div>
-                <div class="vd-card-body">
-                    <div class="vd-table-responsive">
-                        <table class="vd-table vd-table-striped">
-                            <thead><tr><th>Variable</th><th>Default</th><th>Description</th></tr></thead>
-                            <tbody>
-                                <tr><td><code>--toast-width</code></td><td><code>377px</code></td><td>Max toast width (Fibonacci)</td></tr>
-                                <tr><td><code>--toast-max-width</code></td><td><code>90vw</code></td><td>Responsive max width</td></tr>
-                                <tr><td><code>--toast-padding-x</code></td><td><code>1.3125rem</code> (21px)</td><td>Horizontal padding (Fibonacci)</td></tr>
-                                <tr><td><code>--toast-padding-y</code></td><td><code>0.8125rem</code> (13px)</td><td>Vertical padding (Fibonacci)</td></tr>
-                                <tr><td><code>--toast-gap</code></td><td><code>0.8125rem</code> (13px)</td><td>Gap between stacked toasts</td></tr>
-                                <tr><td><code>--toast-bg</code></td><td><code>var(--color-white)</code></td><td>Toast background</td></tr>
-                                <tr><td><code>--toast-text</code></td><td><code>var(--text-primary)</code></td><td>Toast text color</td></tr>
-                                <tr><td><code>--toast-border</code></td><td><code>var(--border-color)</code></td><td>Border color</td></tr>
-                                <tr><td><code>--toast-shadow</code></td><td><code>0 4px 12px rgba(0,0,0,0.15)</code></td><td>Drop shadow</td></tr>
-                                <tr><td><code>--toast-z-index</code></td><td><code>9999</code></td><td>Fixed positioning layer</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- API Reference -->
-    <div class="vd-row vd-mb-6">
-        <div class="vd-col-12">
-            <div class="vd-card vd-card-glow demo-card">
-                <div class="vd-card-header"><h4><i class="ph ph-list-dashes mr-2" style="color: var(--color-primary);"></i>API Reference</h4></div>
-                <div class="vd-card-body">
-                    <h4>CSS Classes</h4>
-                    <div class="vd-table-responsive">
-                        <table class="vd-table vd-table-striped">
-                            <thead><tr><th>Class</th><th>Description</th></tr></thead>
-                            <tbody>
-                                <tr><td><code>.vd-toast-container</code></td><td>Fixed-position wrapper that holds stacked toasts. One per position.</td></tr>
-                                <tr><td><code>.vd-toast-container-[position]</code></td><td>Position modifier: <code>-top-left</code>, <code>-top-center</code>, <code>-top-right</code>, <code>-bottom-left</code>, <code>-bottom-center</code>, <code>-bottom-right</code>.</td></tr>
-                                <tr><td><code>.vd-toast</code></td><td>Individual toast message card with icon, body, and optional close button.</td></tr>
-                                <tr><td><code>.vd-toast-success</code></td><td>Green left-border accent for positive feedback.</td></tr>
-                                <tr><td><code>.vd-toast-error</code></td><td>Red left-border accent for errors.</td></tr>
-                                <tr><td><code>.vd-toast-warning</code></td><td>Amber left-border accent for cautions.</td></tr>
-                                <tr><td><code>.vd-toast-info</code></td><td>Cyan left-border accent for neutral updates.</td></tr>
-                                <tr><td><code>.vd-toast-primary</code></td><td>Primary color accent for general notices.</td></tr>
-                                <tr><td><code>.vd-toast-icon</code></td><td>Icon element inside the toast, colored to match the variant.</td></tr>
-                                <tr><td><code>.vd-toast-body</code></td><td>Text content wrapper.</td></tr>
-                                <tr><td><code>.vd-toast-link</code></td><td>Styled inline link inside toast body.</td></tr>
-                                <tr><td><code>.vd-toast-close</code></td><td>Dismiss button positioned at the right edge.</td></tr>
-                                <tr><td><code>.vd-toast-action</code></td><td>Standalone action button inside the toast footer.</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <h4 class="vd-mt-6">JavaScript Methods</h4>
-                    <div class="vd-table-responsive">
-                        <table class="vd-table vd-table-striped">
-                            <thead><tr><th>Method</th><th>Description</th></tr></thead>
-                            <tbody>
-                                <tr><td><code>VanduoToast.show(message, options)</code></td><td>Display a toast. <code>options</code>: <code>{ variant, duration, position, actions }</code>. <code>duration: false</code> for persistent.</td></tr>
-                                <tr><td><code>VanduoToast.dismiss(el)</code></td><td>Dismiss a specific toast element immediately with exit animation.</td></tr>
-                                <tr><td><code>VanduoToast.dismissAll()</code></td><td>Remove all visible toasts at once.</td></tr>
-                                <tr><td><code>VanduoToast.init()</code></td><td>Wire up close buttons on static toast markup in the DOM.</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <h4 class="vd-mt-6">Events</h4>
-                    <div class="vd-table-responsive">
-                        <table class="vd-table vd-table-striped">
-                            <thead><tr><th>Event</th><th>Description</th></tr></thead>
-                            <tbody>
-                                <tr><td><code>toast:show</code></td><td>Fired on the toast element when it appears.</td></tr>
-                                <tr><td><code>toast:dismiss</code></td><td>Fired on the toast element when it is dismissed.</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Accessibility -->
-    <div class="vd-row vd-mb-6">
-        <div class="vd-col-12">
-            <div class="vd-card vd-card-glow demo-card">
-                <div class="vd-card-header"><h4><i class="ph ph-wheelchair mr-2" style="color: var(--color-primary);"></i>Accessibility</h4></div>
-                <div class="vd-card-body">
-                    <ul>
-                        <li>Use <code>role="alert"</code> for error toasts so screen readers announce them immediately via the live region.</li>
-                        <li>Use <code>role="status"</code> for success and info toasts so they are announced politely.</li>
-                        <li>Each toast should have a close button with an <code>aria-label="Dismiss notification"</code> for keyboard users.</li>
-                        <li>Toast containers use <code>aria-live="polite"</code> and <code>aria-atomic="true"</code> so additions are announced without interrupting the user.</li>
-                        <li>Keep toast messages concise (under 120 characters) so they can be fully announced by screen readers.</li>
-                        <li>Avoid using toasts for critical errors that require user action — use a modal or inline alert instead.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- What's Next block -->
-    <div class="vd-mt-8" style="border-top: 1px solid var(--border-color); padding-top: 2.5rem; padding-bottom: 3rem;">
-        <h4 class="vd-text-lg vd-mb-5"><i class="ph ph-arrow-circle-right"></i> What's Next?</h4>
-        <div class="vd-row" style="gap: 1.25rem;">
-            <div class="vd-col-12 vd-col-md-4 vd-mb-4">
-                <a href="#docs/alerts" data-route="docs/alerts" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
-                    <div class="vd-card-body">
-                        <h4 class="vd-text-md vd-mb-2">Alerts</h4>
-                        <p class="vd-text-sm vd-text-muted vd-mb-0">Persistent inline feedback for messages that should remain visible on the page.</p>
-                    </div>
-                </a>
-            </div>
-            <div class="vd-col-12 vd-col-md-4 vd-mb-4">
-                <a href="#docs/modals" data-route="docs/modals" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
-                    <div class="vd-card-body">
-                        <h4 class="vd-text-md vd-mb-2">Modals</h4>
-                        <p class="vd-text-sm vd-text-muted vd-mb-0">For critical actions and focused tasks where dismissing without action is not acceptable.</p>
-                    </div>
-                </a>
-            </div>
-            <div class="vd-col-12 vd-col-md-4 vd-mb-4">
-                <a href="#docs/spinner" data-route="docs/spinner" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
-                    <div class="vd-card-body">
-                        <h4 class="vd-text-md vd-mb-2">Spinners</h4>
-                        <p class="vd-text-sm vd-text-muted vd-mb-0">Inline loading indicators to show progress while waiting for an async operation to complete.</p>
-                    </div>
-                </a>
-            </div>
-        </div>
+    <h4 id="api" class="docs-heading">Toast API Reference</h4>
+    <p class="vd-mb-5">Toasts are generated dynamically via JavaScript. The configuration object accepts the following fields:</p>
+    <div class="vd-table-responsive" style="margin-bottom: 3rem;">
+        <table class="vd-table vd-table-hover">
+            <thead>
+                <tr>
+                    <th style="width: 25%;">Property</th>
+                    <th style="width: 55%;">Description</th>
+                    <th style="width: 20%;">Default / Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>message</code></td>
+                    <td>The main text content displayed in the toast notification.</td>
+                    <td><code>string</code> (required)</td>
+                </tr>
+                <tr>
+                    <td><code>title</code></td>
+                    <td>An optional bolder heading displayed above the message.</td>
+                    <td><code>string</code></td>
+                </tr>
+                <tr>
+                    <td><code>type</code></td>
+                    <td>Visual variant (<code>success</code>, <code>error</code>, <code>warning</code>, <code>info</code>).</td>
+                    <td><code>info</code></td>
+                </tr>
+                <tr>
+                    <td><code>duration</code></td>
+                    <td>Time in milliseconds before the toast automatically dismisses.</td>
+                    <td><code>5000</code></td>
+                </tr>
+                <tr>
+                    <td><code>position</code></td>
+                    <td>Screen placement (e.g., <code>top-right</code>, <code>bottom-left</code>).</td>
+                    <td><code>top-right</code></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </section>

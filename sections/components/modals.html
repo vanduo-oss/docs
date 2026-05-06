@@ -8,75 +8,73 @@
             <div class="vd-card vd-card-glow demo-card" id="demo-modal-sizes">
                 <div class="vd-card-header"><h4>Modal Sizes</h4></div>
                 <div class="vd-card-body" style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center;">
-                    <button class="vd-btn vd-btn-primary" data-vd-modal="#demo-modal-sm">Small (233px)</button>
-                    <button class="vd-btn vd-btn-primary" data-vd-modal="#demo-modal-default">Default (377px)</button>
-                    <button class="vd-btn vd-btn-primary" data-vd-modal="#demo-modal-lg">Large (610px)</button>
-                    <button class="vd-btn vd-btn-primary" data-vd-modal="#demo-modal-xl">Extra Large (987px)</button>
-
-                    <!-- Demo modals (hidden, triggered via data-vd-modal) -->
-                    <div class="vd-modal" id="demo-modal-sm">
-                        <div class="vd-modal-dialog vd-modal-sm">
-                            <div class="vd-modal-content">
-                                <div class="vd-modal-header">
-                                    <h5 class="vd-modal-title">Small Modal</h5>
-                                    <button class="vd-modal-close" aria-label="Close">&times;</button>
-                                </div>
-                                <div class="vd-modal-body">
-                                    <p class="vd-mb-0">This is the small modal size. Perfect for confirmations and short messages.</p>
-                                </div>
-                                <div class="vd-modal-footer">
-                                    <button class="vd-btn vd-btn-outline-secondary" data-vd-modal-close>Cancel</button>
-                                    <button class="vd-btn vd-btn-primary">Confirm</button>
-                                </div>
-                            </div>
+                    <button class="vd-btn vd-btn-primary" data-modal="#demo-modal-sm">Small (233px)</button>
+                    <button class="vd-btn vd-btn-primary" data-modal="#demo-modal-default">Default (377px)</button>
+                    <button class="vd-btn vd-btn-primary" data-modal="#demo-modal-lg">Large (610px)</button>
+                    <button class="vd-btn vd-btn-primary" data-modal="#demo-modal-xl">Extra Large (987px)</button>
+                </div>
+            </div>
+            <div class="vd-modal" id="demo-modal-sm">
+                <div class="vd-modal-dialog vd-modal-sm">
+                    <div class="vd-modal-content">
+                        <div class="vd-modal-header">
+                            <h5 class="vd-modal-title">Small Modal</h5>
+                            <button class="vd-modal-close" aria-label="Close">&times;</button>
+                        </div>
+                        <div class="vd-modal-body">
+                            <p class="vd-mb-0">This is the small modal size. Perfect for confirmations and short messages.</p>
+                        </div>
+                        <div class="vd-modal-footer">
+                            <button class="vd-btn vd-btn-outline-secondary" data-dismiss="modal">Cancel</button>
+                            <button class="vd-btn vd-btn-primary">Confirm</button>
                         </div>
                     </div>
-                    <div class="vd-modal" id="demo-modal-default">
-                        <div class="vd-modal-dialog">
-                            <div class="vd-modal-content">
-                                <div class="vd-modal-header">
-                                    <h5 class="vd-modal-title">Default Modal</h5>
-                                    <button class="vd-modal-close" aria-label="Close">&times;</button>
-                                </div>
-                                <div class="vd-modal-body">
-                                    <p class="vd-mb-0">The default modal width is 377px — a comfortable size for most dialogs and forms.</p>
-                                </div>
-                                <div class="vd-modal-footer">
-                                    <button class="vd-btn vd-btn-outline-secondary" data-vd-modal-close>Close</button>
-                                </div>
-                            </div>
+                </div>
+            </div>
+            <div class="vd-modal" id="demo-modal-default">
+                <div class="vd-modal-dialog">
+                    <div class="vd-modal-content">
+                        <div class="vd-modal-header">
+                            <h5 class="vd-modal-title">Default Modal</h5>
+                            <button class="vd-modal-close" aria-label="Close">&times;</button>
+                        </div>
+                        <div class="vd-modal-body">
+                            <p class="vd-mb-0">The default modal width is 377px — a comfortable size for most dialogs and forms.</p>
+                        </div>
+                        <div class="vd-modal-footer">
+                            <button class="vd-btn vd-btn-outline-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </div>
-                    <div class="vd-modal" id="demo-modal-lg">
-                        <div class="vd-modal-dialog vd-modal-lg">
-                            <div class="vd-modal-content">
-                                <div class="vd-modal-header">
-                                    <h5 class="vd-modal-title">Large Modal</h5>
-                                    <button class="vd-modal-close" aria-label="Close">&times;</button>
-                                </div>
-                                <div class="vd-modal-body">
-                                    <p class="vd-mb-0">Large modals (610px) work well for complex forms, image galleries, or multi-step wizards.</p>
-                                </div>
-                                <div class="vd-modal-footer">
-                                    <button class="vd-btn vd-btn-outline-secondary" data-vd-modal-close>Close</button>
-                                </div>
-                            </div>
+                </div>
+            </div>
+            <div class="vd-modal" id="demo-modal-lg">
+                <div class="vd-modal-dialog vd-modal-lg">
+                    <div class="vd-modal-content">
+                        <div class="vd-modal-header">
+                            <h5 class="vd-modal-title">Large Modal</h5>
+                            <button class="vd-modal-close" aria-label="Close">&times;</button>
+                        </div>
+                        <div class="vd-modal-body">
+                            <p class="vd-mb-0">Large modals (610px) work well for complex forms, image galleries, or multi-step wizards.</p>
+                        </div>
+                        <div class="vd-modal-footer">
+                            <button class="vd-btn vd-btn-outline-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </div>
-                    <div class="vd-modal" id="demo-modal-xl">
-                        <div class="vd-modal-dialog vd-modal-xl">
-                            <div class="vd-modal-content">
-                                <div class="vd-modal-header">
-                                    <h5 class="vd-modal-title">Extra Large Modal</h5>
-                                    <button class="vd-modal-close" aria-label="Close">&times;</button>
-                                </div>
-                                <div class="vd-modal-body">
-                                    <p class="vd-mb-0">Extra large modals (987px) span most of the viewport. Use sparingly for dashboards, preview panes, or large data tables.</p>
-                                </div>
-                                <div class="vd-modal-footer">
-                                    <button class="vd-btn vd-btn-outline-secondary" data-vd-modal-close>Close</button>
-                                </div>
-                            </div>
+                </div>
+            </div>
+            <div class="vd-modal" id="demo-modal-xl">
+                <div class="vd-modal-dialog vd-modal-xl">
+                    <div class="vd-modal-content">
+                        <div class="vd-modal-header">
+                            <h5 class="vd-modal-title">Extra Large Modal</h5>
+                            <button class="vd-modal-close" aria-label="Close">&times;</button>
+                        </div>
+                        <div class="vd-modal-body">
+                            <p class="vd-mb-0">Extra large modals (987px) span most of the viewport. Use sparingly for dashboards, preview panes, or large data tables.</p>
+                        </div>
+                        <div class="vd-modal-footer">
+                            <button class="vd-btn vd-btn-outline-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>
@@ -101,7 +99,7 @@
                     <div class="vd-code-snippet-body">
                         <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Trigger button --&gt;</span>
 &lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-btn vd-btn-primary"</span>
-        <span class="code-attr">data-vd-modal</span>=<span class="code-string">"#my-modal"</span>&gt;
+        <span class="code-attr">data-modal</span>=<span class="code-string">"#my-modal"</span>&gt;
   Open Modal
 &lt;/<span class="code-tag">button</span>&gt;
 
@@ -122,7 +120,7 @@
 
       &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-modal-footer"</span>&gt;
         &lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-btn vd-btn-outline-secondary"</span>
-                <span class="code-attr">data-vd-modal-close</span>&gt;Cancel&lt;/<span class="code-tag">button</span>&gt;
+                <span class="code-attr">data-dismiss</span>=<span class="code-string">"modal"</span>&gt;Cancel&lt;/<span class="code-tag">button</span>&gt;
         &lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-btn vd-btn-primary"</span>&gt;Save&lt;/<span class="code-tag">button</span>&gt;
       &lt;/<span class="code-tag">div</span>&gt;
 
@@ -141,22 +139,21 @@
             <div class="vd-card vd-card-glow demo-card" id="demo-modal-glass">
                 <div class="vd-card-header"><h4>Glass Modal</h4></div>
                 <div class="vd-card-body" style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center;">
-                    <button class="vd-btn vd-btn-primary" data-vd-modal="#demo-modal-glass-el">Open Glass Modal</button>
-
-                    <div class="vd-modal vd-modal-glass" id="demo-modal-glass-el">
-                        <div class="vd-modal-dialog">
-                            <div class="vd-modal-content">
-                                <div class="vd-modal-header">
-                                    <h5 class="vd-modal-title">Glass Modal</h5>
-                                    <button class="vd-modal-close" aria-label="Close">&times;</button>
-                                </div>
-                                <div class="vd-modal-body">
-                                    <p class="vd-mb-0">Add <code>.vd-modal-glass</code> to the modal root for a frosted-glass backdrop and panel.</p>
-                                </div>
-                                <div class="vd-modal-footer">
-                                    <button class="vd-btn vd-btn-outline-secondary" data-vd-modal-close>Close</button>
-                                </div>
-                            </div>
+                    <button class="vd-btn vd-btn-primary" data-modal="#demo-modal-glass-el">Open Glass Modal</button>
+                </div>
+            </div>
+            <div class="vd-modal vd-modal-glass" id="demo-modal-glass-el">
+                <div class="vd-modal-dialog">
+                    <div class="vd-modal-content">
+                        <div class="vd-modal-header">
+                            <h5 class="vd-modal-title">Glass Modal</h5>
+                            <button class="vd-modal-close" aria-label="Close">&times;</button>
+                        </div>
+                        <div class="vd-modal-body">
+                            <p class="vd-mb-0">Add <code>.vd-modal-glass</code> to the modal root for a frosted-glass backdrop and panel.</p>
+                        </div>
+                        <div class="vd-modal-footer">
+                            <button class="vd-btn vd-btn-outline-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>
@@ -194,23 +191,22 @@
             <div class="vd-card vd-card-glow demo-card" id="demo-modal-static">
                 <div class="vd-card-header"><h4>Static Backdrop</h4></div>
                 <div class="vd-card-body" style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center;">
-                    <button class="vd-btn vd-btn-primary" data-vd-modal="#demo-modal-static-el">Static Backdrop</button>
-
-                    <div class="vd-modal vd-modal-static" id="demo-modal-static-el">
-                        <div class="vd-modal-dialog vd-modal-sm">
-                            <div class="vd-modal-content">
-                                <div class="vd-modal-header">
-                                    <h5 class="vd-modal-title">Confirm Delete</h5>
-                                    <button class="vd-modal-close" aria-label="Close">&times;</button>
-                                </div>
-                                <div class="vd-modal-body">
-                                    <p class="vd-mb-0">Clicking the backdrop won't close this modal. The user must explicitly choose an action.</p>
-                                </div>
-                                <div class="vd-modal-footer">
-                                    <button class="vd-btn vd-btn-outline-secondary" data-vd-modal-close>Cancel</button>
-                                    <button class="vd-btn vd-btn-error">Delete</button>
-                                </div>
-                            </div>
+                    <button class="vd-btn vd-btn-primary" data-modal="#demo-modal-static-el">Static Backdrop</button>
+                </div>
+            </div>
+            <div class="vd-modal vd-modal-static" id="demo-modal-static-el">
+                <div class="vd-modal-dialog vd-modal-sm">
+                    <div class="vd-modal-content">
+                        <div class="vd-modal-header">
+                            <h5 class="vd-modal-title">Confirm Delete</h5>
+                            <button class="vd-modal-close" aria-label="Close">&times;</button>
+                        </div>
+                        <div class="vd-modal-body">
+                            <p class="vd-mb-0">Clicking the backdrop won't close this modal. The user must explicitly choose an action.</p>
+                        </div>
+                        <div class="vd-modal-footer">
+                            <button class="vd-btn vd-btn-outline-secondary" data-dismiss="modal">Cancel</button>
+                            <button class="vd-btn vd-btn-error">Delete</button>
                         </div>
                     </div>
                 </div>
@@ -311,8 +307,8 @@
                         <table class="vd-table vd-table-striped">
                             <thead><tr><th>Attribute</th><th>Description</th></tr></thead>
                             <tbody>
-                                <tr><td><code>data-vd-modal="#id"</code></td><td>Placed on a trigger button to open the targeted modal.</td></tr>
-                                <tr><td><code>data-vd-modal-close</code></td><td>Placed on any button inside the modal to close it when clicked.</td></tr>
+                                <tr><td><code>data-modal="#id"</code></td><td>Placed on a trigger button to open the targeted modal.</td></tr>
+                                <tr><td><code>data-dismiss="modal"</code></td><td>Placed on any button inside the modal to close it when clicked.</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -322,10 +318,10 @@
                         <table class="vd-table vd-table-striped">
                             <thead><tr><th>Method</th><th>Description</th></tr></thead>
                             <tbody>
-                                <tr><td><code>VanduoModal.open(el)</code></td><td>Open the modal element programmatically.</td></tr>
-                                <tr><td><code>VanduoModal.close(el)</code></td><td>Close the modal element.</td></tr>
-                                <tr><td><code>VanduoModal.toggle(el)</code></td><td>Toggle open/closed state.</td></tr>
-                                <tr><td><code>VanduoModal.init()</code></td><td>Wire up all <code>[data-vd-modal]</code> and <code>[data-vd-modal-close]</code> triggers.</td></tr>
+                                <tr><td><code>VanduoModals.open(el)</code></td><td>Open the modal element programmatically.</td></tr>
+                                <tr><td><code>VanduoModals.close(el)</code></td><td>Close the modal element.</td></tr>
+                                <tr><td><code>VanduoModals.toggle(el)</code></td><td>Toggle open/closed state.</td></tr>
+                                <tr><td><code>VanduoModals.init()</code></td><td>Wire up all <code>[data-modal]</code> and <code>[data-dismiss="modal"]</code> triggers.</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -365,34 +361,4 @@
         </div>
     </div>
 
-    <!-- What's Next block -->
-    <div class="vd-mt-8" style="border-top: 1px solid var(--border-color); padding-top: 2.5rem; padding-bottom: 3rem;">
-        <h4 class="vd-text-lg vd-mb-5"><i class="ph ph-arrow-circle-right"></i> What's Next?</h4>
-        <div class="vd-row" style="gap: 1.25rem;">
-            <div class="vd-col-12 vd-col-md-4 vd-mb-4">
-                <a href="#docs/sidenav" data-route="docs/sidenav" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
-                    <div class="vd-card-body">
-                        <h4 class="vd-text-md vd-mb-2">Sidenav</h4>
-                        <p class="vd-text-sm vd-text-muted vd-mb-0">Slide-in panels for navigation and content — the modal's side-dwelling cousin.</p>
-                    </div>
-                </a>
-            </div>
-            <div class="vd-col-12 vd-col-md-4 vd-mb-4">
-                <a href="#docs/forms" data-route="docs/forms" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
-                    <div class="vd-card-body">
-                        <h4 class="vd-text-md vd-mb-2">Forms</h4>
-                        <p class="vd-text-sm vd-text-muted vd-mb-0">Build rich input layouts inside modals — inputs, groups, validation, and more.</p>
-                    </div>
-                </a>
-            </div>
-            <div class="vd-col-12 vd-col-md-4 vd-mb-4">
-                <a href="#docs/alerts" data-route="docs/alerts" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
-                    <div class="vd-card-body">
-                        <h4 class="vd-text-md vd-mb-2">Alerts</h4>
-                        <p class="vd-text-sm vd-text-muted vd-mb-0">Inline feedback messages for lighter-weight notifications that don't block the UI.</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
 </section>

@@ -1,0 +1,171 @@
+<section id="accordion">
+    <h4 class="demo-title"><i class="ph ph-list-plus"></i>Accordion / Collapsible</h4>
+    <p class="vd-mb-8">Expandable content sections for FAQs, settings panels, and progressive disclosure. Use accordions to keep dense content scannable while revealing details on demand.</p>
+
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header"><h4>Basic Accordion</h4></div>
+                <div class="vd-card-body">
+                    <div class="accordion">
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span>Accordion Item 1</span>
+                                <span class="accordion-icon"></span>
+                            </button>
+                            <div class="accordion-body">
+                                <div class="accordion-content">
+                                    This is the content of the first accordion item.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span>Accordion Item 2</span>
+                                <span class="accordion-icon"></span>
+                            </button>
+                            <div class="accordion-body">
+                                <div class="accordion-content">
+                                    This is the content of the second accordion item.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span>Accordion Item 3</span>
+                                <span class="accordion-icon"></span>
+                            </button>
+                            <div class="accordion-body">
+                                <div class="accordion-content">
+                                    This is the content of the third accordion item.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"accordion"</span>&gt;
+  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"accordion-item"</span>&gt;
+    &lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"accordion-header"</span>&gt;
+      &lt;<span class="code-tag">span</span>&gt;Item Title&lt;/<span class="code-tag">span</span>&gt;
+      &lt;<span class="code-tag">span</span> <span class="code-attr">class</span>=<span class="code-string">"accordion-icon"</span>&gt;&lt;/<span class="code-tag">span</span>&gt;
+    &lt;/<span class="code-tag">button</span>&gt;
+    &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"accordion-body"</span>&gt;
+      &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"accordion-content"</span>&gt;Item content goes here&lt;/<span class="code-tag">div</span>&gt;
+    &lt;/<span class="code-tag">div</span>&gt;
+  &lt;/<span class="code-tag">div</span>&gt;
+&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header"><h4>Flush Variant</h4></div>
+                <div class="vd-card-body">
+                    <p class="vd-mb-4">Flush removes the per-item box treatment and stacks rows edge-to-edge, using dividers instead of separate bordered cards.</p>
+                    <div class="accordion accordion-flush">
+                        <div class="accordion-item">
+                            <button class="accordion-header">
+                                <span>Design Tokens</span>
+                                <span class="accordion-icon"></span>
+                            </button>
+                            <div class="accordion-body">
+                                <div class="accordion-content">
+                                    Theme-aware colors, spacing, and typography are inherited from global tokens.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item is-open">
+                            <button class="accordion-header">
+                                <span>Accessibility</span>
+                                <span class="accordion-icon"></span>
+                            </button>
+                            <div class="accordion-body">
+                                <div class="accordion-content">
+                                    Keyboard and focus interactions are handled by the framework component runtime.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View Code</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"accordion accordion-flush"</span>&gt;
+  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"accordion-item"</span>&gt;
+    &lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"accordion-header"</span>&gt;
+      &lt;<span class="code-tag">span</span>&gt;Section Title&lt;/<span class="code-tag">span</span>&gt;
+      &lt;<span class="code-tag">span</span> <span class="code-attr">class</span>=<span class="code-string">"accordion-icon"</span>&gt;&lt;/<span class="code-tag">span</span>&gt;
+    &lt;/<span class="code-tag">button</span>&gt;
+    &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"accordion-body"</span>&gt;
+      &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"accordion-content"</span>&gt;Flush content goes here&lt;/<span class="code-tag">div</span>&gt;
+    &lt;/<span class="code-tag">div</span>&gt;
+  &lt;/<span class="code-tag">div</span>&gt;
+&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header"><h4><i class="ph ph-list-dashes mr-2" style="color: var(--color-primary);"></i>API Reference</h4></div>
+                <div class="vd-card-body">
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead><tr><th>Class Name</th><th>Description</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>.accordion</code></td><td>Base container for a group of collapsible items.</td></tr>
+                                <tr><td><code>.accordion-item</code></td><td>Wrapper for one header/body pair.</td></tr>
+                                <tr><td><code>.accordion-header</code></td><td>Clickable trigger that expands or collapses item content.</td></tr>
+                                <tr><td><code>.accordion-icon</code></td><td>Chevron indicator that rotates with state changes.</td></tr>
+                                <tr><td><code>.accordion-body</code></td><td>Expandable content panel.</td></tr>
+                                <tr><td><code>.accordion-content</code></td><td>Inner content wrapper with readable spacing.</td></tr>
+                                <tr><td><code>.accordion-flush</code></td><td>Variant that removes per-item outer borders and spacing so rows stack with divider lines instead of separate cards.</td></tr>
+                                <tr><td><code>.is-open</code></td><td>Runtime class applied to an item when expanded.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

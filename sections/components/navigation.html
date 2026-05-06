@@ -10,8 +10,8 @@
                 <div class="vd-card-body">
                     <nav class="vd-breadcrumbs" aria-label="Breadcrumb">
                         <ol class="vd-breadcrumb">
-                            <li class="vd-breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="vd-breadcrumb-item"><a href="#">Library</a></li>
+                            <li class="vd-breadcrumb-item"><a href="#" data-demo-no-nav>Home</a></li>
+                            <li class="vd-breadcrumb-item"><a href="#" data-demo-no-nav>Library</a></li>
                             <li class="vd-breadcrumb-item active" aria-current="page">Data</li>
                         </ol>
                     </nav>
@@ -34,8 +34,8 @@
                                 <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Breadcrumb navigation --&gt;</span>
 &lt;<span class="code-tag">nav</span> <span class="code-attr">class</span>=<span class="code-string">"vd-breadcrumbs"</span> <span class="code-attr">aria-label</span>=<span class="code-string">"Breadcrumb"</span>&gt;
   &lt;<span class="code-tag">ol</span> <span class="code-attr">class</span>=<span class="code-string">"vd-breadcrumb"</span>&gt;
-    &lt;<span class="code-tag">li</span> <span class="code-attr">class</span>=<span class="code-string">"vd-breadcrumb-item"</span>&gt;&lt;<span class="code-tag">a</span> <span class="code-attr">href</span>=<span class="code-string">"#"</span>&gt;Home&lt;/<span class="code-tag">a</span>&gt;&lt;/<span class="code-tag">li</span>&gt;
-    &lt;<span class="code-tag">li</span> <span class="code-attr">class</span>=<span class="code-string">"vd-breadcrumb-item"</span>&gt;&lt;<span class="code-tag">a</span> <span class="code-attr">href</span>=<span class="code-string">"#"</span>&gt;Library&lt;/<span class="code-tag">a</span>&gt;&lt;/<span class="code-tag">li</span>&gt;
+    &lt;<span class="code-tag">li</span> <span class="code-attr">class</span>=<span class="code-string">"vd-breadcrumb-item"</span>&gt;&lt;<span class="code-tag">a</span> <span class="code-attr">href</span>=<span class="code-string">"#"</span> <span class="code-attr">data-demo-no-nav</span>&gt;Home&lt;/<span class="code-tag">a</span>&gt;&lt;/<span class="code-tag">li</span>&gt;
+    &lt;<span class="code-tag">li</span> <span class="code-attr">class</span>=<span class="code-string">"vd-breadcrumb-item"</span>&gt;&lt;<span class="code-tag">a</span> <span class="code-attr">href</span>=<span class="code-string">"#"</span> <span class="code-attr">data-demo-no-nav</span>&gt;Library&lt;/<span class="code-tag">a</span>&gt;&lt;/<span class="code-tag">li</span>&gt;
     &lt;<span class="code-tag">li</span> <span class="code-attr">class</span>=<span class="code-string">"vd-breadcrumb-item active"</span> <span class="code-attr">aria-current</span>=<span class="code-string">"page"</span>&gt;Data&lt;/<span class="code-tag">li</span>&gt;
   &lt;/<span class="code-tag">ol</span>&gt;
 &lt;/<span class="code-tag">nav</span>&gt;</code></pre>
@@ -47,36 +47,32 @@
         </div>
 
         <div class="vd-col-12 vd-col-md-6">
-            <div class="vd-card vd-card-glow demo-card">
+            <div class="vd-card vd-card-glow demo-card vd-mb-6">
                 <div class="vd-card-header">
-                    <h4>Pagination</h4>
+                    <h4>Pagination (CSS only)</h4>
+                    <p class="vd-text-sm vd-text-muted vd-mb-0">Static markup for server-rendered pages. Demo links include <code>data-demo-no-nav</code> when used inside apps with hash routing (e.g. this docs SPA) so placeholders don’t change the route.</p>
                 </div>
                 <div class="vd-card-body">
-                    <nav class="vd-pagination" aria-label="Page navigation">
+                    <nav aria-label="Page navigation (CSS only)">
                         <ul class="vd-pagination">
                             <li class="vd-pagination-item">
-                                <a href="#" class="vd-pagination-link" aria-label="Previous">
+                                <a href="#" class="vd-pagination-link" aria-label="Previous" data-demo-no-nav>
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
-                            <li class="vd-pagination-item"><a href="#" class="vd-pagination-link">1</a>
-                            </li>
-                            <li class="vd-pagination-item"><a href="#" class="vd-pagination-link">2</a>
-                            </li>
-                            <li class="vd-pagination-item active"><a href="#" class="vd-pagination-link">3</a>
-                            </li>
-                            <li class="vd-pagination-item"><a href="#" class="vd-pagination-link">4</a>
-                            </li>
-                            <li class="vd-pagination-item"><a href="#" class="vd-pagination-link">5</a>
-                            </li>
+                            <li class="vd-pagination-item"><a href="#" class="vd-pagination-link" data-demo-no-nav>1</a></li>
+                            <li class="vd-pagination-item"><a href="#" class="vd-pagination-link" data-demo-no-nav>2</a></li>
+                            <li class="vd-pagination-item active"><a href="#" class="vd-pagination-link" data-demo-no-nav>3</a></li>
+                            <li class="vd-pagination-item"><a href="#" class="vd-pagination-link" data-demo-no-nav>4</a></li>
+                            <li class="vd-pagination-item"><a href="#" class="vd-pagination-link" data-demo-no-nav>5</a></li>
                             <li class="vd-pagination-item">
-                                <a href="#" class="vd-pagination-link" aria-label="Next">
+                                <a href="#" class="vd-pagination-link" aria-label="Next" data-demo-no-nav>
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>
                         </ul>
                     </nav>
-                    <div class="vd-code-snippet" data-collapsible>
+                    <div class="vd-code-snippet vd-mt-4" data-collapsible>
                         <button class="vd-code-snippet-toggle" aria-expanded="false">
                             <span class="vd-code-snippet-toggle-icon"></span>
                             <span>View Code</span>
@@ -92,29 +88,72 @@
                                 </button>
                             </div>
                             <div class="vd-code-snippet-body">
-                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Pagination --&gt;</span>
-&lt;<span class="code-tag">nav</span> <span class="code-attr">class</span>=<span class="code-string">"vd-pagination"</span> <span class="code-attr">aria-label</span>=<span class="code-string">"Page navigation"</span>&gt;
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Pagination (CSS only): optional data-demo-no-nav for hash-SPAs --&gt;</span>
+&lt;<span class="code-tag">nav</span> <span class="code-attr">aria-label</span>=<span class="code-string">"Page navigation"</span>&gt;
   &lt;<span class="code-tag">ul</span> <span class="code-attr">class</span>=<span class="code-string">"vd-pagination"</span>&gt;
     &lt;<span class="code-tag">li</span> <span class="code-attr">class</span>=<span class="code-string">"vd-pagination-item"</span>&gt;
-      &lt;<span class="code-tag">a</span> <span class="code-attr">href</span>=<span class="code-string">"#"</span> <span class="code-attr">class</span>=<span class="code-string">"vd-pagination-link"</span> <span class="code-attr">aria-label</span>=<span class="code-string">"Previous"</span>&gt;
+      &lt;<span class="code-tag">a</span> <span class="code-attr">href</span>=<span class="code-string">"#"</span> <span class="code-attr">class</span>=<span class="code-string">"vd-pagination-link"</span> <span class="code-attr">aria-label</span>=<span class="code-string">"Previous"</span> <span class="code-attr">data-demo-no-nav</span>&gt;
         &lt;<span class="code-tag">span</span> <span class="code-attr">aria-hidden</span>=<span class="code-string">"true"</span>&gt;&amp;laquo;&lt;/<span class="code-tag">span</span>&gt;
       &lt;/<span class="code-tag">a</span>&gt;
     &lt;/<span class="code-tag">li</span>&gt;
-    &lt;<span class="code-tag">li</span> <span class="code-attr">class</span>=<span class="code-string">"vd-pagination-item"</span>&gt;&lt;<span class="code-tag">a</span> <span class="code-attr">href</span>=<span class="code-string">"#"</span>
-        <span class="code-attr">class</span>=<span class="code-string">"vd-pagination-link"</span>&gt;1&lt;/<span class="code-tag">a</span>&gt;&lt;/<span class="code-tag">li</span>&gt;
-    &lt;<span class="code-tag">li</span> <span class="code-attr">class</span>=<span class="code-string">"vd-pagination-item"</span>&gt;&lt;<span class="code-tag">a</span> <span class="code-attr">href</span>=<span class="code-string">"#"</span>
-        <span class="code-attr">class</span>=<span class="code-string">"vd-pagination-link"</span>&gt;2&lt;/<span class="code-tag">a</span>&gt;&lt;/<span class="code-tag">li</span>&gt;
-    &lt;<span class="code-tag">li</span> <span class="code-attr">class</span>=<span class="code-string">"vd-pagination-item active"</span>&gt;&lt;<span class="code-tag">a</span> <span class="code-attr">href</span>=<span class="code-string">"#"</span>
-        <span class="code-attr">class</span>=<span class="code-string">"vd-pagination-link"</span>&gt;3&lt;/<span class="code-tag">a</span>&gt;&lt;/<span class="code-tag">li</span>&gt;
-    &lt;<span class="code-tag">li</span> <span class="code-attr">class</span>=<span class="code-string">"vd-pagination-item"</span>&gt;&lt;<span class="code-tag">a</span> <span class="code-attr">href</span>=<span class="code-string">"#"</span>
-        <span class="code-attr">class</span>=<span class="code-string">"vd-pagination-link"</span>&gt;4&lt;/<span class="code-tag">a</span>&gt;&lt;/<span class="code-tag">li</span>&gt;
-    &lt;<span class="code-tag">li</span> <span class="code-attr">class</span>=<span class="code-string">"vd-pagination-item"</span>&gt;&lt;<span class="code-tag">a</span> <span class="code-attr">href</span>=<span class="code-string">"#"</span>
-        <span class="code-attr">class</span>=<span class="code-string">"vd-pagination-link"</span>&gt;5&lt;/<span class="code-tag">a</span>&gt;&lt;/<span class="code-tag">li</span>&gt;
+    &lt;<span class="code-tag">li</span> <span class="code-attr">class</span>=<span class="code-string">"vd-pagination-item"</span>&gt;&lt;<span class="code-tag">a</span> <span class="code-attr">href</span>=<span class="code-string">"#"</span> <span class="code-attr">class</span>=<span class="code-string">"vd-pagination-link"</span>
+        <span class="code-attr">data-demo-no-nav</span>&gt;1&lt;/<span class="code-tag">a</span>&gt;&lt;/<span class="code-tag">li</span>&gt;
+    &lt;<span class="code-tag">li</span> <span class="code-attr">class</span>=<span class="code-string">"vd-pagination-item"</span>&gt;&lt;<span class="code-tag">a</span> <span class="code-attr">href</span>=<span class="code-string">"#"</span> <span class="code-attr">class</span>=<span class="code-string">"vd-pagination-link"</span>
+        <span class="code-attr">data-demo-no-nav</span>&gt;2&lt;/<span class="code-tag">a</span>&gt;&lt;/<span class="code-tag">li</span>&gt;
+    &lt;<span class="code-tag">li</span> <span class="code-attr">class</span>=<span class="code-string">"vd-pagination-item active"</span>&gt;&lt;<span class="code-tag">a</span> <span class="code-attr">href</span>=<span class="code-string">"#"</span> <span class="code-attr">class</span>=<span class="code-string">"vd-pagination-link"</span>
+        <span class="code-attr">data-demo-no-nav</span>&gt;3&lt;/<span class="code-tag">a</span>&gt;&lt;/<span class="code-tag">li</span>&gt;
+    &lt;<span class="code-tag">li</span> <span class="code-attr">class</span>=<span class="code-string">"vd-pagination-item"</span>&gt;&lt;<span class="code-tag">a</span> <span class="code-attr">href</span>=<span class="code-string">"#"</span> <span class="code-attr">class</span>=<span class="code-string">"vd-pagination-link"</span>
+        <span class="code-attr">data-demo-no-nav</span>&gt;4&lt;/<span class="code-tag">a</span>&gt;&lt;/<span class="code-tag">li</span>&gt;
+    &lt;<span class="code-tag">li</span> <span class="code-attr">class</span>=<span class="code-string">"vd-pagination-item"</span>&gt;&lt;<span class="code-tag">a</span> <span class="code-attr">href</span>=<span class="code-string">"#"</span> <span class="code-attr">class</span>=<span class="code-string">"vd-pagination-link"</span>
+        <span class="code-attr">data-demo-no-nav</span>&gt;5&lt;/<span class="code-tag">a</span>&gt;&lt;/<span class="code-tag">li</span>&gt;
     &lt;<span class="code-tag">li</span> <span class="code-attr">class</span>=<span class="code-string">"vd-pagination-item"</span>&gt;
-      &lt;<span class="code-tag">a</span> <span class="code-attr">href</span>=<span class="code-string">"#"</span> <span class="code-attr">class</span>=<span class="code-string">"vd-pagination-link"</span> <span class="code-attr">aria-label</span>=<span class="code-string">"Next"</span>&gt;
+      &lt;<span class="code-tag">a</span> <span class="code-attr">href</span>=<span class="code-string">"#"</span> <span class="code-attr">class</span>=<span class="code-string">"vd-pagination-link"</span> <span class="code-attr">aria-label</span>=<span class="code-string">"Next"</span> <span class="code-attr">data-demo-no-nav</span>&gt;
         &lt;<span class="code-tag">span</span> <span class="code-attr">aria-hidden</span>=<span class="code-string">"true"</span>&gt;&amp;raquo;&lt;/<span class="code-tag">span</span>&gt;
       &lt;/<span class="code-tag">a</span>&gt;
     &lt;/<span class="code-tag">li</span>&gt;
+  &lt;/<span class="code-tag">ul</span>&gt;
+&lt;/<span class="code-tag">nav</span>&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h4>Pagination (JavaScript)</h4>
+                    <p class="vd-text-sm vd-text-muted vd-mb-0">Add <code>data-pagination</code> on the list; set <code>data-total-pages</code>, <code>data-current-page</code>, and optional <code>data-max-visible</code>. The component renders controls and emits <code>pagination:change</code> when the active page updates.</p>
+                </div>
+                <div class="vd-card-body">
+                    <nav aria-label="Page navigation (interactive demo)">
+                        <ul class="vd-pagination"
+                            data-pagination
+                            data-total-pages="12"
+                            data-current-page="3"
+                            data-max-visible="7"></ul>
+                    </nav>
+                    <div class="vd-code-snippet vd-mt-4" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Vanduo initializes elements with data-pagination on Vanduo.init() --&gt;</span>
+&lt;<span class="code-tag">nav</span> <span class="code-attr">aria-label</span>=<span class="code-string">"Page navigation"</span>&gt;
+  &lt;<span class="code-tag">ul</span> <span class="code-attr">class</span>=<span class="code-string">"vd-pagination"</span>
+    <span class="code-attr">data-pagination</span>
+    <span class="code-attr">data-total-pages</span>=<span class="code-string">"12"</span>
+    <span class="code-attr">data-current-page</span>=<span class="code-string">"3"</span>
+    <span class="code-attr">data-max-visible</span>=<span class="code-string">"7"</span>&gt;
   &lt;/<span class="code-tag">ul</span>&gt;
 &lt;/<span class="code-tag">nav</span>&gt;</code></pre>
                             </div>
@@ -158,41 +197,34 @@
                             <td>Clickable link inside a pagination item.</td>
                             <td>Element</td>
                         </tr>
+                        <tr>
+                            <td><code>data-pagination</code></td>
+                            <td>On the <code>ul.vd-pagination</code> root: Vanduo initializes dynamic page controls (<code>Vanduo.init()</code>).</td>
+                            <td>JavaScript API</td>
+                        </tr>
+                        <tr>
+                            <td><code>data-total-pages</code></td>
+                            <td>Total number of pages (default <code>1</code>).</td>
+                            <td>JavaScript API</td>
+                        </tr>
+                        <tr>
+                            <td><code>data-current-page</code></td>
+                            <td>Active page index (default <code>1</code>).</td>
+                            <td>JavaScript API</td>
+                        </tr>
+                        <tr>
+                            <td><code>data-max-visible</code></td>
+                            <td>Max page numbers shown before ellipsis (default <code>7</code>).</td>
+                            <td>JavaScript API</td>
+                        </tr>
+                        <tr>
+                            <td><code>data-demo-no-nav</code></td>
+                            <td>Docs SPA helper: <code>preventDefault</code> on placeholder <code>&lt;a href="#"&gt;</code> clicks so hash routing stays put.</td>
+                            <td>Documentation</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
-    <!-- What's Next -->
-    <div class="vd-row vd-mt-10">
-        <div class="vd-col-12">
-            <h5 class="vd-mb-5"><i class="ph ph-arrow-circle-right mr-2" style="color: var(--color-primary);"></i>What's Next</h5>
-            <div class="vd-row">
-                <div class="vd-col-12 vd-col-md-4">
-                    <a href="#docs/navbar" class="vd-card vd-card-glow demo-card" style="text-decoration: none; color: inherit;">
-                        <div class="vd-card-body">
-                            <h5 class="vd-mb-2"><i class="ph ph-list mr-2" style="color: var(--color-primary);"></i>Navbar</h5>
-                            <p class="vd-text-sm vd-text-muted vd-mb-0">Build the responsive top navigation bar for your site.</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="vd-col-12 vd-col-md-4">
-                    <a href="#docs/sidenav" class="vd-card vd-card-glow demo-card" style="text-decoration: none; color: inherit;">
-                        <div class="vd-card-body">
-                            <h5 class="vd-mb-2"><i class="ph ph-sidebar mr-2" style="color: var(--color-primary);"></i>Sidenav</h5>
-                            <p class="vd-text-sm vd-text-muted vd-mb-0">Add an off-canvas drawer for secondary page navigation.</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="vd-col-12 vd-col-md-4">
-                    <a href="#docs/scrollspy" class="vd-card vd-card-glow demo-card" style="text-decoration: none; color: inherit;">
-                        <div class="vd-card-body">
-                            <h5 class="vd-mb-2"><i class="ph ph-crosshair mr-2" style="color: var(--color-primary);"></i>Scrollspy</h5>
-                            <p class="vd-text-sm vd-text-muted vd-mb-0">Highlight nav links automatically as users scroll through sections.</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
 </section>
 
 <!-- Navbar Section -->

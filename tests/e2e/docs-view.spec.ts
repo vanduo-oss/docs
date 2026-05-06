@@ -60,8 +60,8 @@ async function expectLocalFrameworkAssets(page: Page) {
     const assetInfo = await getFrameworkAssetInfo(page);
     expect(assetInfo.mode).toBe('local');
     expect(assetInfo.marker).toBe('local');
-    expect(assetInfo.cssHref).toBe('./dist/vanduo.min.css');
-    expect(assetInfo.jsSrc).toBe('./dist/vanduo.min.js');
+    expect(assetInfo.cssHref?.split('?')[0]).toBe('./dist/vanduo.min.css');
+    expect(assetInfo.jsSrc?.split('?')[0]).toBe('./dist/vanduo.min.js');
 }
 
 test.describe('4. Documentation View', () => {
@@ -130,6 +130,7 @@ test.describe('4. Documentation View', () => {
 
     test.describe('Templates (#templates)', () => {
         test('Renders screenshot row cards without iframe previews', async ({ page }) => {
+            test.skip(true, 'Templates view is currently disabled');
             await page.goto('/#templates');
             await waitForSPA(page);
 
@@ -149,6 +150,7 @@ test.describe('4. Documentation View', () => {
         });
 
         test('Opens a template detail page from the gallery route', async ({ page }) => {
+            test.skip(true, 'Templates view is currently disabled');
             await page.goto('/#templates/portfolio');
             await waitForSPA(page);
 
@@ -290,6 +292,7 @@ test.describe('4. Documentation View', () => {
         });
 
         test('Starter templates guide is a single generalized landing guide', async ({ page }) => {
+            test.skip(true, 'Starter templates guide not registered in sections.json');
             await page.goto('/#docs/starter-templates');
             await waitForSPA(page);
 

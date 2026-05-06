@@ -71,6 +71,13 @@
                                         </div>
                                     </li>
                                     <li class="change-item">
+                                        <i class="ph ph-spinner-gap" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: Loading primitive alignment</strong>
+                                            <p><code>VanduoPreloader</code> now initializes modern <code>.vd-progress-bar[data-progress]</code> markup while keeping legacy <code>.progress-bar[data-progress]</code> compatibility. Preloader CSS now delegates spinner and progress ownership to <code>spinner.css</code> and <code>progress.css</code>, and lazy-load quad placeholders rely on shared CSS stagger timing.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
                                         <i class="ph ph-rectangle" style="color: var(--color-info);"></i>
                                         <div>
                                             <strong>Fix: Card transform rendering in Safari</strong>
@@ -120,7 +127,14 @@
                                         <i class="ph ph-bookmark-simple" style="color: var(--color-info);"></i>
                                         <div>
                                             <strong>Update: Docs &amp; CDN pins to v1.3.8</strong>
-                                            <p>Package metadata, site metadata, jsDelivr examples, local <code>docs/dist</code> framework assets, and synced framework component/util files now reference <strong>v1.3.8</strong>.</p>
+                                            <p>Package metadata, site metadata, jsDelivr examples, local <code>docs/dist</code> framework assets, and synced framework component/util files now reference <strong>v1.3.8</strong></p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-circles-three" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: Loading docs cleanup</strong>
+                                            <p>Spinner, preloader, and skeleton docs now use canonical ownership: Spinners covers quad loader API, Preloader focuses on loading patterns, Progress owns progress bars, and Skeleton documents paragraph/table-row placeholders with aligned navigation metadata.</p>
                                         </div>
                                     </li>
                                 </ul>
@@ -252,7 +266,7 @@
                                         <i class="ph ph-bookmark-simple" style="color: var(--color-info);"></i>
                                         <div>
                                             <strong>Update: Docs &amp; CDN pins to v1.3.7</strong>
-                                            <p>Site metadata, bundled <code>docs/dist</code> framework assets, and jsDelivr examples now reference <strong>v1.3.7</strong>.</p>
+                                            <p>Site metadata, bundled <code>docs/dist</code> framework assets, and jsDelivr examples now reference <strong>v1.3.7</strong></p>
                                         </div>
                                     </li>
                                     <li class="change-item">

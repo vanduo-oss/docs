@@ -300,8 +300,7 @@
                 <div class="vd-card-body" style="padding:2rem;">
                     <p class="vd-text-sm vd-text-muted vd-mb-4">Group related actions behind a single FAB trigger. Clicking the main button reveals a stack of smaller action buttons with a staggered entrance animation.</p>
                     <div class="vd-fab-menu" id="demo-speed-dial">
-                        <button class="vd-fab" aria-label="Toggle speed dial" aria-expanded="false"
-                                onclick="var m=this.parentElement; m.classList.toggle('is-open'); this.setAttribute('aria-expanded', m.classList.contains('is-open'));">
+                        <button class="vd-fab" aria-label="Toggle speed dial" aria-expanded="false" data-fab-speed-dial-toggle>
                             <i class="ph ph-plus"></i>
                         </button>
                         <div class="vd-fab-actions">
@@ -341,7 +340,7 @@
 &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-fab-menu"</span>&gt;
   &lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-fab"</span> <span class="code-attr">aria-label</span>=<span class="code-string">"Toggle menu"</span>
           <span class="code-attr">aria-expanded</span>=<span class="code-string">"false"</span>
-          <span class="code-attr">onclick</span>=<span class="code-string">"this.parentElement.classList.toggle('is-open')"</span>&gt;
+          <span class="code-attr">data-fab-speed-dial-toggle</span>&gt;
     &lt;<span class="code-tag">i</span> <span class="code-attr">class</span>=<span class="code-string">"ph ph-plus"</span>&gt;&lt;/<span class="code-tag">i</span>&gt;
   &lt;/<span class="code-tag">button</span>&gt;
   &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-fab-actions"</span>&gt;
@@ -503,38 +502,6 @@
                 <li>Focus order follows the DOM: trigger first, then actions from top to bottom</li>
                 <li>FABs support standard <code>:focus-visible</code> outline for keyboard users</li>
             </ul>
-        </div>
-    </div>
-    <!-- What's Next -->
-    <div class="vd-row vd-mt-10">
-        <div class="vd-col-12">
-            <h5 class="vd-mb-5"><i class="ph ph-arrow-circle-right mr-2" style="color: var(--color-primary);"></i>What's Next</h5>
-            <div class="vd-row">
-                <div class="vd-col-12 vd-col-md-4">
-                    <a href="#docs/buttons" class="vd-card vd-card-glow demo-card" style="text-decoration: none; color: inherit;">
-                        <div class="vd-card-body">
-                            <h5 class="vd-mb-2"><i class="ph ph-cursor-click mr-2" style="color: var(--color-primary);"></i>Buttons</h5>
-                            <p class="vd-text-sm vd-text-muted vd-mb-0">Combine standard buttons with the floating action button pattern.</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="vd-col-12 vd-col-md-4">
-                    <a href="#docs/cards" class="vd-card vd-card-glow demo-card" style="text-decoration: none; color: inherit;">
-                        <div class="vd-card-body">
-                            <h5 class="vd-mb-2"><i class="ph ph-rectangle mr-2" style="color: var(--color-primary);"></i>Cards</h5>
-                            <p class="vd-text-sm vd-text-muted vd-mb-0">Use FABs inside cards for quick contextual actions.</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="vd-col-12 vd-col-md-4">
-                    <a href="#docs/offcanvas" class="vd-card vd-card-glow demo-card" style="text-decoration: none; color: inherit;">
-                        <div class="vd-card-body">
-                            <h5 class="vd-mb-2"><i class="ph ph-sidebar-simple mr-2" style="color: var(--color-primary);"></i>Offcanvas</h5>
-                            <p class="vd-text-sm vd-text-muted vd-mb-0">Open side panels and drawers with dedicated FAB triggers.</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
         </div>
     </div>
 </section>

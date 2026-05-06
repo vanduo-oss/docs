@@ -8,36 +8,31 @@
                     <h4>Font Families</h4>
                 </div>
                 <div class="vd-card-body">
-                    <p class="vd-mb-5">Vanduo includes <strong>10 carefully selected font
-                            families</strong>, all self-hosted for privacy and performance. No
-                        external font dependencies or Google Fonts requests.</p>
+                    <p class="vd-mb-5">Vanduo ships with <strong>5 curated font options</strong>
+                        for runtime switching. These are the same options exposed by FontSwitcher
+                        and ThemeCustomizer in the framework and docs.</p>
 
                     <div class="vd-row">
                         <div class="vd-col-12 vd-col-md-6">
-                            <h4 class="vd-mb-3">Original Fonts</h4>
+                            <h4 class="vd-mb-3">Supported Font Keys</h4>
                             <ul class="vd-mb-5">
-                                <li><strong>Inter</strong> — Modern, clean sans-serif by Rasmus
-                                    Andersson</li>
-                                <li><strong>Source Sans 3</strong> — Adobe's versatile sans-serif
-                                </li>
-                                <li><strong>Fira Sans</strong> — Mozilla's readable sans-serif</li>
-                                <li><strong>IBM Plex Sans</strong> — Professional, complete font
-                                    family</li>
-                                <li><strong>JetBrains Mono</strong> — Monospace font optimized for
-                                    code</li>
+                                <li><code>lato</code> — Default sans-serif option</li>
+                                <li><code>open-sans</code> — Neutral, highly readable sans-serif</li>
+                                <li><code>ubuntu</code> — Friendly, humanist sans-serif</li>
+                                <li><code>jetbrains-mono</code> — Monospace optimized for code</li>
+                                <li><code>system</code> — Use platform native system stack</li>
                             </ul>
                         </div>
                         <div class="vd-col-12 vd-col-md-6">
-                            <h4 class="vd-mb-3">Google Fonts Collection</h4>
+                            <h4 class="vd-mb-3">Behavior Notes</h4>
                             <ul class="vd-mb-5">
-                                <li><strong>Ubuntu</strong> — Humanist sans-serif, friendly and
-                                    approachable</li>
-                                <li><strong>Open Sans</strong> — Neutral sans-serif, highly readable
-                                </li>
-                                <li><strong>Rubik</strong> — Geometric sans-serif, modern and
-                                    distinctive</li>
-                                <li><strong>Titillium Web</strong> — Technical, elegant sans-serif
-                                </li>
+                                <li>Default preference is <code>lato</code>.</li>
+                                <li>Setting <code>data-font="system"</code> is equivalent to removing
+                                    <code>data-font</code>.</li>
+                                <li>Preference persists in
+                                    <code>localStorage.vanduo-font-preference</code>.</li>
+                                <li>Legacy keys (for example <code>inter</code>, <code>rubik</code>)
+                                    are normalized to supported options in docs runtime glue.</li>
                             </ul>
                         </div>
                     </div>
@@ -74,8 +69,8 @@
                         <code>localStorage</code> and restored on page load.
                     </p>
 
-                    <h4 class="vd-mt-5 vd-mb-3">Adding More Google Fonts</h4>
-                    <p>Need more fonts? You have two options:</p>
+                    <h4 class="vd-mt-5 vd-mb-3">Adding More Fonts</h4>
+                    <p>Need a different family than the built-in curated set? You have two options:</p>
 
                     <h5 class="vd-mb-2">Option 1: Self-Host (Recommended)</h5>
                     <p class="vd-text-sm">Download fonts from <a href="https://fonts.google.com/" target="_blank"
@@ -102,13 +97,14 @@
 2. Add woff2 files
 3. Add @font-face rules to css/core/fonts.css
 4. Add [data-font="my-font"] selector to css/core/typography.css
-5. Register in js/components/font-switcher.js</code></pre>
+5. Register in js/components/font-switcher.js and js/components/theme-customizer.js
+6. (Docs site) add key mapping in docs/js/app.js docsFontOptions/SUPPORTED_CUSTOMIZER_FONTS</code></pre>
                             </div>
                         </div>
                     </div>
 
                     <h5 class="vd-mb-2 vd-mt-4">Option 2: Google Fonts CDN</h5>
-                    <p class="vd-text-sm">For quick prototyping, use Google Fonts CDN link in your
+                    <p class="vd-text-sm">For quick prototyping, use a Google Fonts CDN link in your
                         HTML
                         head:</p>
                     <div class="vd-code-snippet" data-collapsible>
@@ -241,8 +237,9 @@
             <tbody>
                 <tr>
                     <td><code>data-font="[name]"</code></td>
-                    <td>Applies a specific font stack. Typically set on the <code>&lt;html&gt;</code> element. (e.g.,
-                        <code>ubuntu</code>, <code>inter</code>)</td>
+                    <td>Applies a supported font stack on <code>&lt;html&gt;</code> (e.g.,
+                        <code>lato</code>, <code>open-sans</code>, <code>ubuntu</code>,
+                        <code>jetbrains-mono</code>, <code>system</code>).</td>
                     <td>Attribute</td>
                 </tr>
                 <tr>

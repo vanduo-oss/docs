@@ -50,12 +50,15 @@
             var basePath = mode === 'local'
                 ? './dist'
                 : 'https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.3.8/dist';
+            var assetQuery = mode === 'local'
+                ? '?dev=' + Date.now()
+                : '';
 
             window.__VANDUO_FRAMEWORK_ASSET_MODE = mode;
             window.__VANDUO_FRAMEWORK_ASSETS = {
                 mode: mode,
-                cssHref: basePath + '/vanduo.min.css',
-                jsSrc: basePath + '/vanduo.min.js'
+                cssHref: basePath + '/vanduo.min.css' + assetQuery,
+                jsSrc: basePath + '/vanduo.min.js' + assetQuery
             };
             window.__VANDUO_TEMPLATES_BASE_URL = (params.get('vanduo-templates')
                 || (isLocalPreview ? 'http://localhost:8788' : 'https://templates.vanduo.dev'))

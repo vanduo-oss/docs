@@ -1510,6 +1510,47 @@ async function handleRoute() {
 function initSectionDemos(sectionEl) {
     if (!sectionEl) return;
 
+    sectionEl.querySelectorAll('[data-fab-speed-dial-toggle]').forEach(function (toggle) {
+        if (toggle._fabSpeedDialInit) return;
+        toggle._fabSpeedDialInit = true;
+        toggle.addEventListener('click', function (e) {
+            e.preventDefault();
+            var menu = toggle.closest('.vd-fab-menu');
+            if (!menu) return;
+            menu.classList.toggle('is-open');
+            toggle.setAttribute('aria-expanded', menu.classList.contains('is-open') ? 'true' : 'false');
+        });
+    });
+
+    sectionEl.querySelectorAll('[data-demo-no-nav]').forEach(function (link) {
+        if (link._demoNoNavInit) return;
+        link._demoNoNavInit = true;
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+        });
+    });
+
+    sectionEl.querySelectorAll('[data-stepper-demo-control]').forEach(function (button) {
+        if (button._stepperDemoControlInit) return;
+        button._stepperDemoControlInit = true;
+        button.addEventListener('click', function (e) {
+            e.preventDefault();
+            var action = button.getAttribute('data-stepper-demo-control');
+            var targetSelector = button.getAttribute('data-stepper-target');
+            var stepper = targetSelector ? sectionEl.querySelector(targetSelector) : null;
+            if (!stepper && targetSelector) {
+                stepper = document.querySelector(targetSelector);
+            }
+            if (!stepper || !window.VanduoStepper) return;
+
+            if (action === 'next') {
+                window.VanduoStepper.next(stepper);
+            } else if (action === 'prev') {
+                window.VanduoStepper.prev(stepper);
+            }
+        });
+    });
+
     sectionEl.querySelectorAll('[data-vd-morph="manual"][data-morph-states]').forEach(function (badge) {
         if (badge._morphBadgeInit) return;
         badge._morphBadgeInit = true;
@@ -1577,6 +1618,10 @@ function initSectionDemos(sectionEl) {
     if (sectionEl.id === 'music-player') {
         initMusicPlayerDemos(sectionEl);
     }
+
+    if (sectionEl.id === 'toasts') {
+        initToastDemos(sectionEl);
+    }
 }
 
 /* ── Music Player demo wiring ─────────────────── */
@@ -1611,6 +1656,55 @@ function initMusicPlayerDemos(sectionEl) {
     if (btnFloatAttach && d2) {
         btnFloatAttach.addEventListener('click', function () { MP.attach(d2); });
     }
+}
+
+/* ── Toast demo wiring ────────────────────────── */
+function initToastDemos(sectionEl) {
+    if (!window.Toast) return;
+
+    sectionEl.querySelectorAll('[data-toast-demo]').forEach(function (btn) {
+        if (btn._toastDemoInit) return;
+        btn._toastDemoInit = true;
+
+        var demoType = btn.getAttribute('data-toast-demo');
+        btn.addEventListener('click', function () {
+            switch (demoType) {
+                case 'success':
+                    Toast.success('Operation completed successfully!');
+                    break;
+                case 'error':
+                    Toast.error('An error occurred!');
+                    break;
+                case 'warning':
+                    Toast.warning('Please review your input.');
+                    break;
+                case 'info':
+                    Toast.info('Here is some information.');
+                    break;
+                case 'with-title':
+                    Toast.show({
+                        title: 'With Title',
+                        message: 'This toast has a title and message.',
+                        type: 'info'
+                    });
+                    break;
+                case 'long-duration':
+                    Toast.show({
+                        message: 'This toast will stay for 10 seconds.',
+                        type: 'success',
+                        duration: 10000
+                    });
+                    break;
+                case 'bottom-left':
+                    Toast.show({
+                        message: 'Bottom left position.',
+                        type: 'warning',
+                        position: 'bottom-left'
+                    });
+                    break;
+            }
+        });
+    });
 }
 
 /* ── Event listeners ──────────────────────────── */

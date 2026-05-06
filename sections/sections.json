@@ -292,7 +292,7 @@
               "id": "tooltips",
               "title": "Tooltips",
               "file": "components/tooltips.html",
-              "icon": "ph-tooltip",
+              "icon": "ph-chat-centered",
               "keywords": [
                 "tooltip",
                 "hint",
@@ -320,16 +320,20 @@
               "id": "spinner",
               "title": "Spinners",
               "file": "components/spinner.html",
-                "icon": "ph-spinner",
-                "keywords": [
-                  "spinner",
-                  "loader",
-                  "loading",
-                  "dots",
-                  "circular",
-                  "indicator"
-                ]
-              }
+              "icon": "ph-spinner",
+              "keywords": [
+                "spinner",
+                "loader",
+                "loading",
+                "dots",
+                "circular",
+                "indicator",
+                "quad",
+                "quad loader",
+                "dynamic loader",
+                "skeleton overlay"
+              ]
+            }
             ]
           },
           {
@@ -446,7 +450,10 @@
               "keywords": [
                 "preloader",
                 "loading",
+                "loading patterns",
                 "spinner",
+                "quad loader",
+                "dynamic loader",
                 "circular",
                 "progress"
               ]
@@ -455,14 +462,17 @@
               "id": "skeleton",
               "title": "Skeleton",
               "file": "components/skeleton.html",
-              "icon": "ph-selection-background",
+              "icon": "ph-circles-three",
               "keywords": [
                 "skeleton",
                 "ghost",
                 "loading",
                 "placeholder",
                 "shimmer",
-                "pulse"
+                "pulse",
+                "lazy",
+                "VanduoLazyLoad",
+                "data-vd-lazy"
               ]
             }
           ]
@@ -471,17 +481,17 @@
           "name": "Overlay",
           "sections": [
             {
-              "id": "interactive",
-              "title": "Interactive Components",
-              "file": "interactive/interactive.html",
-              "icon": "ph-hand-pointing",
+              "id": "accordion",
+              "title": "Accordion / Collapsible",
+              "file": "components/accordion.html",
+              "icon": "ph-list-plus",
               "keywords": [
-                "interactive",
-                "collapsible",
                 "accordion",
-                "dropdown",
-                "modal",
-                "tooltip"
+                "collapsible",
+                "expand",
+                "collapse",
+                "faq",
+                "disclosure"
               ]
             },
             {
@@ -959,6 +969,11 @@
                 "load",
                 "loading",
                 "performance",
+                "VanduoLazyLoad",
+                "data-vd-lazy",
+                "skeleton",
+                "spinner",
+                "placeholder",
                 "intersection observer",
                 "observer",
                 "intersection",

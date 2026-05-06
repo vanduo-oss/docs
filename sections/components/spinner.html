@@ -1,6 +1,6 @@
 <section id="spinner">
     <h4 class="demo-title"><i class="ph ph-spinner"></i>Spinners</h4>
-    <p class="vd-mb-8">Loading indicators for inline feedback, button states, and page transitions. Spinners come in three visual styles — border spinner, dot bounce, and growing pulse — with size and color variants, plus a signature quad-grid loader for page-level loading states.</p>
+    <p class="vd-mb-8">Canonical reference for Vanduo loading spinners: border spinner, dot bounce, growing pulse, sizes and color modifiers, plus the signature quad-grid loader (<code>.vd-dynamic-loader*</code>). Styles ship in <code>framework/css/components/spinner.css</code>, imported by the main <code>vanduo.css</code> bundle — copy HTML only; no extra layout CSS is required. For loading UX patterns (progress handoff, placeholders), see <a href="#docs/preloader">Preloader</a>.</p>
 
     <!-- Border Spinner Demo -->
     <div class="vd-row vd-mb-6">
@@ -155,6 +155,7 @@
             <div class="vd-card vd-card-glow demo-card" id="demo-spinner-quad">
                 <div class="vd-card-header"><h4>Quad Loader (Signature Vanduo Loader)</h4></div>
                 <div class="vd-card-body">
+                    <p class="vd-text-sm vd-text-muted vd-mb-4">The grid applies staggered rotation via <code>.vd-dynamic-loader-grid</code> (nth-child delays in CSS). Optional inline <code>animation-delay</code> overrides are only needed if you want custom rhythm.</p>
                     <div class="vd-dynamic-loader vd-mb-5">
                         <div class="vd-dynamic-loader-grid">
                             <div class="vd-spinner vd-spinner-sm" style="--spinner-color:var(--color-primary);"></div>
@@ -304,34 +305,4 @@
         </div>
     </div>
 
-    <!-- What's Next block -->
-    <div class="vd-mt-8" style="border-top: 1px solid var(--border-color); padding-top: 2.5rem; padding-bottom: 3rem;">
-        <h4 class="vd-text-lg vd-mb-5"><i class="ph ph-arrow-circle-right"></i> What's Next?</h4>
-        <div class="vd-row" style="gap: 1.25rem;">
-            <div class="vd-col-12 vd-col-md-4 vd-mb-4">
-                <a href="#docs/progress" data-route="docs/progress" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
-                    <div class="vd-card-body">
-                        <h4 class="vd-text-md vd-mb-2">Progress</h4>
-                        <p class="vd-text-sm vd-text-muted vd-mb-0">Linear progress bars for showing completion percentages and operation status.</p>
-                    </div>
-                </a>
-            </div>
-            <div class="vd-col-12 vd-col-md-4 vd-mb-4">
-                <a href="#docs/skeleton" data-route="docs/skeleton" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
-                    <div class="vd-card-body">
-                        <h4 class="vd-text-md vd-mb-2">Skeleton</h4>
-                        <p class="vd-text-sm vd-text-muted vd-mb-0">Loading placeholder shapes that mimic content layout before data arrives.</p>
-                    </div>
-                </a>
-            </div>
-            <div class="vd-col-12 vd-col-md-4 vd-mb-4">
-                <a href="#docs/toast" data-route="docs/toast" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
-                    <div class="vd-card-body">
-                        <h4 class="vd-text-md vd-mb-2">Toast Notifications</h4>
-                        <p class="vd-text-sm vd-text-muted vd-mb-0">Transient popup messages for operation completion feedback after loading finishes.</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
 </section>
