@@ -258,9 +258,18 @@ function requestDocScrollLoaderForRoute(route) {
  * Merging them would require the framework component to know about SPA routing
  * internals, which violates its generic design. The duplication is intentional.
  */
+function getVanduoDynamicLoaderMarkHtml() {
+    return '<div class="vd-dynamic-loader-mark" aria-hidden="true">'
+        + '<svg class="vd-dynamic-loader-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 432 432" fill="none">'
+        + '<circle cx="216" cy="216" r="191.5" fill="none" stroke="var(--color-primary)" stroke-width="49"/>'
+        + '<path fill="var(--color-primary)" d="M245.811 344.5C232.339 367.833 198.661 367.833 185.189 344.5L88.6273 177.25C75.1558 153.917 91.9952 124.75 118.938 124.75L312.062 124.75C339.005 124.75 355.844 153.917 342.373 177.25L245.811 344.5Z"/>'
+        + '<path fill="none" stroke="var(--color-primary-dark)" stroke-width="5" d="M245.378 344.25C232.099 367.25 198.901 367.25 185.622 344.25L89.0605 177C75.7815 154 92.3804 125.25 118.938 125.25L312.062 125.25C338.62 125.25 355.219 154 341.939 177L245.378 344.25Z"/>'
+        + '</svg></div>';
+}
+
 function getLoadingPlaceholderHtml() {
     return '<div style="padding: 4rem 0; scroll-margin-top: 80px; border-bottom: 1px solid var(--border-color);">'
-        + '<div class="vd-skeleton-card" style="position: relative; min-height: 300px; padding: 2rem; overflow: hidden;">'
+        + '<div class="vd-skeleton-card vd-glass vd-glass-contrast" style="position: relative; min-height: 300px; padding: 2rem; overflow: hidden;">'
         + '<div class="vd-skeleton vd-skeleton-heading-lg" style="margin-bottom: 1.5rem;"></div>'
         + '<div class="vd-skeleton vd-skeleton-paragraph">'
         + '<div class="vd-skeleton vd-skeleton-text"></div>'
@@ -273,27 +282,19 @@ function getLoadingPlaceholderHtml() {
         + '<div class="vd-skeleton vd-skeleton-text"></div>'
         + '<div class="vd-skeleton vd-skeleton-text"></div></div>'
         + '<div class="vd-dynamic-loader" style="position: absolute; inset: 0;">'
-        + '<div class="vd-dynamic-loader-grid">'
-        + '<div class="vd-spinner vd-spinner-sm vd-spinner-success" style="animation-delay: 0s;"></div>'
-        + '<div class="vd-spinner vd-spinner-sm vd-spinner-warning" style="animation-delay: -0.15s;"></div>'
-        + '<div class="vd-spinner vd-spinner-sm vd-spinner-error" style="animation-delay: -0.3s;"></div>'
-        + '<div class="vd-spinner vd-spinner-sm vd-spinner-info" style="animation-delay: -0.45s;"></div></div>'
+        + getVanduoDynamicLoaderMarkHtml()
         + '<span class="vd-dynamic-loader-text">Loading section...</span></div></div></div>';
 }
 
 function getPagePlaceholderHtml() {
     return '<div style="min-height: 60vh; display: flex; align-items: center; justify-content: center;">'
         + '<div class="vd-dynamic-loader">'
-        + '<div class="vd-dynamic-loader-grid">'
-        + '<div class="vd-spinner vd-spinner-sm vd-spinner-success" style="animation-delay: 0s;"></div>'
-        + '<div class="vd-spinner vd-spinner-sm vd-spinner-warning" style="animation-delay: -0.15s;"></div>'
-        + '<div class="vd-spinner vd-spinner-sm vd-spinner-error" style="animation-delay: -0.3s;"></div>'
-        + '<div class="vd-spinner vd-spinner-sm vd-spinner-info" style="animation-delay: -0.45s;"></div></div>'
+        + getVanduoDynamicLoaderMarkHtml()
         + '<span class="vd-dynamic-loader-text">Loading...</span></div></div>';
 }
 
 function getDocScrollLoaderHtml() {
-    return '<div class="vd-skeleton-card" style="position: relative; min-height: 220px; padding: 1.5rem; overflow: hidden;">'
+    return '<div class="vd-skeleton-card vd-glass vd-glass-contrast" style="position: relative; min-height: 220px; padding: 1.5rem; overflow: hidden;">'
         + '<div class="vd-skeleton vd-skeleton-heading-lg" style="margin-bottom: 1.25rem;"></div>'
         + '<div class="vd-skeleton vd-skeleton-paragraph">'
         + '<div class="vd-skeleton vd-skeleton-text"></div>'
@@ -305,11 +306,7 @@ function getDocScrollLoaderHtml() {
         + '<div class="vd-skeleton vd-skeleton-text"></div>'
         + '<div class="vd-skeleton vd-skeleton-text"></div></div>'
         + '<div class="vd-dynamic-loader" style="position: absolute; inset: 0;">'
-        + '<div class="vd-dynamic-loader-grid">'
-        + '<div class="vd-spinner vd-spinner-sm vd-spinner-success" style="animation-delay: 0s;"></div>'
-        + '<div class="vd-spinner vd-spinner-sm vd-spinner-warning" style="animation-delay: -0.15s;"></div>'
-        + '<div class="vd-spinner vd-spinner-sm vd-spinner-error" style="animation-delay: -0.3s;"></div>'
-        + '<div class="vd-spinner vd-spinner-sm vd-spinner-info" style="animation-delay: -0.45s;"></div></div>'
+        + getVanduoDynamicLoaderMarkHtml()
         + '<span class="vd-dynamic-loader-text">Finding section...</span></div></div>';
 }
 

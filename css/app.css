@@ -66,19 +66,11 @@
         }
 
         [data-theme="dark"] body {
-            background:
-                radial-gradient(ellipse 80vw 65vh at 78% 7%, rgba(var(--vd-color-primary-rgb), 0.32) 0%, transparent 55%),
-                radial-gradient(ellipse 65vw 55vh at 12% 22%, rgba(var(--vd-color-info-rgb), 0.26) 0%, transparent 50%);
-            background-attachment: fixed;
             background-color: var(--bg-primary);
         }
 
         @media (prefers-color-scheme: dark) {
             :root:not([data-theme]) body {
-                background:
-                    radial-gradient(ellipse 80vw 65vh at 78% 7%, rgba(var(--vd-color-primary-rgb), 0.32) 0%, transparent 55%),
-                    radial-gradient(ellipse 65vw 55vh at 12% 22%, rgba(var(--vd-color-info-rgb), 0.26) 0%, transparent 50%);
-                background-attachment: fixed;
                 background-color: var(--bg-primary);
             }
         }
@@ -155,6 +147,7 @@
         .vd-navbar-brand-wrap {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 0.4rem;
         }
 
@@ -167,10 +160,43 @@
         #home .hero-title {
             font-family: 'Zen Dots', sans-serif;
             text-transform: lowercase;
+            width: 100%;
+            box-sizing: border-box;
+            justify-content: center;
+            text-align: center;
         }
 
         .hero-title-brand {
             font-weight: bold;
+        }
+
+        /* Logo 15% smaller than prior 2.2em baseline (~1.87em) */
+        .hero-title-logo {
+            width: 1.87em;
+            height: 1.87em;
+            margin-right: 0.5em;
+            flex-shrink: 0;
+            transform: translateY(-0.15em);
+            display: block;
+            object-fit: contain;
+            overflow: visible;
+        }
+
+        .vd-navbar-brand-wrap > a.vd-navbar-brand-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.55rem;
+        }
+
+        /* Nav mark 15% larger than prior 1.2rem (~1.38rem) */
+        .vd-navbar-brand-wrap a.vd-navbar-brand-link svg.vd-navbar-brand-logo {
+            height: 1.38rem;
+            width: auto;
+            margin-right: 0;
+            display: block;
+            flex-shrink: 0;
+            overflow: visible;
         }
 
         .vd-lt-flag-link {
@@ -214,7 +240,8 @@
                 align-items: center !important;
             }
 
-            .hero-title svg {
+            .hero-title svg,
+            .hero-title .hero-title-logo {
                 transform: none !important;
                 margin-right: 0 !important;
                 margin-bottom: 0.25em;
@@ -1711,11 +1738,8 @@
             opacity: 1;
         }
 
-        .doc-scroll-loader-card .vd-skeleton-card {
-            border: 1px solid var(--border-color);
+        .vd-skeleton-card.vd-glass {
             border-radius: var(--card-border-radius);
-            background: var(--bg-primary);
-            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.16);
         }
 
         @media (max-width: 767.98px) {
@@ -1729,6 +1753,40 @@
         @media (prefers-reduced-motion: reduce) {
             .doc-scroll-loader-card {
                 transition: none;
+            }
+        }
+
+        /* Vanduo mark inside framework .vd-dynamic-loader (SPA + lazy-load placeholders) */
+        @keyframes vd-dynamic-loader-logo-spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            58% {
+                transform: rotate(318deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .vd-dynamic-loader-mark {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .vd-dynamic-loader-logo {
+            width: 3rem;
+            height: 3rem;
+            display: block;
+            flex-shrink: 0;
+            transform-origin: 50% 50%;
+            animation: vd-dynamic-loader-logo-spin 2.1s linear infinite;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .vd-dynamic-loader-logo {
+                animation: none;
             }
         }
 
