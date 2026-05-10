@@ -9,9 +9,9 @@ Hex Grid Package: https://www.npmjs.com/package/@vanduo-oss/hex-grid
 ## Current Snapshot
 
 - Docs content now includes the **v1.3.9** changelog and Theme Customizer documentation updates.
-- Production docs load the pinned framework CDN bundle from `@v1.3.8`, while local preview resolves framework assets from `./dist` and refreshes them from the sibling framework repo when available.
+- Production docs load the pinned framework CDN bundle from `@v1.3.9`, while local preview resolves framework assets from `./dist` and refreshes them from the sibling framework repo when available.
 - Theme tooling is documented as two separate components: Theme Switcher for lightweight system/light/dark toggles and Theme Customizer for full palette, neutral, radius, and font control, now with `charcoal` and `ubuntu` as the documented defaults.
-- Current docs updates cover the Charcoal/Ubuntu Theme Customizer defaults and the Hex Grid graduation into its standalone package without changing the production CDN pin yet.
+- Current docs updates cover the Charcoal/Ubuntu Theme Customizer defaults, the Hex Grid graduation into its standalone package, and the production CDN pin aligned to `@v1.3.9`.
 
 ## Labs
 
