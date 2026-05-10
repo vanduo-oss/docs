@@ -8,14 +8,14 @@ Hex Grid Package: https://www.npmjs.com/package/@vanduo-oss/hex-grid
 
 ## Current Snapshot
 
-- Docs are aligned with the **v1.3.8** release surface.
+- Docs content now includes the **v1.3.9** changelog and Theme Customizer documentation updates.
 - Production docs load the pinned framework CDN bundle from `@v1.3.8`, while local preview resolves framework assets from `./dist` and refreshes them from the sibling framework repo when available.
-- Theme tooling is documented as two separate components: Theme Switcher for lightweight system/light/dark toggles and Theme Customizer for full palette, neutral, radius, and font control.
-- v1.3.8 extends docs coverage for the release surface, including Expanding Cards and VdHexGrid guidance, while keeping framework metadata/CDN pins aligned.
+- Theme tooling is documented as two separate components: Theme Switcher for lightweight system/light/dark toggles and Theme Customizer for full palette, neutral, radius, and font control, now with `charcoal` and `ubuntu` as the documented defaults.
+- Current docs updates cover the Charcoal/Ubuntu Theme Customizer defaults and the Hex Grid graduation into its standalone package without changing the production CDN pin yet.
 
 ## Labs
 
-The Labs section showcases experimental components such as the `vd-hex` hex grid demo. See the Labs page for details.
+The Labs section now focuses on experimental search and AI components. Hex Grid has graduated into the standalone `@vanduo-oss/hex-grid` package and repository.
 
 ## Installation
 

@@ -50,7 +50,7 @@ if (typeof window.Vanduo === 'undefined') {
                     normalizedBeforeInit = preInitLegacyFontMap[normalizedBeforeInit];
                 }
                 if (!Object.prototype.hasOwnProperty.call(docsFontOptions, normalizedBeforeInit)) {
-                    normalizedBeforeInit = 'lato';
+                    normalizedBeforeInit = 'ubuntu';
                 }
                 if (normalizedBeforeInit !== storedFontBeforeInit) {
                     localStorage.setItem('vanduo-font-preference', normalizedBeforeInit);
@@ -99,10 +99,10 @@ if (typeof window.Vanduo === 'undefined') {
 
         window.ThemeCustomizer.FONT_OPTIONS = docsFontOptions;
         Object.assign(window.ThemeCustomizer.DEFAULTS, {
-            FONT: 'lato',
+            FONT: 'ubuntu',
             PRIMARY_LIGHT: 'black',
             PRIMARY_DARK: 'amber',
-            NEUTRAL: 'slate',
+            NEUTRAL: 'charcoal',
             RADIUS: '0.5'
         });
     }
@@ -2031,14 +2031,14 @@ var LEGACY_CUSTOMIZER_FONT_MAP = {
 
 function normalizeCustomizerFontKey(fontKey) {
     var key = String(fontKey || '').trim().toLowerCase();
-    if (!key) return 'lato';
+    if (!key) return 'ubuntu';
     if (Object.prototype.hasOwnProperty.call(LEGACY_CUSTOMIZER_FONT_MAP, key)) {
         key = LEGACY_CUSTOMIZER_FONT_MAP[key];
     }
     if (Object.prototype.hasOwnProperty.call(SUPPORTED_CUSTOMIZER_FONTS, key)) {
         return key;
     }
-    return 'lato';
+    return 'ubuntu';
 }
 
 function applyCustomizerFontPreference(fontKey) {
@@ -2118,7 +2118,7 @@ function updateCustomizerDemoState() {
     if (!primary) {
         primary = 'black';
     }
-    var neutral = html.getAttribute('data-neutral') || 'neutral';
+    var neutral = html.getAttribute('data-neutral') || 'charcoal';
     var radius = html.getAttribute('data-radius') || '0.375';
 
     // Update mode buttons
@@ -2144,7 +2144,7 @@ function updateCustomizerDemoState() {
     // Update font select
     var fontSelect = document.querySelector('.font-select');
     if (fontSelect) {
-        var font = normalizeCustomizerFontKey(html.getAttribute('data-font') || localStorage.getItem('vanduo-font-preference') || 'lato');
+        var font = normalizeCustomizerFontKey(html.getAttribute('data-font') || localStorage.getItem('vanduo-font-preference') || 'ubuntu');
         fontSelect.value = font;
     }
 }

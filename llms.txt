@@ -2,8 +2,7 @@
 > Pure HTML, CSS, JS framework for designing beautiful websites.
 > Zero runtime dependencies, no mandatory build tools, just clean and simple code.
 > MIT Licensed. https://vanduo.dev
-> Current docs snapshot is aligned with framework v1.3.8.
-> The live docs shell loads the pinned framework CDN bundle from @v1.3.8.
+> Current docs content includes the v1.3.9 changelog/theme updates while the live docs shell still loads the pinned framework CDN bundle from @v1.3.8.
 
 ## What is Vanduo?
 Vanduo is a lightweight front-end framework built on plain HTML, CSS, and JavaScript.
@@ -23,10 +22,10 @@ frameworks.
 
 ## Docs Runtime Overrides
 Before `Vanduo.init()`, the docs site overrides framework Theme Customizer defaults to:
-- Font: `lato`
+- Font: `ubuntu`
 - Primary light: `black`
 - Primary dark: `amber`
-- Neutral: `slate`
+- Neutral: `charcoal`
 - Radius: `0.25`
 
 ## Documentation Structure

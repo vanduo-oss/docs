@@ -109,7 +109,7 @@ test.describe('4. Documentation View', () => {
     });
 
     test.describe('Changelog (#changelog)', () => {
-        test('Shows v1.3.8 as latest and keeps v1.3.7 as history', async ({ page }) => {
+        test('Shows v1.3.9 as latest and keeps v1.3.8 as history', async ({ page }) => {
             await page.goto('/#changelog');
             await waitForSPA(page);
 
@@ -117,13 +117,13 @@ test.describe('4. Documentation View', () => {
             await expect(changelog).toBeVisible();
 
             const latestCard = changelog.locator('.version-card').first();
-            await expect(latestCard).toContainText('v1.3.8');
+            await expect(latestCard).toContainText('v1.3.9');
             await expect(latestCard).toContainText('Latest');
-            await expect(latestCard).toContainText('VdHexGrid');
-            await expect(latestCard).toContainText('Docs & CDN pins to v1.3.8');
+            await expect(latestCard).toContainText('Charcoal');
+            await expect(latestCard).toContainText('Ubuntu');
 
             const previousCard = changelog.locator('.version-card').nth(1);
-            await expect(previousCard).toContainText('v1.3.7');
+            await expect(previousCard).toContainText('v1.3.8');
             await expect(previousCard).not.toContainText('Latest');
         });
     });
@@ -451,19 +451,23 @@ test.describe('4. Documentation View', () => {
                     theme: document.documentElement.getAttribute('data-theme'),
                     primary: document.documentElement.getAttribute('data-primary'),
                     neutral: document.documentElement.getAttribute('data-neutral'),
+                    font: document.documentElement.getAttribute('data-font'),
                     radius: document.documentElement.getAttribute('data-radius'),
-                    storagePref: localStorage.getItem('vanduo-theme-preference')
+                    storagePref: localStorage.getItem('vanduo-theme-preference'),
+                    fontPref: localStorage.getItem('vanduo-font-preference')
                 };
             });
 
             // Docs-site overrides ThemeCustomizer.DEFAULTS in js/app.js:
-            //   PRIMARY_LIGHT='black', NEUTRAL='slate', RADIUS='0.5'
+            //   PRIMARY_LIGHT='black', NEUTRAL='charcoal', FONT='ubuntu', RADIUS='0.5'
             // and resolves the system theme to the active media mode.
             expect(resetState.theme).toBe('light');
             expect(resetState.primary).toBe('black');
-            expect(resetState.neutral).toBe('slate');
+            expect(resetState.neutral).toBe('charcoal');
+            expect(resetState.font).toBe('ubuntu');
             expect(resetState.radius).toBe('0.5');
             expect(resetState.storagePref).toBe('system');
+            expect(resetState.fontPref).toBe('ubuntu');
             expect(pageErrors.join('\n')).not.toContain('savePreference is not a function');
         });
 
