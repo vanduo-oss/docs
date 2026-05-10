@@ -39,6 +39,7 @@
     <!-- Vanduo Framework CSS (local for development, pinned CDN for production) -->
     <script>
         (function () {
+            var frameworkVersion = '1.3.9';
             var params = new URLSearchParams(window.location.search);
             var forcedMode = params.get('vanduo-assets');
             var isLocalPreview = window.location.protocol === 'file:'
@@ -49,7 +50,7 @@
                 : (isLocalPreview ? 'local' : 'cdn');
             var basePath = mode === 'local'
                 ? './dist'
-                : 'https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.3.9/dist';
+                : 'https://cdn.jsdelivr.net/npm/@vanduo-oss/framework@1.3.9/dist';
             var assetQuery = mode === 'local'
                 ? '?dev=' + Date.now()
                 : '';
@@ -57,6 +58,7 @@
             window.__VANDUO_FRAMEWORK_ASSET_MODE = mode;
             window.__VANDUO_FRAMEWORK_ASSETS = {
                 mode: mode,
+                expectedVersion: frameworkVersion,
                 cssHref: basePath + '/vanduo.min.css' + assetQuery,
                 jsSrc: basePath + '/vanduo.min.js' + assetQuery
             };
@@ -298,10 +300,93 @@
     <script>
         (function () {
             var assetState = window.__VANDUO_FRAMEWORK_ASSETS;
+            var LOCAL_ASSET_BASE = './dist';
 
             if (!assetState) {
                 console.error('Vanduo asset configuration is missing.');
                 return;
+            }
+
+            function switchToLocalAssets(reason) {
+                var frameworkCss = document.getElementById('vanduo-framework-css');
+                var cacheBust = '?fallback=' + Date.now();
+
+                assetState.mode = 'local-fallback';
+                assetState.cssHref = LOCAL_ASSET_BASE + '/vanduo.min.css' + cacheBust;
+                assetState.jsSrc = LOCAL_ASSET_BASE + '/vanduo.min.js' + cacheBust;
+
+                if (frameworkCss) {
+                    frameworkCss.href = assetState.cssHref;
+                    frameworkCss.setAttribute('data-framework-mode', assetState.mode);
+                }
+
+                console.warn(
+                    'Switching framework assets to local bundle' + (reason ? ' (' + reason + ')' : '') + '.'
+                );
+            }
+
+            function loadedFrameworkVersion() {
+                if (window.Vanduo && typeof window.Vanduo.version === 'string') {
+                    return window.Vanduo.version;
+                }
+                return null;
+            }
+
+            function parseFrameworkVersionFromSource(sourceText) {
+                var match = sourceText.match(/Vanduo\s+v([0-9]+\.[0-9]+\.[0-9]+)/i);
+                return match ? match[1] : null;
+            }
+
+            function preflightCdnVersion() {
+                if (assetState.mode !== 'cdn' || !assetState.expectedVersion) {
+                    return Promise.resolve();
+                }
+
+                return fetch(assetState.jsSrc, { cache: 'no-store' })
+                    .then(function (response) {
+                        if (!response.ok) {
+                            throw new Error('HTTP ' + response.status);
+                        }
+                        return response.text();
+                    })
+                    .then(function (sourceText) {
+                        var resolvedVersion = parseFrameworkVersionFromSource(sourceText);
+                        if (resolvedVersion && resolvedVersion !== assetState.expectedVersion) {
+                            console.warn(
+                                'CDN framework mismatch before load: expected v'
+                                + assetState.expectedVersion
+                                + ', got v'
+                                + resolvedVersion
+                                + '.'
+                            );
+                            switchToLocalAssets('cdn-version-mismatch');
+                        }
+                    })
+                    .catch(function (error) {
+                        console.warn('Framework CDN preflight skipped:', error.message);
+                    });
+            }
+
+            function verifyFrameworkVersion() {
+                var expected = assetState.expectedVersion;
+                var loaded = loadedFrameworkVersion();
+
+                if (!expected || !loaded) {
+                    return Promise.resolve();
+                }
+
+                if (expected === loaded) {
+                    return Promise.resolve();
+                }
+
+                console.warn('Framework version mismatch: expected v' + expected + ', got v' + loaded + '.');
+
+                if (assetState.mode === 'cdn') {
+                    switchToLocalAssets('runtime-version-mismatch');
+                    return loadScript(assetState.jsSrc, 'data-framework-js', assetState.mode);
+                }
+
+                return Promise.reject(new Error('Loaded framework version does not match expected release.'));
             }
 
             function loadScript(src, attributeName, attributeValue) {
@@ -321,17 +406,43 @@
                 });
             }
 
-            loadScript(assetState.jsSrc, 'data-framework-js', assetState.mode)
+            function loadFramework() {
+                return loadScript(assetState.jsSrc, 'data-framework-js', assetState.mode)
+                    .then(function () {
+                        return verifyFrameworkVersion();
+                    });
+            }
+
+            function loadAppScripts() {
+                return loadScript('js/lazy-loader.js')
+                    .then(function () {
+                        return loadScript('js/section-cache.js');
+                    })
+                    .then(function () {
+                        return loadScript('js/app.js');
+                    });
+            }
+
+            preflightCdnVersion()
                 .then(function () {
-                    return loadScript('js/lazy-loader.js');
+                    return loadFramework();
                 })
                 .then(function () {
-                    return loadScript('js/section-cache.js');
-                })
-                .then(function () {
-                    return loadScript('js/app.js');
+                    return loadAppScripts();
                 })
                 .catch(function (error) {
+                    if (assetState.mode === 'cdn') {
+                        switchToLocalAssets('cdn-load-failed');
+                        loadFramework()
+                            .then(function () {
+                                return loadAppScripts();
+                            })
+                            .catch(function (fallbackError) {
+                                console.error(fallbackError.message);
+                            });
+                        return;
+                    }
+
                     console.error(error.message);
                 });
         })();

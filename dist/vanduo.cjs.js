@@ -1,4 +1,4 @@
-/*! Vanduo v1.3.8 | Built: 2026-05-10T16:42:39.489Z | git:f822e16 | development */
+/*! Vanduo v1.3.9 | Built: 2026-05-10T18:54:59.798Z | git:2945a85 | development */
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
@@ -132,7 +132,7 @@ module.exports = __toCommonJS(index_exports);
 // js/vanduo.js
 (function() {
   "use strict";
-  const VANDUO_VERSION = true ? "1.3.8" : "0.0.0-dev";
+  const VANDUO_VERSION = true ? "1.3.9" : "0.0.0-dev";
   const Vanduo2 = {
     version: VANDUO_VERSION,
     components: {},
@@ -3932,7 +3932,7 @@ module.exports = __toCommonJS(index_exports);
     },
     // Neutral color definitions
     NEUTRAL_COLORS: {
-      "charcoal": { name: "Charcoal", color: "#2d333b" },
+      "charcoal": { name: "Charcoal", color: "#0d1117" },
       "slate": { name: "Slate", color: "#64748b" },
       "gray": { name: "Gray", color: "#6b7280" },
       "zinc": { name: "Zinc", color: "#71717a" },

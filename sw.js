@@ -1,6 +1,6 @@
 'use strict';
 
-const SECTION_CACHE = 'vanduo-sections-v1';
+const SECTION_CACHE = 'vanduo-sections-v139';
 
 self.addEventListener('install', function () {
     self.skipWaiting();
