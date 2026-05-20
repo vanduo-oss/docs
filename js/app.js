@@ -218,6 +218,13 @@ const SECTION_PRELOAD_CONCURRENCY = 6;
 const sectionPrefetching = new Set();
 let docsWarmupTimer = null;
 
+if (window.history && 'scrollRestoration' in window.history) {
+    var initialHash = (window.location.hash || '').replace(/^#\/?/, '');
+    if (initialHash.startsWith('docs/') && initialHash !== 'docs/components' && initialHash !== 'docs/guides') {
+        window.history.scrollRestoration = 'manual';
+    }
+}
+
 function withDocsContentVersion(url) {
     return url + (url.indexOf('?') === -1 ? '?' : '&') + 'v=' + encodeURIComponent(DOCS_CONTENT_VERSION);
 }
@@ -257,6 +264,21 @@ function requestDocScrollLoaderForRoute(route) {
     }
     var parsed = parseHash('#' + route);
     requestedDocScrollLoaderSectionId = parsed && parsed.section ? parsed.section : null;
+}
+
+function primeDocNavigationForHash(hash) {
+    if (window.history && 'scrollRestoration' in window.history) {
+        window.history.scrollRestoration = 'manual';
+    }
+
+    var parsed = parseHash(hash);
+    if (!parsed || parsed.view !== 'docs' || !parsed.section) {
+        requestedDocScrollLoaderSectionId = null;
+        return;
+    }
+
+    requestDocScrollLoaderForRoute('docs/' + parsed.section);
+    pendingDocNavigationId = parsed.section;
 }
 
 /* ── Loading placeholders ─────────────────────── */
@@ -908,7 +930,6 @@ async function loadSection(sectionId, autoScroll = true, options = {}) {
         if (el && autoScroll) el.scrollIntoView({ behavior: 'instant', block: 'start' });
         if (autoScroll) settleDocScrollLoader(sectionId);
         setActiveNavLink(sectionId);
-        if (autoScroll) releasePendingDocNavigation(450);
         return;
     }
 
@@ -1487,7 +1508,15 @@ function parseHash(hash) {
     if (h === 'docs/guides') return { view: 'docs', tab: 'guides', section: null };
     if (h.startsWith('docs/')) {
         var fullPath = h.slice(5);
-        var sectionId = fullPath.split('#')[0];
+        var routePath = fullPath.split('#')[0];
+        var segments = routePath.split('/').filter(Boolean);
+        if (segments.length >= 2 && (segments[0] === 'components' || segments[0] === 'guides')) {
+            var legacySectionId = segments[1];
+            var legacyTabKey = getTabForSection(legacySectionId);
+            if (legacyTabKey) return { view: 'docs', tab: legacyTabKey, section: legacySectionId };
+            return { view: 'docs', tab: segments[0], section: null };
+        }
+        var sectionId = routePath;
         var tabKey = getTabForSection(sectionId);
         if (tabKey) return { view: 'docs', tab: tabKey, section: sectionId };
         return { view: 'docs', tab: 'components', section: null };
@@ -1496,6 +1525,7 @@ function parseHash(hash) {
 }
 
 async function navigate(route) {
+    primeDocNavigationForHash('#' + route);
     if (window.history && window.history.pushState) {
         window.history.pushState(null, '', '#' + route);
     }
@@ -2213,7 +2243,10 @@ document.addEventListener('draggable:drop', function (e) {
 
 wireRouteLinks(document.querySelector('.vd-footer'));
 
-window.addEventListener('hashchange', function () { handleRoute(); });
+window.addEventListener('hashchange', function () {
+    primeDocNavigationForHash(window.location.hash);
+    handleRoute();
+});
 window.addEventListener('scroll', requestActiveDocSectionUpdate, { passive: true });
 window.addEventListener('resize', requestActiveDocSectionUpdate);
 
@@ -2767,6 +2800,7 @@ function initGlobalSearch() {
 
 /* ── Init ───────────────────────────────────── */
 (async function () {
+    primeDocNavigationForHash(window.location.hash);
     await loadRegistry();
     initGlobalSearch();
 

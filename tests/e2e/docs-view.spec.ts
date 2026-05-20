@@ -269,6 +269,51 @@ test.describe('4. Documentation View', () => {
             expect(metrics!.sectionTop).toBeGreaterThanOrEqual(metrics!.stickyBottom - 1);
         });
 
+        test('reload keeps a deep docs route anchored to its intended section', async ({ page, isMobile }) => {
+            test.skip(!!isMobile, 'Reload anchoring regression is covered on desktop, where the scroll restoration race is reproducible.');
+            await page.goto('/#docs/vd-hex');
+            await waitForSPA(page);
+
+            const target = page.locator('#vd-hex');
+            await expect(target).toBeVisible();
+            await expect(page).toHaveURL(/.*#docs\/vd-hex/);
+
+            await page.evaluate(() => {
+                window.scrollTo(0, 24000);
+                window.history.replaceState(null, '', '#docs/vd-hex');
+            });
+
+            await page.reload();
+            await waitForSPA(page);
+
+            await expect(page).toHaveURL(/.*#docs\/vd-hex/);
+            await page.waitForFunction(() => {
+                const target = document.getElementById('vd-hex');
+                if (!target) return false;
+                const top = target.getBoundingClientRect().top;
+                return top <= 120 && top >= -8;
+            }, { timeout: 10000 });
+        });
+
+        test('code snippet toggle still works after leaving docs and returning', async ({ page }) => {
+            await page.goto('/#docs/music-player');
+            await waitForSPA(page);
+
+            const toggle = page.locator('#music-player .vd-code-snippet[data-collapsible] .vd-code-snippet-toggle').first();
+            const snippet = page.locator('#music-player .vd-code-snippet[data-collapsible]').first();
+
+            await expect(toggle).toBeVisible();
+            await expect(snippet).toHaveAttribute('data-expanded', 'false');
+
+            await page.goto('/#about');
+            await waitForSPA(page);
+            await page.goto('/#docs/music-player');
+            await waitForSPA(page);
+
+            await toggle.click();
+            await expect(snippet).toHaveAttribute('data-expanded', 'true');
+        });
+
     });
 
     test.describe('Guides Tab (#docs/guides)', () => {
@@ -325,6 +370,15 @@ test.describe('4. Documentation View', () => {
                     await expect(section).toContainText(text);
                 }
             }
+        });
+
+        test('legacy tab-prefixed guide routes still resolve', async ({ page }) => {
+            await page.goto('/#docs/guides/runtime-architecture');
+            await waitForSPA(page);
+
+            const section = page.locator('#runtime-architecture');
+            await expect(section).toBeVisible();
+            await expect(section).toContainText('Vanduo.init(root)');
         });
 
         test('Token guide teaches canonical v1.4 tokens with compatibility context', async ({ page }) => {
