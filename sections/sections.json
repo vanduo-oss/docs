@@ -337,7 +337,7 @@
             ]
           },
           {
-            "name": "Canvas & Visualization",
+            "name": "Charts & Visualization",
             "sections": [
               {
                 "id": "vd-hex",
@@ -352,6 +352,25 @@
                   "terrain",
                   "pathfinding",
                   "axial coordinates"
+                ]
+              },
+              {
+                "id": "vd-charts",
+                "title": "Vanduo Charts",
+                "file": "canvas/vd-charts.html",
+                "icon": "ph-chart-donut",
+                "keywords": [
+                  "charts",
+                  "chart",
+                  "bar chart",
+                  "line chart",
+                  "area chart",
+                  "scatter plot",
+                  "pie chart",
+                  "donut chart",
+                  "svg",
+                  "dashboard",
+                  "visualization"
                 ]
               }
             ]

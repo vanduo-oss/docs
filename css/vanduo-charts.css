@@ -1,0 +1,51 @@
+:root {
+  --vd-chart-1: var(--vd-color-primary, #5c7cfa);
+  --vd-chart-2: var(--vd-color-info, #228be6);
+  --vd-chart-3: var(--vd-color-success, #40c057);
+  --vd-chart-4: var(--vd-color-warning, #fab005);
+  --vd-chart-5: var(--vd-color-error, #fa5252);
+  --vd-chart-6: #12b886;
+  --vd-chart-7: #be4bdb;
+  --vd-chart-8: #fd7e14;
+}
+
+.vd-chart-root {
+  position: relative;
+  min-height: 220px;
+  color: var(--vd-text-primary, #1a1d20);
+}
+
+.vd-chart-root svg {
+  display: block;
+  max-width: 100%;
+  overflow: visible;
+  font-family: inherit;
+}
+
+.vd-chart-tooltip {
+  position: absolute;
+  z-index: 20;
+  max-width: min(260px, calc(100% - 1rem));
+  padding: 0.45rem 0.6rem;
+  border: 1px solid color-mix(in srgb, var(--vd-border-color, #dee2e6) 72%, transparent);
+  border-radius: 0.375rem;
+  background: color-mix(in srgb, var(--vd-bg-primary, #ffffff) 96%, transparent);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
+  color: var(--vd-text-primary, #1a1d20);
+  font-size: 0.8125rem;
+  line-height: 1.35;
+  pointer-events: none;
+  transform: translate(-50%, calc(-100% - 0.75rem));
+  opacity: 0;
+  transition: opacity 120ms ease;
+}
+
+.vd-chart-tooltip.is-visible {
+  opacity: 1;
+}
+
+.vd-chart-empty {
+  color: var(--vd-text-muted, #868e96);
+  font-size: 0.875rem;
+}
+

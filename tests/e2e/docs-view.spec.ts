@@ -295,6 +295,33 @@ test.describe('4. Documentation View', () => {
             }, { timeout: 10000 });
         });
 
+        test('Vanduo Charts docs render live donut demo and register in navigation/search', async ({ page }) => {
+            const errors: string[] = [];
+            page.on('pageerror', (error) => errors.push(error.message));
+            page.on('console', (message) => {
+                if (message.type() === 'error') errors.push(message.text());
+            });
+
+            await page.goto('/#docs/vd-charts');
+            await waitForSPA(page);
+
+            const target = page.locator('#vd-charts');
+            await expect(target).toBeVisible();
+            await expect(page).toHaveURL(/.*#docs\/vd-charts/);
+
+            await expect(page.locator('#vd-charts-donut-demo svg[role="img"]')).toBeVisible();
+            await expect(page.locator('#vd-charts-donut-demo path.vd-chart-slice')).toHaveCount(3);
+            await expect(page.locator('.doc-nav-link[data-section="vd-charts"]')).toHaveCount(1);
+
+            await page.locator('#global-search-trigger').click();
+            await page.locator('#global-search-input').fill('donut chart');
+            await page.waitForTimeout(300);
+            await expect(page.locator('#global-search-results .global-search-result[data-route="docs/vd-charts"]').first()).toBeVisible();
+
+            expect(errors.join('\n')).not.toContain('Vanduo Charts');
+            expect(errors).toEqual([]);
+        });
+
         test('code snippet toggle still works after leaving docs and returning', async ({ page }) => {
             await page.goto('/#docs/music-player');
             await waitForSPA(page);
