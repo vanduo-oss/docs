@@ -70,7 +70,7 @@
                     <button class="vd-btn vd-btn-outline" data-tooltip="Light tooltip" data-tooltip-variant="light">Light</button>
                     <button class="vd-btn vd-btn-outline" data-tooltip="Glass tooltip with backdrop blur" data-tooltip-variant="glass">Glass</button>
                 </div>
-                <div class="vd-card-body" style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center; justify-content:center; border-top:1px solid var(--border-color);">
+                <div class="vd-card-body" style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center; justify-content:center; border-top:1px solid var(--vd-border-color);">
                     <button class="vd-btn vd-btn-sm vd-btn-outline" data-tooltip="Small tooltip" data-tooltip-size="sm">Small</button>
                     <button class="vd-btn vd-btn-outline" data-tooltip="Default tooltip">Default</button>
                     <button class="vd-btn vd-btn-lg vd-btn-outline" data-tooltip="Large tooltip with more padding" data-tooltip-size="lg">Large</button>
@@ -163,12 +163,12 @@
                         <table class="vd-table vd-table-striped">
                             <thead><tr><th>Variable</th><th>Default</th><th>Description</th></tr></thead>
                             <tbody>
-                                <tr><td><code>--tooltip-bg</code></td><td><code>var(--color-white)</code></td><td>Default tooltip background</td></tr>
-                                <tr><td><code>--tooltip-bg-light</code></td><td><code>var(--color-gray-100)</code></td><td>Light variant background</td></tr>
-                                <tr><td><code>--tooltip-bg-dark</code></td><td><code>var(--color-gray-900)</code></td><td>Dark variant background</td></tr>
-                                <tr><td><code>--tooltip-text-color</code></td><td><code>var(--color-gray-900)</code></td><td>Default text color</td></tr>
-                                <tr><td><code>--tooltip-text-color-light</code></td><td><code>var(--color-gray-800)</code></td><td>Light variant text</td></tr>
-                                <tr><td><code>--tooltip-text-color-dark</code></td><td><code>var(--color-white)</code></td><td>Dark variant text</td></tr>
+                                <tr><td><code>--tooltip-bg</code></td><td><code>var(--vd-color-white)</code></td><td>Default tooltip background</td></tr>
+                                <tr><td><code>--tooltip-bg-light</code></td><td><code>var(--vd-color-gray-100)</code></td><td>Light variant background</td></tr>
+                                <tr><td><code>--tooltip-bg-dark</code></td><td><code>var(--vd-color-gray-900)</code></td><td>Dark variant background</td></tr>
+                                <tr><td><code>--tooltip-text-color</code></td><td><code>var(--vd-color-gray-900)</code></td><td>Default text color</td></tr>
+                                <tr><td><code>--tooltip-text-color-light</code></td><td><code>var(--vd-color-gray-800)</code></td><td>Light variant text</td></tr>
+                                <tr><td><code>--tooltip-text-color-dark</code></td><td><code>var(--vd-color-white)</code></td><td>Dark variant text</td></tr>
                                 <tr><td><code>--tooltip-padding-y</code></td><td><code>0.5rem</code> (8px)</td><td>Vertical padding (Fibonacci)</td></tr>
                                 <tr><td><code>--tooltip-padding-x</code></td><td><code>0.8125rem</code> (13px)</td><td>Horizontal padding (Fibonacci, ratio ~phi)</td></tr>
                                 <tr><td><code>--tooltip-arrow-size</code></td><td><code>5px</code></td><td>Arrow dimensions (Fibonacci)</td></tr>
@@ -186,7 +186,7 @@
     <div class="vd-row vd-mb-6">
         <div class="vd-col-12">
             <div class="vd-card vd-card-glow demo-card">
-                <div class="vd-card-header"><h4><i class="ph ph-list-dashes mr-2" style="color: var(--color-primary);"></i>API Reference</h4></div>
+                <div class="vd-card-header"><h4><i class="ph ph-list-dashes mr-2" style="color: var(--vd-color-primary);"></i>API Reference</h4></div>
                 <div class="vd-card-body">
                     <h4>CSS Classes</h4>
                     <div class="vd-table-responsive">
@@ -235,6 +235,10 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="vd-alert vd-alert-info vd-mt-4">
+                        <i class="ph ph-shield-check"></i>
+                        <div>v1.4.0 sanitizes tooltip HTML with inline styles disabled by default for framework call sites. Prefer <code>data-tooltip</code> for user-provided text and reserve <code>data-tooltip-html</code> for trusted markup.</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -244,7 +248,7 @@
     <div class="vd-row vd-mb-6">
         <div class="vd-col-12">
             <div class="vd-card vd-card-glow demo-card">
-                <div class="vd-card-header"><h4><i class="ph ph-wheelchair mr-2" style="color: var(--color-primary);"></i>Accessibility</h4></div>
+                <div class="vd-card-header"><h4><i class="ph ph-wheelchair mr-2" style="color: var(--vd-color-primary);"></i>Accessibility</h4></div>
                 <div class="vd-card-body">
                     <ul>
                         <li>Tooltips should not contain critical information — ensure the same content is available via visible text or an <code>aria-label</code> on the trigger.</li>

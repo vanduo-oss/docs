@@ -1,6 +1,6 @@
 'use strict';
 
-const SECTION_CACHE = 'vanduo-sections-v139';
+const SECTION_CACHE = 'vanduo-sections-v140-docs-1';
 
 self.addEventListener('install', function () {
     self.skipWaiting();
@@ -26,6 +26,10 @@ self.addEventListener('fetch', function (event) {
     const url = new URL(request.url);
     if (url.origin !== self.location.origin) return;
     if (!url.pathname.includes('/sections/')) return;
+    if (url.pathname.endsWith('/sections/sections.json')) {
+        event.respondWith(fetch(request, { cache: 'no-store' }));
+        return;
+    }
 
     event.respondWith((async function () {
         const cache = await caches.open(SECTION_CACHE);

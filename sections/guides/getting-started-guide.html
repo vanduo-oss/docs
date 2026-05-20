@@ -15,17 +15,17 @@
                 <div class="vd-card-body">
                     <p>By the end of this guide, you'll have a complete page with:</p>
                     <ul>
-                        <li><i class="ph ph-check-circle" style="color: var(--color-success);"></i> A responsive
+                        <li><i class="ph ph-check-circle" style="color: var(--vd-color-success);"></i> A responsive
                             <strong>navbar</strong> with logo and links
                         </li>
-                        <li><i class="ph ph-check-circle" style="color: var(--color-success);"></i> A <strong>hero
+                        <li><i class="ph ph-check-circle" style="color: var(--vd-color-success);"></i> A <strong>hero
                                 section</strong> with text and a call-to-action button</li>
-                        <li><i class="ph ph-check-circle" style="color: var(--color-success);"></i> A <strong>card
+                        <li><i class="ph ph-check-circle" style="color: var(--vd-color-success);"></i> A <strong>card
                                 grid</strong> showing content in columns</li>
-                        <li><i class="ph ph-check-circle" style="color: var(--color-success);"></i> A
+                        <li><i class="ph ph-check-circle" style="color: var(--vd-color-success);"></i> A
                             <strong>footer</strong> at the bottom
                         </li>
-                        <li><i class="ph ph-check-circle" style="color: var(--color-success);"></i> <strong>Dark/light
+                        <li><i class="ph ph-check-circle" style="color: var(--vd-color-success);"></i> <strong>Dark/light
                                 theme</strong> toggle built in</li>
                     </ul>
                     <p class="vd-text-sm vd-text-muted vd-mt-3">All of this in about 60 lines of HTML — no CSS to write,
@@ -140,14 +140,14 @@ cd my-first-vanduo-site</code></pre>
     &lt;<span class="code-tag">title</span>&gt;My First Vanduo Site&lt;/<span class="code-tag">title</span>&gt;
 
     <span class="code-comment">&lt;!-- Vanduo CSS — this gives you the entire design system --&gt;</span>
-    &lt;<span class="code-tag">link</span> <span class="code-attr">rel</span>=<span class="code-string">"stylesheet"</span> <span class="code-attr">href</span>=<span class="code-string">"https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.3.9/dist/vanduo.min.css"</span>&gt;
+    &lt;<span class="code-tag">link</span> <span class="code-attr">rel</span>=<span class="code-string">"stylesheet"</span> <span class="code-attr">href</span>=<span class="code-string">"https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.4.0/dist/vanduo.min.css"</span>&gt;
 &lt;/<span class="code-tag">head</span>&gt;
 &lt;<span class="code-tag">body</span>&gt;
 
     <span class="code-comment">&lt;!-- Your content will go here --&gt;</span>
 
     <span class="code-comment">&lt;!-- Vanduo JS — enables interactive components --&gt;</span>
-    &lt;<span class="code-tag">script</span> <span class="code-attr">src</span>=<span class="code-string">"https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.3.9/dist/vanduo.min.js"</span>&gt;&lt;/<span class="code-tag">script</span>&gt;
+    &lt;<span class="code-tag">script</span> <span class="code-attr">src</span>=<span class="code-string">"https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.4.0/dist/vanduo.min.js"</span>&gt;&lt;/<span class="code-tag">script</span>&gt;
     &lt;<span class="code-tag">script</span>&gt;Vanduo.init();&lt;/<span class="code-tag">script</span>&gt;
 &lt;/<span class="code-tag">body</span>&gt;
 &lt;/<span class="code-tag">html</span>&gt;</code></pre>
@@ -157,9 +157,9 @@ cd my-first-vanduo-site</code></pre>
                     <div class="vd-alert vd-alert-info vd-mt-4">
                         <i class="ph ph-lightbulb"></i>
                         <div>
-                            <strong>Pro tip:</strong> The template above is pinned to <code>@v1.3.9</code>. When new
-                            versions are released, update the version number in both the CSS and JS URLs to get the
-                            latest features and fixes.
+                            <strong>Pro tip:</strong> The template above is pinned to <code>@v1.4.0</code>. When you
+                            upgrade later, update both the CSS and JS URLs together, then test the page before shipping.
+                            For dynamic content, initialize only the new subtree with <code>Vanduo.init(root)</code>.
                         </div>
                     </div>
                     <div class="vd-alert vd-alert-primary vd-mt-3">
@@ -524,29 +524,6 @@ npx http-server . -p 3000
         </div>
     </div>
 
-    <!-- What's Next block -->
-    <div class="vd-mt-8" style="border-top: 1px solid var(--border-color); padding-top: 2.5rem; padding-bottom: 3rem;">
-        <h4 class="vd-text-lg vd-mb-5"><i class="ph ph-arrow-circle-right"></i> What's Next?</h4>
-        <div class="vd-row" style="gap: 1.25rem;">
-            <div class="vd-col-12 vd-col-md-6 vd-mb-4">
-                <a href="#docs/starter-templates" data-route="docs/starter-templates" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
-                    <div class="vd-card-body">
-                        <h4 class="vd-text-md vd-mb-2">Starter Templates</h4>
-                        <p class="vd-text-sm vd-text-muted vd-mb-0">Skip the assembly — copy-paste complete pages for landing sites, dashboards, blogs, and login forms.</p>
-                    </div>
-                </a>
-            </div>
-            <div class="vd-col-12 vd-col-md-6 vd-mb-4">
-                <a href="#docs/first-layout" data-route="docs/first-layout" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
-                    <div class="vd-card-body">
-                        <h4 class="vd-text-md vd-mb-2">Building Your First Layout</h4>
-                        <p class="vd-text-sm vd-text-muted vd-mb-0">Deep dive into containers, rows, columns, breakpoints, and responsive design.</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-
     <!-- The Complete File -->
     <div class="vd-row vd-mb-6">
         <div class="vd-col-12">
@@ -580,7 +557,7 @@ npx http-server . -p 3000
     &lt;<span class="code-tag">meta</span> <span class="code-attr">charset</span>=<span class="code-string">"UTF-8"</span>&gt;
     &lt;<span class="code-tag">meta</span> <span class="code-attr">name</span>=<span class="code-string">"viewport"</span> <span class="code-attr">content</span>=<span class="code-string">"width=device-width, initial-scale=1.0"</span>&gt;
     &lt;<span class="code-tag">title</span>&gt;My First Vanduo Site&lt;/<span class="code-tag">title</span>&gt;
-    &lt;<span class="code-tag">link</span> <span class="code-attr">rel</span>=<span class="code-string">"stylesheet"</span> <span class="code-attr">href</span>=<span class="code-string">"https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.3.9/dist/vanduo.min.css"</span>&gt;
+    &lt;<span class="code-tag">link</span> <span class="code-attr">rel</span>=<span class="code-string">"stylesheet"</span> <span class="code-attr">href</span>=<span class="code-string">"https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.4.0/dist/vanduo.min.css"</span>&gt;
 &lt;/<span class="code-tag">head</span>&gt;
 &lt;<span class="code-tag">body</span>&gt;
     &lt;<span class="code-tag">nav</span> <span class="code-attr">class</span>=<span class="code-string">"vd-navbar"</span>&gt;
@@ -660,7 +637,7 @@ npx http-server . -p 3000
         &lt;/<span class="code-tag">div</span>&gt;
     &lt;/<span class="code-tag">footer</span>&gt;
 
-    &lt;<span class="code-tag">script</span> <span class="code-attr">src</span>=<span class="code-string">"https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.3.9/dist/vanduo.min.js"</span>&gt;&lt;/<span class="code-tag">script</span>&gt;
+    &lt;<span class="code-tag">script</span> <span class="code-attr">src</span>=<span class="code-string">"https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.4.0/dist/vanduo.min.js"</span>&gt;&lt;/<span class="code-tag">script</span>&gt;
     &lt;<span class="code-tag">script</span>&gt;Vanduo.init();&lt;/<span class="code-tag">script</span>&gt;
 &lt;/<span class="code-tag">body</span>&gt;
 &lt;/<span class="code-tag">html</span>&gt;</code></pre>
@@ -728,26 +705,4 @@ npx http-server . -p 3000
         </div>
     </div>
 
-    <!-- What's Next block -->
-    <div class="vd-mt-8" style="border-top: 1px solid var(--border-color); padding-top: 2.5rem; padding-bottom: 3rem;">
-        <h4 class="vd-text-lg vd-mb-5"><i class="ph ph-arrow-circle-right"></i> What's Next?</h4>
-        <div class="vd-row" style="gap: 1.25rem;">
-            <div class="vd-col-12 vd-col-md-6 vd-mb-4">
-                <a href="#docs/first-layout" data-route="docs/first-layout" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
-                    <div class="vd-card-body">
-                        <h4 class="vd-text-md vd-mb-2">Building Your First Layout</h4>
-                        <p class="vd-text-sm vd-text-muted vd-mb-0">Ready to build? Learn how the grid system works to structure your pages.</p>
-                    </div>
-                </a>
-            </div>
-            <div class="vd-col-12 vd-col-md-6 vd-mb-4">
-                <a href="#docs/framework-integration" data-route="docs/framework-integration" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
-                    <div class="vd-card-body">
-                        <h4 class="vd-text-md vd-mb-2">Framework Integration</h4>
-                        <p class="vd-text-sm vd-text-muted vd-mb-0">Using React, Vue, or Svelte? See how to wire Vanduo into your framework's lifecycle.</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
 </section>

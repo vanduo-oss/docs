@@ -10,6 +10,12 @@
             <strong>TL;DR for Beginners:</strong> If you are building a modern app with React, Vue, Next.js, or Vite, use <strong>ESM</strong>. If you are just building a simple HTML page and want to drop in a script tag to make components work immediately, use <strong>IIFE</strong>. You can safely ignore the rest!
         </div>
     </div>
+    <div class="vd-alert vd-alert-info vd-mb-6">
+        <i class="ph ph-circuitry"></i>
+        <div>
+            <strong>v1.4 runtime note:</strong> All formats expose the same runtime contract. Use <code>Vanduo.init()</code> for first document boot, <code>Vanduo.init(root)</code> after injecting a subtree, and <code>Vanduo.getComponent('toast')</code> to access a registered component by its canonical lowerCamelCase name.
+        </div>
+    </div>
 
     <!-- The Big Picture -->
     <div class="vd-row vd-mb-8">
@@ -26,7 +32,7 @@
                             <div class="vd-card">
                                 <div class="vd-card-body" style="text-align: center;">
                                     <i class="ph ph-browser"
-                                        style="font-size: 2.5rem; color: var(--color-primary);"></i>
+                                        style="font-size: 2.5rem; color: var(--vd-color-primary);"></i>
                                     <h4 class="vd-mt-3">IIFE</h4>
                                     <p class="vd-text-sm vd-text-muted">Immediately Invoked Function Expression</p>
                                     <p class="vd-text-sm">The classic <code>&lt;script&gt;</code> tag approach. Drop it
@@ -38,7 +44,7 @@
                             <div class="vd-card">
                                 <div class="vd-card-body" style="text-align: center;">
                                     <i class="ph ph-tree-structure"
-                                        style="font-size: 2.5rem; color: var(--color-success);"></i>
+                                        style="font-size: 2.5rem; color: var(--vd-color-success);"></i>
                                     <h4 class="vd-mt-3">ESM</h4>
                                     <p class="vd-text-sm vd-text-muted">ECMAScript Modules</p>
                                     <p class="vd-text-sm">The modern standard. Use <code>import</code> /
@@ -51,7 +57,7 @@
                             <div class="vd-card">
                                 <div class="vd-card-body" style="text-align: center;">
                                     <i class="ph ph-clock-counter-clockwise"
-                                        style="font-size: 2.5rem; color: var(--color-warning);"></i>
+                                        style="font-size: 2.5rem; color: var(--vd-color-warning);"></i>
                                     <h4 class="vd-mt-3">CJS (Legacy)</h4>
                                     <p class="vd-text-sm vd-text-muted">CommonJS</p>
                                     <p class="vd-text-sm">The Node.js format. Uses <code>require()</code>. For older
@@ -75,16 +81,16 @@
                 <div class="vd-card-body">
                     <p>Follow this decision tree to find the right format for your project:</p>
 
-                    <div class="vd-card vd-mt-5 vd-mb-4" style="border-left: 4px solid var(--color-primary);">
+                    <div class="vd-card vd-mt-5 vd-mb-4" style="border-left: 4px solid var(--vd-color-primary);">
                         <div class="vd-card-body">
                             <p><strong><i class="ph ph-question"></i> Are you using a bundler?</strong> (Vite, Webpack,
                                 Rollup, Parcel, esbuild)</p>
                             <div class="vd-row vd-mt-3">
                                 <div class="vd-col-12 vd-col-md-6">
-                                    <div class="vd-card" style="border-left: 4px solid var(--color-success);">
+                                    <div class="vd-card" style="border-left: 4px solid var(--vd-color-success);">
                                         <div class="vd-card-body">
                                             <p><strong>Yes →</strong> Use <strong>ESM</strong> <i
-                                                    class="ph ph-check-circle" style="color: var(--color-success);"></i>
+                                                    class="ph ph-check-circle" style="color: var(--vd-color-success);"></i>
                                             </p>
                                             <p class="vd-text-sm vd-text-muted">You get tree-shaking (smaller bundles),
                                                 modern syntax, and the best developer experience.</p>
@@ -92,11 +98,11 @@
                                     </div>
                                 </div>
                                 <div class="vd-col-12 vd-col-md-6">
-                                    <div class="vd-card" style="border-left: 4px solid var(--color-warning);">
+                                    <div class="vd-card" style="border-left: 4px solid var(--vd-color-warning);">
                                         <div class="vd-card-body">
                                             <p><strong>No →</strong> Next question...</p>
                                             <div class="vd-card vd-mt-3"
-                                                style="border-left: 4px solid var(--color-info);">
+                                                style="border-left: 4px solid var(--vd-color-info);">
                                                 <div class="vd-card-body">
                                                     <p><strong><i class="ph ph-question"></i> Do you need to support
                                                             very old browsers?</strong> (IE11, old Edge)</p>
@@ -108,7 +114,7 @@
                                                         <div class="vd-col-6">
                                                             <p><strong>No →</strong> Use <strong>IIFE</strong> <i
                                                                     class="ph ph-check-circle"
-                                                                    style="color: var(--color-success);"></i></p>
+                                                                    style="color: var(--vd-color-success);"></i></p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -164,13 +170,13 @@
                             </div>
                             <div class="vd-code-snippet-body">
                                 <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Add these before &lt;/body&gt; --&gt;</span>
-&lt;<span class="code-tag">script</span> <span class="code-attr">src</span>=<span class="code-string">"https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.3.9/dist/vanduo.min.js"</span>&gt;&lt;/<span class="code-tag">script</span>&gt;
+&lt;<span class="code-tag">script</span> <span class="code-attr">src</span>=<span class="code-string">"https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.4.0/dist/vanduo.min.js"</span>&gt;&lt;/<span class="code-tag">script</span>&gt;
 &lt;<span class="code-tag">script</span>&gt;
     // Vanduo is now available as a global object
     Vanduo.init();
 
     // Use any component
-    Vanduo.components.toast.show({
+    Vanduo.getComponent('toast').show({
         title: 'Hello!',
         message: 'IIFE is working.',
         type: 'success'
@@ -185,7 +191,7 @@
 
                     <div class="vd-row vd-mt-5">
                         <div class="vd-col-6">
-                            <p><strong><i class="ph ph-check-circle" style="color: var(--color-success);"></i>
+                            <p><strong><i class="ph ph-check-circle" style="color: var(--vd-color-success);"></i>
                                     Pros:</strong></p>
                             <ul>
                                 <li>Zero configuration</li>
@@ -195,7 +201,7 @@
                             </ul>
                         </div>
                         <div class="vd-col-6">
-                            <p><strong><i class="ph ph-x-circle" style="color: var(--color-error);"></i> Cons:</strong>
+                            <p><strong><i class="ph ph-x-circle" style="color: var(--vd-color-error);"></i> Cons:</strong>
                             </p>
                             <ul>
                                 <li>Loads the entire library (no tree-shaking)</li>
@@ -246,7 +252,7 @@
 Vanduo.<span class="code-function">init</span>();
 
 <span class="code-comment">// Use components with full IntelliSense support</span>
-Vanduo.components.toast.<span class="code-function">show</span>({
+Vanduo.<span class="code-function">getComponent</span>(<span class="code-string">'toast'</span>).<span class="code-function">show</span>({
     title: <span class="code-string">'Hello!'</span>,
     message: <span class="code-string">'ESM is working.'</span>,
     type: <span class="code-string">'success'</span>
@@ -295,7 +301,7 @@ Vanduo.components.toast.<span class="code-function">show</span>({
 
                     <div class="vd-row vd-mt-5">
                         <div class="vd-col-6">
-                            <p><strong><i class="ph ph-check-circle" style="color: var(--color-success);"></i>
+                            <p><strong><i class="ph ph-check-circle" style="color: var(--vd-color-success);"></i>
                                     Pros:</strong></p>
                             <ul>
                                 <li>Tree-shaking (smaller bundles)</li>
@@ -305,7 +311,7 @@ Vanduo.components.toast.<span class="code-function">show</span>({
                             </ul>
                         </div>
                         <div class="vd-col-6">
-                            <p><strong><i class="ph ph-x-circle" style="color: var(--color-error);"></i> Cons:</strong>
+                            <p><strong><i class="ph ph-x-circle" style="color: var(--vd-color-error);"></i> Cons:</strong>
                             </p>
                             <ul>
                                 <li>Needs a bundler for best results</li>
@@ -373,7 +379,7 @@ Vanduo.<span class="code-function">init</span>();</code></pre>
                         modals:</p>
                     <div class="vd-row vd-mt-4">
                         <div class="vd-col-12 vd-col-md-6 vd-mb-4">
-                            <div class="vd-card" style="border-top: 3px solid var(--color-text-muted);">
+                            <div class="vd-card" style="border-top: 3px solid var(--vd-text-muted);">
                                 <div class="vd-card-header">
                                     <h4><i class="ph ph-browser"></i> IIFE / CJS</h4>
                                     <span class="vd-badge vd-badge-warning vd-text-sm">Full bundle</span>
@@ -417,7 +423,7 @@ Vanduo.<span class="code-function">init</span>();</code></pre>
                             </div>
                         </div>
                         <div class="vd-col-12 vd-col-md-6 vd-mb-4">
-                            <div class="vd-card" style="border-top: 3px solid var(--color-success);">
+                            <div class="vd-card" style="border-top: 3px solid var(--vd-color-success);">
                                 <div class="vd-card-header">
                                     <h4><i class="ph ph-tree-structure"></i> ESM with Bundler</h4>
                                     <span class="vd-badge vd-badge-success vd-text-sm">Tree-shaken</span>
@@ -482,28 +488,28 @@ Vanduo.<span class="code-function">init</span>();
                             <tbody>
                                 <tr>
                                     <td><strong>Setup complexity</strong></td>
-                                    <td><span style="color: var(--color-success);">Minimal</span> — one script tag</td>
-                                    <td><span style="color: var(--color-warning);">Moderate</span> — needs bundler or
+                                    <td><span style="color: var(--vd-color-success);">Minimal</span> — one script tag</td>
+                                    <td><span style="color: var(--vd-color-warning);">Moderate</span> — needs bundler or
                                         type=module</td>
-                                    <td><span style="color: var(--color-warning);">Moderate</span> — needs Node.js /
+                                    <td><span style="color: var(--vd-color-warning);">Moderate</span> — needs Node.js /
                                         bundler</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Bundle size</strong></td>
                                     <td>Full library loaded</td>
-                                    <td><span style="color: var(--color-success);">Tree-shakeable</span></td>
+                                    <td><span style="color: var(--vd-color-success);">Tree-shakeable</span></td>
                                     <td>Full library loaded</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Browser support</strong></td>
-                                    <td><span style="color: var(--color-success);">All browsers</span></td>
+                                    <td><span style="color: var(--vd-color-success);">All browsers</span></td>
                                     <td>Modern browsers (ES2015+)</td>
                                     <td>Not browser-native</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Editor IntelliSense</strong></td>
                                     <td>Limited</td>
-                                    <td><span style="color: var(--color-success);">Full support</span></td>
+                                    <td><span style="color: var(--vd-color-success);">Full support</span></td>
                                     <td>Good</td>
                                 </tr>
                                 <tr>
@@ -527,8 +533,8 @@ Vanduo.<span class="code-function">init</span>();
                         <div>
                             <strong>Still not sure?</strong> Start with <strong>IIFE</strong>. It works without any
                             tooling, and you can always migrate to ESM later when your project grows. See the
-                            <strong>Module Formats</strong> reference in Concepts &amp; Architecture for the full
-                            technical details.
+                            <a href="#docs/runtime-architecture" data-route="docs/runtime-architecture"><strong>Runtime Architecture</strong></a>
+                            guide for scoped initialization and registry naming details.
                         </div>
                     </div>
                 </div>
@@ -582,7 +588,7 @@ npm install @vanduo-oss/framework
     </div>
 
     <!-- What's Next block -->
-    <div class="vd-mt-8" style="border-top: 1px solid var(--border-color); padding-top: 2.5rem; padding-bottom: 3rem;">
+    <div class="vd-mt-8" style="border-top: 1px solid var(--vd-border-color); padding-top: 2.5rem; padding-bottom: 3rem;">
         <h4 class="vd-text-lg vd-mb-5"><i class="ph ph-arrow-circle-right"></i> What's Next?</h4>
         <div class="vd-row" style="gap: 1.25rem;">
             <div class="vd-col-12 vd-col-md-6 vd-mb-4">

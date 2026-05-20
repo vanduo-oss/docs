@@ -296,7 +296,7 @@
                             </div>
                             <div class="vd-code-snippet-body">
                                 <pre class="vd-code-snippet-pane is-active" data-lang="js"><code><span class="code-comment">// Access the component</span>
-<span class="code-keyword">const</span> customizer = Vanduo.components.themeCustomizer;
+<span class="code-keyword">const</span> customizer = Vanduo.<span class="code-function">getComponent</span>(<span class="code-string">'themeCustomizer'</span>);
 
 <span class="code-comment">// Open/close programmatically</span>
 customizer.<span class="code-function">open</span>();
@@ -473,7 +473,7 @@ customizer.<span class="code-function">reset</span>();</code></pre>
 <span class="code-comment">/* Trigger button */</span>
 <span class="code-selector">.theme-customizer-trigger</span> {
     <span class="code-property">--tc-trigger-size</span>: <span class="code-value">40px</span>;
-    <span class="code-property">--tc-trigger-bg</span>: <span class="code-value">var(--bg-secondary)</span>;
+    <span class="code-property">--tc-trigger-bg</span>: <span class="code-value">var(--vd-bg-secondary)</span>;
 }
 
 <span class="code-comment">/* Color swatches */</span>

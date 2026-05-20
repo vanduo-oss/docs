@@ -276,7 +276,7 @@
 
                     <div class="vd-alert vd-alert-info vd-mt-5">
                         <i class="ph ph-code"></i>
-                        <div><strong>Default: CSS only.</strong> Static timelines need no JavaScript. With <code>.vd-timeline-animated</code> alone, the framework runs one shared <code>IntersectionObserver</code> (auto-init via <code>Vanduo.init()</code>) to add <code>.is-revealed</code>. With <code>.vd-timeline-playback</code>, there is no observer—only the buttons. Use <code>VanduoTimeline.reinit()</code> after injecting new timeline markup.</div>
+                        <div><strong>Default: CSS only.</strong> Static timelines need no JavaScript. With <code>.vd-timeline-animated</code> alone, the framework runs one shared <code>IntersectionObserver</code> (auto-init via <code>Vanduo.init()</code>) to add <code>.is-revealed</code>. With <code>.vd-timeline-playback</code>, there is no observer—only the buttons. Use <code>Vanduo.reinit('timeline', root)</code> after replacing a dynamic timeline subtree.</div>
                     </div>
                 </div>
             </div>

@@ -1,289 +1,111 @@
 <section id="lazy-loading-guide">
-    <h4 class="demo-title"><i class="ph ph-cloud-arrow-down"></i>Global Lazy Loading <code
-            class="vd-text-sm">Guide</code></h4>
-    <p class="vd-mb-5">This guide walks you through using <strong>VanduoLazyLoad</strong> to build pages that load
-        content on demand. Instead of shipping all HTML upfront, sections are fetched and injected only when they scroll
-        into view — giving users a fast first paint and a smooth reading experience.</p>
+    <h4 class="demo-title"><i class="ph ph-cloud-arrow-down"></i>Global Lazy Loading <code class="vd-text-sm">Guide</code></h4>
+    <p class="vd-mb-6">Use <strong>VanduoLazyLoad</strong> to fetch same-origin HTML, hydrate injected content, and observe expensive work only when it is needed. In v1.4.0 the important architecture change is scoped hydration: loaded content calls <code>Vanduo.init(container)</code> instead of reinitializing the entire page.</p>
 
-    <!-- Why lazy loading -->
-    <div class="vd-row vd-mb-8">
-        <div class="vd-col-12">
-            <div class="vd-card vd-card-glow demo-card">
-                <div class="vd-card-header">
-                    <h4><i class="ph ph-question"></i> Why Lazy Loading?</h4>
-                </div>
-                <div class="vd-card-body">
-                    <p>A documentation site can have hundreds of kilobytes of HTML across dozens of sections. Sending it
-                        all on the first request is wasteful — most users never scroll to the bottom. Lazy loading
-                        solves this by splitting content into small partials that are fetched on demand.</p>
-
-                    <div class="vd-row vd-mt-5">
-                        <div class="vd-col-12 vd-col-md-4 vd-mb-4">
-                            <div class="vd-card" style="text-align:center;">
-                                <div class="vd-card-body">
-                                    <i class="ph ph-lightning" style="font-size:2rem;color:var(--color-primary);"></i>
-                                    <h4 class="vd-mt-3">Faster First Paint</h4>
-                                    <p class="vd-text-sm vd-text-muted">Ship only what's visible. The browser renders
-                                        the page while the rest is pending.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="vd-col-12 vd-col-md-4 vd-mb-4">
-                            <div class="vd-card" style="text-align:center;">
-                                <div class="vd-card-body">
-                                    <i class="ph ph-database" style="font-size:2rem;color:var(--color-success);"></i>
-                                    <h4 class="vd-mt-3">Less Bandwidth</h4>
-                                    <p class="vd-text-sm vd-text-muted">Users who don't scroll never download off-screen
-                                        content.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="vd-col-12 vd-col-md-4 vd-mb-4">
-                            <div class="vd-card" style="text-align:center;">
-                                <div class="vd-card-body">
-                                    <i class="ph ph-puzzle-piece" style="font-size:2rem;color:var(--color-info);"></i>
-                                    <h4 class="vd-mt-3">Composable Sections</h4>
-                                    <p class="vd-text-sm vd-text-muted">Each section is an independent HTML partial —
-                                        easy to author and maintain separately.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Step 1: Install -->
     <div class="vd-row vd-mb-6">
         <div class="vd-col-12">
             <div class="vd-card vd-card-glow demo-card">
                 <div class="vd-card-header">
-                    <h4><span class="vd-badge vd-badge-primary" style="margin-right:8px;">Step 1</span><i
-                            class="ph ph-package"></i> Include VanduoLazyLoad</h4>
+                    <h4><span class="vd-badge vd-badge-primary" style="margin-right:8px;">Step 1</span><i class="ph ph-tag"></i> Attribute-Driven Sections</h4>
                 </div>
                 <div class="vd-card-body">
-                    <p><code>VanduoLazyLoad</code> is part of the Vanduo Framework and is included automatically in the
-                        standard bundle. If you're loading scripts individually, include it after the main framework
-                        files:</p>
-
-                    <div class="vd-code-snippet" data-collapsible data-expanded="true">
-                        <button class="vd-code-snippet-toggle" aria-expanded="true">
-                            <span class="vd-code-snippet-toggle-icon"></span>
-                            <span>View Code</span>
-                        </button>
+                    <p>Add <code>data-vd-lazy</code> to an empty container. Vanduo fetches the partial when the container enters the viewport.</p>
+                    <div class="vd-code-snippet vd-mt-4" data-collapsible data-expanded="true">
+                        <button class="vd-code-snippet-toggle" aria-expanded="true"><span class="vd-code-snippet-toggle-icon"></span><span>View Code</span></button>
                         <div class="vd-code-snippet-content">
                             <div class="vd-code-snippet-header">
                                 <div class="vd-code-snippet-tabs" role="tablist">
                                     <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
                                 </div>
-                                <button class="vd-code-snippet-copy" aria-label="Copy code">
-                                    <span class="vd-code-snippet-copy-icon"></span>
-                                    <span class="vd-code-snippet-copy-text">Copy</span>
-                                </button>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code"><span class="vd-code-snippet-copy-icon"></span><span class="vd-code-snippet-copy-text">Copy</span></button>
                             </div>
                             <div class="vd-code-snippet-body">
-                                <pre class="vd-code-snippet-pane is-active"
-                                    data-lang="html"><code><span class="code-comment">&lt;!-- Option A: Full IIFE bundle (already includes lazy-load) --&gt;</span>
-&lt;<span class="code-tag">script</span> <span class="code-attr">src</span>=<span class="code-string">"vanduo.min.js"</span>&gt;&lt;/<span class="code-tag">script</span>&gt;
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;div
+  data-vd-lazy="./sections/pricing.html"
+  data-vd-lazy-placeholder="skeleton"&gt;
+&lt;/div&gt;
 
-<span class="code-comment">&lt;!-- Option B: Individual scripts --&gt;</span>
-&lt;<span class="code-tag">script</span> <span class="code-attr">src</span>=<span class="code-string">"js/utils/helpers.js"</span>&gt;&lt;/<span class="code-tag">script</span>&gt;
-&lt;<span class="code-tag">script</span> <span class="code-attr">src</span>=<span class="code-string">"js/vanduo.js"</span>&gt;&lt;/<span class="code-tag">script</span>&gt;
-&lt;<span class="code-tag">script</span> <span class="code-attr">src</span>=<span class="code-string">"js/components/lazy-load.js"</span>&gt;&lt;/<span class="code-tag">script</span>&gt;</code></pre>
+&lt;script src="dist/vanduo.min.js"&gt;&lt;/script&gt;
+&lt;script&gt;Vanduo.init();&lt;/script&gt;</code></pre>
                             </div>
                         </div>
+                    </div>
+                    <div class="vd-alert vd-alert-info vd-mt-4">
+                        <i class="ph ph-info"></i>
+                        <div>After the partial is injected, v1.4.0 initializes only that lazy container. Existing dropdowns, tabs, tooltips, and other components outside the container are not touched.</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Step 2: Create partials -->
     <div class="vd-row vd-mb-6">
-        <div class="vd-col-12">
+        <div class="vd-col-12 vd-col-md-6">
             <div class="vd-card vd-card-glow demo-card">
                 <div class="vd-card-header">
-                    <h4><span class="vd-badge vd-badge-primary" style="margin-right:8px;">Step 2</span><i
-                            class="ph ph-file-html"></i> Create HTML Partials</h4>
+                    <h4><i class="ph ph-code"></i> Programmatic Section Loading</h4>
                 </div>
                 <div class="vd-card-body">
-                    <p>Each lazy-loaded section is a standalone HTML fragment — just the content, no
-                        <code>&lt;html&gt;</code> or <code>&lt;body&gt;</code> wrapper. The root element should have a
-                        matching <code>id</code> so scroll-spy and anchor linking work correctly.</p>
-
                     <div class="vd-code-snippet" data-collapsible data-expanded="true">
-                        <button class="vd-code-snippet-toggle" aria-expanded="true">
-                            <span class="vd-code-snippet-toggle-icon"></span>
-                            <span>View Code</span>
-                        </button>
-                        <div class="vd-code-snippet-content">
-                            <div class="vd-code-snippet-header">
-                                <div class="vd-code-snippet-tabs" role="tablist">
-                                    <button class="vd-code-snippet-tab is-active"
-                                        data-lang="html">sections/intro.html</button>
-                                </div>
-                                <button class="vd-code-snippet-copy" aria-label="Copy code">
-                                    <span class="vd-code-snippet-copy-icon"></span>
-                                    <span class="vd-code-snippet-copy-text">Copy</span>
-                                </button>
-                            </div>
-                            <div class="vd-code-snippet-body">
-                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">section</span> <span class="code-attr">id</span>=<span class="code-string">"intro"</span>&gt;
-  &lt;<span class="code-tag">h2</span>&gt;Introduction&lt;/<span class="code-tag">h2</span>&gt;
-  &lt;<span class="code-tag">p</span>&gt;This content was loaded lazily.&lt;/<span class="code-tag">p</span>&gt;
-&lt;/<span class="code-tag">section</span>&gt;</code></pre>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Step 3: Simplest usage — attribute driven -->
-    <div class="vd-row vd-mb-6">
-        <div class="vd-col-12">
-            <div class="vd-card vd-card-glow demo-card">
-                <div class="vd-card-header">
-                    <h4><span class="vd-badge vd-badge-primary" style="margin-right:8px;">Step 3</span><i
-                            class="ph ph-tag"></i> The Simplest Usage: HTML Attributes</h4>
-                </div>
-                <div class="vd-card-body">
-                    <p>Add <code>data-vd-lazy</code> pointing to your partial, and optionally
-                        <code>data-vd-lazy-placeholder</code> for the loading state. Call <code>Vanduo.init()</code>
-                        once and everything is wired automatically.</p>
-
-                    <div class="vd-code-snippet" data-collapsible data-expanded="true">
-                        <button class="vd-code-snippet-toggle" aria-expanded="true">
-                            <span class="vd-code-snippet-toggle-icon"></span>
-                            <span>View Code</span>
-                        </button>
-                        <div class="vd-code-snippet-content">
-                            <div class="vd-code-snippet-header">
-                                <div class="vd-code-snippet-tabs" role="tablist">
-                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
-                                </div>
-                                <button class="vd-code-snippet-copy" aria-label="Copy code">
-                                    <span class="vd-code-snippet-copy-icon"></span>
-                                    <span class="vd-code-snippet-copy-text">Copy</span>
-                                </button>
-                            </div>
-                            <div class="vd-code-snippet-body">
-                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">body</span>&gt;
-
-  <span class="code-comment">&lt;!-- This section loads immediately (it's visible on page load) --&gt;</span>
-  &lt;<span class="code-tag">div</span>
-    <span class="code-attr">data-vd-lazy</span>=<span class="code-string">"./sections/intro.html"</span>
-    <span class="code-attr">data-vd-lazy-placeholder</span>=<span class="code-string">"skeleton"</span>&gt;
-  &lt;/<span class="code-tag">div</span>&gt;
-
-  <span class="code-comment">&lt;!-- Below-fold section — fetched when user scrolls here --&gt;</span>
-  &lt;<span class="code-tag">div</span>
-    <span class="code-attr">data-vd-lazy</span>=<span class="code-string">"./sections/details.html"</span>
-    <span class="code-attr">data-vd-lazy-placeholder</span>=<span class="code-string">"spinner"</span>&gt;
-  &lt;/<span class="code-tag">div</span>&gt;
-
-  &lt;<span class="code-tag">script</span>&gt;Vanduo.init();&lt;/<span class="code-tag">script</span>&gt;
-
-&lt;/<span class="code-tag">body</span>&gt;</code></pre>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="vd-alert vd-alert-info vd-mt-5">
-                        <i class="ph ph-lightbulb"></i>
-                        <div><strong>How it works:</strong> <code>Vanduo.init()</code> calls
-                            <code>VanduoLazyLoad.init()</code>, which scans the DOM for <code>[data-vd-lazy]</code>
-                            elements, shows the placeholder immediately, then uses <code>IntersectionObserver</code> to
-                            trigger the fetch when the element enters the viewport.</div>
-                    </div>
-
-                    <h4 class="vd-mt-6 vd-mb-3">Placeholder Options</h4>
-                    <div class="vd-table-responsive">
-                        <table class="vd-table vd-table-hover">
-                            <thead>
-                                <tr>
-                                    <th style="width: 25%;">Value</th>
-                                    <th style="width: 75%;">Result</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><code>"skeleton"</code> (default)</td>
-                                    <td>Animated skeleton card with shimmer and four-color spinner overlay</td>
-                                </tr>
-                                <tr>
-                                    <td><code>"spinner"</code></td>
-                                    <td>Centered four-color spinner, minimal height</td>
-                                </tr>
-                                <tr>
-                                    <td>Any HTML string</td>
-                                    <td>Your custom HTML rendered while loading</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Step 4: Programmatic API -->
-    <div class="vd-row vd-mb-6">
-        <div class="vd-col-12">
-            <div class="vd-card vd-card-glow demo-card">
-                <div class="vd-card-header">
-                    <h4><span class="vd-badge vd-badge-primary" style="margin-right:8px;">Step 4</span><i
-                            class="ph ph-code"></i> Programmatic Usage</h4>
-                </div>
-                <div class="vd-card-body">
-                    <p>For dynamic UIs where elements are created at runtime, use the JS API directly:</p>
-
-                    <div class="vd-code-snippet" data-collapsible data-expanded="true">
-                        <button class="vd-code-snippet-toggle" aria-expanded="true">
-                            <span class="vd-code-snippet-toggle-icon"></span>
-                            <span>View Code</span>
-                        </button>
+                        <button class="vd-code-snippet-toggle" aria-expanded="true"><span class="vd-code-snippet-toggle-icon"></span><span>View Code</span></button>
                         <div class="vd-code-snippet-content">
                             <div class="vd-code-snippet-header">
                                 <div class="vd-code-snippet-tabs" role="tablist">
                                     <button class="vd-code-snippet-tab is-active" data-lang="js">JS</button>
                                 </div>
-                                <button class="vd-code-snippet-copy" aria-label="Copy code">
-                                    <span class="vd-code-snippet-copy-icon"></span>
-                                    <span class="vd-code-snippet-copy-text">Copy</span>
-                                </button>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code"><span class="vd-code-snippet-copy-icon"></span><span class="vd-code-snippet-copy-text">Copy</span></button>
                             </div>
                             <div class="vd-code-snippet-body">
-                                <pre class="vd-code-snippet-pane is-active" data-lang="js"><code><span class="code-comment">// High-level: section fetcher</span>
-<span class="code-keyword">const</span> el = document.getElementById(<span class="code-string">'section-container'</span>);
+                                <pre class="vd-code-snippet-pane is-active" data-lang="js"><code>const container = document.querySelector('#pricing-slot');
 
-VanduoLazyLoad.loadSection(<span class="code-string">'./sections/heavy.html'</span>, el, {
-  placeholder: <span class="code-string">'skeleton'</span>,
-  onLoaded: (container) =&gt; {
-    console.log(<span class="code-string">'Section ready!'</span>, container);
+VanduoLazyLoad.loadSection('./sections/pricing.html', container, {
+  placeholder: 'skeleton',
+  onLoaded: (root) =&gt; {
+    console.log('Loaded and initialized:', root);
   },
-  onError: (err) =&gt; {
-    console.error(<span class="code-string">'Could not load section:'</span>, err.message);
+  onError: (error) =&gt; {
+    console.error(error.message);
   }
-});
-
-<span class="code-comment">// Low-level: generic observe</span>
-<span class="code-keyword">const</span> img = document.querySelector(<span class="code-string">'img[data-src]'</span>);
-
-VanduoLazyLoad.observe(img, (target) =&gt; {
-  target.src = target.dataset.src;  <span class="code-comment">// swap src when visible</span>
-}, { threshold: <span class="code-number">0.1</span> });</code></pre>
+});</code></pre>
                             </div>
                         </div>
                     </div>
+                    <p class="vd-text-sm vd-text-muted vd-mt-3">The canonical registry name is <code>lazyLoad</code>, but the convenience global <code>VanduoLazyLoad</code> remains available in v1.4.x.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card vd-card-glow demo-card">
+                <div class="vd-card-header">
+                    <h4><i class="ph ph-eye"></i> Generic Observation</h4>
+                </div>
+                <div class="vd-card-body">
+                    <div class="vd-code-snippet" data-collapsible data-expanded="true">
+                        <button class="vd-code-snippet-toggle" aria-expanded="true"><span class="vd-code-snippet-toggle-icon"></span><span>View Code</span></button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="js">Images</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code"><span class="vd-code-snippet-copy-icon"></span><span class="vd-code-snippet-copy-text">Copy</span></button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="js"><code>document.querySelectorAll('img[data-src]').forEach((img) =&gt; {
+  VanduoLazyLoad.observe(img, (el) =&gt; {
+    el.src = el.dataset.src;
+    el.removeAttribute('data-src');
+  }, { rootMargin: '200px' });
+});</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="vd-text-sm vd-text-muted vd-mt-3">Observers are registered with the v1.4 lifecycle manager, so scoped destroy calls can clean them up.</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- API Reference -->
     <div class="vd-row vd-mb-6">
         <div class="vd-col-12">
             <div class="vd-card vd-card-glow demo-card">
@@ -291,326 +113,41 @@ VanduoLazyLoad.observe(img, (target) =&gt; {
                     <h4><i class="ph ph-book-open"></i> API Reference</h4>
                 </div>
                 <div class="vd-card-body">
-                    <h4 class="vd-mb-3">Methods</h4>
-                    <div class="vd-table-responsive">
-                        <table class="vd-table vd-table-hover">
-                            <thead>
-                                <tr>
-                                    <th style="width: 25%;">Method</th>
-                                    <th style="width: 30%;">Parameters</th>
-                                    <th style="width: 45%;">Description</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><code>observe(el, cb, opts?)</code></td>
-                                    <td><code>el</code>: Element<br><code>cb</code>: (el: Element) =>
-                                        void<br><code>opts.threshold</code>: 0–1<br><code>opts.rootMargin</code>: CSS
-                                        string</td>
-                                    <td>Fires <code>cb</code> once when <code>el</code> enters viewport, then unobserves</td>
-                                </tr>
-                                <tr>
-                                    <td><code>unobserve(el)</code></td>
-                                    <td><code>el</code>: Element</td>
-                                    <td>Stops observing a specific element</td>
-                                </tr>
-                                <tr>
-                                    <td><code>unobserveAll()</code></td>
-                                    <td>—</td>
-                                    <td>Stops all active observations</td>
-                                </tr>
-                                <tr>
-                                    <td><code>loadSection(url, el, opts?)</code></td>
-                                    <td><code>url</code>: string<br><code>el</code>: Element<br><code>opts.placeholder</code>: string<br><code>opts.threshold</code>: 0–1<br><code>opts.rootMargin</code>: CSS string<br><code>opts.onLoaded</code>: (el) => void<br><code>opts.onError</code>: (err) => void</td>
-                                    <td>Fetches an HTML partial and injects it into <code>el</code> when the element enters the viewport</td>
-                                </tr>
-                                <tr>
-                                    <td><code>init()</code></td>
-                                    <td>—</td>
-                                    <td>Wires all <code>[data-vd-lazy]</code> elements in the DOM</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <h4 class="vd-mt-6 vd-mb-3">Events</h4>
-                    <div class="vd-table-responsive">
-                        <table class="vd-table vd-table-hover">
-                            <thead>
-                                <tr>
-                                    <th style="width: 25%;">Event</th>
-                                    <th style="width: 25%;">Fired on</th>
-                                    <th style="width: 50%;">When</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><code>lazysection:loading</code></td>
-                                    <td><code>containerEl</code></td>
-                                    <td>Immediately after placeholder is shown</td>
-                                </tr>
-                                <tr>
-                                    <td><code>lazysection:loaded</code></td>
-                                    <td><code>containerEl</code></td>
-                                    <td>After content is injected successfully</td>
-                                </tr>
-                                <tr>
-                                    <td><code>lazysection:error</code></td>
-                                    <td><code>containerEl</code></td>
-                                    <td>After a fetch failure (404, network error, etc.)</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div class="vd-alert vd-alert-info vd-mt-5">
-                        <i class="ph ph-lock"></i>
-                        <div><strong>Security note:</strong> <code>loadSection()</code> rejects any URL that resolves to
-                            a different origin. Only same-origin and relative URLs are allowed. Cross-origin requests
-                            are blocked silently with a console error.</div>
+                    <table class="vd-table vd-table-hover">
+                        <thead>
+                            <tr>
+                                <th>Method</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>observe(el, cb, opts?)</code></td>
+                                <td>Runs <code>cb</code> once when <code>el</code> enters view, then unobserves it.</td>
+                            </tr>
+                            <tr>
+                                <td><code>unobserve(el)</code></td>
+                                <td>Stops observing one element.</td>
+                            </tr>
+                            <tr>
+                                <td><code>unobserveAll()</code></td>
+                                <td>Stops all lazy-load observations.</td>
+                            </tr>
+                            <tr>
+                                <td><code>loadSection(url, el, opts?)</code></td>
+                                <td>Fetches same-origin HTML into <code>el</code>, emits lazy-section events, and initializes only <code>el</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>init(root?)</code></td>
+                                <td>Wires <code>[data-vd-lazy]</code> containers inside <code>root</code> or the full document.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="vd-alert vd-alert-warning vd-mt-4">
+                        <i class="ph ph-shield-check"></i>
+                        <div><code>loadSection()</code> only accepts same-origin or relative URLs. Fetched HTML is convenient for trusted partials; do not use it as a sanitization boundary for untrusted CMS/user content.</div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Listening to events -->
-    <div class="vd-row vd-mb-6">
-        <div class="vd-col-12">
-            <div class="vd-card vd-card-glow demo-card">
-                <div class="vd-card-header">
-                    <h4><i class="ph ph-bell"></i> Listening to Events</h4>
-                </div>
-                <div class="vd-card-body">
-                    <p>All events bubble from the container element, so you can listen globally or on the target:</p>
-
-                    <div class="vd-code-snippet" data-collapsible data-expanded="true">
-                        <button class="vd-code-snippet-toggle" aria-expanded="true">
-                            <span class="vd-code-snippet-toggle-icon"></span>
-                            <span>View Code</span>
-                        </button>
-                        <div class="vd-code-snippet-content">
-                            <div class="vd-code-snippet-header">
-                                <div class="vd-code-snippet-tabs" role="tablist">
-                                    <button class="vd-code-snippet-tab is-active" data-lang="js">JS</button>
-                                </div>
-                                <button class="vd-code-snippet-copy" aria-label="Copy code">
-                                    <span class="vd-code-snippet-copy-icon"></span>
-                                    <span class="vd-code-snippet-copy-text">Copy</span>
-                                </button>
-                            </div>
-                            <div class="vd-code-snippet-body">
-                                <pre class="vd-code-snippet-pane is-active" data-lang="js"><code><span class="code-comment">// Global listeners (bubble from any lazy container)</span>
-document.addEventListener(<span class="code-string">'lazysection:loading'</span>, (e) =&gt; {
-  console.log(<span class="code-string">'Fetching:'</span>, e.detail.url);
-});
-
-document.addEventListener(<span class="code-string">'lazysection:loaded'</span>, (e) =&gt; {
-  console.log(<span class="code-string">'Loaded:'</span>, e.detail.url, <span class="code-string">'into'</span>, e.target);
-  <span class="code-comment">// Re-run analytics, highlight code, etc.</span>
-});
-
-document.addEventListener(<span class="code-string">'lazysection:error'</span>, (e) =&gt; {
-  console.error(<span class="code-string">'Failed:'</span>, e.detail.url, e.detail.error);
-  <span class="code-comment">// Show a retry button, report to Sentry, etc.</span>
-});</code></pre>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Real-world patterns -->
-    <div class="vd-row vd-mb-6">
-        <div class="vd-col-12">
-            <div class="vd-card vd-card-glow demo-card">
-                <div class="vd-card-header">
-                    <h4><i class="ph ph-sparkle"></i> Real-world Patterns</h4>
-                </div>
-                <div class="vd-card-body">
-
-                    <h4 class="vd-mt-3 vd-mb-3"><i class="ph ph-image" style="color:var(--color-primary);"></i> Lazy Images</h4>
-                    <p>Swap <code>data-src</code> to <code>src</code> when images scroll into view:</p>
-                    <div class="vd-code-snippet" data-collapsible data-expanded="true">
-                        <button class="vd-code-snippet-toggle" aria-expanded="true">
-                            <span class="vd-code-snippet-toggle-icon"></span>
-                            <span>View Code</span>
-                        </button>
-                        <div class="vd-code-snippet-content">
-                            <div class="vd-code-snippet-header">
-                                <div class="vd-code-snippet-tabs" role="tablist">
-                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
-                                    <button class="vd-code-snippet-tab" data-lang="js">JS</button>
-                                </div>
-                                <button class="vd-code-snippet-copy" aria-label="Copy code">
-                                    <span class="vd-code-snippet-copy-icon"></span>
-                                    <span class="vd-code-snippet-copy-text">Copy</span>
-                                </button>
-                            </div>
-                            <div class="vd-code-snippet-body">
-                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- HTML: use data-src instead of src --&gt;</span>
-&lt;<span class="code-tag">img</span> <span class="code-attr">data-src</span>=<span class="code-string">"photos/landscape.jpg"</span>
-     <span class="code-attr">alt</span>=<span class="code-string">"Mountain landscape"</span>
-     <span class="code-attr">width</span>=<span class="code-string">"800"</span> <span class="code-attr">height</span>=<span class="code-string">"450"</span>
-     <span class="code-attr">style</span>=<span class="code-string">"background: var(--bg-secondary);"</span>&gt;</code></pre>
-                                <pre class="vd-code-snippet-pane" data-lang="js"><code><span class="code-comment">// JS: observe each image</span>
-document.querySelectorAll(<span class="code-string">'img[data-src]'</span>).forEach((img) =&gt; {
-  VanduoLazyLoad.observe(img, (el) =&gt; {
-    el.src = el.dataset.src;
-    el.removeAttribute(<span class="code-string">'data-src'</span>);
-  }, { rootMargin: <span class="code-string">'200px'</span> });  <span class="code-comment">// prefetch before visible</span>
-});</code></pre>
-                            </div>
-                        </div>
-                    </div>
-
-                    <h4 class="vd-mt-8 vd-mb-3"><i class="ph ph-chart-bar" style="color:var(--color-success);"></i> Lazy Charts</h4>
-                    <p>Initialize expensive chart libraries only when the container scrolls into view:</p>
-                    <div class="vd-code-snippet" data-collapsible data-expanded="true">
-                        <button class="vd-code-snippet-toggle" aria-expanded="true">
-                            <span class="vd-code-snippet-toggle-icon"></span>
-                            <span>View Code</span>
-                        </button>
-                        <div class="vd-code-snippet-content">
-                            <div class="vd-code-snippet-header">
-                                <div class="vd-code-snippet-tabs" role="tablist">
-                                    <button class="vd-code-snippet-tab is-active" data-lang="js">JS</button>
-                                </div>
-                                <button class="vd-code-snippet-copy" aria-label="Copy code">
-                                    <span class="vd-code-snippet-copy-icon"></span>
-                                    <span class="vd-code-snippet-copy-text">Copy</span>
-                                </button>
-                            </div>
-                            <div class="vd-code-snippet-body">
-                                <pre class="vd-code-snippet-pane is-active" data-lang="js"><code><span class="code-keyword">const</span> chartEl = document.getElementById(<span class="code-string">'revenue-chart'</span>);
-
-VanduoLazyLoad.observe(chartEl, <span class="code-keyword">async</span> (el) =&gt; {
-  <span class="code-comment">// Only load the chart library when the user scrolls here</span>
-  <span class="code-keyword">const</span> { Chart } = <span class="code-keyword">await</span> <span class="code-function">import</span>(<span class="code-string">'chart.js'</span>);
-  <span class="code-keyword">new</span> Chart(el, {
-    type: <span class="code-string">'bar'</span>,
-    data: { <span class="code-comment">/* ... */</span> }
-  });
-});</code></pre>
-                            </div>
-                        </div>
-                    </div>
-
-                    <h4 class="vd-mt-8 vd-mb-3"><i class="ph ph-rows" style="color:var(--color-info);"></i> Infinite Scroll (Paginated Content)</h4>
-                    <p>Place a sentinel at the bottom of a list. When it enters view, fetch and append the next page:</p>
-                    <div class="vd-code-snippet" data-collapsible data-expanded="true">
-                        <button class="vd-code-snippet-toggle" aria-expanded="true">
-                            <span class="vd-code-snippet-toggle-icon"></span>
-                            <span>View Code</span>
-                        </button>
-                        <div class="vd-code-snippet-content">
-                            <div class="vd-code-snippet-header">
-                                <div class="vd-code-snippet-tabs" role="tablist">
-                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
-                                    <button class="vd-code-snippet-tab" data-lang="js">JS</button>
-                                </div>
-                                <button class="vd-code-snippet-copy" aria-label="Copy code">
-                                    <span class="vd-code-snippet-copy-icon"></span>
-                                    <span class="vd-code-snippet-copy-text">Copy</span>
-                                </button>
-                            </div>
-                            <div class="vd-code-snippet-body">
-                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">div</span> <span class="code-attr">id</span>=<span class="code-string">"post-list"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;
-&lt;<span class="code-tag">div</span> <span class="code-attr">id</span>=<span class="code-string">"scroll-sentinel"</span> <span class="code-attr">style</span>=<span class="code-string">"height: 1px;"</span>&gt;&lt;/<span class="code-tag">div</span>&gt;</code></pre>
-                                <pre class="vd-code-snippet-pane" data-lang="js"><code><span class="code-keyword">let</span> page = 1;
-<span class="code-keyword">const</span> sentinel = document.getElementById(<span class="code-string">'scroll-sentinel'</span>);
-
-VanduoLazyLoad.observe(sentinel, <span class="code-keyword">async</span> () =&gt; {
-  <span class="code-keyword">const</span> res = <span class="code-keyword">await</span> <span class="code-function">fetch</span>(<span class="code-string">`/api/posts?page=${page}`</span>);
-  <span class="code-keyword">const</span> posts = <span class="code-keyword">await</span> res.<span class="code-function">json</span>();
-
-  <span class="code-keyword">const</span> list = document.getElementById(<span class="code-string">'post-list'</span>);
-  posts.forEach((p) =&gt; {
-    list.insertAdjacentHTML(<span class="code-string">'beforeend'</span>,
-      <span class="code-string">`&lt;div class="vd-card vd-mb-4"&gt;&lt;div class="vd-card-body"&gt;&lt;h4&gt;${p.title}&lt;/h4&gt;&lt;p&gt;${p.excerpt}&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;`</span>
-    );
-  });
-
-  page++;
-  <span class="code-keyword">if</span> (posts.length &gt; 0) {
-    VanduoLazyLoad.observe(sentinel, <span class="code-comment">/* same callback */</span>);
-  }
-});</code></pre>
-                            </div>
-                        </div>
-                    </div>
-
-                    <h4 class="vd-mt-8 vd-mb-3"><i class="ph ph-animation" style="color:var(--color-warning);"></i> Scroll Animations</h4>
-                    <p>Add a CSS class when elements enter the viewport to trigger fade-in or slide-up transitions:</p>
-                    <div class="vd-code-snippet" data-collapsible data-expanded="true">
-                        <button class="vd-code-snippet-toggle" aria-expanded="true">
-                            <span class="vd-code-snippet-toggle-icon"></span>
-                            <span>View Code</span>
-                        </button>
-                        <div class="vd-code-snippet-content">
-                            <div class="vd-code-snippet-header">
-                                <div class="vd-code-snippet-tabs" role="tablist">
-                                    <button class="vd-code-snippet-tab is-active" data-lang="css">CSS</button>
-                                    <button class="vd-code-snippet-tab" data-lang="js">JS</button>
-                                </div>
-                                <button class="vd-code-snippet-copy" aria-label="Copy code">
-                                    <span class="vd-code-snippet-copy-icon"></span>
-                                    <span class="vd-code-snippet-copy-text">Copy</span>
-                                </button>
-                            </div>
-                            <div class="vd-code-snippet-body">
-                                <pre class="vd-code-snippet-pane is-active" data-lang="css"><code>.fade-in {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.fade-in.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}</code></pre>
-                                <pre class="vd-code-snippet-pane" data-lang="js"><code>document.querySelectorAll(<span class="code-string">'.fade-in'</span>).forEach((el) =&gt; {
-  VanduoLazyLoad.observe(el, (target) =&gt; {
-    target.classList.add(<span class="code-string">'is-visible'</span>);
-  }, { threshold: 0.15 });
-});</code></pre>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- What's Next block -->
-    <div class="vd-mt-8" style="border-top: 1px solid var(--border-color); padding-top: 2.5rem; padding-bottom: 3rem;">
-        <h4 class="vd-text-lg vd-mb-5"><i class="ph ph-arrow-circle-right"></i> What's Next?</h4>
-        <div class="vd-row" style="gap: 1.25rem;">
-            <div class="vd-col-12 vd-col-md-4 vd-mb-4">
-                <a href="#docs/accessibility-essentials" data-route="docs/accessibility-essentials" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
-                    <div class="vd-card-body">
-                        <h4 class="vd-text-md vd-mb-2">Accessibility Essentials</h4>
-                        <p class="vd-text-sm vd-text-muted vd-mb-0">Ensure your lazily loaded content is accessible to all users, including screen readers and keyboard navigation.</p>
-                    </div>
-                </a>
-            </div>
-            <div class="vd-col-12 vd-col-md-4 vd-mb-4">
-                <a href="#docs/starter-templates" data-route="docs/starter-templates" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
-                    <div class="vd-card-body">
-                        <h4 class="vd-text-md vd-mb-2">Starter Templates</h4>
-                        <p class="vd-text-sm vd-text-muted vd-mb-0">Put lazy loading into practice with complete, production-ready templates for landing pages, dashboards, and blogs.</p>
-                    </div>
-                </a>
-            </div>
-            <div class="vd-col-12 vd-col-md-4 vd-mb-4">
-                <a href="#docs/utilities-cheat-sheet" data-route="docs/utilities-cheat-sheet" class="vd-card vd-card-actionable vd-card-glow" style="text-decoration: none;">
-                    <div class="vd-card-body">
-                        <h4 class="vd-text-md vd-mb-2">Utilities Cheat Sheet</h4>
-                        <p class="vd-text-sm vd-text-muted vd-mb-0">Quick reference for spacing, typography, colors, and layout utilities you can apply to any element.</p>
-                    </div>
-                </a>
             </div>
         </div>
     </div>

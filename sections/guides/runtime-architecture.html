@@ -1,0 +1,97 @@
+<section id="runtime-architecture">
+    <h4 class="demo-title"><i class="ph ph-circuitry"></i>Runtime Architecture <code class="vd-text-sm">Guide</code></h4>
+    <p class="vd-mb-6">Vanduo v1.4.0 centers the runtime around one public global, scoped initialization, and canonical lowerCamelCase component registry names. This lets static pages stay simple while SPAs and lazy-loaded apps can initialize only the DOM they just rendered.</p>
+
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card demo-card">
+                <div class="vd-card-header">
+                    <h4><i class="ph ph-terminal-window"></i> Public Runtime</h4>
+                </div>
+                <div class="vd-card-body">
+                    <div class="vd-code-snippet" data-collapsible data-expanded="true">
+                        <button class="vd-code-snippet-toggle" aria-expanded="true"><span class="vd-code-snippet-toggle-icon"></span><span>View Code</span></button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="js">API</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code"><span class="vd-code-snippet-copy-icon"></span><span class="vd-code-snippet-copy-text">Copy</span></button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="js"><code>Vanduo.init(root);
+Vanduo.initComponents(root);
+Vanduo.reinit(name, root);
+Vanduo.destroy(root);
+Vanduo.destroyAll();
+Vanduo.getComponent(name);</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="vd-text-sm vd-text-muted vd-mt-3">Pass a <code>Document</code> or <code>Element</code> to scope work. Omit <code>root</code> only when you intend to target the whole document.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card demo-card">
+                <div class="vd-card-header">
+                    <h4><i class="ph ph-text-aa"></i> Naming</h4>
+                </div>
+                <div class="vd-card-body">
+                    <table class="vd-table vd-table-bordered">
+                        <tbody>
+                            <tr>
+                                <td>Registry names</td>
+                                <td><code>lazyLoad</code>, <code>docSearch</code>, <code>fontSwitcher</code>, <code>gridLayout</code></td>
+                            </tr>
+                            <tr>
+                                <td>Files and DOM hooks</td>
+                                <td><code>lazy-load.js</code>, <code>data-vd-lazy</code>, <code>data-vd-doc-search</code></td>
+                            </tr>
+                            <tr>
+                                <td>Convenience globals</td>
+                                <td><code>VanduoLazyLoad</code>, <code>VanduoTooltips</code>, <code>VanduoTimeline</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="vd-text-sm vd-text-muted vd-mt-3"><code>LazyLoad</code> remains a compatibility alias for the 1.4.x line; new code should use <code>lazyLoad</code>.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card demo-card">
+                <div class="vd-card-header">
+                    <h4><i class="ph ph-package"></i> Package Formats</h4>
+                </div>
+                <div class="vd-card-body">
+                    <p>Use the IIFE bundle for plain HTML pages, or import the ESM build through a bundler.</p>
+                    <div class="vd-code-snippet vd-mt-4" data-collapsible data-expanded="true">
+                        <button class="vd-code-snippet-toggle" aria-expanded="true"><span class="vd-code-snippet-toggle-icon"></span><span>View Code</span></button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">IIFE</button>
+                                    <button class="vd-code-snippet-tab" data-lang="js">ESM</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code"><span class="vd-code-snippet-copy-icon"></span><span class="vd-code-snippet-copy-text">Copy</span></button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;link rel="stylesheet" href="dist/vanduo.min.css"&gt;
+&lt;script src="dist/vanduo.min.js"&gt;&lt;/script&gt;
+&lt;script&gt;Vanduo.init();&lt;/script&gt;</code></pre>
+                                <pre class="vd-code-snippet-pane" data-lang="js"><code>import '@vanduo-oss/framework/dist/vanduo.css';
+import { Vanduo } from '@vanduo-oss/framework';
+
+Vanduo.init(document);</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

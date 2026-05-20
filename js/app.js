@@ -164,6 +164,18 @@ function safeInjectHtml(container, html) {
     });
 }
 
+function initVanduoScope(root) {
+    if (window.Vanduo && typeof window.Vanduo.init === 'function') {
+        window.Vanduo.init(root || document);
+    }
+}
+
+function destroyVanduoScope(root) {
+    if (window.Vanduo && typeof window.Vanduo.destroy === 'function' && root) {
+        window.Vanduo.destroy(root);
+    }
+}
+
 function setMorphBadgeContent(target, icon, label) {
     if (!target) return;
     const safeIcon = String(icon || '').replace(/[^a-z0-9-\s]/gi, '').trim();
@@ -185,6 +197,7 @@ function setMorphBadgeContent(target, icon, label) {
 
 /* ── Constants ────────────────────────────────── */
 const SECTIONS_BASE = './sections/';
+const DOCS_CONTENT_VERSION = '1.4.0-docs-5';
 let registry = { pages: [], tabs: {} };
 const loadedSections = new Set();
 const loadingSections = new Set();
@@ -204,6 +217,10 @@ let currentNavigationController = null;
 const SECTION_PRELOAD_CONCURRENCY = 6;
 const sectionPrefetching = new Set();
 let docsWarmupTimer = null;
+
+function withDocsContentVersion(url) {
+    return url + (url.indexOf('?') === -1 ? '?' : '&') + 'v=' + encodeURIComponent(DOCS_CONTENT_VERSION);
+}
 
 function releasePendingDocNavigation(delayMs = 0) {
     if (pendingDocNavigationReleaseTimer) {
@@ -261,14 +278,14 @@ function requestDocScrollLoaderForRoute(route) {
 function getVanduoDynamicLoaderMarkHtml() {
     return '<div class="vd-dynamic-loader-mark" aria-hidden="true">'
         + '<svg class="vd-dynamic-loader-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 432 432" fill="none">'
-        + '<circle cx="216" cy="216" r="191.5" fill="none" stroke="var(--color-primary)" stroke-width="49"/>'
-        + '<path fill="var(--color-primary)" d="M245.811 344.5C232.339 367.833 198.661 367.833 185.189 344.5L88.6273 177.25C75.1558 153.917 91.9952 124.75 118.938 124.75L312.062 124.75C339.005 124.75 355.844 153.917 342.373 177.25L245.811 344.5Z"/>'
-        + '<path fill="none" stroke="var(--color-primary-dark)" stroke-width="5" d="M245.378 344.25C232.099 367.25 198.901 367.25 185.622 344.25L89.0605 177C75.7815 154 92.3804 125.25 118.938 125.25L312.062 125.25C338.62 125.25 355.219 154 341.939 177L245.378 344.25Z"/>'
+        + '<circle cx="216" cy="216" r="191.5" fill="none" stroke="var(--vd-color-primary)" stroke-width="49"/>'
+        + '<path fill="var(--vd-color-primary)" d="M245.811 344.5C232.339 367.833 198.661 367.833 185.189 344.5L88.6273 177.25C75.1558 153.917 91.9952 124.75 118.938 124.75L312.062 124.75C339.005 124.75 355.844 153.917 342.373 177.25L245.811 344.5Z"/>'
+        + '<path fill="none" stroke="var(--vd-color-primary-dark)" stroke-width="5" d="M245.378 344.25C232.099 367.25 198.901 367.25 185.622 344.25L89.0605 177C75.7815 154 92.3804 125.25 118.938 125.25L312.062 125.25C338.62 125.25 355.219 154 341.939 177L245.378 344.25Z"/>'
         + '</svg></div>';
 }
 
 function getLoadingPlaceholderHtml() {
-    return '<div style="padding: 4rem 0; scroll-margin-top: 80px; border-bottom: 1px solid var(--border-color);">'
+    return '<div style="padding: 4rem 0; scroll-margin-top: 80px; border-bottom: 1px solid var(--vd-border-color);">'
         + '<div class="vd-skeleton-card vd-glass vd-glass-contrast" style="position: relative; min-height: 300px; padding: 2rem; overflow: hidden;">'
         + '<div class="vd-skeleton vd-skeleton-heading-lg" style="margin-bottom: 1.5rem;"></div>'
         + '<div class="vd-skeleton vd-skeleton-paragraph">'
@@ -485,7 +502,7 @@ async function prefetchSection(sectionId, options = {}) {
 
     sectionPrefetching.add(sectionId);
     try {
-        var res = await fetch(SECTIONS_BASE + meta.section.file, { signal: options.signal });
+        var res = await fetch(withDocsContentVersion(SECTIONS_BASE + meta.section.file), { signal: options.signal, cache: 'no-store' });
         if (!res.ok) return;
         var html = await res.text();
         if (html) setCachedSectionHtml(sectionId, html);
@@ -500,7 +517,7 @@ async function prefetchSection(sectionId, options = {}) {
 
 /* ── Registry loading ─────────────────────────── */
 async function loadRegistry() {
-    var res = await fetch(SECTIONS_BASE + 'sections.json');
+    var res = await fetch(withDocsContentVersion(SECTIONS_BASE + 'sections.json'), { cache: 'no-store' });
     if (!res.ok) throw new Error('Failed to load sections.json');
     registry = await res.json();
 }
@@ -691,6 +708,19 @@ function setActiveNavLink(sectionId) {
     });
 }
 
+function syncDocsTabState(tabKey) {
+    var safeTab = tabKey === 'guides' ? 'guides' : 'components';
+    var docsView = document.getElementById('docs-view');
+    var docsContent = document.getElementById('dynamic-content');
+
+    if (docsView) {
+        docsView.setAttribute('data-doc-tab', safeTab);
+    }
+    if (docsContent) {
+        docsContent.setAttribute('data-doc-tab', safeTab);
+    }
+}
+
 /* ── View switching ───────────────────────────── */
 function showView(view) {
     var pageView = document.getElementById('page-view');
@@ -698,6 +728,9 @@ function showView(view) {
     if (view === 'docs') {
         pageView.classList.remove('is-active');
         docsView.classList.add('is-active');
+        if (currentTab) {
+            syncDocsTabState(currentTab);
+        }
     } else {
         docsView.classList.remove('is-active');
         pageView.classList.add('is-active');
@@ -766,6 +799,7 @@ async function loadPage(pageId, options = {}) {
     setActiveNavbarLink(pageId);
     var container = document.getElementById('page-view');
 
+    destroyVanduoScope(container);
     container.innerHTML = getPagePlaceholderHtml();
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
@@ -776,11 +810,11 @@ async function loadPage(pageId, options = {}) {
     }
     try {
         setDocumentTitle(page.title);
-        var res = await fetch(SECTIONS_BASE + page.file);
+        var res = await fetch(withDocsContentVersion(SECTIONS_BASE + page.file), { cache: 'no-store' });
         if (!res.ok) throw new Error('Failed to load ' + page.file);
         var html = await res.text();
         safeInjectHtml(container, html);
-        if (typeof Vanduo !== 'undefined') Vanduo.init();
+        initVanduoScope(container);
         hideDisabledCodeTabs(container);
         wireRouteLinks(container);
         initChangelogPagination(pageId, container);
@@ -951,7 +985,7 @@ async function loadSection(sectionId, autoScroll = true, options = {}) {
         var html = getCachedSectionHtml(sectionId);
         if (!html) {
             var url = SECTIONS_BASE + meta.section.file;
-            var res = await fetch(url, { signal: signal });
+            var res = await fetch(withDocsContentVersion(url), { signal: signal, cache: 'no-store' });
             if (!res.ok) throw new Error('Failed to load ' + url);
             html = await res.text();
             setCachedSectionHtml(sectionId, html);
@@ -968,7 +1002,7 @@ async function loadSection(sectionId, autoScroll = true, options = {}) {
                 container.replaceChild(sectionEl, placeholder);
             }
             loadedSections.add(sectionId);
-            if (typeof Vanduo !== 'undefined') Vanduo.init();
+            initVanduoScope(sectionEl);
             hideDisabledCodeTabs(sectionEl);
             wireRouteLinks(sectionEl);
             initSectionDemos(sectionEl);
@@ -1021,8 +1055,10 @@ async function switchTab(tabKey, options = {}) {
     if (currentTab === tabKey) return;
     currentTab = tabKey;
     setActiveDocMode(tabKey);
+    syncDocsTabState(tabKey);
 
     var container = document.getElementById('dynamic-content');
+    destroyVanduoScope(container);
     container.innerHTML = '';
     loadedSections.clear();
     loadingSections.clear();
@@ -2030,6 +2066,9 @@ var LEGACY_CUSTOMIZER_FONT_MAP = {
 };
 
 function normalizeCustomizerFontKey(fontKey) {
+    if (typeof window.__VANDUO_DOCS_NORMALIZE_FONT_PREFERENCE__ === 'function') {
+        return window.__VANDUO_DOCS_NORMALIZE_FONT_PREFERENCE__(fontKey);
+    }
     var key = String(fontKey || '').trim().toLowerCase();
     if (!key) return 'ubuntu';
     if (Object.prototype.hasOwnProperty.call(LEGACY_CUSTOMIZER_FONT_MAP, key)) {

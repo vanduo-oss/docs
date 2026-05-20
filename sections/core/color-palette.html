@@ -39,7 +39,7 @@
 
                             .color-scale-title code {
                                 font-size: var(--font-size-xs);
-                                background: var(--bg-secondary);
+                                background: var(--vd-bg-secondary);
                                 padding: 0.125rem 0.375rem;
                                 border-radius: 3px;
                             }
@@ -171,42 +171,42 @@
                                         <div class="vd-row" style="margin: 0;">
                                             <div class="vd-col-12 vd-col-md-6 vd-col-lg-4" style="padding: 0;">
                                                 <div class="color-swatch"
-                                                    style="background: #f8f9fa; color: #212529; border-bottom: 1px solid var(--border-color);">
+                                                    style="background: #f8f9fa; color: #212529; border-bottom: 1px solid var(--vd-border-color);">
                                                     <span class="color-swatch-name">gray-0</span>
                                                     <span class="color-swatch-hex">#f8f9fa</span>
                                                 </div>
                                             </div>
                                             <div class="vd-col-12 vd-col-md-6 vd-col-lg-4" style="padding: 0;">
                                                 <div class="color-swatch"
-                                                    style="background: #f1f3f5; color: #212529; border-bottom: 1px solid var(--border-color);">
+                                                    style="background: #f1f3f5; color: #212529; border-bottom: 1px solid var(--vd-border-color);">
                                                     <span class="color-swatch-name">gray-1</span>
                                                     <span class="color-swatch-hex">#f1f3f5</span>
                                                 </div>
                                             </div>
                                             <div class="vd-col-12 vd-col-md-6 vd-col-lg-4" style="padding: 0;">
                                                 <div class="color-swatch"
-                                                    style="background: #e9ecef; color: #212529; border-bottom: 1px solid var(--border-color);">
+                                                    style="background: #e9ecef; color: #212529; border-bottom: 1px solid var(--vd-border-color);">
                                                     <span class="color-swatch-name">gray-2</span>
                                                     <span class="color-swatch-hex">#e9ecef</span>
                                                 </div>
                                             </div>
                                             <div class="vd-col-12 vd-col-md-6 vd-col-lg-4" style="padding: 0;">
                                                 <div class="color-swatch"
-                                                    style="background: #dee2e6; color: #212529; border-bottom: 1px solid var(--border-color);">
+                                                    style="background: #dee2e6; color: #212529; border-bottom: 1px solid var(--vd-border-color);">
                                                     <span class="color-swatch-name">gray-3</span>
                                                     <span class="color-swatch-hex">#dee2e6</span>
                                                 </div>
                                             </div>
                                             <div class="vd-col-12 vd-col-md-6 vd-col-lg-4" style="padding: 0;">
                                                 <div class="color-swatch"
-                                                    style="background: #ced4da; color: #212529; border-bottom: 1px solid var(--border-color);">
+                                                    style="background: #ced4da; color: #212529; border-bottom: 1px solid var(--vd-border-color);">
                                                     <span class="color-swatch-name">gray-4</span>
                                                     <span class="color-swatch-hex">#ced4da</span>
                                                 </div>
                                             </div>
                                             <div class="vd-col-12 vd-col-md-6 vd-col-lg-4" style="padding: 0;">
                                                 <div class="color-swatch"
-                                                    style="background: #adb5bd; color: #212529; border-bottom: 1px solid var(--border-color);">
+                                                    style="background: #adb5bd; color: #212529; border-bottom: 1px solid var(--vd-border-color);">
                                                     <span class="color-swatch-name">gray-5</span>
                                                     <span class="color-swatch-hex">#adb5bd</span>
                                                 </div>
@@ -513,7 +513,7 @@
                                         <p class="vd-mb-3">Use <code>vd-text-{color}-{shade}</code> to set an element's
                                             text color.</p>
 
-                                        <div class="vd-card vd-mb-3" style="border: 1px solid var(--border-color);">
+                                        <div class="vd-card vd-mb-3" style="border: 1px solid var(--vd-border-color);">
                                             <div class="vd-card-body">
                                                 <span class="vd-text-blue-7" style="font-size: 1.1rem; font-weight: 500;">
                                                     This text has a <strong>vd-text-blue-7</strong> class
@@ -631,8 +631,8 @@
 
 <span class="code-comment">/* Semantic aliases (recommended) */</span>
 <span class="code-selector">.my-button</span> {
-  <span class="code-property">background</span>: <span class="code-value">var(--color-primary)</span>;
-  <span class="code-property">border-color</span>: <span class="code-value">var(--color-primary-dark)</span>;
+  <span class="code-property">background</span>: <span class="code-value">var(--vd-color-primary)</span>;
+  <span class="code-property">border-color</span>: <span class="code-value">var(--vd-color-primary-dark)</span>;
 }
 
 <span class="code-comment">/* Hover states using scale */</span>
@@ -692,7 +692,7 @@
                                         </div>
                                         <p class="vd-text-sm vd-text-muted vd-mt-3">All components using
                                             <code>--primary-*</code>
-                                            or <code>--color-primary</code> will automatically update.</p>
+                                            or <code>--vd-color-primary</code> will automatically update.</p>
                                     </div>
                                 </div>
                             </div>
@@ -704,7 +704,7 @@
                                 <div class="vd-card vd-card-glow">
                                     <div class="vd-card-body vd-text-center">
                                         <p class="vd-text-muted">
-                                            <i class="ph ph-palette" style="color: var(--color-primary);"></i>
+                                            <i class="ph ph-palette" style="color: var(--vd-color-primary);"></i>
                                             Color palette based on <a href="https://yeun.github.io/open-color/"
                                                 target="_blank" rel="noopener"><strong>Open Color</strong></a> by
                                             Heeyeun Jeong — MIT Licensed

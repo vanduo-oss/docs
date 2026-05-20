@@ -15,6 +15,102 @@
         <div class="vd-container-responsive" style="max-width: 1200px;">
 
             <!-- ═══════════════════════════════════════════════ -->
+            <!-- Version 1.4.0                                   -->
+            <!-- ═══════════════════════════════════════════════ -->
+            <article class="version-card">
+                <header class="version-header">
+                    <span class="vd-badge vd-badge-primary" style="font-size: 1rem; padding: 0.5rem 1rem;">v1.4.0</span>
+                    <span style="color: var(--text-secondary); font-size: 0.95rem;">
+                        <i class="ph ph-calendar mr-1"></i>May 19, 2026
+                    </span>
+                    <span class="vd-badge vd-badge-info" style="font-size: 0.75rem;">Latest</span>
+                </header>
+                <div class="version-body">
+                    <div class="vd-row">
+                        <div class="vd-col-12 vd-col-md-6">
+                            <h4><i class="ph ph-cube mr-2" style="color: var(--color-primary);"></i>Framework</h4>
+                            <div class="change-group">
+                                <h5>Updates</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-circuitry" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: Scoped runtime and lifecycle architecture</strong>
+                                            <p><code>Vanduo.init(root)</code>, <code>Vanduo.destroy(root)</code>, and <code>Vanduo.reinit(name, root)</code> now operate on a specific document or element subtree, backed by <code>VanduoLifecycle</code> cleanup registration for stateful components.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-text-aa" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: Canonical lowerCamelCase registry names</strong>
+                                            <p>Component registry names now standardize on lowerCamelCase. <code>lazyLoad</code> is the canonical lazy-load key, while <code>LazyLoad</code> remains as a 1.4.x compatibility alias.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-swatches" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: Canonical <code>--vd-*</code> semantic tokens</strong>
+                                            <p>Framework authoring now prefers <code>--vd-color-*</code>, <code>--vd-bg-*</code>, <code>--vd-text-*</code>, and related semantic token families. Legacy semantic aliases remain supported through 1.4.x.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-shield-check" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: Security and hygiene hardening</strong>
+                                            <p>Sanitization gained explicit inline-style control, internal HTML-rendering call sites tightened defaults, <code>docSearch.highlightTag</code> is allowlisted, and dependency audit policy moved to a moderate threshold.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-code-block" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: Code Snippet now hydrates cleanly in scoped runtime flows</strong>
+                                            <p><code>codeSnippet</code> now supports scoped initialization and automatic syntax highlighting for standard snippet panes, which keeps dynamic docs sections and lazy-injected examples consistent without full-document reinitialization.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="vd-col-12 vd-col-md-6">
+                            <h4><i class="ph ph-book-open-text mr-2" style="color: var(--color-primary);"></i>Documentation</h4>
+                            <div class="change-group">
+                                <h5>Updates</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-plugs-connected" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: Docs app now uses scoped hydration</strong>
+                                            <p>The docs SPA destroys page containers before replacement and initializes only injected pages or sections, matching the v1.4.0 lifecycle architecture.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-compass" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: New architecture, lifecycle, security, and production guides</strong>
+                                            <p>The Guides tab now includes runtime architecture, lifecycle manager, security practices, and production best-practices pages.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-link" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: Docs CDN examples and runtime pin now target v1.4.0</strong>
+                                            <p>Site metadata, jsDelivr runtime loading, guide examples, local docs assets, and copied framework component/util files now align to <code>@v1.4.0</code>.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-code" style="color: var(--color-info);"></i>
+                                        <div>
+                                            <strong>Update: Code examples now use the unified snippet UI more consistently</strong>
+                                            <p>Active docs pages continue moving toward the shared <code>.vd-code-snippet</code> component with syntax highlighting, reducing older one-off code block patterns and keeping interactive examples visually consistent.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ═══════════════════════════════════════════════ -->
             <!-- Version 1.3.9                                   -->
             <!-- ═══════════════════════════════════════════════ -->
             <article class="version-card">
@@ -23,7 +119,6 @@
                     <span style="color: var(--text-secondary); font-size: 0.95rem;">
                         <i class="ph ph-calendar mr-1"></i>May 10, 2026
                     </span>
-                    <span class="vd-badge vd-badge-info" style="font-size: 0.75rem;">Latest</span>
                 </header>
                 <div class="version-body">
                     <div class="vd-row">
