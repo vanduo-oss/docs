@@ -15,16 +15,16 @@
                         <div class="vd-col-12 vd-col-md-4 vd-mb-3">
                             <div class="vd-card" style="text-align: center;">
                                 <div class="vd-card-body">
-                                    <i class="ph ph-palette" style="font-size: 2rem; color: var(--color-primary);"></i>
+                                    <i class="ph ph-palette" style="font-size: 2rem; color: var(--vd-color-primary);"></i>
                                     <h4 class="vd-mt-2">18 Primary Colors</h4>
-                                    <p class="vd-text-sm vd-text-muted">Sky, blue, indigo, violet, fuchsia, rose, red, orange, amber, yellow, lime, green, emerald, teal, cyan, slate, zinc, stone</p>
+                                    <p class="vd-text-sm vd-text-muted">Black, red, orange, amber, yellow, lime, green, emerald, teal, cyan, sky, blue, indigo, violet, purple, fuchsia, pink, rose</p>
                                 </div>
                             </div>
                         </div>
                         <div class="vd-col-12 vd-col-md-4 vd-mb-3">
                             <div class="vd-card" style="text-align: center;">
                                 <div class="vd-card-body">
-                                    <i class="ph ph-circle-half" style="font-size: 2rem; color: var(--color-info);"></i>
+                                    <i class="ph ph-circle-half" style="font-size: 2rem; color: var(--vd-color-info);"></i>
                                     <h4 class="vd-mt-2">6 Neutral Palettes</h4>
                                     <p class="vd-text-sm vd-text-muted">Charcoal, Slate, Gray, Zinc, Neutral, Stone — controls backgrounds, text, and borders</p>
                                 </div>
@@ -33,7 +33,7 @@
                         <div class="vd-col-12 vd-col-md-4 vd-mb-3">
                             <div class="vd-card" style="text-align: center;">
                                 <div class="vd-card-body">
-                                    <i class="ph ph-sliders-horizontal" style="font-size: 2rem; color: var(--color-success);"></i>
+                                    <i class="ph ph-sliders-horizontal" style="font-size: 2rem; color: var(--vd-color-success);"></i>
                                     <h4 class="vd-mt-2">Radius, Font, Mode</h4>
                                     <p class="vd-text-sm vd-text-muted">Border radius presets, font family selection, and dark/light mode toggle</p>
                                 </div>
@@ -126,12 +126,12 @@
 <span class="code-comment">&lt;!-- JS (required) --&gt;</span>
 &lt;<span class="code-tag">script</span> <span class="code-attr">src</span>=<span class="code-string">"path/to/vanduo.min.js"</span>&gt;&lt;/<span class="code-tag">script</span>&gt;
 &lt;<span class="code-tag">script</span>&gt;
-    Vanduo.init();  // Initializes ALL components, including Theme Customizer
+    Vanduo.init();  // First page boot: initialize the current document
 &lt;/<span class="code-tag">script</span>&gt;</code></pre>
                             </div>
                         </div>
                     </div>
-                    <p class="vd-mt-3">That's it! <code>Vanduo.init()</code> scans the DOM, finds the trigger button, and sets up the customizer panel automatically.</p>
+                    <p class="vd-mt-3">That's it for a static page. <code>Vanduo.init()</code> scans the document, finds the trigger button, and sets up the customizer panel automatically. In an SPA or injected section, use <code>Vanduo.init(root)</code> for the newly mounted subtree instead.</p>
                 </div>
             </div>
         </div>
@@ -159,12 +159,12 @@
                                 <tr>
                                     <td><strong>Primary Color</strong></td>
                                     <td>Buttons, links, active states, focus rings — your brand color</td>
-                                    <td><code>vanduo-primary</code></td>
+                                    <td><code>vanduo-primary-color</code></td>
                                 </tr>
                                 <tr>
                                     <td><strong>Neutral Color</strong></td>
                                     <td>Backgrounds, borders, text — the canvas your content sits on</td>
-                                    <td><code>vanduo-neutral</code></td>
+                                    <td><code>vanduo-neutral-color</code></td>
                                 </tr>
                                 <tr>
                                     <td><strong>Border Radius</strong></td>
@@ -174,7 +174,7 @@
                                 <tr>
                                     <td><strong>Font Family</strong></td>
                                     <td>The typeface used across the entire site</td>
-                                    <td><code>vanduo-font</code></td>
+                                    <td><code>vanduo-font-preference</code></td>
                                 </tr>
                                 <tr>
                                     <td><strong>Color Mode</strong></td>
@@ -221,14 +221,15 @@
                             </div>
                             <div class="vd-code-snippet-body">
                                         <pre class="vd-code-snippet-pane is-active" data-lang="js"><code><span class="code-comment">// Get the current customizer state</span>
-<span class="code-keyword">const</span> state = Vanduo.components.themeCustomizer.<span class="code-function">getState</span>();
+<span class="code-keyword">const</span> themeCustomizer = Vanduo.<span class="code-function">getComponent</span>(<span class="code-string">'themeCustomizer'</span>);
+<span class="code-keyword">const</span> state = themeCustomizer.<span class="code-function">getState</span>();
 
 console.<span class="code-function">log</span>(state);
 <span class="code-comment">// {</span>
-<span class="code-comment">//   primary: 'blue',</span>
+<span class="code-comment">//   primary: 'violet',</span>
 <span class="code-comment">//   neutral: 'slate',</span>
-<span class="code-comment">//   radius: 'md',</span>
-<span class="code-comment">//   font: 'Inter',</span>
+<span class="code-comment">//   radius: '0.375',</span>
+<span class="code-comment">//   font: 'open-sans',</span>
 <span class="code-comment">//   theme: 'dark'</span>
 <span class="code-comment">// }</span></code></pre>
                             </div>
@@ -251,7 +252,7 @@ console.<span class="code-function">log</span>(state);
                                 </button>
                             </div>
                             <div class="vd-code-snippet-body">
-                                        <pre class="vd-code-snippet-pane is-active" data-lang="js"><code><span class="code-keyword">const</span> primaryColor = localStorage.<span class="code-function">getItem</span>(<span class="code-string">'vanduo-primary'</span>);  <span class="code-comment">// 'blue'</span>
+                                        <pre class="vd-code-snippet-pane is-active" data-lang="js"><code><span class="code-keyword">const</span> primaryColor = localStorage.<span class="code-function">getItem</span>(<span class="code-string">'vanduo-primary-color'</span>);  <span class="code-comment">// 'violet'</span>
 <span class="code-keyword">const</span> currentTheme = localStorage.<span class="code-function">getItem</span>(<span class="code-string">'vanduo-theme-preference'</span>);  <span class="code-comment">// 'dark'</span></code></pre>
                             </div>
                         </div>
@@ -286,14 +287,23 @@ console.<span class="code-function">log</span>(state);
                                 </button>
                             </div>
                             <div class="vd-code-snippet-body">
-                                        <pre class="vd-code-snippet-pane is-active" data-lang="js"><code><span class="code-keyword">const</span> tc = Vanduo.components.themeCustomizer;
+                                        <pre class="vd-code-snippet-pane is-active" data-lang="js"><code><span class="code-keyword">const</span> tc = Vanduo.<span class="code-function">getComponent</span>(<span class="code-string">'themeCustomizer'</span>);
 
 <span class="code-comment">// Set individual values</span>
-tc.<span class="code-function">setPrimary</span>(<span class="code-string">'rose'</span>);       <span class="code-comment">// Change primary color</span>
-tc.<span class="code-function">setNeutral</span>(<span class="code-string">'zinc'</span>);       <span class="code-comment">// Change neutral palette</span>
-tc.<span class="code-function">setRadius</span>(<span class="code-string">'lg'</span>);          <span class="code-comment">// Change border radius</span>
-tc.<span class="code-function">setFont</span>(<span class="code-string">'Rubik'</span>);         <span class="code-comment">// Change font family</span>
-tc.<span class="code-function">setTheme</span>(<span class="code-string">'dark'</span>);         <span class="code-comment">// Switch to dark mode</span>
+tc.<span class="code-function">applyPrimary</span>(<span class="code-string">'rose'</span>);       <span class="code-comment">// Change primary color</span>
+tc.<span class="code-function">applyNeutral</span>(<span class="code-string">'zinc'</span>);       <span class="code-comment">// Change neutral palette</span>
+tc.<span class="code-function">applyRadius</span>(<span class="code-string">'0.375'</span>);       <span class="code-comment">// Change border radius scale</span>
+tc.<span class="code-function">applyFont</span>(<span class="code-string">'open-sans'</span>);     <span class="code-comment">// Change font family</span>
+tc.<span class="code-function">applyTheme</span>(<span class="code-string">'dark'</span>);         <span class="code-comment">// Switch to dark mode</span>
+
+<span class="code-comment">// Or update multiple preferences together</span>
+tc.<span class="code-function">setPreferences</span>({
+    primary: <span class="code-string">'rose'</span>,
+    neutral: <span class="code-string">'zinc'</span>,
+    radius: <span class="code-string">'0.375'</span>,
+    font: <span class="code-string">'open-sans'</span>,
+    theme: <span class="code-string">'dark'</span>
+});
 
 <span class="code-comment">// Open/close the panel</span>
 tc.<span class="code-function">open</span>();
@@ -326,24 +336,26 @@ tc.<span class="code-function">reset</span>();</code></pre>
                                 </button>
                             </div>
                             <div class="vd-code-snippet-body">
-                                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">button</span> <span class="code-attr">onclick</span>=<span class="code-string">"applyPreset('corporate')"</span>&gt;Corporate&lt;/<span class="code-tag">button</span>&gt;
-&lt;<span class="code-tag">button</span> <span class="code-attr">onclick</span>=<span class="code-string">"applyPreset('playful')"</span>&gt;Playful&lt;/<span class="code-tag">button</span>&gt;
-&lt;<span class="code-tag">button</span> <span class="code-attr">onclick</span>=<span class="code-string">"applyPreset('minimal')"</span>&gt;Minimal&lt;/<span class="code-tag">button</span>&gt;
+                                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-btn vd-btn-secondary"</span> <span class="code-attr">data-theme-preset</span>=<span class="code-string">"corporate"</span>&gt;Corporate&lt;/<span class="code-tag">button</span>&gt;
+&lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-btn vd-btn-secondary"</span> <span class="code-attr">data-theme-preset</span>=<span class="code-string">"playful"</span>&gt;Playful&lt;/<span class="code-tag">button</span>&gt;
+&lt;<span class="code-tag">button</span> <span class="code-attr">class</span>=<span class="code-string">"vd-btn vd-btn-secondary"</span> <span class="code-attr">data-theme-preset</span>=<span class="code-string">"minimal"</span>&gt;Minimal&lt;/<span class="code-tag">button</span>&gt;
 
 &lt;<span class="code-tag">script</span>&gt;
-function applyPreset(name) {
-    const tc = Vanduo.components.themeCustomizer;
-    const presets = {
-        corporate: { primary: 'blue',   neutral: 'slate', radius: 'sm',  font: 'Inter' },
-        playful:   { primary: 'fuchsia', neutral: 'stone', radius: 'xl',  font: 'Rubik' },
-        minimal:   { primary: 'zinc',   neutral: 'neutral', radius: 'none', font: 'Source Sans' }
-    };
-    const p = presets[name];
-    tc.setPrimary(p.primary);
-    tc.setNeutral(p.neutral);
-    tc.setRadius(p.radius);
-    tc.setFont(p.font);
-}
+const presets = {
+    corporate: { primary: 'blue', neutral: 'slate', radius: '0.25', font: 'open-sans' },
+    playful: { primary: 'fuchsia', neutral: 'stone', radius: '0.5', font: 'lato' },
+    minimal: { primary: 'black', neutral: 'neutral', radius: '0', font: 'system' }
+};
+
+document.querySelectorAll('[data-theme-preset]').forEach((button) =&gt; {
+    button.addEventListener('click', () =&gt; {
+        const tc = Vanduo.getComponent('themeCustomizer');
+        const preset = presets[button.dataset.themePreset];
+        if (tc &amp;&amp; preset) {
+            tc.setPreferences(preset);
+        }
+    });
+});
 &lt;/<span class="code-tag">script</span>&gt;</code></pre>
                             </div>
                         </div>
@@ -379,23 +391,23 @@ function applyPreset(name) {
                             </div>
                             <div class="vd-code-snippet-body">
                                         <pre class="vd-code-snippet-pane is-active" data-lang="js"><code><span class="code-comment">// Fired whenever any setting changes</span>
-document.<span class="code-function">addEventListener</span>(<span class="code-string">'themeCustomizer:change'</span>, (e) => {
+document.<span class="code-function">addEventListener</span>(<span class="code-string">'theme:change'</span>, (e) =&gt; {
     console.<span class="code-function">log</span>(<span class="code-string">'Setting changed: '</span>, e.detail);
-    <span class="code-comment">// e.detail = { property: 'primary', value: 'rose' }</span>
+    <span class="code-comment">// e.detail = { type: 'primary-change', value: 'rose', state: {...} }</span>
 });
 
 <span class="code-comment">// Fired when the panel opens</span>
-document.<span class="code-function">addEventListener</span>(<span class="code-string">'themeCustomizer: open'</span>, () => {
+document.<span class="code-function">addEventListener</span>(<span class="code-string">'theme:panel-open'</span>, () =&gt; {
     console.<span class="code-function">log</span>(<span class="code-string">'Customizer panel opened'</span>);
 });
 
 <span class="code-comment">// Fired when the panel closes</span>
-document.<span class="code-function">addEventListener</span>(<span class="code-string">'themeCustomizer: close'</span>, () => {
+document.<span class="code-function">addEventListener</span>(<span class="code-string">'theme:panel-close'</span>, () =&gt; {
     console.<span class="code-function">log</span>(<span class="code-string">'Customizer panel closed'</span>);
 });
 
 <span class="code-comment">// Fired when user clicks "Reset"</span>
-document.<span class="code-function">addEventListener</span>(<span class="code-string">'themeCustomizer: reset'</span>, () => {
+document.<span class="code-function">addEventListener</span>(<span class="code-string">'theme:reset'</span>, () =&gt; {
     console.<span class="code-function">log</span>(<span class="code-string">'All settings reset to defaults'</span>);
 });</code></pre>
                             </div>
@@ -405,7 +417,7 @@ document.<span class="code-function">addEventListener</span>(<span class="code-s
                     <div class="vd-alert vd-alert-info vd-mt-4">
                         <i class="ph ph-lightbulb"></i>
                         <div>
-                            <strong>Pro tip:</strong> Use the <code>themeCustomizer:change</code> event to sync changes to your backend, apply analytics tracking, or update components that need to adapt to theme changes (like charts or maps).
+                            <strong>Pro tip:</strong> Use the <code>theme:change</code> event to sync changes to your backend, apply analytics tracking, or update components that need to adapt to theme changes such as charts or maps.
                         </div>
                     </div>
                 </div>
@@ -424,7 +436,7 @@ document.<span class="code-function">addEventListener</span>(<span class="code-s
                     <p>See the difference a few customizer calls make:</p>
                     <div class="vd-row vd-mt-4">
                         <div class="vd-col-12 vd-col-md-6 vd-mb-4">
-                            <div class="vd-card" style="border-top: 3px solid var(--color-text-muted);">
+                            <div class="vd-card" style="border-top: 3px solid var(--vd-text-muted);">
                                 <div class="vd-card-header"><h4>Default Vanduo</h4></div>
                                 <div class="vd-card-body">
                                     <div class="vd-code-snippet" data-collapsible data-expanded="true">
@@ -448,12 +460,12 @@ Vanduo.<span class="code-function">init</span>();</code></pre>
                                             </div>
                                         </div>
                                     </div>
-                                    <p class="vd-text-sm vd-text-muted vd-mt-2">Blue primary, slate neutrals, medium radius, Inter font, light mode. Clean and professional, but generic.</p>
+                                    <p class="vd-text-sm vd-text-muted vd-mt-2">Default primary, charcoal neutrals, medium radius, Ubuntu font, and system theme preference. Clean and professional, but intentionally generic.</p>
                                 </div>
                             </div>
                         </div>
                         <div class="vd-col-12 vd-col-md-6 vd-mb-4">
-                            <div class="vd-card" style="border-top: 3px solid var(--color-success);">
+                            <div class="vd-card" style="border-top: 3px solid var(--vd-color-success);">
                                 <div class="vd-card-header"><h4>Branded for "Sunset Travel"</h4></div>
                                 <div class="vd-card-body">
                                     <div class="vd-code-snippet" data-collapsible data-expanded="true">
@@ -473,15 +485,17 @@ Vanduo.<span class="code-function">init</span>();</code></pre>
                                             </div>
                                             <div class="vd-code-snippet-body">
                                                         <pre class="vd-code-snippet-pane is-active" data-lang="js"><code>Vanduo.<span class="code-function">init</span>();
-<span class="code-keyword">const</span> tc = Vanduo.components.themeCustomizer;
-tc.<span class="code-function">setPrimary</span>(<span class="code-string">'orange'</span>);
-tc.<span class="code-function">setNeutral</span>(<span class="code-string">'stone'</span>);
-tc.<span class="code-function">setRadius</span>(<span class="code-string">'lg'</span>);
-tc.<span class="code-function">setFont</span>(<span class="code-string">'Rubik'</span>);</code></pre>
+<span class="code-keyword">const</span> tc = Vanduo.<span class="code-function">getComponent</span>(<span class="code-string">'themeCustomizer'</span>);
+tc.<span class="code-function">setPreferences</span>({
+    primary: <span class="code-string">'orange'</span>,
+    neutral: <span class="code-string">'stone'</span>,
+    radius: <span class="code-string">'0.5'</span>,
+    font: <span class="code-string">'lato'</span>
+});</code></pre>
                                             </div>
                                         </div>
                                     </div>
-                                    <p class="vd-text-sm vd-text-muted vd-mt-2">Orange primary, warm stone neutrals, rounded corners, friendly Rubik font. Feels like a completely different product — 4 lines of code.</p>
+                                    <p class="vd-text-sm vd-text-muted vd-mt-2">Orange primary, warm stone neutrals, rounded corners, and a friendlier font. Feels like a different product with one preference update.</p>
                                 </div>
                             </div>
                         </div>
@@ -517,17 +531,17 @@ tc.<span class="code-function">setFont</span>(<span class="code-string">'Rubik'<
                             </div>
                             <div class="vd-code-snippet-body">
                                         <pre class="vd-code-snippet-pane is-active" data-lang="js"><code><span class="code-comment">// Reset all customizer settings to defaults</span>
-Vanduo.components.themeCustomizer.<span class="code-function">reset</span>();
+Vanduo.<span class="code-function">getComponent</span>(<span class="code-string">'themeCustomizer'</span>).<span class="code-function">reset</span>();
 
-<span class="code-comment">// This clears all 5 localStorage keys and</span>
-<span class="code-comment">// reverts the site to "default appearance</span></code></pre>
+<span class="code-comment">// This writes the default values back to the 5</span>
+<span class="code-comment">// customizer localStorage keys.</span></code></pre>
                             </div>
                         </div>
                     </div>
                     <div class="vd-alert vd-alert-warning vd-mt-4">
                         <i class="ph ph-warning"></i>
                         <div>
-                            <strong>Watch out:</strong> <code>reset()</code> clears all 5 customizer localStorage keys. If you've stored other data in localStorage, those are safe — only the <code>vanduo-*</code> keys are affected.
+                            <strong>Watch out:</strong> <code>reset()</code> rewrites the 5 customizer localStorage keys with default values. Other localStorage data is untouched.
                         </div>
                     </div>
                     <p class="vd-mt-4">You can also customize the panel's appearance itself with CSS variables:</p>
@@ -548,9 +562,9 @@ Vanduo.components.themeCustomizer.<span class="code-function">reset</span>();
                             </div>
                             <div class="vd-code-snippet-body">
                                         <pre class="vd-code-snippet-pane is-active" data-lang="css"><code><span class="code-selector">:root </span>{
-    <span class="code-property">--tc-panel-bg</span>: <span class="code-value">var</span>(<span class="code-value">--bg-primary</span>);
-    <span class="code-property">--tc-panel-border</span>: <span class="code-value">var</span>(<span class="code-value">--border-color</span>);
-    <span class="code-property">--tc-panel-shadow</span>: <span class="code-value">var</span>(<span class="code-value">--shadow-lg</span>);
+    <span class="code-property">--tc-panel-bg</span>: <span class="code-value">var</span>(<span class="code-value">--vd-bg-primary</span>);
+    <span class="code-property">--tc-panel-border</span>: <span class="code-value">var</span>(<span class="code-value">--vd-border-color</span>);
+    <span class="code-property">--tc-panel-shadow</span>: <span class="code-value">var</span>(<span class="code-value">--vd-shadow-lg</span>);
     <span class="code-property">--tc-panel-width</span>: <span class="code-number">320</span><span class="code-unit">px</span>;
     <span class="code-property">--tc-panel-z-index</span>: <span class="code-number">9999</span>;
 }</code></pre>
@@ -563,7 +577,7 @@ Vanduo.components.themeCustomizer.<span class="code-function">reset</span>();
     </div>
 
     <!-- What's Next block -->
-    <div class="vd-mt-8" style="border-top: 1px solid var(--border-color); padding-top: 2.5rem; padding-bottom: 3rem;">
+    <div class="vd-mt-8" style="border-top: 1px solid var(--vd-border-color); padding-top: 2.5rem; padding-bottom: 3rem;">
         <h4 class="vd-text-lg vd-mb-5"><i class="ph ph-arrow-circle-right"></i> What's Next?</h4>
         <div class="vd-row" style="gap: 1.25rem;">
             <div class="vd-col-12 vd-col-md-6 vd-mb-4">

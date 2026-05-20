@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Vanduo Framework v1.3.9. Pure HTML, CSS, JS framework for beautiful websites. Zero runtime dependencies, no mandatory build tools, just clean code.">
+        content="Vanduo Framework v1.4.0. Pure HTML, CSS, JS framework for beautiful websites. Zero runtime dependencies, no mandatory build tools, just clean code.">
     <meta name="author" content="Vanduo Framework">
     <meta name="keywords"
         content="CSS framework, HTML framework, JavaScript framework, static website, no dependencies, pure CSS, pure JavaScript, responsive design, UI components, Lithuania">
@@ -18,7 +18,7 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://vanduo.dev/">
-    <meta property="og:title" content="Vanduo Framework v1.3.9 - Pure HTML, CSS, JS Framework">
+    <meta property="og:title" content="Vanduo Framework v1.4.0 - Pure HTML, CSS, JS Framework">
     <meta property="og:description"
         content="Essential just like water is. Zero-dependency framework for beautiful static websites.">
     <meta property="og:image" content="https://vanduo.dev/images/og-image.png">
@@ -28,7 +28,7 @@
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://vanduo.dev/">
-    <meta name="twitter:title" content="Vanduo Framework v1.3.9 - Pure HTML, CSS, JS Framework">
+    <meta name="twitter:title" content="Vanduo Framework v1.4.0 - Pure HTML, CSS, JS Framework">
     <meta name="twitter:description"
         content="Essential just like water is. Zero-dependency framework for beautiful static websites.">
     <meta name="twitter:image" content="https://vanduo.dev/images/twitter-card.png">
@@ -39,7 +39,7 @@
     <!-- Vanduo Framework CSS (local for development, pinned CDN for production) -->
     <script>
         (function () {
-            var frameworkVersion = '1.3.9';
+            var frameworkVersion = '1.4.0';
             var params = new URLSearchParams(window.location.search);
             var forcedMode = params.get('vanduo-assets');
             var isLocalPreview = window.location.protocol === 'file:'
@@ -50,7 +50,7 @@
                 : (isLocalPreview ? 'local' : 'cdn');
             var basePath = mode === 'local'
                 ? './dist'
-                : 'https://cdn.jsdelivr.net/npm/@vanduo-oss/framework@1.3.9/dist';
+                : 'https://cdn.jsdelivr.net/npm/@vanduo-oss/framework@1.4.0/dist';
             var assetQuery = mode === 'local'
                 ? '?dev=' + Date.now()
                 : '';
@@ -65,6 +65,59 @@
             window.__VANDUO_TEMPLATES_BASE_URL = (params.get('vanduo-templates')
                 || (isLocalPreview ? 'http://localhost:8788' : 'https://templates.vanduo.dev'))
                 .replace(/\/+$/, '');
+            window.__VANDUO_DOCS_SUPPORTED_FONTS = {
+                'jetbrains-mono': true,
+                'system': true,
+                'ubuntu': true,
+                'lato': true,
+                'open-sans': true
+            };
+            window.__VANDUO_DOCS_LEGACY_FONT_MAP = {
+                'inter': 'open-sans',
+                'source-sans': 'open-sans',
+                'source-sans-3': 'open-sans',
+                'fira-sans': 'open-sans',
+                'ibm-plex': 'open-sans',
+                'ibm-plex-sans': 'open-sans',
+                'rubik': 'open-sans',
+                'titillium-web': 'open-sans',
+                'roboto': 'lato',
+                'noto-sans': 'open-sans',
+                'google-sans': 'open-sans',
+                'zen-dots': 'open-sans'
+            };
+            window.__VANDUO_DOCS_NORMALIZE_FONT_PREFERENCE__ = function (fontKey) {
+                var key = String(fontKey || '').trim().toLowerCase();
+                if (!key) {
+                    return 'ubuntu';
+                }
+                if (Object.prototype.hasOwnProperty.call(window.__VANDUO_DOCS_LEGACY_FONT_MAP, key)) {
+                    key = window.__VANDUO_DOCS_LEGACY_FONT_MAP[key];
+                }
+                if (Object.prototype.hasOwnProperty.call(window.__VANDUO_DOCS_SUPPORTED_FONTS, key)) {
+                    return key;
+                }
+                return 'ubuntu';
+            };
+            window.__VANDUO_DOCS_PREPARE_THEME_FONT_STORAGE__ = function () {
+                try {
+                    var storedFont = localStorage.getItem('vanduo-font-preference');
+                    if (!storedFont) {
+                        return;
+                    }
+                    var normalizedFont = window.__VANDUO_DOCS_NORMALIZE_FONT_PREFERENCE__(storedFont);
+                    if (normalizedFont !== storedFont) {
+                        localStorage.setItem('vanduo-font-preference', normalizedFont);
+                    }
+                    if (normalizedFont === 'system') {
+                        document.documentElement.removeAttribute('data-font');
+                    } else {
+                        document.documentElement.setAttribute('data-font', normalizedFont);
+                    }
+                } catch (_e) {
+                    /* ignore */
+                }
+            };
             document.documentElement.setAttribute('data-framework-assets', mode);
         })();
     </script>
@@ -102,7 +155,7 @@
         "price": "0",
         "priceCurrency": "USD"
       },
-    "softwareVersion": "1.3.9",
+    "softwareVersion": "1.4.0",
       "license": "https://opensource.org/licenses/MIT",
       "programmingLanguage": ["HTML", "CSS", "JavaScript"]
     }
@@ -210,7 +263,7 @@
                             </button>
                         </div>
                         <div class="doc-sidebar-filter">
-                            <i class="ph ph-funnel-simple" aria-hidden="true"></i>
+                            <i class="ph ph-funnel-simple doc-sidebar-filter-icon" aria-hidden="true"></i>
                             <input type="search" class="doc-sidebar-filter-input" id="doc-sidebar-filter-input"
                                 placeholder="Filter…" autocomplete="off" aria-label="Filter navigation items">
                         </div>
@@ -272,7 +325,7 @@
     <!-- ── Noscript fallback ──────────────────────────── -->
     <noscript>
         <div style="padding: 4rem 2rem; text-align: center; max-width: 600px; margin: 100px auto;">
-            <h1 style="color: var(--color-primary);">JavaScript Required</h1>
+            <h1 style="color: var(--vd-color-primary);">JavaScript Required</h1>
             <p>The Vanduo Framework documentation site requires JavaScript to load content dynamically.</p>
             <p>Please enable JavaScript in your browser settings.</p>
         </div>
@@ -414,17 +467,21 @@
             }
 
             function loadAppScripts() {
-                return loadScript('js/lazy-loader.js')
+                var docsScriptVersion = '?v=' + (assetState.expectedVersion || 'dev') + '-docs-6';
+                return loadScript('js/lazy-loader.js' + docsScriptVersion)
                     .then(function () {
-                        return loadScript('js/section-cache.js');
+                        return loadScript('js/section-cache.js' + docsScriptVersion);
                     })
                     .then(function () {
-                        return loadScript('js/app.js');
+                        return loadScript('js/app.js' + docsScriptVersion);
                     });
             }
 
             preflightCdnVersion()
                 .then(function () {
+                    if (typeof window.__VANDUO_DOCS_PREPARE_THEME_FONT_STORAGE__ === 'function') {
+                        window.__VANDUO_DOCS_PREPARE_THEME_FONT_STORAGE__();
+                    }
                     return loadFramework();
                 })
                 .then(function () {

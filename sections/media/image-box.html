@@ -10,7 +10,7 @@
         <div class="vd-col-12">
             <div class="vd-card vd-card-glow demo-card">
                 <div class="vd-card-header">
-                    <h4><i class="ph ph-image mr-2" style="color: var(--color-primary);"></i>Gallery
+                    <h4><i class="ph ph-image mr-2" style="color: var(--vd-color-primary);"></i>Gallery
                         with Dual Images</h4>
                     <p class="vd-text-sm vd-text-muted vd-mb-0">Thumbnail → Full-size on click</p>
                 </div>
@@ -63,11 +63,30 @@
                 <div class="vd-card-body">
                     <p>Add the <code>data-image-box</code> attribute to any image you want to make
                         enlargeable:</p>
-                    <pre class="code-example"><code><!-- Enlargeable image with optional caption -->
-<img src="./images/photo.jpg"
+                    <div class="vd-code-snippet vd-mt-4" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;!-- Enlargeable image with optional caption --&gt;
+&lt;img src="./images/photo.jpg"
      alt="Description"
      data-image-box
-     data-image-box-caption="A beautiful photo"></code></pre>
+     data-image-box-caption="A beautiful photo"&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
                     <p class="vd-mt-5 vd-text-sm vd-text-muted">The component auto-initializes on
                         page load.
                         No JavaScript setup required.</p>
@@ -118,25 +137,44 @@
                         <code>.image-box-gallery</code> class. The grid automatically adjusts
                         columns based on available space.
                     </p>
-                    <pre class="code-example"><code><!-- Gallery container -->
-<div class="vd-image-box-gallery">
-  <!-- Each thumbnail opens its full-size version -->
-  <img src="./images/thumb1.jpg"
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;!-- Gallery container --&gt;
+&lt;div class="vd-image-box-gallery"&gt;
+  &lt;!-- Each thumbnail opens its full-size version --&gt;
+  &lt;img src="./images/thumb1.jpg"
        data-image-box
        data-image-box-full-src="./images/full1.jpg"
-       data-image-box-caption="Image 1">
-  
-  <img src="./images/thumb2.jpg"
+       data-image-box-caption="Image 1"&gt;
+
+  &lt;img src="./images/thumb2.jpg"
        data-image-box
        data-image-box-full-src="./images/full2.jpg"
-       data-image-box-caption="Image 2">
-  
-  <!-- Portrait orientation -->
-  <img src="./images/thumb3.jpg"
+       data-image-box-caption="Image 2"&gt;
+
+  &lt;!-- Portrait orientation --&gt;
+  &lt;img src="./images/thumb3.jpg"
        data-image-box
        data-image-box-full-src="./images/full3.jpg"
-       data-orientation="portrait">
-</div></code></pre>
+       data-orientation="portrait"&gt;
+&lt;/div&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
                     <p class="vd-mt-5 vd-text-sm vd-text-muted">The gallery uses CSS Grid with
                         auto-fit
                         columns (minimum 120px). Add <code>data-orientation="portrait"</code> for
@@ -153,8 +191,24 @@
                     <h4>JavaScript API</h4>
                 </div>
                 <div class="vd-card-body">
-                    <pre class="code-example"><code>// Access the component
-const imageBox = Vanduo.components.imageBox;
+                    <div class="vd-code-snippet" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="js">JS</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="js"><code>// Access the component
+const imageBox = Vanduo.getComponent('imageBox');
 
 // Open an image programmatically
 imageBox.open(document.querySelector('[data-image-box]'));
@@ -167,6 +221,9 @@ Vanduo.reinit('imageBox');
 
 // Destroy and clean up
 imageBox.destroy();</code></pre>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -180,14 +237,30 @@ imageBox.destroy();</code></pre>
                 </div>
                 <div class="vd-card-body">
                     <p>Override CSS variables to customize the appearance:</p>
-                    <pre class="code-example"><code>:root {
+                    <div class="vd-code-snippet vd-mt-4" data-collapsible>
+                        <button class="vd-code-snippet-toggle" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>View Code</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="css">CSS</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="css"><code>:root {
   /* Backdrop styling */
   --image-box-backdrop-bg: rgba(0, 0, 0, 0.9);
   --image-box-backdrop-blur: 8px;
-  
+
   /* Animation duration */
   --image-box-transition-duration: 0.3s;
-  
+
   /* Max size of enlarged image (default: 50% of viewport) */
   --image-box-max-width: 50vw;
   --image-box-max-height: 50vh;
@@ -200,9 +273,12 @@ imageBox.destroy();</code></pre>
 
 /* Active/selected thumbnail */
 .image-box-gallery .image-box-trigger.is-active {
-  outline: 3px solid var(--color-primary);
+  outline: 3px solid var(--vd-color-primary);
   transform: scale(1.05);
 }</code></pre>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

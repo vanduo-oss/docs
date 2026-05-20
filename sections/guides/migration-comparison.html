@@ -2,6 +2,13 @@
     <h4 class="demo-title"><i class="ph ph-arrows-left-right"></i>Migration Comparison <code class="vd-text-sm">Guide</code></h4>
     <p class="vd-mb-8">Switching frameworks? This guide translates familiar patterns from Bootstrap and Tailwind into Vanduo's component-first, zero-build approach. Side-by-side code shows the same UI in each framework so you can map your mental model.</p>
 
+    <div class="vd-alert vd-alert-info vd-mb-6">
+        <i class="ph ph-compass"></i>
+        <div>
+            <strong>v1.4 migration compass:</strong> New integration code should use scoped <code>Vanduo.init(root)</code> / <code>Vanduo.destroy(root)</code>, canonical lowerCamelCase registry names such as <code>lazyLoad</code>, and <code>--vd-*</code> semantic tokens for theme overrides. Older aliases remain supported through the 1.4.x line, but new examples should follow the canonical path.
+        </div>
+    </div>
+
     <!-- Bootstrap Comparison -->
     <div class="vd-row vd-mb-8">
         <div class="vd-col-12">
@@ -246,7 +253,7 @@
                         <div class="vd-col-12 vd-col-md-4 vd-mb-4">
                             <div class="vd-card" style="text-align: center; height: 100%;">
                                 <div class="vd-card-body">
-                                    <i class="ph ph-cube" style="font-size: 2.5rem; color: var(--color-primary);"></i>
+                                    <i class="ph ph-cube" style="font-size: 2.5rem; color: var(--vd-color-primary);"></i>
                                     <h4 class="vd-mt-5">Component-First</h4>
                                     <p class="vd-text-sm vd-text-muted vd-mb-0">One class gives you a complete, styled, accessible component. Not 20 utility classes.</p>
                                 </div>
@@ -255,7 +262,7 @@
                         <div class="vd-col-12 vd-col-md-4 vd-mb-4">
                             <div class="vd-card" style="text-align: center; height: 100%;">
                                 <div class="vd-card-body">
-                                    <i class="ph ph-spiral" style="font-size: 2.5rem; color: var(--color-success);"></i>
+                                    <i class="ph ph-spiral" style="font-size: 2.5rem; color: var(--vd-color-success);"></i>
                                     <h4 class="vd-mt-5">Fibonacci Spacing</h4>
                                     <p class="vd-text-sm vd-text-muted vd-mb-0">Spacing follows the golden ratio: 8, 13, 21, 34, 55px. Not an arbitrary 4px grid.</p>
                                 </div>
@@ -264,7 +271,7 @@
                         <div class="vd-col-12 vd-col-md-4 vd-mb-4">
                             <div class="vd-card" style="text-align: center; height: 100%;">
                                 <div class="vd-card-body">
-                                    <i class="ph ph-moon" style="font-size: 2.5rem; color: var(--color-info);"></i>
+                                    <i class="ph ph-moon" style="font-size: 2.5rem; color: var(--vd-color-info);"></i>
                                     <h4 class="vd-mt-5">Built-In Dark Mode</h4>
                                     <p class="vd-text-sm vd-text-muted vd-mb-0">Flip <code>data-theme="dark"</code> on <code>&lt;html&gt;</code>. Every component adapts automatically. No manual dark variants.</p>
                                 </div>
@@ -276,7 +283,7 @@
                         <div class="vd-col-12 vd-col-md-4 vd-mb-4">
                             <div class="vd-card" style="text-align: center; height: 100%;">
                                 <div class="vd-card-body">
-                                    <i class="ph ph-paint-brush" style="font-size: 2.5rem; color: var(--color-warning);"></i>
+                                    <i class="ph ph-paint-brush" style="font-size: 2.5rem; color: var(--vd-color-warning);"></i>
                                     <h4 class="vd-mt-5">Runtime Theming</h4>
                                     <p class="vd-text-sm vd-text-muted vd-mb-0">Change colors, fonts, and radius via CSS variables in the browser. No rebuild or purge step.</p>
                                 </div>
@@ -285,7 +292,7 @@
                         <div class="vd-col-12 vd-col-md-4 vd-mb-4">
                             <div class="vd-card" style="text-align: center; height: 100%;">
                                 <div class="vd-card-body">
-                                    <i class="ph ph-hand-heart" style="font-size: 2.5rem; color: var(--color-primary);"></i>
+                                    <i class="ph ph-hand-heart" style="font-size: 2.5rem; color: var(--vd-color-primary);"></i>
                                     <h4 class="vd-mt-5">Zero Build Tools</h4>
                                     <p class="vd-text-sm vd-text-muted vd-mb-0">Drop a CDN link into any HTML file and start building. No npm install, no config file, no compiler.</p>
                                 </div>
@@ -294,7 +301,7 @@
                         <div class="vd-col-12 vd-col-md-4 vd-mb-4">
                             <div class="vd-card" style="text-align: center; height: 100%;">
                                 <div class="vd-card-body">
-                                    <i class="ph ph-puzzle-piece" style="font-size: 2.5rem; color: var(--color-success);"></i>
+                                    <i class="ph ph-puzzle-piece" style="font-size: 2.5rem; color: var(--vd-color-success);"></i>
                                     <h4 class="vd-mt-5">Semantic HTML</h4>
                                     <p class="vd-text-sm vd-text-muted vd-mb-0">Components use proper elements: <code>&lt;button&gt;</code> for actions, <code>&lt;nav&gt;</code> for navigation, <code>&lt;table&gt;</code> for data.</p>
                                 </div>
@@ -316,9 +323,9 @@
                 <div class="vd-card-body">
                     <p>Three reasons teams migrate:</p>
                     <ul class="vd-mt-4">
-                        <li class="vd-mb-3"><strong><i class="ph ph-trend-down" style="color: var(--color-success);"></i> Smaller bundle.</strong> Vanduo's CSS is a single file (~45KB gzipped). No purge step, no tree-shaking config, no unused class scanning.</li>
-                        <li class="vd-mb-3"><strong><i class="ph ph-clock" style="color: var(--color-info);"></i> Faster to prototype.</strong> Copy a starter template and ship a landing page in 30 minutes. No config file to tweak.</li>
-                        <li class="vd-mb-3"><strong><i class="ph ph-lock-key-open" style="color: var(--color-primary);"></i> No JS framework lock-in.</strong> Vanduo works with plain HTML, React, Vue, Svelte, or server-rendered templates. One framework, any stack.</li>
+                        <li class="vd-mb-3"><strong><i class="ph ph-trend-down" style="color: var(--vd-color-success);"></i> Smaller bundle.</strong> Vanduo's CSS is a single file (~45KB gzipped). No purge step, no tree-shaking config, no unused class scanning.</li>
+                        <li class="vd-mb-3"><strong><i class="ph ph-clock" style="color: var(--vd-color-info);"></i> Faster to prototype.</strong> Copy a starter template and ship a landing page in 30 minutes. No config file to tweak.</li>
+                        <li class="vd-mb-3"><strong><i class="ph ph-lock-key-open" style="color: var(--vd-color-primary);"></i> No JS framework lock-in.</strong> Vanduo works with plain HTML, React, Vue, Svelte, or server-rendered templates. One framework, any stack.</li>
                     </ul>
 
                     <div class="vd-alert vd-alert-primary vd-mt-5">
@@ -333,7 +340,7 @@
     </div>
 
     <!-- What's Next block -->
-    <div class="vd-mt-8" style="border-top: 1px solid var(--border-color); padding-top: 2.5rem; padding-bottom: 3rem;">
+    <div class="vd-mt-8" style="border-top: 1px solid var(--vd-border-color); padding-top: 2.5rem; padding-bottom: 3rem;">
         <h4 class="vd-text-lg vd-mb-5"><i class="ph ph-arrow-circle-right"></i> What's Next?</h4>
         <div class="vd-row" style="gap: 1.25rem;">
             <div class="vd-col-12 vd-col-md-6 vd-mb-4">

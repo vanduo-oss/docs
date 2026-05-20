@@ -1,0 +1,96 @@
+<section id="security-practices">
+    <h4 class="demo-title"><i class="ph ph-shield-check"></i>Security Practices <code class="vd-text-sm">Guide</code></h4>
+    <p class="vd-mb-6">Vanduo is a UI framework, not a security boundary. v1.4.0 tightens several defaults, but applications should still treat CMS, API, and user-provided strings as untrusted unless they are sanitized by the app.</p>
+
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card demo-card">
+                <div class="vd-card-header">
+                    <h4><i class="ph ph-code"></i> Sanitized HTML</h4>
+                </div>
+                <div class="vd-card-body">
+                    <p>The shared sanitizer supports explicit inline-style control. Framework-owned Bubble, Tooltip, and Toast paths disable inline style unless they deliberately need it.</p>
+                    <div class="vd-code-snippet vd-mt-4" data-collapsible data-expanded="true">
+                        <button class="vd-code-snippet-toggle" aria-expanded="true"><span class="vd-code-snippet-toggle-icon"></span><span>View Code</span></button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="js">Sanitize</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code"><span class="vd-code-snippet-copy-icon"></span><span class="vd-code-snippet-copy-text">Copy</span></button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="js"><code>const clean = sanitizeHtml(input, {
+  allowSvg: false,
+  allowStyle: false
+});</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="vd-text-sm vd-text-muted vd-mt-3">The public default remains compatibility-friendly in 1.4.x, so internal call sites opt into stricter behavior where needed.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card demo-card">
+                <div class="vd-card-header">
+                    <h4><i class="ph ph-magnifying-glass"></i> Search Highlighting</h4>
+                </div>
+                <div class="vd-card-body">
+                    <p><code>docSearch.highlightTag</code> is validated against a fixed allowlist: <code>mark</code>, <code>span</code>, <code>strong</code>, and <code>em</code>. Invalid tags fall back to <code>mark</code>.</p>
+                    <div class="vd-code-snippet vd-mt-4" data-collapsible data-expanded="true">
+                        <button class="vd-code-snippet-toggle" aria-expanded="true"><span class="vd-code-snippet-toggle-icon"></span><span>View Code</span></button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="js">Doc Search</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code"><span class="vd-code-snippet-copy-icon"></span><span class="vd-code-snippet-copy-text">Copy</span></button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="js"><code>Search.create({
+  highlightTag: 'mark'
+});</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card demo-card">
+                <div class="vd-card-header">
+                    <h4><i class="ph ph-cloud-arrow-down"></i> Lazy HTML</h4>
+                </div>
+                <div class="vd-card-body">
+                    <p><code>VanduoLazyLoad.loadSection()</code> accepts same-origin and relative URLs only. Use it for trusted app partials, not untrusted third-party HTML.</p>
+                    <ul class="vd-mt-3">
+                        <li>Pin release assets in production, for example <code>@v1.4.0</code>.</li>
+                        <li>Keep fetched partials under your own origin.</li>
+                        <li>Sanitize CMS/user content before it reaches the partial.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card demo-card">
+                <div class="vd-card-header">
+                    <h4><i class="ph ph-list-checks"></i> Practical Checklist</h4>
+                </div>
+                <div class="vd-card-body">
+                    <ul>
+                        <li>Prefer text APIs when rendering user-provided values.</li>
+                        <li>Use <code>allowStyle: false</code> unless inline style is explicitly trusted.</li>
+                        <li>Use scoped <code>Vanduo.destroy(root)</code> before removing dynamic DOM.</li>
+                        <li>Run package audits at least at a moderate threshold before release.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

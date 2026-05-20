@@ -1,0 +1,94 @@
+<section id="lifecycle-manager">
+    <h4 class="demo-title"><i class="ph ph-recycle"></i>Lifecycle Manager <code class="vd-text-sm">Guide</code></h4>
+    <p class="vd-mb-6">The v1.4.0 lifecycle manager is the shared cleanup registry behind scoped destroy and reinit flows. Most users do not call it directly, but understanding it helps when building dynamic pages, SPAs, and custom components.</p>
+
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card demo-card">
+                <div class="vd-card-header">
+                    <h4><i class="ph ph-tree-structure"></i> What It Tracks</h4>
+                </div>
+                <div class="vd-card-body">
+                    <p>Stateful components register cleanup functions against the element they initialize. Scoped runtime calls can then clean up only the affected subtree.</p>
+                    <div class="vd-code-snippet vd-mt-4" data-collapsible data-expanded="true">
+                        <button class="vd-code-snippet-toggle" aria-expanded="true"><span class="vd-code-snippet-toggle-icon"></span><span>View Code</span></button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="js">Lifecycle API</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code"><span class="vd-code-snippet-copy-icon"></span><span class="vd-code-snippet-copy-text">Copy</span></button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="js"><code>VanduoLifecycle.register(element, 'componentName', cleanupFns);
+VanduoLifecycle.unregister(element, 'componentName');
+VanduoLifecycle.destroyAll('componentName');
+VanduoLifecycle.destroyAllInContainer(root, 'componentName');
+VanduoLifecycle.has(element, 'componentName');
+VanduoLifecycle.getAll();</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="vd-text-sm vd-text-muted vd-mt-3">Use the public <code>Vanduo.destroy(root)</code> and <code>Vanduo.reinit(name, root)</code> APIs for normal app code.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card demo-card">
+                <div class="vd-card-header">
+                    <h4><i class="ph ph-arrows-clockwise"></i> Dynamic Replacement</h4>
+                </div>
+                <div class="vd-card-body">
+                    <div class="vd-code-snippet" data-collapsible data-expanded="true">
+                        <button class="vd-code-snippet-toggle" aria-expanded="true"><span class="vd-code-snippet-toggle-icon"></span><span>View Code</span></button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="js">Swap</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code"><span class="vd-code-snippet-copy-icon"></span><span class="vd-code-snippet-copy-text">Copy</span></button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="js"><code>async function renderPanel(panel, url) {
+  Vanduo.destroy(panel);
+  panel.innerHTML = await fetch(url).then((res) =&gt; res.text());
+  Vanduo.init(panel);
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-md-6">
+            <div class="vd-card demo-card">
+                <div class="vd-card-header">
+                    <h4><i class="ph ph-crosshair"></i> Targeted Reinit</h4>
+                </div>
+                <div class="vd-card-body">
+                    <div class="vd-code-snippet" data-collapsible data-expanded="true">
+                        <button class="vd-code-snippet-toggle" aria-expanded="true"><span class="vd-code-snippet-toggle-icon"></span><span>View Code</span></button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="js">One Component</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" aria-label="Copy code"><span class="vd-code-snippet-copy-icon"></span><span class="vd-code-snippet-copy-text">Copy</span></button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="js"><code>const drawer = document.querySelector('#settings-drawer');
+Vanduo.reinit('tabs', drawer);
+Vanduo.reinit('lazyLoad', drawer);</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="vd-text-sm vd-text-muted vd-mt-3">Registry names are lowerCamelCase. Convenience globals can still expose PascalCase names for compatibility.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

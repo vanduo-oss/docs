@@ -2,7 +2,7 @@
 > Pure HTML, CSS, JS framework for designing beautiful websites.
 > Zero runtime dependencies, no mandatory build tools, just clean and simple code.
 > MIT Licensed. https://vanduo.dev
-> Current docs content includes the v1.3.9 changelog/theme updates and the live docs shell now loads the pinned framework CDN bundle from @v1.3.9.
+> Current docs content includes the v1.4.0 runtime/lifecycle updates and the live docs shell now loads the pinned framework CDN bundle from @v1.4.0.
 
 ## What is Vanduo?
 Vanduo is a lightweight front-end framework built on plain HTML, CSS, and JavaScript.
@@ -14,7 +14,7 @@ frameworks.
 - Fibonacci/Golden Ratio design system for spacing, typography, and grid
 - Modular CSS — use the full bundle or pick individual components
 - Built-in theme tools: Theme Switcher for light/dark/system preference and Theme Customizer for primary color, neutral, radius, and font family control
-- Dedicated documentation for Theme Switcher, Theme Customizer, and their shared coordination model
+- Dedicated documentation for scoped runtime initialization, lifecycle cleanup, security practices, and canonical `--vd-*` theme tokens
 - 1,500+ Phosphor Icons in 6 weights, bundled locally (no CDN required)
 - Open Color palette (10-step accessible color scales)
 - Accessibility-first: ARIA, focus-visible, reduced-motion, semantic HTML
@@ -33,16 +33,15 @@ The docs site is a single-page application (SPA) at https://vanduo.dev.
 All content is hash-routed. Main sections:
 
 - #home            — Overview, features, icon preview, color palette
-- #docs            — Full component and concept documentation
+- #docs            — Full component and guide documentation
 - #docs/components — UI components (buttons, cards, forms, alerts, etc.)
 - #docs/effects/glass — Glass Effects system (new in v1.3.4): frosted surfaces, tokens, scroll-activation
 - #docs/morph         — Water Morph effect (new in v1.3.5): liquid wave content-swap, mode toggle, theme card, status badge, caption reveal demos
 - #docs/expanding-cards — Expanding flex card strip (v1.3.8): photo + solid-color demos, MIT CodePen attribution
 - #docs/theme-switcher   — Lightweight light/dark/system toggle component
 - #docs/theme-customizer — Full runtime theming panel component
-- #docs/guides     — Getting started, lazy loading, theme customizer, ESM vs IIFE
+- #docs/guides     — Getting started, runtime architecture, lifecycle, security, production practices, theming, lazy loading, ESM vs IIFE
 - #docs/theme-customizer-guide — Setup and coordination walkthrough for the theming panel
-- #docs/concepts   — Design philosophy, tokens, namespacing, lifecycle, modules
 - #changelog       — Version history
 - #about           — Project background
 

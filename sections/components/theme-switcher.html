@@ -261,7 +261,7 @@ Vanduo.<span class="code-function">init</span>();</code></pre>
                             <div class="vd-code-snippet-body">
                                 <pre class="vd-code-snippet-pane is-active"
                                     data-lang="js"><code><span class="code-comment">// Access the component</span>
-<span class="code-keyword">const</span> switcher = Vanduo.components.themeSwitcher;
+<span class="code-keyword">const</span> switcher = Vanduo.<span class="code-function">getComponent</span>(<span class="code-string">'themeSwitcher'</span>);
 
 <span class="code-comment">// Get current preference</span>
 <span class="code-keyword">const</span> pref = switcher.<span class="code-function">getPreference</span>();

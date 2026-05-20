@@ -836,6 +836,72 @@
           ]
         },
         {
+          "name": "Architecture & Production",
+          "sections": [
+            {
+              "id": "runtime-architecture",
+              "title": "Runtime Architecture",
+              "file": "guides/runtime-architecture.html",
+              "icon": "ph-circuitry",
+              "keywords": [
+                "runtime",
+                "architecture",
+                "init",
+                "destroy",
+                "reinit",
+                "registry",
+                "lowerCamelCase",
+                "scoped"
+              ]
+            },
+            {
+              "id": "lifecycle-manager",
+              "title": "Lifecycle Manager",
+              "file": "guides/lifecycle-manager.html",
+              "icon": "ph-recycle",
+              "keywords": [
+                "lifecycle",
+                "cleanup",
+                "destroy",
+                "dynamic dom",
+                "observers",
+                "listeners",
+                "teardown"
+              ]
+            },
+            {
+              "id": "security-practices",
+              "title": "Security Practices",
+              "file": "guides/security-practices.html",
+              "icon": "ph-shield-check",
+              "keywords": [
+                "security",
+                "sanitize",
+                "trusted html",
+                "allowStyle",
+                "highlightTag",
+                "cdn",
+                "same origin"
+              ]
+            },
+            {
+              "id": "production-best-practices",
+              "title": "Production Best Practices",
+              "file": "guides/production-best-practices.html",
+              "icon": "ph-rocket-launch",
+              "keywords": [
+                "production",
+                "best practices",
+                "version pinning",
+                "tokens",
+                "forms",
+                "debugging",
+                "release"
+              ]
+            }
+          ]
+        },
+        {
           "name": "Layout & Design",
           "sections": [
             {

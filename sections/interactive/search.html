@@ -251,8 +251,17 @@
                                         <td><code>2</code></td>
                                         <td>Minimum characters to trigger search</td>
                                     </tr>
+                                    <tr>
+                                        <td><code>highlightTag</code></td>
+                                        <td><code>mark</code></td>
+                                        <td>Element used for highlighted matches. v1.4.0 allows <code>mark</code>, <code>span</code>, <code>strong</code>, and <code>em</code>; invalid values fall back to <code>mark</code>.</td>
+                                    </tr>
                                 </tbody>
                             </table>
+                        </div>
+                        <div class="vd-alert vd-alert-info vd-mt-4">
+                            <i class="ph ph-shield-check"></i>
+                            <div>Search result text is escaped before highlighting. The highlight tag is allowlisted so configuration cannot inject arbitrary HTML tags.</div>
                         </div>
                     </div>
                 </div>

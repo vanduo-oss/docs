@@ -109,7 +109,7 @@ test.describe('4. Documentation View', () => {
     });
 
     test.describe('Changelog (#changelog)', () => {
-        test('Shows v1.3.9 as latest and keeps v1.3.8 as history', async ({ page }) => {
+        test('Shows v1.4.0 as latest and keeps v1.3.9 as history', async ({ page }) => {
             await page.goto('/#changelog');
             await waitForSPA(page);
 
@@ -117,13 +117,13 @@ test.describe('4. Documentation View', () => {
             await expect(changelog).toBeVisible();
 
             const latestCard = changelog.locator('.version-card').first();
-            await expect(latestCard).toContainText('v1.3.9');
+            await expect(latestCard).toContainText('v1.4.0');
             await expect(latestCard).toContainText('Latest');
-            await expect(latestCard).toContainText('Charcoal');
-            await expect(latestCard).toContainText('Ubuntu');
+            await expect(latestCard).toContainText('Scoped runtime');
+            await expect(latestCard).toContainText('--vd-*');
 
             const previousCard = changelog.locator('.version-card').nth(1);
-            await expect(previousCard).toContainText('v1.3.8');
+            await expect(previousCard).toContainText('v1.3.9');
             await expect(previousCard).not.toContainText('Latest');
         });
     });
@@ -269,6 +269,51 @@ test.describe('4. Documentation View', () => {
             expect(metrics!.sectionTop).toBeGreaterThanOrEqual(metrics!.stickyBottom - 1);
         });
 
+        test('reload keeps a deep docs route anchored to its intended section', async ({ page, isMobile }) => {
+            test.skip(!!isMobile, 'Reload anchoring regression is covered on desktop, where the scroll restoration race is reproducible.');
+            await page.goto('/#docs/vd-hex');
+            await waitForSPA(page);
+
+            const target = page.locator('#vd-hex');
+            await expect(target).toBeVisible();
+            await expect(page).toHaveURL(/.*#docs\/vd-hex/);
+
+            await page.evaluate(() => {
+                window.scrollTo(0, 24000);
+                window.history.replaceState(null, '', '#docs/vd-hex');
+            });
+
+            await page.reload();
+            await waitForSPA(page);
+
+            await expect(page).toHaveURL(/.*#docs\/vd-hex/);
+            await page.waitForFunction(() => {
+                const target = document.getElementById('vd-hex');
+                if (!target) return false;
+                const top = target.getBoundingClientRect().top;
+                return top <= 120 && top >= -8;
+            }, { timeout: 10000 });
+        });
+
+        test('code snippet toggle still works after leaving docs and returning', async ({ page }) => {
+            await page.goto('/#docs/music-player');
+            await waitForSPA(page);
+
+            const toggle = page.locator('#music-player .vd-code-snippet[data-collapsible] .vd-code-snippet-toggle').first();
+            const snippet = page.locator('#music-player .vd-code-snippet[data-collapsible]').first();
+
+            await expect(toggle).toBeVisible();
+            await expect(snippet).toHaveAttribute('data-expanded', 'false');
+
+            await page.goto('/#about');
+            await waitForSPA(page);
+            await page.goto('/#docs/music-player');
+            await waitForSPA(page);
+
+            await toggle.click();
+            await expect(snippet).toHaveAttribute('data-expanded', 'true');
+        });
+
     });
 
     test.describe('Guides Tab (#docs/guides)', () => {
@@ -289,6 +334,62 @@ test.describe('4. Documentation View', () => {
                 await page.waitForTimeout(500);
                 await expect(page.locator('#quick-start')).toBeVisible();
             }
+        });
+
+        test('Loads v1.4.0 architecture and production guides', async ({ page }) => {
+            const guideChecks = [
+                {
+                    route: '/#docs/runtime-architecture',
+                    id: 'runtime-architecture',
+                    expected: ['Vanduo.init(root)', 'lowerCamelCase']
+                },
+                {
+                    route: '/#docs/lifecycle-manager',
+                    id: 'lifecycle-manager',
+                    expected: ['Vanduo.destroy(root)', 'Targeted Reinit']
+                },
+                {
+                    route: '/#docs/security-practices',
+                    id: 'security-practices',
+                    expected: ['allowStyle', 'highlightTag']
+                },
+                {
+                    route: '/#docs/production-best-practices',
+                    id: 'production-best-practices',
+                    expected: ['@v1.4.0', '--vd-*']
+                }
+            ];
+
+            for (const check of guideChecks) {
+                await page.goto(check.route);
+                await waitForSPA(page);
+
+                const section = page.locator(`#${check.id}`);
+                await expect(section).toBeVisible();
+                for (const text of check.expected) {
+                    await expect(section).toContainText(text);
+                }
+            }
+        });
+
+        test('legacy tab-prefixed guide routes still resolve', async ({ page }) => {
+            await page.goto('/#docs/guides/runtime-architecture');
+            await waitForSPA(page);
+
+            const section = page.locator('#runtime-architecture');
+            await expect(section).toBeVisible();
+            await expect(section).toContainText('Vanduo.init(root)');
+        });
+
+        test('Token guide teaches canonical v1.4 tokens with compatibility context', async ({ page }) => {
+            await page.goto('/#docs/css-variables-theming');
+            await waitForSPA(page);
+
+            const section = page.locator('#css-variables-theming');
+            await expect(section).toBeVisible();
+            await expect(section).toContainText('--vd-color-primary');
+            await expect(section).toContainText('--vd-bg-primary');
+            await expect(section).toContainText('compatibility aliases');
         });
 
         test('Starter templates guide is a single generalized landing guide', async ({ page }) => {

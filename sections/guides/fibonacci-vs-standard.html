@@ -12,15 +12,15 @@
                 <div class="vd-card-body">
                     <p>Each number is the sum of the two before it:</p>
                     <div style="font-size: 1.5rem; font-weight: bold; text-align: center; padding: 1rem; letter-spacing: 0.1em;" class="vd-mb-4">
-                        <span style="color: var(--color-text-muted);">1</span> &middot;
-                        <span style="color: var(--color-text-muted);">1</span> &middot;
-                        <span style="color: var(--color-info);">2</span> &middot;
-                        <span style="color: var(--color-success);">3</span> &middot;
-                        <span style="color: var(--color-primary);">5</span> &middot;
-                        <span style="color: var(--color-warning);">8</span> &middot;
-                        <span style="color: var(--color-error);">13</span> &middot;
-                        <span style="color: var(--color-text-muted);">21</span> &middot;
-                        <span style="color: var(--color-text-muted);">34</span> &middot; …
+                        <span style="color: var(--vd-text-muted);">1</span> &middot;
+                        <span style="color: var(--vd-text-muted);">1</span> &middot;
+                        <span style="color: var(--vd-color-info);">2</span> &middot;
+                        <span style="color: var(--vd-color-success);">3</span> &middot;
+                        <span style="color: var(--vd-color-primary);">5</span> &middot;
+                        <span style="color: var(--vd-color-warning);">8</span> &middot;
+                        <span style="color: var(--vd-color-error);">13</span> &middot;
+                        <span style="color: var(--vd-text-muted);">21</span> &middot;
+                        <span style="color: var(--vd-text-muted);">34</span> &middot; …
                     </div>
                     <p>As the numbers grow, the ratio between consecutive numbers approaches <strong>~1.618</strong> — the <strong>Golden Ratio</strong> (φ). This ratio appears in sunflowers, seashells, galaxies, and the proportions of classical architecture.</p>
                     <div class="vd-alert vd-alert-primary vd-mt-4">
@@ -44,20 +44,20 @@
                 <div class="vd-card-body">
                     <div class="vd-row">
                         <div class="vd-col-12 vd-col-md-6 vd-mb-5">
-                            <div class="vd-card" style="border-top: 3px solid var(--color-text-muted);">
+                            <div class="vd-card" style="border-top: 3px solid var(--vd-text-muted);">
                                 <div class="vd-card-header">
                                     <h4>Standard Grid (equal columns)</h4>
                                 </div>
                                 <div class="vd-card-body">
                                     <div class="vd-row" style="gap: 4px;">
                                         <div class="vd-col-4" style="padding: 0;">
-                                            <div style="background: var(--color-primary); opacity: 0.7; height: 80px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8rem;">4 cols</div>
+                                            <div style="background: var(--vd-color-primary); opacity: 0.7; height: 80px; border-radius: var(--radius-fib-3); display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8rem;">4 cols</div>
                                         </div>
                                         <div class="vd-col-4" style="padding: 0;">
-                                            <div style="background: var(--color-primary); opacity: 0.7; height: 80px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8rem;">4 cols</div>
+                                            <div style="background: var(--vd-color-primary); opacity: 0.7; height: 80px; border-radius: var(--radius-fib-3); display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8rem;">4 cols</div>
                                         </div>
                                         <div class="vd-col-4" style="padding: 0;">
-                                            <div style="background: var(--color-primary); opacity: 0.7; height: 80px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8rem;">4 cols</div>
+                                            <div style="background: var(--vd-color-primary); opacity: 0.7; height: 80px; border-radius: var(--radius-fib-3); display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8rem;">4 cols</div>
                                         </div>
                                     </div>
                                     <p class="vd-text-sm vd-text-muted vd-mt-3">Equal widths: 33% + 33% + 33%. Balanced, but uniform — every section gets the same emphasis.</p>
@@ -65,15 +65,15 @@
                             </div>
                         </div>
                         <div class="vd-col-12 vd-col-md-6 vd-mb-5">
-                            <div class="vd-card" style="border-top: 3px solid var(--color-success);">
+                            <div class="vd-card" style="border-top: 3px solid var(--vd-color-success);">
                                 <div class="vd-card-header">
                                     <h4>Fibonacci Grid (golden proportions)</h4>
                                 </div>
                                 <div class="vd-card-body">
                                     <div style="display: flex; gap: 4px;">
-                                        <div style="flex: 3; background: var(--color-success); opacity: 0.8; height: 80px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8rem;">3fr</div>
-                                        <div style="flex: 5; background: var(--color-success); height: 80px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8rem;">5fr</div>
-                                        <div style="flex: 8; background: var(--color-success); opacity: 0.6; height: 80px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8rem;">8fr</div>
+                                        <div style="flex: 3; background: var(--vd-color-success); opacity: 0.8; height: 80px; border-radius: var(--radius-fib-3); display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8rem;">3fr</div>
+                                        <div style="flex: 5; background: var(--vd-color-success); height: 80px; border-radius: var(--radius-fib-3); display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8rem;">5fr</div>
+                                        <div style="flex: 8; background: var(--vd-color-success); opacity: 0.6; height: 80px; border-radius: var(--radius-fib-3); display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8rem;">8fr</div>
                                     </div>
                                     <p class="vd-text-sm vd-text-muted vd-mt-3">Fibonacci widths: ~19% + ~31% + ~50%. Natural hierarchy — your eye moves from small to large, creating visual flow.</p>
                                 </div>
@@ -97,10 +97,10 @@
 
                     <h4 class="vd-mt-5 vd-mb-3">4-Column Fibonacci (1:2:3:5)</h4>
                     <div class="vd-row-fib-4 vd-mb-4" style="gap: 4px;">
-                        <div style="background: var(--color-error); color: white; padding: 1rem; border-radius: var(--radius-sm); text-align: center;">1</div>
-                        <div style="background: var(--color-warning); color: white; padding: 1rem; border-radius: var(--radius-sm); text-align: center;">2</div>
-                        <div style="background: var(--color-info); color: white; padding: 1rem; border-radius: var(--radius-sm); text-align: center;">3</div>
-                        <div style="background: var(--color-primary); color: white; padding: 1rem; border-radius: var(--radius-sm); text-align: center;">5</div>
+                        <div style="background: var(--vd-color-error); color: white; padding: 1rem; border-radius: var(--radius-fib-3); text-align: center;">1</div>
+                        <div style="background: var(--vd-color-warning); color: white; padding: 1rem; border-radius: var(--radius-fib-3); text-align: center;">2</div>
+                        <div style="background: var(--vd-color-info); color: white; padding: 1rem; border-radius: var(--radius-fib-3); text-align: center;">3</div>
+                        <div style="background: var(--vd-color-primary); color: white; padding: 1rem; border-radius: var(--radius-fib-3); text-align: center;">5</div>
                     </div>
                     <div class="vd-code-snippet" data-collapsible data-expanded="true">
                         <button class="vd-code-snippet-toggle" aria-expanded="true">
@@ -132,9 +132,9 @@
 
                     <h4 class="vd-mt-8 vd-mb-3">3-Column Fibonacci (3:5:8)</h4>
                     <div class="vd-row-fib-3-alt vd-mb-4" style="gap: 4px;">
-                        <div style="background: var(--color-success); color: white; padding: 1rem; border-radius: var(--radius-sm); text-align: center;">3</div>
-                        <div style="background: var(--color-primary); color: white; padding: 1rem; border-radius: var(--radius-sm); text-align: center;">5</div>
-                        <div style="background: var(--color-info); color: white; padding: 1rem; border-radius: var(--radius-sm); text-align: center;">8</div>
+                        <div style="background: var(--vd-color-success); color: white; padding: 1rem; border-radius: var(--radius-fib-3); text-align: center;">3</div>
+                        <div style="background: var(--vd-color-primary); color: white; padding: 1rem; border-radius: var(--radius-fib-3); text-align: center;">5</div>
+                        <div style="background: var(--vd-color-info); color: white; padding: 1rem; border-radius: var(--radius-fib-3); text-align: center;">8</div>
                     </div>
                     <div class="vd-code-snippet" data-collapsible data-expanded="true">
                         <button class="vd-code-snippet-toggle" aria-expanded="true">
@@ -282,9 +282,9 @@
                                 <div class="vd-card-body">
                                     <code>vd-gap-fib-3</code>
                                     <div style="display: flex; gap: 3px; justify-content: center; margin-top: 1rem;">
-                                        <div style="width: 40px; height: 40px; background: var(--color-primary); border-radius: var(--radius-sm);"></div>
-                                        <div style="width: 40px; height: 40px; background: var(--color-primary); border-radius: var(--radius-sm);"></div>
-                                        <div style="width: 40px; height: 40px; background: var(--color-primary); border-radius: var(--radius-sm);"></div>
+                                        <div style="width: 40px; height: 40px; background: var(--vd-color-primary); border-radius: var(--radius-fib-3);"></div>
+                                        <div style="width: 40px; height: 40px; background: var(--vd-color-primary); border-radius: var(--radius-fib-3);"></div>
+                                        <div style="width: 40px; height: 40px; background: var(--vd-color-primary); border-radius: var(--radius-fib-3);"></div>
                                     </div>
                                     <p class="vd-text-sm vd-text-muted vd-mt-2">3px gap — tight</p>
                                 </div>
@@ -295,9 +295,9 @@
                                 <div class="vd-card-body">
                                     <code>vd-gap-fib-8</code>
                                     <div style="display: flex; gap: 8px; justify-content: center; margin-top: 1rem;">
-                                        <div style="width: 40px; height: 40px; background: var(--color-success); border-radius: var(--radius-sm);"></div>
-                                        <div style="width: 40px; height: 40px; background: var(--color-success); border-radius: var(--radius-sm);"></div>
-                                        <div style="width: 40px; height: 40px; background: var(--color-success); border-radius: var(--radius-sm);"></div>
+                                        <div style="width: 40px; height: 40px; background: var(--vd-color-success); border-radius: var(--radius-fib-3);"></div>
+                                        <div style="width: 40px; height: 40px; background: var(--vd-color-success); border-radius: var(--radius-fib-3);"></div>
+                                        <div style="width: 40px; height: 40px; background: var(--vd-color-success); border-radius: var(--radius-fib-3);"></div>
                                     </div>
                                     <p class="vd-text-sm vd-text-muted vd-mt-2">8px gap — comfortable</p>
                                 </div>
@@ -308,9 +308,9 @@
                                 <div class="vd-card-body">
                                     <code>vd-gap-fib-21</code>
                                     <div style="display: flex; gap: 21px; justify-content: center; margin-top: 1rem;">
-                                        <div style="width: 40px; height: 40px; background: var(--color-warning); border-radius: var(--radius-sm);"></div>
-                                        <div style="width: 40px; height: 40px; background: var(--color-warning); border-radius: var(--radius-sm);"></div>
-                                        <div style="width: 40px; height: 40px; background: var(--color-warning); border-radius: var(--radius-sm);"></div>
+                                        <div style="width: 40px; height: 40px; background: var(--vd-color-warning); border-radius: var(--radius-fib-3);"></div>
+                                        <div style="width: 40px; height: 40px; background: var(--vd-color-warning); border-radius: var(--radius-fib-3);"></div>
+                                        <div style="width: 40px; height: 40px; background: var(--vd-color-warning); border-radius: var(--radius-fib-3);"></div>
                                     </div>
                                     <p class="vd-text-sm vd-text-muted vd-mt-2">21px gap — spacious</p>
                                 </div>
@@ -418,27 +418,27 @@
                 <div class="vd-card-body">
                     <div class="vd-row">
                         <div class="vd-col-12 vd-col-md-6 vd-mb-4">
-                            <div class="vd-card" style="border-top: 3px solid var(--color-primary);">
+                            <div class="vd-card" style="border-top: 3px solid var(--vd-color-primary);">
                                 <div class="vd-card-header"><h4><i class="ph ph-grid-four"></i> Use Standard Grid When…</h4></div>
                                 <div class="vd-card-body">
                                     <ul>
-                                        <li><i class="ph ph-check" style="color: var(--color-success);"></i> Building data-heavy dashboards (equal emphasis on all metrics)</li>
-                                        <li><i class="ph ph-check" style="color: var(--color-success);"></i> Creating forms with aligned columns</li>
-                                        <li><i class="ph ph-check" style="color: var(--color-success);"></i> E-commerce product grids (uniform card sizes)</li>
-                                        <li><i class="ph ph-check" style="color: var(--color-success);"></i> Any layout where symmetry is desired</li>
+                                        <li><i class="ph ph-check" style="color: var(--vd-color-success);"></i> Building data-heavy dashboards (equal emphasis on all metrics)</li>
+                                        <li><i class="ph ph-check" style="color: var(--vd-color-success);"></i> Creating forms with aligned columns</li>
+                                        <li><i class="ph ph-check" style="color: var(--vd-color-success);"></i> E-commerce product grids (uniform card sizes)</li>
+                                        <li><i class="ph ph-check" style="color: var(--vd-color-success);"></i> Any layout where symmetry is desired</li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <div class="vd-col-12 vd-col-md-6 vd-mb-4">
-                            <div class="vd-card" style="border-top: 3px solid var(--color-success);">
+                            <div class="vd-card" style="border-top: 3px solid var(--vd-color-success);">
                                 <div class="vd-card-header"><h4><i class="ph ph-spiral"></i> Use Fibonacci Grid When…</h4></div>
                                 <div class="vd-card-body">
                                     <ul>
-                                        <li><i class="ph ph-check" style="color: var(--color-success);"></i> Designing content-first pages (blogs, articles, portfolios)</li>
-                                        <li><i class="ph ph-check" style="color: var(--color-success);"></i> Creating visual hierarchy (main content + sidebar)</li>
-                                        <li><i class="ph ph-check" style="color: var(--color-success);"></i> Marketing / landing pages (guide the eye to the CTA)</li>
-                                        <li><i class="ph ph-check" style="color: var(--color-success);"></i> Any layout where you want one area to dominate</li>
+                                        <li><i class="ph ph-check" style="color: var(--vd-color-success);"></i> Designing content-first pages (blogs, articles, portfolios)</li>
+                                        <li><i class="ph ph-check" style="color: var(--vd-color-success);"></i> Creating visual hierarchy (main content + sidebar)</li>
+                                        <li><i class="ph ph-check" style="color: var(--vd-color-success);"></i> Marketing / landing pages (guide the eye to the CTA)</li>
+                                        <li><i class="ph ph-check" style="color: var(--vd-color-success);"></i> Any layout where you want one area to dominate</li>
                                     </ul>
                                 </div>
                             </div>
@@ -457,7 +457,7 @@
     </div>
 
     <!-- What's Next block -->
-    <div class="vd-mt-8" style="border-top: 1px solid var(--border-color); padding-top: 2.5rem; padding-bottom: 3rem;">
+    <div class="vd-mt-8" style="border-top: 1px solid var(--vd-border-color); padding-top: 2.5rem; padding-bottom: 3rem;">
         <h4 class="vd-text-lg vd-mb-5"><i class="ph ph-arrow-circle-right"></i> What's Next?</h4>
         <div class="vd-row" style="gap: 1.25rem;">
             <div class="vd-col-12 vd-col-md-6 vd-mb-4">

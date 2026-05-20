@@ -5,12 +5,12 @@
         style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; overflow: hidden; padding-top: 268px; padding-bottom: 89px;">
         <div class="vd-parallax-layer" data-speed="0.5"></div>
         <div class="vd-parallax-content hero-content">
-            <h2 class="hero-title" style="color: var(--color-primary); display: flex; align-items: center; justify-content: center;">
+            <h2 class="hero-title" style="color: var(--vd-color-primary); display: flex; align-items: center; justify-content: center;">
                 <svg class="hero-title-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 432 432" fill="none" aria-hidden="true">
-                    <circle cx="216" cy="216" r="191.5" fill="none" stroke="var(--color-primary)" stroke-width="49"/>
+                    <circle cx="216" cy="216" r="191.5" fill="none" stroke="var(--vd-color-primary)" stroke-width="49"/>
                     <g filter="url(#vanduoLogoFilterHero)">
-                        <path d="M245.811 344.5C232.339 367.833 198.661 367.833 185.189 344.5L88.6273 177.25C75.1558 153.917 91.9952 124.75 118.938 124.75L312.062 124.75C339.005 124.75 355.844 153.917 342.373 177.25L245.811 344.5Z" fill="var(--color-primary)"/>
-                        <path d="M245.378 344.25C232.099 367.25 198.901 367.25 185.622 344.25L89.0605 177C75.7815 154 92.3804 125.25 118.938 125.25L312.062 125.25C338.62 125.25 355.219 154 341.939 177L245.378 344.25Z" stroke="var(--text-primary)"/>
+                        <path d="M245.811 344.5C232.339 367.833 198.661 367.833 185.189 344.5L88.6273 177.25C75.1558 153.917 91.9952 124.75 118.938 124.75L312.062 124.75C339.005 124.75 355.844 153.917 342.373 177.25L245.811 344.5Z" fill="var(--vd-color-primary)"/>
+                        <path d="M245.378 344.25C232.099 367.25 198.901 367.25 185.622 344.25L89.0605 177C75.7815 154 92.3804 125.25 118.938 125.25L312.062 125.25C338.62 125.25 355.219 154 341.939 177L245.378 344.25Z" stroke="var(--vd-text-primary)"/>
                     </g>
                     <defs>
                         <filter id="vanduoLogoFilterHero" x="79.886" y="124.75" width="271.228" height="245.25" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
@@ -43,7 +43,7 @@
     <div class="vd-container-responsive">
         <!-- Core Philosophy -->
         <div id="home-features" style="padding: 4rem 0; scroll-margin-top: 80px;">
-            <h3 class="vd-text-center vd-mb-8" style="color: var(--color-primary);">Features</h3>
+            <h3 class="vd-text-center vd-mb-8" style="color: var(--vd-color-primary);">Features</h3>
             <div class="vd-row philosophy-cards" style="align-items: stretch;">
                 <div class="vd-col-12 vd-col-md-6 vd-col-lg-4">
                     <div class="vd-card vd-card-glow vd-glass vd-glass-floating vd-text-center vd-morph vd-morph-lg feature-morph-card"
@@ -202,14 +202,14 @@
 
         <!-- Icons Overview -->
         <div id="home-icons" style="padding: 4rem 0; scroll-margin-top: 80px;">
-            <h3 class="icons-section-title vd-mb-3" style="color: var(--color-primary);">Phosphor Icons</h3>
+            <h3 class="icons-section-title vd-mb-3" style="color: var(--vd-color-primary);">Phosphor Icons</h3>
             <p class="icons-section-subtitle vd-text-muted vd-mb-8">1,500+ icons in 6 weights, bundled locally. No
                 CDN
                 required.</p>
 
             <div class="vd-row">
                 <div class="vd-col-12">
-                    <div class="vd-card vd-card-glow vd-card-actionable vd-glass icons-card">
+                    <div class="vd-card vd-card-glow vd-card-actionable vd-glass icons-card home-card-no-glow">
                         <div class="icons-weights">
                             <div class="icons-weight-item">
                                 <i class="ph ph-heart"></i>
@@ -267,13 +267,13 @@
 
         <!-- Open Color Overview -->
         <div id="open-color" style="padding: 4rem 0; scroll-margin-top: 80px;">
-            <h3 class="open-color-title vd-mb-3" style="color: var(--color-primary);">Open Color Palette</h3>
+            <h3 class="open-color-title vd-mb-3" style="color: var(--vd-color-primary);">Open Color Palette</h3>
             <p class="open-color-subtitle vd-text-muted vd-mb-8">Vanduo is built on the Open Color system — clean,
                 accessible hues with consistent 10-step scales.</p>
 
             <div class="vd-row">
                 <div class="vd-col-12">
-                    <div class="vd-card vd-card-glow vd-card-actionable vd-glass open-color-card">
+                    <div class="vd-card vd-card-glow vd-card-actionable vd-glass open-color-card home-card-no-glow">
                         <div class="open-color-grid">
                             <div class="open-color-swatch" style="background: var(--primary-5);">Primary</div>
                             <div class="open-color-swatch" style="background: var(--secondary-5);">Secondary</div>
@@ -286,8 +286,9 @@
                         </div>
                         <p class="open-color-footer vd-text-sm vd-text-muted">Based on <a
                                 href="https://yeun.github.io/open-color/" target="_blank" rel="noopener"><strong>Open
-                                    Color</strong></a> (MIT Licensed). See full palette
-                            in the documentation.</p>
+                                    Color</strong></a> (MIT Licensed).
+                            <a href="#docs/color-palette" data-route="docs/color-palette">See full palette in the
+                                documentation &rarr;</a></p>
                     </div>
                 </div>
             </div>
@@ -296,10 +297,10 @@
         <div id="cta" style="padding: 5rem 0;">
             <div class="vd-row">
                 <div class="vd-col-12">
-                    <div class="vd-card vd-card-glow vd-card-actionable vd-glass vd-text-center" style="padding: 3rem 2rem;">
+                    <div class="vd-card vd-card-glow vd-card-actionable vd-glass vd-text-center home-card-no-glow" style="padding: 3rem 2rem;">
                         <i class="ph ph-book-open"
-                            style="font-size: 3rem; color: var(--color-primary); margin-bottom: 1rem;"></i>
-                        <h4 style="color: var(--color-primary);">Browse Docs</h4>
+                            style="font-size: 3rem; color: var(--vd-color-primary); margin-bottom: 1rem;"></i>
+                        <h4 style="color: var(--vd-color-primary);">Browse Docs</h4>
                         <p class="vd-text-muted vd-mb-5">Explore all components, utilities, and code examples.</p>
                         <a href="#docs" class="vd-btn vd-btn-outline vd-btn-lg" data-route="docs">Docs</a>
                     </div>

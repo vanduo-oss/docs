@@ -8,16 +8,16 @@
             padding: 2rem;
             background:
                 linear-gradient(135deg,
-                    color-mix(in srgb, var(--color-primary) 35%, transparent) 0%,
-                    color-mix(in srgb, var(--color-primary) 8%, var(--bg-secondary)) 45%,
-                    color-mix(in srgb, var(--color-success) 20%, var(--bg-secondary)) 100%);
-            border: 1px solid var(--border-color);
+                    color-mix(in srgb, var(--vd-color-primary) 35%, transparent) 0%,
+                    color-mix(in srgb, var(--vd-color-primary) 8%, var(--vd-bg-secondary)) 45%,
+                    color-mix(in srgb, var(--vd-color-success) 20%, var(--vd-bg-secondary)) 100%);
+            border: 1px solid var(--vd-border-color);
         }
         #cards .cards-morph-inner {
             min-height: 7rem;
             border-radius: calc(var(--card-border-radius) - 2px);
-            border: 1px solid var(--border-color);
-            background: var(--bg-secondary);
+            border: 1px solid var(--vd-border-color);
+            background: var(--vd-bg-secondary);
         }
         #cards .cards-morph-inner .vd-morph-content {
             flex-direction: column;
@@ -202,7 +202,7 @@
 
 <span class="code-selector">.vd-card-outlined</span> {
   <span class="code-property">box-shadow</span>: <span class="code-value">none</span>;
-  <span class="code-property">border</span>: <span class="code-value">1px solid var(--border-color)</span>;
+  <span class="code-property">border</span>: <span class="code-value">1px solid var(--vd-border-color)</span>;
 }
 
 <span class="code-selector">.vd-card-filled</span> {
@@ -311,7 +311,7 @@
         <div class="vd-col-12 vd-col-md-6 vd-col-lg-4">
             <div class="vd-card vd-card-actionable vd-card-glow" id="demo-card-actionable" role="button" tabindex="0">
                 <div class="vd-card-body">
-                    <i class="ph ph-rocket-launch" style="font-size: 2rem; color: var(--color-primary); margin-bottom: 0.75rem; display: block;"></i>
+                    <i class="ph ph-rocket-launch" style="font-size: 2rem; color: var(--vd-color-primary); margin-bottom: 0.75rem; display: block;"></i>
                     <h5>Get Started</h5>
                     <p class="vd-text-sm vd-text-muted vd-mb-0">Click this card to navigate — the whole surface is interactive.</p>
                 </div>
@@ -343,7 +343,7 @@
         <div class="vd-col-12">
             <div class="vd-card vd-card-glow demo-card">
                 <div class="vd-card-header">
-                    <h4><i class="ph ph-list-dashes mr-2" style="color: var(--color-primary);"></i>Class Reference</h4>
+                    <h4><i class="ph ph-list-dashes mr-2" style="color: var(--vd-color-primary);"></i>Class Reference</h4>
                 </div>
                 <div class="vd-card-body">
                     <div class="vd-table-responsive">

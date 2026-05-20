@@ -11,16 +11,16 @@
                     <h4><i class="ph ph-navigation-arrow"></i> Sticky Navigation Bar</h4>
                 </div>
                 <div class="vd-card-body">
-                    <div style="position:relative;height:280px;overflow-y:auto;border:1px solid var(--border-color);border-radius:var(--radius-md);padding:0;">
-                        <div style="padding:1rem 1.25rem;background:var(--bg-secondary);">
+                    <div style="position:relative;height:280px;overflow-y:auto;border:1px solid var(--vd-border-color);border-radius:var(--radius-fib-5);padding:0;">
+                        <div style="padding:1rem 1.25rem;background:var(--vd-bg-secondary);">
                             <p class="vd-text-sm vd-text-muted">Scroll down inside this container to see the sticky bar pin itself. The component automatically uses this panel as its scroll context.</p>
                         </div>
                         <div style="padding:1.25rem;">
                             <p class="vd-text-sm vd-text-muted">Place content before the affix element so it can scroll naturally into position, then let <code>VanduoAffix</code> pin it within the nearest scrollable parent.</p>
                             <p class="vd-text-sm vd-text-muted vd-mt-3">If you drop the same markup into a normal page without an overflow container, it will stick against the browser viewport instead.</p>
                         </div>
-                        <nav class="vd-affix vd-affix-bordered" data-vd-affix data-vd-affix-offset="0" style="background:var(--card-bg);padding:.75rem 1.25rem;border-bottom:1px solid var(--border-color);display:flex;align-items:center;gap:1rem;z-index:10;">
-                            <strong style="color:var(--color-primary);"><i class="ph ph-compass"></i> Nav</strong>
+                        <nav class="vd-affix vd-affix-bordered" data-vd-affix data-vd-affix-offset="0" style="background:var(--card-bg);padding:.75rem 1.25rem;border-bottom:1px solid var(--vd-border-color);display:flex;align-items:center;gap:1rem;z-index:10;">
+                            <strong style="color:var(--vd-color-primary);"><i class="ph ph-compass"></i> Nav</strong>
                             <a href="#" class="vd-text-sm" onclick="return false">Home</a>
                             <a href="#" class="vd-text-sm" onclick="return false">Features</a>
                             <a href="#" class="vd-text-sm" onclick="return false">Pricing</a>
@@ -87,10 +87,10 @@
                 <div class="vd-card-body">
                     <p class="vd-mb-4">Combine modifier classes to fine-tune the look when the element becomes stuck.</p>
                     <div style="display:flex;flex-direction:column;gap:.75rem;">
-                        <div class="vd-affix-bordered" style="padding:.5rem 1rem;border-radius:var(--radius-md);border:1px solid var(--border-color);">
+                        <div class="vd-affix-bordered" style="padding:.5rem 1rem;border-radius:var(--radius-fib-5);border:1px solid var(--vd-border-color);">
                             <code>.vd-affix-bordered</code> — adds a bottom border when stuck
                         </div>
-                        <div class="vd-affix-no-shadow" style="padding:.5rem 1rem;border-radius:var(--radius-md);background:var(--bg-secondary);">
+                        <div class="vd-affix-no-shadow" style="padding:.5rem 1rem;border-radius:var(--radius-fib-5);background:var(--vd-bg-secondary);">
                             <code>.vd-affix-no-shadow</code> — suppresses the default drop shadow
                         </div>
                     </div>
