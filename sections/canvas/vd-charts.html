@@ -1,0 +1,232 @@
+<section id="vd-charts">
+    <h4 class="demo-title"><i class="ph ph-chart-donut"></i>Vanduo Charts</h4>
+    <p class="vd-mb-8">Vanduo Charts is a standalone SVG-first package for common dashboard charts. It is installed separately from the framework, renders accessible SVG, reads Vanduo theme tokens, and can auto-initialize through the v1.4 lifecycle system when the browser bundle is loaded.</p>
+
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12 vd-col-lg-4 vd-mb-4">
+            <div class="vd-card demo-card">
+                <div class="vd-card-header">
+                    <h4><i class="ph ph-chart-bar"></i> Bar Chart</h4>
+                </div>
+                <div class="vd-card-body">
+                    <div
+                        data-vd-chart="bar"
+                        data-vd-x="month"
+                        data-vd-y="sales"
+                        data-vd-title="Monthly sales"
+                        data-vd-height="300"
+                        style="min-height: 300px;">
+[
+  { "month": "Jan", "sales": 120 },
+  { "month": "Feb", "sales": 180 },
+  { "month": "Mar", "sales": 150 },
+  { "month": "Apr", "sales": 220 }
+]
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="vd-col-12 vd-col-lg-4 vd-mb-4">
+            <div class="vd-card demo-card">
+                <div class="vd-card-header">
+                    <h4><i class="ph ph-chart-line-up"></i> Line Chart</h4>
+                </div>
+                <div class="vd-card-body">
+                    <div
+                        data-vd-chart="line"
+                        data-vd-x="month"
+                        data-vd-y="visits"
+                        data-vd-title="Site visits"
+                        data-vd-height="300"
+                        style="min-height: 300px;">
+[
+  { "month": "Jan", "visits": 3200 },
+  { "month": "Feb", "visits": 4100 },
+  { "month": "Mar", "visits": 3700 },
+  { "month": "Apr", "visits": 5200 }
+]
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="vd-col-12 vd-col-lg-4 vd-mb-4">
+            <div class="vd-card demo-card">
+                <div class="vd-card-header">
+                    <h4><i class="ph ph-chart-donut"></i> Donut Chart</h4>
+                </div>
+                <div class="vd-card-body">
+                    <div
+                        id="vd-charts-donut-demo"
+                        data-vd-chart="donut"
+                        data-vd-label="channel"
+                        data-vd-value="revenue"
+                        data-vd-title="Revenue mix"
+                        data-vd-height="300"
+                        style="min-height: 300px;">
+[
+  { "channel": "Product", "revenue": 420 },
+  { "channel": "Services", "revenue": 180 },
+  { "channel": "Support", "revenue": 90 }
+]
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vd-card vd-mb-6">
+        <div class="vd-card-body">
+            <h4 class="vd-mb-4"><i class="ph ph-download-simple"></i> Install</h4>
+            <div class="vd-code-snippet" data-collapsible data-expanded="true">
+                <button class="vd-code-snippet-toggle" type="button" aria-expanded="true">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View install command</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="bash">pnpm</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" type="button" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="bash"><code>pnpm add @vanduo-oss/charts</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vd-card vd-mb-6">
+        <div class="vd-card-body">
+            <h4 class="vd-mb-4"><i class="ph ph-code"></i> JavaScript API</h4>
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" type="button" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View DonutChart example</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="js">JavaScript</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" type="button" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="js"><code>import { DonutChart } from '@vanduo-oss/charts';
+import '@vanduo-oss/charts/css';
+
+const chart = DonutChart({
+  target: '#revenue-mix',
+  data,
+  label: 'channel',
+  value: 'revenue',
+  title: 'Revenue mix',
+  tooltip: d =&gt; `${d.channel}: ${d.revenue}`,
+  onSliceClick: ({ datum }) =&gt; console.log(datum)
+});
+
+chart.update({ data: nextData });
+chart.resize();
+chart.destroy();</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vd-card vd-mb-6">
+        <div class="vd-card-body">
+            <h4 class="vd-mb-4"><i class="ph ph-recycle"></i> Vanduo Auto Init</h4>
+            <p class="vd-text-muted">The browser bundle exposes <code>window.VanduoCharts</code>. When <code>window.Vanduo</code> is present, it registers as <code>charts</code>, so scoped <code>Vanduo.init(root)</code>, <code>Vanduo.destroy(root)</code>, and <code>Vanduo.reinit('charts', root)</code> work without framework changes.</p>
+            <div class="vd-code-snippet vd-mt-4" data-collapsible>
+                <button class="vd-code-snippet-toggle" type="button" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View auto-init markup</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" type="button" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;div
+  data-vd-chart="donut"
+  data-vd-label="channel"
+  data-vd-value="revenue"
+  data-vd-title="Revenue mix"&gt;
+[
+  { "channel": "Product", "revenue": 420 },
+  { "channel": "Services", "revenue": 180 }
+]
+&lt;/div&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vd-card vd-mb-6">
+        <div class="vd-card-body">
+            <h4 class="vd-mb-4"><i class="ph ph-book-open-text"></i> API Reference</h4>
+            <table class="vd-table vd-table-hover vd-mb-4">
+                <thead>
+                    <tr>
+                        <th>Export</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>BarChart</code></td><td>Category bars with band scale, left/bottom axes, grid lines, tooltips, and bar click events.</td></tr>
+                    <tr><td><code>LineChart</code></td><td>Line path with optional points over category, number, or date-like x values.</td></tr>
+                    <tr><td><code>AreaChart</code></td><td>Filled area plus line path, sharing the same cartesian infrastructure as line charts.</td></tr>
+                    <tr><td><code>ScatterChart</code></td><td>Circle marks over numeric, date-like, or categorical x values.</td></tr>
+                    <tr><td><code>DonutChart</code></td><td>Arc slices with default <code>innerRadiusRatio: 0.62</code>, center total, legend, tooltips, and slice click events.</td></tr>
+                    <tr><td><code>PieChart</code></td><td>Same polar renderer as DonutChart with <code>innerRadiusRatio: 0</code>.</td></tr>
+                </tbody>
+            </table>
+
+            <h5 class="vd-mb-3">Shared Options</h5>
+            <table class="vd-table vd-table-hover">
+                <thead>
+                    <tr>
+                        <th>Option</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>target</code></td><td>Element | selector</td><td>Required mount element.</td></tr>
+                    <tr><td><code>data</code></td><td>Array</td><td>Plain objects; null x/y/value rows are skipped.</td></tr>
+                    <tr><td><code>x</code>, <code>y</code></td><td>string | function</td><td>Cartesian accessors.</td></tr>
+                    <tr><td><code>label</code>, <code>value</code></td><td>string | function</td><td>Pie and donut accessors.</td></tr>
+                    <tr><td><code>title</code>, <code>description</code></td><td>string</td><td>Rendered into SVG accessibility metadata.</td></tr>
+                    <tr><td><code>tooltip</code></td><td>function | string | false</td><td>Custom tooltip content or disable tooltips.</td></tr>
+                    <tr><td><code>theme</code></td><td>object</td><td>Override token-derived colors, text, grid, and axis values.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="vd-card vd-mb-6">
+        <div class="vd-card-body">
+            <h4 class="vd-mb-4"><i class="ph ph-universal-access"></i> Accessibility</h4>
+            <ul class="vd-text-muted vd-mb-0">
+                <li>Each chart renders an SVG with <code>role="img"</code> and title/description metadata when provided.</li>
+                <li>Interactive marks are keyboard-focusable and respond to <kbd>Enter</kbd> or <kbd>Space</kbd>.</li>
+                <li>Tooltips use a polite status region and do not own data loading or dashboard state.</li>
+            </ul>
+        </div>
+    </div>
+</section>

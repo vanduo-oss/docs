@@ -162,6 +162,7 @@
     </script>
 
     <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/vanduo-charts.css">
     <link id="vanduo-templates-css" rel="stylesheet">
     <script>
         (function () {
@@ -471,6 +472,9 @@
                 return loadScript('js/lazy-loader.js' + docsScriptVersion)
                     .then(function () {
                         return loadScript('js/section-cache.js' + docsScriptVersion);
+                    })
+                    .then(function () {
+                        return loadScript('js/vanduo-charts.iife.js' + docsScriptVersion);
                     })
                     .then(function () {
                         return loadScript('js/app.js' + docsScriptVersion);
