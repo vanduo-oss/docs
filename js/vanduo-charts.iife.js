@@ -64,7 +64,7 @@ var VanduoCharts = (() => {
     "#be4bdb",
     "#fd7e14"
   ];
-  var VD_CHARTS_VERSION = "0.1.0";
+  var VD_CHARTS_VERSION = "0.0.1";
   var chartId = 0;
   function nextId(prefix) {
     chartId += 1;

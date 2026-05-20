@@ -922,6 +922,7 @@ async function loadSection(sectionId, autoScroll = true, options = {}) {
 
     if (loadedSections.has(sectionId)) {
         var el = document.getElementById(sectionId);
+        var loadedMeta = findSectionMeta(sectionId);
         // 'instant' — deep-link/search to an already-loaded but far-away
         // section (e.g. bottom-of-sidebar like 'glass') can animate for
         // longer than the scroll-spy guard, letting spy hijack the URL
@@ -930,6 +931,13 @@ async function loadSection(sectionId, autoScroll = true, options = {}) {
         if (el && autoScroll) el.scrollIntoView({ behavior: 'instant', block: 'start' });
         if (autoScroll) settleDocScrollLoader(sectionId);
         setActiveNavLink(sectionId);
+        if (loadedMeta && loadedMeta.section) {
+            setDocumentTitle(loadedMeta.section.title);
+            if (autoScroll && window.history && window.history.replaceState) {
+                window.history.replaceState(null, '', '#docs/' + sectionId);
+            }
+            activeDocSectionId = sectionId;
+        }
         return;
     }
 
