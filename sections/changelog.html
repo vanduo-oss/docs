@@ -15,6 +15,67 @@
         <div class="vd-container-responsive" style="max-width: 1200px;">
 
             <!-- ═══════════════════════════════════════════════ -->
+            <!-- Version 142                                     -->
+            <!-- ═══════════════════════════════════════════════ -->
+            <article class="version-card">
+                <header class="version-header">
+                    <span class="vd-badge vd-badge-primary" style="font-size: 1rem; padding: 0.5rem 1rem;">v142</span>
+                    <span style="color: var(--vd-text-secondary); font-size: 0.95rem;">
+                        <i class="ph ph-calendar mr-1"></i>May 23, 2026
+                    </span>
+                    <span class="vd-badge vd-badge-warning" style="font-size: 0.75rem;">Development</span>
+                </header>
+                <div class="version-body">
+                    <div class="vd-row">
+                        <div class="vd-col-12 vd-col-md-6">
+                            <h4><i class="ph ph-cube mr-2" style="color: var(--vd-color-primary);"></i>Framework</h4>
+                            <div class="change-group">
+                                <h5>Fixes</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-arrows-out-line-horizontal" style="color: var(--vd-color-info);"></i>
+                                        <div>
+                                            <strong>Fix: Modal size tiers now render as real desktop width steps</strong>
+                                            <p><code>.vd-modal-sm</code>, default, <code>.vd-modal-lg</code>, and <code>.vd-modal-xl</code> dialogs now open at distinct desktop widths instead of collapsing to the same rendered size.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-code" style="color: var(--vd-color-info);"></i>
+                                        <div>
+                                            <strong>Fix: Dialog-level size modifiers match the documented API</strong>
+                                            <p>Width modifiers now work directly on <code>.vd-modal-dialog</code> as documented, while remaining compatible with wrapper-level modal variants.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="vd-col-12 vd-col-md-6">
+                            <h4><i class="ph ph-book-open-text mr-2" style="color: var(--vd-color-primary);"></i>Documentation</h4>
+                            <div class="change-group">
+                                <h5>Fixes</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-sidebar-simple" style="color: var(--vd-color-info);"></i>
+                                        <div>
+                                            <strong>Fix: Deep docs navigation is now target-first</strong>
+                                            <p>Jumping to a far sidebar item or deep search result now loads the requested section first, trims background prefetch to immediate neighbors, and backfills earlier or later sections only when the reader actually scrolls there.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-monitor-play" style="color: var(--vd-color-info);"></i>
+                                        <div>
+                                            <strong>Fix: Modal demos and regression checks now cover desktop width tiers</strong>
+                                            <p>The docs modal showcase now verifies that small, default, large, and extra-large dialogs visibly step through their intended desktop sizes instead of looking interchangeable.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ═══════════════════════════════════════════════ -->
             <!-- Version 1.4.1                                   -->
             <!-- ═══════════════════════════════════════════════ -->
             <article class="version-card">

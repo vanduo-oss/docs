@@ -16,13 +16,15 @@ test.describe('5. Interactive Demos & Code Snippets', () => {
             await page.goto('/#docs/buttons');
             await waitForSPA(page);
 
+            const snippet = page.locator('.vd-code-snippet').filter({
+                has: page.locator('.vd-code-snippet-tab[data-lang="css"]')
+            }).first();
+            await expect(snippet).toBeVisible();
+
             // Expand a snippet if it's collapsible
-            const collapseToggle = page.locator('.vd-code-snippet[data-collapsible] .vd-code-snippet-toggle').first();
+            const collapseToggle = snippet.locator('.vd-code-snippet-toggle').first();
             await collapseToggle.click();
             await page.waitForTimeout(300);
-
-            const snippet = page.locator('.vd-code-snippet').first();
-            await expect(snippet).toBeVisible();
 
             // Check default active tab
             const htmlTab = snippet.locator('.vd-code-snippet-tab[data-lang="html"]');
@@ -85,6 +87,11 @@ test.describe('5. Interactive Demos & Code Snippets', () => {
             const modalBtn = page.locator('[data-modal="#demo-modal-default"]').first();
             const modal = page.locator('#demo-modal-default');
 
+            await page.waitForFunction(() => {
+                const trigger = document.querySelector('[data-modal="#demo-modal-default"]');
+                return trigger?.dataset.modalTriggerInitialized === 'true';
+            });
+
             await modalBtn.click();
             await expect(modal).toHaveClass(/is-open/);
             await expect.poll(() => modal.evaluate((node) => node.parentElement === document.body)).toBe(true);
@@ -102,6 +109,46 @@ test.describe('5. Interactive Demos & Code Snippets', () => {
 
             await page.keyboard.press('Escape');
             await expect(modal).not.toHaveClass(/is-open/);
+        });
+
+        test('Modal size demo preserves distinct desktop width tiers', async ({ page }) => {
+            const viewport = page.viewportSize();
+            test.skip(!viewport || viewport.width < 992, 'Desktop-only modal width expectation.');
+
+            await page.goto('/#docs/modals');
+            await waitForSPA(page);
+
+            await page.waitForFunction(() => {
+                const trigger = document.querySelector('[data-modal="#demo-modal-default"]');
+                return trigger?.dataset.modalTriggerInitialized === 'true';
+            });
+
+            const measureDialogWidth = async (triggerSelector: string, modalSelector: string) => {
+                await page.locator(triggerSelector).first().click();
+                await expect(page.locator(modalSelector)).toHaveClass(/is-open/);
+
+                const width = await page.locator(`${modalSelector} .vd-modal-dialog`).evaluate((node) => {
+                    return Math.round(node.getBoundingClientRect().width);
+                });
+
+                await page.keyboard.press('Escape');
+                await expect(page.locator(modalSelector)).not.toHaveClass(/is-open/);
+
+                return width;
+            };
+
+            const smallWidth = await measureDialogWidth('[data-modal="#demo-modal-sm"]', '#demo-modal-sm');
+            const defaultWidth = await measureDialogWidth('[data-modal="#demo-modal-default"]', '#demo-modal-default');
+            const largeWidth = await measureDialogWidth('[data-modal="#demo-modal-lg"]', '#demo-modal-lg');
+            const extraLargeWidth = await measureDialogWidth('[data-modal="#demo-modal-xl"]', '#demo-modal-xl');
+
+            expect(smallWidth).toBeLessThan(defaultWidth);
+            expect(defaultWidth).toBeLessThan(largeWidth);
+            expect(largeWidth).toBeLessThan(extraLargeWidth);
+
+            expect(defaultWidth - smallWidth).toBeGreaterThanOrEqual(120);
+            expect(largeWidth - defaultWidth).toBeGreaterThanOrEqual(180);
+            expect(extraLargeWidth - largeWidth).toBeGreaterThanOrEqual(300);
         });
 
         test('Sidenav demo opens as a real left-edge overlay', async ({ page }) => {

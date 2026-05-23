@@ -173,22 +173,28 @@ test.describe('4. Documentation View', () => {
     });
 
     test.describe('Changelog (#changelog)', () => {
-        test('Shows v1.4.1 as latest and keeps v1.4.0 as history', async ({ page }) => {
+        test('Shows v142 development work above the latest v1.4.1 release history', async ({ page }) => {
             await page.goto('/#changelog');
             await waitForSPA(page);
 
             const changelog = page.locator('#changelog');
             await expect(changelog).toBeVisible();
 
-            const latestCard = changelog.locator('.version-card').first();
-            await expect(latestCard).toContainText('v1.4.1');
-            await expect(latestCard).toContainText('Latest');
-            await expect(latestCard).toContainText('Strict --vd-*');
-            await expect(latestCard).toContainText('--vd-*');
+            const developmentCard = changelog.locator('.version-card').first();
+            await expect(developmentCard).toContainText('v142');
+            await expect(developmentCard).toContainText('Development');
+            await expect(developmentCard).toContainText('target-first');
+            await expect(developmentCard).toContainText('Modal size tiers');
 
-            const previousCard = changelog.locator('.version-card').nth(1);
-            await expect(previousCard).toContainText('v1.4.0');
-            await expect(previousCard).not.toContainText('Latest');
+            const latestReleaseCard = changelog.locator('.version-card').nth(1);
+            await expect(latestReleaseCard).toContainText('v1.4.1');
+            await expect(latestReleaseCard).toContainText('Latest');
+            await expect(latestReleaseCard).toContainText('Strict --vd-*');
+            await expect(latestReleaseCard).toContainText('--vd-*');
+
+            const previousReleaseCard = changelog.locator('.version-card').nth(2);
+            await expect(previousReleaseCard).toContainText('v1.4.0');
+            await expect(previousReleaseCard).not.toContainText('Latest');
         });
     });
 
@@ -533,11 +539,11 @@ test.describe('4. Documentation View', () => {
             await expect(page).toHaveURL(/.*#docs\/vd-flowchart/);
 
             await expect(page.locator('#vd-flowchart-demo .vd-flowchart-shell')).toBeVisible();
-            await expect(page.locator('#vd-flowchart-demo .vd-flowchart-node')).toHaveCount(4);
+            await expect(page.locator('#vd-flowchart-demo .vd-flowchart-node')).toHaveCount(5);
             await expect(page.locator('.doc-nav-link[data-section="vd-flowchart"]')).toHaveCount(1);
 
             await page.locator('#vd-flowchart-demo [data-node-type="label"]').click();
-            await expect(page.locator('#vd-flowchart-demo .vd-flowchart-node')).toHaveCount(5);
+            await expect(page.locator('#vd-flowchart-demo .vd-flowchart-node')).toHaveCount(6);
 
             await page.locator('#global-search-trigger').click();
             await page.locator('#global-search-input').fill('flowchart');
