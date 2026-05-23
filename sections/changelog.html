@@ -15,15 +15,15 @@
         <div class="vd-container-responsive" style="max-width: 1200px;">
 
             <!-- ═══════════════════════════════════════════════ -->
-            <!-- Version 142                                     -->
+            <!-- Version 1.4.2                                   -->
             <!-- ═══════════════════════════════════════════════ -->
             <article class="version-card">
                 <header class="version-header">
-                    <span class="vd-badge vd-badge-primary" style="font-size: 1rem; padding: 0.5rem 1rem;">v142</span>
+                    <span class="vd-badge vd-badge-primary" style="font-size: 1rem; padding: 0.5rem 1rem;">v1.4.2</span>
                     <span style="color: var(--vd-text-secondary); font-size: 0.95rem;">
                         <i class="ph ph-calendar mr-1"></i>May 23, 2026
                     </span>
-                    <span class="vd-badge vd-badge-warning" style="font-size: 0.75rem;">Development</span>
+                    <span class="vd-badge vd-badge-info" style="font-size: 0.75rem;">Latest</span>
                 </header>
                 <div class="version-body">
                     <div class="vd-row">
@@ -46,6 +46,25 @@
                                             <p>Width modifiers now work directly on <code>.vd-modal-dialog</code> as documented, while remaining compatible with wrapper-level modal variants.</p>
                                         </div>
                                     </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-calendar-blank" style="color: var(--vd-color-info);"></i>
+                                        <div>
+                                            <strong>Fix: Date and time picker popups portal to <code>document.body</code></strong>
+                                            <p>Calendar and time dropdowns now render in a body-level portal with anchored positioning, scroll/resize repositioning, and overflow clipping fixes so popups stay visible inside modals, cards, and other overflow-hidden containers.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="change-group">
+                                <h5>Updates</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-package" style="color: var(--vd-color-info);"></i>
+                                        <div>
+                                            <strong>Update: Rebuilt release artifacts</strong>
+                                            <p>Bundled CSS, JavaScript, and sourcemaps now align with the v1.4.2 picker portal and modal size fixes.</p>
+                                        </div>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -62,10 +81,50 @@
                                         </div>
                                     </li>
                                     <li class="change-item">
+                                        <i class="ph ph-device-mobile" style="color: var(--vd-color-info);"></i>
+                                        <div>
+                                            <strong>Fix: Home hero spacing and subtitle rotation on mobile</strong>
+                                            <p>The hero title stack now keeps tighter line height on small screens, and the muted subtitle rotates through feature phrases with a crossfade instead of crowding the brand line.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-rows" style="color: var(--vd-color-info);"></i>
+                                        <div>
+                                            <strong>Fix: Footer mobile spacing and link rhythm</strong>
+                                            <p>Footer sections, brand block, link lists, and bottom bar now use consistent mobile padding and vertical gaps so stacked columns breathe without oversized dead space.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-tag" style="color: var(--vd-color-info);"></i>
+                                        <div>
+                                            <strong>Fix: Changelog badges now use the v1.4.2 release label</strong>
+                                            <p>The latest release card shows <code>v1.4.2</code> with a single <code>Latest</code> badge, and older entries no longer carry stale latest markers.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="change-group">
+                                <h5>Updates</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-squares-four" style="color: var(--vd-color-info);"></i>
+                                        <div>
+                                            <strong>Update: Docs landing cards redesigned</strong>
+                                            <p>The Documentation hub now uses a balanced three-column card grid with icon-led rows, highlight bullets, tags, and metadata so Components, Guides, and Changelog previews are easier to scan.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
                                         <i class="ph ph-monitor-play" style="color: var(--vd-color-info);"></i>
                                         <div>
-                                            <strong>Fix: Modal demos and regression checks now cover desktop width tiers</strong>
-                                            <p>The docs modal showcase now verifies that small, default, large, and extra-large dialogs visibly step through their intended desktop sizes instead of looking interchangeable.</p>
+                                            <strong>Update: Modal demos expanded with richer live examples</strong>
+                                            <p>The modal showcase adds stacked form, confirmation, and activity-feed dialogs with realistic content so size tiers, scrollable bodies, and footer actions are easier to evaluate in the docs.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-link" style="color: var(--vd-color-info);"></i>
+                                        <div>
+                                            <strong>Update: Docs runtime and examples now target v1.4.2</strong>
+                                            <p>The docs shell, local preview sync, CDN examples, and release metadata now load the published <code>@v1.4.2</code> framework bundle.</p>
                                         </div>
                                     </li>
                                 </ul>
@@ -84,7 +143,6 @@
                     <span style="color: var(--vd-text-secondary); font-size: 0.95rem;">
                         <i class="ph ph-calendar mr-1"></i>May 23, 2026
                     </span>
-                    <span class="vd-badge vd-badge-info" style="font-size: 0.75rem;">Latest</span>
                 </header>
                 <div class="version-body">
                     <div class="vd-row">

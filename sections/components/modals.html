@@ -35,14 +35,31 @@
                 <div class="vd-modal-dialog">
                     <div class="vd-modal-content">
                         <div class="vd-modal-header">
-                            <h5 class="vd-modal-title">Default Modal</h5>
+                            <h5 class="vd-modal-title"><i class="ph ph-user-plus mr-2" style="color: var(--vd-color-primary);"></i>Invite Teammate</h5>
                             <button class="vd-modal-close" aria-label="Close">&times;</button>
                         </div>
                         <div class="vd-modal-body">
-                            <p class="vd-mb-0">The default modal width is 377px — a comfortable size for most dialogs and forms.</p>
+                            <p class="vd-mb-4">The default modal width (377px) is ideal for focused tasks — quick forms, confirmations, and short workflows.</p>
+                            <div class="vd-form-group vd-mb-3">
+                                <label class="vd-label" for="demo-modal-default-email">Email address</label>
+                                <input type="email" id="demo-modal-default-email" class="vd-input" placeholder="colleague@company.com">
+                            </div>
+                            <div class="vd-form-group vd-mb-4">
+                                <label class="vd-label" for="demo-modal-default-role">Role</label>
+                                <select id="demo-modal-default-role" class="vd-input">
+                                    <option>Editor</option>
+                                    <option>Viewer</option>
+                                    <option>Admin</option>
+                                </select>
+                            </div>
+                            <div class="vd-alert vd-alert-info vd-mb-0">
+                                <i class="ph ph-lightbulb"></i>
+                                <div>Invited members receive a link to join your workspace instantly.</div>
+                            </div>
                         </div>
                         <div class="vd-modal-footer">
-                            <button class="vd-btn vd-btn-outline-secondary" data-dismiss="modal">Close</button>
+                            <button class="vd-btn vd-btn-outline-secondary" data-dismiss="modal">Cancel</button>
+                            <button class="vd-btn vd-btn-primary"><i class="ph ph-paper-plane-tilt mr-1"></i>Send Invite</button>
                         </div>
                     </div>
                 </div>
@@ -51,14 +68,92 @@
                 <div class="vd-modal-dialog vd-modal-lg">
                     <div class="vd-modal-content">
                         <div class="vd-modal-header">
-                            <h5 class="vd-modal-title">Large Modal</h5>
+                            <h5 class="vd-modal-title"><i class="ph ph-gear-six mr-2" style="color: var(--vd-color-primary);"></i>Project Settings</h5>
                             <button class="vd-modal-close" aria-label="Close">&times;</button>
                         </div>
                         <div class="vd-modal-body">
-                            <p class="vd-mb-0">Large modals (610px) work well for complex forms, image galleries, or multi-step wizards.</p>
+                            <p class="vd-mb-4">Large modals (610px) give room for structured content — tabbed settings, multi-section forms, and rich previews.</p>
+                            <div class="vd-tabs vd-tabs-pills" id="demo-modal-lg-tabs">
+                                <ul class="vd-tab-list" role="tablist">
+                                    <li class="vd-tab-item" role="presentation">
+                                        <button class="vd-tab-link is-active" role="tab" aria-selected="true" data-tab-target="demo-modal-lg-general"><i class="ph ph-sliders-horizontal mr-1"></i>General</button>
+                                    </li>
+                                    <li class="vd-tab-item" role="presentation">
+                                        <button class="vd-tab-link" role="tab" aria-selected="false" data-tab-target="demo-modal-lg-design"><i class="ph ph-palette mr-1"></i>Design</button>
+                                    </li>
+                                    <li class="vd-tab-item" role="presentation">
+                                        <button class="vd-tab-link" role="tab" aria-selected="false" data-tab-target="demo-modal-lg-notify"><i class="ph ph-bell mr-1"></i>Notifications</button>
+                                    </li>
+                                </ul>
+                                <div class="vd-tab-content">
+                                    <div class="vd-tab-pane is-active" id="demo-modal-lg-general" role="tabpanel">
+                                        <div class="vd-row">
+                                            <div class="vd-col-12 vd-col-md-6">
+                                                <div class="vd-form-group vd-mb-3">
+                                                    <label class="vd-label" for="demo-modal-lg-name">Project name</label>
+                                                    <input type="text" id="demo-modal-lg-name" class="vd-input" value="Vanduo Design System">
+                                                </div>
+                                            </div>
+                                            <div class="vd-col-12 vd-col-md-6">
+                                                <div class="vd-form-group vd-mb-3">
+                                                    <label class="vd-label" for="demo-modal-lg-url">Project URL</label>
+                                                    <input type="text" id="demo-modal-lg-url" class="vd-input" value="vanduo.dev/design">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="vd-form-group vd-mb-0">
+                                            <label class="vd-label" for="demo-modal-lg-desc">Description</label>
+                                            <textarea id="demo-modal-lg-desc" class="vd-input" rows="3" placeholder="Describe your project…">A Fibonacci-scaled component library for modern web apps.</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="vd-tab-pane" id="demo-modal-lg-design" role="tabpanel">
+                                        <div class="vd-d-flex vd-gap-3 vd-flex-wrap vd-mb-4">
+                                            <div class="vd-card vd-card-glow" style="flex:1; min-width:140px;">
+                                                <div class="vd-card-body vd-text-center">
+                                                    <i class="ph ph-sun" style="font-size:1.75rem; color: var(--vd-color-warning);"></i>
+                                                    <p class="vd-mb-0 vd-mt-2"><strong>Light</strong></p>
+                                                </div>
+                                            </div>
+                                            <div class="vd-card vd-card-glow" style="flex:1; min-width:140px; border-color: var(--vd-color-primary);">
+                                                <div class="vd-card-body vd-text-center">
+                                                    <i class="ph ph-moon-stars" style="font-size:1.75rem; color: var(--vd-color-primary);"></i>
+                                                    <p class="vd-mb-0 vd-mt-2"><strong>Dark</strong></p>
+                                                </div>
+                                            </div>
+                                            <div class="vd-card vd-card-glow" style="flex:1; min-width:140px;">
+                                                <div class="vd-card-body vd-text-center">
+                                                    <i class="ph ph-desktop" style="font-size:1.75rem; color: var(--vd-color-info);"></i>
+                                                    <p class="vd-mb-0 vd-mt-2"><strong>System</strong></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="vd-alert vd-alert-primary vd-mb-0">
+                                            <i class="ph ph-sparkle"></i>
+                                            <div>Theme changes apply instantly across all connected components.</div>
+                                        </div>
+                                    </div>
+                                    <div class="vd-tab-pane" id="demo-modal-lg-notify" role="tabpanel">
+                                        <ul style="list-style:none; padding:0; margin:0;">
+                                            <li class="vd-d-flex vd-align-items-center vd-gap-2 vd-mb-3">
+                                                <i class="ph ph-check-circle" style="color: var(--vd-color-success);"></i>
+                                                <span>Email me when a teammate joins</span>
+                                            </li>
+                                            <li class="vd-d-flex vd-align-items-center vd-gap-2 vd-mb-3">
+                                                <i class="ph ph-check-circle" style="color: var(--vd-color-success);"></i>
+                                                <span>Weekly activity digest</span>
+                                            </li>
+                                            <li class="vd-d-flex vd-align-items-center vd-gap-2 vd-mb-0">
+                                                <i class="ph ph-circle" style="color: var(--vd-color-muted);"></i>
+                                                <span>Push notifications for mentions</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="vd-modal-footer">
-                            <button class="vd-btn vd-btn-outline-secondary" data-dismiss="modal">Close</button>
+                            <button class="vd-btn vd-btn-outline-secondary" data-dismiss="modal">Cancel</button>
+                            <button class="vd-btn vd-btn-primary"><i class="ph ph-floppy-disk mr-1"></i>Save Changes</button>
                         </div>
                     </div>
                 </div>
@@ -67,14 +162,174 @@
                 <div class="vd-modal-dialog vd-modal-xl">
                     <div class="vd-modal-content">
                         <div class="vd-modal-header">
-                            <h5 class="vd-modal-title">Extra Large Modal</h5>
+                            <h5 class="vd-modal-title"><i class="ph ph-rocket-launch mr-2" style="color: var(--vd-color-primary);"></i>Launch Campaign</h5>
                             <button class="vd-modal-close" aria-label="Close">&times;</button>
                         </div>
                         <div class="vd-modal-body">
-                            <p class="vd-mb-0">Extra large modals (987px) span most of the viewport. Use sparingly for dashboards, preview panes, or large data tables.</p>
+                            <p class="vd-mb-5">Extra large modals (987px) span most of the viewport — perfect for dashboards, preview panes, and data-rich workflows.</p>
+                            <div class="vd-tabs" id="demo-modal-xl-tabs">
+                                <ul class="vd-tab-list" role="tablist">
+                                    <li class="vd-tab-item" role="presentation">
+                                        <button class="vd-tab-link is-active" role="tab" aria-selected="true" data-tab-target="demo-modal-xl-overview"><i class="ph ph-chart-line-up mr-1"></i>Overview</button>
+                                    </li>
+                                    <li class="vd-tab-item" role="presentation">
+                                        <button class="vd-tab-link" role="tab" aria-selected="false" data-tab-target="demo-modal-xl-team"><i class="ph ph-users-three mr-1"></i>Team</button>
+                                    </li>
+                                    <li class="vd-tab-item" role="presentation">
+                                        <button class="vd-tab-link" role="tab" aria-selected="false" data-tab-target="demo-modal-xl-activity"><i class="ph ph-pulse mr-1"></i>Activity</button>
+                                    </li>
+                                    <li class="vd-tab-item" role="presentation">
+                                        <button class="vd-tab-link" role="tab" aria-selected="false" data-tab-target="demo-modal-xl-settings"><i class="ph ph-gear mr-1"></i>Settings</button>
+                                    </li>
+                                </ul>
+                                <div class="vd-tab-content">
+                                    <div class="vd-tab-pane is-active" id="demo-modal-xl-overview" role="tabpanel">
+                                        <div class="vd-row vd-mb-5">
+                                            <div class="vd-col-12 vd-col-md-4">
+                                                <div class="vd-card vd-card-glow">
+                                                    <div class="vd-card-body">
+                                                        <div class="vd-d-flex vd-align-items-center vd-gap-2 vd-mb-2">
+                                                            <i class="ph ph-eye" style="color: var(--vd-color-primary); font-size:1.25rem;"></i>
+                                                            <span class="vd-text-muted">Impressions</span>
+                                                        </div>
+                                                        <h4 class="vd-mb-0">24,891</h4>
+                                                        <small style="color: var(--vd-color-success);"><i class="ph ph-trend-up mr-1"></i>+12.4%</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="vd-col-12 vd-col-md-4">
+                                                <div class="vd-card vd-card-glow">
+                                                    <div class="vd-card-body">
+                                                        <div class="vd-d-flex vd-align-items-center vd-gap-2 vd-mb-2">
+                                                            <i class="ph ph-cursor-click" style="color: var(--vd-color-info); font-size:1.25rem;"></i>
+                                                            <span class="vd-text-muted">Click-through</span>
+                                                        </div>
+                                                        <h4 class="vd-mb-0">3.8%</h4>
+                                                        <small style="color: var(--vd-color-success);"><i class="ph ph-trend-up mr-1"></i>+0.6%</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="vd-col-12 vd-col-md-4">
+                                                <div class="vd-card vd-card-glow">
+                                                    <div class="vd-card-body">
+                                                        <div class="vd-d-flex vd-align-items-center vd-gap-2 vd-mb-2">
+                                                            <i class="ph ph-shopping-cart" style="color: var(--vd-color-warning); font-size:1.25rem;"></i>
+                                                            <span class="vd-text-muted">Conversions</span>
+                                                        </div>
+                                                        <h4 class="vd-mb-0">847</h4>
+                                                        <small style="color: var(--vd-color-success);"><i class="ph ph-trend-up mr-1"></i>+8.2%</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="vd-alert vd-alert-success vd-mb-0">
+                                            <i class="ph ph-check-circle"></i>
+                                            <div><strong>Campaign is live.</strong> All channels are active and tracking is enabled across web, email, and social.</div>
+                                        </div>
+                                    </div>
+                                    <div class="vd-tab-pane" id="demo-modal-xl-team" role="tabpanel">
+                                        <div class="vd-table-responsive">
+                                            <table class="vd-table vd-table-striped vd-mb-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Member</th>
+                                                        <th>Role</th>
+                                                        <th>Status</th>
+                                                        <th>Last active</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><i class="ph ph-user-circle mr-1"></i> Alex Rivera</td>
+                                                        <td>Lead Designer</td>
+                                                        <td><span style="color: var(--vd-color-success);"><i class="ph ph-circle-fill" style="font-size:0.5rem;"></i> Online</span></td>
+                                                        <td>Just now</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><i class="ph ph-user-circle mr-1"></i> Jordan Lee</td>
+                                                        <td>Developer</td>
+                                                        <td><span style="color: var(--vd-color-success);"><i class="ph ph-circle-fill" style="font-size:0.5rem;"></i> Online</span></td>
+                                                        <td>2 min ago</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><i class="ph ph-user-circle mr-1"></i> Sam Patel</td>
+                                                        <td>Product Manager</td>
+                                                        <td><span class="vd-text-muted"><i class="ph ph-circle-fill" style="font-size:0.5rem;"></i> Away</span></td>
+                                                        <td>1 hr ago</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><i class="ph ph-user-circle mr-1"></i> Casey Morgan</td>
+                                                        <td>Marketing</td>
+                                                        <td><span class="vd-text-muted"><i class="ph ph-circle-fill" style="font-size:0.5rem;"></i> Offline</span></td>
+                                                        <td>Yesterday</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="vd-tab-pane" id="demo-modal-xl-activity" role="tabpanel">
+                                        <ul style="list-style:none; padding:0; margin:0;">
+                                            <li class="vd-d-flex vd-gap-3 vd-mb-4">
+                                                <i class="ph ph-pencil-simple" style="color: var(--vd-color-primary); font-size:1.25rem; margin-top:2px;"></i>
+                                                <div>
+                                                    <strong>Alex updated the hero banner</strong>
+                                                    <p class="vd-mb-0 vd-text-muted">Changed headline copy and CTA color · 12 min ago</p>
+                                                </div>
+                                            </li>
+                                            <li class="vd-d-flex vd-gap-3 vd-mb-4">
+                                                <i class="ph ph-upload" style="color: var(--vd-color-info); font-size:1.25rem; margin-top:2px;"></i>
+                                                <div>
+                                                    <strong>Jordan deployed v1.4.2</strong>
+                                                    <p class="vd-mb-0 vd-text-muted">Production build with modal size fixes · 45 min ago</p>
+                                                </div>
+                                            </li>
+                                            <li class="vd-d-flex vd-gap-3 vd-mb-4">
+                                                <i class="ph ph-chat-circle" style="color: var(--vd-color-warning); font-size:1.25rem; margin-top:2px;"></i>
+                                                <div>
+                                                    <strong>Sam approved the launch checklist</strong>
+                                                    <p class="vd-mb-0 vd-text-muted">All 12 items verified · 2 hr ago</p>
+                                                </div>
+                                            </li>
+                                            <li class="vd-d-flex vd-gap-3 vd-mb-0">
+                                                <i class="ph ph-envelope" style="color: var(--vd-color-success); font-size:1.25rem; margin-top:2px;"></i>
+                                                <div>
+                                                    <strong>Casey sent the announcement email</strong>
+                                                    <p class="vd-mb-0 vd-text-muted">Delivered to 12,400 subscribers · Yesterday</p>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="vd-tab-pane" id="demo-modal-xl-settings" role="tabpanel">
+                                        <div class="vd-row">
+                                            <div class="vd-col-12 vd-col-md-6">
+                                                <h6 class="vd-mb-3"><i class="ph ph-calendar mr-1"></i>Schedule</h6>
+                                                <div class="vd-form-group vd-mb-3">
+                                                    <label class="vd-label" for="demo-modal-xl-start">Start date</label>
+                                                    <input type="text" id="demo-modal-xl-start" class="vd-input" value="May 23, 2026">
+                                                </div>
+                                                <div class="vd-form-group vd-mb-0">
+                                                    <label class="vd-label" for="demo-modal-xl-end">End date</label>
+                                                    <input type="text" id="demo-modal-xl-end" class="vd-input" value="Jun 30, 2026">
+                                                </div>
+                                            </div>
+                                            <div class="vd-col-12 vd-col-md-6">
+                                                <h6 class="vd-mb-3"><i class="ph ph-broadcast mr-1"></i>Channels</h6>
+                                                <ul style="list-style:none; padding:0; margin:0;">
+                                                    <li class="vd-d-flex vd-align-items-center vd-gap-2 vd-mb-2"><i class="ph ph-check-square" style="color: var(--vd-color-primary);"></i> Website landing page</li>
+                                                    <li class="vd-d-flex vd-align-items-center vd-gap-2 vd-mb-2"><i class="ph ph-check-square" style="color: var(--vd-color-primary);"></i> Email newsletter</li>
+                                                    <li class="vd-d-flex vd-align-items-center vd-gap-2 vd-mb-2"><i class="ph ph-check-square" style="color: var(--vd-color-primary);"></i> Social media posts</li>
+                                                    <li class="vd-d-flex vd-align-items-center vd-gap-2 vd-mb-0"><i class="ph ph-square" style="color: var(--vd-color-muted);"></i> Paid search ads</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="vd-modal-footer">
-                            <button class="vd-btn vd-btn-outline-secondary" data-dismiss="modal">Close</button>
+                            <button class="vd-btn vd-btn-outline-secondary" data-dismiss="modal"><i class="ph ph-x mr-1"></i>Cancel</button>
+                            <button class="vd-btn vd-btn-outline-primary"><i class="ph ph-floppy-disk mr-1"></i>Save Draft</button>
+                            <button class="vd-btn vd-btn-primary"><i class="ph ph-rocket-launch mr-1"></i>Launch Now</button>
                         </div>
                     </div>
                 </div>
@@ -195,18 +450,36 @@
                 </div>
             </div>
             <div class="vd-modal vd-modal-static" id="demo-modal-static-el">
-                <div class="vd-modal-dialog vd-modal-sm">
+                <div class="vd-modal-dialog">
                     <div class="vd-modal-content">
                         <div class="vd-modal-header">
-                            <h5 class="vd-modal-title">Confirm Delete</h5>
+                            <h5 class="vd-modal-title"><i class="ph ph-trash mr-2" style="color: var(--vd-color-error);"></i>Confirm Delete</h5>
                             <button class="vd-modal-close" aria-label="Close">&times;</button>
                         </div>
                         <div class="vd-modal-body">
-                            <p class="vd-mb-0">Clicking the backdrop won't close this modal. The user must explicitly choose an action.</p>
+                            <div class="vd-alert vd-alert-warning vd-mb-4">
+                                <i class="ph ph-warning"></i>
+                                <div><strong>This action cannot be undone.</strong> Clicking the backdrop will not close this modal — you must choose explicitly.</div>
+                            </div>
+                            <p class="vd-mb-3">You are about to permanently delete <strong>design-system-v2.fig</strong> and all associated assets:</p>
+                            <ul class="vd-mb-4" style="padding-left: 1.25rem;">
+                                <li>12 component variants</li>
+                                <li>4 shared color styles</li>
+                                <li>Team comments and version history</li>
+                            </ul>
+                            <div class="vd-card" style="background: var(--vd-bg-secondary);">
+                                <div class="vd-card-body vd-d-flex vd-align-items-center vd-gap-3">
+                                    <i class="ph ph-file-dashed" style="font-size:2rem; color: var(--vd-color-error);"></i>
+                                    <div>
+                                        <strong>design-system-v2.fig</strong>
+                                        <p class="vd-mb-0 vd-text-muted">Last modified May 20, 2026 · 4.2 MB</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="vd-modal-footer">
                             <button class="vd-btn vd-btn-outline-secondary" data-dismiss="modal">Cancel</button>
-                            <button class="vd-btn vd-btn-error">Delete</button>
+                            <button class="vd-btn vd-btn-error"><i class="ph ph-trash mr-1"></i>Delete Permanently</button>
                         </div>
                     </div>
                 </div>
@@ -231,7 +504,7 @@
                     <div class="vd-code-snippet-body">
                         <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Static backdrop (clicking outside won't close) --&gt;</span>
 &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-modal vd-modal-static"</span> <span class="code-attr">id</span>=<span class="code-string">"confirm-modal"</span>&gt;
-  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-modal-dialog vd-modal-sm"</span>&gt;
+  &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-modal-dialog"</span>&gt;
     &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-modal-content"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;
   &lt;/<span class="code-tag">div</span>&gt;
 &lt;/<span class="code-tag">div</span>&gt;</code></pre>

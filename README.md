@@ -10,10 +10,10 @@ Flowchart Package: https://www.npmjs.com/package/@vanduo-oss/flowchart
 
 ## Current Snapshot
 
-- Docs content now includes the **v1.4.1** changelog, scoped runtime guidance, lifecycle manager docs, security practices, and canonical token guidance.
+- Docs content now includes the **v1.4.2** changelog, scoped runtime guidance, lifecycle manager docs, security practices, and canonical token guidance.
 - Vanduo Charts is documented as the standalone `@vanduo-oss/charts` package with SVG chart demos and Vanduo lifecycle auto-init examples.
 - Vanduo Flowchart is documented as the standalone `@vanduo-oss/flowchart` package with a live editor demo, primitive palette, and JSON import/export workflow.
-- Production docs load the pinned framework CDN bundle from `@v1.4.1`, while local preview resolves framework assets from `./dist` and refreshes them from the sibling framework repo when available.
+- Production docs load the pinned framework CDN bundle from `@v1.4.2`, while local preview resolves framework assets from `./dist` and refreshes them from the sibling framework repo when available.
 - Theme docs now treat `--vd-*` semantic and component tokens as the strict Vanduo API.
 - Framework integration docs now recommend scoped `Vanduo.init(root)`, `Vanduo.destroy(root)`, and `Vanduo.reinit(name, root)` for SPAs and dynamic DOM.
 

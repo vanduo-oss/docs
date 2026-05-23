@@ -2,7 +2,7 @@
     <!-- Page Header -->
     <div class="about-header">
         <div class="vd-container-responsive">
-            <h2 style="color: var(--vd-color-primary);"><i class="ph ph-book-open-text"></i> Docs</h2>
+            <h2 style="color: var(--vd-color-primary);"><i class="ph ph-book-open-text"></i> Documentation</h2>
             <p class="vd-text-lg vd-text-muted">Explore Vanduo Documentation, Guides and Changelog</p>
             <span id="docs-component-count" class="vd-badge vd-badge-outlined"
                 style="margin-top: 0.75rem; font-size: 0.85rem; padding: 0.4rem 0.8rem; display: inline-flex; align-items: center; gap: 0.35rem; color: var(--vd-color-primary); background-color: rgba(var(--vd-color-primary-rgb), 0.1); border-color: rgba(var(--vd-color-primary-rgb), 0.3);">
@@ -16,31 +16,86 @@
         <div class="docs-landing-grid">
             <a href="#docs/components" class="docs-landing-link docs-landing-link-components" data-route="docs/components">
                 <div class="vd-card vd-card-glow vd-card-actionable vd-glass about-card docs-landing-card docs-card-components">
-                    <div class="vd-card-body vd-text-center docs-landing-card-body">
-                            <i class="ph ph-cube"
-                                style="font-size: 3.5rem; color: var(--vd-color-primary); margin-bottom: 1.5rem; display: block;"></i>
+                    <div class="vd-card-body docs-landing-card-body">
+                        <i class="ph ph-cube docs-landing-card-icon" aria-hidden="true"></i>
+                        <div class="docs-landing-card-copy">
                             <h4>Components</h4>
                             <p>Explore the building blocks of Vanduo Framework.</p>
+                            <ul class="docs-landing-card-highlights" aria-label="Component highlights">
+                                <li><i class="ph ph-check-circle" aria-hidden="true"></i> Live demos with copy-paste snippets</li>
+                                <li><i class="ph ph-check-circle" aria-hidden="true"></i> Props, tokens, and accessibility notes</li>
+                            </ul>
+                            <div class="docs-landing-card-icons" aria-hidden="true">
+                                <span title="Core"><i class="ph ph-palette"></i></span>
+                                <span title="Input"><i class="ph ph-cursor-click"></i></span>
+                                <span title="Effects"><i class="ph ph-sparkle"></i></span>
+                                <span title="Canvas"><i class="ph ph-chart-line"></i></span>
+                            </div>
+                            <div class="docs-landing-card-tags">
+                                <span class="vd-badge vd-badge-outlined docs-landing-tag">Core</span>
+                                <span class="vd-badge vd-badge-outlined docs-landing-tag">Input</span>
+                                <span class="vd-badge vd-badge-outlined docs-landing-tag">Effects</span>
+                            </div>
+                            <div class="docs-landing-card-meta vd-text-muted">
+                                <span><i class="ph ph-files" aria-hidden="true"></i> <span id="docs-landing-components-count">47+</span> reference pages</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </a>
             <a href="#docs/guides" class="docs-landing-link docs-landing-link-guides" data-route="docs/guides">
                 <div class="vd-card vd-card-glow vd-card-actionable vd-glass about-card docs-landing-card docs-card-guides">
-                    <div class="vd-card-body vd-text-center docs-landing-card-body">
-                            <i class="ph ph-compass"
-                                style="font-size: 3.5rem; color: var(--vd-color-primary); margin-bottom: 1.5rem; display: block;"></i>
+                    <div class="vd-card-body docs-landing-card-body">
+                        <i class="ph ph-compass docs-landing-card-icon" aria-hidden="true"></i>
+                        <div class="docs-landing-card-copy">
                             <h4>Guides</h4>
                             <p>Step-by-step tutorials to master Vanduo.</p>
+                            <ul class="docs-landing-card-highlights" aria-label="Guide highlights">
+                                <li><i class="ph ph-rocket-launch" aria-hidden="true"></i> Quick start &amp; zero-to-ship setup</li>
+                                <li><i class="ph ph-shield-check" aria-hidden="true"></i> Security, lifecycle, and production</li>
+                            </ul>
+                            <div class="docs-landing-card-icons" aria-hidden="true">
+                                <span title="Setup"><i class="ph ph-package"></i></span>
+                                <span title="Theming"><i class="ph ph-paint-brush"></i></span>
+                                <span title="Integrations"><i class="ph ph-plugs-connected"></i></span>
+                            </div>
+                            <div class="docs-landing-card-tags">
+                                <span class="vd-badge vd-badge-outlined docs-landing-tag">Setup</span>
+                                <span class="vd-badge vd-badge-outlined docs-landing-tag">Theming</span>
+                                <span class="vd-badge vd-badge-outlined docs-landing-tag">Integrations</span>
+                            </div>
+                            <div class="docs-landing-card-meta vd-text-muted">
+                                <span><i class="ph ph-book-bookmark" aria-hidden="true"></i> 18 guided walkthroughs</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </a>
             <a href="#changelog" class="docs-landing-link docs-landing-link-changelog" data-route="changelog">
                 <div class="vd-card vd-card-glow vd-card-actionable vd-glass about-card docs-landing-card docs-card-changelog">
-                    <div class="vd-card-body vd-text-center docs-landing-card-body">
-                            <i class="ph ph-clock-counter-clockwise"
-                                style="font-size: 3.5rem; color: var(--vd-color-primary); margin-bottom: 1.5rem; display: block;"></i>
+                    <div class="vd-card-body docs-landing-card-body">
+                        <i class="ph ph-clock-counter-clockwise docs-landing-card-icon" aria-hidden="true"></i>
+                        <div class="docs-landing-card-copy">
                             <h4>Changelog</h4>
                             <p>See what's new in Vanduo and track each release update.</p>
+                            <ul class="docs-landing-card-highlights" aria-label="Changelog highlights">
+                                <li><i class="ph ph-sparkle" aria-hidden="true"></i> v1.4.2 modal, picker, and docs polish</li>
+                                <li><i class="ph ph-git-branch" aria-hidden="true"></i> Migration notes for each major release</li>
+                            </ul>
+                            <div class="docs-landing-card-icons" aria-hidden="true">
+                                <span title="Releases"><i class="ph ph-tag"></i></span>
+                                <span title="Breaking changes"><i class="ph ph-warning-circle"></i></span>
+                                <span title="Roadmap"><i class="ph ph-map-trifold"></i></span>
+                            </div>
+                            <div class="docs-landing-card-tags">
+                                <span class="vd-badge vd-badge-outlined docs-landing-tag">Releases</span>
+                                <span class="vd-badge vd-badge-outlined docs-landing-tag">Tokens</span>
+                                <span class="vd-badge vd-badge-outlined docs-landing-tag">Lifecycle</span>
+                            </div>
+                            <div class="docs-landing-card-meta vd-text-muted">
+                                <span><i class="ph ph-calendar-blank" aria-hidden="true"></i> Latest: v1.4.2</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </a>

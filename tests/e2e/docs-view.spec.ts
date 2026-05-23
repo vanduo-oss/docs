@@ -173,28 +173,28 @@ test.describe('4. Documentation View', () => {
     });
 
     test.describe('Changelog (#changelog)', () => {
-        test('Shows v142 development work above the latest v1.4.1 release history', async ({ page }) => {
+        test('Shows v1.4.2 as latest release above v1.4.1 and v1.4.0 history', async ({ page }) => {
             await page.goto('/#changelog');
             await waitForSPA(page);
 
             const changelog = page.locator('#changelog');
             await expect(changelog).toBeVisible();
 
-            const developmentCard = changelog.locator('.version-card').first();
-            await expect(developmentCard).toContainText('v142');
-            await expect(developmentCard).toContainText('Development');
-            await expect(developmentCard).toContainText('target-first');
-            await expect(developmentCard).toContainText('Modal size tiers');
-
-            const latestReleaseCard = changelog.locator('.version-card').nth(1);
-            await expect(latestReleaseCard).toContainText('v1.4.1');
+            const latestReleaseCard = changelog.locator('.version-card').first();
+            await expect(latestReleaseCard).toContainText('v1.4.2');
             await expect(latestReleaseCard).toContainText('Latest');
-            await expect(latestReleaseCard).toContainText('Strict --vd-*');
-            await expect(latestReleaseCard).toContainText('--vd-*');
+            await expect(latestReleaseCard).toContainText('target-first');
+            await expect(latestReleaseCard).toContainText('Modal size tiers');
 
-            const previousReleaseCard = changelog.locator('.version-card').nth(2);
-            await expect(previousReleaseCard).toContainText('v1.4.0');
+            const previousReleaseCard = changelog.locator('.version-card').nth(1);
+            await expect(previousReleaseCard).toContainText('v1.4.1');
             await expect(previousReleaseCard).not.toContainText('Latest');
+            await expect(previousReleaseCard).toContainText('Strict --vd-*');
+            await expect(previousReleaseCard).toContainText('--vd-*');
+
+            const olderReleaseCard = changelog.locator('.version-card').nth(2);
+            await expect(olderReleaseCard).toContainText('v1.4.0');
+            await expect(olderReleaseCard).not.toContainText('Latest');
         });
     });
 
