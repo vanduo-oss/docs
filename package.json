@@ -7,6 +7,7 @@
     "sync:framework": "node scripts/sync-framework-assets.js",
     "audit:v140": "node scripts/audit-v140-docs.js",
     "audit:v141": "node scripts/audit-v140-docs.js",
+    "dev": "pnpm run preview:local",
     "preview:local": "pnpm run sync:framework && npx --yes serve -l 8787",
     "preview:with-templates": "node scripts/preview-with-templates.js",
     "test": "playwright test",

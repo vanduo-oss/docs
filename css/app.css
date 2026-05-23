@@ -58,21 +58,7 @@
 
         body {
             overscroll-behavior-y: none;
-            background:
-                radial-gradient(ellipse 80vw 65vh at 78% 7%, rgba(var(--vd-color-primary-rgb), 0.18) 0%, transparent 60%),
-                radial-gradient(ellipse 65vw 55vh at 12% 22%, rgba(var(--vd-color-info-rgb), 0.14) 0%, transparent 55%);
-            background-attachment: fixed;
             background-color: var(--vd-bg-primary);
-        }
-
-        [data-theme="dark"] body {
-            background-color: var(--vd-bg-primary);
-        }
-
-        @media (prefers-color-scheme: dark) {
-            :root:not([data-theme]) body {
-                background-color: var(--vd-bg-primary);
-            }
         }
 
         /* ── Dark mode scrollbars (docs) ─────────────────── */
@@ -1523,7 +1509,7 @@
             line-height: 1;
         }
 
-        #docs-landing .docs-landing-card-body h3 {
+        #docs-landing .docs-landing-card-body h4 {
             margin: 0;
             font-size: clamp(1.5rem, 2.1vw, 2.2rem);
             line-height: 1.1;
@@ -1569,7 +1555,7 @@
             }
         }
 
-        /* Docs landing: fixed icon colors only (h3 follows primary); hover keeps icon color */
+        /* Docs landing: fixed icon colors only (h4 follows primary); hover keeps icon color */
         #docs-landing .docs-card-components .vd-card-body i {
             color: #eab308;
         }

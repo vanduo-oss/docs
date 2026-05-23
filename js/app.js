@@ -247,7 +247,20 @@ function requestDocScrollLoaderForRoute(route) {
     requestedDocScrollLoaderSectionId = parsed && parsed.section ? parsed.section : extractDocsSectionId(route);
 }
 
-function primeDocNavigationForHash(hash) {
+function shouldRequestDocScrollLoaderForRoute(route, options) {
+    if (options && options.showScrollLoader === true) return true;
+    if (options && options.showScrollLoader === false) return false;
+
+    var parsed = parseHash('#' + route);
+    if (parsed.view !== 'docs' || !parsed.section) return false;
+
+    // Sidebar-style in-page jumps within the active docs tab.
+    if (currentView === 'docs' && currentTab === parsed.tab) return false;
+
+    return true;
+}
+
+function primeDocNavigationForHash(hash, options) {
     if (window.history && 'scrollRestoration' in window.history) {
         window.history.scrollRestoration = 'manual';
     }
@@ -261,7 +274,12 @@ function primeDocNavigationForHash(hash) {
         return;
     }
 
-    requestDocScrollLoaderForRoute('docs/' + sectionId);
+    var route = 'docs/' + sectionId;
+    if (shouldRequestDocScrollLoaderForRoute(route, options || {})) {
+        requestDocScrollLoaderForRoute(route);
+    } else {
+        requestedDocScrollLoaderSectionId = null;
+    }
     pendingDocNavigationId = sectionId;
 }
 
@@ -1517,8 +1535,8 @@ function parseHash(hash) {
     return { view: 'home' };
 }
 
-async function navigate(route) {
-    primeDocNavigationForHash('#' + route);
+async function navigate(route, options) {
+    primeDocNavigationForHash('#' + route, options);
     if (window.history && window.history.pushState) {
         window.history.pushState(null, '', '#' + route);
     }
@@ -1906,7 +1924,6 @@ if (dynamicNavList) {
         var id = link.getAttribute('data-section');
         clearNavigatingNavLinks();
         link.classList.add('is-navigating');
-        requestDocScrollLoaderForRoute('docs/' + id);
         closeMobileToc();
         var sidebarFilterInput = document.getElementById('doc-sidebar-filter-input');
         if (sidebarFilterInput) { sidebarFilterInput.value = ''; filterSidebarNav(''); }
@@ -2391,9 +2408,8 @@ function closeGlobalSearch() {
 function selectGlobalSearchResult(index) {
     var result = globalSearchState.results[index];
     if (!result) return;
-    requestDocScrollLoaderForRoute(result.route);
     closeGlobalSearch();
-    navigate(result.route);
+    navigate(result.route, { showScrollLoader: true });
 }
 
 function setGlobalSearchActiveIndex(index) {
@@ -2612,14 +2628,13 @@ function initGlobalSearch() {
     function selectHeroResult(index) {
         var result = heroSearchState.results[index];
         if (!result) return;
-        requestDocScrollLoaderForRoute(result.route);
         closeHeroDropdown();
         var input = document.getElementById('hero-search-input');
         if (input) { input.value = ''; input.blur(); }
         heroSearchState.query = '';
         heroSearchState.results = [];
         heroSearchState.activeIndex = -1;
-        navigate(result.route);
+        navigate(result.route, { showScrollLoader: true });
     }
 
     // Event delegation for hero search (home.html loads dynamically)
