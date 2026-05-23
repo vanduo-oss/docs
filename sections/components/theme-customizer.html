@@ -356,25 +356,25 @@ customizer.<span class="code-function">reset</span>();</code></pre>
                 </tr>
                 <tr>
                     <td><code>data-primary</code></td>
-                    <td>Applied to <code>&lt;html&gt;</code>. Remaps <code>--primary-*</code> CSS variables to the
+                    <td>Applied to <code>&lt;html&gt;</code>. Remaps <code>--vd-primary-*</code> CSS variables to the
                         selected color.</td>
                     <td>State Attribute</td>
                 </tr>
                 <tr>
                     <td><code>data-neutral</code></td>
-                    <td>Applied to <code>&lt;html&gt;</code>. Remaps <code>--gray-*</code> CSS variables to the selected
+                    <td>Applied to <code>&lt;html&gt;</code>. Remaps <code>--vd-gray-*</code> CSS variables to the selected
                         neutral scale.</td>
                     <td>State Attribute</td>
                 </tr>
                 <tr>
                     <td><code>data-radius</code></td>
-                    <td>Applied to <code>&lt;html&gt;</code>. Sets <code>--radius-scale</code> for component
+                    <td>Applied to <code>&lt;html&gt;</code>. Sets <code>--vd-radius-scale</code> for component
                         border-radius.</td>
                     <td>State Attribute</td>
                 </tr>
                 <tr>
                     <td><code>data-font</code></td>
-                    <td>Applied to <code>&lt;html&gt;</code>. Sets <code>--font-family-base</code> to the selected font
+                    <td>Applied to <code>&lt;html&gt;</code>. Sets <code>--vd-font-family-base</code> to the selected font
                         stack.</td>
                     <td>State Attribute</td>
                 </tr>
@@ -465,20 +465,21 @@ customizer.<span class="code-function">reset</span>();</code></pre>
                             </div>
                             <div class="vd-code-snippet-body">
                                 <pre class="vd-code-snippet-pane is-active" data-lang="css"><code><span class="code-comment">/* Panel dimensions */</span>
-<span class="code-selector">.theme-customizer-panel</span> {
-    <span class="code-property">--tc-panel-width</span>: <span class="code-value">320px</span>;
-    <span class="code-property">--tc-panel-max-height</span>: <span class="code-value">90vh</span>;
+<span class="code-selector">:root</span> {
+    <span class="code-property">--vd-customizer-width</span>: <span class="code-value">320px</span>;
+    <span class="code-property">--vd-customizer-padding</span>: <span class="code-value">1rem</span>;
 }
 
-<span class="code-comment">/* Trigger button */</span>
-<span class="code-selector">.theme-customizer-trigger</span> {
-    <span class="code-property">--tc-trigger-size</span>: <span class="code-value">40px</span>;
-    <span class="code-property">--tc-trigger-bg</span>: <span class="code-value">var(--vd-bg-secondary)</span>;
+<span class="code-comment">/* Panel surface */</span>
+<span class="code-selector">:root</span> {
+    <span class="code-property">--vd-customizer-bg</span>: <span class="code-value">var(--vd-bg-primary)</span>;
+    <span class="code-property">--vd-customizer-border</span>: <span class="code-value">var(--vd-border-color)</span>;
+    <span class="code-property">--vd-customizer-shadow</span>: <span class="code-value">var(--vd-shadow-lg)</span>;
 }
 
 <span class="code-comment">/* Color swatches */</span>
-<span class="code-selector">.tc-color-swatch</span> {
-    <span class="code-property">--tc-swatch-size</span>: <span class="code-value">28px</span>;
+<span class="code-selector">:root</span> {
+    <span class="code-property">--vd-customizer-swatch-size</span>: <span class="code-value">28px</span>;
 }</code></pre>
                             </div>
                         </div>

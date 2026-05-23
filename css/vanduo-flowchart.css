@@ -1,0 +1,574 @@
+:root {
+  --vd-flowchart-surface: var(--vd-bg-primary, #fcfbf7);
+  --vd-flowchart-panel: color-mix(in srgb, var(--vd-bg-primary, #ffffff) 90%, #efe7d4);
+  --vd-flowchart-panel-alt: color-mix(in srgb, var(--vd-bg-secondary, #f4efe2) 82%, #ffffff);
+  --vd-flowchart-border: color-mix(in srgb, var(--vd-border-color, #d5ccba) 78%, #ffffff);
+  --vd-flowchart-accent: var(--vd-color-primary, #245f52);
+  --vd-flowchart-accent-soft: color-mix(in srgb, var(--vd-color-primary, #245f52) 16%, transparent);
+  --vd-flowchart-text: var(--vd-text-primary, #1f2720);
+  --vd-flowchart-muted: var(--vd-text-muted, #67746a);
+  --vd-flowchart-node-fill: color-mix(in srgb, var(--vd-bg-primary, #ffffff) 95%, #f1e7cf);
+  --vd-flowchart-node-stroke: color-mix(in srgb, var(--vd-border-color, #d5ccba) 86%, #ffffff);
+}
+
+.vd-flowchart-host {
+  min-height: 560px;
+}
+
+.vd-flowchart-shell {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  min-height: 560px;
+  border: 1px solid var(--vd-flowchart-border);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at top left, color-mix(in srgb, var(--vd-flowchart-accent) 10%, transparent), transparent 38%),
+    linear-gradient(180deg, color-mix(in srgb, var(--vd-flowchart-surface) 92%, #f5ecd8), var(--vd-flowchart-surface));
+  color: var(--vd-flowchart-text);
+  overflow: hidden;
+}
+
+.vd-flowchart-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem 0.9rem;
+  border-bottom: 1px solid var(--vd-flowchart-border);
+  background: color-mix(in srgb, var(--vd-flowchart-panel) 92%, transparent);
+  backdrop-filter: blur(16px);
+}
+
+.vd-flowchart-toolbar-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.vd-flowchart-toolbar-label {
+  font-size: 0.8rem;
+  color: var(--vd-flowchart-muted);
+  letter-spacing: 0;
+}
+
+.vd-flowchart-body {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr) 300px;
+  min-height: 0;
+}
+
+.vd-flowchart-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  padding: 0.95rem;
+  background: color-mix(in srgb, var(--vd-flowchart-panel-alt) 88%, transparent);
+}
+
+.vd-flowchart-panel--palette {
+  border-right: 1px solid var(--vd-flowchart-border);
+}
+
+.vd-flowchart-panel--inspector {
+  border-left: 1px solid var(--vd-flowchart-border);
+}
+
+.vd-flowchart-panel-title {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--vd-flowchart-muted);
+}
+
+.vd-flowchart-palette {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+}
+
+.vd-flowchart-btn,
+.vd-flowchart-palette-btn,
+.vd-flowchart-field input,
+.vd-flowchart-field select,
+.vd-flowchart-field textarea,
+.vd-flowchart-json textarea {
+  font: inherit;
+}
+
+.vd-flowchart-btn,
+.vd-flowchart-palette-btn,
+.vd-flowchart-json-btn {
+  appearance: none;
+  border: 1px solid var(--vd-flowchart-border);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--vd-flowchart-panel) 90%, #ffffff);
+  color: var(--vd-flowchart-text);
+  cursor: pointer;
+  transition: transform 140ms ease, border-color 140ms ease, background 140ms ease, box-shadow 140ms ease;
+}
+
+.vd-flowchart-btn,
+.vd-flowchart-json-btn {
+  min-height: 2rem;
+  padding: 0.45rem 0.75rem;
+}
+
+.vd-flowchart-palette-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  min-height: 4.35rem;
+  padding: 0.55rem 0.45rem;
+  text-align: center;
+  font-size: 0.82rem;
+}
+
+.vd-flowchart-palette-preview {
+  display: block;
+  width: 4.5rem;
+  max-width: 100%;
+  height: 2.75rem;
+  overflow: visible;
+}
+
+.vd-flowchart-palette-shape {
+  fill: var(--vd-flowchart-node-fill);
+  stroke: var(--vd-flowchart-node-stroke);
+  stroke-width: 2;
+}
+
+.vd-flowchart-palette-shape--textbox {
+  stroke-dasharray: 5 4;
+}
+
+.vd-flowchart-palette-shape--junction {
+  fill: var(--vd-flowchart-accent);
+  stroke: color-mix(in srgb, var(--vd-flowchart-accent) 74%, var(--vd-flowchart-text));
+}
+
+.vd-flowchart-palette-lines {
+  fill: none;
+  stroke: var(--vd-flowchart-muted);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.vd-flowchart-palette-arrow {
+  fill: none;
+  stroke: color-mix(in srgb, var(--vd-flowchart-accent) 72%, var(--vd-flowchart-text));
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.vd-flowchart-palette-arrowhead {
+  fill: var(--vd-flowchart-accent);
+}
+
+.vd-flowchart-palette-junction-lines {
+  fill: none;
+  stroke: color-mix(in srgb, var(--vd-flowchart-accent) 42%, var(--vd-flowchart-muted));
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.vd-flowchart-palette-label-mark {
+  fill: var(--vd-flowchart-text);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.vd-flowchart-palette-label {
+  display: block;
+  line-height: 1.15;
+}
+
+.vd-flowchart-btn:hover,
+.vd-flowchart-palette-btn:hover,
+.vd-flowchart-json-btn:hover {
+  border-color: color-mix(in srgb, var(--vd-flowchart-accent) 42%, var(--vd-flowchart-border));
+  transform: translateY(-1px);
+}
+
+.vd-flowchart-palette-btn.is-active {
+  border-color: color-mix(in srgb, var(--vd-flowchart-accent) 68%, var(--vd-flowchart-border));
+  background: color-mix(in srgb, var(--vd-flowchart-accent) 10%, var(--vd-flowchart-panel));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--vd-flowchart-accent) 24%, transparent);
+}
+
+.vd-flowchart-btn:focus-visible,
+.vd-flowchart-palette-btn:focus-visible,
+.vd-flowchart-json-btn:focus-visible,
+.vd-flowchart-field input:focus-visible,
+.vd-flowchart-field select:focus-visible,
+.vd-flowchart-field textarea:focus-visible,
+.vd-flowchart-json textarea:focus-visible,
+.vd-flowchart-canvas:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--vd-flowchart-accent) 72%, transparent);
+  outline-offset: 2px;
+}
+
+.vd-flowchart-btn:disabled,
+.vd-flowchart-json-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  transform: none;
+}
+
+.vd-flowchart-canvas {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  background: transparent;
+}
+
+.vd-flowchart-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 560px;
+  touch-action: none;
+}
+
+.vd-flowchart-grid {
+  pointer-events: none;
+}
+
+.vd-flowchart-edge-path,
+.vd-flowchart-edge-selection,
+.vd-flowchart-edge-hit,
+.vd-flowchart-preview-path {
+  fill: none;
+}
+
+.vd-flowchart-edge-selection {
+  stroke: color-mix(in srgb, var(--vd-flowchart-accent) 28%, transparent);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+
+.vd-flowchart-edge-path {
+  stroke: color-mix(in srgb, var(--vd-flowchart-accent) 70%, var(--vd-flowchart-text));
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.vd-flowchart-edge.is-selected .vd-flowchart-edge-path {
+  stroke: var(--vd-flowchart-accent);
+}
+
+.vd-flowchart-edge-hit {
+  stroke: transparent;
+  cursor: pointer;
+}
+
+.vd-flowchart-preview-path {
+  stroke: color-mix(in srgb, var(--vd-flowchart-accent) 55%, transparent);
+  stroke-dasharray: 8 7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.vd-flowchart-edge-label {
+  font-size: 12px;
+  fill: var(--vd-flowchart-muted);
+  paint-order: stroke;
+  stroke: color-mix(in srgb, var(--vd-flowchart-surface) 94%, transparent);
+  stroke-width: 5px;
+  stroke-linejoin: round;
+}
+
+.vd-flowchart-node {
+  cursor: grab;
+}
+
+.vd-flowchart-node.is-dragging,
+.vd-flowchart-node.is-resizing {
+  cursor: grabbing;
+}
+
+.vd-flowchart-node-shape {
+  fill: var(--vd-flowchart-node-fill);
+  stroke: var(--vd-flowchart-node-stroke);
+  stroke-width: 1.5;
+  transition: stroke 120ms ease, filter 120ms ease, fill 120ms ease;
+}
+
+.vd-flowchart-node-shape--textbox {
+  stroke-dasharray: 8 5;
+}
+
+.vd-flowchart-node-shape--label {
+  fill: transparent;
+  stroke: transparent;
+}
+
+.vd-flowchart-node-shape--junction {
+  fill: var(--vd-flowchart-accent);
+  stroke: color-mix(in srgb, var(--vd-flowchart-accent) 72%, var(--vd-flowchart-text));
+  stroke-width: 1.25;
+}
+
+.vd-flowchart-node.is-selected .vd-flowchart-node-shape,
+.vd-flowchart-node:hover .vd-flowchart-node-shape {
+  stroke: var(--vd-flowchart-accent);
+  filter: drop-shadow(0 10px 18px color-mix(in srgb, var(--vd-flowchart-accent) 12%, transparent));
+}
+
+.vd-flowchart-node:hover .vd-flowchart-node-shape--junction,
+.vd-flowchart-node.is-selected .vd-flowchart-node-shape--junction {
+  fill: color-mix(in srgb, var(--vd-flowchart-accent) 86%, #ffffff);
+}
+
+.vd-flowchart-node-text {
+  fill: var(--vd-flowchart-text);
+  font-size: 14px;
+  font-weight: 600;
+  pointer-events: none;
+  dominant-baseline: middle;
+  text-anchor: middle;
+}
+
+.vd-flowchart-node-text--textbox {
+  font-size: 13px;
+  font-weight: 500;
+  dominant-baseline: auto;
+  text-anchor: start;
+}
+
+.vd-flowchart-node-text--label {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.vd-flowchart-port-group {
+  pointer-events: none;
+}
+
+.vd-flowchart-port-hit {
+  fill: transparent;
+}
+
+.vd-flowchart-port {
+  opacity: 0;
+  fill: color-mix(in srgb, var(--vd-flowchart-panel) 88%, #ffffff);
+  stroke: var(--vd-flowchart-accent);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+  transition: opacity 120ms ease, transform 120ms ease, fill 120ms ease;
+}
+
+.vd-flowchart-port-group.is-visible {
+  pointer-events: auto;
+  cursor: crosshair;
+}
+
+.vd-flowchart-port-group.is-visible .vd-flowchart-port {
+  opacity: 1;
+}
+
+.vd-flowchart-port-group.is-visible:hover .vd-flowchart-port {
+  transform: scale(1.08);
+  fill: color-mix(in srgb, var(--vd-flowchart-accent) 12%, #ffffff);
+}
+
+.vd-flowchart-canvas.is-connecting .vd-flowchart-node:hover .vd-flowchart-node-shape {
+  stroke: var(--vd-flowchart-node-stroke);
+  filter: none;
+}
+
+.vd-flowchart-canvas.is-connecting .vd-flowchart-port-group.is-visible .vd-flowchart-port,
+.vd-flowchart-canvas.is-arrow-tool .vd-flowchart-port-group.is-visible .vd-flowchart-port {
+  opacity: 1;
+}
+
+.vd-flowchart-canvas.is-connecting .vd-flowchart-port-group.is-visible:hover .vd-flowchart-port,
+.vd-flowchart-canvas.is-arrow-tool .vd-flowchart-port-group.is-visible:hover .vd-flowchart-port {
+  transform: none;
+}
+
+.vd-flowchart-edge-endpoint-hit {
+  fill: transparent;
+  cursor: crosshair;
+}
+
+.vd-flowchart-edge-endpoint {
+  fill: color-mix(in srgb, var(--vd-flowchart-panel) 88%, #ffffff);
+  stroke: var(--vd-flowchart-accent);
+  stroke-width: 2;
+  cursor: crosshair;
+  vector-effect: non-scaling-stroke;
+  pointer-events: none;
+}
+
+.vd-flowchart-edge.is-reconnecting .vd-flowchart-edge-path {
+  stroke-dasharray: 6 4;
+}
+
+.vd-flowchart-node.is-editing .vd-flowchart-node-text {
+  opacity: 0;
+}
+
+.vd-flowchart-resize-zone {
+  fill: transparent;
+  pointer-events: all;
+}
+
+.vd-flowchart-resize-handle {
+  fill: color-mix(in srgb, var(--vd-flowchart-panel) 92%, #ffffff);
+  stroke: var(--vd-flowchart-accent);
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+  pointer-events: all;
+}
+
+.vd-flowchart-text-editor {
+  position: absolute;
+  z-index: 5;
+  box-sizing: border-box;
+  min-width: 0;
+  min-height: 0;
+  border: 1px solid color-mix(in srgb, var(--vd-flowchart-accent) 78%, var(--vd-flowchart-border));
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--vd-flowchart-panel) 92%, #ffffff);
+  color: var(--vd-flowchart-text);
+  box-shadow: 0 12px 26px color-mix(in srgb, var(--vd-flowchart-accent) 16%, transparent);
+  font: inherit;
+  font-weight: 600;
+  outline: none;
+  overflow: hidden;
+  resize: none;
+  text-align: center;
+}
+
+.vd-flowchart-text-editor--textbox {
+  border-style: dashed;
+  font-weight: 500;
+  text-align: left;
+}
+
+.vd-flowchart-text-editor--label {
+  border-color: transparent;
+  background: color-mix(in srgb, var(--vd-flowchart-panel) 82%, transparent);
+  font-weight: 700;
+}
+
+.vd-flowchart-selection-meta {
+  font-size: 0.86rem;
+  color: var(--vd-flowchart-muted);
+}
+
+.vd-flowchart-selection-empty {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--vd-flowchart-muted);
+}
+
+.vd-flowchart-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.vd-flowchart-field-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.vd-flowchart-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.vd-flowchart-field label {
+  font-size: 0.78rem;
+  color: var(--vd-flowchart-muted);
+}
+
+.vd-flowchart-field input,
+.vd-flowchart-field select,
+.vd-flowchart-field textarea,
+.vd-flowchart-json textarea {
+  border: 1px solid var(--vd-flowchart-border);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--vd-flowchart-panel) 94%, #ffffff);
+  color: var(--vd-flowchart-text);
+  padding: 0.55rem 0.65rem;
+}
+
+.vd-flowchart-field textarea,
+.vd-flowchart-json textarea {
+  resize: vertical;
+  min-height: 5.5rem;
+}
+
+.vd-flowchart-delete {
+  width: 100%;
+}
+
+.vd-flowchart-json {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  min-height: 0;
+}
+
+.vd-flowchart-json-actions {
+  display: flex;
+  gap: 0.55rem;
+}
+
+.vd-flowchart-json textarea {
+  min-height: 13rem;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.vd-flowchart-readonly .vd-flowchart-panel--palette,
+.vd-flowchart-readonly .vd-flowchart-panel--inspector {
+  display: none;
+}
+
+.vd-flowchart-readonly .vd-flowchart-body {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (max-width: 1180px) {
+  .vd-flowchart-body {
+    grid-template-columns: 200px minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr) auto;
+  }
+
+  .vd-flowchart-panel--inspector {
+    grid-column: 1 / -1;
+    border-left: 0;
+    border-top: 1px solid var(--vd-flowchart-border);
+  }
+}
+
+@media (max-width: 840px) {
+  .vd-flowchart-body {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto minmax(360px, 1fr) auto;
+  }
+
+  .vd-flowchart-panel--palette {
+    border-right: 0;
+    border-bottom: 1px solid var(--vd-flowchart-border);
+  }
+
+  .vd-flowchart-svg {
+    min-height: 420px;
+  }
+
+  .vd-flowchart-palette {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

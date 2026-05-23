@@ -34,19 +34,19 @@
         /* ── Custom Font Tokens ─────────────────────────── */
         [data-font='google-sans'] {
             /* Inter substitutes the proprietary Google Sans face used in the theme picker */
-            --font-family-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --vd-font-family-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         [data-font='roboto'] {
-            --font-family-sans: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+            --vd-font-family-sans: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         [data-font='lato'] {
-            --font-family-sans: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+            --vd-font-family-sans: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         [data-font='noto-sans'] {
-            --font-family-sans: 'Noto Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            --vd-font-family-sans: 'Noto Sans', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         /* ── Global ─────────────────────────────────────── */
@@ -170,16 +170,25 @@
             font-weight: bold;
         }
 
+        .hero-title-logo-wrap {
+            display: inline-flex;
+            flex-shrink: 0;
+            margin-right: 0.5em;
+            transform: translateY(-0.15em);
+        }
+
         /* Logo 15% smaller than prior 2.2em baseline (~1.87em) */
         .hero-title-logo {
             width: 1.87em;
             height: 1.87em;
-            margin-right: 0.5em;
-            flex-shrink: 0;
-            transform: translateY(-0.15em);
             display: block;
             object-fit: contain;
-            overflow: visible;
+            transform-origin: 50% 50%;
+            cursor: default;
+        }
+
+        .hero-title-logo:hover {
+            animation: vd-dynamic-loader-logo-spin 2.1s linear infinite;
         }
 
         .vd-navbar-brand-wrap > a.vd-navbar-brand-link {
@@ -190,13 +199,21 @@
         }
 
         /* Nav mark 15% larger than prior 1.2rem (~1.38rem) */
-        .vd-navbar-brand-wrap a.vd-navbar-brand-link svg.vd-navbar-brand-logo {
+        .vd-navbar-brand-wrap a.vd-navbar-brand-link .vd-navbar-brand-logo {
             height: 1.38rem;
             width: auto;
             margin-right: 0;
             display: block;
             flex-shrink: 0;
-            overflow: visible;
+            object-fit: contain;
+        }
+
+        .vd-footer-brand-logo {
+            width: 2.5rem;
+            height: 2.5rem;
+            margin-top: 0.75rem;
+            display: block;
+            object-fit: contain;
         }
 
         .vd-lt-flag-link {
@@ -240,8 +257,7 @@
                 align-items: center !important;
             }
 
-            .hero-title svg,
-            .hero-title .hero-title-logo {
+            .hero-title .hero-title-logo-wrap {
                 transform: none !important;
                 margin-right: 0 !important;
                 margin-bottom: 0.25em;
@@ -302,26 +318,26 @@
 
         /* ── Typography docs section spacing ───────────── */
         #typography > .vd-row {
-            margin-bottom: var(--spacing-10, 2.125rem);
+            margin-bottom: var(--vd-spacing-10, 2.125rem);
         }
 
         #typography .vd-card-body > p {
-            margin-bottom: var(--spacing-6, 0.8125rem);
+            margin-bottom: var(--vd-spacing-6, 0.8125rem);
         }
 
         #typography .vd-card-body > p.vd-text-muted {
-            margin-top: var(--spacing-5, 0.5rem);
-            margin-bottom: var(--spacing-8, 1.3125rem);
+            margin-top: var(--vd-spacing-5, 0.5rem);
+            margin-bottom: var(--vd-spacing-8, 1.3125rem);
         }
 
         #typography .vd-card-body > h4 {
-            margin-top: var(--spacing-10, 2.125rem);
-            margin-bottom: var(--spacing-5, 0.5rem);
+            margin-top: var(--vd-spacing-10, 2.125rem);
+            margin-bottom: var(--vd-spacing-5, 0.5rem);
         }
 
         #typography .vd-card-body > h5 {
-            margin-top: var(--spacing-8, 1.3125rem);
-            margin-bottom: var(--spacing-4, 0.3125rem);
+            margin-top: var(--vd-spacing-8, 1.3125rem);
+            margin-bottom: var(--vd-spacing-4, 0.3125rem);
         }
 
         #typography .vd-card-body .vd-row h4 {
@@ -333,21 +349,21 @@
             padding-left: 1.25rem;
             display: flex;
             flex-direction: column;
-            gap: var(--spacing-5, 0.5rem);
+            gap: var(--vd-spacing-5, 0.5rem);
         }
 
         #typography .vd-card-body .vd-code-snippet {
-            margin-top: var(--spacing-5, 0.5rem);
-            margin-bottom: var(--spacing-8, 1.3125rem);
+            margin-top: var(--vd-spacing-5, 0.5rem);
+            margin-bottom: var(--vd-spacing-8, 1.3125rem);
         }
 
         #typography .doc-typography-headings > :is(h1, h2, h3, h4, h5, h6) {
             margin-top: 0;
-            margin-bottom: var(--spacing-6, 0.8125rem);
+            margin-bottom: var(--vd-spacing-6, 0.8125rem);
         }
 
         #typography .doc-typography-headings > :is(h2, h3, h4, h5, h6) {
-            margin-top: var(--spacing-6, 0.8125rem);
+            margin-top: var(--vd-spacing-6, 0.8125rem);
         }
 
         #typography .doc-typography-headings > :is(h1, h2, h3, h4, h5, h6):last-child {
@@ -355,7 +371,7 @@
         }
 
         #typography .doc-typography-utilities > p {
-            margin-bottom: var(--spacing-5, 0.5rem);
+            margin-bottom: var(--vd-spacing-5, 0.5rem);
         }
 
         #typography .doc-typography-utilities > p:last-child {
@@ -384,13 +400,13 @@
         .theme-customizer-inline {
             padding: 1rem;
             background: var(--vd-bg-secondary);
-            border-radius: var(--btn-border-radius-lg);
+            border-radius: var(--vd-btn-border-radius-lg);
         }
 
         .theme-customizer-inline .color-swatch {
             width: 2rem;
             height: 2rem;
-            border-radius: var(--radius-fib-3);
+            border-radius: var(--vd-radius-fib-3);
             border: 2px solid transparent;
             cursor: pointer;
             transition: transform 0.15s ease, border-color 0.15s ease;
@@ -475,7 +491,7 @@
             gap: 0.75rem;
             padding: 1rem 1.25rem;
             background: var(--vd-bg-secondary);
-            border-radius: var(--btn-border-radius);
+            border-radius: var(--vd-btn-border-radius);
             min-height: 4.25rem;
         }
 
@@ -579,9 +595,9 @@
         }
 
         .waypoint-demo-tab-nav-underline button.is-active {
-            color: var(--waypoint-active-color);
+            color: var(--vd-waypoint-active-color);
             font-weight: 600;
-            border-bottom-color: var(--waypoint-active-color);
+            border-bottom-color: var(--vd-waypoint-active-color);
         }
 
         .waypoint-demo-tab-nav-pill {
@@ -594,7 +610,7 @@
         }
 
         .waypoint-demo-tab-nav-pill button.is-active {
-            background-color: var(--waypoint-active-color);
+            background-color: var(--vd-waypoint-active-color);
             color: #fff;
             font-weight: 600;
         }
@@ -671,7 +687,7 @@
             justify-content: center;
             padding: 0.625rem 1rem;
             border: none;
-            border-radius: var(--btn-border-radius);
+            border-radius: var(--vd-btn-border-radius);
             background: transparent;
             color: var(--vd-color-primary);
             min-height: 2.5rem;
@@ -733,7 +749,7 @@
             text-decoration: none;
             font-size: 0.875rem;
             border-left: 2px solid transparent;
-            border-radius: var(--btn-border-radius);
+            border-radius: var(--vd-btn-border-radius);
             transition: all 0.2s ease;
         }
 
@@ -767,7 +783,7 @@
             margin: var(--doc-sidebar-header-gap) 0 0.75rem 0;
             padding: 0;
             border: 1px solid color-mix(in srgb, var(--vd-border-color) 65%, transparent);
-            border-radius: var(--input-border-radius, var(--btn-border-radius));
+            border-radius: var(--vd-input-border-radius, var(--vd-btn-border-radius));
             background: transparent;
             flex-shrink: 0;
             /* Keep filter visible at top of sidebar during page scroll */
@@ -804,10 +820,10 @@
             width: 100%;
             min-width: 0;
             margin: 0;
-            padding: var(--input-padding-y, 0.5rem) var(--input-padding-x, 0.75rem);
+            padding: var(--vd-input-padding-y, 0.5rem) var(--vd-input-padding-x, 0.75rem);
             padding-left: 2rem;
-            font-size: var(--font-size-sm);
-            line-height: var(--line-height-normal, 1.5);
+            font-size: var(--vd-font-size-sm);
+            line-height: var(--vd-line-height-normal, 1.5);
             color: var(--vd-text-primary);
             background: transparent;
             border: none;
@@ -836,7 +852,7 @@
 
         .doc-sidebar-filter-no-results {
             padding: 0.375rem 0.8125rem;
-            font-size: var(--font-size-sm);
+            font-size: var(--vd-font-size-sm);
             color: var(--vd-text-muted);
             font-style: italic;
         }
@@ -848,9 +864,9 @@
             padding: 0.75rem 1rem;
             background: var(--vd-bg-secondary);
             border: 1px solid var(--vd-border-color);
-            border-radius: var(--btn-border-radius);
+            border-radius: var(--vd-btn-border-radius);
             cursor: pointer;
-            font-size: var(--font-size-sm);
+            font-size: var(--vd-font-size-sm);
             color: var(--vd-text-primary);
             margin-bottom: 1rem;
             text-align: left;
@@ -959,7 +975,7 @@
 
         /* ── Footer tweaks ──────────────────────────────── */
         .vd-footer {
-            padding: var(--footer-padding-y-sm) var(--footer-padding-x) 0;
+            padding: var(--vd-footer-padding-y-sm) var(--vd-footer-padding-x) 0;
         }
 
         .vd-footer.vd-glass {
@@ -1018,9 +1034,9 @@
             margin-top: 10rem;
         }
 
-        /* Hero bottom padding: sized so gap to search bar matches CTA button spacing (--spacing-6) */
+        /* Hero bottom padding: sized so gap to search bar matches CTA button spacing (--vd-spacing-6) */
         .hero-zone #hero {
-            padding-bottom: calc(2rem + var(--spacing-6, 1.5rem)) !important;
+            padding-bottom: calc(2rem + var(--vd-spacing-6, 1.5rem)) !important;
         }
 
         /* ── Global ambient gradient — all pages ──────────────────────────── */
@@ -1038,7 +1054,7 @@
         .hero-cta-buttons {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: var(--spacing-6, 1.5rem);
+            gap: var(--vd-spacing-6, 1.5rem);
             align-items: stretch;
             width: 100%;
         }
@@ -1108,12 +1124,12 @@
         }
 
         .home-card-no-glow {
-            --card-glow-color: transparent;
-            --card-glow-border-color: var(--card-border-color);
+            --vd-card-glow-color: transparent;
+            --vd-card-glow-border-color: var(--vd-card-border-color);
         }
 
         .home-card-no-glow:hover {
-            border-color: var(--card-border-color);
+            border-color: var(--vd-card-border-color);
         }
 
         #cta .vd-card > .vd-btn {
@@ -1177,7 +1193,7 @@
             align-items: center;
             justify-content: center;
             height: 64px;
-            border-radius: var(--card-border-radius);
+            border-radius: var(--vd-card-border-radius);
             font-size: 0.875rem;
             font-weight: 600;
             color: var(--vd-color-white);
@@ -1228,7 +1244,7 @@
         #home-features .philosophy-cards {
             display: grid;
             grid-template-columns: 1fr;
-            gap: var(--grid-gutter);
+            gap: var(--vd-grid-gutter);
             margin-left: 0;
             margin-right: 0;
         }
@@ -1261,7 +1277,7 @@
         #home #philosophy .philosophy-cards {
             display: grid;
             grid-template-columns: 1fr;
-            gap: var(--grid-gutter);
+            gap: var(--vd-grid-gutter);
             margin-left: 0;
             margin-right: 0;
         }
@@ -1323,7 +1339,7 @@
         #whats-new .whats-new-cards {
             display: grid;
             grid-template-columns: 1fr;
-            gap: var(--grid-gutter);
+            gap: var(--vd-grid-gutter);
             margin-left: 0;
             margin-right: 0;
         }
@@ -1373,8 +1389,8 @@
             padding: 144px 0 55px;
             text-align: center;
             background: linear-gradient(135deg,
-                rgba(var(--primary-rgb, var(--vd-color-primary-rgb)), 0.16) 0%,
-                rgba(var(--info-rgb, var(--vd-color-info-rgb)), 0.1) 100%);
+                rgba(var(--vd-color-primary-rgb, var(--vd-color-primary-rgb)), 0.16) 0%,
+                rgba(var(--vd-color-info-rgb, var(--vd-color-info-rgb)), 0.1) 100%);
         }
 
         .about-header h1,
@@ -1418,8 +1434,8 @@
 
         /* Glow uses framework .vd-card-glow:hover from vanduo.min.css (do not reset here). */
         a:hover .vd-card-actionable.vd-card-glow {
-            box-shadow: 0 0 15px 0 var(--card-glow-color), var(--vd-shadow-xl);
-            border-color: var(--card-glow-border-color);
+            box-shadow: 0 0 15px 0 var(--vd-card-glow-color), var(--vd-shadow-xl);
+            border-color: var(--vd-card-glow-border-color);
         }
 
         /*
@@ -1433,8 +1449,8 @@
         #docs-view[data-doc-tab="guides"] a.vd-card.vd-card-glow,
         #docs-view[data-doc-tab="components"] a .vd-card.vd-card-glow,
         #docs-view[data-doc-tab="guides"] a .vd-card.vd-card-glow {
-            --card-glow-color: transparent;
-            --card-glow-border-color: var(--card-border-color);
+            --vd-card-glow-color: transparent;
+            --vd-card-glow-border-color: var(--vd-card-border-color);
         }
 
         #docs-view[data-doc-tab="components"] .demo-card.vd-card-glow:hover,
@@ -1443,7 +1459,7 @@
         #docs-view[data-doc-tab="guides"] a.vd-card.vd-card-glow:hover,
         #docs-view[data-doc-tab="components"] a:hover .vd-card.vd-card-glow,
         #docs-view[data-doc-tab="guides"] a:hover .vd-card.vd-card-glow {
-            border-color: var(--card-border-color);
+            border-color: var(--vd-card-border-color);
         }
 
         /*
@@ -1614,7 +1630,7 @@
 
         .about-golden-stack {
             display: grid;
-            gap: var(--grid-gutter);
+            gap: var(--vd-grid-gutter);
             min-width: 0;
         }
 
@@ -1630,7 +1646,7 @@
 
         .about-split {
             display: grid;
-            gap: var(--grid-gutter);
+            gap: var(--vd-grid-gutter);
             align-items: start;
         }
 
@@ -1683,7 +1699,7 @@
         }
 
         /*
-         * vd-hex long-form cards: Vanduo utilities vd-mb-3 / vd-mb-4 use --spacing-3 / --spacing-4
+         * vd-hex long-form cards: Vanduo utilities vd-mb-3 / vd-mb-4 use --vd-spacing-3 / --vd-spacing-4
          * (~3px / ~5px), which reads as “no gap” under headings. Use normal document rhythm here only.
          */
         #labs #vd-hex-demo .vd-card-body h4.vd-mb-4 {
@@ -1709,7 +1725,7 @@
         .version-card {
             margin-bottom: 2rem;
             border: 1px solid var(--vd-border-color);
-            border-radius: var(--card-border-radius);
+            border-radius: var(--vd-card-border-radius);
             overflow: hidden;
         }
 
@@ -1866,7 +1882,7 @@
         }
 
         .vd-skeleton-card.vd-glass {
-            border-radius: var(--card-border-radius);
+            border-radius: var(--vd-card-border-radius);
         }
 
         @media (max-width: 767.98px) {
@@ -1912,7 +1928,8 @@
         }
 
         @media (prefers-reduced-motion: reduce) {
-            .vd-dynamic-loader-logo {
+            .vd-dynamic-loader-logo,
+            .hero-title-logo:hover {
                 animation: none;
             }
         }
@@ -1936,7 +1953,7 @@
             width: 38px;
             height: 38px;
             border: 1px solid var(--vd-border-color);
-            border-radius: var(--card-border-radius);
+            border-radius: var(--vd-card-border-radius);
             background: transparent;
             color: var(--vd-text-secondary);
             cursor: pointer;
@@ -1958,7 +1975,7 @@
             width: 38px;
             height: 38px;
             border: 1px solid var(--vd-border-color);
-            border-radius: var(--card-border-radius);
+            border-radius: var(--vd-card-border-radius);
             background: transparent;
             color: var(--vd-text-secondary);
             cursor: pointer;
@@ -1980,7 +1997,7 @@
             width: 38px;
             height: 38px;
             border: 1px solid var(--vd-border-color);
-            border-radius: var(--card-border-radius);
+            border-radius: var(--vd-card-border-radius);
             background: transparent;
             color: var(--vd-text-secondary);
             cursor: pointer;
@@ -2030,7 +2047,7 @@
             backdrop-filter: blur(var(--vd-glass-blur, 12px)) saturate(var(--vd-glass-saturate, 1.8));
             -webkit-backdrop-filter: blur(var(--vd-glass-blur, 12px)) saturate(var(--vd-glass-saturate, 1.8));
             border: 1px solid var(--vd-glass-border-light);
-            border-radius: calc(var(--card-border-radius) * 1.5);
+            border-radius: calc(var(--vd-card-border-radius) * 1.5);
             box-shadow: var(--vd-glass-shadow), 0 30px 70px rgba(0, 0, 0, 0.45);
             opacity: 0;
             pointer-events: none;
@@ -2125,7 +2142,7 @@
             align-items: center;
             gap: 0.75rem;
             padding: 0.6rem 0.75rem;
-            border-radius: var(--card-border-radius);
+            border-radius: var(--vd-card-border-radius);
             cursor: pointer;
             transition: background 0.15s;
         }
@@ -2269,7 +2286,7 @@
             width: 100%;
             padding: 0.85rem 1.25rem;
             border: 1px solid var(--vd-border-color);
-            border-radius: var(--card-border-radius);
+            border-radius: var(--vd-card-border-radius);
             background: var(--vd-bg-secondary);
             color: var(--vd-text-secondary);
             transition: border-color 0.2s, box-shadow 0.2s;
@@ -2341,7 +2358,7 @@
             z-index: 100;
             background: var(--vd-bg-primary);
             border: 1px solid var(--vd-border-color);
-            border-radius: var(--card-border-radius);
+            border-radius: var(--vd-card-border-radius);
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.04) inset;
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
@@ -2400,7 +2417,7 @@
             align-items: center;
             gap: 0.75rem;
             padding: 0.6rem 0.75rem;
-            border-radius: var(--card-border-radius);
+            border-radius: var(--vd-card-border-radius);
             cursor: pointer;
             transition: background 0.15s;
         }
@@ -2495,8 +2512,8 @@
         /* ── Mobile navbar alignment ───────────────── */
         @media (max-width: 991.98px) {
             .vd-navbar {
-                padding-left: max(var(--container-padding, 1rem), env(safe-area-inset-left, 0px));
-                padding-right: max(var(--container-padding, 1rem), env(safe-area-inset-right, 0px));
+                padding-left: max(var(--vd-container-padding, 1rem), env(safe-area-inset-left, 0px));
+                padding-right: max(var(--vd-container-padding, 1rem), env(safe-area-inset-right, 0px));
             }
 
             .hero-cta-buttons {
@@ -2606,7 +2623,7 @@
         .vd-code-snippet .code-selector:hover {
             background-color: var(--vd-color-primary);
             color: var(--vd-color-white);
-            border-radius: var(--radius-fib-3, 4px);
+            border-radius: var(--vd-radius-fib-3, 4px);
         }
 
         /* Tooltip for copy action */
@@ -2621,7 +2638,7 @@
             color: var(--vd-bg-primary);
             font-size: 0.7rem;
             padding: 0.2rem 0.4rem;
-            border-radius: var(--radius-fib-3, 4px);
+            border-radius: var(--vd-radius-fib-3, 4px);
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.15s ease, transform 0.15s ease;

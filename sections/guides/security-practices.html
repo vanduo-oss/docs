@@ -1,6 +1,6 @@
 <section id="security-practices">
     <h4 class="demo-title"><i class="ph ph-shield-check"></i>Security Practices <code class="vd-text-sm">Guide</code></h4>
-    <p class="vd-mb-6">Vanduo is a UI framework, not a security boundary. v1.4.0 tightens several defaults, but applications should still treat CMS, API, and user-provided strings as untrusted unless they are sanitized by the app.</p>
+    <p class="vd-mb-6">Vanduo is a UI framework, not a security boundary. v1.4.1 tightens several defaults, but applications should still treat CMS, API, and user-provided strings as untrusted unless they are sanitized by the app.</p>
 
     <div class="vd-row vd-mb-6">
         <div class="vd-col-12 vd-col-md-6">
@@ -69,7 +69,7 @@
                 <div class="vd-card-body">
                     <p><code>VanduoLazyLoad.loadSection()</code> accepts same-origin and relative URLs only. Use it for trusted app partials, not untrusted third-party HTML.</p>
                     <ul class="vd-mt-3">
-                        <li>Pin release assets in production, for example <code>@v1.4.0</code>.</li>
+                        <li>Pin release assets in production, for example <code>@v1.4.1</code>.</li>
                         <li>Keep fetched partials under your own origin.</li>
                         <li>Sanitize CMS/user content before it reaches the partial.</li>
                     </ul>

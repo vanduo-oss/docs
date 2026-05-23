@@ -1,6 +1,6 @@
 <section id="troubleshooting">
     <h4 class="demo-title"><i class="ph ph-wrench"></i>Troubleshooting &amp; FAQ <code class="vd-text-sm">Guide</code></h4>
-    <p class="vd-mb-8">Most Vanduo issues come down to load order, scoped initialization, token override order, or trusted-content boundaries. This v1.4.0 checklist follows the runtime architecture now used by the docs site itself.</p>
+    <p class="vd-mb-8">Most Vanduo issues come down to load order, scoped initialization, token override order, or trusted-content boundaries. This v1.4.1 checklist follows the runtime architecture now used by the docs site itself.</p>
 
     <div class="vd-row vd-mb-6">
         <div class="vd-col-12">
@@ -21,7 +21,7 @@
                                 <button class="vd-code-snippet-copy" aria-label="Copy code"><span class="vd-code-snippet-copy-icon"></span><span class="vd-code-snippet-copy-text">Copy</span></button>
                             </div>
                             <div class="vd-code-snippet-body">
-                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;script src="https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.4.0/dist/vanduo.min.js"&gt;&lt;/script&gt;
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;script src="https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.4.1/dist/vanduo.min.js"&gt;&lt;/script&gt;
 &lt;script&gt;Vanduo.init();&lt;/script&gt;</code></pre>
                                 <pre class="vd-code-snippet-pane" data-lang="js"><code>const panel = document.querySelector('#settings-panel');
 Vanduo.init(panel);</code></pre>
@@ -91,7 +91,7 @@ function unmountRoute(root) {
                             </div>
                         </div>
                     </div>
-                    <p class="vd-text-sm vd-text-muted vd-mt-3">Existing <code>--color-*</code>, <code>--bg-*</code>, and <code>--text-*</code> aliases still work in 1.4.x, but new examples should use <code>--vd-*</code>.</p>
+                    <p class="vd-text-sm vd-text-muted vd-mt-3">In v1.4.1, theme CSS should override canonical <code>--vd-*</code> tokens only. Unprefixed token aliases are no longer shipped.</p>
                 </div>
             </div>
         </div>
@@ -119,7 +119,7 @@ function unmountRoute(root) {
                     <h4><span class="vd-badge vd-badge-primary" style="margin-right:8px;">#5</span><i class="ph ph-cloud-arrow-down"></i> Lazy-loaded content is not interactive</h4>
                 </div>
                 <div class="vd-card-body">
-                    <p>In v1.4.0, <code>VanduoLazyLoad.loadSection()</code> initializes only the injected container after same-origin HTML is loaded. If you inject HTML yourself, mirror that scoped pattern.</p>
+                    <p>In v1.4.1, <code>VanduoLazyLoad.loadSection()</code> initializes only the injected container after same-origin HTML is loaded. If you inject HTML yourself, mirror that scoped pattern.</p>
                     <div class="vd-code-snippet vd-mt-4" data-collapsible data-expanded="true">
                         <button class="vd-code-snippet-toggle" aria-expanded="true"><span class="vd-code-snippet-toggle-icon"></span><span>View Code</span></button>
                         <div class="vd-code-snippet-content">

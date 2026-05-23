@@ -6,13 +6,15 @@ Framework repo: https://github.com/vanduo-oss/framework
 NPM Package: https://www.npmjs.com/package/@vanduo-oss/framework
 Hex Grid Package: https://www.npmjs.com/package/@vanduo-oss/hex-grid
 Charts Package: https://www.npmjs.com/package/@vanduo-oss/charts
+Flowchart Package: https://www.npmjs.com/package/@vanduo-oss/flowchart
 
 ## Current Snapshot
 
-- Docs content now includes the **v1.4.0** changelog, scoped runtime guidance, lifecycle manager docs, security practices, and canonical token guidance.
+- Docs content now includes the **v1.4.1** changelog, scoped runtime guidance, lifecycle manager docs, security practices, and canonical token guidance.
 - Vanduo Charts is documented as the standalone `@vanduo-oss/charts` package with SVG chart demos and Vanduo lifecycle auto-init examples.
-- Production docs load the pinned framework CDN bundle from `@v1.4.0`, while local preview resolves framework assets from `./dist` and refreshes them from the sibling framework repo when available.
-- Theme docs now treat `--vd-*` semantic tokens as the canonical Vanduo API, with unprefixed semantic tokens documented as 1.4.x compatibility aliases.
+- Vanduo Flowchart is documented as the standalone `@vanduo-oss/flowchart` package with a live editor demo, primitive palette, and JSON import/export workflow.
+- Production docs load the pinned framework CDN bundle from `@v1.4.1`, while local preview resolves framework assets from `./dist` and refreshes them from the sibling framework repo when available.
+- Theme docs now treat `--vd-*` semantic and component tokens as the strict Vanduo API.
 - Framework integration docs now recommend scoped `Vanduo.init(root)`, `Vanduo.destroy(root)`, and `Vanduo.reinit(name, root)` for SPAs and dynamic DOM.
 
 ## Labs

@@ -29,41 +29,6 @@ if (typeof window.Vanduo === 'undefined') {
             'lato': { name: 'Lato', family: "'Lato', sans-serif" },
             'open-sans': { name: 'Open Sans', family: "'Open Sans', sans-serif" }
         };
-        var preInitLegacyFontMap = {
-            'inter': 'open-sans',
-            'source-sans': 'open-sans',
-            'source-sans-3': 'open-sans',
-            'fira-sans': 'open-sans',
-            'ibm-plex': 'open-sans',
-            'ibm-plex-sans': 'open-sans',
-            'rubik': 'open-sans',
-            'titillium-web': 'open-sans',
-            'roboto': 'lato',
-            'noto-sans': 'open-sans',
-            'google-sans': 'open-sans'
-        };
-        try {
-            var storedFontBeforeInit = localStorage.getItem('vanduo-font-preference');
-            if (storedFontBeforeInit) {
-                var normalizedBeforeInit = String(storedFontBeforeInit).trim().toLowerCase();
-                if (Object.prototype.hasOwnProperty.call(preInitLegacyFontMap, normalizedBeforeInit)) {
-                    normalizedBeforeInit = preInitLegacyFontMap[normalizedBeforeInit];
-                }
-                if (!Object.prototype.hasOwnProperty.call(docsFontOptions, normalizedBeforeInit)) {
-                    normalizedBeforeInit = 'ubuntu';
-                }
-                if (normalizedBeforeInit !== storedFontBeforeInit) {
-                    localStorage.setItem('vanduo-font-preference', normalizedBeforeInit);
-                }
-                if (normalizedBeforeInit === 'system') {
-                    document.documentElement.removeAttribute('data-font');
-                } else {
-                    document.documentElement.setAttribute('data-font', normalizedBeforeInit);
-                }
-            }
-        } catch (_e) {
-            /* ignore */
-        }
         window.ThemeCustomizer.applyTheme = function (mode) {
             var nextMode = this.THEME_MODES.includes(mode) ? mode : this.DEFAULTS.THEME;
 
@@ -101,8 +66,8 @@ if (typeof window.Vanduo === 'undefined') {
         Object.assign(window.ThemeCustomizer.DEFAULTS, {
             FONT: 'ubuntu',
             PRIMARY_LIGHT: 'black',
-            PRIMARY_DARK: 'amber',
-            NEUTRAL: 'charcoal',
+            PRIMARY_DARK: 'blue',
+            NEUTRAL: 'stone',
             RADIUS: '0.5'
         });
     }
@@ -197,7 +162,7 @@ function setMorphBadgeContent(target, icon, label) {
 
 /* ── Constants ────────────────────────────────── */
 const SECTIONS_BASE = './sections/';
-const DOCS_CONTENT_VERSION = '1.4.0-docs-5';
+const DOCS_CONTENT_VERSION = '1.4.1-docs-1';
 let registry = { pages: [], tabs: {} };
 const loadedSections = new Set();
 const loadingSections = new Set();
@@ -257,13 +222,29 @@ function clearNavigatingNavLinks() {
     });
 }
 
+function extractDocsSectionId(value) {
+    var normalized = String(value || '').replace(/^#\/?/, '');
+    if (!normalized.startsWith('docs/')) return null;
+    if (normalized === 'docs' || normalized === 'docs/components' || normalized === 'docs/guides') return null;
+
+    var fullPath = normalized.slice(5);
+    var routePath = fullPath.split('#')[0];
+    var segments = routePath.split('/').filter(Boolean);
+
+    if (segments.length >= 2 && (segments[0] === 'components' || segments[0] === 'guides')) {
+        return segments[1] || null;
+    }
+
+    return routePath || null;
+}
+
 function requestDocScrollLoaderForRoute(route) {
     if (typeof route !== 'string' || !route.startsWith('docs/')) {
         requestedDocScrollLoaderSectionId = null;
         return;
     }
     var parsed = parseHash('#' + route);
-    requestedDocScrollLoaderSectionId = parsed && parsed.section ? parsed.section : null;
+    requestedDocScrollLoaderSectionId = parsed && parsed.section ? parsed.section : extractDocsSectionId(route);
 }
 
 function primeDocNavigationForHash(hash) {
@@ -272,13 +253,16 @@ function primeDocNavigationForHash(hash) {
     }
 
     var parsed = parseHash(hash);
-    if (!parsed || parsed.view !== 'docs' || !parsed.section) {
+    var sectionId = parsed && parsed.view === 'docs' && parsed.section
+        ? parsed.section
+        : extractDocsSectionId(hash);
+    if (!sectionId) {
         requestedDocScrollLoaderSectionId = null;
         return;
     }
 
-    requestDocScrollLoaderForRoute('docs/' + parsed.section);
-    pendingDocNavigationId = parsed.section;
+    requestDocScrollLoaderForRoute('docs/' + sectionId);
+    pendingDocNavigationId = sectionId;
 }
 
 /* ── Loading placeholders ─────────────────────── */
@@ -297,13 +281,12 @@ function primeDocNavigationForHash(hash) {
  * Merging them would require the framework component to know about SPA routing
  * internals, which violates its generic design. The duplication is intentional.
  */
+var VANDUO_BRAND_LOGO_SRC = 'vanduo-new-logo.svg';
+
 function getVanduoDynamicLoaderMarkHtml() {
     return '<div class="vd-dynamic-loader-mark" aria-hidden="true">'
-        + '<svg class="vd-dynamic-loader-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 432 432" fill="none">'
-        + '<circle cx="216" cy="216" r="191.5" fill="none" stroke="var(--vd-color-primary)" stroke-width="49"/>'
-        + '<path fill="var(--vd-color-primary)" d="M245.811 344.5C232.339 367.833 198.661 367.833 185.189 344.5L88.6273 177.25C75.1558 153.917 91.9952 124.75 118.938 124.75L312.062 124.75C339.005 124.75 355.844 153.917 342.373 177.25L245.811 344.5Z"/>'
-        + '<path fill="none" stroke="var(--vd-color-primary-dark)" stroke-width="5" d="M245.378 344.25C232.099 367.25 198.901 367.25 185.622 344.25L89.0605 177C75.7815 154 92.3804 125.25 118.938 125.25L312.062 125.25C338.62 125.25 355.219 154 341.939 177L245.378 344.25Z"/>'
-        + '</svg></div>';
+        + '<img class="vd-dynamic-loader-logo" src="' + VANDUO_BRAND_LOGO_SRC + '" alt="" width="495" height="495" decoding="async">'
+        + '</div>';
 }
 
 function getLoadingPlaceholderHtml() {
@@ -423,8 +406,9 @@ function settleDocScrollLoader(sectionId) {
         }
 
         var targetTop = target.getBoundingClientRect().top;
-        var driftedDown = targetTop > (SCROLL_SPY_OFFSET + 32);
-        if (driftedDown) {
+        var driftedDown = targetTop > (SCROLL_SPY_OFFSET + ACTIVE_DOC_SECTION_TOLERANCE);
+        var driftedUp = targetTop < -4;
+        if (driftedDown || driftedUp) {
             // 'instant' to bypass the global `html { scroll-behavior: smooth }`
             // so drift correction actually snaps rather than animating.
             target.scrollIntoView({ behavior: 'instant', block: 'start' });
@@ -432,7 +416,7 @@ function settleDocScrollLoader(sectionId) {
             stableFrames = 0;
             stableSince = 0;
         }
-        var reachedTarget = targetTop <= (SCROLL_SPY_OFFSET + 10) && targetTop >= -4;
+        var reachedTarget = targetTop <= (SCROLL_SPY_OFFSET + ACTIVE_DOC_SECTION_TOLERANCE) && targetTop >= -4;
         if (reachedTarget) {
             // Require a short stable window so late layout shifts
             // (icon font swap, lazy demo init, preloaded demo expansion) get
@@ -501,7 +485,7 @@ function getOrderedIds(tabKey) {
 function parseSectionIdFromRoute(route) {
     if (typeof route !== 'string' || !route.startsWith('docs/')) return null;
     var parsed = parseHash('#' + route);
-    return parsed && parsed.section ? parsed.section : null;
+    return parsed && parsed.section ? parsed.section : extractDocsSectionId(route);
 }
 
 function getCachedSectionHtml(sectionId) {
@@ -649,7 +633,7 @@ var _pendingDocModeTab = null;
 function _getMorphDurationMs(el) {
     var duration = 750;
     if (!el) return duration;
-    var custom = getComputedStyle(el).getPropertyValue('--morph-duration');
+    var custom = getComputedStyle(el).getPropertyValue('--vd-morph-duration');
     if (custom) {
         var parsed = parseFloat(custom);
         if (!isNaN(parsed)) duration = parsed * (custom.indexOf('ms') !== -1 ? 1 : 1000);
@@ -1116,6 +1100,7 @@ async function switchTab(tabKey, options = {}) {
 
 /* ── Scroll-spy ───────────────────────────────── */
 const SCROLL_SPY_OFFSET = 96;
+const ACTIVE_DOC_SECTION_TOLERANCE = 24;
 
 function syncActiveDocSection(sectionId) {
     if (!sectionId) return;
@@ -1149,7 +1134,7 @@ function getActiveDocSectionId() {
 
         if (!firstLoadedId) firstLoadedId = id;
 
-        if (sectionEl.getBoundingClientRect().top <= SCROLL_SPY_OFFSET) {
+        if (sectionEl.getBoundingClientRect().top <= (SCROLL_SPY_OFFSET + ACTIVE_DOC_SECTION_TOLERANCE)) {
             activeId = id;
             continue;
         }
@@ -1633,7 +1618,7 @@ function initSectionDemos(sectionEl) {
 
         var morphMs = 750;
         try {
-            var d = getComputedStyle(badge).getPropertyValue('--morph-duration').trim();
+            var d = getComputedStyle(badge).getPropertyValue('--vd-morph-duration').trim();
             if (d) {
                 var parsed = parseFloat(d);
                 if (!isNaN(parsed)) morphMs = parsed * (d.indexOf('ms') !== -1 ? 1 : 1000);
@@ -2088,30 +2073,9 @@ var SUPPORTED_CUSTOMIZER_FONTS = {
     'open-sans': true
 };
 
-var LEGACY_CUSTOMIZER_FONT_MAP = {
-    'inter': 'open-sans',
-    'source-sans': 'open-sans',
-    'source-sans-3': 'open-sans',
-    'fira-sans': 'open-sans',
-    'ibm-plex': 'open-sans',
-    'ibm-plex-sans': 'open-sans',
-    'rubik': 'open-sans',
-    'titillium-web': 'open-sans',
-    'roboto': 'lato',
-    'noto-sans': 'open-sans',
-    'google-sans': 'open-sans',
-    'zen-dots': 'open-sans'
-};
-
 function normalizeCustomizerFontKey(fontKey) {
-    if (typeof window.__VANDUO_DOCS_NORMALIZE_FONT_PREFERENCE__ === 'function') {
-        return window.__VANDUO_DOCS_NORMALIZE_FONT_PREFERENCE__(fontKey);
-    }
     var key = String(fontKey || '').trim().toLowerCase();
     if (!key) return 'ubuntu';
-    if (Object.prototype.hasOwnProperty.call(LEGACY_CUSTOMIZER_FONT_MAP, key)) {
-        key = LEGACY_CUSTOMIZER_FONT_MAP[key];
-    }
     if (Object.prototype.hasOwnProperty.call(SUPPORTED_CUSTOMIZER_FONTS, key)) {
         return key;
     }
@@ -2135,32 +2099,6 @@ function applyCustomizerFontPreference(fontKey) {
     }
     localStorage.setItem('vanduo-font-preference', normalized);
     return normalized;
-}
-
-/** Copy legacy demo keys into framework storage keys once (radius/font). */
-function migrateLegacyCustomizerDemoStorage() {
-    try {
-        if (!localStorage.getItem('vanduo-radius') && localStorage.getItem('vanduo-border-radius')) {
-            localStorage.setItem('vanduo-radius', localStorage.getItem('vanduo-border-radius'));
-        }
-        if (!localStorage.getItem('vanduo-font-preference') && localStorage.getItem('vanduo-font-family')) {
-            localStorage.setItem('vanduo-font-preference', localStorage.getItem('vanduo-font-family'));
-        }
-        var storedFont = localStorage.getItem('vanduo-font-preference');
-        if (storedFont) {
-            var normalizedFont = normalizeCustomizerFontKey(storedFont);
-            if (normalizedFont !== storedFont) {
-                localStorage.setItem('vanduo-font-preference', normalizedFont);
-            }
-            if (normalizedFont === 'system') {
-                document.documentElement.removeAttribute('data-font');
-            } else {
-                document.documentElement.setAttribute('data-font', normalizedFont);
-            }
-        }
-    } catch (_e) {
-        /* ignore */
-    }
 }
 
 // Theme Customizer Demo - Font Family
@@ -2195,7 +2133,7 @@ function updateCustomizerDemoState() {
     if (!primary) {
         primary = 'black';
     }
-    var neutral = html.getAttribute('data-neutral') || 'charcoal';
+    var neutral = html.getAttribute('data-neutral') || 'stone';
     var radius = html.getAttribute('data-radius') || '0.375';
 
     // Update mode buttons
@@ -2230,7 +2168,6 @@ var isCustomizerDemoBootstrapped = false;
 function bootstrapCustomizerDemo() {
     if (isCustomizerDemoBootstrapped) return;
     isCustomizerDemoBootstrapped = true;
-    migrateLegacyCustomizerDemoStorage();
     initFontSelectListener();
     updateCustomizerDemoState();
 }

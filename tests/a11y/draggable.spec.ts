@@ -80,8 +80,8 @@ test.describe('Draggable Docs Page @docs', () => {
         await expect(cssCard).toBeVisible();
 
         const table = cssCard.locator('.vd-table');
-        await expect(table).toContainText('--draggable-bg');
-        await expect(table).toContainText('--drop-zone-bg');
+        await expect(table).toContainText('--vd-draggable-bg');
+        await expect(table).toContainText('--vd-drop-zone-bg');
     });
 
     test('has JavaScript API reference table', async ({ page }) => {

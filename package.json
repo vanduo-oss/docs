@@ -1,11 +1,12 @@
 {
   "name": "vanduo-docs",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "private": true,
   "description": "Vanduo documentation and website",
   "scripts": {
     "sync:framework": "node scripts/sync-framework-assets.js",
     "audit:v140": "node scripts/audit-v140-docs.js",
+    "audit:v141": "node scripts/audit-v140-docs.js",
     "preview:local": "pnpm run sync:framework && npx --yes serve -l 8787",
     "preview:with-templates": "node scripts/preview-with-templates.js",
     "test": "playwright test",

@@ -1,0 +1,269 @@
+<section id="vd-flowchart">
+    <h4 class="demo-title"><i class="ph ph-flow-arrow"></i>Flowchart</h4>
+    <p class="vd-mb-8">Vanduo Flowchart is a standalone SVG editor for flow diagrams with zoom, canvas drag, draggable primitives, double-click text editing, a one-shot Arrow tool, selected-only connection handles, selected-edge reconnect handles, calmer side-aware snapping, per-edge route and line-weight controls, larger marker caps, keyboard copy-paste, selected-node resizing, junction primitives for branching, and a built-in JSON import/export panel. It lives outside the framework package and follows the same standalone package pattern as Vanduo Charts and Hex Grid.</p>
+
+    <div class="vd-card vd-mb-6">
+        <div class="vd-card-body">
+            <div
+                id="vd-flowchart-demo"
+                data-vd-flowchart
+                style="min-height: 760px;">
+{
+  "nodes": [
+    { "id": "start", "type": "circle", "x": 40, "y": 120, "text": "Start" },
+    { "id": "review", "type": "rounded-rect", "x": 260, "y": 136, "text": "Review request" },
+    { "id": "decision", "type": "diamond", "x": 540, "y": 110, "text": "Approved?" },
+    { "id": "branch", "type": "junction", "x": 754, "y": 146 },
+    { "id": "notes", "type": "textbox", "x": 840, "y": 104, "text": "Attach notes\\nfor launch prep" }
+  ],
+  "edges": [
+    {
+      "id": "edge-a",
+      "from": { "nodeId": "start", "port": "right" },
+      "to": { "nodeId": "review", "port": "left" },
+      "kind": "arrow",
+      "strokeWidth": 2.25
+    },
+    {
+      "id": "edge-b",
+      "from": { "nodeId": "review", "port": "right" },
+      "to": { "nodeId": "decision", "port": "left" },
+      "kind": "arrow",
+      "route": "orthogonal",
+      "strokeWidth": 3.5
+    },
+    {
+      "id": "edge-c",
+      "from": { "nodeId": "decision", "port": "right" },
+      "to": { "nodeId": "branch", "port": "left" },
+      "kind": "arrow",
+      "route": "straight",
+      "strokeWidth": 2.25
+    },
+    {
+      "id": "edge-d",
+      "from": { "nodeId": "branch", "port": "right" },
+      "to": { "nodeId": "notes", "port": "left" },
+      "kind": "line",
+      "label": "handoff",
+      "strokeWidth": 1.75
+    }
+  ]
+}
+            </div>
+        </div>
+    </div>
+
+    <div class="vd-card vd-mb-6">
+        <div class="vd-card-body">
+            <h4 class="vd-mb-4"><i class="ph ph-download-simple"></i> Install</h4>
+            <div class="vd-code-snippet" data-collapsible data-expanded="true">
+                <button class="vd-code-snippet-toggle" type="button" aria-expanded="true">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View install command</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="bash">pnpm</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" type="button" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="bash"><code>pnpm add @vanduo-oss/flowchart</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vd-card vd-mb-6">
+        <div class="vd-card-body">
+            <h4 class="vd-mb-4"><i class="ph ph-code"></i> JavaScript API</h4>
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" type="button" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View VdFlowchart example</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="js">JavaScript</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" type="button" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="js"><code>import { VdFlowchart } from '@vanduo-oss/flowchart';
+import '@vanduo-oss/flowchart/css';
+
+const editor = new VdFlowchart({
+  element: document.getElementById('flowchart-demo'),
+  data: {
+    nodes: [
+      { id: 'start', type: 'circle', x: 80, y: 80, text: 'Start' },
+      { id: 'review', type: 'rounded-rect', x: 300, y: 92, text: 'Review request' }
+    ],
+    edges: [
+      {
+        id: 'edge-1',
+        from: { nodeId: 'start', port: 'right' },
+        to: { nodeId: 'review', port: 'left' },
+        kind: 'arrow',
+        route: 'orthogonal',
+        strokeWidth: 3.5
+      }
+    ]
+  }
+});
+
+editor.addNode({ type: 'diamond', text: 'Approved?' });
+editor.addNode({ type: 'junction' });
+editor.fitView();
+
+const snapshot = editor.toJSON();
+editor.load(snapshot);</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vd-card vd-mb-6">
+        <div class="vd-card-body">
+            <h4 class="vd-mb-4"><i class="ph ph-recycle"></i> Vanduo Auto Init</h4>
+            <p class="vd-text-muted">The browser bundle exposes <code>window.VanduoFlowchart</code>. When <code>window.Vanduo</code> is present, it registers as <code>flowchart</code>, so scoped <code>Vanduo.init(root)</code>, <code>Vanduo.destroy(root)</code>, and <code>Vanduo.reinit('flowchart', root)</code> work without framework changes.</p>
+            <div class="vd-code-snippet vd-mt-4" data-collapsible>
+                <button class="vd-code-snippet-toggle" type="button" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View auto-init markup</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" type="button" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;div data-vd-flowchart&gt;
+{
+  "nodes": [
+    { "id": "start", "type": "circle", "x": 80, "y": 80, "text": "Start" }
+  ],
+  "edges": []
+}
+&lt;/div&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vd-card vd-mb-6">
+        <div class="vd-card-body">
+            <h4 class="vd-mb-4"><i class="ph ph-book-open-text"></i> API Reference</h4>
+            <table class="vd-table vd-table-hover vd-mb-4">
+                <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>addNode(node)</code></td><td>Add a primitive near the current viewport center.</td></tr>
+                    <tr><td><code>updateNode(id, patch)</code></td><td>Change node type, text, size, or coordinates.</td></tr>
+                    <tr><td><code>removeNode(id)</code></td><td>Delete a node and its connected edges.</td></tr>
+                    <tr><td><code>addEdge(edge)</code></td><td>Create a line or arrow between two ports. Set <code>route</code> to <code>curve</code>, <code>straight</code>, or <code>orthogonal</code>, adjust <code>strokeWidth</code> for line weight, and use marker caps as needed; pointer-created edges snap to the nearest side of the target shape.</td></tr>
+                    <tr><td><code>removeEdge(id)</code></td><td>Delete a connection.</td></tr>
+                    <tr><td><code>zoomIn()</code>, <code>zoomOut()</code>, <code>fitView()</code>, <code>resetView()</code></td><td>Adjust viewport scale and framing.</td></tr>
+                    <tr><td><code>startTextEdit(nodeId)</code>, <code>stopTextEdit({ commit })</code></td><td>Open or close the inline text editor used by double-click editing.</td></tr>
+                    <tr><td><code>toJSON()</code>, <code>load(data)</code>, <code>clear()</code></td><td>Export, import, or reset the full document.</td></tr>
+                    <tr><td><code>on(event, callback)</code>, <code>off(event, callback)</code></td><td>Subscribe to <code>change</code>, <code>select</code>, <code>viewport</code>, and <code>connect</code>. Resize completion emits <code>change</code> with <code>reason: 'node:resize'</code>.</td></tr>
+                </tbody>
+            </table>
+
+            <h5 class="vd-mb-3">Primitive Types</h5>
+            <table class="vd-table vd-table-hover">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Default Use</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>rounded-rect</code></td><td>Primary flow step</td></tr>
+                    <tr><td><code>rect</code></td><td>Sharp process block</td></tr>
+                    <tr><td><code>diamond</code></td><td>Decision</td></tr>
+                    <tr><td><code>circle</code></td><td>Start or end state</td></tr>
+                    <tr><td><code>textbox</code></td><td>Notes or descriptive payload</td></tr>
+                    <tr><td><code>label</code></td><td>Free text annotation</td></tr>
+                    <tr><td><code>junction</code></td><td>Fixed-size branch or merge point</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="vd-card vd-mb-6">
+        <div class="vd-card-body">
+            <h4 class="vd-mb-4"><i class="ph ph-brackets-curly"></i> Document Shape</h4>
+            <div class="vd-code-snippet" data-collapsible>
+                <button class="vd-code-snippet-toggle" type="button" aria-expanded="false">
+                    <span class="vd-code-snippet-toggle-icon"></span>
+                    <span>View JSON schema example</span>
+                </button>
+                <div class="vd-code-snippet-content">
+                    <div class="vd-code-snippet-header">
+                        <div class="vd-code-snippet-tabs" role="tablist">
+                            <button class="vd-code-snippet-tab is-active" data-lang="json">JSON</button>
+                        </div>
+                        <button class="vd-code-snippet-copy" type="button" aria-label="Copy code">
+                            <span class="vd-code-snippet-copy-icon"></span>
+                            <span class="vd-code-snippet-copy-text">Copy</span>
+                        </button>
+                    </div>
+                    <div class="vd-code-snippet-body">
+                        <pre class="vd-code-snippet-pane is-active" data-lang="json"><code>{
+  "version": "0.0.1",
+  "viewport": { "x": 0, "y": 0, "scale": 1 },
+  "nodes": [
+    { "id": "review", "type": "rounded-rect", "x": 260, "y": 136, "width": 180, "height": 96, "text": "Review request" }
+  ],
+  "edges": [
+    {
+      "id": "edge-a",
+      "from": { "nodeId": "start", "port": "right" },
+      "to": { "nodeId": "review", "port": "left" },
+      "kind": "arrow",
+      "route": "orthogonal",
+      "strokeWidth": 3.5,
+      "label": ""
+    }
+  ]
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vd-card vd-mb-6">
+        <div class="vd-card-body">
+            <h4 class="vd-mb-4"><i class="ph ph-universal-access"></i> Accessibility</h4>
+            <ul class="vd-text-muted vd-mb-0">
+                <li>The editor surface exposes a single labeled SVG region and keeps editor controls in semantic HTML.</li>
+                <li>Nodes and edges remain keyboard-deletable once the canvas is focused.</li>
+                <li>Connection handles stay out of hit-testing until a node is selected, the Arrow tool is armed, or a reconnect is in progress.</li>
+                <li>The JSON panel provides a direct text representation for import/export and testing workflows.</li>
+            </ul>
+        </div>
+    </div>
+</section>

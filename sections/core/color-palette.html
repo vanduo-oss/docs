@@ -8,15 +8,15 @@
                         <style>
                             .color-swatch {
                                 padding: 1rem;
-                                font-size: var(--font-size-sm);
-                                font-family: var(--font-family-mono);
+                                font-size: var(--vd-font-size-sm);
+                                font-family: var(--vd-font-family-mono);
                                 display: flex;
                                 justify-content: space-between;
                                 align-items: center;
                             }
 
                             .color-swatch-name {
-                                font-weight: var(--font-weight-medium);
+                                font-weight: var(--vd-font-weight-medium);
                             }
 
                             .color-swatch-hex {
@@ -24,13 +24,13 @@
                             }
 
                             .color-scale {
-                                border-radius: var(--btn-border-radius);
+                                border-radius: var(--vd-btn-border-radius);
                                 overflow: hidden;
                                 margin-bottom: 1.5rem;
                             }
 
                             .color-scale-title {
-                                font-weight: var(--font-weight-semibold);
+                                font-weight: var(--vd-font-weight-semibold);
                                 margin-bottom: 0.5rem;
                                 display: flex;
                                 align-items: center;
@@ -38,7 +38,7 @@
                             }
 
                             .color-scale-title code {
-                                font-size: var(--font-size-xs);
+                                font-size: var(--vd-font-size-xs);
                                 background: var(--vd-bg-secondary);
                                 padding: 0.125rem 0.375rem;
                                 border-radius: 3px;
@@ -482,7 +482,7 @@
                                             background color.</p>
 
                                         <div class="vd-bg-teal-3 vd-mb-3"
-                                            style="padding: 1.25rem; border-radius: var(--btn-border-radius); color: #087f5b;">
+                                            style="padding: 1.25rem; border-radius: var(--vd-btn-border-radius); color: #087f5b;">
                                             This element has a <strong>vd-bg-teal-3</strong> class
                                         </div>
 
@@ -548,7 +548,7 @@
                                         <p class="vd-mb-3">Stack both classes on a single element for full control.</p>
 
                                         <div class="vd-bg-indigo-8 vd-text-yellow-2 vd-mb-3"
-                                            style="padding: 1.25rem; border-radius: var(--btn-border-radius); font-weight: 500;">
+                                            style="padding: 1.25rem; border-radius: var(--vd-btn-border-radius); font-weight: 500;">
                                             <strong>vd-bg-indigo-8</strong> background with
                                             <strong>vd-text-yellow-2</strong> text
                                         </div>
@@ -625,8 +625,8 @@
                                                 <div class="vd-code-snippet-body">
                                                     <pre class="vd-code-snippet-pane is-active" data-lang="css"><code><span class="code-comment">/* Direct scale access */</span>
 <span class="code-selector">.my-element</span> {
-  <span class="code-property">background</span>: <span class="code-value">var(--primary-0)</span>;  <span class="code-comment">/* Lightest */</span>
-  <span class="code-property">color</span>: <span class="code-value">var(--primary-9)</span>;       <span class="code-comment">/* Darkest */</span>
+  <span class="code-property">background</span>: <span class="code-value">var(--vd-primary-0)</span>;  <span class="code-comment">/* Lightest */</span>
+  <span class="code-property">color</span>: <span class="code-value">var(--vd-primary-9)</span>;       <span class="code-comment">/* Darkest */</span>
 }
 
 <span class="code-comment">/* Semantic aliases (recommended) */</span>
@@ -637,11 +637,11 @@
 
 <span class="code-comment">/* Hover states using scale */</span>
 <span class="code-selector">.my-button:hover</span> {
-  <span class="code-property">background</span>: <span class="code-value">var(--primary-6)</span>;
+  <span class="code-property">background</span>: <span class="code-value">var(--vd-primary-6)</span>;
 }
 
 <span class="code-selector">.my-button:active</span> {
-  <span class="code-property">background</span>: <span class="code-value">var(--primary-7)</span>;
+  <span class="code-property">background</span>: <span class="code-value">var(--vd-primary-7)</span>;
 }</code></pre>
                                                 </div>
                                             </div>
@@ -676,22 +676,22 @@
                                                 <div class="vd-code-snippet-body">
                                                     <pre class="vd-code-snippet-pane is-active" data-lang="css"><code><span class="code-selector">:root</span> {
   <span class="code-comment">/* Swap Cyan with Violet */</span>
-  <span class="code-property">--primary-0</span>: <span class="code-value">#f3f0ff</span>;
-  <span class="code-property">--primary-1</span>: <span class="code-value">#e5dbff</span>;
-  <span class="code-property">--primary-2</span>: <span class="code-value">#d0bfff</span>;
-  <span class="code-property">--primary-3</span>: <span class="code-value">#b197fc</span>;
-  <span class="code-property">--primary-4</span>: <span class="code-value">#9775fa</span>;
-  <span class="code-property">--primary-5</span>: <span class="code-value">#845ef7</span>;
-  <span class="code-property">--primary-6</span>: <span class="code-value">#7950f2</span>;
-  <span class="code-property">--primary-7</span>: <span class="code-value">#7048e8</span>;
-  <span class="code-property">--primary-8</span>: <span class="code-value">#6741d9</span>;
-  <span class="code-property">--primary-9</span>: <span class="code-value">#5f3dc4</span>;
+  <span class="code-property">--vd-primary-0</span>: <span class="code-value">#f3f0ff</span>;
+  <span class="code-property">--vd-primary-1</span>: <span class="code-value">#e5dbff</span>;
+  <span class="code-property">--vd-primary-2</span>: <span class="code-value">#d0bfff</span>;
+  <span class="code-property">--vd-primary-3</span>: <span class="code-value">#b197fc</span>;
+  <span class="code-property">--vd-primary-4</span>: <span class="code-value">#9775fa</span>;
+  <span class="code-property">--vd-primary-5</span>: <span class="code-value">#845ef7</span>;
+  <span class="code-property">--vd-primary-6</span>: <span class="code-value">#7950f2</span>;
+  <span class="code-property">--vd-primary-7</span>: <span class="code-value">#7048e8</span>;
+  <span class="code-property">--vd-primary-8</span>: <span class="code-value">#6741d9</span>;
+  <span class="code-property">--vd-primary-9</span>: <span class="code-value">#5f3dc4</span>;
 }</code></pre>
                                                 </div>
                                             </div>
                                         </div>
                                         <p class="vd-text-sm vd-text-muted vd-mt-3">All components using
-                                            <code>--primary-*</code>
+                                            <code>--vd-primary-*</code>
                                             or <code>--vd-color-primary</code> will automatically update.</p>
                                     </div>
                                 </div>

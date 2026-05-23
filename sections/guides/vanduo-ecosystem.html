@@ -1,0 +1,273 @@
+<section id="vanduo-ecosystem">
+    <h4 class="demo-title"><i class="ph ph-planet"></i>Vanduo Ecosystem <code class="vd-text-sm">Guide</code></h4>
+    <p class="vd-mb-6">Vanduo is intentionally split into a lightweight core framework and optional canvas libraries. Everything is documented here on <strong>vanduo.dev</strong>, but you install only the packages your project needs — keeping bundle size and maintenance scope under control.</p>
+
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card demo-card">
+                <div class="vd-card-header">
+                    <h4><i class="ph ph-lightbulb"></i> Why separate packages?</h4>
+                </div>
+                <div class="vd-card-body">
+                    <p>Most sites need buttons, forms, layout, and theme tooling — not hex terrain editors or flowchart builders. Shipping every visualization inside the framework would inflate every install.</p>
+                    <ul class="vd-mt-3">
+                        <li><strong>Framework first:</strong> Start with <code>@vanduo-oss/framework</code> for UI, layout, and runtime components.</li>
+                        <li><strong>Add canvas libraries on demand:</strong> Install Hex Grid, Charts, or Flowchart only when a feature needs them.</li>
+                        <li><strong>Same docs site:</strong> Demos, API references, and guides for all packages live together so you can evaluate before installing.</li>
+                        <li><strong>Shared design language:</strong> Canvas packages read Vanduo <code>--vd-*</code> tokens and register with the same <code>Vanduo.init</code> lifecycle when loaded.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12 vd-col-lg-6 vd-mb-4">
+            <div class="vd-card demo-card">
+                <div class="vd-card-header">
+                    <h4><i class="ph ph-cube"></i> Vanduo Framework</h4>
+                </div>
+                <div class="vd-card-body">
+                    <p>The core UI system: responsive grid, typography, components (buttons, modals, tabs, forms), theme customizer, lazy loading, and the scoped runtime (<code>Vanduo.init</code> / <code>Vanduo.destroy</code>).</p>
+                    <p class="vd-text-sm vd-text-muted vd-mt-3"><strong>Choose when:</strong> building any Vanduo-powered site or app shell — always your first install.</p>
+                    <div class="vd-code-snippet vd-mt-4" data-collapsible data-expanded="true">
+                        <button class="vd-code-snippet-toggle" type="button" aria-expanded="true">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>Install</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="bash">pnpm</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" type="button" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="bash"><code>pnpm add @vanduo-oss/framework</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-lg-6 vd-mb-4">
+            <div class="vd-card demo-card">
+                <div class="vd-card-header">
+                    <h4><i class="ph ph-hexagon"></i> Hex Grid</h4>
+                </div>
+                <div class="vd-card-body">
+                    <p>Interactive flat-top hex canvas with pan/zoom, selection, terrain helpers, rotation, and axial coordinate math. Canvas-based, not SVG DOM nodes.</p>
+                    <p class="vd-text-sm vd-text-muted vd-mt-3"><strong>Choose when:</strong> strategy maps, tile prototypes, terrain editors, or experimental game mechanics.</p>
+                    <p class="vd-mt-3"><a href="#docs/vd-hex" data-route="docs/vd-hex" class="vd-link">Hex Grid docs →</a></p>
+                    <div class="vd-code-snippet vd-mt-4" data-collapsible>
+                        <button class="vd-code-snippet-toggle" type="button" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>Install</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="bash">pnpm</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" type="button" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="bash"><code>pnpm add @vanduo-oss/hex-grid</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-lg-6 vd-mb-4">
+            <div class="vd-card demo-card">
+                <div class="vd-card-header">
+                    <h4><i class="ph ph-chart-donut"></i> Charts</h4>
+                </div>
+                <div class="vd-card-body">
+                    <p>Standalone SVG charting for dashboards: bar, line, area, scatter, pie, and donut charts. Declarative <code>data-vd-chart</code> markup or JavaScript API; theme-aware colors.</p>
+                    <p class="vd-text-sm vd-text-muted vd-mt-3"><strong>Choose when:</strong> analytics panels, KPI tiles, reports, or any data visualization that fits standard chart types.</p>
+                    <p class="vd-mt-3"><a href="#docs/vd-charts" data-route="docs/vd-charts" class="vd-link">Charts docs →</a></p>
+                    <div class="vd-code-snippet vd-mt-4" data-collapsible>
+                        <button class="vd-code-snippet-toggle" type="button" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>Install</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="bash">pnpm</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" type="button" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="bash"><code>pnpm add @vanduo-oss/charts</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vd-col-12 vd-col-lg-6 vd-mb-4">
+            <div class="vd-card demo-card">
+                <div class="vd-card-header">
+                    <h4><i class="ph ph-flow-arrow"></i> Flowchart</h4>
+                </div>
+                <div class="vd-card-body">
+                    <p>SVG flow-diagram editor: draggable shapes, port-based arrows, double-click re-attachment, start/end marker caps, keyboard copy-paste, JSON import/export, and zoom/pan canvas.</p>
+                    <p class="vd-text-sm vd-text-muted vd-mt-3"><strong>Choose when:</strong> workflow builders, process maps, internal tooling, or documentation that needs editable diagrams.</p>
+                    <p class="vd-mt-3"><a href="#docs/vd-flowchart" data-route="docs/vd-flowchart" class="vd-link">Flowchart docs →</a></p>
+                    <div class="vd-code-snippet vd-mt-4" data-collapsible>
+                        <button class="vd-code-snippet-toggle" type="button" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>Install</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="bash">pnpm</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" type="button" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="bash"><code>pnpm add @vanduo-oss/flowchart</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card demo-card">
+                <div class="vd-card-header">
+                    <h4><i class="ph ph-git-branch"></i> How packages relate</h4>
+                </div>
+                <div class="vd-card-body">
+                    <pre class="vd-text-sm" style="overflow-x: auto; padding: 1rem; border-radius: 8px; background: color-mix(in srgb, var(--vd-bg-secondary) 80%, transparent);"><code>vanduo.dev docs
+├── @vanduo-oss/framework     ← UI, layout, theme, runtime (required base)
+├── @vanduo-oss/hex-grid      ← optional canvas library
+├── @vanduo-oss/charts        ← optional canvas library
+└── @vanduo-oss/flowchart     ← optional canvas library</code></pre>
+                    <p class="vd-mt-4">Canvas libraries are <strong>peers</strong>, not nested inside the framework bundle. Each ships its own CSS and IIFE/ESM build. Load the framework first, then add any canvas script and stylesheet your page needs.</p>
+                    <div class="vd-code-snippet vd-mt-4" data-collapsible data-expanded="true">
+                        <button class="vd-code-snippet-toggle" type="button" aria-expanded="true">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>Typical HTML load order</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="html">HTML</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" type="button" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;!-- Always --&gt;
+&lt;link rel="stylesheet" href="/path/to/vanduo.min.css"&gt;
+&lt;script src="/path/to/vanduo.min.js"&gt;&lt;/script&gt;
+
+&lt;!-- Only if this page uses charts --&gt;
+&lt;link rel="stylesheet" href="/path/to/vanduo-charts.css"&gt;
+&lt;script src="/path/to/vanduo-charts.iife.js"&gt;&lt;/script&gt;
+
+&lt;!-- Initialize the mounted subtree --&gt;
+&lt;script&gt;Vanduo.init(document.getElementById('app'));&lt;/script&gt;</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="vd-text-sm vd-text-muted vd-mt-3">Extension packages call <code>Vanduo.register(name, api)</code> during load so <code>Vanduo.init</code> can auto-discover <code>data-vd-chart</code>, <code>data-vd-flowchart</code>, and similar markers. See <a href="#docs/runtime-architecture" data-route="docs/runtime-architecture">Runtime Architecture</a> for scoped init/destroy details.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vd-row vd-mb-6">
+        <div class="vd-col-12">
+            <div class="vd-card demo-card">
+                <div class="vd-card-header">
+                    <h4><i class="ph ph-crosshair"></i> Which package do I need?</h4>
+                </div>
+                <div class="vd-card-body">
+                    <div class="vd-table-responsive">
+                        <table class="vd-table vd-table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Your goal</th>
+                                    <th>Install</th>
+                                    <th>Docs section</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Landing page, admin UI, component library</td>
+                                    <td><code>@vanduo-oss/framework</code></td>
+                                    <td><a href="#docs/components" data-route="docs/components">Components</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Dashboard with bar/line/pie charts</td>
+                                    <td>framework + <code>@vanduo-oss/charts</code></td>
+                                    <td><a href="#docs/vd-charts" data-route="docs/vd-charts">Charts</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Editable process or workflow diagram</td>
+                                    <td>framework + <code>@vanduo-oss/flowchart</code></td>
+                                    <td><a href="#docs/vd-flowchart" data-route="docs/vd-flowchart">Flowchart</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Hex tile map, strategy board, terrain tool</td>
+                                    <td>framework + <code>@vanduo-oss/hex-grid</code></td>
+                                    <td><a href="#docs/vd-hex" data-route="docs/vd-hex">Hex Grid</a></td>
+                                </tr>
+                                <tr>
+                                    <td>All of the above on one site</td>
+                                    <td>framework + each canvas package used on that route</td>
+                                    <td>Load scripts per page or code-split by route</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="vd-text-sm vd-text-muted vd-mt-4">You can combine packages — for example, a dashboard page might use Charts inside Vanduo cards, while a separate admin route mounts Flowchart. Avoid loading every canvas bundle on every page; scope assets to the routes that need them.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vd-row">
+        <div class="vd-col-12">
+            <div class="vd-card demo-card">
+                <div class="vd-card-header">
+                    <h4><i class="ph ph-arrow-square-out"></i> Next steps</h4>
+                </div>
+                <div class="vd-card-body">
+                    <ul>
+                        <li><a href="#docs/getting-started" data-route="docs/getting-started">Quick Start</a> — install the framework and render your first page.</li>
+                        <li><a href="#docs/framework-integration" data-route="docs/framework-integration">Framework Integration</a> — use Vanduo inside React, Vue, Nuxt, or other SPAs.</li>
+                        <li><a href="#docs/esm-vs-iife" data-route="docs/esm-vs-iife">ESM vs IIFE</a> — pick the right bundle format for your build pipeline.</li>
+                        <li><a href="#docs/vd-hex" data-route="docs/vd-hex">Hex Grid</a>, <a href="#docs/vd-charts" data-route="docs/vd-charts">Charts</a>, <a href="#docs/vd-flowchart" data-route="docs/vd-flowchart">Flowchart</a> — live demos and API references for each canvas library.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

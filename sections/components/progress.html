@@ -245,10 +245,10 @@
                         <table class="vd-table vd-table-striped">
                             <thead><tr><th>Variable</th><th>Default</th><th>Description</th></tr></thead>
                             <tbody>
-                                <tr><td><code>--progress-height</code></td><td><code>8px</code></td><td>Default track height</td></tr>
-                                <tr><td><code>--progress-bg</code></td><td><code>var(--vd-bg-tertiary)</code></td><td>Track background color</td></tr>
-                                <tr><td><code>--progress-bar-bg</code></td><td><code>var(--vd-color-primary)</code></td><td>Default bar fill color</td></tr>
-                                <tr><td><code>--progress-border-radius</code></td><td><code>var(--radius-fib-5, 5px)</code></td><td>Track and bar rounding</td></tr>
+                                <tr><td><code>--vd-progress-height</code></td><td><code>8px</code></td><td>Default track height</td></tr>
+                                <tr><td><code>--vd-progress-bg</code></td><td><code>var(--vd-bg-tertiary)</code></td><td>Track background color</td></tr>
+                                <tr><td><code>--vd-progress-bar-bg</code></td><td><code>var(--vd-color-primary)</code></td><td>Default bar fill color</td></tr>
+                                <tr><td><code>--vd-progress-border-radius</code></td><td><code>var(--vd-radius-fib-5, 5px)</code></td><td>Track and bar rounding</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -300,7 +300,7 @@
                         <li>Provide an <code>aria-label</code> or <code>aria-labelledby</code> describing what is progressing (e.g., "Uploading file.jpg").</li>
                         <li>For indeterminate bars, omit <code>aria-valuenow</code> and add <code>aria-valuetext="Loading..."</code> instead.</li>
                         <li>Animations respect <code>prefers-reduced-motion: reduce</code> — stripes and indeterminate motion are disabled.</li>
-                        <li>Dark mode automatically adjusts <code>--progress-bg</code> for sufficient contrast.</li>
+                        <li>Dark mode automatically adjusts <code>--vd-progress-bg</code> for sufficient contrast.</li>
                     </ul>
                 </div>
             </div>

@@ -20,7 +20,7 @@
             min-height: 2.5rem;
             padding: 0.65rem 1.25rem;
             border: 1px solid color-mix(in srgb, var(--vd-color-primary) 35%, var(--vd-border-color));
-            border-radius: var(--btn-border-radius);
+            border-radius: var(--vd-btn-border-radius);
             background: color-mix(in srgb, var(--vd-color-primary) 12%, var(--vd-bg-secondary));
             color: var(--vd-color-primary);
             font-weight: 600;
@@ -37,7 +37,7 @@
         #morph .morph-theme-card {
             width: 260px;
             height: 160px;
-            border-radius: var(--card-border-radius);
+            border-radius: var(--vd-card-border-radius);
             border: 1px solid var(--vd-border-color);
         }
         #morph .morph-theme-card .vd-morph-content {
@@ -81,58 +81,58 @@
         #morph .morph-badge-online {
             background: var(--vd-color-success-alpha-10, rgba(16,185,129,0.1));
             color: var(--vd-color-success, #10b981);
-            --morph-wave-color: var(--vd-color-success, #10b981);
+            --vd-morph-wave-color: var(--vd-color-success, #10b981);
         }
         #morph .morph-badge-away {
             background: var(--vd-color-warning-alpha-10, rgba(245,158,11,0.1));
             color: var(--vd-color-warning, #f59e0b);
-            --morph-wave-color: var(--vd-color-warning, #f59e0b);
+            --vd-morph-wave-color: var(--vd-color-warning, #f59e0b);
         }
         #morph .morph-badge-offline {
             background: var(--vd-color-error-alpha-10, rgba(239,68,68,0.1));
             color: var(--vd-color-error, #ef4444);
-            --morph-wave-color: var(--vd-color-error, #ef4444);
+            --vd-morph-wave-color: var(--vd-color-error, #ef4444);
         }
         #morph .morph-badge-priority-low {
             background: color-mix(in srgb, var(--vd-color-info, #0ea5e9) 12%, transparent);
             color: var(--vd-color-info, #0ea5e9);
-            --morph-wave-color: var(--vd-color-info, #0ea5e9);
+            --vd-morph-wave-color: var(--vd-color-info, #0ea5e9);
         }
         #morph .morph-badge-priority-medium {
             background: var(--vd-color-warning-alpha-10, rgba(245,158,11,0.1));
             color: var(--vd-color-warning, #f59e0b);
-            --morph-wave-color: var(--vd-color-warning, #f59e0b);
+            --vd-morph-wave-color: var(--vd-color-warning, #f59e0b);
         }
         #morph .morph-badge-priority-high {
             background: color-mix(in srgb, #ea580c 14%, transparent);
             color: #ea580c;
-            --morph-wave-color: #ea580c;
+            --vd-morph-wave-color: #ea580c;
         }
         #morph .morph-badge-priority-urgent {
             background: var(--vd-color-error-alpha-10, rgba(239,68,68,0.1));
             color: var(--vd-color-error, #ef4444);
-            --morph-wave-color: var(--vd-color-error, #ef4444);
+            --vd-morph-wave-color: var(--vd-color-error, #ef4444);
         }
         #morph .morph-badge-build-passing {
             background: var(--vd-color-success-alpha-10, rgba(16,185,129,0.1));
             color: var(--vd-color-success, #10b981);
-            --morph-wave-color: var(--vd-color-success, #10b981);
+            --vd-morph-wave-color: var(--vd-color-success, #10b981);
         }
         #morph .morph-badge-build-running {
             background: color-mix(in srgb, var(--vd-color-primary) 12%, var(--vd-bg-secondary));
             color: var(--vd-color-primary);
-            --morph-wave-color: var(--vd-color-primary);
+            --vd-morph-wave-color: var(--vd-color-primary);
         }
         #morph .morph-badge-build-failed {
             background: var(--vd-color-error-alpha-10, rgba(239,68,68,0.1));
             color: var(--vd-color-error, #ef4444);
-            --morph-wave-color: var(--vd-color-error, #ef4444);
+            --vd-morph-wave-color: var(--vd-color-error, #ef4444);
         }
 
         #morph .morph-caption-card {
             width: 100%;
             max-width: 340px;
-            border-radius: var(--card-border-radius);
+            border-radius: var(--vd-card-border-radius);
             border: 1px solid var(--vd-border-color);
             background: var(--vd-bg-secondary);
             min-height: 120px;
@@ -269,7 +269,7 @@
                     <h4>Status Badge Morph</h4>
                 </div>
                 <div class="vd-card-body">
-                    <p class="vd-text-sm vd-text-muted vd-mb-4">Click any badge to cycle. Each state overrides <code>--morph-wave-color</code> for a matching wave.</p>
+                    <p class="vd-text-sm vd-text-muted vd-mb-4">Click any badge to cycle. Each state overrides <code>--vd-morph-wave-color</code> for a matching wave.</p>
                     <div class="morph-badge-stack">
                         <span class="vd-morph morph-badge morph-badge-online" data-vd-morph="manual" id="demo-morph-badge-btn"
                               data-morph-states='["Online","Away","Offline"]'
@@ -330,7 +330,7 @@
                         </button>
                     </div>
                     <div class="vd-code-snippet-body">
-                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Override --morph-wave-color per status --&gt;</span>
+                        <pre class="vd-code-snippet-pane is-active" data-lang="html"><code><span class="code-comment">&lt;!-- Override --vd-morph-wave-color per status --&gt;</span>
 &lt;<span class="code-tag">span</span> <span class="code-attr">class</span>=<span class="code-string">"vd-morph vd-morph-sm badge-online"</span> <span class="code-attr">data-vd-morph</span>&gt;
   &lt;<span class="code-tag">span</span> <span class="code-attr">class</span>=<span class="code-string">"vd-morph-content vd-morph-current"</span>&gt;
     &lt;<span class="code-tag">i</span> <span class="code-attr">class</span>=<span class="code-string">"ph ph-wifi-high"</span>&gt;&lt;/<span class="code-tag">i</span>&gt; Online
@@ -340,7 +340,7 @@
   &lt;/<span class="code-tag">span</span>&gt;
 &lt;/<span class="code-tag">span</span>&gt;
 
-<span class="code-comment">&lt;!-- CSS: .badge-online { --morph-wave-color: var(--vd-color-success); } --&gt;</span></code></pre>
+<span class="code-comment">&lt;!-- CSS: .badge-online { --vd-morph-wave-color: var(--vd-color-success); } --&gt;</span></code></pre>
                     </div>
                 </div>
             </div>
@@ -435,10 +435,10 @@
                         <tr><th>Variable</th><th>Default</th><th>Description</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td><code>--morph-duration</code></td><td>0.75s</td><td>Total animation duration</td></tr>
-                        <tr><td><code>--morph-easing</code></td><td>cubic-bezier(0.2, 0.8, 0.35, 1)</td><td>Wave expansion timing</td></tr>
-                        <tr><td><code>--morph-wave-color</code></td><td>var(--vd-color-primary)</td><td>Wave gradient base colour (override per-element)</td></tr>
-                        <tr><td><code>--morph-blur-peak</code></td><td>11px</td><td>Maximum blur at wave peak</td></tr>
+                        <tr><td><code>--vd-morph-duration</code></td><td>0.75s</td><td>Total animation duration</td></tr>
+                        <tr><td><code>--vd-morph-easing</code></td><td>cubic-bezier(0.2, 0.8, 0.35, 1)</td><td>Wave expansion timing</td></tr>
+                        <tr><td><code>--vd-morph-wave-color</code></td><td>var(--vd-color-primary)</td><td>Wave gradient base colour (override per-element)</td></tr>
+                        <tr><td><code>--vd-morph-blur-peak</code></td><td>11px</td><td>Maximum blur at wave peak</td></tr>
                     </tbody>
                 </table>
             </div>

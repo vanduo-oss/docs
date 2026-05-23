@@ -247,17 +247,17 @@ var VanduoCharts = (() => {
       index === 2 ? "--vd-color-success" : "",
       index === 3 ? "--vd-color-warning" : "",
       index === 4 ? "--vd-color-error" : "",
-      index === 0 ? "--color-primary" : "",
-      index === 1 ? "--color-info" : "",
-      index === 2 ? "--color-success" : ""
+      index === 0 ? "--vd-color-primary" : "",
+      index === 1 ? "--vd-color-info" : "",
+      index === 2 ? "--vd-color-success" : ""
     ].filter(Boolean), fallback));
     return {
       fontFamily: readToken(tokenStyle, ["--vd-font-family-base"], "inherit"),
-      textColor: readToken(tokenStyle, ["--vd-text-primary", "--text-primary"], "#1a1d20"),
-      mutedTextColor: readToken(tokenStyle, ["--vd-text-muted", "--text-muted"], "#868e96"),
-      gridColor: readToken(tokenStyle, ["--vd-border-color-light", "--border-color-light", "--vd-border-color"], "#e9ecef"),
-      axisColor: readToken(tokenStyle, ["--vd-border-color", "--border-color"], "#ced4da"),
-      backgroundColor: readToken(tokenStyle, ["--vd-bg-primary", "--bg-primary"], "#ffffff"),
+      textColor: readToken(tokenStyle, ["--vd-text-primary", "--vd-text-primary"], "#1a1d20"),
+      mutedTextColor: readToken(tokenStyle, ["--vd-text-muted", "--vd-text-muted"], "#868e96"),
+      gridColor: readToken(tokenStyle, ["--vd-border-color-light", "--vd-border-color-light", "--vd-border-color"], "#e9ecef"),
+      axisColor: readToken(tokenStyle, ["--vd-border-color", "--vd-border-color"], "#ced4da"),
+      backgroundColor: readToken(tokenStyle, ["--vd-bg-primary", "--vd-bg-primary"], "#ffffff"),
       ...overrides,
       colors: overrides.colors || colors
     };

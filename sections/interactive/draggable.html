@@ -210,7 +210,7 @@
                     <p class="vd-mb-5">Use the JavaScript API to add or remove draggable at runtime:</p>
 
                     <div id="programmatic-element"
-                        style="padding: 0.8125rem; border: 1px dashed var(--vd-border-color); border-radius: var(--border-radius); margin-bottom: 1rem;">
+                        style="padding: 0.8125rem; border: 1px dashed var(--vd-border-color); border-radius: var(--vd-radius-fib-8); margin-bottom: 1rem;">
                         I'm not draggable yet...
                     </div>
                     <button class="vd-btn vd-btn-primary vd-btn-sm" id="make-draggable-btn"><i class="ph ph-plus"></i>
@@ -302,7 +302,7 @@ VanduoDraggable.<span class="code-function">removeDraggable</span>(el);</code></
                     <p class="vd-mb-5">Override CSS variables for a custom look:</p>
 
                     <div class="vd-draggable" data-draggable="custom-1"
-                        style="--draggable-bg: var(--vd-color-primary-alpha-5); --draggable-border-color: var(--vd-color-primary); --draggable-hover-bg: var(--vd-color-primary-alpha-10);">
+                        style="--vd-draggable-bg: var(--vd-color-primary-alpha-5); --vd-draggable-border-color: var(--vd-color-primary); --vd-draggable-hover-bg: var(--vd-color-primary-alpha-10);">
                         <span class="vd-draggable-handle"><i class="ph ph-paint-brush"></i></span>
                         Custom styled draggable
                     </div>
@@ -328,9 +328,9 @@ VanduoDraggable.<span class="code-function">removeDraggable</span>(el);</code></
   Custom styled draggable
 &lt;/<span class="code-tag">div</span>&gt;</code></pre>
                                 <pre class="vd-code-snippet-pane" data-lang="css"><code><span class="code-selector">.custom-drag</span> {
-  <span class="code-property">--draggable-bg</span>: <span class="code-value">var</span>(<span class="code-value">--vd-color-primary-alpha-5</span>);
-  <span class="code-property">--draggable-border-color</span>: <span class="code-value">var</span>(<span class="code-value">--vd-color-primary</span>);
-  <span class="code-property">--draggable-hover-bg</span>: <span class="code-value">var</span>(<span class="code-value">--vd-color-primary-alpha-10</span>);
+  <span class="code-property">--vd-draggable-bg</span>: <span class="code-value">var</span>(<span class="code-value">--vd-color-primary-alpha-5</span>);
+  <span class="code-property">--vd-draggable-border-color</span>: <span class="code-value">var</span>(<span class="code-value">--vd-color-primary</span>);
+  <span class="code-property">--vd-draggable-hover-bg</span>: <span class="code-value">var</span>(<span class="code-value">--vd-color-primary-alpha-10</span>);
 }</code></pre>
                             </div>
                         </div>
@@ -556,47 +556,47 @@ el.<span class="code-function">addEventListener</span>(<span class="code-string"
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><code>--draggable-bg</code></td>
+                                    <td><code>--vd-draggable-bg</code></td>
                                     <td><code>var(--vd-color-white)</code></td>
                                 </tr>
                                 <tr>
-                                    <td><code>--draggable-border-color</code></td>
+                                    <td><code>--vd-draggable-border-color</code></td>
                                     <td><code>var(--vd-border-color)</code></td>
                                 </tr>
                                 <tr>
-                                    <td><code>--draggable-hover-bg</code></td>
+                                    <td><code>--vd-draggable-hover-bg</code></td>
                                     <td><code>var(--vd-bg-secondary)</code></td>
                                 </tr>
                                 <tr>
-                                    <td><code>--draggable-hover-border-color</code></td>
+                                    <td><code>--vd-draggable-hover-border-color</code></td>
                                     <td><code>var(--vd-color-primary)</code></td>
                                 </tr>
                                 <tr>
-                                    <td><code>--draggable-dragging-bg</code></td>
+                                    <td><code>--vd-draggable-dragging-bg</code></td>
                                     <td><code>var(--vd-bg-secondary)</code></td>
                                 </tr>
                                 <tr>
-                                    <td><code>--draggable-dragging-border-color</code></td>
+                                    <td><code>--vd-draggable-dragging-border-color</code></td>
                                     <td><code>var(--vd-color-primary)</code></td>
                                 </tr>
                                 <tr>
-                                    <td><code>--draggable-dragging-shadow</code></td>
+                                    <td><code>--vd-draggable-dragging-shadow</code></td>
                                     <td><code>var(--vd-shadow-lg)</code></td>
                                 </tr>
                                 <tr>
-                                    <td><code>--drop-zone-bg</code></td>
+                                    <td><code>--vd-drop-zone-bg</code></td>
                                     <td><code>var(--vd-color-primary-alpha-5)</code></td>
                                 </tr>
                                 <tr>
-                                    <td><code>--drop-zone-border-color</code></td>
+                                    <td><code>--vd-drop-zone-border-color</code></td>
                                     <td><code>var(--vd-color-primary-alpha-30)</code></td>
                                 </tr>
                                 <tr>
-                                    <td><code>--draggable-padding</code></td>
+                                    <td><code>--vd-draggable-padding</code></td>
                                     <td><code>0.8125rem</code> (Fibonacci 13px)</td>
                                 </tr>
                                 <tr>
-                                    <td><code>--draggable-margin</code></td>
+                                    <td><code>--vd-draggable-margin</code></td>
                                     <td><code>0.5rem</code> (Fibonacci 8px)</td>
                                 </tr>
                             </tbody>

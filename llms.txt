@@ -2,7 +2,7 @@
 > Pure HTML, CSS, JS framework for designing beautiful websites.
 > Zero runtime dependencies, no mandatory build tools, just clean and simple code.
 > MIT Licensed. https://vanduo.dev
-> Current docs content includes the v1.4.0 runtime/lifecycle updates and the live docs shell now loads the pinned framework CDN bundle from @v1.4.0.
+> Current docs content includes the v1.4.1 runtime/lifecycle updates and the live docs shell now loads the pinned framework CDN bundle from @v1.4.1.
 
 ## What is Vanduo?
 Vanduo is a lightweight front-end framework built on plain HTML, CSS, and JavaScript.

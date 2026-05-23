@@ -1,19 +1,7 @@
-<svg width="432" height="432" viewBox="0 0 432 432" fill="none" xmlns="http://www.w3.org/2000/svg">
-<circle cx="216" cy="216" r="191.5" fill="none" stroke="var(--color-primary, #0F097C)" stroke-width="49"/>
-<g filter="url(#filter0_d_19_30)">
-<path d="M245.811 344.5C232.339 367.833 198.661 367.833 185.189 344.5L88.6273 177.25C75.1558 153.917 91.9952 124.75 118.938 124.75L312.062 124.75C339.005 124.75 355.844 153.917 342.373 177.25L245.811 344.5Z" fill="var(--color-primary, #160DB5)"/>
-<path d="M245.378 344.25C232.099 367.25 198.901 367.25 185.622 344.25L89.0605 177C75.7815 154 92.3804 125.25 118.938 125.25L312.062 125.25C338.62 125.25 355.219 154 341.939 177L245.378 344.25Z" stroke="var(--text-primary, #000)"/>
-</g>
-<defs>
-<filter id="filter0_d_19_30" x="79.886" y="124.75" width="271.228" height="245.25" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-<feOffset dy="4"/>
-<feGaussianBlur stdDeviation="2"/>
-<feComposite in2="hardAlpha" operator="out"/>
-<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
-<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_19_30"/>
-<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_19_30" result="shape"/>
-</filter>
-</defs>
+<svg width="495" height="495" viewBox="0 0 495 495" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="247.5" cy="247.5" r="230.5" stroke="#003399" stroke-width="34"/>
+<path d="M135.327 283H135.326L114.008 249.021L114.007 249.019L135.327 283ZM167.323 140.75C134.941 165.109 113.999 203.859 113.999 247.5C113.999 248.007 114.002 248.513 114.007 249.019L105.652 235.699C79.7469 194.408 109.427 140.75 158.171 140.75H167.323Z" fill="#FDB913"/>
+<circle cx="247.5" cy="247.5" r="133" fill="#003399" stroke="black"/>
+<path d="M335.829 140.75C384.573 140.75 414.253 194.408 388.349 235.699L358.046 284H358.045L380.999 247.413C380.971 203.807 360.037 165.093 327.677 140.75H335.829Z" fill="#006A44"/>
+<path d="M299.521 377.287C275.22 416.021 218.781 416.021 194.48 377.287L188.074 367.076C205.971 375.987 226.15 381 247.5 381C268.277 381 287.946 376.253 305.48 367.785L329.813 329H329.814L299.521 377.287Z" fill="#C1272D"/>
 </svg>

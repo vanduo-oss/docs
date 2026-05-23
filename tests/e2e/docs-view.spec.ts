@@ -8,6 +8,22 @@ async function waitForSPA(page: Page) {
     }, { timeout: 10000 });
 }
 
+async function waitForVisibleSection(page: Page, selector: string) {
+    await page.waitForFunction((targetSelector) => {
+        const section = document.querySelector(targetSelector);
+        if (!section) return false;
+
+        const style = window.getComputedStyle(section);
+        const rect = section.getBoundingClientRect();
+
+        return document.querySelector('#docs-view.is-active') !== null
+            && style.display !== 'none'
+            && style.visibility !== 'hidden'
+            && rect.width > 0
+            && rect.height > 0;
+    }, selector, { timeout: 10000 });
+}
+
 async function getCurrentTheme(page: Page) {
     return await page.evaluate(() => document.documentElement.getAttribute('data-theme'));
 }
@@ -109,7 +125,7 @@ test.describe('4. Documentation View', () => {
     });
 
     test.describe('Changelog (#changelog)', () => {
-        test('Shows v1.4.0 as latest and keeps v1.3.9 as history', async ({ page }) => {
+        test('Shows v1.4.1 as latest and keeps v1.4.0 as history', async ({ page }) => {
             await page.goto('/#changelog');
             await waitForSPA(page);
 
@@ -117,13 +133,13 @@ test.describe('4. Documentation View', () => {
             await expect(changelog).toBeVisible();
 
             const latestCard = changelog.locator('.version-card').first();
-            await expect(latestCard).toContainText('v1.4.0');
+            await expect(latestCard).toContainText('v1.4.1');
             await expect(latestCard).toContainText('Latest');
-            await expect(latestCard).toContainText('Scoped runtime');
+            await expect(latestCard).toContainText('Strict --vd-*');
             await expect(latestCard).toContainText('--vd-*');
 
             const previousCard = changelog.locator('.version-card').nth(1);
-            await expect(previousCard).toContainText('v1.3.9');
+            await expect(previousCard).toContainText('v1.4.0');
             await expect(previousCard).not.toContainText('Latest');
         });
     });
@@ -322,23 +338,59 @@ test.describe('4. Documentation View', () => {
             expect(errors).toEqual([]);
         });
 
+        test('Vanduo Flowchart docs render live editor and register in navigation/search', async ({ page }) => {
+            const errors: string[] = [];
+            page.on('pageerror', (error) => errors.push(error.message));
+            page.on('console', (message) => {
+                if (message.type() === 'error') errors.push(message.text());
+            });
+
+            await page.goto('/#docs/vd-flowchart');
+            await waitForSPA(page);
+
+            const target = page.locator('#vd-flowchart');
+            await expect(target).toBeVisible();
+            await expect(page).toHaveURL(/.*#docs\/vd-flowchart/);
+
+            await expect(page.locator('#vd-flowchart-demo .vd-flowchart-shell')).toBeVisible();
+            await expect(page.locator('#vd-flowchart-demo .vd-flowchart-node')).toHaveCount(4);
+            await expect(page.locator('.doc-nav-link[data-section="vd-flowchart"]')).toHaveCount(1);
+
+            await page.locator('#vd-flowchart-demo [data-node-type="label"]').click();
+            await expect(page.locator('#vd-flowchart-demo .vd-flowchart-node')).toHaveCount(5);
+
+            await page.locator('#global-search-trigger').click();
+            await page.locator('#global-search-input').fill('flowchart');
+            await page.waitForTimeout(300);
+            await expect(page.locator('#global-search-results .global-search-result[data-route="docs/vd-flowchart"]').first()).toBeVisible();
+
+            expect(errors.join('\n')).not.toContain('Vanduo Flowchart');
+            expect(errors).toEqual([]);
+        });
+
         test('code snippet toggle still works after leaving docs and returning', async ({ page }) => {
             await page.goto('/#docs/music-player');
             await waitForSPA(page);
 
             const toggle = page.locator('#music-player .vd-code-snippet[data-collapsible] .vd-code-snippet-toggle').first();
-            const snippet = page.locator('#music-player .vd-code-snippet[data-collapsible]').first();
 
             await expect(toggle).toBeVisible();
-            await expect(snippet).toHaveAttribute('data-expanded', 'false');
+            await expect(toggle).toHaveAttribute('aria-expanded', 'false');
 
-            await page.goto('/#about');
+            await page.goto('/?docs-route-test=about#about');
             await waitForSPA(page);
-            await page.goto('/#docs/music-player');
-            await waitForSPA(page);
+            await expect(page).toHaveURL(/.*#about/);
+            await expect(page.locator('#about')).toBeVisible();
 
-            await toggle.click();
-            await expect(snippet).toHaveAttribute('data-expanded', 'true');
+            await page.goto('/?docs-route-test=music-player#docs/music-player');
+            await expect(page).toHaveURL(/.*#docs\/music-player/);
+            await waitForVisibleSection(page, '#music-player');
+
+            const returnedToggle = page.locator('#music-player .vd-code-snippet[data-collapsible] .vd-code-snippet-toggle').first();
+            await expect(returnedToggle).toBeVisible();
+            await returnedToggle.scrollIntoViewIfNeeded();
+            await returnedToggle.click();
+            await expect(returnedToggle).toHaveAttribute('aria-expanded', 'true');
         });
 
     });
@@ -363,8 +415,13 @@ test.describe('4. Documentation View', () => {
             }
         });
 
-        test('Loads v1.4.0 architecture and production guides', async ({ page }) => {
+        test('Loads v1.4.1 architecture and production guides', async ({ page }) => {
             const guideChecks = [
+                {
+                    route: '/#docs/vanduo-ecosystem',
+                    id: 'vanduo-ecosystem',
+                    expected: ['@vanduo-oss/framework', '@vanduo-oss/hex-grid', '@vanduo-oss/charts', '@vanduo-oss/flowchart']
+                },
                 {
                     route: '/#docs/runtime-architecture',
                     id: 'runtime-architecture',
@@ -383,7 +440,7 @@ test.describe('4. Documentation View', () => {
                 {
                     route: '/#docs/production-best-practices',
                     id: 'production-best-practices',
-                    expected: ['@v1.4.0', '--vd-*']
+                    expected: ['@v1.4.1', '--vd-*']
                 }
             ];
 
@@ -408,7 +465,7 @@ test.describe('4. Documentation View', () => {
             await expect(section).toContainText('Vanduo.init(root)');
         });
 
-        test('Token guide teaches canonical v1.4 tokens with compatibility context', async ({ page }) => {
+        test('Token guide teaches the strict v1.4.1 token namespace', async ({ page }) => {
             await page.goto('/#docs/css-variables-theming');
             await waitForSPA(page);
 
@@ -416,7 +473,7 @@ test.describe('4. Documentation View', () => {
             await expect(section).toBeVisible();
             await expect(section).toContainText('--vd-color-primary');
             await expect(section).toContainText('--vd-bg-primary');
-            await expect(section).toContainText('compatibility aliases');
+            await expect(section).toContainText('strict public CSS custom property API');
         });
 
         test('Starter templates guide is a single generalized landing guide', async ({ page }) => {
@@ -474,7 +531,7 @@ test.describe('4. Documentation View', () => {
             await expectLocalFrameworkAssets(page);
         });
 
-        test('Dark mode toggle changes primary color from black to amber', async ({ page }) => {
+        test('Dark mode toggle changes primary color from black to blue', async ({ page }) => {
             await page.emulateMedia({ colorScheme: 'light' });
             await page.goto('/#home');
             await waitForSPA(page);
@@ -500,14 +557,14 @@ test.describe('4. Documentation View', () => {
             expect(currentTheme).toBe('dark');
 
             await page.waitForFunction(() => {
-                return document.documentElement.getAttribute('data-primary') === 'amber';
+                return document.documentElement.getAttribute('data-primary') === 'blue';
             }, { timeout: 5000 });
 
-            // Verify primary color changed to amber (dark mode default per docs)
+            // Verify primary color changed to blue (dark mode default per docs)
             const darkPrimary = await page.evaluate(() => {
                 return document.documentElement.getAttribute('data-primary');
             });
-            expect(darkPrimary).toBe('amber');
+            expect(darkPrimary).toBe('blue');
 
             // Toggle back to light mode
             currentTheme = await cycleTheme(page, 'light');
@@ -533,7 +590,7 @@ test.describe('4. Documentation View', () => {
 
             await page.evaluate(() => {
                 localStorage.setItem('vanduo-theme-preference', 'light');
-                localStorage.setItem('vanduo-primary-color', 'amber');
+                localStorage.setItem('vanduo-primary-color', 'blue');
             });
             await page.reload();
             await waitForSPA(page);
@@ -587,11 +644,11 @@ test.describe('4. Documentation View', () => {
             });
 
             // Docs-site overrides ThemeCustomizer.DEFAULTS in js/app.js:
-            //   PRIMARY_LIGHT='black', NEUTRAL='charcoal', FONT='ubuntu', RADIUS='0.5'
+            //   PRIMARY_LIGHT='black', PRIMARY_DARK='blue', NEUTRAL='stone', FONT='ubuntu', RADIUS='0.5'
             // and resolves the system theme to the active media mode.
             expect(resetState.theme).toBe('light');
             expect(resetState.primary).toBe('black');
-            expect(resetState.neutral).toBe('charcoal');
+            expect(resetState.neutral).toBe('stone');
             expect(resetState.font).toBe('ubuntu');
             expect(resetState.radius).toBe('0.5');
             expect(resetState.storagePref).toBe('system');
@@ -626,7 +683,10 @@ test.describe('4. Documentation View', () => {
                 select.value = 'open-sans';
                 select.dispatchEvent(new Event('change', { bubbles: true }));
             });
-            await page.waitForTimeout(150);
+            await page.waitForFunction(() => {
+                return document.documentElement.getAttribute('data-font') === 'open-sans'
+                    && localStorage.getItem('vanduo-font-preference') === 'open-sans';
+            }, null, { timeout: 10000 });
 
             let fontState = await page.evaluate(() => {
                 return {
@@ -641,6 +701,10 @@ test.describe('4. Documentation View', () => {
             await waitForSPA(page);
             await page.goto('/#docs/theme-customizer');
             await waitForSPA(page);
+            await page.waitForFunction(() => {
+                return document.documentElement.getAttribute('data-font') === 'open-sans'
+                    && localStorage.getItem('vanduo-font-preference') === 'open-sans';
+            }, null, { timeout: 10000 });
 
             fontState = await page.evaluate(() => {
                 return {
@@ -652,21 +716,25 @@ test.describe('4. Documentation View', () => {
             expect(fontState.stored).toBe('open-sans');
 
             await page.evaluate(() => {
-                localStorage.setItem('vanduo-font-preference', 'source-sans-3');
+                localStorage.setItem('vanduo-font-preference', 'not-a-real-font');
             });
             await page.reload();
             await waitForSPA(page);
             await page.goto('/#docs/theme-customizer');
             await waitForSPA(page);
+            await page.waitForFunction(() => {
+                return document.documentElement.getAttribute('data-font') === 'ubuntu'
+                    && localStorage.getItem('vanduo-font-preference') === 'ubuntu';
+            }, null, { timeout: 10000 });
 
-            const normalizedState = await page.evaluate(() => {
+            const fallbackState = await page.evaluate(() => {
                 return {
                     attr: document.documentElement.getAttribute('data-font'),
                     stored: localStorage.getItem('vanduo-font-preference')
                 };
             });
-            expect(normalizedState.attr).toBe('open-sans');
-            expect(normalizedState.stored).toBe('open-sans');
+            expect(fallbackState.attr).toBe('ubuntu');
+            expect(fallbackState.stored).toBe('ubuntu');
         });
     });
 

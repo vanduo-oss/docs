@@ -20,18 +20,18 @@ test.describe('Timeline – Docs Section', () => {
 
         const basic = page.locator('#demo-timeline-basic .vd-timeline.vd-timeline-animated');
         await expect(basic).toBeVisible();
-        await basic.scrollIntoViewIfNeeded();
-
-        await expect.poll(async () => {
-            return await basic.locator('.vd-timeline-item.is-revealed').count();
-        }, { timeout: 15000 }).toBeGreaterThan(0);
 
         const items = basic.locator('.vd-timeline-item');
         const n = await items.count();
         expect(n).toBeGreaterThan(0);
+
         for (let i = 0; i < n; i++) {
-            await expect(items.nth(i)).toHaveClass(/is-revealed/);
+            await items.nth(i).scrollIntoViewIfNeeded();
         }
+
+        await expect.poll(async () => {
+            return await basic.locator('.vd-timeline-item.is-revealed').count();
+        }, { timeout: 15000 }).toBe(n);
     });
 
     test('playback demo reveals one item per next click', async ({ page }) => {

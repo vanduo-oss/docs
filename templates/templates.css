@@ -850,7 +850,7 @@
     border-radius: 1rem;
     background: rgba(15, 23, 42, 0.92);
     color: #e2e8f0;
-    font-family: var(--font-family-mono);
+    font-family: var(--vd-font-family-mono);
     font-size: 0.92rem;
     overflow-x: auto;
 }

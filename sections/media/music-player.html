@@ -339,7 +339,7 @@ VanduoMusicPlayer.initPlayer(
                 </div>
                 <div class="vd-card-body">
                     <!-- Vibrant background so the frosted glass effect is visible -->
-                    <div class="vd-p-4 vd-mb-4" style="border-radius: var(--border-radius, 0.5rem); background: linear-gradient(120deg, #ff6b6b 0%, #4ecdc4 50%, #45b7d1 100%); position: relative; overflow: hidden;">
+                    <div class="vd-p-4 vd-mb-4" style="border-radius: var(--vd-radius-fib-8, 0.5rem); background: linear-gradient(120deg, #ff6b6b 0%, #4ecdc4 50%, #45b7d1 100%); position: relative; overflow: hidden;">
                         <div style="position: absolute; inset: 0; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4) 0%, transparent 50%), radial-gradient(circle at 70% 70%, rgba(255,215,0,0.3) 0%, transparent 40%);"></div>
                         <div id="demo-glass" class="vd-music-player" data-music-player
                             data-music-player-options='{"tracks":[{"name":"Pale Blue Dot","url":"./music/Stellardrone/Invent the Universe/06 - Pale Blue Dot.mp3"},{"name":"Maia Nebula","url":"./music/Stellardrone/Invent the Universe/03 - Maia Nebula.mp3"},{"name":"Approaching the Heliopause","url":"./music/Stellardrone/Invent the Universe/04 - Approaching the Heliopause.mp3"},{"name":"An Ocean of Galaxies","url":"./music/Stellardrone/Invent the Universe/07 - An Ocean of Galaxies.mp3"},{"name":"Infinite Void","url":"./music/Stellardrone/Invent the Universe/08 - Infinite Void.mp3"}],"showProgress":true,"glass":true,"detachable":true,"minimizable":true}'></div>
@@ -625,36 +625,36 @@ el.addEventListener(<span class="code-string">'musicplayer:expand'</span>, () =&
                             <div class="vd-code-snippet-body">
                                 <pre class="vd-code-snippet-pane is-active" data-lang="css"><code><span class="code-selector">:root</span> {
   <span class="code-comment">/* Accent */</span>
-  <span class="code-property">--music-player-accent</span>: <span class="code-value">var(--vd-color-primary)</span>;
+  <span class="code-property">--vd-music-player-accent</span>: <span class="code-value">var(--vd-color-primary)</span>;
 
   <span class="code-comment">/* Surfaces */</span>
-  <span class="code-property">--music-player-bg</span>: <span class="code-value">var(--vd-bg-primary)</span>;
-  <span class="code-property">--music-player-bg-secondary</span>: <span class="code-value">var(--vd-bg-secondary)</span>;
-  <span class="code-property">--music-player-border</span>: <span class="code-value">var(--vd-border-color)</span>;
+  <span class="code-property">--vd-music-player-bg</span>: <span class="code-value">var(--vd-bg-primary)</span>;
+  <span class="code-property">--vd-music-player-bg-secondary</span>: <span class="code-value">var(--vd-bg-secondary)</span>;
+  <span class="code-property">--vd-music-player-border</span>: <span class="code-value">var(--vd-border-color)</span>;
 
   <span class="code-comment">/* Text */</span>
-  <span class="code-property">--music-player-text</span>: <span class="code-value">var(--vd-text-primary)</span>;
-  <span class="code-property">--music-player-text-muted</span>: <span class="code-value">var(--vd-text-muted)</span>;
+  <span class="code-property">--vd-music-player-text</span>: <span class="code-value">var(--vd-text-primary)</span>;
+  <span class="code-property">--vd-music-player-text-muted</span>: <span class="code-value">var(--vd-text-muted)</span>;
 
   <span class="code-comment">/* Range track */</span>
-  <span class="code-property">--music-player-track-bg</span>: <span class="code-value">var(--vd-border-color)</span>;
-  <span class="code-property">--music-player-track-fill</span>: <span class="code-value">var(--vd-color-primary)</span>;
+  <span class="code-property">--vd-music-player-track-bg</span>: <span class="code-value">var(--vd-border-color)</span>;
+  <span class="code-property">--vd-music-player-track-fill</span>: <span class="code-value">var(--vd-color-primary)</span>;
 
   <span class="code-comment">/* Sizing */</span>
-  <span class="code-property">--music-player-btn-size</span>: <span class="code-value">2.125rem</span>;
-  <span class="code-property">--music-player-padding-x</span>: <span class="code-value">1.3125rem</span>;
-  <span class="code-property">--music-player-padding-y</span>: <span class="code-value">0.8125rem</span>;
+  <span class="code-property">--vd-music-player-btn-size</span>: <span class="code-value">2.125rem</span>;
+  <span class="code-property">--vd-music-player-padding-x</span>: <span class="code-value">1.3125rem</span>;
+  <span class="code-property">--vd-music-player-padding-y</span>: <span class="code-value">0.8125rem</span>;
 
   <span class="code-comment">/* Glass (vd-music-player-glass) — also uses --vd-glass-blur, etc. */</span>
-  <span class="code-property">--music-player-glass-bg</span>: <span class="code-value">var(--vd-glass-bg-light)</span>;
-  <span class="code-property">--music-player-glass-border</span>: <span class="code-value">var(--vd-glass-border-light)</span>;
-  <span class="code-property">--music-player-glass-shadow</span>: <span class="code-value">var(--vd-glass-shadow)</span>;
+  <span class="code-property">--vd-music-player-glass-bg</span>: <span class="code-value">var(--vd-glass-bg-light)</span>;
+  <span class="code-property">--vd-music-player-glass-border</span>: <span class="code-value">var(--vd-glass-border-light)</span>;
+  <span class="code-property">--vd-music-player-glass-shadow</span>: <span class="code-value">var(--vd-glass-shadow)</span>;
 
   <span class="code-comment">/* Floating / detached */</span>
-  <span class="code-property">--music-player-floating-z</span>: <span class="code-value">10050</span>;
-  <span class="code-property">--music-player-floating-offset</span>: <span class="code-value">1rem</span>;
-  <span class="code-property">--music-player-floating-left</span>: <span class="code-value">1rem</span>; <span class="code-comment">/* with .is-position-custom */</span>
-  <span class="code-property">--music-player-floating-top</span>: <span class="code-value">1rem</span>;
+  <span class="code-property">--vd-music-player-floating-z</span>: <span class="code-value">10050</span>;
+  <span class="code-property">--vd-music-player-floating-offset</span>: <span class="code-value">1rem</span>;
+  <span class="code-property">--vd-music-player-floating-left</span>: <span class="code-value">1rem</span>; <span class="code-comment">/* with .is-position-custom */</span>
+  <span class="code-property">--vd-music-player-floating-top</span>: <span class="code-value">1rem</span>;
 }</code></pre>
                             </div>
                         </div>

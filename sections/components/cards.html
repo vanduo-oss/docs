@@ -4,7 +4,7 @@
 
     <style>
         #cards .cards-glass-stage {
-            border-radius: var(--card-border-radius);
+            border-radius: var(--vd-card-border-radius);
             padding: 2rem;
             background:
                 linear-gradient(135deg,
@@ -15,7 +15,7 @@
         }
         #cards .cards-morph-inner {
             min-height: 7rem;
-            border-radius: calc(var(--card-border-radius) - 2px);
+            border-radius: calc(var(--vd-card-border-radius) - 2px);
             border: 1px solid var(--vd-border-color);
             background: var(--vd-bg-secondary);
         }
@@ -84,7 +84,7 @@
             <div class="vd-card vd-card-glow demo-card" id="demo-card-glow-hover">
                 <div class="vd-card-body vd-text-center">
                     <p class="vd-mb-0"><strong>Hover this card</strong></p>
-                    <p class="vd-text-sm vd-text-muted vd-mb-0">Glow uses <code>--card-glow-color</code> / <code>--card-glow-border-color</code>.</p>
+                    <p class="vd-text-sm vd-text-muted vd-mb-0">Glow uses <code>--vd-card-glow-color</code> / <code>--vd-card-glow-border-color</code>.</p>
                 </div>
             </div>
         </div>
@@ -195,9 +195,9 @@
 <span class="code-comment">&lt;!-- Filled variant --&gt;</span>
 &lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"vd-card vd-card-filled"</span>&gt;...&lt;/<span class="code-tag">div</span>&gt;</code></pre>
                 <pre class="vd-code-snippet-pane" data-lang="css"><code><span class="code-selector">.vd-card</span> {
-  <span class="code-property">background-color</span>: <span class="code-value">var(--card-bg)</span>;
-  <span class="code-property">border-radius</span>: <span class="code-value">var(--card-border-radius)</span>;
-  <span class="code-property">box-shadow</span>: <span class="code-value">var(--card-shadow-elevated)</span>;
+  <span class="code-property">background-color</span>: <span class="code-value">var(--vd-card-bg)</span>;
+  <span class="code-property">border-radius</span>: <span class="code-value">var(--vd-card-border-radius)</span>;
+  <span class="code-property">box-shadow</span>: <span class="code-value">var(--vd-card-shadow-elevated)</span>;
 }
 
 <span class="code-selector">.vd-card-outlined</span> {
@@ -207,7 +207,7 @@
 
 <span class="code-selector">.vd-card-filled</span> {
   <span class="code-property">box-shadow</span>: <span class="code-value">none</span>;
-  <span class="code-property">background-color</span>: <span class="code-value">var(--card-bg-filled)</span>;
+  <span class="code-property">background-color</span>: <span class="code-value">var(--vd-card-bg-filled)</span>;
   <span class="code-property">border</span>: <span class="code-value">none</span>;
 }</code></pre>
             </div>
@@ -272,7 +272,7 @@
         <div class="vd-col-12 vd-col-md-6">
             <div class="vd-card" id="demo-card-image">
                 <div class="vd-card-image-container" style="position: relative;">
-                    <img src="../../images/og-docs.png" alt="Landscape" class="vd-card-image" style="width: 100%; height: 160px; object-fit: cover; border-radius: var(--card-border-radius) var(--card-border-radius) 0 0;">
+                    <img src="../../images/og-docs.png" alt="Landscape" class="vd-card-image" style="width: 100%; height: 160px; object-fit: cover; border-radius: var(--vd-card-border-radius) var(--vd-card-border-radius) 0 0;">
                     <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 1rem; background: linear-gradient(transparent, rgba(0,0,0,0.7)); color: white;">
                         <h5 class="vd-mb-0">Landscape</h5>
                     </div>
