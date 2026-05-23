@@ -167,7 +167,10 @@ let registry = { pages: [], tabs: {} };
 const loadedSections = new Set();
 const loadingSections = new Set();
 let scrollSpyObserver = null;
-let docLazyLoader = null;
+let docTopBoundaryObserver = null;
+let docBottomBoundaryObserver = null;
+let docTopBoundaryEl = null;
+let docBottomBoundaryEl = null;
 let currentView = null;
 let currentTab = null;
 let scrollSpyTicking = false;
@@ -179,9 +182,18 @@ let docScrollLoaderTargetId = null;
 let docScrollLoaderFallbackTimer = null;
 let requestedDocScrollLoaderSectionId = null;
 let currentNavigationController = null;
-const SECTION_PRELOAD_CONCURRENCY = 6;
 const sectionPrefetching = new Set();
-let docsWarmupTimer = null;
+let docTopBoundaryArmed = false;
+let docBottomBoundaryArmed = false;
+let docBoundaryPrevLoading = false;
+let docBoundaryNextLoading = false;
+let docLastKnownScrollY = window.scrollY || window.pageYOffset || 0;
+let docContentEpoch = 0;
+const DOC_TOP_BOUNDARY_SENTINEL_ID = 'docs-scroll-top-sentinel';
+const DOC_BOTTOM_BOUNDARY_SENTINEL_ID = 'infinite-scroll-sentinel';
+const DOC_BOUNDARY_ROOT_MARGIN = '400px 0px 400px 0px';
+const DOC_NEIGHBOR_PREFETCH_RADIUS = 1;
+const DOC_RUNWAY_BOTTOM_THRESHOLD = 48;
 
 if (window.history && 'scrollRestoration' in window.history) {
     var initialHash = (window.location.hash || '').replace(/^#\/?/, '');
@@ -853,34 +865,227 @@ async function loadPage(pageId, options = {}) {
 }
 
 /* ── Section loading (docs) ───────────────────── */
-async function preloadSectionsBefore(tabKey, targetSectionId, options = {}) {
-    var signal = options.signal;
-    var orderedIds = getOrderedIds(tabKey);
-    var targetIndex = orderedIds.indexOf(targetSectionId);
-    if (targetIndex <= 0) return;
+function getCurrentDocOrderedIds() {
+    return currentTab ? getOrderedIds(currentTab) : [];
+}
 
-    var pendingIds = [];
-    for (var i = 0; i < targetIndex; i++) {
-        var id = orderedIds[i];
-        if (!loadedSections.has(id) && !loadingSections.has(id)) {
-            pendingIds.push(id);
-        }
+function getLoadedDocSectionRange() {
+    var orderedIds = getCurrentDocOrderedIds();
+    var firstIndex = -1;
+    var lastIndex = -1;
+
+    for (var i = 0; i < orderedIds.length; i++) {
+        if (!document.getElementById(orderedIds[i])) continue;
+        if (firstIndex === -1) firstIndex = i;
+        lastIndex = i;
     }
 
-    if (!pendingIds.length) return;
+    if (firstIndex === -1 || lastIndex === -1) return null;
 
-    var cursor = 0;
-    var workerCount = Math.min(SECTION_PRELOAD_CONCURRENCY, pendingIds.length);
-    async function worker() {
-        while (cursor < pendingIds.length) {
-            if (signal && signal.aborted) return;
-            var id = pendingIds[cursor];
-            cursor += 1;
-            await loadSection(id, false, { signal: signal, skipInfiniteRefresh: true });
+    return {
+        orderedIds: orderedIds,
+        firstIndex: firstIndex,
+        lastIndex: lastIndex,
+        firstId: orderedIds[firstIndex],
+        lastId: orderedIds[lastIndex]
+    };
+}
+
+function getNeighborSectionId(sectionId, offset) {
+    if (!sectionId || !currentTab || !offset) return null;
+    var orderedIds = getCurrentDocOrderedIds();
+    var index = orderedIds.indexOf(sectionId);
+    if (index === -1) return null;
+    var neighborIndex = index + offset;
+    if (neighborIndex < 0 || neighborIndex >= orderedIds.length) return null;
+    return orderedIds[neighborIndex];
+}
+
+function prefetchDocNeighborsAround(sectionId, radius = DOC_NEIGHBOR_PREFETCH_RADIUS) {
+    if (!sectionId || !currentTab) return;
+    for (var step = 1; step <= radius; step++) {
+        var prevId = getNeighborSectionId(sectionId, -step);
+        var nextId = getNeighborSectionId(sectionId, step);
+        if (prevId) prefetchSection(prevId);
+        if (nextId) prefetchSection(nextId);
+    }
+}
+
+function removeDocBoundarySentinel(sentinelEl) {
+    if (sentinelEl && sentinelEl.parentNode) {
+        sentinelEl.parentNode.removeChild(sentinelEl);
+    }
+}
+
+function disconnectDocBoundaryObservers() {
+    if (docTopBoundaryObserver) {
+        docTopBoundaryObserver.disconnect();
+    }
+    if (docBottomBoundaryObserver) {
+        docBottomBoundaryObserver.disconnect();
+    }
+}
+
+function disarmDocBoundaries() {
+    docTopBoundaryArmed = false;
+    docBottomBoundaryArmed = false;
+    disconnectDocBoundaryObservers();
+}
+
+function resetDocsSectionRenderState(options = {}) {
+    var container = document.getElementById('dynamic-content');
+
+    docContentEpoch += 1;
+    disarmDocBoundaries();
+    removeDocBoundarySentinel(docTopBoundaryEl);
+    removeDocBoundarySentinel(docBottomBoundaryEl);
+    docTopBoundaryEl = null;
+    docBottomBoundaryEl = null;
+    docBoundaryPrevLoading = false;
+    docBoundaryNextLoading = false;
+    docLastKnownScrollY = window.scrollY || window.pageYOffset || 0;
+
+    if (scrollSpyObserver) {
+        scrollSpyObserver.disconnect();
+        scrollSpyObserver = null;
+    }
+    activeDocSectionId = null;
+    scrollSpyTicking = false;
+    loadedSections.clear();
+    loadingSections.clear();
+
+    if (!container) return;
+
+    if (options.destroyScope !== false) {
+        destroyVanduoScope(container);
+    }
+    container.innerHTML = '';
+}
+
+function isDocContentStale(loadEpoch) {
+    return loadEpoch !== docContentEpoch;
+}
+
+function createDocBoundarySentinel(id) {
+    var sentinel = document.getElementById(id);
+    if (!sentinel) {
+        sentinel = document.createElement('div');
+        sentinel.id = id;
+        sentinel.style.height = '1px';
+        sentinel.style.width = '100%';
+        sentinel.setAttribute('aria-hidden', 'true');
+    }
+    return sentinel;
+}
+
+function ensureDocBoundarySentinels() {
+    docTopBoundaryEl = createDocBoundarySentinel(DOC_TOP_BOUNDARY_SENTINEL_ID);
+    docBottomBoundaryEl = createDocBoundarySentinel(DOC_BOTTOM_BOUNDARY_SENTINEL_ID);
+}
+
+function ensureDocBoundaryObserver(direction) {
+    if (direction === 'top') {
+        if (!docTopBoundaryObserver) {
+            docTopBoundaryObserver = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (!entry.isIntersecting || !docTopBoundaryArmed || docBoundaryPrevLoading) return;
+                    docTopBoundaryArmed = false;
+                    disconnectDocBoundaryObservers();
+                    loadPreviousSection();
+                });
+            }, { rootMargin: DOC_BOUNDARY_ROOT_MARGIN, threshold: 0 });
         }
+        return docTopBoundaryObserver;
     }
 
-    await Promise.all(Array.from({ length: workerCount }, worker));
+    if (!docBottomBoundaryObserver) {
+        docBottomBoundaryObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (!entry.isIntersecting || !docBottomBoundaryArmed || docBoundaryNextLoading) return;
+                docBottomBoundaryArmed = false;
+                disconnectDocBoundaryObservers();
+                loadNextSection();
+            });
+        }, { rootMargin: DOC_BOUNDARY_ROOT_MARGIN, threshold: 0 });
+    }
+    return docBottomBoundaryObserver;
+}
+
+function syncDocBoundarySentinels() {
+    var container = document.getElementById('dynamic-content');
+    var range = getLoadedDocSectionRange();
+
+    if (!container || !range) {
+        removeDocBoundarySentinel(docTopBoundaryEl);
+        removeDocBoundarySentinel(docBottomBoundaryEl);
+        return;
+    }
+
+    ensureDocBoundarySentinels();
+
+    var firstSection = document.getElementById(range.firstId);
+    var lastSection = document.getElementById(range.lastId);
+    var topCandidateId = range.firstIndex > 0 ? range.orderedIds[range.firstIndex - 1] : null;
+    var bottomCandidateId = range.lastIndex < range.orderedIds.length - 1 ? range.orderedIds[range.lastIndex + 1] : null;
+
+    if (topCandidateId && firstSection) {
+        container.insertBefore(docTopBoundaryEl, firstSection);
+    } else {
+        docTopBoundaryArmed = false;
+        removeDocBoundarySentinel(docTopBoundaryEl);
+    }
+
+    if (bottomCandidateId && lastSection) {
+        container.insertBefore(docBottomBoundaryEl, lastSection.nextSibling);
+    } else {
+        docBottomBoundaryArmed = false;
+        removeDocBoundarySentinel(docBottomBoundaryEl);
+    }
+}
+
+function observeArmedDocBoundaries() {
+    disconnectDocBoundaryObservers();
+    syncDocBoundarySentinels();
+
+    if (docTopBoundaryArmed && docTopBoundaryEl && docTopBoundaryEl.isConnected) {
+        ensureDocBoundaryObserver('top').observe(docTopBoundaryEl);
+    }
+
+    if (docBottomBoundaryArmed && docBottomBoundaryEl && docBottomBoundaryEl.isConnected) {
+        ensureDocBoundaryObserver('bottom').observe(docBottomBoundaryEl);
+    }
+}
+
+function armDocBoundary(direction) {
+    var range = getLoadedDocSectionRange();
+    if (!range) return;
+
+    if (direction === 'up') {
+        if (range.firstIndex <= 0 || docBoundaryPrevLoading) return;
+        docTopBoundaryArmed = true;
+        docBottomBoundaryArmed = false;
+    } else if (direction === 'down') {
+        if (range.lastIndex >= range.orderedIds.length - 1 || docBoundaryNextLoading) return;
+        docBottomBoundaryArmed = true;
+        docTopBoundaryArmed = false;
+    } else {
+        return;
+    }
+
+    observeArmedDocBoundaries();
+}
+
+function handleDocBoundaryScroll() {
+    var nextScrollY = window.scrollY || window.pageYOffset || 0;
+
+    if (nextScrollY < docLastKnownScrollY - 1) {
+        armDocBoundary('up');
+    } else if (nextScrollY > docLastKnownScrollY + 1) {
+        armDocBoundary('down');
+    }
+
+    docLastKnownScrollY = nextScrollY;
+    requestActiveDocSectionUpdate();
 }
 
 function waitForLoadingSection(sectionId, signal, timeoutMs = 5000) {
@@ -911,6 +1116,8 @@ function waitForLoadingSection(sectionId, signal, timeoutMs = 5000) {
 async function loadSection(sectionId, autoScroll = true, options = {}) {
     var signal = options.signal;
     var skipInfiniteRefresh = options.skipInfiniteRefresh === true;
+    var skipRunway = options.skipRunway === true;
+    var loadEpoch = docContentEpoch;
     if (signal && signal.aborted) return;
 
     if (autoScroll && requestedDocScrollLoaderSectionId === sectionId) {
@@ -939,6 +1146,8 @@ async function loadSection(sectionId, autoScroll = true, options = {}) {
                 window.history.replaceState(null, '', '#docs/' + sectionId);
             }
             activeDocSectionId = sectionId;
+            disarmDocBoundaries();
+            prefetchDocNeighborsAround(sectionId);
         }
         return;
     }
@@ -948,25 +1157,9 @@ async function loadSection(sectionId, autoScroll = true, options = {}) {
         return;
     }
 
-    if (autoScroll) {
-        await preloadSectionsBefore(meta.tab, sectionId, { signal: signal });
-        if (signal && signal.aborted) return;
-        if (loadedSections.has(sectionId)) {
-            var existingSection = document.getElementById(sectionId);
-            // 'instant' bypasses the global `html { scroll-behavior: smooth }`;
-            // deep-link targets may be far from current scroll, and a smooth
-            // scroll gets cancelled/mis-targeted by concurrent layout shifts
-            // from in-flight Vanduo.init on preloaded siblings.
-            if (existingSection) existingSection.scrollIntoView({ behavior: 'instant', block: 'start' });
-            settleDocScrollLoader(sectionId);
-            setActiveNavLink(sectionId);
-            setDocumentTitle(meta.section.title);
-            if (window.history && window.history.replaceState) {
-                window.history.replaceState(null, '', '#docs/' + sectionId);
-            }
-            activeDocSectionId = sectionId;
-            return;
-        }
+    if (autoScroll && currentTab === meta.tab && loadedSections.size > 0) {
+        resetDocsSectionRenderState();
+        loadEpoch = docContentEpoch;
     }
 
     if (loadingSections.has(sectionId)) {
@@ -983,6 +1176,8 @@ async function loadSection(sectionId, autoScroll = true, options = {}) {
                     window.history.replaceState(null, '', '#docs/' + sectionId);
                 }
                 activeDocSectionId = sectionId;
+                disarmDocBoundaries();
+                prefetchDocNeighborsAround(sectionId);
             }
         }
         return;
@@ -990,6 +1185,10 @@ async function loadSection(sectionId, autoScroll = true, options = {}) {
     loadingSections.add(sectionId);
 
     var container = document.getElementById('dynamic-content');
+    if (!container) {
+        loadingSections.delete(sectionId);
+        return;
+    }
     var orderedIds = getOrderedIds(meta.tab);
 
     var placeholder = document.createElement('div');
@@ -1021,16 +1220,34 @@ async function loadSection(sectionId, autoScroll = true, options = {}) {
             html = await res.text();
             setCachedSectionHtml(sectionId, html);
         }
+        if (signal && signal.aborted) {
+            placeholder.remove();
+            return;
+        }
+        if (isDocContentStale(loadEpoch)) {
+            placeholder.remove();
+            return;
+        }
         var wrap = document.createElement('div');
         safeInjectHtml(wrap, html);
         var sectionEl = wrap.querySelector('#' + sectionId) || wrap.firstElementChild;
         if (sectionEl) {
+            if (isDocContentStale(loadEpoch)) {
+                placeholder.remove();
+                return;
+            }
             if (document.startViewTransition && autoScroll) {
                 await document.startViewTransition(function () {
                     container.replaceChild(sectionEl, placeholder);
                 }).finished;
             } else {
                 container.replaceChild(sectionEl, placeholder);
+            }
+            if (isDocContentStale(loadEpoch)) {
+                if (sectionEl.parentNode === container) {
+                    container.removeChild(sectionEl);
+                }
+                return;
             }
             loadedSections.add(sectionId);
             initVanduoScope(sectionEl);
@@ -1062,6 +1279,11 @@ async function loadSection(sectionId, autoScroll = true, options = {}) {
                 window.history.replaceState(null, '', '#docs/' + sectionId);
             }
             activeDocSectionId = sectionId;
+            disarmDocBoundaries();
+            prefetchDocNeighborsAround(sectionId);
+            if (!skipRunway) {
+                await ensureDocsScrollRunway(sectionId, { signal: signal });
+            }
         }
     } catch (err) {
         if (err && err.name === 'AbortError') {
@@ -1088,21 +1310,7 @@ async function switchTab(tabKey, options = {}) {
     setActiveDocMode(tabKey);
     syncDocsTabState(tabKey);
 
-    var container = document.getElementById('dynamic-content');
-    destroyVanduoScope(container);
-    container.innerHTML = '';
-    loadedSections.clear();
-    loadingSections.clear();
-    if (docLazyLoader) {
-        docLazyLoader.disconnect();
-    }
-    if (scrollSpyObserver) {
-        scrollSpyObserver.disconnect();
-        scrollSpyObserver = null;
-    }
-    scrollSpyTicking = false;
-    activeDocSectionId = null;
-
+    resetDocsSectionRenderState();
     buildSidebar(tabKey);
     closeMobileToc();
 
@@ -1112,8 +1320,6 @@ async function switchTab(tabKey, options = {}) {
     if (targetId) {
         await loadSection(targetId, true, { signal: signal });
     }
-    if (signal && signal.aborted) return;
-    scheduleDocsWarmup(tabKey);
 }
 
 /* ── Scroll-spy ───────────────────────────────── */
@@ -1137,6 +1343,7 @@ function syncActiveDocSection(sectionId) {
             }
         }
     }
+    prefetchDocNeighborsAround(sectionId);
 }
 
 function getActiveDocSectionId() {
@@ -1213,64 +1420,98 @@ function setupScrollSpy() {
 }
 
 function setupInfiniteScroll() {
-    var container = document.getElementById('dynamic-content');
-    if (!container) return;
-
-    if (!window.VanduoLazyLoader) return; // Safety check if module not loaded
-
-    if (!docLazyLoader) {
-        docLazyLoader = new window.VanduoLazyLoader({
-            container: container,
-            onLoadNext: loadNextSection,
-            rootMargin: '400px'
-        });
-    }
-
-    // Always re-init when needed to append sentinel to the bottom again
-    docLazyLoader.init();
+    syncDocBoundarySentinels();
+    observeArmedDocBoundaries();
 }
 
-function loadNextSection() {
-    if (!currentTab) return;
-    var orderedIds = getOrderedIds(currentTab);
+function getFirstLoadedSectionElement() {
+    var range = getLoadedDocSectionRange();
+    return range ? document.getElementById(range.firstId) : null;
+}
 
-    // Find the highest index among currently loaded or loading sections
-    var maxIndex = -1;
-    for (var id of orderedIds) {
-        if (loadedSections.has(id) || loadingSections.has(id)) {
-            var idx = orderedIds.indexOf(id);
-            if (idx > maxIndex) {
-                maxIndex = idx;
+function getLastLoadedSectionElement() {
+    var range = getLoadedDocSectionRange();
+    return range ? document.getElementById(range.lastId) : null;
+}
+
+async function ensureDocsScrollRunway(sectionId, options = {}) {
+    if (options.signal && options.signal.aborted) return;
+    var range = getLoadedDocSectionRange();
+    if (!range || range.lastId !== sectionId) return;
+
+    var lastSection = getLastLoadedSectionElement();
+    if (!lastSection) return;
+
+    if (lastSection.getBoundingClientRect().bottom > window.innerHeight - DOC_RUNWAY_BOTTOM_THRESHOLD) {
+        return;
+    }
+
+    await loadNextSection({ skipInfiniteRefresh: true });
+    if (options.signal && options.signal.aborted) return;
+    setupInfiniteScroll();
+}
+
+async function loadPreviousSection(options = {}) {
+    if (!currentTab || docBoundaryPrevLoading) return false;
+
+    var range = getLoadedDocSectionRange();
+    if (!range || range.firstIndex <= 0) return false;
+
+    var previousSectionId = range.orderedIds[range.firstIndex - 1];
+    var anchorEl = getFirstLoadedSectionElement();
+    var anchorTop = anchorEl ? anchorEl.getBoundingClientRect().top : null;
+
+    docBoundaryPrevLoading = true;
+    try {
+        await loadSection(previousSectionId, false, {
+            skipInfiniteRefresh: true,
+            skipRunway: true
+        });
+
+        if (anchorEl && anchorEl.isConnected && anchorTop != null) {
+            var nextTop = anchorEl.getBoundingClientRect().top;
+            var delta = nextTop - anchorTop;
+            if (Math.abs(delta) > 1) {
+                window.scrollTo({
+                    top: (window.scrollY || window.pageYOffset || 0) + delta,
+                    behavior: 'instant'
+                });
             }
         }
-    }
 
-    var nextIndex = maxIndex + 1;
-    if (nextIndex < orderedIds.length) {
-        loadSection(orderedIds[nextIndex], false, { skipInfiniteRefresh: true }) // autoScroll = false
-            .finally(function () {
-                setupInfiniteScroll();
-            });
+        requestActiveDocSectionUpdate();
+        prefetchDocNeighborsAround(activeDocSectionId || previousSectionId);
+        return true;
+    } finally {
+        docBoundaryPrevLoading = false;
+        if (!options.skipInfiniteRefresh) {
+            setupInfiniteScroll();
+        }
     }
 }
 
-function scheduleDocsWarmup(tabKey) {
-    if (!tabKey) return;
-    if (docsWarmupTimer) {
-        clearTimeout(docsWarmupTimer);
-        docsWarmupTimer = null;
-    }
+async function loadNextSection(options = {}) {
+    if (!currentTab || docBoundaryNextLoading) return false;
 
-    var runWarmup = function () {
-        getOrderedIds(tabKey).forEach(function (id) {
-            prefetchSection(id);
+    var range = getLoadedDocSectionRange();
+    if (!range || range.lastIndex >= range.orderedIds.length - 1) return false;
+
+    var nextSectionId = range.orderedIds[range.lastIndex + 1];
+
+    docBoundaryNextLoading = true;
+    try {
+        await loadSection(nextSectionId, false, {
+            skipInfiniteRefresh: true,
+            skipRunway: true
         });
-    };
-
-    if (typeof window.requestIdleCallback === 'function') {
-        window.requestIdleCallback(runWarmup, { timeout: 1500 });
-    } else {
-        docsWarmupTimer = setTimeout(runWarmup, 500);
+        requestActiveDocSectionUpdate();
+        prefetchDocNeighborsAround(activeDocSectionId || nextSectionId);
+        return true;
+    } finally {
+        docBoundaryNextLoading = false;
+        if (!options.skipInfiniteRefresh) {
+            setupInfiniteScroll();
+        }
     }
 }
 
@@ -1568,15 +1809,8 @@ async function handleRoute() {
             signal: signal,
             initialSectionId: parsed.section || undefined
         });
-        if (signal.aborted) return;
-        if (parsed.section) {
-            scheduleDocsWarmup(parsed.tab);
-        }
     } else if (parsed.section) {
         await loadSection(parsed.section, true, { signal: signal });
-        if (!signal.aborted) {
-            scheduleDocsWarmup(parsed.tab);
-        }
     }
 }
 
@@ -1929,16 +2163,6 @@ if (dynamicNavList) {
         if (sidebarFilterInput) { sidebarFilterInput.value = ''; filterSidebarNav(''); }
         navigate('docs/' + id);
     });
-    dynamicNavList.addEventListener('pointerenter', function (e) {
-        var link = e.target.closest('.doc-nav-link[data-section]');
-        if (!link) return;
-        prefetchSection(link.getAttribute('data-section'));
-    }, true);
-    dynamicNavList.addEventListener('touchstart', function (e) {
-        var link = e.target.closest('.doc-nav-link[data-section]');
-        if (!link) return;
-        prefetchSection(link.getAttribute('data-section'));
-    }, { passive: true });
 }
 
 /* ── Sidebar filter events ────────────────────── */
@@ -2209,7 +2433,7 @@ window.addEventListener('hashchange', function () {
     primeDocNavigationForHash(window.location.hash);
     handleRoute();
 });
-window.addEventListener('scroll', requestActiveDocSectionUpdate, { passive: true });
+window.addEventListener('scroll', handleDocBoundaryScroll, { passive: true });
 window.addEventListener('resize', requestActiveDocSectionUpdate);
 
 /* ── Global Search ────────────────────────────── */
@@ -2499,18 +2723,6 @@ function initGlobalSearch() {
             selectGlobalSearchResult(idx);
         }
     });
-    document.getElementById('global-search-results').addEventListener('pointerover', function (e) {
-        var item = e.target.closest('.global-search-result[data-route]');
-        if (!item) return;
-        var sectionId = parseSectionIdFromRoute(item.dataset.route);
-        if (sectionId) prefetchSection(sectionId);
-    });
-    document.getElementById('global-search-results').addEventListener('touchstart', function (e) {
-        var item = e.target.closest('.global-search-result[data-route]');
-        if (!item) return;
-        var sectionId = parseSectionIdFromRoute(item.dataset.route);
-        if (sectionId) prefetchSection(sectionId);
-    }, { passive: true });
 
     // Cmd/Ctrl+K global shortcut
     document.addEventListener('keydown', function (e) {
@@ -2708,18 +2920,6 @@ function initGlobalSearch() {
             closeHeroDropdown();
         }
     });
-    document.addEventListener('pointerover', function (e) {
-        var item = e.target.closest('.hero-search-dropdown .global-search-result[data-route]');
-        if (!item) return;
-        var sectionId = parseSectionIdFromRoute(item.getAttribute('data-route'));
-        if (sectionId) prefetchSection(sectionId);
-    });
-    document.addEventListener('touchstart', function (e) {
-        var item = e.target.closest('.hero-search-dropdown .global-search-result[data-route]');
-        if (!item) return;
-        var sectionId = parseSectionIdFromRoute(item.getAttribute('data-route'));
-        if (sectionId) prefetchSection(sectionId);
-    }, { passive: true });
 }
 
 /* ── Dark Mode Toggle Icon Sync ───────────────── */

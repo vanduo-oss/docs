@@ -399,7 +399,7 @@
             }
 
             function loadAppScripts() {
-                var docsScriptVersion = '?v=' + (assetState.expectedVersion || 'dev') + '-docs-8';
+                var docsScriptVersion = '?v=' + (assetState.expectedVersion || 'dev') + '-docs-9';
                 return loadScript('js/lazy-loader.js' + docsScriptVersion)
                     .then(function () {
                         return loadScript('js/section-cache.js' + docsScriptVersion);

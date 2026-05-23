@@ -1,4 +1,4 @@
-import { test, expect, type Page } from '@playwright/test';
+import { test, expect, type Page, type Request } from '@playwright/test';
 
 async function waitForSPA(page: Page) {
     await page.waitForFunction(() => {
@@ -22,6 +22,54 @@ async function waitForVisibleSection(page: Page, selector: string) {
             && rect.width > 0
             && rect.height > 0;
     }, selector, { timeout: 10000 });
+}
+
+function trackSectionHtmlRequests(page: Page) {
+    const requests: string[] = [];
+    const handler = (request: Request) => {
+        const url = request.url();
+        if (url.includes('/sections/') && /\.html\?v=/.test(url)) {
+            requests.push(url.replace(/^.*\/sections\//, 'sections/'));
+        }
+    };
+
+    page.on('request', handler);
+
+    return {
+        clear() {
+            requests.length = 0;
+        },
+        snapshot() {
+            return [...new Set(requests)];
+        },
+        dispose() {
+            page.off('request', handler);
+        }
+    };
+}
+
+async function waitForSectionHtmlNetworkIdle(page: Page, tracker: ReturnType<typeof trackSectionHtmlRequests>, idleMs = 1200, timeoutMs = 15000) {
+    const startedAt = Date.now();
+    let previousCount = tracker.snapshot().length;
+    let lastChangeAt = Date.now();
+
+    while (Date.now() - startedAt < timeoutMs) {
+        await page.waitForTimeout(150);
+        const nextCount = tracker.snapshot().length;
+        if (nextCount !== previousCount) {
+            previousCount = nextCount;
+            lastChangeAt = Date.now();
+        }
+        if (Date.now() - lastChangeAt >= idleMs) {
+            return;
+        }
+    }
+}
+
+async function getRenderedDocSectionIds(page: Page) {
+    return await page.locator('#dynamic-content > section[id]').evaluateAll((elements) => {
+        return elements.map((element) => (element as HTMLElement).id);
+    });
 }
 
 async function getCurrentTheme(page: Page) {
@@ -200,6 +248,138 @@ test.describe('4. Documentation View', () => {
             await expect(content).toBeVisible();
             // Wait for at least one piece of actual content inside dynamic-content
             await expect(content.locator('h1, h2, h3, h4').first()).toBeVisible();
+        });
+
+        test('Initial docs load only fetches the visible target plus a small runway', async ({ page }) => {
+            const tracker = trackSectionHtmlRequests(page);
+
+            try {
+                await page.goto('/#docs/components');
+                await waitForSPA(page);
+                await waitForVisibleSection(page, '#icons');
+                await waitForSectionHtmlNetworkIdle(page, tracker);
+
+                const sectionRequests = tracker.snapshot();
+                const renderedSections = await getRenderedDocSectionIds(page);
+
+                expect(sectionRequests.length).toBeLessThanOrEqual(2);
+                expect(renderedSections[0]).toBe('icons');
+                expect(renderedSections.length).toBeLessThanOrEqual(2);
+            } finally {
+                tracker.dispose();
+            }
+        });
+
+        test('Sidebar jump to buttons is target-first and avoids materializing the full prefix', async ({ page, isMobile }) => {
+            test.skip(!!isMobile, 'Network budget check uses the desktop-visible sidebar.');
+            const tracker = trackSectionHtmlRequests(page);
+
+            try {
+                await page.goto('/#docs/components');
+                await waitForSPA(page);
+                await waitForVisibleSection(page, '#icons');
+                await waitForSectionHtmlNetworkIdle(page, tracker);
+
+                tracker.clear();
+                await page.locator('.doc-nav-link[data-section="buttons"]').click();
+                await waitForVisibleSection(page, '#buttons');
+                await waitForSectionHtmlNetworkIdle(page, tracker);
+
+                const sectionRequests = tracker.snapshot();
+                const renderedSections = await getRenderedDocSectionIds(page);
+
+                expect(sectionRequests.length).toBeLessThanOrEqual(4);
+                expect(renderedSections[0]).toBe('buttons');
+                expect(renderedSections.length).toBeLessThanOrEqual(2);
+                expect(renderedSections).not.toContain('icons');
+                expect(renderedSections).not.toContain('color-palette');
+                await expect(page).toHaveURL(/.*#docs\/buttons/);
+            } finally {
+                tracker.dispose();
+            }
+        });
+
+        test('Far sidebar jump to music-player stays within the reduced request budget', async ({ page, isMobile }) => {
+            test.skip(!!isMobile, 'Network budget check uses the desktop-visible sidebar.');
+            const tracker = trackSectionHtmlRequests(page);
+
+            try {
+                await page.goto('/#docs/components');
+                await waitForSPA(page);
+                await waitForVisibleSection(page, '#icons');
+                await waitForSectionHtmlNetworkIdle(page, tracker);
+
+                tracker.clear();
+                await page.locator('.doc-nav-link[data-section="buttons"]').click();
+                await waitForVisibleSection(page, '#buttons');
+                await waitForSectionHtmlNetworkIdle(page, tracker);
+
+                tracker.clear();
+                await page.locator('.doc-nav-link[data-section="music-player"]').click();
+                await waitForVisibleSection(page, '#music-player');
+                await waitForSectionHtmlNetworkIdle(page, tracker);
+
+                const sectionRequests = tracker.snapshot();
+                const renderedSections = await getRenderedDocSectionIds(page);
+
+                expect(sectionRequests.length).toBeLessThanOrEqual(4);
+                expect(renderedSections[0]).toBe('music-player');
+                expect(renderedSections.length).toBeLessThanOrEqual(2);
+                expect(renderedSections).not.toContain('buttons');
+                await expect(page).toHaveURL(/.*#docs\/music-player/);
+            } finally {
+                tracker.dispose();
+            }
+        });
+
+        test('Upward scroll backfills previous sections one at a time without yanking the viewport', async ({ page, isMobile }) => {
+            test.skip(!!isMobile, 'Sequential prepend behavior is validated on desktop layout.');
+
+            await page.goto('/#docs/music-player');
+            await waitForSPA(page);
+            await waitForVisibleSection(page, '#music-player');
+            await page.waitForTimeout(1200);
+
+            let renderedSections = await getRenderedDocSectionIds(page);
+            expect(renderedSections[0]).toBe('music-player');
+            expect(renderedSections).not.toContain('image-box');
+            expect(renderedSections).not.toContain('footer');
+
+            const topAfterScroll = await page.evaluate(() => {
+                const target = document.getElementById('music-player');
+                if (!target) return null;
+                window.scrollBy(0, -180);
+                return target.getBoundingClientRect().top;
+            });
+            expect(topAfterScroll).not.toBeNull();
+
+            await page.waitForFunction(() => !!document.getElementById('image-box'), { timeout: 10000 });
+            const topAfterFirstPrepend = await page.evaluate(() => {
+                const target = document.getElementById('music-player');
+                return target ? target.getBoundingClientRect().top : null;
+            });
+            expect(topAfterFirstPrepend).not.toBeNull();
+            expect(Math.abs((topAfterFirstPrepend ?? 0) - (topAfterScroll ?? 0))).toBeLessThanOrEqual(32);
+
+            renderedSections = await getRenderedDocSectionIds(page);
+            expect(renderedSections).toEqual(expect.arrayContaining(['image-box', 'music-player']));
+            expect(renderedSections).not.toContain('footer');
+
+            await page.waitForTimeout(500);
+            await expect(page.locator('#footer')).toHaveCount(0);
+
+            await page.evaluate(async () => {
+                for (let step = 0; step < 6 && !document.getElementById('footer'); step++) {
+                    window.scrollBy(0, -600);
+                    await new Promise((resolve) => window.setTimeout(resolve, 250));
+                }
+            });
+            await page.waitForFunction(() => !!document.getElementById('footer'), { timeout: 10000 });
+
+            renderedSections = await getRenderedDocSectionIds(page);
+            expect(renderedSections).toEqual(expect.arrayContaining(['footer', 'image-box', 'music-player']));
+            expect(renderedSections.indexOf('footer')).toBeLessThan(renderedSections.indexOf('image-box'));
+            expect(renderedSections.indexOf('image-box')).toBeLessThan(renderedSections.indexOf('music-player'));
         });
 
         test('Scrollspy highlights the active section in the sidebar as user scrolls', async ({ page, isMobile }) => {
