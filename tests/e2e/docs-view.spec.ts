@@ -72,6 +72,48 @@ async function getRenderedDocSectionIds(page: Page) {
     });
 }
 
+async function waitForDocsSectionAnchored(page: Page, sectionId: string) {
+    await page.waitForFunction((id) => {
+        const target = document.getElementById(id);
+        if (!target) return false;
+        const top = target.getBoundingClientRect().top;
+        return top <= 120 && top >= -8;
+    }, sectionId, { timeout: 12000 });
+    // Explicit sidebar navigation keeps boundary observers paused for ~900ms.
+    await page.waitForTimeout(1100);
+}
+
+async function triggerDocsNeighborBackfill(page: Page, neighborSectionId: string) {
+    if (await page.locator(`#${neighborSectionId}`).count() > 0) {
+        await page.waitForTimeout(300);
+        return;
+    }
+
+    const initialCount = await page.locator('#dynamic-content > section[id]').count();
+    const sentinel = page.locator('#infinite-scroll-sentinel');
+    await expect(sentinel).toBeAttached();
+
+    for (let attempt = 0; attempt < 5; attempt++) {
+        if (await page.locator(`#${neighborSectionId}`).count() > 0) {
+            break;
+        }
+        await page.evaluate(() => window.scrollBy(0, 250));
+        await sentinel.scrollIntoViewIfNeeded();
+        await page.waitForTimeout(250);
+    }
+
+    await page.waitForFunction(({ id, count }) => {
+        return !!document.getElementById(id)
+            || document.querySelectorAll('#dynamic-content > section[id]').length > count;
+    }, { id: neighborSectionId, count: initialCount }, { timeout: 15000 });
+    await page.waitForFunction((id) => !!document.getElementById(id), neighborSectionId, { timeout: 5000 });
+    await page.waitForTimeout(300);
+}
+
+async function expectSidebarSectionActive(page: Page, sectionId: string) {
+    await expect(page.locator(`.doc-nav-link[data-section="${sectionId}"]`)).toHaveClass(/active/, { timeout: 12000 });
+}
+
 async function getCurrentTheme(page: Page) {
     return await page.evaluate(() => document.documentElement.getAttribute('data-theme'));
 }
@@ -338,6 +380,78 @@ test.describe('4. Documentation View', () => {
             }
         });
 
+        test('Fast scroll during initial section load does not leave skeleton placeholders', async ({ page, isMobile }) => {
+            test.skip(!!isMobile, 'Fast-scroll regression validated on desktop layout.');
+            test.setTimeout(60000);
+
+            await page.goto('/#docs/icons');
+            await waitForSPA(page);
+            await waitForVisibleSection(page, '#icons');
+
+            await page.evaluate(() => {
+                for (let step = 0; step < 8; step++) {
+                    window.scrollBy(0, 600);
+                }
+            });
+
+            await page.waitForFunction(() => {
+                return document.querySelectorAll('#dynamic-content > div[id^="dynamic-placeholder-"]').length === 0;
+            }, { timeout: 15000 });
+
+            const placeholders = await page.locator('#dynamic-content > div[id^="dynamic-placeholder-"]').count();
+            expect(placeholders).toBe(0);
+
+            const renderedSections = await getRenderedDocSectionIds(page);
+            expect(renderedSections.length).toBeGreaterThan(0);
+            expect(renderedSections).toContain('icons');
+        });
+
+        test('Scroll then forward sidebar jump lands on the clicked section', async ({ page, isMobile }) => {
+            test.skip(!!isMobile, 'Desktop sidebar regression for post-scroll navigation.');
+            test.setTimeout(60000);
+
+            await page.goto('/#docs/components');
+            await waitForSPA(page);
+            await page.locator('.doc-nav-link[data-section="buttons"]').click();
+            await waitForVisibleSection(page, '#buttons');
+            await waitForDocsSectionAnchored(page, 'buttons');
+
+            await triggerDocsNeighborBackfill(page, 'button-groups');
+
+            await page.locator('.doc-nav-link[data-section="modals"]').click();
+            await waitForVisibleSection(page, '#modals');
+            await waitForDocsSectionAnchored(page, 'modals');
+            await expect(page).toHaveURL(/.*#docs\/modals/);
+            await expectSidebarSectionActive(page, 'modals');
+
+            const renderedSections = await getRenderedDocSectionIds(page);
+            expect(renderedSections[0]).toBe('modals');
+        });
+
+        test('Scroll then sidebar click on backfilled neighbor resets target-first', async ({ page, isMobile }) => {
+            test.skip(!!isMobile, 'Desktop sidebar regression for post-scroll navigation.');
+            test.setTimeout(60000);
+
+            await page.goto('/#docs/music-player');
+            await waitForSPA(page);
+            await waitForVisibleSection(page, '#music-player');
+            await waitForDocsSectionAnchored(page, 'music-player');
+
+            await page.evaluate(() => window.scrollBy(0, -180));
+            await page.waitForFunction(() => !!document.getElementById('image-box'), { timeout: 10000 });
+            await page.evaluate(() => window.scrollBy(0, 80));
+
+            await page.locator('.doc-nav-link[data-section="image-box"]').click();
+            await waitForVisibleSection(page, '#image-box');
+            await waitForDocsSectionAnchored(page, 'image-box');
+            await expect(page).toHaveURL(/.*#docs\/image-box/);
+            await expectSidebarSectionActive(page, 'image-box');
+
+            const renderedSections = await getRenderedDocSectionIds(page);
+            expect(renderedSections[0]).toBe('image-box');
+            expect(renderedSections.length).toBeLessThanOrEqual(2);
+        });
+
         test('Upward scroll backfills previous sections one at a time without yanking the viewport', async ({ page, isMobile }) => {
             test.skip(!!isMobile, 'Sequential prepend behavior is validated on desktop layout.');
 
@@ -601,7 +715,29 @@ test.describe('4. Documentation View', () => {
             }
         });
 
-        test('Loads v1.4.1 architecture and production guides', async ({ page }) => {
+        test('Scroll then sequential sidebar clicks stay anchored on guides', async ({ page, isMobile }) => {
+            test.skip(!!isMobile, 'Desktop sidebar regression for post-scroll navigation.');
+            test.setTimeout(60000);
+
+            await page.goto('/#docs/guides');
+            await waitForSPA(page);
+            await page.locator('.doc-nav-link[data-section="getting-started"]').click();
+            await waitForVisibleSection(page, '#getting-started');
+            await waitForDocsSectionAnchored(page, 'getting-started');
+
+            await triggerDocsNeighborBackfill(page, 'getting-started-guide');
+
+            await page.locator('.doc-nav-link[data-section="framework-integration"]').click();
+            await waitForVisibleSection(page, '#framework-integration');
+            await waitForDocsSectionAnchored(page, 'framework-integration');
+            await expect(page).toHaveURL(/.*#docs\/framework-integration/);
+            await expectSidebarSectionActive(page, 'framework-integration');
+
+            const renderedSections = await getRenderedDocSectionIds(page);
+            expect(renderedSections[0]).toBe('framework-integration');
+        });
+
+        test('Loads v1.4.x architecture and production guides', async ({ page }) => {
             const guideChecks = [
                 {
                     route: '/#docs/vanduo-ecosystem',
@@ -626,7 +762,7 @@ test.describe('4. Documentation View', () => {
                 {
                     route: '/#docs/production-best-practices',
                     id: 'production-best-practices',
-                    expected: ['@v1.4.1', '--vd-*']
+                    expected: ['@v1.4.2', '--vd-*']
                 }
             ];
 

@@ -374,10 +374,13 @@
                 return Promise.reject(new Error('Loaded framework version does not match expected release.'));
             }
 
-            function loadScript(src, attributeName, attributeValue) {
+            function loadScript(src, attributeName, attributeValue, isModule) {
                 return new Promise(function (resolve, reject) {
                     var script = document.createElement('script');
                     script.src = src;
+                    if (isModule) {
+                        script.type = 'module';
+                    }
                     if (attributeName) {
                         script.setAttribute(attributeName, attributeValue || '');
                     }
@@ -411,7 +414,7 @@
                         return loadScript('js/vanduo-flowchart.iife.js' + docsScriptVersion);
                     })
                     .then(function () {
-                        return loadScript('js/app.js' + docsScriptVersion);
+                        return loadScript('js/app.js' + docsScriptVersion, null, null, true);
                     });
             }
 
