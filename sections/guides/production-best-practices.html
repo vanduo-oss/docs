@@ -1,12 +1,12 @@
 <section id="production-best-practices">
-    <h4 class="demo-title"><i class="ph ph-rocket-launch"></i>Production Best Practices <code class="vd-text-sm">Guide</code></h4>
+    <h5 class="demo-title"><i class="ph ph-rocket-launch"></i>Production Best Practices <code class="vd-text-sm">Guide</code></h5>
     <p class="vd-mb-6">This is the short path to a reliable Vanduo production app: pin versions, initialize the DOM you own, prefer canonical tokens, and keep form and HTML boundaries explicit.</p>
 
     <div class="vd-row vd-mb-6">
         <div class="vd-col-12 vd-col-md-6">
             <div class="vd-card demo-card">
                 <div class="vd-card-header">
-                    <h4><i class="ph ph-link"></i> Pin Assets</h4>
+                    <h6><i class="ph ph-link"></i> Pin Assets</h6>
                 </div>
                 <div class="vd-card-body">
                     <div class="vd-code-snippet" data-collapsible data-expanded="true">
@@ -19,8 +19,8 @@
                                 <button class="vd-code-snippet-copy" aria-label="Copy code"><span class="vd-code-snippet-copy-icon"></span><span class="vd-code-snippet-copy-text">Copy</span></button>
                             </div>
                             <div class="vd-code-snippet-body">
-                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.4.2/dist/vanduo.min.css"&gt;
-&lt;script src="https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.4.2/dist/vanduo.min.js"&gt;&lt;/script&gt;</code></pre>
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.4.3/dist/vanduo.min.css"&gt;
+&lt;script src="https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.4.3/dist/vanduo.min.js"&gt;&lt;/script&gt;</code></pre>
                             </div>
                         </div>
                     </div>
@@ -32,7 +32,7 @@
         <div class="vd-col-12 vd-col-md-6">
             <div class="vd-card demo-card">
                 <div class="vd-card-header">
-                    <h4><i class="ph ph-crosshair"></i> Scope Runtime Work</h4>
+                    <h6><i class="ph ph-crosshair"></i> Scope Runtime Work</h6>
                 </div>
                 <div class="vd-card-body">
                     <div class="vd-code-snippet" data-collapsible data-expanded="true">
@@ -61,7 +61,7 @@ Vanduo.init(viewRoot);</code></pre>
         <div class="vd-col-12 vd-col-md-6">
             <div class="vd-card demo-card">
                 <div class="vd-card-header">
-                    <h4><i class="ph ph-swatches"></i> Theme Safely</h4>
+                    <h6><i class="ph ph-swatches"></i> Theme Safely</h6>
                 </div>
                 <div class="vd-card-body">
                     <p>Use <code>--vd-*</code> semantic tokens for new themes, and load your theme after Vanduo.</p>
@@ -90,7 +90,7 @@ Vanduo.init(viewRoot);</code></pre>
         <div class="vd-col-12 vd-col-md-6">
             <div class="vd-card demo-card">
                 <div class="vd-card-header">
-                    <h4><i class="ph ph-textbox"></i> Form Boundaries</h4>
+                    <h6><i class="ph ph-textbox"></i> Form Boundaries</h6>
                 </div>
                 <div class="vd-card-body">
                     <p>The main bundle includes native form defaults. For app embeds with an existing design system, load your app-level overrides after Vanduo or use more specific selectors for local form regions.</p>

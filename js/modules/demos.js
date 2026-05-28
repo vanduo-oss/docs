@@ -302,31 +302,35 @@ export function initMusicPlayerDemos(sectionEl) {
     var MP = window.VanduoMusicPlayer;
     if (!MP) return;
 
-    var d1 = sectionEl.querySelector('#demo-detach');
-    var d2 = sectionEl.querySelector('#demo-floating-pro');
-    var btnDetach = sectionEl.querySelector('#btn-detach-demo');
-    var btnAttach = sectionEl.querySelector('#btn-attach-demo');
-    if (btnDetach && d1) {
-        btnDetach.addEventListener('click', function () { MP.detach(d1, 'bottom-left'); });
+    var fixedPlayer = sectionEl.querySelector('#demo-detach-fixed');
+    var btnDetachBl = sectionEl.querySelector('#btn-detach-bl');
+    var btnDetachTr = sectionEl.querySelector('#btn-detach-tr');
+    var btnAttachFixed = sectionEl.querySelector('#btn-attach-fixed');
+    if (btnDetachBl && fixedPlayer) {
+        btnDetachBl.addEventListener('click', function () { MP.detach(fixedPlayer, 'bottom-left'); });
     }
-    if (btnAttach && d1) {
-        btnAttach.addEventListener('click', function () { MP.attach(d1); });
+    if (btnDetachTr && fixedPlayer) {
+        btnDetachTr.addEventListener('click', function () { MP.detach(fixedPlayer, 'top-right'); });
+    }
+    if (btnAttachFixed && fixedPlayer) {
+        btnAttachFixed.addEventListener('click', function () { MP.attach(fixedPlayer); });
     }
 
+    var dragPlayer = sectionEl.querySelector('#demo-detach-drag');
     var btnFloatPro = sectionEl.querySelector('#btn-float-pro');
     var btnFloatExpand = sectionEl.querySelector('#btn-float-expand');
     var btnFloatAttach = sectionEl.querySelector('#btn-float-attach');
-    if (btnFloatPro && d2) {
+    if (btnFloatPro && dragPlayer) {
         btnFloatPro.addEventListener('click', function () {
-            MP.detach(d2, 'bottom-right');
-            setTimeout(function () { MP.minimize(d2); }, 150);
+            MP.detach(dragPlayer, 'bottom-right');
+            setTimeout(function () { MP.minimize(dragPlayer); }, 150);
         });
     }
-    if (btnFloatExpand && d2) {
-        btnFloatExpand.addEventListener('click', function () { MP.expand(d2); });
+    if (btnFloatExpand && dragPlayer) {
+        btnFloatExpand.addEventListener('click', function () { MP.expand(dragPlayer); });
     }
-    if (btnFloatAttach && d2) {
-        btnFloatAttach.addEventListener('click', function () { MP.attach(d2); });
+    if (btnFloatAttach && dragPlayer) {
+        btnFloatAttach.addEventListener('click', function () { MP.attach(dragPlayer); });
     }
 }
 
@@ -448,7 +452,14 @@ export function updateCustomizerDemoState() {
         primary = window.ThemeCustomizer.getDefaultPrimary(tm);
     }
     if (!primary) primary = 'black';
-    var neutral = html.getAttribute('data-neutral') || 'stone';
+    var neutral = html.getAttribute('data-neutral');
+    if (!neutral && window.ThemeCustomizer && typeof window.ThemeCustomizer.getDefaultNeutral === 'function') {
+        var themeMode = (window.ThemeCustomizer.state && window.ThemeCustomizer.state.theme)
+            ? window.ThemeCustomizer.state.theme
+            : 'system';
+        neutral = window.ThemeCustomizer.getDefaultNeutral(themeMode);
+    }
+    if (!neutral) neutral = 'stone';
     var radius = html.getAttribute('data-radius') || '0.375';
 
     document.querySelectorAll('.theme-mode-btn').forEach(function (btn) {

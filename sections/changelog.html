@@ -4,8 +4,8 @@
         <div class="vd-container-responsive">
             <h2 style="color: var(--vd-color-primary);"><i class="ph ph-scroll" style="color: var(--vd-color-primary);"></i>
                 Changelog</h2>
-            <p class="vd-text-lg vd-text-muted">All notable changes to <strong>Vanduo Framework</strong> and
-                <strong>Vanduo Docs</strong> are documented here — side by side.
+            <p class="vd-text-lg vd-text-muted">Release notes for <strong>Vanduo Framework</strong> and
+                <strong>ecosystem extension packages</strong> — documented side by side. The docs site is not a separate product column; optional packages live under <strong>Ecosystem</strong>.
             </p>
         </div>
     </div>
@@ -13,6 +13,110 @@
     <!-- Main Content -->
     <div style="padding: 3rem 0;">
         <div class="vd-container-responsive" style="max-width: 1200px;">
+
+            <!-- ═══════════════════════════════════════════════ -->
+            <!-- Version 1.4.3                                   -->
+            <!-- ═══════════════════════════════════════════════ -->
+            <article class="version-card">
+                <header class="version-header">
+                    <span class="vd-badge vd-badge-primary" style="font-size: 1rem; padding: 0.5rem 1rem;">v1.4.3</span>
+                    <span style="color: var(--vd-text-secondary); font-size: 0.95rem;">
+                        <i class="ph ph-calendar mr-1"></i>May 27, 2026
+                    </span>
+                    <span class="vd-badge vd-badge-info" style="font-size: 0.75rem;">Latest</span>
+                </header>
+                <div class="version-body">
+                    <div class="vd-row">
+                        <div class="vd-col-12 vd-col-md-6">
+                            <h4><i class="ph ph-cube mr-2" style="color: var(--vd-color-primary);"></i>Framework</h4>
+                            <div class="change-group">
+                                <h5>Fixes</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-shield-check" style="color: var(--vd-color-success);"></i>
+                                        <div>
+                                            <strong>Fix: Suggest autocomplete uses DOM-safe match highlighting</strong>
+                                            <p>The Suggest component no longer assigns highlighted labels via <code>innerHTML</code>. Match spans are built with <code>textContent</code> and text nodes so remote or user-supplied labels cannot inject markup (DOM XSS).</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-code" style="color: var(--vd-color-info);"></i>
+                                        <div>
+                                            <strong>Fix: Code Snippet HTML highlighting no longer corrupts extracted markup</strong>
+                                            <p><code>highlightHtml()</code> in the core Code Snippet component now scopes attribute and string highlighting to escaped HTML tag regions only, so highlight <code>&lt;span class="code-*"&gt;</code> wrappers are not re-processed. This restores readable syntax coloring for <code>data-extract</code> panes and other auto-highlighted HTML snippets in the framework and on vanduo.dev (for example, Glass Effects “View Code” blocks that pull live demo markup).</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="change-group">
+                                <h5>Changes</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-music-notes" style="color: var(--vd-color-warning);"></i>
+                                        <div>
+                                            <strong>Music Player moved out of the core bundle</strong>
+                                            <p>The HTML5 audio player is no longer shipped inside <code>@vanduo-oss/framework</code>. That keeps the default install focused on layout, forms, theme tooling, and everyday UI — the same approach already used for Hex Grid, Charts, and Flowchart.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="change-group">
+                                <h5>Updates</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-package" style="color: var(--vd-color-info);"></i>
+                                        <div>
+                                            <strong>Update: Rebuilt release artifacts</strong>
+                                            <p>Core CSS and JavaScript bundles were regenerated without the music player module, reducing default bundle size for sites that do not need audio playback.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-scroll" style="color: var(--vd-color-info);"></i>
+                                        <div>
+                                            <strong>Update: Changelog layout</strong>
+                                            <p>Release notes on vanduo.dev now use two columns — <strong>Framework</strong> first, then <strong>Ecosystem</strong> — instead of a separate documentation product column.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="vd-col-12 vd-col-md-6">
+                            <h4><i class="ph ph-planet mr-2" style="color: var(--vd-color-primary);"></i>Ecosystem</h4>
+                            <div class="change-group">
+                                <h5>New</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-music-note" style="color: var(--vd-color-success);"></i>
+                                        <div>
+                                            <strong>New: <code>@vanduo-oss/music-player</code> (v0.0.1)</strong>
+                                            <p>Standalone HTML5 audio player with transport controls, seek bar, playlist, glass surface, and detachable floating modes. Install with <code>pnpm add @vanduo-oss/music-player</code>, load <code>vanduo-music-player.css</code> and the IIFE bundle after core Vanduo, and use <code>data-music-player</code> or <code>VanduoMusicPlayer.initPlayer()</code>. Registers as <code>musicPlayer</code> for scoped <code>Vanduo.init()</code>.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="change-group">
+                                <h5>Updates</h5>
+                                <ul class="change-list">
+                                    <li class="change-item">
+                                        <i class="ph ph-book-open-text" style="color: var(--vd-color-info);"></i>
+                                        <div>
+                                            <strong>Update: Music Player docs on vanduo.dev</strong>
+                                            <p>The <a href="#docs/music-player">Music Player</a> page now documents separate installation, a leaner demo set (playlist + progress, fixed-corner vs draggable detach, glass as a cross-cutting option), and corner positions <code>top-left</code> / <code>top-right</code> in addition to bottom corners.</p>
+                                        </div>
+                                    </li>
+                                    <li class="change-item">
+                                        <i class="ph ph-planet" style="color: var(--vd-color-info);"></i>
+                                        <div>
+                                            <strong>Update: Ecosystem guide</strong>
+                                            <p>The <a href="#docs/vanduo-ecosystem">Vanduo Ecosystem</a> guide lists <code>@vanduo-oss/music-player</code> alongside Hex Grid, Charts, and Flowchart, with typical HTML load order for the extension scripts.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
 
             <!-- ═══════════════════════════════════════════════ -->
             <!-- Version 1.4.2                                   -->
@@ -23,7 +127,6 @@
                     <span style="color: var(--vd-text-secondary); font-size: 0.95rem;">
                         <i class="ph ph-calendar mr-1"></i>May 23, 2026
                     </span>
-                    <span class="vd-badge vd-badge-info" style="font-size: 0.75rem;">Latest</span>
                 </header>
                 <div class="version-body">
                     <div class="vd-row">
@@ -69,7 +172,7 @@
                             </div>
                         </div>
                         <div class="vd-col-12 vd-col-md-6">
-                            <h4><i class="ph ph-book-open-text mr-2" style="color: var(--vd-color-primary);"></i>Documentation</h4>
+                            <h4><i class="ph ph-planet mr-2" style="color: var(--vd-color-primary);"></i>Ecosystem</h4>
                             <div class="change-group">
                                 <h5>Fixes</h5>
                                 <ul class="change-list">
@@ -174,7 +277,7 @@
                             </div>
                         </div>
                         <div class="vd-col-12 vd-col-md-6">
-                            <h4><i class="ph ph-book-open-text mr-2" style="color: var(--vd-color-primary);"></i>Documentation</h4>
+                            <h4><i class="ph ph-planet mr-2" style="color: var(--vd-color-primary);"></i>Ecosystem</h4>
                             <div class="change-group">
                                 <h5>Updates</h5>
                                 <ul class="change-list">
@@ -269,7 +372,7 @@
                             </div>
                         </div>
                         <div class="vd-col-12 vd-col-md-6">
-                            <h4><i class="ph ph-book-open-text mr-2" style="color: var(--vd-color-primary);"></i>Documentation</h4>
+                            <h4><i class="ph ph-planet mr-2" style="color: var(--vd-color-primary);"></i>Ecosystem</h4>
                             <div class="change-group">
                                 <h5>Updates</h5>
                                 <ul class="change-list">
@@ -350,7 +453,7 @@
                             </div>
                         </div>
                         <div class="vd-col-12 vd-col-md-6">
-                            <h4><i class="ph ph-book-open-text mr-2" style="color: var(--vd-color-primary);"></i>Documentation</h4>
+                            <h4><i class="ph ph-planet mr-2" style="color: var(--vd-color-primary);"></i>Ecosystem</h4>
                             <div class="change-group">
                                 <h5>Updates</h5>
                                 <ul class="change-list">
@@ -462,7 +565,7 @@
                             </div>
                         </div>
                         <div class="vd-col-12 vd-col-md-6">
-                            <h4><i class="ph ph-book-open-text mr-2" style="color: var(--vd-color-primary);"></i>Documentation</h4>
+                            <h4><i class="ph ph-planet mr-2" style="color: var(--vd-color-primary);"></i>Ecosystem</h4>
                             <div class="change-group">
                                 <h5>New</h5>
                                 <ul class="change-list">
@@ -594,7 +697,7 @@
                             </div>
                         </div>
                         <div class="vd-col-12 vd-col-md-6">
-                            <h4><i class="ph ph-book-open-text mr-2" style="color: var(--vd-color-primary);"></i>Documentation</h4>
+                            <h4><i class="ph ph-planet mr-2" style="color: var(--vd-color-primary);"></i>Ecosystem</h4>
                             <div class="change-group">
                                 <h5>New</h5>
                                 <ul class="change-list">
@@ -695,7 +798,7 @@
                             </div>
                         </div>
                         <div class="vd-col-12 vd-col-md-6">
-                            <h4><i class="ph ph-book-open-text mr-2" style="color: var(--vd-color-primary);"></i>Documentation</h4>
+                            <h4><i class="ph ph-planet mr-2" style="color: var(--vd-color-primary);"></i>Ecosystem</h4>
                             <div class="change-group">
                                 <h5>New</h5>
                                 <ul class="change-list">
@@ -824,7 +927,7 @@
                             </div>
                         </div>
                         <div class="vd-col-12 vd-col-md-6">
-                            <h4><i class="ph ph-book-open-text mr-2" style="color: var(--vd-color-primary);"></i>Documentation</h4>
+                            <h4><i class="ph ph-planet mr-2" style="color: var(--vd-color-primary);"></i>Ecosystem</h4>
                             <div class="change-group">
                                 <h5>New</h5>
                                 <ul class="change-list">
@@ -940,7 +1043,7 @@
                             </div>
                         </div>
                         <div class="vd-col-12 vd-col-md-6">
-                            <h4><i class="ph ph-book-open-text mr-2" style="color: var(--vd-color-primary);"></i>Documentation</h4>
+                            <h4><i class="ph ph-planet mr-2" style="color: var(--vd-color-primary);"></i>Ecosystem</h4>
                             <div class="change-group">
                                 <h5>New Features</h5>
                                 <ul class="change-list">
@@ -1029,7 +1132,7 @@
                             </div>
                         </div>
                         <div class="vd-col-12 vd-col-md-6">
-                            <h4><i class="ph ph-book-open-text mr-2" style="color: var(--vd-color-primary);"></i>Documentation</h4>
+                            <h4><i class="ph ph-planet mr-2" style="color: var(--vd-color-primary);"></i>Ecosystem</h4>
                             <div class="change-group">
                                 <h5>Updates</h5>
                                 <ul class="change-list">
@@ -1101,7 +1204,7 @@
                             </div>
                         </div>
                         <div class="vd-col-12 vd-col-md-6">
-                            <h4><i class="ph ph-book-open-text mr-2" style="color: var(--vd-color-primary);"></i>Documentation</h4>
+                            <h4><i class="ph ph-planet mr-2" style="color: var(--vd-color-primary);"></i>Ecosystem</h4>
                             <div class="change-group">
                                 <h5>New Features</h5>
                                 <ul class="change-list">
@@ -1253,7 +1356,7 @@
                             </div>
                         </div>
                         <div class="vd-col-12 vd-col-md-6">
-                            <h4><i class="ph ph-book-open-text mr-2" style="color: var(--vd-color-primary);"></i>Documentation</h4>
+                            <h4><i class="ph ph-planet mr-2" style="color: var(--vd-color-primary);"></i>Ecosystem</h4>
                             <div class="change-group">
                                 <h5>New Features</h5>
                                 <ul class="change-list">
@@ -1332,7 +1435,7 @@
                             </div>
                         </div>
                         <div class="vd-col-12 vd-col-md-6">
-                            <h4><i class="ph ph-book-open-text mr-2" style="color: var(--vd-color-primary);"></i>Documentation</h4>
+                            <h4><i class="ph ph-planet mr-2" style="color: var(--vd-color-primary);"></i>Ecosystem</h4>
                             <div class="change-group">
                                 <h5>New Features</h5>
                                 <ul class="change-list">
@@ -1459,7 +1562,7 @@
                         </div>
                         <div class="vd-col-12 vd-col-md-6">
                             <h4><i class="ph ph-book-open-text mr-2"
-                                    style="color: var(--vd-color-primary);"></i>Documentation</h4>
+                                    style="color: var(--vd-color-primary);"></i>Ecosystem</h4>
                             <div class="change-group">
                                 <h5>New Features</h5>
                                 <ul class="change-list">
@@ -1549,7 +1652,7 @@
                         </div>
                         <div class="vd-col-12 vd-col-md-6">
                             <h4><i class="ph ph-book-open-text mr-2"
-                                    style="color: var(--vd-color-primary);"></i>Documentation</h4>
+                                    style="color: var(--vd-color-primary);"></i>Ecosystem</h4>
                             <div class="change-group">
                                 <h5>New Features</h5>
                                 <ul class="change-list">
@@ -1664,7 +1767,7 @@
                         </div>
                         <div class="vd-col-12 vd-col-md-6">
                             <h4><i class="ph ph-book-open-text mr-2"
-                                    style="color: var(--vd-color-primary);"></i>Documentation</h4>
+                                    style="color: var(--vd-color-primary);"></i>Ecosystem</h4>
                             <div class="change-group">
                                 <h5>New Features</h5>
                                 <ul class="change-list">
@@ -1743,7 +1846,7 @@
                         </div>
                         <div class="vd-col-12 vd-col-md-6">
                             <h4><i class="ph ph-book-open-text mr-2"
-                                    style="color: var(--vd-color-primary);"></i>Documentation</h4>
+                                    style="color: var(--vd-color-primary);"></i>Ecosystem</h4>
                             <div class="change-group">
                                 <h5>New Features</h5>
                                 <ul class="change-list">
@@ -1818,7 +1921,7 @@
                         </div>
                         <div class="vd-col-12 vd-col-md-6">
                             <h4><i class="ph ph-book-open-text mr-2"
-                                    style="color: var(--vd-color-primary);"></i>Documentation</h4>
+                                    style="color: var(--vd-color-primary);"></i>Ecosystem</h4>
                             <div class="change-group">
                                 <h5>New Features</h5>
                                 <ul class="change-list">
@@ -1940,7 +2043,7 @@
                         </div>
                         <div class="vd-col-12 vd-col-md-6">
                             <h4><i class="ph ph-book-open-text mr-2"
-                                    style="color: var(--vd-color-primary);"></i>Documentation</h4>
+                                    style="color: var(--vd-color-primary);"></i>Ecosystem</h4>
                             <div class="change-group">
                                 <h5>Bug Fixes</h5>
                                 <ul class="change-list">
@@ -2045,7 +2148,7 @@
                         </div>
                         <div class="vd-col-12 vd-col-md-6">
                             <h4><i class="ph ph-book-open-text mr-2"
-                                    style="color: var(--vd-color-primary);"></i>Documentation</h4>
+                                    style="color: var(--vd-color-primary);"></i>Ecosystem</h4>
                             <div class="change-group">
                                 <h5>Updates</h5>
                                 <ul class="change-list">
@@ -2113,7 +2216,7 @@
                         </div>
                         <div class="vd-col-12 vd-col-md-6">
                             <h4><i class="ph ph-book-open-text mr-2"
-                                    style="color: var(--vd-color-primary);"></i>Documentation</h4>
+                                    style="color: var(--vd-color-primary);"></i>Ecosystem</h4>
                             <div class="change-group">
                                 <h5>Updates</h5>
                                 <ul class="change-list">
@@ -2167,7 +2270,7 @@
                         <div class="vd-col-12 vd-col-md-6">
                             <div class="change-category">
                                 <h4 style="color: var(--vd-color-info);">
-                                    <i class="ph ph-book-open-text"></i> Documentation
+                                    <i class="ph ph-planet"></i> Ecosystem
                                 </h4>
                                 <ul class="change-list">
                                     <li class="change-item">
@@ -2263,7 +2366,7 @@
                         <div class="vd-col-12 vd-col-md-6">
                             <div class="change-category">
                                 <h4 style="color: var(--vd-color-info);">
-                                    <i class="ph ph-book-open-text"></i> Documentation
+                                    <i class="ph ph-planet"></i> Ecosystem
                                 </h4>
                                 <ul class="change-list">
                                     <li class="change-item">
@@ -2356,7 +2459,7 @@
                         <div class="vd-col-12 vd-col-md-6">
                             <div class="change-category">
                                 <h4 style="color: var(--vd-color-info);">
-                                    <i class="ph ph-book-open-text"></i> Documentation
+                                    <i class="ph ph-planet"></i> Ecosystem
                                 </h4>
                                 <ul class="change-list">
                                     <li class="change-item">
@@ -2435,7 +2538,7 @@
                         <div class="vd-col-12 vd-col-md-6">
                             <div class="change-category">
                                 <h4 style="color: var(--vd-color-info);">
-                                    <i class="ph ph-book-open-text"></i> Documentation
+                                    <i class="ph ph-planet"></i> Ecosystem
                                 </h4>
                                 <ul class="change-list">
                                     <li class="change-item">
@@ -2508,7 +2611,7 @@
                         <div class="vd-col-12 vd-col-md-6">
                             <div class="change-category">
                                 <h4 style="color: var(--vd-color-info);">
-                                    <i class="ph ph-book-open-text"></i> Documentation
+                                    <i class="ph ph-planet"></i> Ecosystem
                                 </h4>
                                 <ul class="change-list">
                                     <li class="change-item">
@@ -2551,7 +2654,7 @@
                                         <i class="ph ph-arrow-up" style="color: var(--vd-color-info);"></i>
                                         <div>
                                             <strong>Improvement: Two-column changelog</strong>
-                                            <p>Changelog redesigned with separate Framework and Documentation columns
+                                            <p>Changelog redesigned with separate Framework and Ecosystem columns
                                                 for clearer change tracking. All historical entries migrated to the new
                                                 format.</p>
                                         </div>
@@ -2674,7 +2777,7 @@
                         <div class="vd-col-12 vd-col-md-6">
                             <div class="change-category">
                                 <h4 style="color: var(--vd-color-info);">
-                                    <i class="ph ph-book-open-text"></i> Documentation
+                                    <i class="ph ph-planet"></i> Ecosystem
                                 </h4>
                                 <ul class="change-list">
                                     <li class="change-item">
@@ -2847,7 +2950,7 @@
                         <div class="vd-col-12 vd-col-md-6">
                             <div class="change-category">
                                 <h4 style="color: var(--vd-color-info);">
-                                    <i class="ph ph-book-open-text"></i> Documentation
+                                    <i class="ph ph-planet"></i> Ecosystem
                                 </h4>
                                 <ul class="change-list">
                                     <li class="change-item">
@@ -2907,7 +3010,7 @@
                         <div class="vd-col-12 vd-col-md-6">
                             <div class="change-category">
                                 <h4 style="color: var(--vd-color-info);">
-                                    <i class="ph ph-book-open-text"></i> Documentation
+                                    <i class="ph ph-planet"></i> Ecosystem
                                 </h4>
                                 <p class="vd-text-sm vd-text-muted" style="padding-left: 1.5rem;"><em>No documentation
                                         changes in this release.</em></p>
@@ -2967,7 +3070,7 @@
                         <div class="vd-col-12 vd-col-md-6">
                             <div class="change-category">
                                 <h4 style="color: var(--vd-color-info);">
-                                    <i class="ph ph-book-open-text"></i> Documentation
+                                    <i class="ph ph-planet"></i> Ecosystem
                                 </h4>
                                 <ul class="change-list">
                                     <li class="change-item">
@@ -3057,7 +3160,7 @@
                         <div class="vd-col-12 vd-col-md-6">
                             <div class="change-category">
                                 <h4 style="color: var(--vd-color-info);">
-                                    <i class="ph ph-book-open-text"></i> Documentation
+                                    <i class="ph ph-planet"></i> Ecosystem
                                 </h4>
                                 <p class="vd-text-sm vd-text-muted" style="padding-left: 1.5rem;"><em>No documentation
                                         changes in this release.</em></p>
@@ -3141,7 +3244,7 @@
                         <div class="vd-col-12 vd-col-md-6">
                             <div class="change-category">
                                 <h4 style="color: var(--vd-color-info);">
-                                    <i class="ph ph-book-open-text"></i> Documentation
+                                    <i class="ph ph-planet"></i> Ecosystem
                                 </h4>
                                 <p class="vd-text-sm vd-text-muted" style="padding-left: 1.5rem;"><em>No documentation
                                         changes in this release.</em></p>
@@ -3194,7 +3297,7 @@
                         <div class="vd-col-12 vd-col-md-6">
                             <div class="change-category">
                                 <h4 style="color: var(--vd-color-info);">
-                                    <i class="ph ph-book-open-text"></i> Documentation
+                                    <i class="ph ph-planet"></i> Ecosystem
                                 </h4>
                                 <ul class="change-list">
                                     <li class="change-item">
@@ -3294,7 +3397,7 @@
                         <div class="vd-col-12 vd-col-md-6">
                             <div class="change-category">
                                 <h4 style="color: var(--vd-color-info);">
-                                    <i class="ph ph-book-open-text"></i> Documentation
+                                    <i class="ph ph-planet"></i> Ecosystem
                                 </h4>
                                 <ul class="change-list">
                                     <li class="change-item">
@@ -3378,7 +3481,7 @@
                         <div class="vd-col-12 vd-col-md-6">
                             <div class="change-category">
                                 <h4 style="color: var(--vd-color-info);">
-                                    <i class="ph ph-book-open-text"></i> Documentation
+                                    <i class="ph ph-planet"></i> Ecosystem
                                 </h4>
                                 <ul class="change-list">
                                     <li class="change-item">
@@ -3449,7 +3552,7 @@
                         <div class="vd-col-12 vd-col-md-6">
                             <div class="change-category">
                                 <h4 style="color: var(--vd-color-info);">
-                                    <i class="ph ph-book-open-text"></i> Documentation
+                                    <i class="ph ph-planet"></i> Ecosystem
                                 </h4>
                                 <ul class="change-list">
                                     <li class="change-item">
@@ -3544,7 +3647,7 @@
                                     <li class="change-item">
                                         <i class="ph ph-wheelchair" style="color: var(--vd-color-info);"></i>
                                         <div>
-                                            <strong>Accessibility First</strong>
+                                            <strong>Accessibility Support</strong>
                                             <p>ARIA attributes, focus states, and semantic HTML built-in.</p>
                                         </div>
                                     </li>
@@ -3554,7 +3657,7 @@
                         <div class="vd-col-12 vd-col-md-6">
                             <div class="change-category">
                                 <h4 style="color: var(--vd-color-info);">
-                                    <i class="ph ph-book-open-text"></i> Documentation
+                                    <i class="ph ph-planet"></i> Ecosystem
                                 </h4>
                                 <ul class="change-list">
                                     <li class="change-item">

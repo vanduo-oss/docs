@@ -37,6 +37,7 @@ node_modules/
 # /favicon.svg is committed
 
 # Test related
+.test-runs/
 test-results/
 playwright-report/
 playwright/.cache/

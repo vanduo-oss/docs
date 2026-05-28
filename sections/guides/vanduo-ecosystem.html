@@ -1,20 +1,20 @@
 <section id="vanduo-ecosystem">
-    <h4 class="demo-title"><i class="ph ph-planet"></i>Vanduo Ecosystem <code class="vd-text-sm">Guide</code></h4>
+    <h5 class="demo-title"><i class="ph ph-planet"></i>Vanduo Ecosystem <code class="vd-text-sm">Guide</code></h5>
     <p class="vd-mb-6">Vanduo is intentionally split into a lightweight core framework and optional canvas libraries. Everything is documented here on <strong>vanduo.dev</strong>, but you install only the packages your project needs — keeping bundle size and maintenance scope under control.</p>
 
     <div class="vd-row vd-mb-6">
         <div class="vd-col-12">
             <div class="vd-card demo-card">
                 <div class="vd-card-header">
-                    <h4><i class="ph ph-lightbulb"></i> Why separate packages?</h4>
+                    <h6><i class="ph ph-lightbulb"></i> Why separate packages?</h6>
                 </div>
                 <div class="vd-card-body">
                     <p>Most sites need buttons, forms, layout, and theme tooling — not hex terrain editors or flowchart builders. Shipping every visualization inside the framework would inflate every install.</p>
                     <ul class="vd-mt-3">
                         <li><strong>Framework first:</strong> Start with <code>@vanduo-oss/framework</code> for UI, layout, and runtime components.</li>
-                        <li><strong>Add canvas libraries on demand:</strong> Install Hex Grid, Charts, or Flowchart only when a feature needs them.</li>
+                        <li><strong>Add extensions on demand:</strong> Install Hex Grid, Charts, Flowchart, or Music Player only when a feature needs them.</li>
                         <li><strong>Same docs site:</strong> Demos, API references, and guides for all packages live together so you can evaluate before installing.</li>
-                        <li><strong>Shared design language:</strong> Canvas packages read Vanduo <code>--vd-*</code> tokens and register with the same <code>Vanduo.init</code> lifecycle when loaded.</li>
+                        <li><strong>Shared design language:</strong> Extension packages read Vanduo <code>--vd-*</code> tokens and register with the same <code>Vanduo.init</code> lifecycle when loaded.</li>
                     </ul>
                 </div>
             </div>
@@ -25,7 +25,7 @@
         <div class="vd-col-12 vd-col-lg-6 vd-mb-4">
             <div class="vd-card demo-card">
                 <div class="vd-card-header">
-                    <h4><i class="ph ph-cube"></i> Vanduo Framework</h4>
+                    <h6><i class="ph ph-cube"></i> Vanduo Framework</h6>
                 </div>
                 <div class="vd-card-body">
                     <p>The core UI system: responsive grid, typography, components (buttons, modals, tabs, forms), theme customizer, lazy loading, and the scoped runtime (<code>Vanduo.init</code> / <code>Vanduo.destroy</code>).</p>
@@ -57,7 +57,7 @@
         <div class="vd-col-12 vd-col-lg-6 vd-mb-4">
             <div class="vd-card demo-card">
                 <div class="vd-card-header">
-                    <h4><i class="ph ph-hexagon"></i> Hex Grid</h4>
+                    <h6><i class="ph ph-hexagon"></i> Hex Grid</h6>
                 </div>
                 <div class="vd-card-body">
                     <p>Interactive flat-top hex canvas with pan/zoom, selection, terrain helpers, rotation, and axial coordinate math. Canvas-based, not SVG DOM nodes.</p>
@@ -90,7 +90,7 @@
         <div class="vd-col-12 vd-col-lg-6 vd-mb-4">
             <div class="vd-card demo-card">
                 <div class="vd-card-header">
-                    <h4><i class="ph ph-chart-donut"></i> Charts</h4>
+                    <h6><i class="ph ph-chart-donut"></i> Charts</h6>
                 </div>
                 <div class="vd-card-body">
                     <p>Standalone SVG charting for dashboards: bar, line, area, scatter, pie, and donut charts. Declarative <code>data-vd-chart</code> markup or JavaScript API; theme-aware colors.</p>
@@ -123,7 +123,7 @@
         <div class="vd-col-12 vd-col-lg-6 vd-mb-4">
             <div class="vd-card demo-card">
                 <div class="vd-card-header">
-                    <h4><i class="ph ph-flow-arrow"></i> Flowchart</h4>
+                    <h6><i class="ph ph-flow-arrow"></i> Flowchart</h6>
                 </div>
                 <div class="vd-card-body">
                     <p>SVG flow-diagram editor: draggable shapes, port-based arrows, double-click re-attachment, start/end marker caps, keyboard copy-paste, JSON import/export, and zoom/pan canvas.</p>
@@ -152,21 +152,56 @@
                 </div>
             </div>
         </div>
+
+        <div class="vd-col-12 vd-col-lg-6 vd-mb-4">
+            <div class="vd-card demo-card">
+                <div class="vd-card-header">
+                    <h6><i class="ph ph-music-note"></i> Music Player</h6>
+                </div>
+                <div class="vd-card-body">
+                    <p>Accessible HTML5 audio player: transport controls, volume, seek bar, optional shuffle and playlist, glass surface, and a detachable floating mode. Declarative <code>data-music-player</code> markup or the <code>VanduoMusicPlayer</code> JavaScript API; theme-aware styling.</p>
+                    <p class="vd-text-sm vd-text-muted vd-mt-3"><strong>Choose when:</strong> background music, portfolio audio demos, podcast or playlist embeds, or any page that needs a styled player without a third-party widget.</p>
+                    <p class="vd-mt-3"><a href="#docs/music-player" data-route="docs/music-player" class="vd-link">Music Player docs →</a></p>
+                    <div class="vd-code-snippet vd-mt-4" data-collapsible>
+                        <button class="vd-code-snippet-toggle" type="button" aria-expanded="false">
+                            <span class="vd-code-snippet-toggle-icon"></span>
+                            <span>Install</span>
+                        </button>
+                        <div class="vd-code-snippet-content">
+                            <div class="vd-code-snippet-header">
+                                <div class="vd-code-snippet-tabs" role="tablist">
+                                    <button class="vd-code-snippet-tab is-active" data-lang="bash">pnpm</button>
+                                </div>
+                                <button class="vd-code-snippet-copy" type="button" aria-label="Copy code">
+                                    <span class="vd-code-snippet-copy-icon"></span>
+                                    <span class="vd-code-snippet-copy-text">Copy</span>
+                                </button>
+                            </div>
+                            <div class="vd-code-snippet-body">
+                                <pre class="vd-code-snippet-pane is-active" data-lang="bash"><code>pnpm add @vanduo-oss/music-player</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="vd-text-sm vd-text-muted vd-mt-3">Load <code>vanduo-music-player.css</code> and <code>vanduo-music-player.iife.js</code> after the core bundle. The script registers as <code>musicPlayer</code> so <code>Vanduo.init()</code> auto-inits <code>data-music-player</code> elements.</p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="vd-row vd-mb-6">
         <div class="vd-col-12">
             <div class="vd-card demo-card">
                 <div class="vd-card-header">
-                    <h4><i class="ph ph-git-branch"></i> How packages relate</h4>
+                    <h6><i class="ph ph-git-branch"></i> How packages relate</h6>
                 </div>
                 <div class="vd-card-body">
                     <pre class="vd-text-sm" style="overflow-x: auto; padding: 1rem; border-radius: 8px; background: color-mix(in srgb, var(--vd-bg-secondary) 80%, transparent);"><code>vanduo.dev docs
 ├── @vanduo-oss/framework     ← UI, layout, theme, runtime (required base)
 ├── @vanduo-oss/hex-grid      ← optional canvas library
 ├── @vanduo-oss/charts        ← optional canvas library
-└── @vanduo-oss/flowchart     ← optional canvas library</code></pre>
-                    <p class="vd-mt-4">Canvas libraries are <strong>peers</strong>, not nested inside the framework bundle. Each ships its own CSS and IIFE/ESM build. Load the framework first, then add any canvas script and stylesheet your page needs.</p>
+├── @vanduo-oss/flowchart     ← optional canvas library
+└── @vanduo-oss/music-player  ← optional media component</code></pre>
+                    <p class="vd-mt-4">Extension packages are <strong>peers</strong>, not nested inside the framework bundle. Each ships its own CSS and IIFE/ESM build. Load the framework first, then add any extension script and stylesheet your page needs.</p>
                     <div class="vd-code-snippet vd-mt-4" data-collapsible data-expanded="true">
                         <button class="vd-code-snippet-toggle" type="button" aria-expanded="true">
                             <span class="vd-code-snippet-toggle-icon"></span>
@@ -191,12 +226,16 @@
 &lt;link rel="stylesheet" href="/path/to/vanduo-charts.css"&gt;
 &lt;script src="/path/to/vanduo-charts.iife.js"&gt;&lt;/script&gt;
 
+&lt;!-- Only if this page uses the music player --&gt;
+&lt;link rel="stylesheet" href="/path/to/vanduo-music-player.css"&gt;
+&lt;script src="/path/to/vanduo-music-player.iife.js"&gt;&lt;/script&gt;
+
 &lt;!-- Initialize the mounted subtree --&gt;
 &lt;script&gt;Vanduo.init(document.getElementById('app'));&lt;/script&gt;</code></pre>
                             </div>
                         </div>
                     </div>
-                    <p class="vd-text-sm vd-text-muted vd-mt-3">Extension packages call <code>Vanduo.register(name, api)</code> during load so <code>Vanduo.init</code> can auto-discover <code>data-vd-chart</code>, <code>data-vd-flowchart</code>, and similar markers. See <a href="#docs/runtime-architecture" data-route="docs/runtime-architecture">Runtime Architecture</a> for scoped init/destroy details.</p>
+                    <p class="vd-text-sm vd-text-muted vd-mt-3">Extension packages call <code>Vanduo.register(name, api)</code> during load so <code>Vanduo.init</code> can auto-discover <code>data-vd-chart</code>, <code>data-vd-flowchart</code>, <code>data-music-player</code>, and similar markers. See <a href="#docs/runtime-architecture" data-route="docs/runtime-architecture">Runtime Architecture</a> for scoped init/destroy details.</p>
                 </div>
             </div>
         </div>
@@ -206,7 +245,7 @@
         <div class="vd-col-12">
             <div class="vd-card demo-card">
                 <div class="vd-card-header">
-                    <h4><i class="ph ph-crosshair"></i> Which package do I need?</h4>
+                    <h6><i class="ph ph-crosshair"></i> Which package do I need?</h6>
                 </div>
                 <div class="vd-card-body">
                     <div class="vd-table-responsive">
@@ -240,14 +279,19 @@
                                     <td><a href="#docs/vd-hex" data-route="docs/vd-hex">Hex Grid</a></td>
                                 </tr>
                                 <tr>
+                                    <td>Background or featured audio with playlist controls</td>
+                                    <td>framework + <code>@vanduo-oss/music-player</code></td>
+                                    <td><a href="#docs/music-player" data-route="docs/music-player">Music Player</a></td>
+                                </tr>
+                                <tr>
                                     <td>All of the above on one site</td>
-                                    <td>framework + each canvas package used on that route</td>
+                                    <td>framework + each extension package used on that route</td>
                                     <td>Load scripts per page or code-split by route</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <p class="vd-text-sm vd-text-muted vd-mt-4">You can combine packages — for example, a dashboard page might use Charts inside Vanduo cards, while a separate admin route mounts Flowchart. Avoid loading every canvas bundle on every page; scope assets to the routes that need them.</p>
+                    <p class="vd-text-sm vd-text-muted vd-mt-4">You can combine packages — for example, a dashboard page might use Charts inside Vanduo cards, while a separate admin route mounts Flowchart or a floating Music Player. Avoid loading every extension bundle on every page; scope assets to the routes that need them.</p>
                 </div>
             </div>
         </div>
@@ -257,14 +301,14 @@
         <div class="vd-col-12">
             <div class="vd-card demo-card">
                 <div class="vd-card-header">
-                    <h4><i class="ph ph-arrow-square-out"></i> Next steps</h4>
+                    <h6><i class="ph ph-arrow-square-out"></i> Next steps</h6>
                 </div>
                 <div class="vd-card-body">
                     <ul>
                         <li><a href="#docs/getting-started" data-route="docs/getting-started">Quick Start</a> — install the framework and render your first page.</li>
                         <li><a href="#docs/framework-integration" data-route="docs/framework-integration">Framework Integration</a> — use Vanduo inside React, Vue, Nuxt, or other SPAs.</li>
                         <li><a href="#docs/esm-vs-iife" data-route="docs/esm-vs-iife">ESM vs IIFE</a> — pick the right bundle format for your build pipeline.</li>
-                        <li><a href="#docs/vd-hex" data-route="docs/vd-hex">Hex Grid</a>, <a href="#docs/vd-charts" data-route="docs/vd-charts">Charts</a>, <a href="#docs/vd-flowchart" data-route="docs/vd-flowchart">Flowchart</a> — live demos and API references for each canvas library.</li>
+                        <li><a href="#docs/vd-hex" data-route="docs/vd-hex">Hex Grid</a>, <a href="#docs/vd-charts" data-route="docs/vd-charts">Charts</a>, <a href="#docs/vd-flowchart" data-route="docs/vd-flowchart">Flowchart</a>, <a href="#docs/music-player" data-route="docs/music-player">Music Player</a> — live demos and API references for each extension package.</li>
                     </ul>
                 </div>
             </div>

@@ -1,5 +1,5 @@
 export const SECTIONS_BASE = './sections/';
-export const DOCS_CONTENT_VERSION = '1.4.2-docs-1';
+export const DOCS_CONTENT_VERSION = '1.4.3-docs-1';
 
 export const loadedSections = new Set();
 export const loadingSections = new Set();

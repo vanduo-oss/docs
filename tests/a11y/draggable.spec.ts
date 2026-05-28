@@ -75,7 +75,7 @@ test.describe('Draggable Docs Page @docs', () => {
     test('has CSS variables reference table', async ({ page }) => {
         await navigateToDraggable(page);
         const cssCard = page.locator('#draggable .vd-card').filter({
-            has: page.locator('h1, h2, h3, h4').filter({ hasText: 'CSS Variables' })
+            has: page.locator('h1, h2, h3, h4, h5, h6').filter({ hasText: 'CSS Variables' })
         });
         await expect(cssCard).toBeVisible();
 
@@ -87,7 +87,7 @@ test.describe('Draggable Docs Page @docs', () => {
     test('has JavaScript API reference table', async ({ page }) => {
         await navigateToDraggable(page);
         const apiCard = page.locator('#draggable .vd-card').filter({
-            has: page.locator('h1, h2, h3, h4').filter({ hasText: 'JavaScript API' })
+            has: page.locator('h1, h2, h3, h4, h5, h6').filter({ hasText: 'JavaScript API' })
         });
         await expect(apiCard).toBeVisible();
 

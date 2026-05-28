@@ -247,21 +247,6 @@
               ]
             },
             {
-              "id": "music-player",
-              "title": "Music Player",
-              "file": "media/music-player.html",
-              "icon": "ph-music-note",
-              "keywords": [
-                "music",
-                "player",
-                "audio",
-                "mp3",
-                "playlist",
-                "volume",
-                "media"
-              ]
-            },
-            {
               "id": "dropdown",
               "title": "Dropdown",
               "file": "components/dropdown.html",
@@ -643,6 +628,21 @@
               "file": "components/timeline.html",
               "icon": "ph-clock-countdown",
               "keywords": ["timeline", "history", "events", "chronology", "vertical"]
+            },
+            {
+              "id": "music-player",
+              "title": "Music Player",
+              "file": "media/music-player.html",
+              "icon": "ph-music-note",
+              "keywords": [
+                "music",
+                "player",
+                "audio",
+                "mp3",
+                "playlist",
+                "volume",
+                "media"
+              ]
             }
           ]
         },
@@ -847,6 +847,9 @@
                 "hex grid",
                 "charts",
                 "flowchart",
+                "music player",
+                "music-player",
+                "audio",
                 "canvas",
                 "packages",
                 "install",

@@ -65,6 +65,13 @@ function initFramework() {
                 }
             }
 
+            if (this.isUsingDefaultNeutral()) {
+                var expectedNeutral = this.getDefaultNeutral(nextMode);
+                if (this.state.neutral !== expectedNeutral) {
+                    this.applyNeutral(expectedNeutral);
+                }
+            }
+
             this.state.theme = nextMode;
             applyResolvedDocsTheme(nextMode);
             this.savePreference(this.STORAGE_KEYS.THEME, nextMode);
@@ -92,8 +99,69 @@ function initFramework() {
             PRIMARY_LIGHT: 'black',
             PRIMARY_DARK: 'blue',
             NEUTRAL: 'stone',
+            NEUTRAL_LIGHT: 'stone',
+            NEUTRAL_DARK: 'charcoal',
             RADIUS: '0.5'
         });
+
+        var themeCustomizer = window.ThemeCustomizer;
+        var origLoadPreferences = themeCustomizer.loadPreferences;
+
+        themeCustomizer.getDefaultNeutral = function (theme) {
+            if (theme === 'system') {
+                return getResolvedThemeMode('system') === 'dark'
+                    ? this.DEFAULTS.NEUTRAL_DARK
+                    : this.DEFAULTS.NEUTRAL_LIGHT;
+            }
+            return theme === 'dark' ? this.DEFAULTS.NEUTRAL_DARK : this.DEFAULTS.NEUTRAL_LIGHT;
+        };
+
+        themeCustomizer.isUsingDefaultNeutral = function () {
+            return this.state.neutral === this.DEFAULTS.NEUTRAL_LIGHT ||
+                this.state.neutral === this.DEFAULTS.NEUTRAL_DARK ||
+                this.state.neutral === 'neutral';
+        };
+
+        themeCustomizer._normalizeDefaultNeutralIfStaleWithStoredTheme = function () {
+            if (!this.isUsingDefaultNeutral()) {
+                return;
+            }
+            var expectedNeutral = this.getDefaultNeutral(this.state.theme);
+            if (this.state.neutral !== expectedNeutral) {
+                this.state.neutral = expectedNeutral;
+            }
+        };
+
+        themeCustomizer.loadPreferences = function () {
+            origLoadPreferences.call(this);
+            this._normalizeDefaultNeutralIfStaleWithStoredTheme();
+        };
+
+        themeCustomizer.reset = function () {
+            this.applyTheme(this.DEFAULTS.THEME);
+            this.applyPrimary(this.getDefaultPrimary(this.DEFAULTS.THEME));
+            this.applyNeutral(this.getDefaultNeutral(this.DEFAULTS.THEME));
+            this.applyRadius(this.DEFAULTS.RADIUS);
+            this.applyFont(this.DEFAULTS.FONT);
+            this.updateUI();
+            this.dispatchEvent('reset', { state: { ...this.state } });
+        };
+
+        if (window.matchMedia) {
+            var colorSchemeMq = window.matchMedia('(prefers-color-scheme: dark)');
+            colorSchemeMq.addEventListener('change', function () {
+                if (!themeCustomizer.isInitialized) {
+                    return;
+                }
+                if (themeCustomizer.state.theme === 'system' && themeCustomizer.isUsingDefaultNeutral()) {
+                    var nextNeutral = themeCustomizer.getDefaultNeutral('system');
+                    if (nextNeutral !== themeCustomizer.state.neutral) {
+                        themeCustomizer.applyNeutral(nextNeutral);
+                        themeCustomizer.updateUI();
+                    }
+                }
+            });
+        }
     }
     window.Vanduo.init();
 }

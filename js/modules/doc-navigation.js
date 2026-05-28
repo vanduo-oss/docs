@@ -700,6 +700,9 @@ export async function loadSection(sectionId, autoScroll = true, options = {}) {
     if (!needsTargetFirstReset && loadedSections.has(sectionId)) {
         var el = document.getElementById(sectionId);
         var loadedMeta = findSectionMeta(sectionId);
+        if (el) {
+            initVanduoScope(el);
+        }
         if (el && autoScroll) {
             markProgrammaticScroll();
             el.scrollIntoView({ behavior: 'instant', block: 'start' });

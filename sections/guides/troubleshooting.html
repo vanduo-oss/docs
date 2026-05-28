@@ -1,12 +1,12 @@
 <section id="troubleshooting">
-    <h4 class="demo-title"><i class="ph ph-wrench"></i>Troubleshooting &amp; FAQ <code class="vd-text-sm">Guide</code></h4>
+    <h5 class="demo-title"><i class="ph ph-wrench"></i>Troubleshooting &amp; FAQ <code class="vd-text-sm">Guide</code></h5>
     <p class="vd-mb-8">Most Vanduo issues come down to load order, scoped initialization, token override order, or trusted-content boundaries. This v1.4.1 checklist follows the runtime architecture now used by the docs site itself.</p>
 
     <div class="vd-row vd-mb-6">
         <div class="vd-col-12">
             <div class="vd-card vd-card-glow demo-card">
                 <div class="vd-card-header">
-                    <h4><span class="vd-badge vd-badge-primary" style="margin-right:8px;">#1</span><i class="ph ph-cursor-click"></i> Interactive components do not respond</h4>
+                    <h6><span class="vd-badge vd-badge-primary" style="margin-right:8px;">#1</span><i class="ph ph-cursor-click"></i> Interactive components do not respond</h6>
                 </div>
                 <div class="vd-card-body">
                     <p><strong>Likely cause:</strong> Vanduo initialized before the markup existed, or only the old DOM was initialized.</p>
@@ -21,7 +21,7 @@
                                 <button class="vd-code-snippet-copy" aria-label="Copy code"><span class="vd-code-snippet-copy-icon"></span><span class="vd-code-snippet-copy-text">Copy</span></button>
                             </div>
                             <div class="vd-code-snippet-body">
-                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;script src="https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.4.2/dist/vanduo.min.js"&gt;&lt;/script&gt;
+                                <pre class="vd-code-snippet-pane is-active" data-lang="html"><code>&lt;script src="https://cdn.jsdelivr.net/gh/vanduo-oss/framework@v1.4.3/dist/vanduo.min.js"&gt;&lt;/script&gt;
 &lt;script&gt;Vanduo.init();&lt;/script&gt;</code></pre>
                                 <pre class="vd-code-snippet-pane" data-lang="js"><code>const panel = document.querySelector('#settings-panel');
 Vanduo.init(panel);</code></pre>
@@ -38,7 +38,7 @@ Vanduo.init(panel);</code></pre>
         <div class="vd-col-12">
             <div class="vd-card vd-card-glow demo-card">
                 <div class="vd-card-header">
-                    <h4><span class="vd-badge vd-badge-primary" style="margin-right:8px;">#2</span><i class="ph ph-arrows-clockwise"></i> Components break after SPA navigation</h4>
+                    <h6><span class="vd-badge vd-badge-primary" style="margin-right:8px;">#2</span><i class="ph ph-arrows-clockwise"></i> Components break after SPA navigation</h6>
                 </div>
                 <div class="vd-card-body">
                     <p><strong>Likely cause:</strong> your router removed initialized elements without giving Vanduo a chance to clean up listeners, observers, and timers.</p>
@@ -72,7 +72,7 @@ function unmountRoute(root) {
         <div class="vd-col-12 vd-col-md-6">
             <div class="vd-card vd-card-glow demo-card">
                 <div class="vd-card-header">
-                    <h4><span class="vd-badge vd-badge-primary" style="margin-right:8px;">#3</span><i class="ph ph-palette"></i> Theme overrides do not apply</h4>
+                    <h6><span class="vd-badge vd-badge-primary" style="margin-right:8px;">#3</span><i class="ph ph-palette"></i> Theme overrides do not apply</h6>
                 </div>
                 <div class="vd-card-body">
                     <p>Load your theme after Vanduo and override canonical <code>--vd-*</code> tokens.</p>
@@ -99,7 +99,7 @@ function unmountRoute(root) {
         <div class="vd-col-12 vd-col-md-6">
             <div class="vd-card vd-card-glow demo-card">
                 <div class="vd-card-header">
-                    <h4><span class="vd-badge vd-badge-primary" style="margin-right:8px;">#4</span><i class="ph ph-textbox"></i> Forms look different than expected</h4>
+                    <h6><span class="vd-badge vd-badge-primary" style="margin-right:8px;">#4</span><i class="ph ph-textbox"></i> Forms look different than expected</h6>
                 </div>
                 <div class="vd-card-body">
                     <p>The main bundle intentionally includes framework-wide defaults for common native form controls. Use <code>.vd-input</code>, <code>.vd-form-group</code>, <code>.checkbox</code>, <code>.radio</code>, and <code>.switch</code> when you want the documented component patterns.</p>
@@ -116,7 +116,7 @@ function unmountRoute(root) {
         <div class="vd-col-12 vd-col-md-6">
             <div class="vd-card vd-card-glow demo-card">
                 <div class="vd-card-header">
-                    <h4><span class="vd-badge vd-badge-primary" style="margin-right:8px;">#5</span><i class="ph ph-cloud-arrow-down"></i> Lazy-loaded content is not interactive</h4>
+                    <h6><span class="vd-badge vd-badge-primary" style="margin-right:8px;">#5</span><i class="ph ph-cloud-arrow-down"></i> Lazy-loaded content is not interactive</h6>
                 </div>
                 <div class="vd-card-body">
                     <p>In v1.4.1, <code>VanduoLazyLoad.loadSection()</code> initializes only the injected container after same-origin HTML is loaded. If you inject HTML yourself, mirror that scoped pattern.</p>
@@ -142,7 +142,7 @@ Vanduo.init(target);</code></pre>
         <div class="vd-col-12 vd-col-md-6">
             <div class="vd-card vd-card-glow demo-card">
                 <div class="vd-card-header">
-                    <h4><span class="vd-badge vd-badge-primary" style="margin-right:8px;">#6</span><i class="ph ph-shield-check"></i> HTML content is stripped or sanitized</h4>
+                    <h6><span class="vd-badge vd-badge-primary" style="margin-right:8px;">#6</span><i class="ph ph-shield-check"></i> HTML content is stripped or sanitized</h6>
                 </div>
                 <div class="vd-card-body">
                     <p>Tooltip, Bubble, Toast, and Search rendering escape or sanitize user-facing HTML. Treat strings from users, APIs, or CMS fields as untrusted unless you sanitize them before passing them to Vanduo.</p>

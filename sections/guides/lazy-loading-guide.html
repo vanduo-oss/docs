@@ -1,12 +1,12 @@
 <section id="lazy-loading-guide">
-    <h4 class="demo-title"><i class="ph ph-cloud-arrow-down"></i>Global Lazy Loading <code class="vd-text-sm">Guide</code></h4>
+    <h5 class="demo-title"><i class="ph ph-cloud-arrow-down"></i>Global Lazy Loading <code class="vd-text-sm">Guide</code></h5>
     <p class="vd-mb-6">Use <strong>VanduoLazyLoad</strong> to fetch same-origin HTML, hydrate injected content, and observe expensive work only when it is needed. In v1.4.1 the important architecture change is scoped hydration: loaded content calls <code>Vanduo.init(container)</code> instead of reinitializing the entire page.</p>
 
     <div class="vd-row vd-mb-6">
         <div class="vd-col-12">
             <div class="vd-card vd-card-glow demo-card">
                 <div class="vd-card-header">
-                    <h4><span class="vd-badge vd-badge-primary" style="margin-right:8px;">Step 1</span><i class="ph ph-tag"></i> Attribute-Driven Sections</h4>
+                    <h6><span class="vd-badge vd-badge-primary" style="margin-right:8px;">Step 1</span><i class="ph ph-tag"></i> Attribute-Driven Sections</h6>
                 </div>
                 <div class="vd-card-body">
                     <p>Add <code>data-vd-lazy</code> to an empty container. Vanduo fetches the partial when the container enters the viewport.</p>
@@ -43,7 +43,7 @@
         <div class="vd-col-12 vd-col-md-6">
             <div class="vd-card vd-card-glow demo-card">
                 <div class="vd-card-header">
-                    <h4><i class="ph ph-code"></i> Programmatic Section Loading</h4>
+                    <h6><i class="ph ph-code"></i> Programmatic Section Loading</h6>
                 </div>
                 <div class="vd-card-body">
                     <div class="vd-code-snippet" data-collapsible data-expanded="true">
@@ -78,7 +78,7 @@ VanduoLazyLoad.loadSection('./sections/pricing.html', container, {
         <div class="vd-col-12 vd-col-md-6">
             <div class="vd-card vd-card-glow demo-card">
                 <div class="vd-card-header">
-                    <h4><i class="ph ph-eye"></i> Generic Observation</h4>
+                    <h6><i class="ph ph-eye"></i> Generic Observation</h6>
                 </div>
                 <div class="vd-card-body">
                     <div class="vd-code-snippet" data-collapsible data-expanded="true">
@@ -110,7 +110,7 @@ VanduoLazyLoad.loadSection('./sections/pricing.html', container, {
         <div class="vd-col-12">
             <div class="vd-card vd-card-glow demo-card">
                 <div class="vd-card-header">
-                    <h4><i class="ph ph-book-open"></i> API Reference</h4>
+                    <h6><i class="ph ph-book-open"></i> API Reference</h6>
                 </div>
                 <div class="vd-card-body">
                     <table class="vd-table vd-table-hover">

@@ -63,6 +63,7 @@
 
         /* ── Dark mode scrollbars (docs) ─────────────────── */
         [data-theme="dark"] {
+            --vd-bg-primary: var(--vd-charcoal-9);
             --docs-scrollbar-thumb: color-mix(in srgb, var(--vd-text-secondary) 38%, var(--vd-bg-primary));
             --docs-scrollbar-track: color-mix(in srgb, var(--vd-bg-secondary) 55%, transparent);
         }
@@ -195,10 +196,28 @@
             object-fit: contain;
             transform-origin: 50% 50%;
             cursor: default;
+            animation:
+                hero-title-logo-spin-intro 0.385s linear,
+                hero-title-logo-spin-steady 14s linear 0.385s infinite;
         }
 
-        .hero-title-logo:hover {
-            animation: vd-dynamic-loader-logo-spin 2.1s linear infinite;
+        @keyframes hero-title-logo-spin-intro {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                /* Ends on 0° so steady spin has no jump (2 turns, half prior speed) */
+                transform: rotate(720deg);
+            }
+        }
+
+        @keyframes hero-title-logo-spin-steady {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         .vd-navbar-brand-wrap > a.vd-navbar-brand-link {
@@ -323,11 +342,11 @@
             margin-bottom: 1.5rem;
             padding-bottom: 0;
             border-bottom: none;
-            font-size: 1.75rem;
             color: var(--vd-color-primary);
         }
 
         .demo-card .vd-card-header h3,
+        .demo-card .vd-card-header h6,
         .demo-card .vd-card-body h3,
         .demo-card .vd-card-body h4,
         .vd-footer h4 {
@@ -661,7 +680,7 @@
             overflow-y: auto;
             padding-right: 0.5rem;
             --doc-sidebar-title-align-fudge: 0px;
-            /* Align morph toggle vertical center with first h4.demo-title (40px btn vs ~35px title) */
+            /* Align morph toggle vertical center with first h5.demo-title (40px btn vs section title) */
             padding-top: calc(1rem - 2.5px + var(--doc-sidebar-title-align-fudge));
             --doc-sidebar-header-gap: 1rem;
             border-right: none;
@@ -1012,15 +1031,6 @@
             box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.06);
         }
 
-        [data-theme="dark"] .vd-footer.vd-glass {
-            box-shadow: 0 -12px 36px rgba(0, 0, 0, 0.35);
-        }
-
-        @media (prefers-color-scheme: dark) {
-            :root:not([data-theme]) .vd-footer.vd-glass {
-                box-shadow: 0 -12px 36px rgba(0, 0, 0, 0.35);
-            }
-        }
 
         .vd-footer-made-with {
             margin-top: 1rem;
@@ -1144,6 +1154,38 @@
         section#home .vd-glass::before,
         footer.vd-glass::before {
             display: none;
+        }
+
+        /* Dark home + docs landing: glass cards + footer share the charcoal canvas */
+        [data-theme="dark"] section#home .vd-card.vd-glass,
+        [data-theme="dark"] section#docs-landing .vd-card.vd-glass,
+        [data-theme="dark"] footer.vd-footer.vd-glass {
+            --vd-glass-bg-light: var(--vd-bg-primary);
+            --vd-glass-bg-dark: var(--vd-bg-primary);
+            --vd-glass-bg-opacity: 1;
+            --vd-card-bg: var(--vd-bg-primary);
+            background: var(--vd-bg-primary);
+            background-color: var(--vd-bg-primary);
+            background-image: none;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+            box-shadow: none;
+        }
+
+        [data-theme="dark"] section#home .vd-card.vd-glass::after,
+        [data-theme="dark"] section#docs-landing .vd-card.vd-glass::after,
+        [data-theme="dark"] footer.vd-footer.vd-glass::after {
+            display: none;
+        }
+
+        [data-theme="dark"] section#home .vd-card.vd-glass::before,
+        [data-theme="dark"] section#docs-landing .vd-card.vd-glass::before {
+            display: none;
+        }
+
+        [data-theme="dark"] section#home .vd-card.vd-glass.vd-glass-floating:hover,
+        [data-theme="dark"] section#home .vd-card.vd-glass.vd-glass-floating:focus-within {
+            box-shadow: var(--vd-glass-float-shadow);
         }
 
         /* Hero CTA: Fibonacci 5:4:2 (largest first, middle gets more room for "Browse Components") */
@@ -2116,7 +2158,7 @@
 
         @media (prefers-reduced-motion: reduce) {
             .vd-dynamic-loader-logo,
-            .hero-title-logo:hover {
+            .hero-title-logo {
                 animation: none;
             }
 

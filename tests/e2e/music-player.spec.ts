@@ -22,9 +22,22 @@ async function waitForSPA(page: import('@playwright/test').Page) {
 }
 
 async function gotoMusicPlayer(page: import('@playwright/test').Page) {
-    await page.goto('/#docs/music-player');
+    await page.goto('/#docs/music-player', { waitUntil: 'networkidle' });
     await waitForSPA(page);
-    await page.waitForTimeout(300);
+    await page.waitForSelector('#music-player', { state: 'visible', timeout: 10000 });
+    await page.waitForFunction(() => {
+        const snippets = [...document.querySelectorAll('#music-player .vd-code-snippet[data-collapsible]')];
+        const snippet = snippets.find((el) => el.textContent?.includes('View ESM / bundler import'));
+        return snippet?.dataset.initialized === 'true'
+            && (snippet._codeSnippetCleanup?.length ?? 0) > 0;
+    }, { timeout: 15000 });
+}
+
+/** Install block is expanded by default; target the ESM import snippet by label. */
+function esmImportCodeSnippet(page: import('@playwright/test').Page) {
+    return page.locator('#music-player .vd-code-snippet[data-collapsible]', {
+        hasText: 'View ESM / bundler import',
+    });
 }
 
 test.describe('Music Player Docs Page @e2e', () => {
@@ -37,7 +50,7 @@ test.describe('Music Player Docs Page @e2e', () => {
 
     test('section heading is visible', async ({ page }) => {
         await gotoMusicPlayer(page);
-        const heading = page.locator('#music-player h4.demo-title');
+        const heading = page.locator('#music-player h5.demo-title');
         await expect(heading).toBeVisible();
         await expect(heading).toContainText('Music Player');
     });
@@ -61,15 +74,12 @@ test.describe('Music Player Docs Page @e2e', () => {
         await expect(page.locator('#demo-progress .vd-music-player-progress')).toBeAttached();
     });
 
-    test('With Shuffle demo card renders', async ({ page }) => {
+    test('install section shows package name', async ({ page }) => {
         await gotoMusicPlayer(page);
-        await expect(page.locator('#demo-shuffle')).toHaveAttribute(
-            'data-music-player-initialized',
-            'true',
-        );
+        await expect(page.locator('#music-player')).toContainText('@vanduo-oss/music-player');
     });
 
-    test('With Playlist demo card renders and shows playlist button', async ({ page }) => {
+    test('With Playlist + Progress demo renders', async ({ page }) => {
         await gotoMusicPlayer(page);
         await expect(page.locator('#demo-playlist')).toHaveAttribute(
             'data-music-player-initialized',
@@ -78,6 +88,7 @@ test.describe('Music Player Docs Page @e2e', () => {
         await expect(
             page.locator('#demo-playlist .vd-music-player-btn-playlist'),
         ).toBeVisible();
+        await expect(page.locator('#demo-playlist .vd-music-player-progress')).toBeAttached();
     });
 
     test('Inline all-features demo renders', async ({ page }) => {
@@ -118,26 +129,25 @@ test.describe('Music Player Docs Page @e2e', () => {
 
     test('code snippet collapsible expands on click', async ({ page }) => {
         await gotoMusicPlayer(page);
-        const toggle = page
-            .locator('#music-player .vd-code-snippet[data-collapsible] .vd-code-snippet-toggle')
-            .first();
+        const snippet = esmImportCodeSnippet(page);
+        const toggle = snippet.locator('.vd-code-snippet-toggle');
+        await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+        await toggle.scrollIntoViewIfNeeded();
         await toggle.click();
-        await page.waitForTimeout(300);
         await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+        await toggle.click();
+        await expect(toggle).toHaveAttribute('aria-expanded', 'false');
     });
 
     test('code snippet HTML tab is active by default', async ({ page }) => {
         await gotoMusicPlayer(page);
-        const toggle = page
-            .locator('#music-player .vd-code-snippet[data-collapsible] .vd-code-snippet-toggle')
+        const snippet = page
+            .locator('#music-player .vd-code-snippet[data-collapsible]')
+            .filter({ has: page.locator('.vd-code-snippet-tab[data-lang="html"]') })
             .first();
+        const toggle = snippet.locator('.vd-code-snippet-toggle');
         await toggle.click();
-        await page.waitForTimeout(300);
-        const htmlTab = page
-            .locator(
-                '#music-player .vd-code-snippet[data-collapsible] .vd-code-snippet-tab[data-lang="html"]',
-            )
-            .first();
+        const htmlTab = snippet.locator('.vd-code-snippet-tab[data-lang="html"]');
         await expect(htmlTab).toHaveClass(/is-active/);
     });
 

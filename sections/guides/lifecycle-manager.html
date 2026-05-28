@@ -1,12 +1,12 @@
 <section id="lifecycle-manager">
-    <h4 class="demo-title"><i class="ph ph-recycle"></i>Lifecycle Manager <code class="vd-text-sm">Guide</code></h4>
+    <h5 class="demo-title"><i class="ph ph-recycle"></i>Lifecycle Manager <code class="vd-text-sm">Guide</code></h5>
     <p class="vd-mb-6">The v1.4.1 lifecycle manager is the shared cleanup registry behind scoped destroy and reinit flows. Most users do not call it directly, but understanding it helps when building dynamic pages, SPAs, and custom components.</p>
 
     <div class="vd-row vd-mb-6">
         <div class="vd-col-12">
             <div class="vd-card demo-card">
                 <div class="vd-card-header">
-                    <h4><i class="ph ph-tree-structure"></i> What It Tracks</h4>
+                    <h6><i class="ph ph-tree-structure"></i> What It Tracks</h6>
                 </div>
                 <div class="vd-card-body">
                     <p>Stateful components register cleanup functions against the element they initialize. Scoped runtime calls can then clean up only the affected subtree.</p>
@@ -39,7 +39,7 @@ VanduoLifecycle.getAll();</code></pre>
         <div class="vd-col-12 vd-col-md-6">
             <div class="vd-card demo-card">
                 <div class="vd-card-header">
-                    <h4><i class="ph ph-arrows-clockwise"></i> Dynamic Replacement</h4>
+                    <h6><i class="ph ph-arrows-clockwise"></i> Dynamic Replacement</h6>
                 </div>
                 <div class="vd-card-body">
                     <div class="vd-code-snippet" data-collapsible data-expanded="true">
@@ -67,7 +67,7 @@ VanduoLifecycle.getAll();</code></pre>
         <div class="vd-col-12 vd-col-md-6">
             <div class="vd-card demo-card">
                 <div class="vd-card-header">
-                    <h4><i class="ph ph-crosshair"></i> Targeted Reinit</h4>
+                    <h6><i class="ph ph-crosshair"></i> Targeted Reinit</h6>
                 </div>
                 <div class="vd-card-body">
                     <div class="vd-code-snippet" data-collapsible data-expanded="true">

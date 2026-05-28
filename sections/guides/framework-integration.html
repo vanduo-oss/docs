@@ -1,12 +1,12 @@
 <section id="framework-integration">
-    <h4 class="demo-title"><i class="ph ph-plugs-connected"></i>Framework Integration <code class="vd-text-sm">Guide</code></h4>
+    <h5 class="demo-title"><i class="ph ph-plugs-connected"></i>Framework Integration <code class="vd-text-sm">Guide</code></h5>
     <p class="vd-mb-6">Vanduo remains framework-agnostic in v1.4.1, but the recommended JavaScript pattern is now scoped: initialize the DOM subtree your app just mounted, and destroy that same subtree before your framework removes it.</p>
 
     <div class="vd-row vd-mb-6">
         <div class="vd-col-12">
             <div class="vd-card demo-card">
                 <div class="vd-card-header">
-                    <h4><i class="ph ph-brain"></i> The Pattern</h4>
+                    <h6><i class="ph ph-brain"></i> The Pattern</h6>
                 </div>
                 <div class="vd-card-body">
                     <ol>
@@ -41,7 +41,7 @@ Vanduo.getComponent('lazyLoad'); // canonical lowerCamelCase registry name</code
         <div class="vd-col-12 vd-col-md-6">
             <div class="vd-card demo-card">
                 <div class="vd-card-header">
-                    <h4><i class="ph ph-atom"></i> React</h4>
+                    <h6><i class="ph ph-atom"></i> React</h6>
                 </div>
                 <div class="vd-card-body">
                     <div class="vd-code-snippet" data-collapsible data-expanded="true">
@@ -79,7 +79,7 @@ export function VanduoBoundary({ children }) {
         <div class="vd-col-12 vd-col-md-6">
             <div class="vd-card demo-card">
                 <div class="vd-card-header">
-                    <h4><i class="ph ph-triangle"></i> Vue</h4>
+                    <h6><i class="ph ph-triangle"></i> Vue</h6>
                 </div>
                 <div class="vd-card-body">
                     <div class="vd-code-snippet" data-collapsible data-expanded="true">
@@ -117,7 +117,7 @@ onUnmounted(() =&gt; Vanduo.destroy(root.value));
         <div class="vd-col-12 vd-col-md-6">
             <div class="vd-card demo-card">
                 <div class="vd-card-header">
-                    <h4><i class="ph ph-lightning"></i> Svelte</h4>
+                    <h6><i class="ph ph-lightning"></i> Svelte</h6>
                 </div>
                 <div class="vd-card-body">
                     <div class="vd-code-snippet" data-collapsible data-expanded="true">
@@ -153,7 +153,7 @@ onUnmounted(() =&gt; Vanduo.destroy(root.value));
         <div class="vd-col-12 vd-col-md-6">
             <div class="vd-card demo-card">
                 <div class="vd-card-header">
-                    <h4><i class="ph ph-arrows-clockwise"></i> Dynamic DOM</h4>
+                    <h6><i class="ph ph-arrows-clockwise"></i> Dynamic DOM</h6>
                 </div>
                 <div class="vd-card-body">
                     <p>When you replace a subtree yourself, destroy the old subtree before assigning new HTML, then initialize the new subtree.</p>

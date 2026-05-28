@@ -215,7 +215,7 @@ test.describe('4. Documentation View', () => {
     });
 
     test.describe('Changelog (#changelog)', () => {
-        test('Shows v1.4.2 as latest release above v1.4.1 and v1.4.0 history', async ({ page }) => {
+        test('Shows v1.4.3 as latest release above v1.4.2 and v1.4.1 history', async ({ page }) => {
             await page.goto('/#changelog');
             await waitForSPA(page);
 
@@ -223,20 +223,24 @@ test.describe('4. Documentation View', () => {
             await expect(changelog).toBeVisible();
 
             const latestReleaseCard = changelog.locator('.version-card').first();
-            await expect(latestReleaseCard).toContainText('v1.4.2');
+            await expect(latestReleaseCard).toContainText('v1.4.3');
             await expect(latestReleaseCard).toContainText('Latest');
-            await expect(latestReleaseCard).toContainText('target-first');
-            await expect(latestReleaseCard).toContainText('Modal size tiers');
+            await expect(latestReleaseCard).toContainText('Music Player moved');
+            await expect(latestReleaseCard).toContainText('DOM-safe match highlighting');
 
             const previousReleaseCard = changelog.locator('.version-card').nth(1);
-            await expect(previousReleaseCard).toContainText('v1.4.1');
-            await expect(previousReleaseCard).not.toContainText('Latest');
-            await expect(previousReleaseCard).toContainText('Strict --vd-*');
-            await expect(previousReleaseCard).toContainText('--vd-*');
+            await expect(previousReleaseCard).toContainText('v1.4.2');
+            await expect(previousReleaseCard.locator('.version-header')).not.toContainText('Latest');
+            await expect(previousReleaseCard).toContainText('Modal size tiers');
 
             const olderReleaseCard = changelog.locator('.version-card').nth(2);
-            await expect(olderReleaseCard).toContainText('v1.4.0');
-            await expect(olderReleaseCard).not.toContainText('Latest');
+            await expect(olderReleaseCard).toContainText('v1.4.1');
+            await expect(olderReleaseCard.locator('.version-header')).not.toContainText('Latest');
+            await expect(olderReleaseCard).toContainText('Strict --vd-*');
+
+            const oldestReleaseCard = changelog.locator('.version-card').nth(3);
+            await expect(oldestReleaseCard).toContainText('v1.4.0');
+            await expect(oldestReleaseCard.locator('.version-header')).not.toContainText('Latest');
         });
     });
 
@@ -295,7 +299,7 @@ test.describe('4. Documentation View', () => {
             const content = page.locator('#dynamic-content');
             await expect(content).toBeVisible();
             // Wait for at least one piece of actual content inside dynamic-content
-            await expect(content.locator('h1, h2, h3, h4').first()).toBeVisible();
+            await expect(content.locator('h1, h2, h3, h4, h5, h6').first()).toBeVisible();
         });
 
         test('Initial docs load only fetches the visible target plus a small runway', async ({ page }) => {
@@ -438,17 +442,17 @@ test.describe('4. Documentation View', () => {
             await waitForDocsSectionAnchored(page, 'music-player');
 
             await page.evaluate(() => window.scrollBy(0, -180));
-            await page.waitForFunction(() => !!document.getElementById('image-box'), { timeout: 10000 });
+            await page.waitForFunction(() => !!document.getElementById('timeline'), { timeout: 10000 });
             await page.evaluate(() => window.scrollBy(0, 80));
 
-            await page.locator('.doc-nav-link[data-section="image-box"]').click();
-            await waitForVisibleSection(page, '#image-box');
-            await waitForDocsSectionAnchored(page, 'image-box');
-            await expect(page).toHaveURL(/.*#docs\/image-box/);
-            await expectSidebarSectionActive(page, 'image-box');
+            await page.locator('.doc-nav-link[data-section="timeline"]').click();
+            await waitForVisibleSection(page, '#timeline');
+            await waitForDocsSectionAnchored(page, 'timeline');
+            await expect(page).toHaveURL(/.*#docs\/timeline/);
+            await expectSidebarSectionActive(page, 'timeline');
 
             const renderedSections = await getRenderedDocSectionIds(page);
-            expect(renderedSections[0]).toBe('image-box');
+            expect(renderedSections[0]).toBe('timeline');
             expect(renderedSections.length).toBeLessThanOrEqual(2);
         });
 
@@ -462,8 +466,8 @@ test.describe('4. Documentation View', () => {
 
             let renderedSections = await getRenderedDocSectionIds(page);
             expect(renderedSections[0]).toBe('music-player');
-            expect(renderedSections).not.toContain('image-box');
-            expect(renderedSections).not.toContain('footer');
+            expect(renderedSections).not.toContain('timeline');
+            expect(renderedSections).not.toContain('spotlight');
 
             const topAfterScroll = await page.evaluate(() => {
                 const target = document.getElementById('music-player');
@@ -473,7 +477,7 @@ test.describe('4. Documentation View', () => {
             });
             expect(topAfterScroll).not.toBeNull();
 
-            await page.waitForFunction(() => !!document.getElementById('image-box'), { timeout: 10000 });
+            await page.waitForFunction(() => !!document.getElementById('timeline'), { timeout: 10000 });
             const topAfterFirstPrepend = await page.evaluate(() => {
                 const target = document.getElementById('music-player');
                 return target ? target.getBoundingClientRect().top : null;
@@ -482,24 +486,24 @@ test.describe('4. Documentation View', () => {
             expect(Math.abs((topAfterFirstPrepend ?? 0) - (topAfterScroll ?? 0))).toBeLessThanOrEqual(32);
 
             renderedSections = await getRenderedDocSectionIds(page);
-            expect(renderedSections).toEqual(expect.arrayContaining(['image-box', 'music-player']));
-            expect(renderedSections).not.toContain('footer');
+            expect(renderedSections).toEqual(expect.arrayContaining(['timeline', 'music-player']));
+            expect(renderedSections).not.toContain('spotlight');
 
             await page.waitForTimeout(500);
-            await expect(page.locator('#footer')).toHaveCount(0);
+            await expect(page.locator('#spotlight')).toHaveCount(0);
 
             await page.evaluate(async () => {
-                for (let step = 0; step < 6 && !document.getElementById('footer'); step++) {
+                for (let step = 0; step < 6 && !document.getElementById('spotlight'); step++) {
                     window.scrollBy(0, -600);
                     await new Promise((resolve) => window.setTimeout(resolve, 250));
                 }
             });
-            await page.waitForFunction(() => !!document.getElementById('footer'), { timeout: 10000 });
+            await page.waitForFunction(() => !!document.getElementById('spotlight'), { timeout: 10000 });
 
             renderedSections = await getRenderedDocSectionIds(page);
-            expect(renderedSections).toEqual(expect.arrayContaining(['footer', 'image-box', 'music-player']));
-            expect(renderedSections.indexOf('footer')).toBeLessThan(renderedSections.indexOf('image-box'));
-            expect(renderedSections.indexOf('image-box')).toBeLessThan(renderedSections.indexOf('music-player'));
+            expect(renderedSections).toEqual(expect.arrayContaining(['spotlight', 'timeline', 'music-player']));
+            expect(renderedSections.indexOf('spotlight')).toBeLessThan(renderedSections.indexOf('timeline'));
+            expect(renderedSections.indexOf('timeline')).toBeLessThan(renderedSections.indexOf('music-player'));
         });
 
         test('Scrollspy highlights the active section in the sidebar as user scrolls', async ({ page, isMobile }) => {
@@ -669,13 +673,22 @@ test.describe('4. Documentation View', () => {
         });
 
         test('code snippet toggle still works after leaving docs and returning', async ({ page }) => {
+            const waitForEsmImportSnippet = () => page.waitForFunction(() => {
+                const snippets = [...document.querySelectorAll('#music-player .vd-code-snippet[data-collapsible]')];
+                const snippet = snippets.find((el) => el.textContent?.includes('View ESM / bundler import'));
+                return document.getElementById('docs-view')?.classList.contains('is-active')
+                    && snippet?.dataset.initialized === 'true'
+                    && (snippet._codeSnippetCleanup?.length ?? 0) > 0;
+            }, { timeout: 15000 });
+
             await page.goto('/#docs/music-player');
             await waitForSPA(page);
+            await waitForEsmImportSnippet();
 
-            const toggle = page.locator('#music-player .vd-code-snippet[data-collapsible] .vd-code-snippet-toggle').first();
-
-            await expect(toggle).toBeVisible();
-            await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+            const esmSnippet = page.locator('#music-player .vd-code-snippet[data-collapsible]', {
+                hasText: 'View ESM / bundler import',
+            });
+            await expect(esmSnippet.locator('.vd-code-snippet-toggle')).toBeVisible();
 
             await page.goto('/?docs-route-test=about#about');
             await waitForSPA(page);
@@ -684,10 +697,9 @@ test.describe('4. Documentation View', () => {
 
             await page.goto('/?docs-route-test=music-player#docs/music-player');
             await expect(page).toHaveURL(/.*#docs\/music-player/);
-            await waitForVisibleSection(page, '#music-player');
+            await waitForEsmImportSnippet();
 
-            const returnedToggle = page.locator('#music-player .vd-code-snippet[data-collapsible] .vd-code-snippet-toggle').first();
-            await expect(returnedToggle).toBeVisible();
+            const returnedToggle = esmSnippet.locator('.vd-code-snippet-toggle');
             await returnedToggle.scrollIntoViewIfNeeded();
             await returnedToggle.click();
             await expect(returnedToggle).toHaveAttribute('aria-expanded', 'true');
@@ -742,7 +754,7 @@ test.describe('4. Documentation View', () => {
                 {
                     route: '/#docs/vanduo-ecosystem',
                     id: 'vanduo-ecosystem',
-                    expected: ['@vanduo-oss/framework', '@vanduo-oss/hex-grid', '@vanduo-oss/charts', '@vanduo-oss/flowchart']
+                    expected: ['@vanduo-oss/framework', '@vanduo-oss/hex-grid', '@vanduo-oss/charts', '@vanduo-oss/flowchart', '@vanduo-oss/music-player']
                 },
                 {
                     route: '/#docs/runtime-architecture',
@@ -762,7 +774,7 @@ test.describe('4. Documentation View', () => {
                 {
                     route: '/#docs/production-best-practices',
                     id: 'production-best-practices',
-                    expected: ['@v1.4.2', '--vd-*']
+                    expected: ['@v1.4.3', '--vd-*']
                 }
             ];
 
@@ -888,6 +900,16 @@ test.describe('4. Documentation View', () => {
             });
             expect(darkPrimary).toBe('blue');
 
+            const darkNeutral = await page.evaluate(() => {
+                return document.documentElement.getAttribute('data-neutral');
+            });
+            expect(darkNeutral).toBe('charcoal');
+
+            const darkCanvasBg = await page.evaluate(() => {
+                return getComputedStyle(document.body).backgroundColor;
+            });
+            expect(darkCanvasBg).toBe('rgb(13, 17, 23)');
+
             // Toggle back to light mode
             currentTheme = await cycleTheme(page, 'light');
             
@@ -902,6 +924,11 @@ test.describe('4. Documentation View', () => {
                 return document.documentElement.getAttribute('data-primary');
             });
             expect(lightPrimary).toBe('black');
+
+            const lightNeutral = await page.evaluate(() => {
+                return document.documentElement.getAttribute('data-neutral');
+            });
+            expect(lightNeutral).toBe('stone');
         });
 
         test('normalizes stale default primary when theme and storage disagree after reload', async ({ page }) => {
@@ -966,7 +993,7 @@ test.describe('4. Documentation View', () => {
             });
 
             // Docs-site overrides ThemeCustomizer.DEFAULTS in js/app.js:
-            //   PRIMARY_LIGHT='black', PRIMARY_DARK='blue', NEUTRAL='stone', FONT='ubuntu', RADIUS='0.5'
+            //   PRIMARY_LIGHT='black', PRIMARY_DARK='blue', NEUTRAL_LIGHT='stone', NEUTRAL_DARK='charcoal', FONT='ubuntu', RADIUS='0.5'
             // and resolves the system theme to the active media mode.
             expect(resetState.theme).toBe('light');
             expect(resetState.primary).toBe('black');

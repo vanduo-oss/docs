@@ -36,6 +36,10 @@ export function showView(view) {
     } else {
         docsView.classList.remove('is-active');
         pageView.classList.add('is-active');
+        var dynamicContent = document.getElementById('dynamic-content');
+        if (dynamicContent) {
+            destroyVanduoScope(dynamicContent);
+        }
         leaveDocsView();
     }
     state.currentView = view;
